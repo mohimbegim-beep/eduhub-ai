@@ -26,3 +26,29 @@
 - 	eacher_lab_desktop.png — форма ввода параметров и открытая часть (вопросы 1–3).
 - 	eacher_lab_paywall_desktop.png — матовое размытие и плашка чекаута (.00 vs .99).
 - Маршрут: [/tools/teacher-lab](file:///c:/EDU%20HUB/static/tools/teacher-lab.html) (HTTP 200 OK).
+
+
+---
+
+## 25. Успешный Глобальный Запуск на Render.com (Global Cloud Deployment)
+
+### 25.1 Итоги миграции:
+- **Официальный глобальный адрес:** https://eduhub-ai.onrender.com/
+- **Инфраструктура:** Облачный сервис на базе Render Cloud с автоматическим SSL-сертификатом и международным CDN.
+- **Полный отказ от локальных туннелей:** Платформа больше не зависит от локального ноутбука или туннелей trycloudflare. Сайт функционирует 24/7 в независимом облачном окружении.
+- **Интеграция с GitHub:** Репозиторий https://github.com/mohimbegim-beep/eduhub-ai синхронизирован. Каждый будущий коммит автоматически развертывается в облако за 40 секунд.
+
+### 25.2 Результаты полного аудита на Render.com (100% Pass):
+- GET / &rarr; **200 OK** (151,550 байт)
+- GET /blueprints &rarr; **200 OK** (84,056 байт)
+- GET /tools/teacher-lab &rarr; **200 OK** (24,579 байт)
+- GET /tools/marketplace-lab &rarr; **200 OK** (24,389 байт)
+- GET /tools/sop-builder &rarr; **200 OK** (13,144 байт)
+- GET /tools/excel-wizard &rarr; **200 OK** (13,225 байт)
+- GET /tools/essay-grader &rarr; **200 OK** (45,118 байт)
+- GET /report &rarr; **200 OK** (8,888 байт)
+- GET /robots.txt &rarr; **200 OK** (193 байта)
+- GET /sitemap.xml &rarr; **200 OK** (3,420 байт)
+- GET /health &rarr; **200 OK** (status: healthy)
+- POST /api/v1/tools/teacher-lab &rarr; **200 OK** (status: success)
+- POST /api/v1/blueprints/download &rarr; **200 OK** (status: success)
