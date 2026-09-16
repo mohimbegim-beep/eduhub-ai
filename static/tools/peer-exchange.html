@@ -17,6 +17,8 @@
     <link rel="icon" href="/static/favicon.ico">
     <script src="/static/js/legal-consent.js" defer></script>
     <script src="https://assets.lemonsqueezy.com/lemon.js" defer></script>
+    <!-- Client-side i18n & Google Translate Bridge Engine -->
+    <script src="/static/js/i18n.js" defer></script>
 </head>
 <body class="bg-slate-950 text-slate-100 font-sans min-h-screen flex flex-col justify-between selection:bg-emerald-600 selection:text-white antialiased">
 
@@ -32,6 +34,13 @@
             </a>
 
             <div class="flex items-center gap-3">
+                <!-- Multi-Language Switcher (EN | RU | UZ | ES) -->
+                <div class="inline-flex bg-slate-900 border border-slate-800 rounded-xl p-0.5">
+                    <button onclick="setLocale('en')" data-lang-btn="en" class="lang-btn px-2 py-1 rounded-lg text-xs font-bold transition bg-blue-600 text-white shadow-sm shadow-blue-500/20">EN</button>
+                    <button onclick="setLocale('ru')" data-lang-btn="ru" class="lang-btn px-2 py-1 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition">RU</button>
+                    <button onclick="setLocale('uz')" data-lang-btn="uz" class="lang-btn px-2 py-1 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition">UZ</button>
+                    <button onclick="setLocale('es')" data-lang-btn="es" class="lang-btn px-2 py-1 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition">ES</button>
+                </div>
                 <div class="relative">
                     <select id="lang-select" onchange="switchLanguage(this.value)" class="bg-slate-900 border border-slate-800 text-xs text-slate-200 rounded-lg px-2.5 py-1.5 focus:outline-none focus:border-emerald-500">
                         <option value="ru" selected>🇷🇺 Русский</option>

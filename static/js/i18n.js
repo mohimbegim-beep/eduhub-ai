@@ -7,6 +7,24 @@ const I18N_DICTIONARY = {
 
 
   en: {
+    hero_badge_socratic: "⚡ Socratic Intelligence • 100% Safe Guardrails (Strict 18+ Refusal)",
+    hero_badge_trial: "Start 3-Day Pro Access for Just $1 &rarr;",
+    hero_cta_try: "Try Live Assistant",
+    hero_cta_pricing: "View Pricing ($9 - $39)",
+    hero_trust_1: "14-Day Money-Back Guarantee",
+    hero_trust_2: "Strict 18+ Refusal Policy",
+    hero_trust_3: "Gemini 2.5 Flash Ultra-Low Latency",
+    hero_trust_4: "Lemon Squeezy Safe MoR",
+    ielts_flagship_badge: "🔥 Flagship Offer • 3 Days for $1",
+    ielts_flagship_price_badge: "$1.00 USD Total",
+    ielts_flagship_price_sub: "Then $19/mo • Cancel anytime in 1 click",
+    ielts_flagship_title: "Cambridge IELTS AI Examiner — Expert Essay Evaluation",
+    ielts_flagship_desc: "Full diagnostic across 4 official Cambridge criteria (TR, CC, LR, GRA), handwritten essay photo grading, Band 8.5+ model rewrite, and instant Anki vocabulary export.",
+    ielts_flagship_cta: "Launch IELTS Examiner ($1) →",
+    nav_history: "History",
+    nav_reports: "Report 2026",
+    nav_blueprints: "All Blueprints ($1)",
+
     checkout_micro_consent: "By clicking, you agree to the <a href='/terms' target='_blank' class='underline text-slate-300 hover:text-white'>Terms of Service</a> and our <a href='/refund' target='_blank' class='underline text-slate-300 hover:text-white'>14-day money-back guarantee</a>. Cancel anytime in 1 click.",
     cookie_consent_text: "We use cookies for security and personalization. By continuing to use EduHub AI, you agree to our <a href='/terms' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Terms of Service</a>, <a href='/privacy' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Privacy Policy</a>, and <a href='/refund' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Refund Policy</a>.",
     cookie_consent_btn: "Accept & Continue",
@@ -330,6 +348,24 @@ const I18N_DICTIONARY = {
 
 
   ru: {
+    hero_badge_socratic: "⚡ Сократовский Интеллект • 100% Академическая Безопасность (Отказ 18+)",
+    hero_badge_trial: "3 Дня Pro-доступа всего за $1 &rarr;",
+    hero_cta_try: "Попробовать Ассистента",
+    hero_cta_pricing: "Посмотреть Тарифы ($9 - $39)",
+    hero_trust_1: "100% Гарантия возврата 14 дней",
+    hero_trust_2: "Строгий фильтр безопасности 18+",
+    hero_trust_3: "Сверхбыстрый Gemini 2.5 Flash",
+    hero_trust_4: "Lemon Squeezy Безопасные Платежи",
+    ielts_flagship_badge: "🔥 Флагманский Оффер • 3 Дня за $1",
+    ielts_flagship_price_badge: "1.00 USD Всего",
+    ielts_flagship_price_sub: "Затем $19/мес • Отмена в 1 клик в любое время",
+    ielts_flagship_title: "Экзаменатор Cambridge IELTS AI — Проверка эссе экспертом",
+    ielts_flagship_desc: "Полная диагностика по 4 официальным критериям Кембриджа (TR, CC, LR, GRA), проверка рукописных эссе по фото, идеальный авторский рерайт на Band 8.5+ и экспорт словаря в Anki.",
+    ielts_flagship_cta: "Открыть Экзаменатор IELTS ($1) →",
+    nav_history: "История",
+    nav_reports: "Отчет 2026",
+    nav_blueprints: "Все Заводы ($1)",
+
     checkout_micro_consent: "Нажимая кнопку, вы принимаете <a href='/terms' target='_blank' class='underline text-slate-300 hover:text-white'>Условия оферты</a> и <a href='/refund' target='_blank' class='underline text-slate-300 hover:text-white'>14-дневную гарантию возврата</a>. Отмена подписки в 1 клик в любое время.",
     cookie_consent_text: "Мы используем cookies для безопасности и персонализации. Продолжая использовать EduHub AI, вы соглашаетесь с <a href='/terms' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Условиями обслуживания</a>, <a href='/privacy' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Политикой конфиденциальности</a> и <a href='/refund' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Политикой возвратов</a>.",
     cookie_consent_btn: "Принять и продолжить",
@@ -653,6 +689,24 @@ const I18N_DICTIONARY = {
 
 
   uz: {
+    hero_badge_socratic: "⚡ Suqrot Intellekti • 100% Xavfsiz Muhit (18+ Rad Etish)",
+    hero_badge_trial: "3 Kunlik Pro-kirish atigi $1 &rarr;",
+    hero_cta_try: "AI Yordamchini Sinash",
+    hero_cta_pricing: "Tariflarni Ko'rish ($9 - $39)",
+    hero_trust_1: "14 Kunlik 100% Qaytarish Kafolati",
+    hero_trust_2: "18+ Qat'iy Xavfsizlik Filtri",
+    hero_trust_3: "Gemini 2.5 Flash Tezkor AI",
+    hero_trust_4: "Lemon Squeezy Xavfsiz To'lovlar",
+    ielts_flagship_badge: "🔥 Asosiy Taklif • 3 Kun $1",
+    ielts_flagship_price_badge: "Jami 1.00 USD",
+    ielts_flagship_price_sub: "Keyin $19/oy • 1 bosishda bekor qilish",
+    ielts_flagship_title: "Cambridge IELTS AI Imtihonchisi — Insholarni ekspert baholashi",
+    ielts_flagship_desc: "4 ta rasmiy Cambridge mezonlari (TR, CC, LR, GRA) bo'yicha to'liq tahlil, qo'lyozma insholarni rasm orqali tekshirish, Band 8.5+ darajasiga qayta yozish va Anki-ga eksport.",
+    ielts_flagship_cta: "IELTS Tekshiruvchini Ochish ($1) →",
+    nav_history: "Tarix",
+    nav_reports: "Hisobot 2026",
+    nav_blueprints: "Barcha Zavodlar ($1)",
+
     checkout_micro_consent: "Tugmani bosish orqali siz <a href='/terms' target='_blank' class='underline text-slate-300 hover:text-white'>Ommaviy oferta shartlari</a> va <a href='/refund' target='_blank' class='underline text-slate-300 hover:text-white'>14 kunlik to\'lovni qaytarish kafolati</a>ni qabul qilasiz. Obunani istalgan vaqtda 1 bosishda bekor qilish mumkin.",
     cookie_consent_text: "Xavfsizlik va shaxsiylashtirish uchun cookies fayllaridan foydalanamiz. EduHub AI dan foydalanishni davom ettirish orqali siz <a href='/terms' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Xizmat ko\'rsatish shartlari</a>, <a href='/privacy' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Maxfiylik siyosati</a> va <a href='/refund' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Qaytarish siyosati</a>ga rozilik bildirasiz.",
     cookie_consent_btn: "Qabul qilish va davom etish",
@@ -976,6 +1030,24 @@ const I18N_DICTIONARY = {
 
 
   es: {
+    hero_badge_socratic: "⚡ Inteligencia Socrática • Filtro de Seguridad 18+ Estricto",
+    hero_badge_trial: "Comenzar Pro 3 Días por Solo $1 &rarr;",
+    hero_cta_try: "Probar Asistente en Vivo",
+    hero_cta_pricing: "Ver Precios ($9 - $39)",
+    hero_trust_1: "Garantía de reembolso de 14 días",
+    hero_trust_2: "Política estricta sin contenido 18+",
+    hero_trust_3: "Gemini 2.5 Flash Ultra Rápido",
+    hero_trust_4: "Lemon Squeezy Pagos Seguros",
+    ielts_flagship_badge: "🔥 Oferta Estrella • 3 Días por $1",
+    ielts_flagship_price_badge: "1.00 USD Total",
+    ielts_flagship_price_sub: "Luego $19/mes • Cancela en 1 clic",
+    ielts_flagship_title: "Examinador Cambridge IELTS AI — Evaluación de Ensayos",
+    ielts_flagship_desc: "Diagnóstico completo según los 4 criterios de Cambridge (TR, CC, LR, GRA), corrección de ensayos manuscritos por foto, reescritura Band 8.5+ y exportación a Anki.",
+    ielts_flagship_cta: "Abrir Examinador IELTS ($1) →",
+    nav_history: "Historial",
+    nav_reports: "Informe 2026",
+    nav_blueprints: "Todos los Modelos ($1)",
+
     checkout_micro_consent: "Al hacer clic, aceptas los <a href='/terms' target='_blank' class='underline text-slate-300 hover:text-white'>Términos del servicio</a> y nuestra <a href='/refund' target='_blank' class='underline text-slate-300 hover:text-white'>garantía de reembolso de 14 días</a>. Cancela en cualquier momento con 1 clic.",
     cookie_consent_text: "Utilizamos cookies para seguridad y personalización. Al continuar utilizando EduHub AI, aceptas nuestros <a href='/terms' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Términos de servicio</a>, <a href='/privacy' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Política de privacidad</a> y <a href='/refund' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Política de reembolsos</a>.",
     cookie_consent_btn: "Aceptar y continuar",
@@ -1298,11 +1370,117 @@ const I18N_DICTIONARY = {
 };
 
 // Auto-detect user locale with fallback to 'en'
+
+
+// --------------------------------------------------------------------------
+// Multi-Language Core Engine & Google Translate Fail-Safe Bridge
+// --------------------------------------------------------------------------
+
+function setGoogleTransCookie(lang) {
+  try {
+    const val = (lang === 'en') ? '/en/en' : `/auto/${lang}`;
+    const domain = window.location.hostname;
+    document.cookie = `googtrans=${val}; path=/;`;
+    if (domain && domain !== 'localhost') {
+      document.cookie = `googtrans=${val}; path=/; domain=${domain};`;
+      document.cookie = `googtrans=${val}; path=/; domain=.${domain};`;
+    }
+    if (lang === 'en') {
+      document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      if (domain && domain !== 'localhost') {
+        document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${domain};`;
+        document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.${domain};`;
+      }
+    }
+  } catch(e) {}
+}
+
+function triggerGoogleTranslateCombo(lang) {
+  try {
+    const select = document.querySelector(".goog-te-combo");
+    if (select) {
+      if (select.value !== lang) {
+        select.value = lang;
+        select.dispatchEvent(new Event("change"));
+      }
+      return true;
+    }
+  } catch(e) {}
+  return false;
+}
+
+function initGoogleTranslate() {
+  if (document.getElementById("google-translate-script")) return;
+
+  // Hidden mount point
+  let div = document.getElementById("google_translate_element");
+  if (!div) {
+    div = document.createElement("div");
+    div.id = "google_translate_element";
+    div.style.display = "none";
+    document.body.appendChild(div);
+  }
+
+  // Inject sleek CSS to completely hide Google bar & preserve cyberpunk dark theme
+  if (!document.getElementById("google-translate-clean-css")) {
+    const style = document.createElement("style");
+    style.id = "google-translate-clean-css";
+    style.innerHTML = `
+      .goog-te-banner-frame.skiptranslate, .goog-te-banner-frame { display: none !important; }
+      body { top: 0px !important; position: static !important; }
+      .goog-tooltip, .goog-tooltip:hover { display: none !important; }
+      .goog-text-highlight { background-color: transparent !important; border: none !important; box-shadow: none !important; }
+      #goog-gt-tt, .goog-te-balloon-frame { display: none !important; }
+      .skiptranslate:not(.lang-btn) { display: none !important; }
+      #google_translate_element { display: none !important; }
+    `;
+    document.head.appendChild(style);
+  }
+
+  window.googleTranslateElementInit = function() {
+    try {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'en,ru,uz,es',
+        autoDisplay: false
+      }, 'google_translate_element');
+
+      // If current locale is non-english, apply it once loaded
+      if (currentLocale && currentLocale !== 'en') {
+        setTimeout(() => {
+          setGoogleTransCookie(currentLocale);
+          triggerGoogleTranslateCombo(currentLocale);
+        }, 300);
+      }
+    } catch(e) {}
+  };
+
+  const script = document.createElement("script");
+  script.id = "google-translate-script";
+  script.src = "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+  script.async = true;
+  document.head.appendChild(script);
+}
+
+// Auto-detect user locale with fallback to 'ru' for CIS / Uzbekistan users, else 'en'
 function detectLocale() {
+  // 1. Check URL param ?lang=ru|uz|en|es
+  try {
+    const params = new URLSearchParams(window.location.search);
+    const urlLang = params.get("lang");
+    if (urlLang && ["en", "ru", "uz", "es"].includes(urlLang.toLowerCase())) {
+      localStorage.setItem("eduhub_locale", urlLang.toLowerCase());
+      return urlLang.toLowerCase();
+    }
+  } catch(e) {}
+
+  // 2. Check localStorage
   const stored = localStorage.getItem("eduhub_locale");
   if (stored && ["en", "ru", "uz", "es"].includes(stored)) {
     return stored;
   }
+
+  // 3. Check browser language
   const navLang = (navigator.language || navigator.userLanguage || "en").toLowerCase();
   if (navLang.startsWith("ru")) return "ru";
   if (navLang.startsWith("uz")) return "uz";
@@ -1321,8 +1499,20 @@ function setLocale(newLocale) {
   if (!["en", "ru", "uz", "es"].includes(newLocale)) return;
   currentLocale = newLocale;
   localStorage.setItem("eduhub_locale", newLocale);
+
+  // 1. Apply native dictionary
   applyTranslations();
   updateSwitcherButtons();
+
+  // 2. Apply Google Translate Bridge for non-tagged text
+  setGoogleTransCookie(newLocale);
+  const triggered = triggerGoogleTranslateCombo(newLocale);
+  if (!triggered && newLocale !== 'en') {
+    // Retry once after 400ms
+    setTimeout(() => {
+      triggerGoogleTranslateCombo(newLocale);
+    }, 400);
+  }
 }
 
 function updateSwitcherButtons() {
@@ -1378,4 +1568,5 @@ document.addEventListener("DOMContentLoaded", () => {
   currentLocale = detectLocale();
   applyTranslations();
   updateSwitcherButtons();
+  initGoogleTranslate();
 });

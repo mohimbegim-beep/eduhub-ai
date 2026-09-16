@@ -231,7 +231,7 @@
                 <a href="/report" class="text-blue-300 hover:text-white transition flex items-center gap-1">
                     <span>📊</span> <span>Отчет 2026</span>
                 </a>
-                <a href="#pricing" class="text-slate-400 hover:text-white transition">Тарифы</a>
+                <a href="#pricing" class="text-slate-400 hover:text-white transition" data-i18n="nav_pricing">Тарифы</a>
             </nav>
 
             <div class="flex items-center space-x-2 sm:space-x-3">
@@ -246,11 +246,11 @@
                 <!-- Recent Documents Drawer Trigger -->
                 <button onclick="EduHubUtils.openHistoryDrawer()" class="inline-flex items-center gap-1 text-xs text-slate-300 hover:text-white bg-slate-900 border border-slate-800 hover:border-slate-700 px-2.5 py-1.5 rounded-xl transition font-medium" title="Recent Documents">
                     <span>🕒</span>
-                    <span class="hidden sm:inline">История</span>
+                    <span class="hidden sm:inline" data-i18n="nav_history">История</span>
                 </button>
 
                 <!-- Hero Action Button -->
-                <a href="https://test.dodopayments.com/buy/pdt_0NYV3EevfB7hC3hRkF2kG?quantity=1" class="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-black text-xs px-3.5 py-2 rounded-xl shadow-lg shadow-amber-500/20 transition transform active:scale-95 whitespace-nowrap">
+                <a href="https://eduhub-ai.lemonsqueezy.com/buy/pro-max?checkout[trial]=true" class="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-black text-xs px-3.5 py-2 rounded-xl shadow-lg shadow-amber-500/20 transition transform active:scale-95 whitespace-nowrap">
                     IELTS 3 Дня за $1
                 </a>
             </div>
@@ -277,20 +277,15 @@
                     </a>
                 </div>
 
-                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-tight mb-6">
-                    Your Autonomous AI Academic Copilot — <br>
-                    <span class="bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-400 bg-clip-text text-transparent">Learn Faster, Grade Smarter, Master Any Subject</span>
-                </h1>
+                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-tight mb-6" data-i18n="hero_title">Your Autonomous AI Academic Copilot — <br><span class="bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-400 bg-clip-text text-transparent">Learn Faster, Grade Smarter, Master Any Subject</span></h1>
 
-                <p class="text-base sm:text-xl text-slate-400 max-w-3xl mx-auto mb-10 leading-relaxed">
-                    Designed for ambitious students, proactive educators, and engaged parents. Synthesize messy lecture recordings into flashcards, diagnose homework through guided Socratic hints, and automate classroom grading with zero academic dishonesty.
-                </p>
+                <p class="text-base sm:text-xl text-slate-400 max-w-3xl mx-auto mb-10 leading-relaxed" data-i18n="hero_desc">Designed for ambitious students, proactive educators, and engaged parents. Synthesize messy lecture recordings into flashcards, diagnose homework through guided Socratic hints, and automate classroom grading with zero academic dishonesty.</p>
 
                 <div class="flex flex-col sm:flex-row justify-center items-center gap-4 mb-14">
-                    <a href="#playground" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-500 text-white font-semibold px-8 py-3.5 rounded-xl shadow-xl shadow-blue-500/25 transition transform hover:-translate-y-0.5">
+                    <a href="#playground" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-500 text-white font-semibold px-8 py-3.5 rounded-xl shadow-xl shadow-blue-500/25 transition transform hover:-translate-y-0.5" data-i18n="hero_cta_try">
                         Try Live Assistant
                     </a>
-                    <a href="#pricing" class="w-full sm:w-auto bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700 hover:border-slate-600 font-medium px-8 py-3.5 rounded-xl transition">
+                    <a href="#pricing" class="w-full sm:w-auto bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700 hover:border-slate-600 font-medium px-8 py-3.5 rounded-xl transition" data-i18n="hero_cta_pricing">
                         View Pricing ($9 - $39)
                     </a>
                 </div>
@@ -299,19 +294,19 @@
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto border-t border-slate-800/80 pt-8 text-xs text-slate-400">
                     <div class="flex items-center justify-center gap-2">
                         <span class="text-emerald-400 text-base">🛡️</span>
-                        <span>14-Day Money-Back Guarantee</span>
+                        <span data-i18n="hero_trust_1">14-Day Money-Back Guarantee</span>
                     </div>
                     <div class="flex items-center justify-center gap-2">
                         <span class="text-blue-400 text-base">🔒</span>
-                        <span>Strict 18+ Refusal Policy</span>
+                        <span data-i18n="hero_trust_2">Strict 18+ Refusal Policy</span>
                     </div>
                     <div class="flex items-center justify-center gap-2">
                         <span class="text-indigo-400 text-base">⚡</span>
-                        <span>Gemini 2.5 Flash Ultra-Low Latency</span>
+                        <span data-i18n="hero_trust_3">Gemini 2.5 Flash Ultra-Low Latency</span>
                     </div>
                     <div class="flex items-center justify-center gap-2">
                         <span class="text-purple-400 text-base">💳</span>
-                        <span>Dodo Payments &middot; Safe MoR</span>
+                        <span data-i18n="hero_trust_4">Lemon Squeezy Safe MoR</span>
                     </div>
                 </div>
 
@@ -334,22 +329,22 @@
                         <div>
                             <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2 mb-1.5">
                                 <span class="text-[10px] font-extrabold uppercase tracking-widest text-amber-300 bg-amber-950/90 border border-amber-700 px-2.5 py-0.5 rounded-full">
-                                    🔥 Флагманский Оффер &middot; 3 Дня за $1
+                                    <span data-i18n="ielts_flagship_badge">🔥 Флагманский Оффер &middot; 3 Дня за $1</span>
                                 </span>
                                 <span class="text-xs font-bold text-emerald-400 font-mono">1.00 USD Всего</span>
                                 <span class="text-[10px] text-slate-400">Затем $19/мес &middot; 1-клик отмена</span>
                             </div>
-                            <h2 class="text-xl sm:text-3xl font-extrabold text-white tracking-tight">
+                            <h2 class="text-xl sm:text-3xl font-extrabold text-white tracking-tight" data-i18n="ielts_flagship_title">
                                 Экзаменатор Cambridge IELTS AI &mdash; Проверка эссе экспертом
                             </h2>
-                            <p class="text-xs sm:text-sm text-slate-300 max-w-3xl mt-1.5 leading-relaxed">
+                            <p class="text-xs sm:text-sm text-slate-300 max-w-3xl mt-1.5 leading-relaxed" data-i18n="ielts_flagship_desc">
                                 Полная диагностика по 4 официальным критериям Кембриджа (TR, CC, LR, GRA), проверка рукописных эссе по фото с камеры, идеальный авторский рерайт эссе на Band 8.5+ и экспорт словаря в Anki за секунду.
                             </p>
                         </div>
                     </div>
                     
                     <div class="flex flex-col sm:flex-row lg:flex-col gap-2.5 shrink-0 w-full sm:w-auto text-center">
-                        <a href="https://test.dodopayments.com/buy/pdt_0NYV3EevfB7hC3hRkF2kG?quantity=1" class="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-black text-xs sm:text-sm px-6 py-3.5 rounded-xl shadow-xl shadow-amber-500/25 transition transform active:scale-95 block whitespace-nowrap">
+                        <a href="https://eduhub-ai.lemonsqueezy.com/buy/pro-max?checkout[trial]=true" class="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-black text-xs sm:text-sm px-6 py-3.5 rounded-xl shadow-xl shadow-amber-500/25 transition transform active:scale-95 block whitespace-nowrap">
                             Включить 3 Дня IELTS за $1 &rarr;
                         </a>
                         <a href="/tools/essay-grader" class="bg-slate-900/90 hover:bg-slate-800 text-slate-200 border border-slate-700 text-xs font-semibold px-4 py-2.5 rounded-xl transition block">
@@ -636,7 +631,7 @@
                                     <p class="text-[11px] text-slate-400" id="home-ats-gaps">Пропущены 3 ключевых слова из вакансии</p>
                                 </div>
                             </div>
-                            <a href="https://test.dodopayments.com/buy/pdt_0NYV3EevfB7hC3hRkF2kG?quantity=1" class="bg-gradient-to-r from-emerald-500 to-teal-400 text-slate-950 font-black text-xs px-5 py-2.5 rounded-xl transition shadow-lg shadow-emerald-500/25">
+                            <a href="https://eduhub-ai.lemonsqueezy.com/buy/pro-max?checkout[trial]=true" class="bg-gradient-to-r from-emerald-500 to-teal-400 text-slate-950 font-black text-xs px-5 py-2.5 rounded-xl transition shadow-lg shadow-emerald-500/25">
                                 Скачать адаптированное резюме за 1 $
                             </a>
                         </div>
@@ -688,7 +683,7 @@
                                 <a href="/blueprints" class="flex-1 text-center bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs py-2 rounded-lg border border-slate-800 transition">
                                     👁️ Тест-драйв
                                 </a>
-                                <a href="https://test.dodopayments.com/buy/pdt_0NYV3EevfB7hC3hRkF2kG?quantity=1" class="flex-1 text-center bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold py-2 rounded-lg transition">
+                                <a href="https://eduhub-ai.lemonsqueezy.com/buy/pro-max?checkout[trial]=true" class="flex-1 text-center bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold py-2 rounded-lg transition">
                                     Купить $1
                                 </a>
                             </div>
@@ -712,7 +707,7 @@
                                 <a href="/blueprints" class="flex-1 text-center bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs py-2 rounded-lg border border-slate-800 transition">
                                     👁️ Тест-драйв
                                 </a>
-                                <a href="https://test.dodopayments.com/buy/pdt_0NYV3EevfB7hC3hRkF2kG?quantity=1" class="flex-1 text-center bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold py-2 rounded-lg transition">
+                                <a href="https://eduhub-ai.lemonsqueezy.com/buy/pro-max?checkout[trial]=true" class="flex-1 text-center bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold py-2 rounded-lg transition">
                                     Купить $1
                                 </a>
                             </div>
@@ -736,7 +731,7 @@
                                 <a href="/blueprints" class="flex-1 text-center bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs py-2 rounded-lg border border-slate-800 transition">
                                     👁️ Тест-драйв
                                 </a>
-                                <a href="https://test.dodopayments.com/buy/pdt_0NYV3EevfB7hC3hRkF2kG?quantity=1" class="flex-1 text-center bg-amber-600 hover:bg-amber-500 text-slate-950 text-xs font-bold py-2 rounded-lg transition">
+                                <a href="https://eduhub-ai.lemonsqueezy.com/buy/pro-max?checkout[trial]=true" class="flex-1 text-center bg-amber-600 hover:bg-amber-500 text-slate-950 text-xs font-bold py-2 rounded-lg transition">
                                     Купить $1
                                 </a>
                             </div>
@@ -760,7 +755,7 @@
                                 <a href="/blueprints" class="flex-1 text-center bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs py-2 rounded-lg border border-slate-800 transition">
                                     👁️ Тест-драйв
                                 </a>
-                                <a href="https://test.dodopayments.com/buy/pdt_0NYV3EevfB7hC3hRkF2kG?quantity=1" class="flex-1 text-center bg-emerald-600 hover:bg-emerald-500 text-slate-950 text-xs font-bold py-2 rounded-lg transition">
+                                <a href="https://eduhub-ai.lemonsqueezy.com/buy/pro-max?checkout[trial]=true" class="flex-1 text-center bg-emerald-600 hover:bg-emerald-500 text-slate-950 text-xs font-bold py-2 rounded-lg transition">
                                     Купить $1
                                 </a>
                             </div>
@@ -784,7 +779,7 @@
                                 <a href="/blueprints" class="flex-1 text-center bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs py-2 rounded-lg border border-slate-800 transition">
                                     👁️ Тест-драйв
                                 </a>
-                                <a href="https://test.dodopayments.com/buy/pdt_0NYV3EevfB7hC3hRkF2kG?quantity=1" class="flex-1 text-center bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold py-2 rounded-lg transition">
+                                <a href="https://eduhub-ai.lemonsqueezy.com/buy/pro-max?checkout[trial]=true" class="flex-1 text-center bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold py-2 rounded-lg transition">
                                     Купить $1
                                 </a>
                             </div>
@@ -808,7 +803,7 @@
                                 <a href="/blueprints" class="flex-1 text-center bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs py-2 rounded-lg border border-slate-800 transition">
                                     👁️ Тест-драйв
                                 </a>
-                                <a href="https://test.dodopayments.com/buy/pdt_0NYV3EevfB7hC3hRkF2kG?quantity=1" class="flex-1 text-center bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold py-2 rounded-lg transition">
+                                <a href="https://eduhub-ai.lemonsqueezy.com/buy/pro-max?checkout[trial]=true" class="flex-1 text-center bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold py-2 rounded-lg transition">
                                     Купить $1
                                 </a>
                             </div>
@@ -1151,7 +1146,7 @@
                         </ul>
                     </div>
                     <div>
-                        <a href="https://test.dodopayments.com/buy/pdt_0NYV3EevfB7hC3hRkF2kG?quantity=1" class="block text-center w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-semibold py-3 rounded-xl text-xs transition shadow-lg shadow-blue-600/30 transform hover:-translate-y-0.5">
+                        <a href="https://eduhub-ai.lemonsqueezy.com/buy/pro-max?checkout[trial]=true" class="block text-center w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-semibold py-3 rounded-xl text-xs transition shadow-lg shadow-blue-600/30 transform hover:-translate-y-0.5">
                             Start 3-Day Pro Access for Just $1
                         </a>
                         <p class="checkout-micro-consent mt-2 text-[10px] text-slate-400 text-center leading-relaxed" data-i18n="checkout_micro_consent">By clicking, you agree to the <a href="/terms" target="_blank" class="underline text-slate-300 hover:text-white">Terms of Service</a> and our <a href="/refund" target="_blank" class="underline text-slate-300 hover:text-white">14-day money-back guarantee</a>. Cancel anytime in 1 click.</p>

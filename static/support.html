@@ -8,6 +8,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="icon" href="/static/favicon.ico">
     <script src="/static/js/legal-consent.js" defer></script>
+    <!-- Client-side i18n & Google Translate Bridge Engine -->
+    <script src="/static/js/i18n.js" defer></script>
 </head>
 <body class="bg-slate-950 text-slate-100 font-sans min-h-screen flex flex-col justify-between selection:bg-blue-600 selection:text-white">
 
@@ -425,6 +427,13 @@
                 <div class="p-6 sm:p-8 rounded-3xl border ${badgeBorder} shadow-2xl space-y-6">
                     <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-3 border-b border-slate-800/80 pb-4">
                         <div class="flex items-center gap-3">
+                <!-- Multi-Language Switcher (EN | RU | UZ | ES) -->
+                <div class="inline-flex bg-slate-900 border border-slate-800 rounded-xl p-0.5">
+                    <button onclick="setLocale('en')" data-lang-btn="en" class="lang-btn px-2 py-1 rounded-lg text-xs font-bold transition bg-blue-600 text-white shadow-sm shadow-blue-500/20">EN</button>
+                    <button onclick="setLocale('ru')" data-lang-btn="ru" class="lang-btn px-2 py-1 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition">RU</button>
+                    <button onclick="setLocale('uz')" data-lang-btn="uz" class="lang-btn px-2 py-1 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition">UZ</button>
+                    <button onclick="setLocale('es')" data-lang-btn="es" class="lang-btn px-2 py-1 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition">ES</button>
+                </div>
                             <span class="text-3xl">${icon}</span>
                             <div>
                                 <span class="text-[10px] font-extrabold uppercase tracking-widest px-2.5 py-0.5 rounded-full border border-current">

@@ -11,12 +11,21 @@
         .glass-card { background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
         .blur-locked { filter: blur(6px); user-select: none; pointer-events: none; opacity: 0.6; }
     </style>
+    <!-- Client-side i18n & Google Translate Bridge Engine -->
+    <script src="/static/js/i18n.js" defer></script>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen font-sans antialiased selection:bg-emerald-500 selection:text-slate-950">
 
     <header class="border-b border-slate-800/80 bg-slate-950/80 backdrop-blur sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
             <div class="flex items-center gap-3">
+                <!-- Multi-Language Switcher (EN | RU | UZ | ES) -->
+                <div class="inline-flex bg-slate-900 border border-slate-800 rounded-xl p-0.5">
+                    <button onclick="setLocale('en')" data-lang-btn="en" class="lang-btn px-2 py-1 rounded-lg text-xs font-bold transition bg-blue-600 text-white shadow-sm shadow-blue-500/20">EN</button>
+                    <button onclick="setLocale('ru')" data-lang-btn="ru" class="lang-btn px-2 py-1 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition">RU</button>
+                    <button onclick="setLocale('uz')" data-lang-btn="uz" class="lang-btn px-2 py-1 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition">UZ</button>
+                    <button onclick="setLocale('es')" data-lang-btn="es" class="lang-btn px-2 py-1 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition">ES</button>
+                </div>
                 <a href="/" class="flex items-center gap-2 text-white font-extrabold text-lg tracking-tight hover:opacity-80 transition">
                     <span class="w-8 h-8 rounded-lg bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 font-black">E</span>
                     <span>EduHub<span class="text-emerald-400">.AI</span></span>
@@ -29,7 +38,7 @@
                 <a href="/blueprints" class="text-xs text-slate-300 hover:text-white transition px-3 py-1.5 rounded-lg border border-slate-800 bg-slate-900/60">
                     🏭 Все Заводы ($1)
                 </a>
-                <a href="https://test.dodopayments.com/buy/pdt_0NYV3EevfB7hC3hRkF2kG?quantity=1" class="text-xs font-bold bg-emerald-500 hover:bg-emerald-400 text-slate-950 px-3.5 py-1.5 rounded-lg shadow-lg shadow-emerald-500/20 transition">
+                <a href="https://eduhub-ai.lemonsqueezy.com/buy/pro-max?checkout[trial]=true" class="text-xs font-bold bg-emerald-500 hover:bg-emerald-400 text-slate-950 px-3.5 py-1.5 rounded-lg shadow-lg shadow-emerald-500/20 transition">
                     ⚡ Разблокировать доступ ($1)
                 </a>
             </div>
@@ -219,7 +228,7 @@
                             </p>
 
                             <div class="flex flex-col sm:flex-row items-center gap-3 w-full max-w-md">
-                                <a href="https://test.dodopayments.com/buy/pdt_0NYV3EevfB7hC3hRkF2kG?quantity=1" class="w-full sm:w-1/2 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs py-3 px-4 rounded-xl shadow-lg shadow-emerald-500/25 transition text-center">
+                                <a href="https://eduhub-ai.lemonsqueezy.com/buy/pro-max?checkout[trial]=true" class="w-full sm:w-1/2 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs py-3 px-4 rounded-xl shadow-lg shadow-emerald-500/25 transition text-center">
                                     ⚡ Разблокировать за $1.00 &rarr;
                                 </a>
 
