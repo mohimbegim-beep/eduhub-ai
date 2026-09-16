@@ -52,3 +52,19 @@
 - GET /health &rarr; **200 OK** (status: healthy)
 - POST /api/v1/tools/teacher-lab &rarr; **200 OK** (status: success)
 - POST /api/v1/blueprints/download &rarr; **200 OK** (status: success)
+
+
+---
+
+## 26. Финализация Заявки в Lemon Squeezy & Полная Готовность к Международным Платежам
+
+### 26.1 Завершенные действия:
+1. **Обновление вебхука в панели Lemon Squeezy:**
+   - Рабочий адрес: https://eduhub-ai.onrender.com/api/v1/billing/lemon-webhook
+   - Подписанные события: order_created, order_refunded, subscription_created, subscription_updated, subscription_cancelled, subscription_resumed, subscription_expired, subscription_payment_success, subscription_payment_failed.
+   - Криптографическая защита: HMAC-SHA256 с мульти-ключевой верификацией.
+2. **Синхронизация официального контакта мерчанта:**
+   - Во всех юридических документах (/terms, /privacy, /refund, /support) и на главной странице контактный email заменен на реальный рабочий адрес: mohim.mohimbegim@gmail.com.
+   - Изменения зафиксированы в репозитории и развернуты на боевом сервере Render.
+3. **Отправка официального запроса на активацию:**
+   - Письмо комплаенса с полным аудитом инфраструктуры, ссылками на политики и описанием бизнес-модели (\ триал, \ цифровые продукты) отправлено в службу поддержки Lemon Squeezy.
