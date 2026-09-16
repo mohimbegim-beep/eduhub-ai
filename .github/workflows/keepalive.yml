@@ -1,0 +1,16 @@
+name: EduHub 24/7 KeepAlive
+
+on:
+  schedule:
+    # Trigger every 10 minutes
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
+
+jobs:
+  keepalive:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping EduHub AI Production Endpoint
+        run: |
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://eduhub-ai.onrender.com/health)
+          echo "EduHub Health Status: $STATUS"
