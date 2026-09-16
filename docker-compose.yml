@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  web_api:
+    build: .
+    container_name: eduhub_core
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - LEMON_WEBHOOK_SECRET=${LEMON_WEBHOOK_SECRET:-dev_signing_secret}
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+      - GEMINI_MODEL=${GEMINI_MODEL:-gemini-2.5-flash}
+      - RATE_LIMIT_MAX_REQUESTS=${RATE_LIMIT_MAX_REQUESTS:-20}
+      - RATE_LIMIT_WINDOW_SECONDS=${RATE_LIMIT_WINDOW_SECONDS:-60}
+    volumes:
+      - ./logs:/server/logs
+      - ./data:/server/data
+    deploy:
+      resources:
+        limits:
+          cpus: '6.0'
+          memory: 6144M
+
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: eduhub_tunnel
+    restart: unless-stopped
+    command: tunnel --protocol http2 --no-autoupdate run --token ${CF_TUNNEL_TOKEN}
+    depends_on:
+      - web_api
+
+  trend_scout:
+    build: .
+    container_name: eduhub_trend_scout
+    restart: unless-stopped
+    command: python services/trend_scout/scout.py --interval 3600
+    environment:
+      - PYTHONUNBUFFERED=1
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+      - GEMINI_MODEL=${GEMINI_MODEL:-gemini-2.5-flash}
+    volumes:
+      - ./data:/server/data
+      - ./static:/server/static
+    depends_on:
+      - web_api
+

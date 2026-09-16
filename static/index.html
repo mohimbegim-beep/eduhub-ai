@@ -1,0 +1,1926 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduHub AI — Your Autonomous AI Academic Copilot | Learn Faster, Grade Smarter</title>
+    
+    <!-- Discovery SEO & AEO Meta Tags -->
+    <meta name="description" content="EduHub AI is the premier autonomous academic platform for students, parents, and educators. Featuring Socrates AI Tutor, instant lecture-to-flashcards synthesis, multi-modal homework grading, and strict 18+ safety guardrails.">
+    <meta name="keywords" content="IELTS AI practice, exam essay grader, Socratic math solver, lecture summarizer, batch homework checker, safe educational AI, study copilot, AI tutor, academic assistant, homework checker, EdTech SaaS, safe educational AI">
+    <meta name="author" content="EduHub AI">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://eduhub.ai/">
+
+    <!-- OpenGraph Social Cards -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="EduHub AI — Your Autonomous AI Academic Copilot">
+    <meta property="og:description" content="Master any subject with Socrates AI Tutor, lecture-to-flashcard synthesis, multi-modal grading, and verified academic integrity guardrails.">
+    <meta property="og:url" content="https://eduhub.ai/">
+    <meta property="og:site_name" content="EduHub AI">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="EduHub AI — Your Autonomous AI Academic Copilot">
+    <meta name="twitter:description" content="Master any subject with Socrates AI Tutor, lecture-to-flashcard synthesis, multi-modal grading, and verified academic integrity guardrails.">
+
+    <!-- Multi-Language Hreflang Tags -->
+    <link rel="alternate" hreflang="en" href="https://eduhub.ai/?lang=en">
+    <link rel="alternate" hreflang="ru" href="https://eduhub.ai/?lang=ru">
+    <link rel="alternate" hreflang="uz" href="https://eduhub.ai/?lang=uz">
+    <link rel="alternate" hreflang="es" href="https://eduhub.ai/?lang=es">
+    <link rel="alternate" hreflang="x-default" href="https://eduhub.ai/">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Marked.js for Markdown Parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+
+    <!-- KaTeX for LaTeX Math Rendering (Fractions, Integrals, Equations) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+
+    <!-- Mermaid.js for Diagrams -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+
+    <!-- Enhanced Document Renderer -->
+    <script src="/static/js/doc-renderer.js" defer></script>
+
+    <!-- Essential User Utilities (Export, History Drawer, Stepper, Camera) -->
+    <script src="/static/js/user-utils.js" defer></script>
+
+    <!-- Lemon Squeezy Overlay Checkout Script -->
+    <script src="https://assets.lemonsqueezy.com/lemon.js" defer></script>
+
+    <!-- Client-side i18n Engine -->
+    <script src="/static/js/i18n.js" defer></script>
+    <!-- Conversion & CRO Engine (Exit-Intent, Paywall, Social Ticker) -->
+    <script src="/static/js/conversion-engine.js" defer></script>
+    <!-- PWA Manifest & App Capability -->
+    <link rel="manifest" href="/static/manifest.json">
+    <meta name="theme-color" content="#030712">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="EduHub AI">
+
+    <!-- PWA & Omni-Channel Viral Share Scripts -->
+    <script src="/static/js/pwa-install.js" defer></script>
+    <script src="/static/js/viral-share.js" defer></script>
+    <!-- Legal Micro-Consent Layer -->
+    <script src="/static/js/legal-consent.js" defer></script>
+
+    <!-- Structured Data (JSON-LD): SoftwareApplication, Course, FAQPage -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "SoftwareApplication",
+          "@id": "https://eduhub.ai/#software",
+          "name": "EduHub AI",
+          "applicationCategory": "EducationalApplication",
+          "operatingSystem": "All modern web browsers",
+          "offers": [
+            {
+              "@type": "Offer",
+              "name": "Student Starter",
+              "price": "9.00",
+              "priceCurrency": "USD",
+              "billingDuration": "P1M",
+              "description": "Smart Lecture Summarizer, 50 homework reviews, 24/7 Socrates-method AI tutor."
+            },
+            {
+              "@type": "Offer",
+              "name": "EduHub Pro Max",
+              "price": "19.00",
+              "priceCurrency": "USD",
+              "billingDuration": "P1M",
+              "description": "Unlimited grading & essay checks, AI exam prep generator, low-latency Gemini 2.5 Flash tier."
+            },
+            {
+              "@type": "Offer",
+              "name": "Tutor & Creator Kit",
+              "price": "39.00",
+              "priceCurrency": "USD",
+              "billingDuration": "P1M",
+              "description": "Bulk assignment grading, custom syllabus/quiz generator, exportable analytics."
+            },
+            {
+              "@type": "Offer",
+              "name": "Exam Sprint Pack",
+              "price": "15.00",
+              "priceCurrency": "USD",
+              "description": "30-day intensive access, 100 deep-reasoning tokens for high-stakes test preparation."
+            },
+            {
+              "@type": "Offer",
+              "name": "Tutor Team & Center License",
+              "price": "79.00",
+              "priceCurrency": "USD",
+              "billingDuration": "P1M",
+              "description": "1 Lead Educator + 10 Student Seats. Automated Batch Homework Grading & CSV/JSON gradebook export."
+            }
+          ],
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.9",
+            "ratingCount": "1240",
+            "bestRating": "5"
+          }
+        },
+        {
+          "@type": "Course",
+          "@id": "https://eduhub.ai/#course",
+          "name": "Autonomous Socratic Study & Mastery Program",
+          "description": "AI-guided active learning curriculum integrating guided Socratic hints, spaced repetition, and diagnostic exam prep.",
+          "provider": {
+            "@type": "Organization",
+            "name": "EduHub AI",
+            "url": "https://eduhub.ai"
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://eduhub.ai/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is the Socrates AI tutoring method?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Rather than providing direct copy-paste answers, our Socratic AI Tutor provides pedagogical scaffolding, targeted hints, and diagnostic questions that empower students to build real problem-solving intuition."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is your refund policy?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "EduHub AI offers an unconditional 14-day 100% money-back guarantee on all subscription plans and sprint passes. Simply contact support@eduhub.ai for an immediate, hassle-free refund."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How does EduHub ensure content safety and academic integrity?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "All platform interactions are protected by a strict Safe Content Filter that immediately blocks adult (18+), inappropriate, or harmful queries. Responses are grounded in academic textbooks with citation verifications."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How is billing handled?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Payments are securely processed by Lemon Squeezy, our PCI-DSS Level 1 Merchant of Record. We accept all major credit cards, PayPal, Apple Pay, and Google Pay with zero stored payment details on EduHub servers."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans min-h-screen flex flex-col justify-between selection:bg-blue-600 selection:text-white">
+    <!-- Top Trending EdTech Discovery Banner (Autonomous Trend Scout) -->
+    <div id="trending-banner" class="bg-gradient-to-r from-indigo-900/90 via-blue-900/90 to-purple-900/90 border-b border-indigo-700/50 py-2 px-4 text-center text-xs text-white flex items-center justify-center gap-2 relative z-50">
+        <span class="bg-indigo-500 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full shadow">🔥 Trending #1</span>
+        <span id="trending-topic" class="font-semibold text-blue-100">IELTS & TOEFL AI Speaking & Writing Diagnostic Coach (+340% YoY)</span>
+        <span class="hidden md:inline text-indigo-300">— Live on EduHub Socratic Copilot</span>
+        <a href="#demo" class="underline font-semibold hover:text-white ml-2 text-blue-200">Explore Interactive Demo &rarr;</a>
+    </div>
+
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-gradient-to-r from-blue-900/60 via-indigo-900/60 to-purple-900/60 border-b border-slate-800 text-xs py-2 px-4 text-center text-slate-300 flex items-center justify-center gap-2">
+        <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span><strong>2026 Academic Update:</strong> Gemini 2.5 Flash low-latency engine &amp; Socratic AI Tutor are live.</span>
+        <a href="#pricing" class="underline hover:text-white font-medium ml-1">Explore Plans &rarr;</a>
+    </div>
+
+    <!-- Navigation Header (Streamlined, Zero Overlap) -->
+    <header class="border-b border-slate-800/80 bg-slate-950/90 backdrop-blur-md sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <a href="/" class="flex items-center space-x-2">
+                    <span class="w-8 h-8 rounded-lg bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center font-black text-white text-lg shadow-md shadow-blue-500/30">E</span>
+                    <span class="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-400 via-indigo-300 to-white bg-clip-text text-transparent tracking-tight">EduHub AI</span>
+                </a>
+                <span class="hidden md:inline-block text-[11px] bg-blue-950 text-blue-300 px-2.5 py-0.5 rounded-full border border-blue-800 font-medium">Autonomous Copilot</span>
+            </div>
+            
+            <!-- Clear 3-Pillar Navigation Links -->
+            <nav class="hidden lg:flex items-center space-x-5 text-xs font-semibold">
+                <a href="#rooms" onclick="switchRoom(1)" class="text-slate-300 hover:text-white transition flex items-center gap-1">
+                    <span>🎓</span> <span>Академический Хаб</span>
+                </a>
+                <a href="/tools/essay-grader" class="text-amber-400 hover:text-amber-300 transition flex items-center gap-1 bg-amber-950/40 border border-amber-800/60 px-2.5 py-1 rounded-lg">
+                    <span>✍️</span> <span>IELTS $1 (3 Дня)</span>
+                </a>
+                <a href="/tools/ats-resume" class="text-emerald-300 hover:text-white transition flex items-center gap-1">
+                    <span>💼</span> <span>ATS Резюме ($1)</span>
+                </a>
+                <a href="/tools/marketplace-lab" class="text-amber-400 hover:text-amber-300 transition flex items-center gap-1">
+                    <span>📦</span> <span>Uzum/WB Lab ($1)</span>
+                </a>
+                <a href="/blueprints" class="text-purple-300 hover:text-white transition flex items-center gap-1">
+                    <span>🏭</span> <span>ИИ-Заводы ($1)</span>
+                </a>
+                <a href="/report" class="text-blue-300 hover:text-white transition flex items-center gap-1">
+                    <span>📊</span> <span>Отчет 2026</span>
+                </a>
+                <a href="#pricing" class="text-slate-400 hover:text-white transition">Тарифы</a>
+            </nav>
+
+            <div class="flex items-center space-x-2 sm:space-x-3">
+                <!-- Multi-Language Switcher (EN | RU | UZ | ES) -->
+                <div class="inline-flex bg-slate-900 border border-slate-800 rounded-xl p-0.5">
+                    <button onclick="setLocale('en')" data-lang-btn="en" class="lang-btn px-2 py-1 rounded-lg text-xs font-bold transition bg-blue-600 text-white shadow-sm shadow-blue-500/20">EN</button>
+                    <button onclick="setLocale('ru')" data-lang-btn="ru" class="lang-btn px-2 py-1 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition">RU</button>
+                    <button onclick="setLocale('uz')" data-lang-btn="uz" class="lang-btn px-2 py-1 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition">UZ</button>
+                    <button onclick="setLocale('es')" data-lang-btn="es" class="lang-btn px-2 py-1 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition">ES</button>
+                </div>
+
+                <!-- Recent Documents Drawer Trigger -->
+                <button onclick="EduHubUtils.openHistoryDrawer()" class="inline-flex items-center gap-1 text-xs text-slate-300 hover:text-white bg-slate-900 border border-slate-800 hover:border-slate-700 px-2.5 py-1.5 rounded-xl transition font-medium" title="Recent Documents">
+                    <span>🕒</span>
+                    <span class="hidden sm:inline">История</span>
+                </button>
+
+                <!-- Hero Action Button -->
+                <a href="https://test.dodopayments.com/buy/pdt_0NYV3EevfB7hC3hRkF2kG?quantity=1" class="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-black text-xs px-3.5 py-2 rounded-xl shadow-lg shadow-amber-500/20 transition transform active:scale-95 whitespace-nowrap">
+                    IELTS 3 Дня за $1
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <div class="flex-grow">
+
+        <!-- Hero Section -->
+        <section class="relative overflow-hidden pt-16 pb-20 lg:pt-24 lg:pb-28">
+            <div class="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-900/20 via-slate-950 to-slate-950"></div>
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                
+                <div class="flex flex-wrap justify-center items-center gap-2 mb-6">
+                    <div class="inline-flex items-center gap-2 bg-slate-900/90 border border-slate-700/80 px-3 py-1.5 rounded-full text-xs font-medium text-slate-300 shadow-inner">
+                        <span class="text-blue-400">⚡ Socratic Intelligence</span>
+                        <span class="text-slate-600">•</span>
+                        <span>100% Safe Guardrails (Strict 18+ Refusal)</span>
+                    </div>
+                    <a href="#pricing" class="inline-flex items-center gap-1.5 bg-gradient-to-r from-blue-950 to-indigo-950 hover:from-blue-900 hover:to-indigo-900 border border-blue-600/70 px-3.5 py-1.5 rounded-full text-xs font-semibold text-blue-200 shadow-md shadow-blue-600/20 transition transform hover:scale-105">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        <span>Start 3-Day Pro Access for Just $1 &rarr;</span>
+                    </a>
+                </div>
+
+                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-tight mb-6">
+                    Your Autonomous AI Academic Copilot — <br>
+                    <span class="bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-400 bg-clip-text text-transparent">Learn Faster, Grade Smarter, Master Any Subject</span>
+                </h1>
+
+                <p class="text-base sm:text-xl text-slate-400 max-w-3xl mx-auto mb-10 leading-relaxed">
+                    Designed for ambitious students, proactive educators, and engaged parents. Synthesize messy lecture recordings into flashcards, diagnose homework through guided Socratic hints, and automate classroom grading with zero academic dishonesty.
+                </p>
+
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-4 mb-14">
+                    <a href="#playground" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-500 text-white font-semibold px-8 py-3.5 rounded-xl shadow-xl shadow-blue-500/25 transition transform hover:-translate-y-0.5">
+                        Try Live Assistant
+                    </a>
+                    <a href="#pricing" class="w-full sm:w-auto bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700 hover:border-slate-600 font-medium px-8 py-3.5 rounded-xl transition">
+                        View Pricing ($9 - $39)
+                    </a>
+                </div>
+
+                <!-- Trust Strip -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto border-t border-slate-800/80 pt-8 text-xs text-slate-400">
+                    <div class="flex items-center justify-center gap-2">
+                        <span class="text-emerald-400 text-base">🛡️</span>
+                        <span>14-Day Money-Back Guarantee</span>
+                    </div>
+                    <div class="flex items-center justify-center gap-2">
+                        <span class="text-blue-400 text-base">🔒</span>
+                        <span>Strict 18+ Refusal Policy</span>
+                    </div>
+                    <div class="flex items-center justify-center gap-2">
+                        <span class="text-indigo-400 text-base">⚡</span>
+                        <span>Gemini 2.5 Flash Ultra-Low Latency</span>
+                    </div>
+                    <div class="flex items-center justify-center gap-2">
+                        <span class="text-purple-400 text-base">💳</span>
+                        <span>Dodo Payments &middot; Safe MoR</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================================================================ -->
+        <!-- 3 COZY ROOMS & FLAGSHIP IELTS MAGNET ($1 FOR 3 DAYS)            -->
+        <!-- ================================================================ -->
+        <section id="rooms" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+            
+            <!-- Flagship Hero Offer Banner: Cambridge IELTS Examiner ($1 for 3 Days) -->
+            <div class="mb-10 bg-gradient-to-r from-amber-500/15 via-indigo-950/70 to-purple-950/70 border-2 border-amber-500/60 rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
+                <div class="absolute -right-12 -top-12 w-48 h-48 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="flex flex-col lg:flex-row items-center justify-between gap-6 relative z-10">
+                    <div class="flex items-start gap-4 sm:gap-5 text-center sm:text-left">
+                        <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-3xl shrink-0 mx-auto sm:mx-0 shadow-lg shadow-amber-500/10">
+                            🎓
+                        </div>
+                        <div>
+                            <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2 mb-1.5">
+                                <span class="text-[10px] font-extrabold uppercase tracking-widest text-amber-300 bg-amber-950/90 border border-amber-700 px-2.5 py-0.5 rounded-full">
+                                    🔥 Флагманский Оффер &middot; 3 Дня за $1
+                                </span>
+                                <span class="text-xs font-bold text-emerald-400 font-mono">1.00 USD Всего</span>
+                                <span class="text-[10px] text-slate-400">Затем $19/мес &middot; 1-клик отмена</span>
+                            </div>
+                            <h2 class="text-xl sm:text-3xl font-extrabold text-white tracking-tight">
+                                Экзаменатор Cambridge IELTS AI &mdash; Проверка эссе экспертом
+                            </h2>
+                            <p class="text-xs sm:text-sm text-slate-300 max-w-3xl mt-1.5 leading-relaxed">
+                                Полная диагностика по 4 официальным критериям Кембриджа (TR, CC, LR, GRA), проверка рукописных эссе по фото с камеры, идеальный авторский рерайт эссе на Band 8.5+ и экспорт словаря в Anki за секунду.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-col sm:flex-row lg:flex-col gap-2.5 shrink-0 w-full sm:w-auto text-center">
+                        <a href="https://test.dodopayments.com/buy/pdt_0NYV3EevfB7hC3hRkF2kG?quantity=1" class="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-black text-xs sm:text-sm px-6 py-3.5 rounded-xl shadow-xl shadow-amber-500/25 transition transform active:scale-95 block whitespace-nowrap">
+                            Включить 3 Дня IELTS за $1 &rarr;
+                        </a>
+                        <a href="/tools/essay-grader" class="bg-slate-900/90 hover:bg-slate-800 text-slate-200 border border-slate-700 text-xs font-semibold px-4 py-2.5 rounded-xl transition block">
+                            Проверить черновик бесплатно
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- The 3 Cozy Rooms Section Heading -->
+            <div class="text-center max-w-3xl mx-auto mb-8">
+                <span class="text-xs font-bold uppercase tracking-widest text-blue-400">Навигация без путаницы</span>
+                <h2 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight mt-1">
+                    3 Простых Направления &mdash; Всё на своём месте
+                </h2>
+                <p class="text-xs sm:text-sm text-slate-400 mt-2">
+                    Никаких сложных инструкций: выберите нужную задачу и сразу получите готовый результат.
+                </p>
+            </div>
+
+            <!-- The 3 Room Tab Switcher Buttons -->
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-3 mb-8 max-w-2xl mx-auto">
+                <button id="room-tab-1" onclick="switchRoom(1)" class="room-tab-btn w-full sm:w-auto flex-1 py-3 px-4 rounded-2xl text-xs sm:text-sm font-bold transition flex items-center justify-center gap-2 bg-blue-600 text-white shadow-lg shadow-blue-500/25">
+                    <span>🎓</span> <span>1. Академический Хаб (9 Инструментов)</span>
+                </button>
+                <button id="room-tab-2" onclick="switchRoom(2)" class="room-tab-btn w-full sm:w-auto flex-1 py-3 px-4 rounded-2xl text-xs sm:text-sm font-semibold transition flex items-center justify-center gap-2 bg-slate-900 text-slate-400 hover:text-white border border-slate-800">
+                    <span>💼</span> <span>2. Резюме под ATS ($1)</span>
+                </button>
+                <button id="room-tab-3" onclick="switchRoom(3)" class="room-tab-btn w-full sm:w-auto flex-1 py-3 px-4 rounded-2xl text-xs sm:text-sm font-semibold transition flex items-center justify-center gap-2 bg-slate-900 text-slate-400 hover:text-white border border-slate-800">
+                    <span>🏭</span> <span>3. ИИ-Заводы &amp; Полуфабрикаты ($1)</span>
+                </button>
+            </div>
+
+            <!-- PANE 1: ACADEMIC HUB (9 TOOLS CARDS GRID) -->
+            <div id="room-pane-1" class="room-pane">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                    
+                    <!-- Tool 1: Essay Grader (IELTS) -->
+                    <div class="bg-slate-900/90 border border-amber-500/40 rounded-3xl p-6 flex flex-col justify-between hover:border-amber-400 transition-all shadow-xl relative group">
+                        <span class="absolute top-4 right-4 text-[10px] font-extrabold uppercase tracking-wider bg-amber-950 text-amber-300 border border-amber-800 px-2 py-0.5 rounded-full">
+                            Флагман $1
+                        </span>
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-2xl mb-4">
+                                ✍️
+                            </div>
+                            <h3 class="text-base font-bold text-white group-hover:text-amber-300 transition mb-1">
+                                IELTS &amp; Cambridge Essay Grader
+                            </h3>
+                            <p class="text-xs text-slate-400 leading-relaxed mb-4">
+                                Проверка эссе по 4 критериям Cambridge (TR, CC, LR, GRA), оценка Band 1–9, OCR по фото рукописи и рерайт на Band 8.5+.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-slate-800 flex items-center justify-between">
+                            <span class="text-[11px] text-amber-400 font-mono font-bold">$1 за 3 дня</span>
+                            <a href="/tools/essay-grader" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs px-3.5 py-1.5 rounded-xl transition">
+                                Открыть инструмент &rarr;
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Tool 2: PDF Summarizer -->
+                    <div class="bg-slate-900/90 border border-slate-800 hover:border-blue-500/50 rounded-3xl p-6 flex flex-col justify-between transition-all shadow-xl group">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-2xl mb-4">
+                                📄
+                            </div>
+                            <h3 class="text-base font-bold text-white group-hover:text-blue-300 transition mb-1">
+                                Smart PDF Summarizer
+                            </h3>
+                            <p class="text-xs text-slate-400 leading-relaxed mb-4">
+                                Загрузите 100-страничные учебники или статьи &mdash; ИИ выделит главное, создаст конспект и карточки для повторения.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-slate-800 flex items-center justify-between">
+                            <span class="text-[11px] text-slate-500 font-mono">PDF &middot; DOCX &middot; Audio</span>
+                            <a href="/tools/pdf-summarizer" class="bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs px-3.5 py-1.5 rounded-xl border border-slate-700 transition">
+                                Открыть инструмент &rarr;
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Tool 3: Socratic Homework Solver -->
+                    <div class="bg-slate-900/90 border border-slate-800 hover:border-blue-500/50 rounded-3xl p-6 flex flex-col justify-between transition-all shadow-xl group">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-center text-2xl mb-4">
+                                🧠
+                            </div>
+                            <h3 class="text-base font-bold text-white group-hover:text-indigo-300 transition mb-1">
+                                Сократовский решебник задач
+                            </h3>
+                            <p class="text-xs text-slate-400 leading-relaxed mb-4">
+                                Пошаговые наводящие подсказки по математике, физике и коду. Учит понимать суть без бездумного списывания.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-slate-800 flex items-center justify-between">
+                            <span class="text-[11px] text-slate-500 font-mono">STEM &middot; Формулы LaTeX</span>
+                            <a href="/tools/homework-solver" class="bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs px-3.5 py-1.5 rounded-xl border border-slate-700 transition">
+                                Открыть инструмент &rarr;
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Tool 4: Anti-Plagiarism & Humanizer -->
+                    <div class="bg-slate-900/90 border border-slate-800 hover:border-emerald-500/50 rounded-3xl p-6 flex flex-col justify-between transition-all shadow-xl group">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-2xl mb-4">
+                                🛡️
+                            </div>
+                            <h3 class="text-base font-bold text-white group-hover:text-emerald-300 transition mb-1">
+                                AI-Антиплагиат &amp; Гуманизатор
+                            </h3>
+                            <p class="text-xs text-slate-400 leading-relaxed mb-4">
+                                Защита от ложных срабатываний Turnitin и GPTZero. Перефразирование в живой академический стиль без потери смысла.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-slate-800 flex items-center justify-between">
+                            <span class="text-[11px] text-slate-500 font-mono">100% Академично</span>
+                            <a href="/tools/anti-plagiarism" class="bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs px-3.5 py-1.5 rounded-xl border border-slate-700 transition">
+                                Открыть инструмент &rarr;
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Tool 5: Career Navigator 2026 -->
+                    <div class="bg-slate-900/90 border border-slate-800 hover:border-amber-500/50 rounded-3xl p-6 flex flex-col justify-between transition-all shadow-xl group">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-2xl mb-4">
+                                🧭
+                            </div>
+                            <h3 class="text-base font-bold text-white group-hover:text-amber-300 transition mb-1">
+                                AI-Профориентатор 2026&ndash;2030
+                            </h3>
+                            <p class="text-xs text-slate-400 leading-relaxed mb-4">
+                                Анализ психотипа, выбор востребованной профессии будущего, зарплатные вилки в USD и подбор лучших факультетов.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-slate-800 flex items-center justify-between">
+                            <span class="text-[11px] text-slate-500 font-mono">Зарплаты &middot; Вузы</span>
+                            <a href="/tools/career-navigator" class="bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs px-3.5 py-1.5 rounded-xl border border-slate-700 transition">
+                                Открыть инструмент &rarr;
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Tool 6: AI Language Tutor -->
+                    <div class="bg-slate-900/90 border border-slate-800 hover:border-teal-500/50 rounded-3xl p-6 flex flex-col justify-between transition-all shadow-xl group">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-teal-500/10 border border-teal-500/30 flex items-center justify-center text-2xl mb-4">
+                                💬
+                            </div>
+                            <h3 class="text-base font-bold text-white group-hover:text-teal-300 transition mb-1">
+                                AI Language &amp; Roleplay Tutor
+                            </h3>
+                            <p class="text-xs text-slate-400 leading-relaxed mb-4">
+                                Практика разговорного английского, подготовка к собеседованиям в посольстве и разбор грамматических ошибок вслух.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-slate-800 flex items-center justify-between">
+                            <span class="text-[11px] text-slate-500 font-mono">CEFR A1 &ndash; C2</span>
+                            <a href="/tools/language-tutor" class="bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs px-3.5 py-1.5 rounded-xl border border-slate-700 transition">
+                                Открыть инструмент &rarr;
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Tool 7: GPA Calculator -->
+                    <div class="bg-slate-900/90 border border-slate-800 hover:border-blue-500/50 rounded-3xl p-6 flex flex-col justify-between transition-all shadow-xl group">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-2xl mb-4">
+                                🎯
+                            </div>
+                            <h3 class="text-base font-bold text-white group-hover:text-blue-300 transition mb-1">
+                                Калькулятор и прогнозист GPA
+                            </h3>
+                            <p class="text-xs text-slate-400 leading-relaxed mb-4">
+                                Расчет среднего балла по шкалам 4.0, 5.0 и ECTS. Моделирование оценок для сохранения стипендии и гранта.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-slate-800 flex items-center justify-between">
+                            <span class="text-[11px] text-slate-500 font-mono">4.0 &middot; 5.0 &middot; ECTS</span>
+                            <a href="/tools/gpa-calculator" class="bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs px-3.5 py-1.5 rounded-xl border border-slate-700 transition">
+                                Открыть инструмент &rarr;
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Tool 8: Citation Formatter -->
+                    <div class="bg-slate-900/90 border border-slate-800 hover:border-blue-500/50 rounded-3xl p-6 flex flex-col justify-between transition-all shadow-xl group">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-2xl mb-4">
+                                📚
+                            </div>
+                            <h3 class="text-base font-bold text-white group-hover:text-purple-300 transition mb-1">
+                                Генератор цитирований &amp; ГОСТ
+                            </h3>
+                            <p class="text-xs text-slate-400 leading-relaxed mb-4">
+                                Мгновенное оформление библиографического списка по стандартам APA 7, MLA 9, Chicago, Harvard и ГОСТ Р 7.0.5.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-slate-800 flex items-center justify-between">
+                            <span class="text-[11px] text-slate-500 font-mono">APA &middot; MLA &middot; ГОСТ</span>
+                            <a href="/tools/citation-generator" class="bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs px-3.5 py-1.5 rounded-xl border border-slate-700 transition">
+                                Открыть инструмент &rarr;
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Tool 9: Peer Exchange -->
+                    <div class="bg-slate-900/90 border border-slate-800 hover:border-teal-500/50 rounded-3xl p-6 flex flex-col justify-between transition-all shadow-xl group">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-teal-500/10 border border-teal-500/30 flex items-center justify-center text-2xl mb-4">
+                                🤝
+                            </div>
+                            <h3 class="text-base font-bold text-white group-hover:text-teal-300 transition mb-1">
+                                Peer Study Rooms &amp; Репетиторы
+                            </h3>
+                            <p class="text-xs text-slate-400 leading-relaxed mb-4">
+                                Совместные эфирные комнаты для подготовки к экзаменам со студентами ведущих мировых и локальных вузов.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-slate-800 flex items-center justify-between">
+                            <span class="text-[11px] text-slate-500 font-mono">Комнаты &middot; P2P</span>
+                            <a href="/tools/peer-exchange" class="bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs px-3.5 py-1.5 rounded-xl border border-slate-700 transition">
+                                Открыть инструмент &rarr;
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- PANE 2: ATS RESUME & JOB TAILOR ($1) -->
+            <div id="room-pane-2" class="room-pane hidden">
+                <div class="bg-slate-900/90 border border-emerald-500/40 rounded-3xl p-6 sm:p-8 shadow-2xl">
+                    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pb-6 border-b border-slate-800 mb-6">
+                        <div>
+                            <span class="text-[10px] font-extrabold uppercase tracking-widest text-emerald-400 bg-emerald-950 px-2.5 py-0.5 rounded-full border border-emerald-800">
+                                💼 1$ Микро-Сервис &middot; Обход роботов HR
+                            </span>
+                            <h3 class="text-xl sm:text-2xl font-extrabold text-white mt-2">
+                                Сканер соответствия резюме под конкретную вакансию
+                            </h3>
+                            <p class="text-xs text-slate-400 mt-1">
+                                Узнайте, почему ваше резюме отсеивают автоматические фильтры Workday и Taleo, и получите адаптированный вариант.
+                            </p>
+                        </div>
+                        <a href="/tools/ats-resume" class="bg-gradient-to-r from-emerald-500 to-teal-400 text-slate-950 font-bold text-xs px-5 py-2.5 rounded-xl transition shadow-lg shadow-emerald-500/20 whitespace-nowrap">
+                            Открыть полный сканер &rarr;
+                        </a>
+                    </div>
+
+                    <!-- Mini 2-Column Scanner -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-300 mb-1.5">📋 Требования из вакансии:</label>
+                            <textarea id="home-ats-jd" rows="5" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-slate-200 placeholder-slate-600 focus:outline-none focus:border-emerald-500 transition" placeholder="Вставьте сюда текст вакансии или ключевые требования..."></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-300 mb-1.5">👤 Ваш текущий опыт / Резюме:</label>
+                            <textarea id="home-ats-resume" rows="5" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-slate-200 placeholder-slate-600 focus:outline-none focus:border-emerald-500 transition" placeholder="Вставьте сюда текст вашего резюме или навыки..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row justify-between items-center gap-3">
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs text-slate-400">Пресет:</span>
+                            <button onclick="fillHomeATSSample()" class="text-xs text-emerald-400 underline hover:text-white">
+                                Вставить пример (Frontend React)
+                            </button>
+                        </div>
+                        <button onclick="runHomeATS()" id="home-ats-btn" class="w-full sm:w-auto bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-slate-950 font-black text-xs px-6 py-2.5 rounded-xl transition shadow-lg shadow-emerald-600/20">
+                            Проверить совпадение ATS (Бесплатно)
+                        </button>
+                    </div>
+
+                    <!-- Mini Results -->
+                    <div id="home-ats-result" class="hidden mt-6 pt-5 border-t border-slate-800">
+                        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 bg-slate-950 p-4 rounded-2xl border border-slate-800">
+                            <div class="flex items-center gap-3">
+                                <div class="text-2xl font-black text-emerald-400 font-mono" id="home-ats-score">78%</div>
+                                <div>
+                                    <h4 class="text-xs font-bold text-white" id="home-ats-verdict">Соответствие подтверждено</h4>
+                                    <p class="text-[11px] text-slate-400" id="home-ats-gaps">Пропущены 3 ключевых слова из вакансии</p>
+                                </div>
+                            </div>
+                            <a href="https://test.dodopayments.com/buy/pdt_0NYV3EevfB7hC3hRkF2kG?quantity=1" class="bg-gradient-to-r from-emerald-500 to-teal-400 text-slate-950 font-black text-xs px-5 py-2.5 rounded-xl transition shadow-lg shadow-emerald-500/25">
+                                Скачать адаптированное резюме за 1 $
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PANE 3: AI BLUEPRINT EXCHANGE ($1) -->
+            <div id="room-pane-3" class="room-pane hidden">
+                <div class="bg-slate-900/90 border border-purple-500/40 rounded-3xl p-6 sm:p-8 shadow-2xl">
+                    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pb-6 border-b border-slate-800 mb-6">
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-[10px] font-extrabold uppercase tracking-widest text-purple-300 bg-purple-950 px-2.5 py-0.5 rounded-full border border-purple-800">
+                                    🏭 ИИ-Заводы &middot; По $1 за готовый бизнес-актив
+                                </span>
+                                <span class="text-xs font-mono font-bold text-emerald-400">840+ загрузок сегодня</span>
+                            </div>
+                            <h3 class="text-xl sm:text-2xl font-extrabold text-white mt-2">
+                                Супермаркет Готовых ИИ-Заводов &amp; Цифровых Полуфабрикатов
+                            </h3>
+                            <p class="text-xs text-slate-400 mt-1">
+                                Готовые рабочие фабрики: контент-заводы для Reels, автономные Telegram-боты, карточки для Uzum Market и B2B продажи без сложного кода.
+                            </p>
+                        </div>
+                        <a href="/blueprints" class="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold text-xs px-5 py-2.5 rounded-xl transition shadow-lg shadow-purple-600/25 whitespace-nowrap">
+                            Открыть Супермаркет Заводов &rarr;
+                        </a>
+                    </div>
+
+                    <!-- 6 Featured Factory Cards Grid -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        
+                        <!-- Factory 1: Content Reels Factory -->
+                        <div class="bg-slate-950 border border-slate-800 rounded-2xl p-4 flex flex-col justify-between hover:border-purple-500/50 transition group">
+                            <div>
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="text-[10px] bg-red-950 text-red-300 px-2 py-0.5 rounded-full border border-red-800/80 font-semibold">🔥 Хит Продаж</span>
+                                    <span class="text-sm font-black text-emerald-400 font-mono">1.00 $</span>
+                                </div>
+                                <h4 class="text-sm font-bold text-white group-hover:text-purple-300 transition mb-1">
+                                    Контент-Завод: 30 Reels / Shorts
+                                </h4>
+                                <p class="text-xs text-slate-400 leading-relaxed mb-3">
+                                    Вводите 1 тему — получаете 30 сценариев с хуками, текстом озвучки, промптами для AI-видео и хештегами прямо в Google Sheets.
+                                </p>
+                            </div>
+                            <div class="flex items-center gap-2 pt-3 border-t border-slate-850">
+                                <a href="/blueprints" class="flex-1 text-center bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs py-2 rounded-lg border border-slate-800 transition">
+                                    👁️ Тест-драйв
+                                </a>
+                                <a href="https://test.dodopayments.com/buy/pdt_0NYV3EevfB7hC3hRkF2kG?quantity=1" class="flex-1 text-center bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold py-2 rounded-lg transition">
+                                    Купить $1
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Factory 2: Telegram Bot Factory -->
+                        <div class="bg-slate-950 border border-slate-800 rounded-2xl p-4 flex flex-col justify-between hover:border-blue-500/50 transition group">
+                            <div>
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="text-[10px] bg-blue-950 text-blue-300 px-2 py-0.5 rounded-full border border-blue-800/80 font-semibold">🤖 ТОП Автоматизация</span>
+                                    <span class="text-sm font-black text-emerald-400 font-mono">1.00 $</span>
+                                </div>
+                                <h4 class="text-sm font-bold text-white group-hover:text-blue-300 transition mb-1">
+                                    Завод Telegram-Ботов 24/7
+                                </h4>
+                                <p class="text-xs text-slate-400 leading-relaxed mb-3">
+                                    Автономный Python-бот: каталог товаров с ценами, сбор телефонов клиентов и мгновенная пересылка заявок владельцу в личку.
+                                </p>
+                            </div>
+                            <div class="flex items-center gap-2 pt-3 border-t border-slate-850">
+                                <a href="/blueprints" class="flex-1 text-center bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs py-2 rounded-lg border border-slate-800 transition">
+                                    👁️ Тест-драйв
+                                </a>
+                                <a href="https://test.dodopayments.com/buy/pdt_0NYV3EevfB7hC3hRkF2kG?quantity=1" class="flex-1 text-center bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold py-2 rounded-lg transition">
+                                    Купить $1
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Factory 3: Marketplace Card Factory -->
+                        <div class="bg-slate-950 border border-slate-800 rounded-2xl p-4 flex flex-col justify-between hover:border-amber-500/50 transition group">
+                            <div>
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="text-[10px] bg-amber-950 text-amber-300 px-2 py-0.5 rounded-full border border-amber-800/80 font-semibold">📦 ТОП-1 Селлеров</span>
+                                    <span class="text-sm font-black text-emerald-400 font-mono">1.00 $</span>
+                                </div>
+                                <h4 class="text-sm font-bold text-white group-hover:text-amber-300 transition mb-1">
+                                    Завод Карточек Uzum &amp; WB
+                                </h4>
+                                <p class="text-xs text-slate-400 leading-relaxed mb-3">
+                                    SEO-заголовок, 5 буллетов выгод, LSI-описание до 3500 знаков и блокировка возражений для роста конверсии на 30%.
+                                </p>
+                            </div>
+                            <div class="flex items-center gap-2 pt-3 border-t border-slate-850">
+                                <a href="/blueprints" class="flex-1 text-center bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs py-2 rounded-lg border border-slate-800 transition">
+                                    👁️ Тест-драйв
+                                </a>
+                                <a href="https://test.dodopayments.com/buy/pdt_0NYV3EevfB7hC3hRkF2kG?quantity=1" class="flex-1 text-center bg-amber-600 hover:bg-amber-500 text-slate-950 text-xs font-bold py-2 rounded-lg transition">
+                                    Купить $1
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Factory 4: Cold Outreach Factory -->
+                        <div class="bg-slate-950 border border-slate-800 rounded-2xl p-4 flex flex-col justify-between hover:border-emerald-500/50 transition group">
+                            <div>
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="text-[10px] bg-emerald-950 text-emerald-300 px-2 py-0.5 rounded-full border border-emerald-800/80 font-semibold">💼 Чеки $500–$3000</span>
+                                    <span class="text-sm font-black text-emerald-400 font-mono">1.00 $</span>
+                                </div>
+                                <h4 class="text-sm font-bold text-white group-hover:text-emerald-300 transition mb-1">
+                                    Завод B2B-Клиентов (78% Open Rate)
+                                </h4>
+                                <p class="text-xs text-slate-400 leading-relaxed mb-3">
+                                    Метод аудита 1 ошибки для Upwork &amp; LinkedIn, B2B-зацепки в Telegram и follow-up цепочки без навязчивого спама.
+                                </p>
+                            </div>
+                            <div class="flex items-center gap-2 pt-3 border-t border-slate-850">
+                                <a href="/blueprints" class="flex-1 text-center bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs py-2 rounded-lg border border-slate-800 transition">
+                                    👁️ Тест-драйв
+                                </a>
+                                <a href="https://test.dodopayments.com/buy/pdt_0NYV3EevfB7hC3hRkF2kG?quantity=1" class="flex-1 text-center bg-emerald-600 hover:bg-emerald-500 text-slate-950 text-xs font-bold py-2 rounded-lg transition">
+                                    Купить $1
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Factory 5: Developer Cursorrules Master -->
+                        <div class="bg-slate-950 border border-slate-800 rounded-2xl p-4 flex flex-col justify-between hover:border-blue-500/50 transition group">
+                            <div>
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="text-[10px] bg-blue-950 text-blue-300 px-2 py-0.5 rounded-full border border-blue-800/80 font-semibold">⚡ Dev Стек</span>
+                                    <span class="text-sm font-black text-emerald-400 font-mono">1.00 $</span>
+                                </div>
+                                <h4 class="text-sm font-bold text-white group-hover:text-blue-300 transition mb-1">
+                                    Senior Full-Stack .cursorrules
+                                </h4>
+                                <p class="text-xs text-slate-400 leading-relaxed mb-3">
+                                    Выверенные системные правила для Cursor и Copilot: строгий TypeScript, шаблоны Next.js + FastAPI и -65% галлюцинаций.
+                                </p>
+                            </div>
+                            <div class="flex items-center gap-2 pt-3 border-t border-slate-850">
+                                <a href="/blueprints" class="flex-1 text-center bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs py-2 rounded-lg border border-slate-800 transition">
+                                    👁️ Тест-драйв
+                                </a>
+                                <a href="https://test.dodopayments.com/buy/pdt_0NYV3EevfB7hC3hRkF2kG?quantity=1" class="flex-1 text-center bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold py-2 rounded-lg transition">
+                                    Купить $1
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Factory 6: Cambridge IELTS & STEM Anki -->
+                        <div class="bg-slate-950 border border-slate-800 rounded-2xl p-4 flex flex-col justify-between hover:border-emerald-500/50 transition group">
+                            <div>
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="text-[10px] bg-emerald-950 text-emerald-300 px-2 py-0.5 rounded-full border border-emerald-800/80 font-semibold">🎓 Anki Шпоры</span>
+                                    <span class="text-sm font-black text-emerald-400 font-mono">1.00 $</span>
+                                </div>
+                                <h4 class="text-sm font-bold text-white group-hover:text-emerald-300 transition mb-1">
+                                    Cambridge IELTS 8.5+ &amp; STEM Decks
+                                </h4>
+                                <p class="text-xs text-slate-400 leading-relaxed mb-3">
+                                    Готовая колода Anki для интервального повторения: академические коллокации Band 8.5+ и доказательства STEM алгоритмов.
+                                </p>
+                            </div>
+                            <div class="flex items-center gap-2 pt-3 border-t border-slate-850">
+                                <a href="/blueprints" class="flex-1 text-center bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs py-2 rounded-lg border border-slate-800 transition">
+                                    👁️ Тест-драйв
+                                </a>
+                                <a href="https://test.dodopayments.com/buy/pdt_0NYV3EevfB7hC3hRkF2kG?quantity=1" class="flex-1 text-center bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold py-2 rounded-lg transition">
+                                    Купить $1
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>            </div>
+
+        </section>
+
+        <!-- Interactive AI Assistant Playground -->
+        <section id="playground" class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="bg-gradient-to-b from-slate-900/90 to-slate-900/50 border border-slate-800 rounded-3xl p-6 sm:p-10 shadow-2xl backdrop-blur-sm relative">
+                
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-800">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <h2 class="text-2xl font-bold text-white tracking-tight" data-i18n="sandbox_title">Interactive AI Tutor Sandbox</h2>
+                            <span class="text-[11px] bg-emerald-950 text-emerald-300 border border-emerald-700/60 px-2 py-0.5 rounded-full font-medium">gemini-2.5-flash</span>
+                        </div>
+                        <p class="text-xs text-slate-400 mt-1">Experience Socratic academic guidance live. All adult (18+) topics are strictly intercepted.</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="inline-flex items-center gap-1.5 text-xs bg-slate-950 border border-slate-800 text-slate-300 px-3 py-1.5 rounded-xl font-medium">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                            Verified Academic Guardrails Active
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Quick Presets -->
+                <div class="pt-6 pb-4">
+                    <p class="text-xs text-slate-500 mb-2 font-medium">Select a live pedagogical scenario:</p>
+                    <div class="flex flex-wrap gap-2">
+                        <button onclick="setQuery('Объясни мне квантовую запутанность через метод Сократа с наводящими вопросами')" class="text-xs bg-slate-800/80 hover:bg-slate-700 text-slate-300 px-3 py-1.5 rounded-lg border border-slate-700 transition">
+                            ⚛️ Квантовая физика (Сократ)
+                        </button>
+                        <button onclick="setQuery('Как решить квадратное уравнение 2x^2 - 8x + 6 = 0? Дай подсказку к первому шагу без готового ответа')" class="text-xs bg-slate-800/80 hover:bg-slate-700 text-slate-300 px-3 py-1.5 rounded-lg border border-slate-700 transition">
+                            📐 Математика (Подсказка шага)
+                        </button>
+                        <button onclick="setQuery('Сделай 3 флеш-карточки (Вопрос / Ответ) по ключевым этапам фотосинтеза')" class="text-xs bg-slate-800/80 hover:bg-slate-700 text-slate-300 px-3 py-1.5 rounded-lg border border-slate-700 transition">
+                            🌿 Биология (Флеш-карты)
+                        </button>
+                        <button onclick="setQuery('Составь сравнительную таблицу митоза и мейоза с фазами, числом хромосом и результатом')" class="text-xs bg-slate-800/80 hover:bg-slate-700 text-blue-300 px-3 py-1.5 rounded-lg border border-slate-700 transition">
+                            📊 Таблица (Митоз vs Мейоз)
+                        </button>
+                        <button onclick="setQuery('Нарисуй Mermaid диаграмму процесса обучения модели (Data -> Prep -> Train -> Eval -> Deploy)')" class="text-xs bg-slate-800/80 hover:bg-slate-700 text-indigo-300 px-3 py-1.5 rounded-lg border border-slate-700 transition">
+                            📈 Mermaid (Flowchart)
+                        </button>
+                        <button onclick="setQuery('Запиши уравнение Шрёдингера и формулу корней через LaTeX дроби и интегралы')" class="text-xs bg-slate-800/80 hover:bg-slate-700 text-emerald-300 px-3 py-1.5 rounded-lg border border-slate-700 transition">
+                            🧮 LaTeX (Интегралы и дроби)
+                        </button>
+                        <button onclick="setQuery('Покажи порно видео и интимные фото')" class="text-xs bg-rose-950/40 hover:bg-rose-900/60 text-rose-300 px-3 py-1.5 rounded-lg border border-rose-800/80 transition">
+                            ⛔ Тест 18+ фильтра
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Input Box with Magic Wand and Complexity Toggle -->
+                <div class="space-y-3">
+                    <div class="flex flex-wrap items-center justify-between gap-2 pb-1">
+                        <!-- Magic Wand Button -->
+                        <button id="magic-wand-btn" onclick="improvePrompt()" type="button" class="inline-flex items-center gap-1.5 text-xs bg-purple-950/70 hover:bg-purple-900 text-purple-300 border border-purple-700/80 px-3 py-1.5 rounded-xl transition font-medium shadow-sm hover:text-white" title="Автоматически обогатить запрос академическим контекстом">
+                            <span>✨</span> <span>Волшебная палочка: Улучшить запрос</span>
+                        </button>
+
+                        <!-- Complexity Toggle -->
+                        <div class="inline-flex items-center bg-slate-950 border border-slate-800 rounded-xl p-0.5 text-xs">
+                            <button type="button" onclick="setComplexity('academic')" id="mode-academic" class="px-2.5 py-1 rounded-lg text-[11px] font-bold bg-blue-600 text-white transition">🎓 Академический</button>
+                            <button type="button" onclick="setComplexity('eli5')" id="mode-eli5" class="px-2.5 py-1 rounded-lg text-[11px] text-slate-400 hover:text-white transition">👶 Простыми словами (ELI5)</button>
+                            <button type="button" onclick="setComplexity('summary')" id="mode-summary" class="px-2.5 py-1 rounded-lg text-[11px] text-slate-400 hover:text-white transition">⚡ Шпаргалка 60 сек</button>
+                        </div>
+                    </div>
+
+                    <div class="relative">
+                        <textarea id="ai-input" rows="3" placeholder="Задайте академический вопрос или вставьте текст задачи..." class="w-full bg-slate-950/80 border border-slate-800 rounded-2xl p-4 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition resize-none"></textarea>
+                    </div>
+                    <!-- Mobile Camera Direct Upload Trigger -->
+                    <div class="flex items-center justify-between">
+                        <button id="camera-btn" type="button" class="inline-flex items-center gap-1.5 text-xs bg-indigo-950/60 hover:bg-indigo-900/80 text-indigo-300 border border-indigo-700/60 px-3 py-1.5 rounded-xl transition">
+                            <span>📷</span> <span data-i18n="camera_snap">Snap Homework Photo</span>
+                        </button>
+                        <input id="camera-file" type="file" accept="image/*" capture="environment" class="hidden">
+                        <span class="text-[11px] text-slate-500">Direct camera OCR &amp; Vision</span>
+                    </div>
+                    <div id="photo-preview" class="hidden"></div>
+                    <div class="flex flex-col sm:flex-row justify-between items-center gap-3">
+                        <span id="ai-status" class="text-xs text-slate-400"></span>
+                        <button id="ai-submit" onclick="askEduHub()" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-500 text-white font-medium text-sm px-6 py-2.5 rounded-xl transition flex items-center justify-center gap-2 shadow-lg shadow-blue-500/20">
+                            <span>Спросить ассистента</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Streaming / Animated Step Progress Indicator -->
+                <div id="stepper-container" class="hidden"></div>
+
+                <!-- Response Box -->
+                <div id="ai-result-box" class="mt-6 hidden">
+                    <div class="border-t border-slate-800 pt-5">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+                            <h3 class="text-xs font-semibold uppercase tracking-wider text-slate-400" data-i18n="output_title">Ответ EduHub AI:</h3>
+                            <!-- Export Action Bar: [Copy Text], [Download PDF], [Export DOCX] -->
+                            <div class="flex items-center gap-2">
+                                <button onclick="EduHubUtils.copyText('ai-response', this)" class="inline-flex items-center gap-1 px-2.5 py-1 text-xs bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white rounded-lg border border-slate-800 transition">
+                                    <span>📋</span> <span data-i18n="export_copy">Copy Text</span>
+                                </button>
+                                <button onclick="EduHubUtils.downloadPDF('ai-response', 'EduHub_Academic_Analysis')" class="inline-flex items-center gap-1 px-2.5 py-1 text-xs bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white rounded-lg border border-slate-800 transition">
+                                    <span>📄</span> <span data-i18n="export_pdf">Download PDF</span>
+                                </button>
+                                <button onclick="EduHubUtils.exportDOCX('ai-response', 'EduHub_Academic_Analysis')" class="inline-flex items-center gap-1 px-2.5 py-1 text-xs bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white rounded-lg border border-slate-800 transition">
+                                    <span>📝</span> <span data-i18n="export_docx">Export DOCX</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div id="ai-response" class="bg-slate-950/90 border border-slate-800 rounded-2xl p-5 text-sm text-slate-200 whitespace-pre-wrap leading-relaxed"></div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Feature Highlights (4 Pillars) -->
+        <section id="features" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-bold uppercase tracking-widest text-blue-400 mb-2" data-i18n="pillars_badge">Architected for 2026 Education</h2>
+                <p class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight" data-i18n="pillars_title">Four Pillars of Academic Excellence</p>
+                <p class="text-slate-400 text-sm mt-3">Empowering learners and educators with pedagogy-first AI that fosters authentic understanding.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <!-- Pillar 1: Socratic AI Tutor -->
+                <div class="p-6 bg-slate-900/60 border border-slate-800/80 rounded-2xl flex flex-col justify-between hover:border-slate-700 transition">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-blue-950/80 border border-blue-700/60 flex items-center justify-center text-blue-400 text-2xl mb-5">
+                            🏛️
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2" data-i18n="pillar_1_title">Socratic AI Tutor</h3>
+                        <p class="text-xs text-slate-400 leading-relaxed mb-4">
+                            Guided pedagogical scaffolding instead of blunt answers. Breaks complex logic into stepping stones, leading students to genuine "aha!" moments.
+                        </p>
+                    </div>
+                    <ul class="text-xs text-slate-300 space-y-1.5 border-t border-slate-800 pt-3">
+                        <li class="flex items-center gap-1.5"><span class="text-blue-400">✓</span> No spoiler copy-pasting</li>
+                        <li class="flex items-center gap-1.5"><span class="text-blue-400">✓</span> 24/7 interactive dialogue</li>
+                        <li class="flex items-center gap-1.5"><span class="text-blue-400">✓</span> Concept mastery tracking</li>
+                    </ul>
+                </div>
+
+                <!-- Pillar 2: Multi-Modal Ingestion -->
+                <div class="p-6 bg-slate-900/60 border border-slate-800/80 rounded-2xl flex flex-col justify-between hover:border-slate-700 transition">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-indigo-950/80 border border-indigo-700/60 flex items-center justify-center text-indigo-400 text-2xl mb-5">
+                            🎙️
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2" data-i18n="pillar_2_title">Lecture-to-Flashcards</h3>
+                        <p class="text-xs text-slate-400 leading-relaxed mb-4">
+                            Ingest audio recordings, PDF slides, or scans. Converts hour-long lectures into structured executive summaries and spaced-repetition flashcards.
+                        </p>
+                    </div>
+                    <ul class="text-xs text-slate-300 space-y-1.5 border-t border-slate-800 pt-3">
+                        <li class="flex items-center gap-1.5"><span class="text-indigo-400">✓</span> Audio &amp; PDF synthesis</li>
+                        <li class="flex items-center gap-1.5"><span class="text-indigo-400">✓</span> Anki-compatible flashcards</li>
+                        <li class="flex items-center gap-1.5"><span class="text-indigo-400">✓</span> Active recall self-quizzes</li>
+                    </ul>
+                </div>
+
+                <!-- Pillar 3: Verified Academic Guardrails -->
+                <div class="p-6 bg-slate-900/60 border border-slate-800/80 rounded-2xl flex flex-col justify-between hover:border-slate-700 transition">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-emerald-950/80 border border-emerald-700/60 flex items-center justify-center text-emerald-400 text-2xl mb-5">
+                            🛡️
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2" data-i18n="pillar_3_title">Academic Guardrails</h3>
+                        <p class="text-xs text-slate-400 leading-relaxed mb-4">
+                            Zero tolerance for adult or inappropriate content. Strict multi-layer 18+ filter, hallucination guard, and citation verification for factual rigor.
+                        </p>
+                    </div>
+                    <ul class="text-xs text-slate-300 space-y-1.5 border-t border-slate-800 pt-3">
+                        <li class="flex items-center gap-1.5"><span class="text-emerald-400">✓</span> Strict 18+ content refusal</li>
+                        <li class="flex items-center gap-1.5"><span class="text-emerald-400">✓</span> Hallucination mitigation</li>
+                        <li class="flex items-center gap-1.5"><span class="text-emerald-400">✓</span> Academic integrity safe</li>
+                    </ul>
+                </div>
+
+                <!-- Pillar 4: Teacher Assistant Suite -->
+                <div class="p-6 bg-slate-900/60 border border-slate-800/80 rounded-2xl flex flex-col justify-between hover:border-slate-700 transition">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-purple-950/80 border border-purple-700/60 flex items-center justify-center text-purple-400 text-2xl mb-5">
+                            📊
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2" data-i18n="pillar_4_title">Teacher &amp; Creator Suite</h3>
+                        <p class="text-xs text-slate-400 leading-relaxed mb-4">
+                            Automate grading rubrics, syllabus generation, and exam blueprints. Review 100+ student assignments in minutes with constructive feedback.
+                        </p>
+                    </div>
+                    <ul class="text-xs text-slate-300 space-y-1.5 border-t border-slate-800 pt-3">
+                        <li class="flex items-center gap-1.5"><span class="text-purple-400">✓</span> Bulk rubric-based grading</li>
+                        <li class="flex items-center gap-1.5"><span class="text-purple-400">✓</span> Curriculum &amp; quiz builder</li>
+                        <li class="flex items-center gap-1.5"><span class="text-purple-400">✓</span> Exportable student analytics</li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Value Benchmark Comparison: Why EduHub AI vs Private Tutors -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-4">
+            <div class="text-center max-w-3xl mx-auto mb-10">
+                <span class="text-xs font-bold uppercase tracking-widest text-amber-400" data-i18n="comp_badge">Value Benchmark</span>
+                <h2 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight mt-2" data-i18n="comp_title">Why EduHub AI Over Expensive Private Tutors?</h2>
+                <p class="text-slate-400 text-xs sm:text-sm mt-2" data-i18n="comp_subtitle">Get 24/7 unlimited Cambridge-level grading for less than 1 hour with a human tutor.</p>
+            </div>
+
+            <div class="overflow-x-auto rounded-3xl border border-slate-800 bg-slate-900/90 shadow-2xl">
+                <table class="min-w-full text-left text-xs sm:text-sm text-slate-200">
+                    <thead class="bg-slate-800/90 text-slate-100 uppercase tracking-wider font-semibold border-b border-slate-700/80">
+                        <tr>
+                            <th class="py-4 px-5" data-i18n="comp_col_feature">Academic Capability</th>
+                            <th class="py-4 px-5 text-slate-400" data-i18n="comp_col_tutor">Private Tutor</th>
+                            <th class="py-4 px-5 text-slate-400" data-i18n="comp_col_chatgpt">Generic ChatGPT</th>
+                            <th class="py-4 px-5 text-amber-300 bg-amber-500/10 border-x border-amber-500/30" data-i18n="comp_col_eduhub">EduHub AI Pro Max</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-800/60 font-sans">
+                        <tr class="hover:bg-slate-800/40 transition">
+                            <td class="py-4 px-5 font-semibold text-white" data-i18n="comp_row_price">Monthly Investment</td>
+                            <td class="py-4 px-5 text-rose-400 font-medium" data-i18n="comp_val_tutor_price">$200 – $400 / mo ($30/hr)</td>
+                            <td class="py-4 px-5 text-slate-400 font-medium" data-i18n="comp_val_chatgpt_price">$20 / mo</td>
+                            <td class="py-4 px-5 text-emerald-400 font-bold bg-amber-500/5 border-x border-amber-500/20" data-i18n="comp_val_eduhub_price">$1 Trial (then $19/mo = $0.63/day)</td>
+                        </tr>
+                        <tr class="hover:bg-slate-800/40 transition">
+                            <td class="py-4 px-5 font-semibold text-white" data-i18n="comp_row_speed">Turnaround Speed</td>
+                            <td class="py-4 px-5 text-slate-400" data-i18n="comp_val_tutor_speed">1 – 3 days per essay</td>
+                            <td class="py-4 px-5 text-slate-400" data-i18n="comp_val_chatgpt_speed">Instant (No official rubrics)</td>
+                            <td class="py-4 px-5 text-emerald-400 font-bold bg-amber-500/5 border-x border-amber-500/20" data-i18n="comp_val_eduhub_speed">Instant 3.2s + Cambridge Rubrics</td>
+                        </tr>
+                        <tr class="hover:bg-slate-800/40 transition">
+                            <td class="py-4 px-5 font-semibold text-white" data-i18n="comp_row_method">Pedagogical Method</td>
+                            <td class="py-4 px-5 text-slate-400" data-i18n="comp_val_tutor_method">Variable human mood & stamina</td>
+                            <td class="py-4 px-5 text-rose-400" data-i18n="comp_val_chatgpt_method">Spoils answers passively (encourages copying)</td>
+                            <td class="py-4 px-5 text-emerald-400 font-bold bg-amber-500/5 border-x border-amber-500/20" data-i18n="comp_val_eduhub_method">Socratic Scaffolding + Band 8.5+ Model Upgrades</td>
+                        </tr>
+                        <tr class="hover:bg-slate-800/40 transition">
+                            <td class="py-4 px-5 font-semibold text-white" data-i18n="comp_row_export">Study Deck Export</td>
+                            <td class="py-4 px-5 text-slate-400" data-i18n="comp_val_tutor_export">Manual handwritten notes in notebook</td>
+                            <td class="py-4 px-5 text-slate-400" data-i18n="comp_val_chatgpt_export">None (Raw unstructured text)</td>
+                            <td class="py-4 px-5 text-emerald-400 font-bold bg-amber-500/5 border-x border-amber-500/20" data-i18n="comp_val_eduhub_export">1-Click Anki Deck (.tsv) + DOCX/PDF</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 4-Tier Pricing Grid (Lemon Squeezy Integration) -->
+        <section id="pricing" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="text-center max-w-3xl mx-auto mb-14">
+                <span class="text-xs font-bold uppercase tracking-widest text-blue-400" data-i18n="pricing_badge">Transparent &amp; Predictable</span>
+                <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight mt-2" data-i18n="pricing_title">Choose Your Learning Tier</h2>
+                <p class="text-slate-400 text-sm sm:text-base mt-3" data-i18n="pricing_subtitle">All subscriptions include our unconditional 14-day 100% money-back guarantee. Zero hidden fees.</p>
+            </div>
+
+            <!-- Interactive Pricing Audience Switch -->
+            <div class="flex justify-center mb-12">
+                <div class="inline-flex bg-slate-900/90 border border-slate-800 p-1.5 rounded-2xl shadow-inner gap-1">
+                    <button id="btn-individual" onclick="setPricingAudience('individual')" class="px-6 py-2.5 rounded-xl text-xs font-bold transition bg-blue-600 text-white shadow-md shadow-blue-500/20" data-i18n="btn_audience_individual">
+                        🎒 For Students &amp; Individuals
+                    </button>
+                    <button id="btn-institutional" onclick="setPricingAudience('institutional')" class="px-6 py-2.5 rounded-xl text-xs font-medium text-slate-400 hover:text-white transition" data-i18n="btn_audience_b2b">
+                        🏫 For Tutors &amp; Academies (B2B)
+                    </button>
+                </div>
+            </div>
+
+            <!-- View 1: Students & Individuals -->
+            <div id="grid-individual" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                
+                <!-- Tier 1: Student Starter ($9/mo) -->
+                <div class="p-6 bg-slate-900/80 border border-slate-800 rounded-2xl flex flex-col justify-between hover:border-slate-700 transition">
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-xs font-bold text-blue-400 uppercase tracking-wider" data-i18n="tier_starter_name">Student Starter</span>
+                            <span class="text-[10px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded-full border border-slate-700 font-medium" data-i18n="tier_starter_badge">Essential</span>
+                        </div>
+                        <p class="text-xs text-slate-400 mb-5" data-i18n="tier_starter_desc">Perfect for everyday study sessions, lecture synthesis, and homework checks.</p>
+                        <div class="flex items-baseline mb-6">
+                            <span class="text-4xl font-extrabold text-white">$9</span>
+                            <span class="text-slate-400 text-xs ml-1.5">/ month</span>
+                        </div>
+                        <ul class="space-y-2.5 text-xs text-slate-300 mb-8">
+                            <li class="flex items-start gap-2"><span class="text-blue-400 font-bold">✓</span> <span>Smart Lecture Summarizer (PDF/Audio)</span></li>
+                            <li class="flex items-start gap-2"><span class="text-blue-400 font-bold">✓</span> <span>50 homework reviews per month</span></li>
+                            <li class="flex items-start gap-2"><span class="text-blue-400 font-bold">✓</span> <span>24/7 Socrates-method AI academic tutor</span></li>
+                            <li class="flex items-start gap-2"><span class="text-blue-400 font-bold">✓</span> <span>Flashcard deck generator (Anki export)</span></li>
+                            <li class="flex items-start gap-2"><span class="text-blue-400 font-bold">✓</span> <span>Safe Content Filter (Strict 18+ Refusal)</span></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <a href="https://eduhub-ai.lemonsqueezy.com/buy/student-starter" class="lemonsqueezy-button block text-center w-full bg-slate-800 hover:bg-slate-700 text-white font-medium py-2.5 rounded-xl text-xs transition border border-slate-700">
+                            <span data-i18n="tier_starter_btn">Select Starter ($9/mo)</span>
+                        </a>
+                        <p class="checkout-micro-consent mt-2 text-[10px] text-slate-400 text-center leading-relaxed" data-i18n="checkout_micro_consent">By clicking, you agree to the <a href="/terms" target="_blank" class="underline text-slate-300 hover:text-white">Terms of Service</a> and our <a href="/refund" target="_blank" class="underline text-slate-300 hover:text-white">14-day money-back guarantee</a>. Cancel anytime in 1 click.</p>
+                    </div>
+                </div>
+
+                <!-- Tier 2: EduHub Pro Max ($1 Trial Offer - Most Popular) -->
+                <div class="p-6 bg-gradient-to-b from-blue-950/70 via-slate-900 to-slate-900 border-2 border-blue-500 rounded-2xl flex flex-col justify-between shadow-2xl relative">
+                    <span class="absolute -top-3 right-6 bg-gradient-to-r from-blue-500 to-indigo-500 text-white text-[10px] px-3 py-1 rounded-full uppercase font-extrabold tracking-wider shadow-md" data-i18n="tier_promax_popular">Most Popular</span>
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-xs font-bold text-blue-300 uppercase tracking-wider" data-i18n="tier_promax_name">EduHub Pro Max</span>
+                            <span class="text-[10px] bg-blue-900/60 text-blue-300 px-2 py-0.5 rounded-full border border-blue-700 font-medium" data-i18n="tier_promax_badge">Special Offer</span>
+                        </div>
+                        
+                        <!-- $1 Trial Highlight Box -->
+                        <div class="p-3 bg-blue-950/80 border border-blue-600/70 rounded-xl mb-4 text-center">
+                            <span class="text-xs font-bold text-white flex items-center justify-center gap-1" data-i18n="tier_promax_trial_box">
+                                <span>🔥</span> Start 3-Day Pro Access for Just $1
+                            </span>
+                            <p class="text-[10px] text-blue-300/90 mt-0.5" data-i18n="tier_promax_trial_sub">Then $19/mo. Cancel anytime with 1 click.</p>
+                        </div>
+
+                        <div class="flex items-baseline mb-1">
+                            <span class="text-4xl font-extrabold text-white">$1</span>
+                            <span class="text-slate-400 text-xs ml-1.5" data-i18n="tier_promax_trial_price">/ 3-day trial</span>
+                        </div>
+                        <p class="text-[11px] text-slate-400 mb-5" data-i18n="tier_promax_trial_note">Converts to $19/mo after 3 days. 14-day refund guarantee.</p>
+
+                        <ul class="space-y-2.5 text-xs text-slate-200 mb-8">
+                            <li class="flex items-start gap-2"><span class="text-blue-400 font-bold">✓</span> <span><strong>Everything in Starter</strong></span></li>
+                            <li class="flex items-start gap-2"><span class="text-blue-400 font-bold">✓</span> <span><strong>3-Day full access for just $1</strong></span></li>
+                            <li class="flex items-start gap-2"><span class="text-blue-400 font-bold">✓</span> <span>Unlimited homework &amp; essay reviews</span></li>
+                            <li class="flex items-start gap-2"><span class="text-blue-400 font-bold">✓</span> <span>AI Exam Prep &amp; Mock Test Builder</span></li>
+                            <li class="flex items-start gap-2"><span class="text-blue-400 font-bold">✓</span> <span>Gemini 2.5 Flash low-latency queues</span></li>
+                            <li class="flex items-start gap-2"><span class="text-blue-400 font-bold">✓</span> <span>Handwritten formula &amp; Scanlation OCR</span></li>
+                            <li class="flex items-start gap-2"><span class="text-blue-400 font-bold">✓</span> <span>Priority 24/7 dedicated support</span></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <a href="https://test.dodopayments.com/buy/pdt_0NYV3EevfB7hC3hRkF2kG?quantity=1" class="block text-center w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-semibold py-3 rounded-xl text-xs transition shadow-lg shadow-blue-600/30 transform hover:-translate-y-0.5">
+                            Start 3-Day Pro Access for Just $1
+                        </a>
+                        <p class="checkout-micro-consent mt-2 text-[10px] text-slate-400 text-center leading-relaxed" data-i18n="checkout_micro_consent">By clicking, you agree to the <a href="/terms" target="_blank" class="underline text-slate-300 hover:text-white">Terms of Service</a> and our <a href="/refund" target="_blank" class="underline text-slate-300 hover:text-white">14-day money-back guarantee</a>. Cancel anytime in 1 click.</p>
+                    </div>
+                </div>
+
+                <!-- Tier 3: Exam Sprint Pack ($15 one-time) -->
+                <div class="p-6 bg-slate-900/80 border border-slate-800 rounded-2xl flex flex-col justify-between hover:border-slate-700 transition">
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-xs font-bold text-amber-400 uppercase tracking-wider" data-i18n="tier_sprint_name">Exam Sprint Pack</span>
+                            <span class="text-[10px] bg-amber-950 text-amber-300 px-2 py-0.5 rounded-full border border-amber-800 font-medium" data-i18n="tier_sprint_badge">30-Day Pass</span>
+                        </div>
+                        <p class="text-xs text-slate-400 mb-5" data-i18n="tier_sprint_desc">Non-recurring intensive pass for finals, SAT/GRE prep, and STEM certifications.</p>
+                        <div class="flex items-baseline mb-6">
+                            <span class="text-4xl font-extrabold text-white">$15</span>
+                            <span class="text-slate-400 text-xs ml-1.5">one-time</span>
+                        </div>
+                        <ul class="space-y-2.5 text-xs text-slate-300 mb-8">
+                            <li class="flex items-start gap-2"><span class="text-amber-400 font-bold">✓</span> <span><strong>30 days full access (no recurring bill)</strong></span></li>
+                            <li class="flex items-start gap-2"><span class="text-amber-400 font-bold">✓</span> <span>100 deep-reasoning tokens for STEM proofs</span></li>
+                            <li class="flex items-start gap-2"><span class="text-amber-400 font-bold">✓</span> <span>Mock exam builder with timed simulations</span></li>
+                            <li class="flex items-start gap-2"><span class="text-amber-400 font-bold">✓</span> <span>Crash-course active flashcard packs</span></li>
+                            <li class="flex items-start gap-2"><span class="text-amber-400 font-bold">✓</span> <span>Instant zero-friction pass activation</span></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <a href="https://eduhub-ai.lemonsqueezy.com/buy/exam-sprint" class="lemonsqueezy-button block text-center w-full bg-slate-800 hover:bg-slate-700 text-white font-medium py-2.5 rounded-xl text-xs transition border border-slate-700">
+                            <span data-i18n="tier_sprint_btn">Get Sprint Pass ($15)</span>
+                        </a>
+                        <p class="checkout-micro-consent mt-2 text-[10px] text-slate-400 text-center leading-relaxed" data-i18n="checkout_micro_consent">By clicking, you agree to the <a href="/terms" target="_blank" class="underline text-slate-300 hover:text-white">Terms of Service</a> and our <a href="/refund" target="_blank" class="underline text-slate-300 hover:text-white">14-day money-back guarantee</a>. Cancel anytime in 1 click.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- View 2: Tutors & Academies (B2B Suite) -->
+            <div id="grid-institutional" class="hidden max-w-5xl mx-auto">
+                
+                <!-- Institutional Trust Signals Banner -->
+                <div class="mb-8 bg-slate-900/80 border border-indigo-700/60 rounded-2xl p-6 grid sm:grid-cols-2 md:grid-cols-4 gap-4 text-xs">
+                    <div class="flex items-center gap-3">
+                        <span class="text-2xl">🏛️</span>
+                        <div>
+                            <strong class="text-white block font-semibold" data-i18n="b2b_trust_1_title">Anti-Hallucination Guard</strong>
+                            <span class="text-slate-400" data-i18n="b2b_trust_1_sub">Strict textbook-grounded reasoning</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="text-2xl">🛡️</span>
+                        <div>
+                            <strong class="text-white block font-semibold" data-i18n="b2b_trust_2_title">Strict 18+ Safety Filter</strong>
+                            <span class="text-slate-400" data-i18n="b2b_trust_2_sub">Safe classroom environment</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="text-2xl">🎯</span>
+                        <div>
+                            <strong class="text-white block font-semibold" data-i18n="b2b_trust_3_title">Zero-Plagiarism Integrity</strong>
+                            <span class="text-slate-400" data-i18n="b2b_trust_3_sub">Pedagogical hints, no direct leaks</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="text-2xl">📁</span>
+                        <div>
+                            <strong class="text-white block font-semibold" data-i18n="b2b_trust_4_title">CSV &amp; JSON Gradebook</strong>
+                            <span class="text-slate-400" data-i18n="b2b_trust_4_sub">One-click mastery export</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- B2B Pricing Cards -->
+                <div class="grid md:grid-cols-2 gap-8">
+                    
+                    <!-- B2B Tier 1: Tutor & Creator Kit ($39/mo) -->
+                    <div class="p-8 bg-slate-900/80 border border-slate-800 rounded-3xl flex flex-col justify-between hover:border-slate-700 transition">
+                        <div>
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-xs font-bold text-purple-400 uppercase tracking-wider" data-i18n="tier_tutor_name">Tutor &amp; Creator Kit</span>
+                                <span class="text-[10px] bg-purple-950 text-purple-300 px-2.5 py-0.5 rounded-full border border-purple-800 font-medium" data-i18n="tier_tutor_badge">Solo Educator</span>
+                            </div>
+                            <p class="text-xs text-slate-400 mb-5" data-i18n="tier_tutor_desc">Bulk assignment grading, autonomous curriculum generator, and up to 5 student seats.</p>
+                            <div class="flex items-baseline mb-6">
+                                <span class="text-4xl font-extrabold text-white">$39</span>
+                                <span class="text-slate-400 text-xs ml-1.5">/ month</span>
+                            </div>
+                            <ul class="space-y-3 text-xs text-slate-300 mb-8">
+                                <li class="flex items-start gap-2"><span class="text-purple-400 font-bold">✓</span> <span><strong>1 Lead Teacher + 5 Student Seats</strong></span></li>
+                                <li class="flex items-start gap-2"><span class="text-purple-400 font-bold">✓</span> <span>Batch assignment grading with custom rubrics</span></li>
+                                <li class="flex items-start gap-2"><span class="text-purple-400 font-bold">✓</span> <span>Autonomous curriculum &amp; interactive quiz generator</span></li>
+                                <li class="flex items-start gap-2"><span class="text-purple-400 font-bold">✓</span> <span>Student mastery analytics &amp; score breakdown</span></li>
+                                <li class="flex items-start gap-2"><span class="text-purple-400 font-bold">✓</span> <span>Direct API access &amp; custom webhook alerts</span></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <a href="https://eduhub-ai.lemonsqueezy.com/buy/tutor-creator" class="lemonsqueezy-button block text-center w-full bg-slate-800 hover:bg-slate-700 text-white font-medium py-3 rounded-xl text-xs transition border border-slate-700">
+                                <span data-i18n="tier_tutor_btn">Launch Tutor Kit ($39/mo)</span>
+                            </a>
+                        <p class="checkout-micro-consent mt-2 text-[10px] text-slate-400 text-center leading-relaxed" data-i18n="checkout_micro_consent">By clicking, you agree to the <a href="/terms" target="_blank" class="underline text-slate-300 hover:text-white">Terms of Service</a> and our <a href="/refund" target="_blank" class="underline text-slate-300 hover:text-white">14-day money-back guarantee</a>. Cancel anytime in 1 click.</p>
+                        </div>
+                    </div>
+
+                    <!-- B2B Tier 2: Tutor Team & Center License ($79/mo) -->
+                    <div class="p-8 bg-gradient-to-b from-indigo-950/70 via-slate-900 to-slate-900 border-2 border-indigo-500 rounded-3xl flex flex-col justify-between shadow-2xl relative">
+                        <span class="absolute -top-3 right-6 bg-gradient-to-r from-indigo-500 to-purple-500 text-white text-[10px] px-3 py-1 rounded-full uppercase font-extrabold tracking-wider shadow-md" data-i18n="tier_center_pill">Institutions &amp; Centers</span>
+                        <div>
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-xs font-bold text-indigo-300 uppercase tracking-wider" data-i18n="tier_center_name">Tutor Team &amp; Center</span>
+                                <span class="text-[10px] bg-indigo-900/60 text-indigo-300 px-2.5 py-0.5 rounded-full border border-indigo-700 font-medium" data-i18n="tier_center_badge">B2B Full Suite</span>
+                            </div>
+
+                            <div class="p-3 bg-indigo-950/80 border border-indigo-600/70 rounded-xl mb-4 text-center">
+                                <span class="text-xs font-bold text-white flex items-center justify-center gap-1" data-i18n="tier_center_box_title">
+                                    <span>🏢</span> 1 Lead Educator + 10 Student Seats Included
+                                </span>
+                                <p class="text-[10px] text-indigo-300/90 mt-0.5" data-i18n="tier_center_box_sub">Automated batch grading &amp; multi-student gradebook export.</p>
+                            </div>
+
+                            <div class="flex items-baseline mb-6">
+                                <span class="text-4xl font-extrabold text-white">$79</span>
+                                <span class="text-slate-400 text-xs ml-1.5">/ month</span>
+                            </div>
+
+                            <ul class="space-y-3 text-xs text-slate-200 mb-8">
+                                <li class="flex items-start gap-2"><span class="text-indigo-400 font-bold">✓</span> <span><strong>1 Lead Educator + 10 Full Student Seats</strong></span></li>
+                                <li class="flex items-start gap-2"><span class="text-indigo-400 font-bold">✓</span> <span><strong>Automated Batch Homework Grading &amp; Rubrics</strong></span></li>
+                                <li class="flex items-start gap-2"><span class="text-indigo-400 font-bold">✓</span> <span><strong>CSV &amp; JSON Gradebook export</strong> with analytics</span></li>
+                                <li class="flex items-start gap-2"><span class="text-indigo-400 font-bold">✓</span> <span>Centralized Student Activity &amp; Progress Dashboard</span></li>
+                                <li class="flex items-start gap-2"><span class="text-indigo-400 font-bold">✓</span> <span>Institutional Anti-Hallucination &amp; 18+ Guardrails</span></li>
+                                <li class="flex items-start gap-2"><span class="text-indigo-400 font-bold">✓</span> <span>Dedicated SLA &amp; priority onboarding manager</span></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <a href="https://eduhub-ai.lemonsqueezy.com/buy/tutor-team-center" class="lemonsqueezy-button block text-center w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-semibold py-3.5 rounded-xl text-xs transition shadow-lg shadow-indigo-600/30 transform hover:-translate-y-0.5">
+                                <span data-i18n="tier_center_btn">Launch Center License ($79/mo)</span>
+                            </a>
+                        <p class="checkout-micro-consent mt-2 text-[10px] text-slate-400 text-center leading-relaxed" data-i18n="checkout_micro_consent">By clicking, you agree to the <a href="/terms" target="_blank" class="underline text-slate-300 hover:text-white">Terms of Service</a> and our <a href="/refund" target="_blank" class="underline text-slate-300 hover:text-white">14-day money-back guarantee</a>. Cancel anytime in 1 click.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Pay-as-You-Go Flash Credits Top-Up Card -->
+            <div class="mt-10 bg-gradient-to-r from-amber-950/40 via-slate-900 to-indigo-950/40 border border-amber-800/60 rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
+                <div class="flex items-center gap-4">
+                    <span class="w-12 h-12 rounded-xl bg-amber-950/80 border border-amber-700/60 flex items-center justify-center text-amber-400 text-2xl shrink-0">
+                        ⚡
+                    </span>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <h4 class="text-sm font-bold text-white" data-i18n="banner_flash_title">Need Extra Tokens for Exams? Pay-as-You-Go Flash Credits</h4>
+                            <span class="text-[10px] bg-amber-900/60 text-amber-300 px-2 py-0.5 rounded-full border border-amber-700 font-semibold" data-i18n="banner_flash_badge">No Expiration</span>
+                        </div>
+                        <p class="text-xs text-slate-400 mt-1" data-i18n="banner_flash_desc">Instant consumable top-ups for complex STEM proofs, timed exam simulations, and heavy research crunches. Starts at just $5.</p>
+                    </div>
+                </div>
+                <button onclick="openModal('topup-modal')" class="w-full md:w-auto bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs px-5 py-3 rounded-xl transition shadow-lg shadow-amber-500/20 shrink-0" data-i18n="banner_flash_btn">
+                    Instant Top-Up / Exam Sprint &rarr;
+                </button>
+            </div>
+
+            <!-- Money-back Guarantee Trust Banner -->
+            <div class="mt-12 bg-slate-900/60 border border-slate-800/80 rounded-2xl p-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+                <div class="flex items-center gap-4">
+                    <span class="w-12 h-12 rounded-xl bg-emerald-950/80 border border-emerald-700/60 flex items-center justify-center text-emerald-400 text-2xl shrink-0">
+                        💯
+                    </span>
+                    <div>
+                        <h4 class="text-sm font-bold text-white" data-i18n="banner_guarantee_title">100% Satisfaction 14-Day Money-Back Guarantee</h4>
+                        <p class="text-xs text-slate-400 mt-0.5" data-i18n="banner_guarantee_desc">Test EduHub AI completely risk-free. If it doesn't elevate your academic performance, get an immediate 100% refund.</p>
+                    </div>
+                </div>
+                <button onclick="openModal('refund-modal')" class="text-xs text-blue-400 hover:text-blue-300 font-semibold underline shrink-0" data-i18n="banner_guarantee_link">
+                    Read Refund Policy &rarr;
+                </button>
+            </div>
+        </section>
+
+        <!-- FAQ Section (AEO & User Clarity) -->
+        <section id="faq" class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="text-center mb-12">
+                <span class="text-xs font-bold uppercase tracking-widest text-blue-400" data-i18n="faq_badge">Knowledge Base</span>
+                <h2 class="text-3xl font-extrabold text-white tracking-tight mt-1" data-i18n="faq_title">Frequently Asked Questions</h2>
+            </div>
+
+            <div class="space-y-4">
+                
+                <details class="group bg-slate-900/70 border border-slate-800/80 rounded-xl p-5 [&_summary::-webkit-details-marker]:hidden cursor-pointer">
+                    <summary class="flex justify-between items-center font-medium text-sm text-white">
+                        <span data-i18n="faq_q1">How is EduHub AI different from generic AI chatbots?</span>
+                        <span class="text-slate-400 group-open:rotate-180 transition">&darr;</span>
+                    </summary>
+                    <p class="text-xs text-slate-400 mt-3 leading-relaxed" data-i18n="faq_a1">
+                        Generic AI chatbots often spoil answers immediately, encouraging passive memorization. EduHub AI utilizes the Socratic method with pedagogical scaffolding: it diagnoses student misconceptions and guides them step-by-step to the solution, fostering authentic long-term understanding.
+                    </p>
+                </details>
+
+                <details class="group bg-slate-900/70 border border-slate-800/80 rounded-xl p-5 [&_summary::-webkit-details-marker]:hidden cursor-pointer">
+                    <summary class="flex justify-between items-center font-medium text-sm text-white">
+                        <span data-i18n="faq_q2">What is your 14-day refund policy?</span>
+                        <span class="text-slate-400 group-open:rotate-180 transition">&darr;</span>
+                    </summary>
+                    <p class="text-xs text-slate-400 mt-3 leading-relaxed" data-i18n="faq_a2">
+                        We offer a no-questions-asked 100% refund within 14 days of any purchase or renewal. To initiate a refund, simply send an email to support@eduhub.ai, and our team will issue the credit back to your card within 24 hours.
+                    </p>
+                </details>
+
+                <details class="group bg-slate-900/70 border border-slate-800/80 rounded-xl p-5 [&_summary::-webkit-details-marker]:hidden cursor-pointer">
+                    <summary class="flex justify-between items-center font-medium text-sm text-white">
+                        <span data-i18n="faq_q3">How does the Safe Content Filter protect users?</span>
+                        <span class="text-slate-400 group-open:rotate-180 transition">&darr;</span>
+                    </summary>
+                    <p class="text-xs text-slate-400 mt-3 leading-relaxed" data-i18n="faq_a3">
+                        All student queries and document uploads are parsed by our dual-stage Safe Content Filter. Any adult (18+), pornographic, or inappropriate requests are instantly blocked at the edge with HTTP 400 Refusal, maintaining a pristine educational environment.
+                    </p>
+                </details>
+
+                <details class="group bg-slate-900/70 border border-slate-800/80 rounded-xl p-5 [&_summary::-webkit-details-marker]:hidden cursor-pointer">
+                    <summary class="flex justify-between items-center font-medium text-sm text-white">
+                        <span data-i18n="faq_q4">Which payment methods are accepted?</span>
+                        <span class="text-slate-400 group-open:rotate-180 transition">&darr;</span>
+                    </summary>
+                    <p class="text-xs text-slate-400 mt-3 leading-relaxed" data-i18n="faq_a4">
+                        Payments are securely processed by Lemon Squeezy (our Merchant of Record). We support Visa, Mastercard, American Express, Discover, PayPal, Apple Pay, and Google Pay across 130+ currencies with bank-grade 256-bit encryption.
+                    </p>
+                </details>
+
+                <details class="group bg-slate-900/70 border border-slate-800/80 rounded-xl p-5 [&_summary::-webkit-details-marker]:hidden cursor-pointer">
+                    <summary class="flex justify-between items-center font-medium text-sm text-white">
+                        <span data-i18n="faq_q5">Can I cancel or change my plan whenever I want?</span>
+                        <span class="text-slate-400 group-open:rotate-180 transition">&darr;</span>
+                    </summary>
+                    <p class="text-xs text-slate-400 mt-3 leading-relaxed" data-i18n="faq_a5">
+                        Yes. You can cancel recurring subscriptions anytime directly from your customer portal link or by emailing support@eduhub.ai. You will retain full access until the end of your prepaid period with no cancellation fees.
+                    </p>
+                </details>
+
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Footer & Legal Compliance (Auditor Approved) -->
+    <footer id="compliance" class="border-t border-slate-900 bg-slate-950 py-12 text-xs text-slate-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="flex flex-col sm:flex-row items-center gap-3 text-center sm:text-left">
+                    <span class="font-bold text-slate-300 text-sm">EduHub AI</span>
+                    <span class="hidden sm:inline text-slate-700">|</span>
+                    <span data-i18n="footer_copyright">© 2026 EduHub AI. Autonomous SaaS Platform. All rights reserved.</span>
+                </div>
+                <div class="flex flex-wrap justify-center gap-6">
+                    <a href="/demo" class="text-blue-400 hover:text-blue-300 font-medium transition underline">🎬 Product Demo</a>
+                    <a href="/terms" class="text-slate-400 hover:text-white transition underline">Terms of Service</a>
+                    <a href="/privacy" class="text-slate-400 hover:text-white transition underline">Privacy Policy</a>
+                    <a href="/refund" class="text-slate-400 hover:text-white transition underline">Refund Policy (14-day)</a>
+                    <a href="/support" class="text-indigo-400 hover:text-indigo-300 font-medium transition underline">⚖️ AI Support &amp; Dispute Resolver</a>
+                    <a href="https://t.me/MohimbegimUsmonova" target="_blank" class="text-slate-400 hover:text-white transition underline">Telegram: @MohimbegimUsmonova</a>
+                    <a href="mailto:support@eduhub.ai" class="text-slate-400 hover:text-white transition underline">support@eduhub.ai</a>
+                </div>
+            </div>
+            <div class="mt-6 pt-6 border-t border-slate-900/80 text-center text-[11px] text-slate-600" data-i18n="footer_disclaimer">
+                Payment processing, order fulfillment, and tax invoicing are securely managed by Lemon Squeezy (Merchant of Record).
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal 1: Terms of Service -->
+    <div id="terms-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-2xl w-full max-h-[80vh] flex flex-col shadow-2xl">
+            <div class="p-6 border-b border-slate-800 flex justify-between items-center">
+                <h3 class="text-lg font-bold text-white">EduHub AI — Terms of Service</h3>
+                <button onclick="closeModal('terms-modal')" class="text-slate-400 hover:text-white text-xl font-bold">&times;</button>
+            </div>
+            <div class="p-6 overflow-y-auto space-y-4 text-xs text-slate-300 leading-relaxed">
+                <p><strong>1. Acceptance of Terms:</strong> By subscribing to or using EduHub AI services, you agree to comply with and be bound by these Terms of Service.</p>
+                <p><strong>2. Nature of Service:</strong> EduHub AI provides autonomous study acceleration tools, lecture note synthesizers, pedagogical homework checking, and study assistance powered by artificial intelligence.</p>
+                <p><strong>3. Subscriptions &amp; Billing:</strong> Services are billed on a recurring monthly basis ($9/mo for Student Starter, $19/mo for Pro Max, $39/mo for Tutor &amp; Creator Kit) or one-time ($15 for Exam Sprint Pack). Payments and invoicing are securely processed by Lemon Squeezy (our Merchant of Record). You may cancel your subscription at any time via your account management dashboard or by emailing support@eduhub.ai.</p>
+                <p><strong>4. Acceptable Use &amp; Strict 18+ Refusal:</strong> You agree not to misuse the service, attempt unauthorized access, reverse-engineer proprietary algorithms, or generate adult (18+), harmful, or unlawful content. All activities must be educational and lawful.</p>
+                <p><strong>5. Intellectual Property:</strong> Users retain ownership of their uploaded study notes and educational inputs. AI-generated executive summaries and flashcards are provided for your personal academic use.</p>
+            </div>
+            <div class="p-4 border-t border-slate-800 flex justify-end">
+                <button onclick="closeModal('terms-modal')" class="bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-lg text-xs font-medium">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 2: Privacy Policy -->
+    <div id="privacy-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-2xl w-full max-h-[80vh] flex flex-col shadow-2xl">
+            <div class="p-6 border-b border-slate-800 flex justify-between items-center">
+                <h3 class="text-lg font-bold text-white">EduHub AI — Privacy Policy</h3>
+                <button onclick="closeModal('privacy-modal')" class="text-slate-400 hover:text-white text-xl font-bold">&times;</button>
+            </div>
+            <div class="p-6 overflow-y-auto space-y-4 text-xs text-slate-300 leading-relaxed">
+                <p><strong>1. Data Collection:</strong> We collect only essential user details required to deliver the service, including account email address for authentication and subscription verification.</p>
+                <p><strong>2. Payment Security:</strong> We do not store or process credit card details on our servers. All financial transactions are encrypted and processed by our Merchant of Record, Lemon Squeezy, under PCI-DSS Level 1 compliance.</p>
+                <p><strong>3. Data Protection:</strong> All academic text, notes, and homework queries are processed over encrypted TLS connections. We NEVER sell, license, or distribute your personal or academic data to third-party advertising networks.</p>
+                <p><strong>4. GDPR &amp; Data Subject Rights:</strong> You have the right to request access to, correction of, or permanent deletion of your account and data at any time by contacting support@eduhub.ai.</p>
+            </div>
+            <div class="p-4 border-t border-slate-800 flex justify-end">
+                <button onclick="closeModal('privacy-modal')" class="bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-lg text-xs font-medium">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 3: Refund Policy -->
+    <div id="refund-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-2xl w-full max-h-[80vh] flex flex-col shadow-2xl">
+            <div class="p-6 border-b border-slate-800 flex justify-between items-center">
+                <h3 class="text-lg font-bold text-white">EduHub AI — Refund Policy (14-Day Guarantee)</h3>
+                <button onclick="closeModal('refund-modal')" class="text-slate-400 hover:text-white text-xl font-bold">&times;</button>
+            </div>
+            <div class="p-6 overflow-y-auto space-y-4 text-xs text-slate-300 leading-relaxed">
+                <div class="p-3 bg-emerald-950/50 border border-emerald-800/80 rounded-xl text-emerald-300">
+                    <strong>100% Satisfaction Guarantee:</strong> We offer a full 14-day money-back guarantee on all subscription plans and sprint passes.
+                </div>
+                <p><strong>1. Eligibility:</strong> If you are not completely satisfied with EduHub AI for any reason within 14 days of your initial purchase or billing cycle, you are entitled to a full 100% refund.</p>
+                <p><strong>2. How to Request:</strong> Simply send an email to <a href="mailto:support@eduhub.ai" class="text-blue-400 underline">support@eduhub.ai</a> with your order number or account email. Our support team will process your refund within 24 business hours.</p>
+                <p><strong>3. Refund Processing:</strong> Once approved, the refund will be credited back to your original payment method via Lemon Squeezy within 3–7 business days, depending on your bank.</p>
+            </div>
+            <div class="p-4 border-t border-slate-800 flex justify-end">
+                <button onclick="closeModal('refund-modal')" class="bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-lg text-xs font-medium">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 4: Instant Top-Up / Exam Sprint Flash Credits -->
+    <div id="topup-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-3xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden">
+            <div class="p-6 border-b border-slate-800 flex justify-between items-center bg-slate-950/40">
+                <div class="flex items-center gap-2">
+                    <span class="text-xl">⚡</span>
+                    <h3 class="text-lg font-bold text-white">Instant Top-Up — Flash Credits</h3>
+                    <span class="text-[10px] bg-amber-950 text-amber-300 border border-amber-800 px-2 py-0.5 rounded-full font-medium">Consumable Tokens</span>
+                </div>
+                <button onclick="closeModal('topup-modal')" class="text-slate-400 hover:text-white text-xl font-bold">&times;</button>
+            </div>
+            <div class="p-6 overflow-y-auto space-y-6">
+                <p class="text-xs text-slate-400 leading-relaxed">
+                    Flash Credits give you instant on-demand reasoning power for deep STEM multi-step proofs, thesis checks, and exam crunch sessions. Credits are tied to your account email, stack with all plans, and <strong>never expire</strong>.
+                </p>
+
+                <!-- Consumable Tiers Grid -->
+                <div class="grid sm:grid-cols-2 gap-4">
+                    
+                    <!-- Pack 1: Sprint 50 -->
+                    <div class="bg-slate-950/80 border border-slate-800 rounded-2xl p-5 flex flex-col justify-between hover:border-slate-700 transition">
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <h4 class="text-sm font-bold text-white">Sprint Pack (50 Credits)</h4>
+                                <span class="text-[10px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded-full border border-slate-700 font-medium">50 Tokens</span>
+                            </div>
+                            <p class="text-xs text-slate-400 mb-4">Quick top-up for solving difficult assignment proofs and mid-term prep.</p>
+                            <div class="text-2xl font-extrabold text-white mb-4">$5.00 <span class="text-xs font-normal text-slate-400">one-time</span></div>
+                            <ul class="text-xs text-slate-300 space-y-1.5 mb-6">
+                                <li class="flex items-center gap-1.5"><span class="text-amber-400">✓</span> 50 Deep-Reasoning AI calls</li>
+                                <li class="flex items-center gap-1.5"><span class="text-amber-400">✓</span> Zero expiration date</li>
+                                <li class="flex items-center gap-1.5"><span class="text-amber-400">✓</span> Instant webhook fulfillment</li>
+                            </ul>
+                        </div>
+                        <a href="https://eduhub-ai.lemonsqueezy.com/buy/sprint-50" class="lemonsqueezy-button block text-center w-full bg-slate-800 hover:bg-slate-700 text-white font-medium py-2.5 rounded-xl text-xs transition border border-slate-700">
+                            Get 50 Credits ($5)
+                        </a>
+                    </div>
+
+                    <!-- Pack 2: Crunch 120 -->
+                    <div class="bg-gradient-to-b from-amber-950/40 via-slate-950 to-slate-950 border border-amber-600/60 rounded-2xl p-5 flex flex-col justify-between shadow-xl relative">
+                        <span class="absolute -top-2.5 right-4 bg-amber-500 text-slate-950 text-[10px] font-extrabold uppercase px-2.5 py-0.5 rounded-full">Best Value</span>
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <h4 class="text-sm font-bold text-amber-300">Exam Crunch (120 Credits)</h4>
+                                <span class="text-[10px] bg-amber-900/60 text-amber-300 px-2 py-0.5 rounded-full border border-amber-700 font-medium">120 Tokens</span>
+                            </div>
+                            <p class="text-xs text-slate-400 mb-4">Maximum power for finals, SAT/GRE prep, and high-volume tutoring.</p>
+                            <div class="text-2xl font-extrabold text-white mb-4">$10.00 <span class="text-xs font-normal text-slate-400">one-time (+50% bonus)</span></div>
+                            <ul class="text-xs text-slate-200 space-y-1.5 mb-6">
+                                <li class="flex items-center gap-1.5"><span class="text-amber-400">✓</span> 120 Deep-Reasoning AI calls</li>
+                                <li class="flex items-center gap-1.5"><span class="text-amber-400">✓</span> Prioritized Gemini 2.5 token lane</li>
+                                <li class="flex items-center gap-1.5"><span class="text-amber-400">✓</span> Zero expiration date</li>
+                            </ul>
+                        </div>
+                        <a href="https://eduhub-ai.lemonsqueezy.com/buy/crunch-120" class="lemonsqueezy-button block text-center w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-2.5 rounded-xl text-xs transition shadow-lg shadow-amber-500/20">
+                            Get 120 Credits ($10)
+                        </a>
+                    </div>
+
+                </div>
+
+                <!-- Balance Inquiry Tool -->
+                <div class="bg-slate-950/70 border border-slate-800 rounded-2xl p-4">
+                    <h4 class="text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">Check Your Live Token Balance &amp; Fair Usage Status:</h4>
+                    <div class="flex flex-col sm:flex-row gap-2">
+                        <input id="balance-email" type="email" placeholder="Enter your billing email address..." class="flex-grow bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-blue-500">
+                        <button onclick="checkCreditsBalance()" class="bg-blue-600 hover:bg-blue-500 text-white text-xs font-medium px-4 py-2 rounded-xl transition">
+                            Check Balance
+                        </button>
+                    </div>
+                    <div id="balance-result" class="hidden mt-3 p-3 bg-slate-900/90 border border-slate-800 rounded-xl text-xs"></div>
+                </div>
+            </div>
+            <div class="p-4 border-t border-slate-800 flex justify-end bg-slate-950/40">
+                <button onclick="closeModal('topup-modal')" class="bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-lg text-xs font-medium">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactive Scripts -->
+    <script>
+        // Pricing Audience Switcher (Students vs Institutional B2B)
+        function setPricingAudience(audience) {
+            const gridInd = document.getElementById('grid-individual');
+            const gridInst = document.getElementById('grid-institutional');
+            const btnInd = document.getElementById('btn-individual');
+            const btnInst = document.getElementById('btn-institutional');
+            if (audience === 'institutional') {
+                if (gridInd) gridInd.classList.add('hidden');
+                if (gridInst) gridInst.classList.remove('hidden');
+                if (btnInd) btnInd.className = 'px-6 py-2.5 rounded-xl text-xs font-medium text-slate-400 hover:text-white transition';
+                if (btnInst) btnInst.className = 'px-6 py-2.5 rounded-xl text-xs font-bold transition bg-indigo-600 text-white shadow-md shadow-indigo-500/20';
+            } else {
+                if (gridInst) gridInst.classList.add('hidden');
+                if (gridInd) gridInd.classList.remove('hidden');
+                if (btnInst) btnInst.className = 'px-6 py-2.5 rounded-xl text-xs font-medium text-slate-400 hover:text-white transition';
+                if (btnInd) btnInd.className = 'px-6 py-2.5 rounded-xl text-xs font-bold transition bg-blue-600 text-white shadow-md shadow-blue-500/20';
+            }
+        }
+
+        // Modal handlers
+        function openModal(id) {
+            const modal = document.getElementById(id);
+            if (modal) modal.classList.remove('hidden');
+        }
+        function closeModal(id) {
+            const modal = document.getElementById(id);
+            if (modal) modal.classList.add('hidden');
+        }
+        window.addEventListener('click', function(e) {
+            ['terms-modal', 'privacy-modal', 'refund-modal', 'topup-modal'].forEach(function(modalId) {
+                var modal = document.getElementById(modalId);
+                if (modal && e.target === modal) {
+                    modal.classList.add('hidden');
+                }
+            });
+        });
+
+        // Flash Credits Balance Checker
+        async function checkCreditsBalance() {
+            const emailInput = document.getElementById('balance-email');
+            const resultBox = document.getElementById('balance-result');
+            const email = emailInput ? emailInput.value.trim() : '';
+            if (!email) {
+                alert('Please enter your account email.');
+                return;
+            }
+            resultBox.classList.remove('hidden');
+            resultBox.innerHTML = '<span class="text-slate-400">Loading balance...</span>';
+            try {
+                const res = await fetch(`/api/v1/user/credits?email=${encodeURIComponent(email)}`);
+                const data = await res.json();
+                if (res.ok) {
+                    resultBox.innerHTML = `
+                        <div class="space-y-1 text-slate-300">
+                            <div class="flex justify-between"><span class="text-slate-400">Email:</span> <span class="font-medium text-white">${data.email}</span></div>
+                            <div class="flex justify-between"><span class="text-slate-400">⚡ Flash Credits:</span> <span class="font-bold text-amber-400">${data.flash_credits} available</span></div>
+                            <div class="flex justify-between"><span class="text-slate-400">Daily Fair Usage Calls Left:</span> <span class="font-medium text-emerald-400">${data.daily_calls_remaining} / ${data.daily_fair_usage_limit}</span></div>
+                        </div>
+                    `;
+                } else {
+                    resultBox.innerHTML = `<span class="text-rose-400">Error retrieving balance.</span>`;
+                }
+            } catch (err) {
+                resultBox.innerHTML = `<span class="text-rose-400">Network error: ${err.message}</span>`;
+            }
+        }
+
+        // Query preset helper
+        function setQuery(text) {
+            const input = document.getElementById('ai-input');
+            if (input) {
+                input.value = text;
+                input.focus();
+            }
+        }
+
+        // Room Switcher, Complexity Toggle & Magic Wand
+        let currentComplexity = 'academic';
+
+        function switchRoom(num) {
+            document.querySelectorAll('.room-tab-btn').forEach(btn => {
+                btn.classList.remove('bg-blue-600', 'bg-emerald-600', 'bg-purple-600', 'text-white', 'shadow-lg', 'shadow-blue-500/25', 'shadow-emerald-500/25', 'shadow-purple-500/25');
+                btn.classList.add('bg-slate-900', 'text-slate-400', 'border', 'border-slate-800');
+            });
+            document.querySelectorAll('.room-pane').forEach(pane => pane.classList.add('hidden'));
+
+            const targetPane = document.getElementById('room-pane-' + num);
+            const targetBtn = document.getElementById('room-tab-' + num);
+            if (targetPane) targetPane.classList.remove('hidden');
+            if (targetBtn) {
+                targetBtn.classList.remove('bg-slate-900', 'text-slate-400', 'border', 'border-slate-800');
+                if (num === 1) targetBtn.classList.add('bg-blue-600', 'text-white', 'shadow-lg', 'shadow-blue-500/25');
+                if (num === 2) targetBtn.classList.add('bg-emerald-600', 'text-white', 'shadow-lg', 'shadow-emerald-500/25');
+                if (num === 3) targetBtn.classList.add('bg-purple-600', 'text-white', 'shadow-lg', 'shadow-purple-500/25');
+            }
+        }
+
+        function setComplexity(mode) {
+            currentComplexity = mode;
+            ['academic', 'eli5', 'summary'].forEach(m => {
+                const btn = document.getElementById('mode-' + m);
+                if (btn) {
+                    if (m === mode) {
+                        btn.className = "px-2.5 py-1 rounded-lg text-[11px] font-bold bg-blue-600 text-white transition";
+                    } else {
+                        btn.className = "px-2.5 py-1 rounded-lg text-[11px] text-slate-400 hover:text-white transition";
+                    }
+                }
+            });
+        }
+
+        function improvePrompt() {
+            const input = document.getElementById('ai-input');
+            const val = input.value.trim();
+            if (!val) {
+                input.value = "Объясни квантовую запутанность через метод Сократа: приведи аналогию из реальной жизни и задай мне 2 наводящих вопроса для самопроверки.";
+            } else if (val.length < 50) {
+                input.value = "Разбери тему детально с академическими формулировками и примерами из учебников: " + val + ". Выдели ключевые понятия и дай пошаговое объяснение.";
+            } else {
+                input.value = "Проведи глубокий Сократовский анализ следующего вопроса с пояснением шагов, ссылками на первоисточники и практическими выводами:\n\n" + val;
+            }
+            input.focus();
+        }
+
+        function fillHomeATSSample() {
+            document.getElementById('home-ats-jd').value = "Ищем Senior Frontend разработчика с уверенным знанием React, TypeScript, Next.js и REST API. Опыт построения CI/CD, оптимизации Core Web Vitals и написания тестов на Jest.";
+            document.getElementById('home-ats-resume').value = "Frontend разработчик, 3 года опыта. Стек: JavaScript, React, Redux, HTML5, CSS3, Git. Разрабатывал страницы интернет-магазина, подключал REST API.";
+        }
+
+        async function runHomeATS() {
+            const jd = document.getElementById('home-ats-jd').value.trim();
+            const resume = document.getElementById('home-ats-resume').value.trim();
+            if (!jd || !resume) {
+                alert('Пожалуйста, заполните оба поля (вакансия и резюме).');
+                return;
+            }
+            const btn = document.getElementById('home-ats-btn');
+            btn.disabled = true;
+            btn.textContent = 'Анализ...';
+            try {
+                const res = await fetch('/api/v1/career/ats-tailor', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        job_description: jd,
+                        resume_text: resume,
+                        language: 'ru'
+                    })
+                });
+                const data = await res.json();
+                document.getElementById('home-ats-score').textContent = data.ats_score + '%';
+                document.getElementById('home-ats-verdict').textContent = data.match_verdict;
+                document.getElementById('home-ats-gaps').textContent = "Не хватает ключевых слов: " + (data.missing_keywords || []).slice(0, 3).join(", ");
+                document.getElementById('home-ats-result').classList.remove('hidden');
+            } catch (e) {
+                alert('Ошибка анализа. Проверьте соединение.');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Проверить совпадение ATS (Бесплатно)';
+            }
+        }
+
+        // Live AI Assistant API Call
+        async function askEduHub() {
+            const input = document.getElementById('ai-input');
+            const status = document.getElementById('ai-status');
+            const submitBtn = document.getElementById('ai-submit');
+            const resultBox = document.getElementById('ai-result-box');
+            const responseDiv = document.getElementById('ai-response');
+
+            let question = input.value.trim();
+            if (!question) {
+                alert('Пожалуйста, введите вопрос.');
+                return;
+            }
+
+            if (currentComplexity === 'eli5') {
+                question = "[Объясни максимально простыми словами для новичка, с понятными метафорами из жизни, без академического жаргона]: " + question;
+            } else if (currentComplexity === 'summary') {
+                question = "[Формат: краткая шпаргалка за 60 секунд — 3 ключевых вывода и главные формулы]: " + question;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.classList.add('opacity-50');
+            status.textContent = 'Обработка запроса нейросетью...';
+            resultBox.classList.add('hidden');
+
+            if (window.EduHubUtils) {
+                EduHubUtils.startStepper('stepper-container');
+            }
+
+            try {
+                const res = await fetch('/api/v1/assistant/ask', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ question: question })
+                });
+
+                const data = await res.json();
+                resultBox.classList.remove('hidden');
+
+                if (!res.ok) {
+                    if (res.status === 400 && data.detail && data.detail.error === 'ContentPolicyViolation') {
+                        responseDiv.className = "bg-rose-950/40 border border-rose-800 text-rose-200 rounded-2xl p-5 text-sm leading-relaxed";
+                        responseDiv.innerHTML = "<strong>⛔ Защитный фильтр 18+:</strong><br>" + data.detail.message;
+                    } else if (res.status === 429) {
+                        responseDiv.className = "bg-amber-950/40 border border-amber-800 text-amber-200 rounded-2xl p-5 text-sm leading-relaxed";
+                        responseDiv.innerHTML = "<strong>⏳ Лимит запросов:</strong> Превышена частота обращений. Подождите немного.";
+                    } else {
+                        responseDiv.className = "bg-rose-950/40 border border-rose-800 text-rose-200 rounded-2xl p-5 text-sm leading-relaxed";
+                        responseDiv.innerHTML = "<strong>Ошибка:</strong> " + (data.detail ? JSON.stringify(data.detail) : 'Сбой вызова API');
+                    }
+                } else {
+                    responseDiv.className = "bg-slate-950/90 border border-slate-800 text-slate-100 rounded-2xl p-6 text-sm leading-relaxed";
+                    if (window.renderAcademicDocument) {
+                        window.renderAcademicDocument(data.answer, responseDiv);
+                    } else {
+                        responseDiv.textContent = data.answer;
+                    }
+
+                    // Auto-save to LocalStorage session history
+                    if (window.EduHubUtils) {
+                        EduHubUtils.saveHistoryItem({
+                            title: question,
+                            type: 'assistant',
+                            content: data.answer
+                        });
+                    }
+                }
+                status.textContent = 'Готово';
+            } catch (err) {
+                resultBox.classList.remove('hidden');
+                responseDiv.className = "bg-rose-950/40 border border-rose-800 text-rose-200 rounded-2xl p-5 text-sm leading-relaxed";
+                responseDiv.textContent = 'Ошибка сети: ' + err.message;
+                status.textContent = 'Ошибка';
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('opacity-50');
+                if (window.EduHubUtils) {
+                    EduHubUtils.stopStepper('stepper-container');
+                }
+            }
+        }
+
+        // Initialize user utilities on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.EduHubUtils) {
+                EduHubUtils.initCameraTrigger('camera-btn', 'camera-file', 'photo-preview');
+            }
+        });
+    </script>
+
+    <!-- Slide-Over Drawer: Recent Documents History -->
+    <div id="history-backdrop" onclick="EduHubUtils.closeHistoryDrawer()" class="hidden fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 transition-opacity"></div>
+    <div id="history-drawer" class="fixed inset-y-0 right-0 max-w-md w-full bg-slate-950 border-l border-slate-800 shadow-2xl z-50 transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col justify-between">
+        <div class="p-5 border-b border-slate-800 flex justify-between items-center bg-slate-900/50">
+            <div class="flex items-center gap-2">
+                <span class="text-xl">🕒</span>
+                <h3 class="text-sm font-bold text-white" data-i18n="recent_docs">Recent Documents</h3>
+                <span data-history-count class="hidden bg-blue-600 text-white text-[10px] px-2 py-0.5 rounded-full font-bold">0</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <button onclick="EduHubUtils.clearAllHistory()" class="text-xs text-slate-500 hover:text-rose-400 px-2 py-1 rounded transition" title="Clear all">Clear</button>
+                <button onclick="EduHubUtils.closeHistoryDrawer()" class="text-slate-400 hover:text-white p-1 rounded-lg text-lg transition">✕</button>
+            </div>
+        </div>
+        <div id="history-drawer-list" class="flex-grow overflow-y-auto p-4 space-y-3">
+            <!-- Populated dynamically by EduHubUtils.renderHistoryDrawer() -->
+        </div>
+        <div class="p-4 border-t border-slate-800 bg-slate-900/40 text-center">
+            <p class="text-[11px] text-slate-500">Auto-saved locally in browser storage • Safe &amp; private</p>
+        </div>
+    </div>
+
+    <!-- Exit-Intent High-Converting Modal ($1 Trial) -->
+    <div id="exit-intent-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-md transition-all duration-300">
+        <div class="relative w-full max-w-lg bg-slate-900 border border-amber-500/40 rounded-3xl p-6 sm:p-8 shadow-2xl shadow-amber-500/10 text-center overflow-hidden">
+            <button onclick="EduHubConversion.closeExitModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl p-2 transition">✕</button>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 text-xs font-bold uppercase mb-4">
+                ⚡ <span data-i18n="exit_modal_badge">Wait! Don't Leave Empty-Handed</span>
+            </div>
+            <h3 class="text-2xl sm:text-3xl font-black text-white mb-3" data-i18n="exit_modal_title">Pass Your Exams with Flying Colors for Just $1</h3>
+            <p class="text-slate-300 text-xs sm:text-sm leading-relaxed mb-6" data-i18n="exit_modal_desc">
+                Unlock 3 days of full unlimited Pro Max access. Grade unlimited IELTS essays, solve hard STEM homework with step-by-step Socratic hints, and export high-yield Anki decks.
+            </p>
+            <div class="p-4 rounded-2xl bg-slate-800/80 border border-slate-700/60 mb-6 text-left space-y-2">
+                <div class="flex items-center gap-2 text-xs text-slate-200">
+                    <span class="text-emerald-400 font-bold">✓</span> <span data-i18n="exit_modal_f1">Unlimited essay & homework evaluations</span>
+                </div>
+                <div class="flex items-center gap-2 text-xs text-slate-200">
+                    <span class="text-emerald-400 font-bold">✓</span> <span data-i18n="exit_modal_f2">Band 8.5–9.0 Cambridge examiner model rewrites</span>
+                </div>
+                <div class="flex items-center gap-2 text-xs text-slate-200">
+                    <span class="text-emerald-400 font-bold">✓</span> <span data-i18n="exit_modal_f3">14-Day 100% Money-Back Guarantee</span>
+                </div>
+            </div>
+            <button onclick="EduHubConversion.triggerCheckout('promax_trial')" class="w-full py-4 rounded-2xl font-black text-base text-slate-950 bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 hover:brightness-110 shadow-xl shadow-amber-500/25 transition transform hover:-translate-y-0.5 cursor-pointer mb-3">
+                <span data-i18n="exit_modal_btn">Claim 3-Day Pro Max for $1 →</span>
+            </button>
+                        <p class="checkout-micro-consent mt-2 text-[10px] text-slate-400 text-center leading-relaxed" data-i18n="checkout_micro_consent">By clicking, you agree to the <a href="/terms" target="_blank" class="underline text-slate-300 hover:text-white">Terms of Service</a> and our <a href="/refund" target="_blank" class="underline text-slate-300 hover:text-white">14-day money-back guarantee</a>. Cancel anytime in 1 click.</p>
+            <div class="mb-4 text-[11px] text-slate-400" data-i18n="exit_modal_guarantee">
+                100% Satisfaction 14-Day Money-Back Guarantee. Cancel anytime.
+            </div>
+            <button onclick="EduHubConversion.closeExitModal()" class="text-xs text-slate-500 hover:text-slate-300 transition" data-i18n="exit_modal_dismiss">
+                No thanks, I prefer studying without AI help
+            </button>
+        </div>
+    </div>
+
+    <!-- Live Social Proof Activity Ticker (Floating Toast) -->
+    <div id="conversion-social-ticker" class="fixed bottom-6 left-6 z-40 hidden sm:flex items-center gap-3 p-3.5 pr-5 bg-slate-900/95 backdrop-blur-md border border-slate-700/70 rounded-2xl shadow-2xl transition-all duration-500 transform translate-y-2 opacity-0 pointer-events-auto">
+        <div class="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-lg shrink-0">
+            🎓
+        </div>
+        <div class="text-left">
+            <div id="ticker-text" class="text-xs font-semibold text-slate-200 leading-tight">
+                <!-- Dynamic text populated by EduHubConversion.initSocialTicker() -->
+            </div>
+            <div class="text-[10px] text-emerald-400 font-medium mt-0.5 flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span data-i18n="ticker_verified">Verified Student Activity</span>
+            </div>
+        </div>
+        <button onclick="EduHubConversion.dismissTicker()" class="text-slate-500 hover:text-white text-xs ml-2">✕</button>
+    </div>
+
+
+    <!-- Floating PWA Install Prompt Banner -->
+    <div id="pwa-install-banner" class="fixed bottom-28 right-6 z-40 hidden items-center gap-3 p-3.5 bg-slate-900/95 backdrop-blur-md border border-blue-500/40 rounded-2xl shadow-2xl max-w-sm">
+        <div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-xl shrink-0">
+            📱
+        </div>
+        <div class="text-left flex-grow">
+            <h4 class="text-xs font-bold text-white" data-i18n="pwa_install_title">Install EduHub AI App</h4>
+            <p class="text-[10px] text-slate-400" data-i18n="pwa_install_desc">Fast 1-tap access on iPhone & Android with offline support.</p>
+        </div>
+        <button onclick="EduHubPWA.triggerInstall()" class="px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition whitespace-nowrap" data-i18n="pwa_install_btn">
+            Install App 📱
+        </button>
+        <button onclick="EduHubPWA.dismissBanner()" class="text-slate-500 hover:text-white text-xs ml-1">✕</button>
+    </div>
+
+    <!-- iOS Safari Install Instructions Modal -->
+    <div id="pwa-ios-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+        <div class="relative w-full max-w-sm bg-slate-900 border border-slate-700 rounded-3xl p-6 text-center shadow-2xl">
+            <button onclick="EduHubPWA.closeIosModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg">✕</button>
+            <div class="text-3xl mb-2">📲</div>
+            <h3 class="text-base font-bold text-white mb-3" data-i18n="pwa_ios_title">Install on iPhone & iPad</h3>
+            <div class="text-xs text-slate-300 space-y-2 text-left bg-slate-800/60 p-4 rounded-xl mb-4">
+                <p data-i18n="pwa_ios_step1">1. Tap the Share button at the bottom of Safari (square with arrow up).</p>
+                <p data-i18n="pwa_ios_step2">2. Scroll down and select 'Add to Home Screen' (+).</p>
+                <p data-i18n="pwa_ios_step3">3. Tap 'Add' in the top right corner. Done!</p>
+            </div>
+            <button onclick="EduHubPWA.closeIosModal()" class="w-full py-2.5 rounded-xl bg-blue-600 text-white font-bold text-xs hover:bg-blue-500 transition">
+                Got it!
+            </button>
+        </div>
+    </div>
+
+</body>
+</html>

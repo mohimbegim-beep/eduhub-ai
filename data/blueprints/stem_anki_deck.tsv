@@ -1,0 +1,8 @@
+#separator:tab
+#html:true
+#tags column:3
+Band 8.5 Academic Collocation: <i>ubiquitous phenomenon</i>	A trend or occurrence that is found everywhere simultaneously. Example: 'The integration of generative algorithms into higher education is rapidly becoming a ubiquitous phenomenon.'	IELTS_Band8_Academic
+Band 8.5 Transitional Discourse: <i>notwithstanding the fact that</i>	Formal concession marker equivalent to 'despite the fact that'. Example: 'Notwithstanding the fact that automation displaces routine labor, it fosters specialized engineering roles.'	IELTS_Band8_Academic
+Critical Academic Verb: <i>exacerbate</i>	To make a problem, bad situation, or negative feeling worse. Example: 'Inadequate digital infrastructure can severely exacerbate educational inequality.'	IELTS_Band8_Academic
+Algorithmic Proof: <i>Dijkstra's Shortest Path Algorithm</i>	Greedy algorithm that finds the shortest path between nodes in a graph with non-negative edge weights. Time complexity: O((V + E) log V).	STEM_Computer_Science
+Mathematical Principle: <i>Bayes' Theorem</i>	P(A|B) = [P(B|A) * P(A)] / P(B). Calculates conditional probability of event A given event B has already occurred.	STEM_Mathematics

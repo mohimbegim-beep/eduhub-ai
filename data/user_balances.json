@@ -1,0 +1,277 @@
+{
+  "student_test_1789146955@eduhub.ai": {
+    "email": "student_test_1789146955@eduhub.ai",
+    "flash_credits": 170,
+    "daily_usage": {
+      "date": "2026-09-11",
+      "count": 0
+    },
+    "last_updated": 1789146955.5859356,
+    "transaction_history": [
+      {
+        "order_id": "ord_50_1789146955",
+        "credits": 50,
+        "timestamp": 1789146955.5748374
+      },
+      {
+        "order_id": "ord_120_1789146955",
+        "credits": 120,
+        "timestamp": 1789146955.5859356
+      }
+    ]
+  },
+  "fu_test_1789146955@eduhub.ai": {
+    "email": "fu_test_1789146955@eduhub.ai",
+    "flash_credits": 4,
+    "daily_usage": {
+      "date": "2026-09-11",
+      "count": 61
+    },
+    "last_updated": 1789146955.6192386
+  },
+  "guest_testclient@eduhub.ai": {
+    "email": "guest_testclient@eduhub.ai",
+    "flash_credits": 0,
+    "daily_usage": {
+      "date": "2026-09-11",
+      "count": 1
+    },
+    "last_updated": 1789146970.193724
+  },
+  "student_test_1789147251@eduhub.ai": {
+    "email": "student_test_1789147251@eduhub.ai",
+    "flash_credits": 170,
+    "daily_usage": {
+      "date": "2026-09-11",
+      "count": 0
+    },
+    "last_updated": 1789147251.0651166,
+    "transaction_history": [
+      {
+        "order_id": "ord_50_1789147251",
+        "credits": 50,
+        "timestamp": 1789147251.04879
+      },
+      {
+        "order_id": "ord_120_1789147251",
+        "credits": 120,
+        "timestamp": 1789147251.0651166
+      }
+    ]
+  },
+  "fu_test_1789147251@eduhub.ai": {
+    "email": "fu_test_1789147251@eduhub.ai",
+    "flash_credits": 4,
+    "daily_usage": {
+      "date": "2026-09-11",
+      "count": 61
+    },
+    "last_updated": 1789147251.1039567
+  },
+  "student_test_1789147615@eduhub.ai": {
+    "email": "student_test_1789147615@eduhub.ai",
+    "flash_credits": 170,
+    "daily_usage": {
+      "date": "2026-09-11",
+      "count": 0
+    },
+    "last_updated": 1789147615.4444911,
+    "transaction_history": [
+      {
+        "order_id": "ord_50_1789147615",
+        "credits": 50,
+        "timestamp": 1789147615.4444911
+      },
+      {
+        "order_id": "ord_120_1789147615",
+        "credits": 120,
+        "timestamp": 1789147615.4444911
+      }
+    ]
+  },
+  "fu_test_1789147615@eduhub.ai": {
+    "email": "fu_test_1789147615@eduhub.ai",
+    "flash_credits": 4,
+    "daily_usage": {
+      "date": "2026-09-11",
+      "count": 61
+    },
+    "last_updated": 1789147615.4933097
+  },
+  "student_test_1789148070@eduhub.ai": {
+    "email": "student_test_1789148070@eduhub.ai",
+    "flash_credits": 170,
+    "daily_usage": {
+      "date": "2026-09-11",
+      "count": 0
+    },
+    "last_updated": 1789148070.9187846,
+    "transaction_history": [
+      {
+        "order_id": "ord_50_1789148070",
+        "credits": 50,
+        "timestamp": 1789148070.9187846
+      },
+      {
+        "order_id": "ord_120_1789148070",
+        "credits": 120,
+        "timestamp": 1789148070.9187846
+      }
+    ]
+  },
+  "fu_test_1789148070@eduhub.ai": {
+    "email": "fu_test_1789148070@eduhub.ai",
+    "flash_credits": 4,
+    "daily_usage": {
+      "date": "2026-09-11",
+      "count": 61
+    },
+    "last_updated": 1789148070.968487
+  },
+  "student_test_1789148773@eduhub.ai": {
+    "email": "student_test_1789148773@eduhub.ai",
+    "flash_credits": 170,
+    "daily_usage": {
+      "date": "2026-09-11",
+      "count": 0
+    },
+    "last_updated": 1789148773.934766,
+    "transaction_history": [
+      {
+        "order_id": "ord_50_1789148773",
+        "credits": 50,
+        "timestamp": 1789148773.9216168
+      },
+      {
+        "order_id": "ord_120_1789148773",
+        "credits": 120,
+        "timestamp": 1789148773.934766
+      }
+    ]
+  },
+  "fu_test_1789148773@eduhub.ai": {
+    "email": "fu_test_1789148773@eduhub.ai",
+    "flash_credits": 4,
+    "daily_usage": {
+      "date": "2026-09-11",
+      "count": 61
+    },
+    "last_updated": 1789148773.9887471
+  },
+  "student_test_1789149498@eduhub.ai": {
+    "email": "student_test_1789149498@eduhub.ai",
+    "flash_credits": 170,
+    "daily_usage": {
+      "date": "2026-09-11",
+      "count": 0
+    },
+    "last_updated": 1789149498.8734748,
+    "transaction_history": [
+      {
+        "order_id": "ord_50_1789149498",
+        "credits": 50,
+        "timestamp": 1789149498.868475
+      },
+      {
+        "order_id": "ord_120_1789149498",
+        "credits": 120,
+        "timestamp": 1789149498.8734748
+      }
+    ]
+  },
+  "fu_test_1789149498@eduhub.ai": {
+    "email": "fu_test_1789149498@eduhub.ai",
+    "flash_credits": 4,
+    "daily_usage": {
+      "date": "2026-09-11",
+      "count": 61
+    },
+    "last_updated": 1789149498.9394584
+  },
+  "guest_127.0.0.1@eduhub.ai": {
+    "email": "guest_127.0.0.1@eduhub.ai",
+    "flash_credits": 0,
+    "daily_usage": {
+      "date": "2026-09-12",
+      "count": 4
+    },
+    "last_updated": 1789190247.2017093
+  },
+  "test@eduhub.ai": {
+    "email": "test@eduhub.ai",
+    "flash_credits": 0,
+    "daily_usage": {
+      "date": "2026-09-12",
+      "count": 0
+    },
+    "last_updated": 1789195429.8867395
+  },
+  "student_pro_1789195502@eduhub.ai": {
+    "email": "student_pro_1789195502@eduhub.ai",
+    "flash_credits": 120,
+    "daily_usage": {
+      "date": "2026-09-12",
+      "count": 0
+    },
+    "last_updated": 1789195502.588198,
+    "role": "pro_max",
+    "tier": "pro_max",
+    "is_subscribed": true,
+    "user_id": "usr_test_1789195502",
+    "subscription": {
+      "status": "active",
+      "tier": "pro_max",
+      "role": "pro_max",
+      "variant_id": "ca17b5d8-9754-44f3-9a1f-f6d779eb8203",
+      "order_id": "ls_test_ord_1789195502",
+      "activated_at": 1789195502.588198,
+      "trial": true
+    }
+  },
+  "devops_audit_1789205433@eduhub.ai": {
+    "email": "devops_audit_1789205433@eduhub.ai",
+    "flash_credits": 120,
+    "daily_usage": {
+      "date": "2026-09-12",
+      "count": 0
+    },
+    "last_updated": 1789205433.469137,
+    "role": "free_tier",
+    "tier": "free_tier",
+    "is_subscribed": false,
+    "user_id": "usr_devops_1789205433",
+    "subscription": {
+      "status": "cancelled",
+      "tier": "free_tier",
+      "role": "free_tier",
+      "variant_id": "ca17b5d8-9754-44f3-9a1f-f6d779eb8203",
+      "order_id": "ls_pay_ord_1789205433",
+      "activated_at": 1789205433.4621203,
+      "trial": true,
+      "ended_at": 1789205433.469137,
+      "last_order_id": "ls_cancel_ord_1789205433"
+    }
+  },
+  "public_tunnel_1789205462@eduhub.ai": {
+    "email": "public_tunnel_1789205462@eduhub.ai",
+    "flash_credits": 120,
+    "daily_usage": {
+      "date": "2026-09-12",
+      "count": 0
+    },
+    "last_updated": 1789205463.478952,
+    "role": "pro_max",
+    "tier": "pro_max",
+    "is_subscribed": true,
+    "user_id": "usr_pub_test",
+    "subscription": {
+      "status": "active",
+      "tier": "pro_max",
+      "role": "pro_max",
+      "variant_id": "ca17b5d8-9754-44f3-9a1f-f6d779eb8203",
+      "order_id": "pub_ord_1789205462",
+      "activated_at": 1789205463.478952,
+      "trial": true
+    }
+  }
+}

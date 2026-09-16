@@ -1,0 +1,72 @@
+{
+  "updated_at": "2026-09-11T17:58:32.552610+00:00",
+  "source": "curated_2026_edtech_index",
+  "model": "gemini-2.5-flash-baseline",
+  "trends": [
+    {
+      "id": "ielts_ai_prep",
+      "title": "IELTS & TOEFL AI Speaking & Writing Diagnostic Coach",
+      "tag": "Trending #1",
+      "category": "Language & High-Stakes Testing",
+      "search_growth": "+340% YoY",
+      "summary": "Instant Cambridge IELTS band scoring, speech fluency analysis, and real-time rubric feedback.",
+      "keywords": [
+        "IELTS AI practice",
+        "TOEFL essay scoring",
+        "AI speaking coach",
+        "band 8.0 prep"
+      ]
+    },
+    {
+      "id": "automated_essay_grader",
+      "title": "Smart Exam Essay & Homework Rubric Grader",
+      "tag": "High Demand",
+      "category": "Educator Productivity & Centers",
+      "search_growth": "+280% YoY",
+      "summary": "Automated batch grading of student essays against AP, IB, and SAT rubrics with anti-hallucination citations.",
+      "keywords": [
+        "exam essay grader",
+        "automated rubric grading",
+        "batch homework checker",
+        "teacher AI assistant"
+      ]
+    },
+    {
+      "id": "socratic_stem_solver",
+      "title": "Socratic Step-by-Step STEM & Calculus Solver",
+      "tag": "Fastest Growing",
+      "category": "Higher Ed & STEM Prep",
+      "search_growth": "+410% YoY",
+      "summary": "Guided pedagogical hints for complex STEM proofs, avoiding direct copy-paste plagiarism.",
+      "keywords": [
+        "Socratic math solver",
+        "calculus proof helper",
+        "zero-plagiarism homework tutor",
+        "STEM study copilot"
+      ]
+    },
+    {
+      "id": "lecture_flashcards_anki",
+      "title": "Autonomous Lecture-to-Flashcards & Spaced Repetition Engine",
+      "tag": "Study Essential",
+      "category": "Cognitive Science & Memory",
+      "search_growth": "+210% YoY",
+      "summary": "Transforms 2-hour recorded university lectures and PDFs into active recall flashcards with 1-click Anki export.",
+      "keywords": [
+        "lecture summarizer",
+        "AI flashcards",
+        "Anki deck generator",
+        "spaced repetition AI"
+      ]
+    }
+  ],
+  "top_keywords": [
+    "IELTS AI practice",
+    "exam essay grader",
+    "Socratic math solver",
+    "lecture summarizer",
+    "batch homework checker",
+    "safe educational AI",
+    "study copilot"
+  ]
+}

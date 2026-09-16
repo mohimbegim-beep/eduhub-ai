@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Архитектор Мотивационных Писем &amp; SOP на Гранты (El-Yurt Umidi, Erasmus, DAAD) | EduHub AI</title>
+    
+    <!-- SEO & AEO Meta Tags -->
+    <meta name="description" content="Интерактивный ИИ генератор академических Statement of Purpose и мотивационных писем для поступления в зарубежные вузы США, Европы, Китая и на стипендии El-Yurt Umidi и Erasmus.">
+    <meta name="keywords" content="мотивационное письмо El-Yurt Umidi, statement of purpose пример, SOP для магистратуры США, эссе на стипендию Erasmus, academic motivation letter, поступить в зарубежный вуз">
+    <link rel="canonical" href="https://eduhub.ai/tools/sop-builder">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/static/js/user-utils.js" defer></script>
+    <script src="/static/js/legal-consent.js" defer></script>
+    <script src="/static/js/conversion-engine.js" defer></script>
+    <script src="/static/js/i18n.js" defer></script>
+</head>
+<body data-page-tool="sop-builder" class="bg-slate-950 text-slate-100 font-sans min-h-screen flex flex-col justify-between selection:bg-indigo-500 selection:text-white">
+
+    <div class="bg-gradient-to-r from-indigo-900 via-purple-900 to-blue-900 py-2 px-4 text-center text-xs font-bold text-white flex items-center justify-center gap-2 shadow-md">
+        <span>🎓 <strong>Сезон Поступлений 2026:</strong> Академический SOP стандарт Ivy League &bull; Проверка приёмной комиссии &bull; Экспорт за <strong>$1.00</strong></span>
+    </div>
+
+    <!-- Header -->
+    <header class="border-b border-slate-800/80 bg-slate-950/90 backdrop-blur-md sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <a href="/" class="flex items-center space-x-2">
+                    <span class="w-8 h-8 rounded-lg bg-gradient-to-tr from-indigo-600 to-purple-500 flex items-center justify-center font-black text-white text-lg shadow-md shadow-indigo-500/30">E</span>
+                    <span class="text-xl font-bold bg-gradient-to-r from-indigo-400 via-purple-300 to-white bg-clip-text text-transparent tracking-tight">EduHub AI</span>
+                </a>
+                <span class="hidden sm:inline-block text-[11px] bg-indigo-950 text-indigo-300 px-2.5 py-0.5 rounded-full border border-indigo-800 font-medium">
+                    🎓 SOP &amp; Grant Architect ($1)
+                </span>
+            </div>
+            
+            <div class="flex items-center space-x-3">
+                <a href="/" class="text-xs text-indigo-400 hover:text-indigo-300 font-medium transition hidden sm:inline-block">
+                    &larr; На главную
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8 w-full flex-grow">
+        
+        <div class="mb-8 text-center max-w-3xl mx-auto">
+            <span class="text-[10px] font-extrabold uppercase tracking-widest text-indigo-400 bg-indigo-950/80 border border-indigo-800/80 px-3 py-1 rounded-full shadow">
+                🏛️ Академический Стандарт Приёмных Комиссий
+            </span>
+            <h1 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight mt-3 mb-2">
+                Генератор Statement of Purpose &amp; Мотивационных Писем
+            </h1>
+            <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                Сформулируйте ваши академические цели, выберите грант и вуз — ИИ выстроит логичную 4-частную структуру эссе с редкими академическими коллокациями и оценкой шансов на зачисление.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            
+            <!-- Left: Inputs -->
+            <div class="lg:col-span-5 space-y-4 bg-slate-900/90 border border-slate-800 rounded-3xl p-5 sm:p-6 shadow-xl">
+                <h3 class="text-sm font-bold text-white flex items-center gap-2 pb-3 border-b border-slate-800">
+                    <span>📝</span> <span>Данные Кандидата &amp; Целевой Вуз</span>
+                </h3>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-300 mb-1">Уровень:</label>
+                        <select id="sop-degree" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-slate-200">
+                            <option value="Master / Магистратура">Магистратура (MS/MA)</option>
+                            <option value="Bachelor / Бакалавриат">Бакалавриат (BS/BA)</option>
+                            <option value="PhD / Докторантура">PhD / Докторантура</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-300 mb-1">Страна:</label>
+                        <input id="sop-country" type="text" value="USA" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-slate-200">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 mb-1">Специальность / Факультет:</label>
+                    <input id="sop-major" type="text" value="Computer Science & Artificial Intelligence" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-slate-200">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 mb-1">Целевой университет:</label>
+                    <input id="sop-uni" type="text" value="Stanford University / TU Munich" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-slate-200">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 mb-1">Стипендиальная программа / Грант:</label>
+                    <input id="sop-grant" type="text" value="El-Yurt Umidi / Full Tuition Scholarship" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-slate-200">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 mb-1">Ваш текущий опыт / Достижения:</label>
+                    <textarea id="sop-bg" rows="2" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-slate-200" placeholder="Опишите бакалавриат, GPA, проекты, стажировки..."></textarea>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 mb-1">Карьерное видение после выпуска:</label>
+                    <textarea id="sop-vision" rows="2" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-slate-200" placeholder="Кем планируете работать и какой вклад внести..."></textarea>
+                </div>
+
+                <button onclick="generateSOP()" id="sop-btn" class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-black text-xs sm:text-sm py-3 px-4 rounded-xl shadow-lg shadow-indigo-600/25 transition">
+                    ⚡ Сгенерировать Statement of Purpose &rarr;
+                </button>
+            </div>
+
+            <!-- Right: Generated SOP Document -->
+            <div class="lg:col-span-7 flex flex-col justify-between bg-slate-900/90 border border-slate-800 rounded-3xl p-5 sm:p-6 shadow-xl">
+                <div>
+                    <div class="flex justify-between items-center pb-3 border-b border-slate-800 mb-3">
+                        <h4 class="text-xs font-bold text-white uppercase tracking-wider">📄 Академический Текст (Готов к подаче):</h4>
+                        <span class="text-[10px] text-indigo-400 font-mono">Ivy League Standard</span>
+                    </div>
+
+                    <div id="sop-output" class="bg-slate-950 border border-slate-800 rounded-2xl p-4 text-xs text-slate-300 leading-relaxed font-serif max-h-96 overflow-y-auto whitespace-pre-wrap select-all mb-4">
+Нажмите «Сгенерировать Statement of Purpose», чтобы получить академический текст эссе, выверенный под требования зарубежных приёмных комиссий.
+                    </div>
+
+                    <div class="bg-slate-950/70 border border-slate-850 rounded-xl p-3 text-[11px] space-y-1">
+                        <span class="font-bold text-indigo-300 block">💡 Академические коллокации в тексте:</span>
+                        <p class="text-slate-400" id="sop-collocations">empirical discipline, intellectual maturation, spearhead impactful research, technological sovereignty.</p>
+                    </div>
+                </div>
+
+                <div class="mt-4 pt-3 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-3">
+                    <button onclick="copySOP()" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 py-2.5 px-4 rounded-xl border border-slate-700 transition">
+                        📋 Скопировать эссе
+                    </button>
+                    <a href="https://test.dodopayments.com/buy/pdt_0NYV3EevfB7hC3hRkF2kG?quantity=1" class="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold text-xs py-2.5 px-5 rounded-xl shadow-lg shadow-indigo-600/25 transition whitespace-nowrap">
+                        ⚡ Скачать в Word / PDF за $1.00 &rarr;
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <footer class="border-t border-slate-800/80 bg-slate-950 py-6 text-xs text-slate-500 text-center">
+        EduHub AI &mdash; Academic Statement of Purpose Architect. Dodo Payments Secured.
+    </footer>
+
+    <script>
+        async function generateSOP() {
+            const btn = document.getElementById('sop-btn');
+            btn.innerHTML = '<span>⏳ Создание академического эссе...</span>';
+            btn.disabled = true;
+
+            const payload = {
+                degree_level: document.getElementById('sop-degree').value,
+                target_major: document.getElementById('sop-major').value,
+                target_country: document.getElementById('sop-country').value,
+                target_university: document.getElementById('sop-uni').value,
+                grant_program: document.getElementById('sop-grant').value,
+                background_experience: document.getElementById('sop-bg').value.trim() || 'Strong background in computer science with distinction',
+                career_vision: document.getElementById('sop-vision').value.trim() || 'Establish high-impact tech infrastructure'
+            };
+
+            try {
+                const res = await fetch('/api/v1/tools/sop-builder', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const data = await res.json();
+                if (data.statement_of_purpose) {
+                    document.getElementById('sop-output').textContent = data.statement_of_purpose;
+                }
+                if (data.academic_collocations) {
+                    document.getElementById('sop-collocations').textContent = data.academic_collocations.join(', ');
+                }
+            } catch (err) {
+                console.error(err);
+            } finally {
+                btn.innerHTML = '<span>⚡ Сгенерировать Statement of Purpose &rarr;</span>';
+                btn.disabled = false;
+            }
+        }
+
+        function copySOP() {
+            navigator.clipboard.writeText(document.getElementById('sop-output').innerText);
+            alert('Statement of Purpose скопирован в буфер обмена!');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Career Navigator & Major Selector 2026 — EduHub AI</title>
+    
+    <!-- Programmatic SEO & AEO Meta Tags -->
+    <meta name="description" content="Intelligent AI Career Guidance, University Major Selector and Personality Archetype Navigator. Find high-paying 2026-2030 professions with USD salary benchmarks and custom study roadmaps.">
+    <meta name="keywords" content="AI career guidance, career test online, university major selector, best jobs 2026 2030, high paying remote careers, tech switch test, proforientatsiya AI">
+    <link rel="canonical" href="https://eduhub.ai/tools/career-navigator">
+    
+    <!-- Multi-Language Hreflang Tags -->
+    <link rel="alternate" hreflang="en" href="https://eduhub.ai/tools/career-navigator?lang=en">
+    <link rel="alternate" hreflang="ru" href="https://eduhub.ai/tools/career-navigator?lang=ru">
+    <link rel="alternate" hreflang="uz" href="https://eduhub.ai/tools/career-navigator?lang=uz">
+    <link rel="alternate" hreflang="es" href="https://eduhub.ai/tools/career-navigator?lang=es">
+    <link rel="alternate" hreflang="x-default" href="https://eduhub.ai/tools/career-navigator">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Essential User Utilities -->
+    <script src="/static/js/user-utils.js" defer></script>
+
+    <!-- Lemon Squeezy Overlay Checkout Script -->
+    <script src="https://assets.lemonsqueezy.com/lemon.js" defer></script>
+
+    <!-- PWA Manifest & App Capability -->
+    <link rel="manifest" href="/static/manifest.json">
+    <meta name="theme-color" content="#030712">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="EduHub AI">
+
+    <!-- PWA & Omni-Channel Viral Share Scripts -->
+    <script src="/static/js/pwa-install.js" defer></script>
+    <script src="/static/js/viral-share.js" defer></script>
+    <script src="/static/js/legal-consent.js" defer></script>
+    <script src="/static/js/conversion-engine.js" defer></script>
+    <script src="/static/js/i18n.js" defer></script>
+</head>
+<body data-page-tool="career-navigator" class="bg-slate-950 text-slate-100 font-sans min-h-screen flex flex-col justify-between selection:bg-amber-500 selection:text-slate-950">
+
+    <!-- Header -->
+    <header class="border-b border-slate-800/80 bg-slate-950/90 backdrop-blur-md sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <a href="/" class="flex items-center space-x-2">
+                    <span class="w-8 h-8 rounded-lg bg-gradient-to-tr from-amber-500 to-orange-500 flex items-center justify-center font-black text-slate-950 text-lg shadow-md shadow-amber-500/30">E</span>
+                    <span class="text-xl font-bold bg-gradient-to-r from-amber-400 via-orange-300 to-white bg-clip-text text-transparent tracking-tight">EduHub AI</span>
+                </a>
+                <span class="hidden sm:inline-block text-[11px] bg-amber-950 text-amber-300 px-2.5 py-0.5 rounded-full border border-amber-800 font-medium">
+                    🧭 AI Career Navigator
+                </span>
+            </div>
+            
+            <div class="flex items-center space-x-3">
+                <div class="inline-flex bg-slate-900 border border-slate-800 rounded-xl p-0.5">
+                    <button onclick="setLocale('en')" data-lang-btn="en" class="lang-btn px-2.5 py-1 rounded-lg text-xs font-bold transition bg-amber-500 text-slate-950 shadow-sm shadow-amber-500/20">EN</button>
+                    <button onclick="setLocale('ru')" data-lang-btn="ru" class="lang-btn px-2.5 py-1 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition">RU</button>
+                    <button onclick="setLocale('uz')" data-lang-btn="uz" class="lang-btn px-2.5 py-1 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition">UZ</button>
+                    <button onclick="setLocale('es')" data-lang-btn="es" class="lang-btn px-2.5 py-1 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition">ES</button>
+                </div>
+
+                <button onclick="EduHubUtils.openHistoryDrawer()" class="inline-flex items-center gap-1.5 text-xs text-slate-300 hover:text-white bg-slate-900 border border-slate-800 hover:border-slate-700 px-3 py-1.5 rounded-xl transition font-medium" title="Recent Documents">
+                    <span>🕒</span>
+                    <span class="hidden sm:inline">Recent</span>
+                    <span data-history-count class="hidden bg-amber-500 text-slate-950 text-[10px] px-1.5 py-0.2 rounded-full font-bold">0</span>
+                </button>
+
+                <a href="/" class="text-xs text-amber-400 hover:text-amber-300 font-medium transition hidden sm:inline-block">
+                    Explore all tools &rarr;
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 py-10 w-full flex-grow">
+        
+        <!-- Headline -->
+        <div class="text-center mb-8">
+            <span class="text-[11px] font-bold uppercase tracking-widest text-amber-400 bg-amber-950/70 border border-amber-800/80 px-3.5 py-1 rounded-full">
+                🚀 Карьерный компас 2026-2030 &bull; Для школьников, студентов и свитчеров
+            </span>
+            <h1 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight mt-3 mb-3">
+                Интеллектуальный AI-Профориентатор
+            </h1>
+            <p class="text-slate-400 text-xs sm:text-base max-w-2xl mx-auto">
+                Откройте ваши скрытые суперсилы за 3 минуты. ИИ подберёт профессии будущего, вилки зарплат в долларах и персональную дорожную карту развития без навязанных стереотипов.
+            </p>
+        </div>
+
+        <!-- Interactive Stepper Container -->
+        <div id="quiz-container" class="bg-slate-900/90 border border-slate-800 rounded-3xl p-6 sm:p-10 shadow-2xl space-y-8 relative overflow-hidden">
+            
+            <!-- Progress Bar -->
+            <div class="space-y-2">
+                <div class="flex justify-between text-xs text-slate-400 font-medium">
+                    <span id="step-indicator">Шаг 1 из 4: Жизненный этап</span>
+                    <span id="progress-percent">25%</span>
+                </div>
+                <div class="w-full bg-slate-950 rounded-full h-2 overflow-hidden border border-slate-800">
+                    <div id="progress-bar" class="bg-gradient-to-r from-amber-500 to-orange-500 h-2 rounded-full transition-all duration-300 w-1/4"></div>
+                </div>
+            </div>
+
+            <!-- STEP 1: Жизненный этап -->
+            <div id="step-1" class="step-card space-y-4">
+                <h3 class="text-lg sm:text-xl font-bold text-white flex items-center gap-2">
+                    <span>🌱</span> На каком этапе жизни вы находитесь прямо сейчас?
+                </h3>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div onclick="selectOption('stage', 'school', this)" class="opt-card p-5 rounded-2xl bg-slate-950 border border-slate-800 hover:border-amber-500/60 cursor-pointer transition flex flex-col justify-between space-y-3 group">
+                        <span class="text-3xl">🎒</span>
+                        <div>
+                            <h4 class="text-sm font-bold text-white group-hover:text-amber-400 transition">Школьник / Абитуриент</h4>
+                            <p class="text-xs text-slate-400 mt-1">9-11 классы: выбираю вуз, факультет, профильные предметы и экзамены</p>
+                        </div>
+                    </div>
+                    <div onclick="selectOption('stage', 'student', this)" class="opt-card p-5 rounded-2xl bg-slate-950 border border-slate-800 hover:border-amber-500/60 cursor-pointer transition flex flex-col justify-between space-y-3 group">
+                        <span class="text-3xl">🎓</span>
+                        <div>
+                            <h4 class="text-sm font-bold text-white group-hover:text-amber-400 transition">Студент вуза</h4>
+                            <p class="text-xs text-slate-400 mt-1">1-4 курсы: ищу первую стажировку, сомневаюсь в специальности, магистратура</p>
+                        </div>
+                    </div>
+                    <div onclick="selectOption('stage', 'adult', this)" class="opt-card p-5 rounded-2xl bg-slate-950 border border-slate-800 hover:border-amber-500/60 cursor-pointer transition flex flex-col justify-between space-y-3 group">
+                        <span class="text-3xl">💼</span>
+                        <div>
+                            <h4 class="text-sm font-bold text-white group-hover:text-amber-400 transition">Взрослый специалист</h4>
+                            <p class="text-xs text-slate-400 mt-1">23+ года: хочу сменить сферу, перейти в IT/цифровой бизнес, расти в доходе</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 2: Тип энергии / таланта -->
+            <div id="step-2" class="step-card hidden space-y-4">
+                <h3 class="text-lg sm:text-xl font-bold text-white flex items-center gap-2">
+                    <span>⚡</span> В чём ваша естественная сила и интерес?
+                </h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div onclick="selectOption('energy_type', 'logic', this)" class="opt-card p-4 rounded-2xl bg-slate-950 border border-slate-800 hover:border-amber-500/60 cursor-pointer transition space-y-2 group">
+                        <span class="text-2xl">🧠</span>
+                        <h4 class="text-sm font-bold text-white group-hover:text-amber-400 transition">Логика & Системы</h4>
+                        <p class="text-xs text-slate-400">IT, алгоритмы, базы данных, цифры, инженерия и автоматизация</p>
+                    </div>
+                    <div onclick="selectOption('energy_type', 'people', this)" class="opt-card p-4 rounded-2xl bg-slate-950 border border-slate-800 hover:border-amber-500/60 cursor-pointer transition space-y-2 group">
+                        <span class="text-2xl">🤝</span>
+                        <h4 class="text-sm font-bold text-white group-hover:text-amber-400 transition">Люди & Общение</h4>
+                        <p class="text-xs text-slate-400">Переговоры, психология, дипломатия, HR, обучение и медиа</p>
+                    </div>
+                    <div onclick="selectOption('energy_type', 'creativity', this)" class="opt-card p-4 rounded-2xl bg-slate-950 border border-slate-800 hover:border-amber-500/60 cursor-pointer transition space-y-2 group">
+                        <span class="text-2xl">🎨</span>
+                        <h4 class="text-sm font-bold text-white group-hover:text-amber-400 transition">Творчество & Визуал</h4>
+                        <p class="text-xs text-slate-400">UI/UX дизайн, 3D графика, GameDev, архитектура, режиссура</p>
+                    </div>
+                    <div onclick="selectOption('energy_type', 'business', this)" class="opt-card p-4 rounded-2xl bg-slate-950 border border-slate-800 hover:border-amber-500/60 cursor-pointer transition space-y-2 group">
+                        <span class="text-2xl">💰</span>
+                        <h4 class="text-sm font-bold text-white group-hover:text-amber-400 transition">Бизнес & Финансы</h4>
+                        <p class="text-xs text-slate-400">Стартапы, инвестиции, e-commerce маркетплейсы, FinTech, управление</p>
+                    </div>
+                    <div onclick="selectOption('energy_type', 'science', this)" class="opt-card p-4 rounded-2xl bg-slate-950 border border-slate-800 hover:border-amber-500/60 cursor-pointer transition space-y-2 group">
+                        <span class="text-2xl">🔬</span>
+                        <h4 class="text-sm font-bold text-white group-hover:text-amber-400 transition">Наука & Био-Технологии</h4>
+                        <p class="text-xs text-slate-400">Медицина будущего, фармацевтика, биотехнологии, экология</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 3: Идеальный образ жизни -->
+            <div id="step-3" class="step-card hidden space-y-4">
+                <h3 class="text-lg sm:text-xl font-bold text-white flex items-center gap-2">
+                    <span>🌍</span> Какой образ жизни вас по-настоящему вдохновляет?
+                </h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div onclick="selectOption('dream_lifestyle', 'remote', this)" class="opt-card p-4 rounded-2xl bg-slate-950 border border-slate-800 hover:border-amber-500/60 cursor-pointer transition space-y-2 group">
+                        <span class="text-2xl">💻</span>
+                        <h4 class="text-sm font-bold text-white group-hover:text-amber-400 transition">Глобальная удалёнка из дома</h4>
+                        <p class="text-xs text-slate-400">Работать за ноутбуком из любой точки мира, получая зарплату в долларах США</p>
+                    </div>
+                    <div onclick="selectOption('dream_lifestyle', 'travel', this)" class="opt-card p-4 rounded-2xl bg-slate-950 border border-slate-800 hover:border-amber-500/60 cursor-pointer transition space-y-2 group">
+                        <span class="text-2xl">✈️</span>
+                        <h4 class="text-sm font-bold text-white group-hover:text-amber-400 transition">Международные проекты & Релокация</h4>
+                        <p class="text-xs text-slate-400">Командировки, работа в зарубежных филиалах (Европа, ОАЭ, США, Азия)</p>
+                    </div>
+                    <div onclick="selectOption('dream_lifestyle', 'office', this)" class="opt-card p-4 rounded-2xl bg-slate-950 border border-slate-800 hover:border-amber-500/60 cursor-pointer transition space-y-2 group">
+                        <span class="text-2xl">🏢</span>
+                        <h4 class="text-sm font-bold text-white group-hover:text-amber-400 transition">Карьера в крупной компании</h4>
+                        <p class="text-xs text-slate-400">Красивый офис, стабильный рост по карьерной лестнице, сильная команда рядом</p>
+                    </div>
+                    <div onclick="selectOption('dream_lifestyle', 'academic', this)" class="opt-card p-4 rounded-2xl bg-slate-950 border border-slate-800 hover:border-amber-500/60 cursor-pointer transition space-y-2 group">
+                        <span class="text-2xl">🧪</span>
+                        <h4 class="text-sm font-bold text-white group-hover:text-amber-400 transition">Наука, исследования & Университет</h4>
+                        <p class="text-xs text-slate-400">Глубокие исследования, гранты, разработка инновационных решений для человечества</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 4: Приоритеты и интересы -->
+            <div id="step-4" class="step-card hidden space-y-5">
+                <h3 class="text-lg sm:text-xl font-bold text-white flex items-center gap-2">
+                    <span>🎯</span> Что для вас на первом месте в работе?
+                </h3>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div onclick="selectOption('income_priority', 'high_wealth', this)" class="opt-card p-4 rounded-2xl bg-slate-950 border border-slate-800 hover:border-amber-500/60 cursor-pointer transition space-y-2 group">
+                        <span class="text-2xl">💎</span>
+                        <h4 class="text-sm font-bold text-white group-hover:text-amber-400 transition">Максимум дохода</h4>
+                        <p class="text-xs text-slate-400">Высокий финансовый доход, капитал, быстрый рост заработка</p>
+                    </div>
+                    <div onclick="selectOption('income_priority', 'work_life_balance', this)" class="opt-card p-4 rounded-2xl bg-slate-950 border border-slate-800 hover:border-amber-500/60 cursor-pointer transition space-y-2 group">
+                        <span class="text-2xl">🧘</span>
+                        <h4 class="text-sm font-bold text-white group-hover:text-amber-400 transition">Баланс & Спокойствие</h4>
+                        <p class="text-xs text-slate-400">Без бессонных ночей и выгорания, время на хобби и семью</p>
+                    </div>
+                    <div onclick="selectOption('income_priority', 'impact', this)" class="opt-card p-4 rounded-2xl bg-slate-950 border border-slate-800 hover:border-amber-500/60 cursor-pointer transition space-y-2 group">
+                        <span class="text-2xl">🌟</span>
+                        <h4 class="text-sm font-bold text-white group-hover:text-amber-400 transition">Польза обществу</h4>
+                        <p class="text-xs text-slate-400">Смысл, помощь людям, вклад в образование или экологию</p>
+                    </div>
+                </div>
+
+                <div class="space-y-2 pt-2">
+                    <label class="block text-xs font-semibold text-slate-300">Ваши любимые предметы, хобби или навыки (необязательно):</label>
+                    <input type="text" id="favourite-subjects" placeholder="Например: математика, английский, рисование, видеоигры, психология..." class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-slate-200 focus:outline-none focus:border-amber-500">
+                </div>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="flex justify-between items-center pt-4 border-t border-slate-800">
+                <button onclick="prevStep()" id="btn-prev" class="hidden text-xs text-slate-400 hover:text-white px-4 py-2 rounded-xl transition">
+                    &larr; Назад
+                </button>
+                <div class="ml-auto">
+                    <button onclick="nextStep()" id="btn-next" class="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-bold px-7 py-3 rounded-xl text-xs sm:text-sm transition shadow-lg shadow-amber-500/25 transform hover:-translate-y-0.5">
+                        Продолжить &rarr;
+                    </button>
+                </div>
+            </div>
+
+            <!-- Loader Screen -->
+            <div id="quiz-loader" class="hidden absolute inset-0 bg-slate-950/95 backdrop-blur-md flex flex-col items-center justify-center p-6 text-center space-y-4 z-20">
+                <div class="w-14 h-14 border-4 border-amber-500 border-t-transparent rounded-full animate-spin"></div>
+                <h3 class="text-base sm:text-lg font-bold text-white animate-pulse" id="loader-status">
+                    Анализируем ваш профиль по 120 профессиям 2026-2030 годов...
+                </h3>
+                <p class="text-xs text-slate-400 max-w-sm">
+                    Сопоставляем рынок труда, зарплатные вилки в USD и международные гранты
+                </p>
+            </div>
+
+        </div>
+
+        <!-- RESULTS SECTION (Hidden initially) -->
+        <div id="results-container" class="hidden space-y-8 animate-fade-in">
+            
+            <!-- Career Dossier Header Banner -->
+            <div class="bg-gradient-to-r from-amber-950/70 via-orange-950/60 to-slate-900 border border-amber-500/40 rounded-3xl p-6 sm:p-10 shadow-2xl relative overflow-hidden">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                    <div>
+                        <span class="text-[11px] font-extrabold uppercase tracking-widest text-amber-400 bg-amber-950 border border-amber-700 px-3 py-1 rounded-full">
+                            🎓 Ваш подтвержденный карьерный архетип
+                        </span>
+                        <h2 id="res-archetype" class="text-2xl sm:text-4xl font-black text-white mt-2 mb-1">
+                            Архитектор Цифровых Систем
+                        </h2>
+                        <p id="res-superpower" class="text-xs sm:text-sm text-amber-200/90 font-medium">
+                            Суперсила: Умение соединять аналитику с проектированием масштабных систем
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-2 shrink-0">
+                        <button onclick="shareStories()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-4 py-2 rounded-xl text-xs font-semibold transition flex items-center gap-1.5">
+                            <span>📲</span> В Stories / TG
+                        </button>
+                        <button onclick="downloadPassport()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-4 py-2 rounded-xl text-xs transition flex items-center gap-1.5 shadow-md shadow-amber-500/20">
+                            <span>📥</span> Скачать план (DOCX)
+                        </button>
+                    </div>
+                </div>
+
+                <div class="mt-6 pt-5 border-t border-amber-800/40">
+                    <p id="res-personality" class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                        Ваш психотип сочетает структурное мышление с высокой ориентацией на конечный финансовый результат.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Top 3 Careers Cards -->
+            <div class="space-y-4">
+                <h3 class="text-lg sm:text-xl font-bold text-white flex items-center gap-2">
+                    <span>🎯</span> ТОП-3 идеально подходящие профессии будущего:
+                </h3>
+                <div id="careers-list" class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                    <!-- Dynamic career cards will be rendered here -->
+                </div>
+            </div>
+
+            <!-- Recommended Universities & Grants -->
+            <div class="bg-slate-900/90 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-xl space-y-4">
+                <h3 class="text-base sm:text-lg font-bold text-white flex items-center gap-2">
+                    <span>🏛️</span> Рекомендованные вузы, факультеты и международные гранты:
+                </h3>
+                <div id="universities-list" class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-slate-300">
+                    <!-- Dynamic uni list -->
+                </div>
+            </div>
+
+            <!-- Immediate Action Steps Checklist -->
+            <div class="bg-slate-900/90 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-xl space-y-4">
+                <h3 class="text-base sm:text-lg font-bold text-emerald-400 flex items-center gap-2">
+                    <span>📋</span> Пошаговый план: 3 шага на этой неделе
+                </h3>
+                <div id="steps-list" class="space-y-2 text-xs sm:text-sm text-slate-200">
+                    <!-- Dynamic steps list -->
+                </div>
+            </div>
+
+            <!-- Smart Cross-Promotion Funnel Banner -->
+            <div class="bg-gradient-to-r from-blue-950/70 via-indigo-950/70 to-slate-900 border border-blue-500/40 rounded-3xl p-6 sm:p-8 shadow-2xl flex flex-col sm:flex-row items-center justify-between gap-5">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-2xl bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-2xl shrink-0">
+                        🚀
+                    </div>
+                    <div>
+                        <span class="text-[10px] font-extrabold uppercase tracking-widest text-blue-400 bg-blue-950 border border-blue-800 px-2 py-0.5 rounded-md">
+                            Следующий шаг к вашей профессии
+                        </span>
+                        <h4 id="funnel-title" class="text-base sm:text-lg font-bold text-white mt-1">
+                            Подготовьтесь к вступительным и международным грантам
+                        </h4>
+                        <p id="funnel-reason" class="text-xs text-slate-300 mt-0.5">
+                            Для выхода на доход $2,000+ критически необходим английский язык и высокий балл IELTS.
+                        </p>
+                    </div>
+                </div>
+                <a id="funnel-btn" href="/tools/essay-grader" class="w-full sm:w-auto text-center px-6 py-3 rounded-xl font-bold text-xs bg-blue-600 hover:bg-blue-500 text-white transition shadow-lg shadow-blue-600/30 whitespace-nowrap">
+                    Начать подготовку в IELTS Grader &rarr;
+                </a>
+            </div>
+
+            <!-- Retake Button -->
+            <div class="text-center pt-4">
+                <button onclick="resetQuiz()" class="text-xs text-slate-500 hover:text-slate-300 transition underline">
+                    Пройти тест заново с другими параметрами
+                </button>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800/80 bg-slate-950 py-6 text-center text-xs text-slate-500">
+        <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-3">
+            <p>&copy; 2026 EduHub Global Academic Technologies. All rights reserved.</p>
+            <div class="flex space-x-4 text-slate-400">
+                <a href="/privacy" class="hover:text-white transition">Privacy</a>
+                <a href="/terms" class="hover:text-white transition">Terms</a>
+                <a href="/refund" class="hover:text-white transition">Refund Policy</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Script -->
+    <script>
+        let currentStep = 1;
+        const totalSteps = 4;
+        const formData = {
+            stage: 'school',
+            energy_type: 'logic',
+            problem_solving: 'strategic',
+            dream_lifestyle: 'remote',
+            income_priority: 'high_wealth',
+            favourite_subjects: '',
+            language: 'ru'
+        };
+
+        let lastResult = null;
+
+        function selectOption(key, val, el) {
+            formData[key] = val;
+            const parent = el.parentElement;
+            parent.querySelectorAll('.opt-card').forEach(c => {
+                c.classList.remove('border-amber-500', 'bg-amber-950/20', 'ring-2', 'ring-amber-500/50');
+                c.classList.add('border-slate-800', 'bg-slate-950');
+            });
+            el.classList.remove('border-slate-800', 'bg-slate-950');
+            el.classList.add('border-amber-500', 'bg-amber-950/20', 'ring-2', 'ring-amber-500/50');
+        }
+
+        function updateProgress() {
+            const pct = Math.round((currentStep / totalSteps) * 100);
+            document.getElementById('progress-percent').innerText = `${pct}%`;
+            document.getElementById('progress-bar').style.width = `${pct}%`;
+            
+            const stepTitles = [
+                "Шаг 1 из 4: Жизненный этап",
+                "Шаг 2 из 4: Главная сила и интересы",
+                "Шаг 3 из 4: Идеальный образ жизни",
+                "Шаг 4 из 4: Приоритеты и цели"
+            ];
+            document.getElementById('step-indicator').innerText = stepTitles[currentStep - 1] || "";
+            
+            document.getElementById('btn-prev').classList.toggle('hidden', currentStep === 1);
+            document.getElementById('btn-next').innerText = currentStep === totalSteps ? "Сформировать карьерный паспорт ✨" : "Продолжить →";
+        }
+
+        function nextStep() {
+            if (currentStep < totalSteps) {
+                document.getElementById(`step-${currentStep}`).classList.add('hidden');
+                currentStep++;
+                document.getElementById(`step-${currentStep}`).classList.remove('hidden');
+                updateProgress();
+            } else {
+                submitQuiz();
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 1) {
+                document.getElementById(`step-${currentStep}`).classList.add('hidden');
+                currentStep--;
+                document.getElementById(`step-${currentStep}`).classList.remove('hidden');
+                updateProgress();
+            }
+        }
+
+        async function submitQuiz() {
+            formData.favourite_subjects = document.getElementById('favourite-subjects').value;
+            const loader = document.getElementById('quiz-loader');
+            loader.classList.remove('hidden');
+
+            const loaderStatus = document.getElementById('loader-status');
+            const messages = [
+                "Сканируем 120 профессий 2026-2030 годов...",
+                "Анализируем международные зарплатные вилки в USD...",
+                "Сопоставляем гранты и лучшие профильные факультеты...",
+                "Формируем персональный карьерный паспорт..."
+            ];
+            let msgIdx = 0;
+            const interval = setInterval(() => {
+                msgIdx = (msgIdx + 1) % messages.length;
+                loaderStatus.innerText = messages[msgIdx];
+            }, 900);
+
+            try {
+                const resp = await fetch('/api/v1/career/orientate', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+                const data = await resp.json();
+                clearInterval(interval);
+                loader.classList.add('hidden');
+
+                if (data.status === 'success') {
+                    lastResult = data;
+                    renderResults(data);
+                } else {
+                    alert("Ошибка: " + (data.detail || "Попробуйте снова"));
+                }
+            } catch (err) {
+                clearInterval(interval);
+                loader.classList.add('hidden');
+                alert("Сервер временно недоступен. Проверьте соединение.");
+            }
+        }
+
+        function renderResults(data) {
+            document.getElementById('quiz-container').classList.add('hidden');
+            const resBox = document.getElementById('results-container');
+            resBox.classList.remove('hidden');
+
+            document.getElementById('res-archetype').innerText = data.archetype;
+            document.getElementById('res-superpower').innerText = "Суперсила: " + data.superpower;
+            document.getElementById('res-personality').innerText = data.personality_summary;
+
+            // Render Careers
+            const cList = document.getElementById('careers-list');
+            cList.innerHTML = '';
+            (data.top_careers || []).forEach(c => {
+                const card = document.createElement('div');
+                card.className = "bg-slate-950 border border-slate-800 hover:border-amber-500/50 rounded-2xl p-5 shadow-lg flex flex-col justify-between space-y-4 transition";
+                card.innerHTML = `
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span class="text-[10px] bg-emerald-950 text-emerald-300 border border-emerald-800 px-2 py-0.5 rounded-full font-bold">
+                                ${c.match_percentage}% Совместимость
+                            </span>
+                            <span class="text-[10px] text-slate-500 font-medium">Сложность: ${c.difficulty || 'Средняя'}</span>
+                        </div>
+                        <h4 class="text-base font-bold text-white">${c.title}</h4>
+                        <p class="text-xs text-slate-400 leading-relaxed">${c.why_fits}</p>
+                    </div>
+                    <div class="pt-3 border-t border-slate-800/80 space-y-1">
+                        <div class="text-[11px] text-slate-400 flex justify-between">
+                            <span>Локально:</span> <strong class="text-slate-200">${c.salary_local}</strong>
+                        </div>
+                        <div class="text-[11px] text-amber-400 flex justify-between font-bold">
+                            <span>Global Remote ($):</span> <strong>${c.salary_usd}</strong>
+                        </div>
+                    </div>
+                `;
+                cList.appendChild(card);
+            });
+
+            // Render Unis
+            const uList = document.getElementById('universities-list');
+            uList.innerHTML = '';
+            (data.recommended_faculties_and_universities || []).forEach(u => {
+                const item = document.createElement('div');
+                item.className = "flex items-center gap-2 p-2.5 rounded-xl bg-slate-950 border border-slate-800/80";
+                item.innerHTML = `<span class="text-amber-400 font-bold">✓</span> <span>${u}</span>`;
+                uList.appendChild(item);
+            });
+
+            // Render Steps
+            const sList = document.getElementById('steps-list');
+            sList.innerHTML = '';
+            (data.immediate_next_steps || []).forEach((s, idx) => {
+                const item = document.createElement('div');
+                item.className = "flex items-start gap-3 p-3 rounded-xl bg-slate-950 border border-slate-800/80";
+                item.innerHTML = `<span class="w-6 h-6 rounded-lg bg-emerald-600/20 text-emerald-400 font-bold flex items-center justify-center shrink-0 text-xs">${idx + 1}</span> <span class="text-xs text-slate-300 leading-relaxed">${s}</span>`;
+                sList.appendChild(item);
+            });
+
+            // Funnel
+            if (data.next_eduhub_tool) {
+                document.getElementById('funnel-title').innerText = "Инструмент для старта: " + data.next_eduhub_tool.name;
+                document.getElementById('funnel-reason').innerText = data.next_eduhub_tool.reason;
+                document.getElementById('funnel-btn').href = data.next_eduhub_tool.url;
+                document.getElementById('funnel-btn').innerText = `Открыть ${data.next_eduhub_tool.name} →`;
+            }
+
+            resBox.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function resetQuiz() {
+            document.getElementById('results-container').classList.add('hidden');
+            document.getElementById('quiz-container').classList.remove('hidden');
+            currentStep = 1;
+            for (let i = 1; i <= totalSteps; i++) {
+                document.getElementById(`step-${i}`).classList.toggle('hidden', i !== 1);
+            }
+            updateProgress();
+        }
+
+        function shareStories() {
+            if (!lastResult) return;
+            const text = `🔥 Мой подтвержденный карьерный архетип в EduHub AI: "${lastResult.archetype}"! ИИ подобрал 3 профессии с доходом до $4,000/мес. Пройди тест за 3 минуты: ${window.location.href}`;
+            if (navigator.share) {
+                navigator.share({ title: 'EduHub AI Career Navigator', text: text, url: window.location.href });
+            } else {
+                navigator.clipboard.writeText(text).then(() => {
+                    alert("Ссылка и ваш результат скопированы в буфер обмена! Можете отправить в Telegram или выложить в Stories 📋");
+                });
+            }
+        }
+
+        function downloadPassport() {
+            if (!lastResult) return;
+            let doc = `========================================================\n`;
+            doc += `EDUHUB AI — ПЕРСОНАЛЬНЫЙ КАРЬЕРНЫЙ ПАСПОРТ (2026-2030)\n`;
+            doc += `========================================================\n\n`;
+            doc += `АРХЕТИП: ${lastResult.archetype}\n`;
+            doc += `СУПЕРСИЛА: ${lastResult.superpower}\n\n`;
+            doc += `ХАРАКТЕРИСТИКА:\n${lastResult.personality_summary}\n\n`;
+            doc += `--------------------------------------------------------\n`;
+            doc += `ТОП-3 РЕКОМЕНДОВАННЫЕ ПРОФЕССИИ БУДУЩЕГО:\n`;
+            doc += `--------------------------------------------------------\n`;
+            (lastResult.top_careers || []).forEach((c, idx) => {
+                doc += `${idx + 1}. ${c.title} (Совместимость: ${c.match_percentage}%)\n`;
+                doc += `   Почему подходит: ${c.why_fits}\n`;
+                doc += `   Локальный доход: ${c.salary_local}\n`;
+                doc += `   Международный доход (USD): ${c.salary_usd}\n\n`;
+            });
+            doc += `--------------------------------------------------------\n`;
+            doc += `РЕКОМЕНДОВАННЫЕ ВУЗЫ И ГРАНТЫ:\n`;
+            (lastResult.recommended_faculties_and_universities || []).forEach(u => {
+                doc += `• ${u}\n`;
+            });
+            doc += `\n--------------------------------------------------------\n`;
+            doc += `ПЕРВЫЕ 3 ШАГА НА ЭТОЙ НЕДЕЛЕ:\n`;
+            (lastResult.immediate_next_steps || []).forEach((s, idx) => {
+                doc += `${idx + 1}. ${s}\n`;
+            });
+            doc += `\nСформировано на платформе: eduhub.ai\n`;
+
+            const blob = new Blob([doc], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `eduhub_career_passport_${Date.now()}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>

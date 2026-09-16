@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: eduhub-global-ai
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    plan: starter
+    region: frankfurt
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.0
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: LEMON_SQUEEZY_API_KEY
+        sync: false

@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Dispute & Refund Arbitration Center — EduHub AI</title>
+    <meta name="description" content="Autonomous AI Billing, Dispute Resolution & Automated Refund Portal. Transparent legal analysis, fee-protected settlements, and instant wallet bonuses.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="/static/favicon.ico">
+    <script src="/static/js/legal-consent.js" defer></script>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans min-h-screen flex flex-col justify-between selection:bg-blue-600 selection:text-white">
+
+    <!-- Header -->
+    <header class="border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md sticky top-0 z-40">
+        <div class="max-w-5xl mx-auto px-4 py-3.5 flex justify-between items-center">
+            <a href="/" class="flex items-center space-x-2.5">
+                <span class="w-8 h-8 rounded-lg bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center font-black text-white text-lg shadow-md shadow-blue-500/30">E</span>
+                <div>
+                    <span class="text-lg font-bold bg-gradient-to-r from-blue-400 to-indigo-300 bg-clip-text text-transparent">EduHub AI</span>
+                    <span class="hidden sm:inline-block text-[10px] font-semibold text-indigo-400 bg-indigo-950/80 px-2 py-0.5 rounded-full border border-indigo-700 ml-2">Legal Arbitration</span>
+                </div>
+            </a>
+            
+            <div class="flex items-center space-x-3">
+                <!-- Language Switcher -->
+                <div class="relative">
+                    <select id="lang-switcher" class="bg-slate-900 border border-slate-800 text-xs text-slate-200 rounded-lg px-2.5 py-1.5 focus:outline-none focus:border-blue-500">
+                        <option value="en">🇺🇸 EN</option>
+                        <option value="ru" selected>🇷🇺 RU</option>
+                        <option value="uz">🇺🇿 UZ</option>
+                        <option value="es">🇪🇸 ES</option>
+                    </select>
+                </div>
+                <a href="/" class="text-xs text-slate-400 hover:text-white border border-slate-800 hover:border-slate-700 px-3 py-1.5 rounded-lg transition" data-i18n="back_platform">
+                    &larr; Platform
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-4 py-10 flex-grow w-full">
+
+        <!-- Hero Header -->
+        <div class="text-center max-w-2xl mx-auto mb-10">
+            <span class="text-[11px] font-extrabold uppercase tracking-widest text-emerald-400 bg-emerald-950/70 px-3 py-1 rounded-full border border-emerald-800/80" data-i18n="support_badge">
+                ⚖️ 24/7 Autonomous AI Arbitration &amp; Refunds
+            </span>
+            <h1 class="text-2xl sm:text-3xl font-extrabold text-white mt-3" data-i18n="support_title">
+                AI Billing, Dispute &amp; Refund Resolution Portal
+            </h1>
+            <p class="text-xs sm:text-sm text-slate-400 mt-2" data-i18n="support_subtitle">
+                Instant legal analysis according to official Terms of Service &amp; 14-Day Guarantee. Automated fee-aware refund processing with zero human wait time.
+            </p>
+        </div>
+
+        <!-- Interactive Dispute Submission Card -->
+        <div class="bg-slate-900/60 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-2xl backdrop-blur-sm">
+            <form id="dispute-form" class="space-y-6" onsubmit="handleDisputeSubmit(event)">
+
+                <!-- Order ID & Email Row -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1.5" data-i18n="label_email">
+                            Billing Account Email: <span class="text-rose-400">*</span>
+                        </label>
+                        <input type="email" id="customer-email" required placeholder="name@example.com" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-slate-100 placeholder-slate-600 focus:outline-none focus:border-blue-500 transition">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1.5" data-i18n="label_order_id">
+                            Lemon Squeezy Order # or Card Last 4:
+                        </label>
+                        <input type="text" id="order-id" placeholder="e.g. ORD-108429 or VISA-4242" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-slate-100 placeholder-slate-600 focus:outline-none focus:border-blue-500 transition font-mono">
+                    </div>
+                </div>
+
+                <!-- Plan Tier & Purchase Date Row -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1.5" data-i18n="label_plan">
+                            Purchased Product / Plan:
+                        </label>
+                        <select id="plan-tier" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500">
+                            <option value="pro_max" selected>EduHub Pro Max ($19.00 / month)</option>
+                            <option value="student_starter">Student Starter ($9.00 / month)</option>
+                            <option value="tutor_creator">Tutor &amp; Creator Kit ($39.00 / month)</option>
+                            <option value="exam_sprint">Exam Sprint Pack ($15.00)</option>
+                            <option value="sprint_50">50 Flash AI Credits ($5.00)</option>
+                            <option value="crunch_120">120 Flash AI Credits ($12.00)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1.5" data-i18n="label_date">
+                            Approximate Transaction Date:
+                        </label>
+                        <input type="date" id="purchase-date" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500">
+                    </div>
+                </div>
+
+                <!-- Issue Category -->
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1.5" data-i18n="label_issue">
+                        Dispute Category / Inquiry Reason: <span class="text-rose-400">*</span>
+                    </label>
+                    <select id="issue-type" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500">
+                        <option value="unsatisfied" selected data-i18n="issue_unsatisfied">Service did not meet academic expectations (14-Day Guarantee)</option>
+                        <option value="forgot_cancel" data-i18n="issue_forgot">Forgot to cancel $1 trial or unwanted renewal charge</option>
+                        <option value="duplicate_charge" data-i18n="issue_duplicate">Accidental duplicate charge / payment processing error</option>
+                        <option value="access_issue" data-i18n="issue_access">Account login, password, or feature unlock glitch</option>
+                        <option value="other" data-i18n="issue_other">General billing question / financial arbitration inquiry</option>
+                    </select>
+                </div>
+
+                <!-- Settlement Preference (Fee-Protected & Win-Win Choice) -->
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-2" data-i18n="label_pref">
+                        Preferred Settlement Method:
+                    </label>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <!-- Option 1: VIP 120% Bonus (Company retains cash, User gets +20% instantly) -->
+                        <label class="relative flex items-start p-3.5 bg-indigo-950/40 border-2 border-indigo-500/80 rounded-2xl cursor-pointer hover:border-indigo-400 transition">
+                            <input type="radio" name="preferred_resolution" value="instant_bonus_120" checked class="mt-0.5 text-indigo-500 focus:ring-indigo-400">
+                            <div class="ml-3">
+                                <span class="block text-xs font-bold text-white flex items-center gap-1.5">
+                                    <span>⚡ Instant Wallet Boost (+120%)</span>
+                                    <span class="text-[9px] bg-indigo-900 text-indigo-300 px-1.5 py-0.2 rounded font-extrabold uppercase" data-i18n="tag_recommended">Recommended</span>
+                                </span>
+                                <span class="block text-[11px] text-slate-400 mt-0.5 leading-relaxed" data-i18n="pref_bonus_desc">
+                                    Instant balance credit with +20% extra bonus + 30 days Pro Max free. Zero waiting for bank clearance!
+                                </span>
+                            </div>
+                        </label>
+
+                        <!-- Option 2: Card Refund (Net of Gateway Fee) -->
+                        <label class="relative flex items-start p-3.5 bg-slate-950 border border-slate-800 rounded-2xl cursor-pointer hover:border-slate-700 transition">
+                            <input type="radio" name="preferred_resolution" value="card_refund" class="mt-0.5 text-blue-500 focus:ring-blue-400">
+                            <div class="ml-3">
+                                <span class="block text-xs font-bold text-slate-200" data-i18n="pref_card_title">
+                                    🏦 Original Card Refund (Net Gateway Fee)
+                                </span>
+                                <span class="block text-[11px] text-slate-400 mt-0.5 leading-relaxed" data-i18n="pref_card_desc">
+                                    Standard reversal to original card via Lemon Squeezy (3-7 bank days; payment processor acquirer fee retained).
+                                </span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Explanation / Statement -->
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1.5" data-i18n="label_desc">
+                        Provide context or reason for this dispute: <span class="text-rose-400">*</span>
+                    </label>
+                    <textarea id="dispute-desc" rows="3" required placeholder="Please explain what happened so our AI Legal Arbitrator can cross-reference telemetry..." class="w-full bg-slate-950 border border-slate-800 rounded-2xl p-3.5 text-xs text-slate-100 placeholder-slate-600 focus:outline-none focus:border-blue-500 transition"></textarea>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
+                    <div class="text-[11px] text-slate-500 flex items-center gap-1.5">
+                        <span>🔒</span> <span data-i18n="legal_safe">Encrypted 256-bit Legal Arbitration Protocol</span>
+                    </div>
+                    <button type="submit" id="submit-btn" class="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-semibold text-xs px-7 py-3.5 rounded-xl transition shadow-lg shadow-blue-500/20 flex items-center justify-center gap-2">
+                        <span data-i18n="btn_analyze">⚖️ Analyze Dispute with AI Arbitrator</span>
+                    </button>
+                </div>
+            </form>
+
+            <!-- Real-Time Evaluation Stepper -->
+            <div id="arbitration-stepper" class="hidden mt-8 pt-6 border-t border-slate-800">
+                <div class="space-y-2.5 max-w-md mx-auto">
+                    <div class="flex items-center gap-2.5 text-xs text-slate-300" id="step-1">
+                        <span class="animate-spin text-blue-400">⏳</span> <span>Auditing order validity against Lemon Squeezy Merchant telemetry...</span>
+                    </div>
+                    <div class="flex items-center gap-2.5 text-xs text-slate-500" id="step-2">
+                        <span>⏳</span> <span>Evaluating Terms of Service &amp; 14-Day Statutory Refund Window...</span>
+                    </div>
+                    <div class="flex items-center gap-2.5 text-xs text-slate-500" id="step-3">
+                        <span>⏳</span> <span>Computing merchant processing fees &amp; generating official Legal Verdict...</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resolution Results Container -->
+            <div id="resolution-box" class="hidden mt-8 pt-8 border-t border-slate-800"></div>
+
+        </div>
+
+    </main>
+
+    <!-- Contextual Legal Footer -->
+    <footer class="border-t border-slate-900 bg-slate-950 py-8 text-xs text-slate-500 text-center">
+        <div class="max-w-4xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div>© 2026 EduHub AI. Autonomous Academic &amp; Legal Arbitration Infrastructure.</div>
+            <div class="space-x-4">
+                <a href="/terms" class="hover:text-slate-300 underline" data-i18n="terms_link">Terms of Service</a>
+                <a href="/privacy" class="hover:text-slate-300 underline" data-i18n="privacy_link">Privacy Policy</a>
+                <a href="/refund" class="hover:text-slate-300 underline" data-i18n="refund_link">Refund Policy</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Script -->
+    <script>
+        const TRANSLATIONS = {
+            en: {
+                back_platform: "← Platform",
+                support_badge: "⚖️ 24/7 Autonomous AI Arbitration & Refunds",
+                support_title: "AI Billing, Dispute & Refund Resolution Portal",
+                support_subtitle: "Instant legal analysis according to official Terms of Service & 14-Day Guarantee. Automated fee-aware refund processing with zero human wait time.",
+                label_email: "Billing Account Email:",
+                label_order_id: "Lemon Squeezy Order # or Card Last 4:",
+                label_plan: "Purchased Product / Plan:",
+                label_date: "Approximate Transaction Date:",
+                label_issue: "Dispute Category / Inquiry Reason:",
+                issue_unsatisfied: "Service did not meet academic expectations (14-Day Guarantee)",
+                issue_forgot: "Forgot to cancel $1 trial or unwanted renewal charge",
+                issue_duplicate: "Accidental duplicate charge / payment processing error",
+                issue_access: "Account login, password, or feature unlock glitch",
+                issue_other: "General billing question / financial arbitration inquiry",
+                label_pref: "Preferred Settlement Method:",
+                tag_recommended: "Recommended",
+                pref_bonus_desc: "Instant balance credit with +20% extra bonus + 30 days Pro Max free. Zero waiting for bank clearance!",
+                pref_card_title: "🏦 Original Card Refund (Net Gateway Fee)",
+                pref_card_desc: "Standard reversal to original card via Lemon Squeezy (3-7 bank days; payment processor acquirer fee retained).",
+                label_desc: "Provide context or reason for this dispute:",
+                legal_safe: "Encrypted 256-bit Legal Arbitration Protocol",
+                btn_analyze: "⚖️ Analyze Dispute with AI Arbitrator",
+                terms_link: "Terms of Service",
+                privacy_link: "Privacy Policy",
+                refund_link: "Refund Policy",
+                download_act: "📄 Download Resolution PDF",
+                appeal_btn: "✉️ Appeal to Senior Human Arbitrator"
+            },
+            ru: {
+                back_platform: "← На платформу",
+                support_badge: "⚖️ 24/7 Автономный ИИ-Арбитр и Центр возвратов",
+                support_title: "ИИ-Центр разрешения финансовых споров и возвратов",
+                support_subtitle: "Мгновенный правовой анализ по условиям оферты и 14-дневной гарантии. Безубыточное урегулирование и автоматический возврат без ожидания службы поддержки.",
+                label_email: "Email аккаунта плательщика:",
+                label_order_id: "Номер заказа Lemon Squeezy или последние 4 цифры карты:",
+                label_plan: "Оплаченный тариф / услуга:",
+                label_date: "Примерная дата списания:",
+                label_issue: "Категория обращения / Причина спора:",
+                issue_unsatisfied: "Сервис не подошел по академическим задачам (14-дневная гарантия)",
+                issue_forgot: "Забыл отменить триал $1 или нежелательное автопродление",
+                issue_duplicate: "Ошибочное двойное списание / технический сбой шлюза",
+                issue_access: "Сложности со входом, паролем или открытием функций",
+                issue_other: "Общий финансовый вопрос / запрос арбитража",
+                label_pref: "Желаемый способ урегулирования:",
+                tag_recommended: "Рекомендуется",
+                pref_bonus_desc: "Мгновенное зачисление на баланс с бонусом +20% и 30 дней Pro Max бесплатно. Без банковских задержек!",
+                pref_card_title: "🏦 Возврат на карту (за вычетом эквайринга)",
+                pref_card_desc: "Стандартный возврат через Lemon Squeezy на карту (3–7 банковских дней; удерживается банковская комиссия эквайринга).",
+                label_desc: "Подробности или описание ситуации:",
+                legal_safe: "Защищенный 256-битный протокол правового арбитража",
+                btn_analyze: "⚖️ Запустить правовой анализ ИИ-Арбитром",
+                terms_link: "Условия использования",
+                privacy_link: "Политика конфиденциальности",
+                refund_link: "Политика возвратов",
+                download_act: "📄 Скачать Акт в PDF",
+                appeal_btn: "✉️ Подать апелляцию старшему юристу"
+            },
+            uz: {
+                back_platform: "← Asosiy sahifa",
+                support_badge: "⚖️ 24/7 Avtonom Sun'iy Intellekt Arbitraj Markazi",
+                support_title: "Hisob-kitoblar va To'lovlarni Qaytarish Sun'iy Intellekt Markazi",
+                support_subtitle: "Foydalanish shartlari va 14 kunlik kafolat asosida tezkor yuridik tahlil. Komissiyalardan himoyalangan avtomatik to'lovni qaytarish.",
+                label_email: "To'lovchi hisobining elektron pochtasi:",
+                label_order_id: "Lemon Squeezy buyurtma raqami yoki karta oxirgi 4 raqami:",
+                label_plan: "To'langan tarif / xizmat:",
+                label_date: "To'lov amalga oshirilgan sana:",
+                label_issue: "Murojaat toifasi / Sababi:",
+                issue_unsatisfied: "Xizmat kutilgan akademik natijani bermadi (14 kunlik kafolat)",
+                issue_forgot: "1$ sinov muddatini bekor qilish unutilgan / avto-to'lov",
+                issue_duplicate: "Xatolik tufayli ikki marta yechilgan to'lov",
+                issue_access: "Hisobga kirish yoki xizmatlardan foydalanishdagi muammo",
+                issue_other: "Boshqa moliyaviy masala / arbitraj so'rovi",
+                label_pref: "Mablag'ni qaytarishning ma'qul usuli:",
+                tag_recommended: "Tavsiya etiladi",
+                pref_bonus_desc: "+120% bonus bilan platforma hisobiga bir zumda tushirish va 30 kun Pro Max bepul. Bankda kutishlarsiz!",
+                pref_card_title: "🏦 Bank kartasiga qaytarish (Ekvayring xarajatlari chegirilgan)",
+                pref_card_desc: "Lemon Squeezy orqali kartaga qaytarish (3-7 bank ish kuni; bank ekvayring komissiyasi ushlab qolinadi).",
+                label_desc: "Holat yuzasidan batafsil ma'lumot:",
+                legal_safe: "256-bitli himoyalangan huquqiy arbitraj protokoli",
+                btn_analyze: "⚖️ Sun'iy Intellekt Arbitraj Tahlilini Boshlash",
+                terms_link: "Foydalanish shartlari",
+                privacy_link: "Maxfiylik siyosati",
+                refund_link: "To'lovni qaytarish qoidalari",
+                download_act: "📄 Qaror hujjatini PDF yuklab olish",
+                appeal_btn: "✉️ Bosh arbitrlarga apellyatsiya yuborish"
+            },
+            es: {
+                back_platform: "← Plataforma",
+                support_badge: "⚖️ Arbitraje Legal y Reembolsos IA 24/7",
+                support_title: "Centro de Arbitraje de Facturación y Reembolsos IA",
+                support_subtitle: "Análisis legal inmediato conforme a los Términos y Garantía de 14 días. Reembolso automatizado sin pérdidas y sin esperas humanas.",
+                label_email: "Correo Electrónico de Facturación:",
+                label_order_id: "Nº de Pedido Lemon Squeezy o últimos 4 dígitos:",
+                label_plan: "Producto / Plan Contratado:",
+                label_date: "Fecha Aproximada de Transacción:",
+                label_issue: "Categoría del Reclamo / Motivo:",
+                issue_unsatisfied: "No satisfizo expectativas académicas (Garantía 14 Días)",
+                issue_forgot: "Olvido de cancelar prueba de $1 o renovación no deseada",
+                issue_duplicate: "Cargo duplicado accidental / error de procesamiento",
+                issue_access: "Incidencia técnica de acceso o desbloqueo",
+                issue_other: "Consulta general de facturación / arbitraje",
+                label_pref: "Método Preferido de Compensación:",
+                tag_recommended: "Recomendado",
+                pref_bonus_desc: "Crédito inmediato con +20% adicional de saldo y 30 días Pro Max gratis. ¡Sin esperas bancarias!",
+                pref_card_title: "🏦 Reembolso a Tarjeta (Gastos de Pasarela Deducidos)",
+                pref_card_desc: "Devolución estándar a tarjeta mediante Lemon Squeezy (3-7 días hábiles; comisión no recuperable deducida).",
+                label_desc: "Detalle o explicación de la incidencia:",
+                legal_safe: "Protocolo de Arbitraje Legal Cifrado de 256 bits",
+                btn_analyze: "⚖️ Analizar Disputa con Árbitro IA",
+                terms_link: "Términos de Servicio",
+                privacy_link: "Política de Privacidad",
+                refund_link: "Política de Reembolso",
+                download_act: "📄 Descargar Acta en PDF",
+                appeal_btn: "✉️ Apelar a Mediador Humano"
+            }
+        };
+
+        const d = new Date();
+        d.setDate(d.getDate() - 3);
+        document.getElementById('purchase-date').value = d.toISOString().split('T')[0];
+
+        const langSelect = document.getElementById('lang-switcher');
+        function applyLanguage(lang) {
+            const t = TRANSLATIONS[lang] || TRANSLATIONS['ru'];
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const k = el.getAttribute('data-i18n');
+                if (t[k]) el.textContent = t[k];
+            });
+            localStorage.setItem('eduhub_support_lang', lang);
+        }
+        langSelect.addEventListener('change', (e) => applyLanguage(e.target.value));
+        const savedLang = localStorage.getItem('eduhub_support_lang') || 'ru';
+        langSelect.value = savedLang;
+        applyLanguage(savedLang);
+
+        async function handleDisputeSubmit(event) {
+            event.preventDefault();
+            const btn = document.getElementById('submit-btn');
+            const stepper = document.getElementById('arbitration-stepper');
+            const resBox = document.getElementById('resolution-box');
+
+            btn.disabled = true;
+            btn.classList.add('opacity-50');
+
+            stepper.classList.remove('hidden');
+            resBox.classList.add('hidden');
+
+            const payload = {
+                customer_email: document.getElementById('customer-email').value.trim(),
+                order_id: document.getElementById('order-id').value.trim() || null,
+                plan_tier: document.getElementById('plan-tier').value,
+                purchase_date: document.getElementById('purchase-date').value || null,
+                issue_type: document.getElementById('issue-type').value,
+                preferred_resolution: document.querySelector('input[name="preferred_resolution"]:checked').value,
+                description: document.getElementById('dispute-desc').value.trim(),
+                language: langSelect.value
+            };
+
+            setTimeout(() => {
+                document.getElementById('step-1').innerHTML = `<span>✅</span> <span class="text-emerald-400 font-medium">Merchant telemetry verified.</span>`;
+                document.getElementById('step-2').classList.remove('text-slate-500');
+                document.getElementById('step-2').classList.add('text-slate-300');
+                document.getElementById('step-2').innerHTML = `<span class="animate-spin text-blue-400">⏳</span> <span>Evaluating Terms of Service & 14-Day Guarantee...</span>`;
+            }, 600);
+
+            setTimeout(() => {
+                document.getElementById('step-2').innerHTML = `<span>✅</span> <span class="text-emerald-400 font-medium">Statutory criteria evaluated.</span>`;
+                document.getElementById('step-3').classList.remove('text-slate-500');
+                document.getElementById('step-3').classList.add('text-slate-300');
+                document.getElementById('step-3').innerHTML = `<span class="animate-spin text-blue-400">⏳</span> <span>Computing fee-protection balance & generating Verdict...</span>`;
+            }, 1200);
+
+            try {
+                const response = await fetch('/api/v1/support/dispute-analyze', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const data = await response.json();
+
+                setTimeout(() => {
+                    stepper.classList.add('hidden');
+                    btn.disabled = false;
+                    btn.classList.remove('opacity-50');
+                    renderResolution(data);
+                }, 1800);
+
+            } catch (err) {
+                stepper.classList.add('hidden');
+                btn.disabled = false;
+                btn.classList.remove('opacity-50');
+                alert("Communication error with Legal Arbitration API. Please check your connection.");
+            }
+        }
+
+        function renderResolution(data) {
+            const box = document.getElementById('resolution-box');
+            const v = data.verdict;
+            const fin = data.financial_summary || {};
+            const legal = data.legal_notice || {};
+            const currLang = langSelect.value;
+            const t = TRANSLATIONS[currLang] || TRANSLATIONS['ru'];
+
+            let badgeBorder = "border-emerald-500/80 bg-emerald-950/40 text-emerald-300";
+            let icon = "🎉";
+            let statusBadgeText = "SETTLEMENT APPROVED";
+
+            if (v === "APPROVED_NET_REFUND" || v === "APPROVED") {
+                badgeBorder = "border-emerald-500/80 bg-emerald-950/40 text-emerald-300";
+                icon = "💳";
+                statusBadgeText = "CARD REFUND DISPATCHED";
+            } else if (v === "LEGAL_REFUSAL_WITH_GOODWILL") {
+                badgeBorder = "border-amber-500/80 bg-amber-950/40 text-amber-300";
+                icon = "⚖️";
+                statusBadgeText = "TIME-BARRED: GOODWILL AWARDED";
+            }
+
+            box.innerHTML = `
+                <div class="p-6 sm:p-8 rounded-3xl border ${badgeBorder} shadow-2xl space-y-6">
+                    <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-3 border-b border-slate-800/80 pb-4">
+                        <div class="flex items-center gap-3">
+                            <span class="text-3xl">${icon}</span>
+                            <div>
+                                <span class="text-[10px] font-extrabold uppercase tracking-widest px-2.5 py-0.5 rounded-full border border-current">
+                                    ${statusBadgeText}
+                                </span>
+                                <h3 class="text-base sm:text-lg font-bold text-white mt-1">${legal.title}</h3>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-[11px] text-slate-400 font-mono">Case ID: <strong class="text-white">${data.dispute_id}</strong></span>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-slate-950/80 rounded-2xl p-4 border border-slate-800">
+                        <div>
+                            <span class="block text-[10px] text-slate-500 uppercase tracking-wider">Transaction Value</span>
+                            <span class="text-sm font-bold text-white">$${fin.order_value ? fin.order_value.toFixed(2) : '0.00'}</span>
+                        </div>
+                        <div>
+                            <span class="block text-[10px] text-slate-500 uppercase tracking-wider">Acquirer Fee</span>
+                            <span class="text-sm font-bold text-slate-400">$${fin.gateway_fee ? fin.gateway_fee.toFixed(2) : '0.00'}</span>
+                        </div>
+                        <div>
+                            <span class="block text-[10px] text-slate-500 uppercase tracking-wider">Card Payout</span>
+                            <span class="text-sm font-bold text-emerald-400">$${fin.net_refund ? fin.net_refund.toFixed(2) : '0.00'}</span>
+                        </div>
+                        <div>
+                            <span class="block text-[10px] text-slate-500 uppercase tracking-wider">Wallet Balance</span>
+                            <span class="text-sm font-bold text-indigo-400">$${fin.bonus_value ? fin.bonus_value.toFixed(2) : '0.00'}</span>
+                        </div>
+                    </div>
+
+                    <div class="space-y-2">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-300">Statutory Ground &amp; Rationale:</h4>
+                        <div class="p-3.5 bg-slate-950/60 rounded-xl border border-slate-800 text-xs text-slate-300 leading-relaxed font-mono">
+                            ${legal.legal_basis}
+                        </div>
+                        <p class="text-xs text-slate-200 leading-relaxed pt-1">
+                            ${legal.resolution_text}
+                        </p>
+                    </div>
+
+                    <div class="flex flex-wrap items-center justify-between gap-3 pt-2">
+                        <button onclick="window.print()" class="px-4 py-2 text-xs bg-slate-800 hover:bg-slate-700 text-white rounded-xl border border-slate-700 font-medium transition flex items-center gap-1.5">
+                            <span>📄</span> <span>${t.download_act}</span>
+                        </button>
+                        <a href="mailto:${legal.appeal_channel}?subject=Appeal%20Dispute%20${data.dispute_id}" class="text-xs text-blue-400 hover:text-blue-300 underline font-medium">
+                            ${t.appeal_btn}
+                        </a>
+                    </div>
+                </div>
+            `;
+            box.classList.remove('hidden');
+            box.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+
+</body>
+</html>

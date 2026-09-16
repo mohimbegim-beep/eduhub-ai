@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ИИ-Лаборатория Карточек Маркетплейсов (Uzum Market, WB, Ozon) — Вывод в ТОП-1 &amp; Unit-Экономика | EduHub AI</title>
+    
+    <!-- SEO & AEO Meta Tags -->
+    <meta name="description" content="Бесплатный онлайн генератор продающих SEO карточек для селлеров Uzum Market, Wildberries и Ozon. Расчет чистой маржи, 5 буллетов выгод, LSI описание и снятие возражений.">
+    <meta name="keywords" content="Uzum Market карточка товара, генератор описания Wildberries, SEO карточки Ozon, юнит экономика маркетплейса, промпт для селлеров, ИИ карточки товаров">
+    <link rel="canonical" href="https://eduhub.ai/tools/marketplace-lab">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Utilities -->
+    <script src="/static/js/user-utils.js" defer></script>
+    <script src="/static/js/legal-consent.js" defer></script>
+    <script src="/static/js/conversion-engine.js" defer></script>
+    <script src="/static/js/i18n.js" defer></script>
+
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "EduHub AI Marketplace Lab",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "All",
+      "offers": {
+        "@type": "Offer",
+        "price": "1.00",
+        "priceCurrency": "USD"
+      },
+      "description": "Autonomous AI listing generator and unit-economics margin calculator for Uzum Market, Wildberries and Ozon sellers."
+    }
+    </script>
+</head>
+<body data-page-tool="marketplace-lab" class="bg-slate-950 text-slate-100 font-sans min-h-screen flex flex-col justify-between selection:bg-amber-500 selection:text-slate-950">
+
+    <!-- Top Sales Banner -->
+    <div class="bg-gradient-to-r from-amber-600 via-orange-600 to-red-600 py-2 px-4 text-center text-xs font-bold text-slate-950 flex items-center justify-center gap-2 shadow-md">
+        <span>🔥 <strong>Хит Селлеров 2026:</strong> Генерация ТОП-1 карточки за 5 секунд &bull; Рост конверсии на 30% &bull; Скидка на экспорт: <span class="line-through text-amber-900">$29.00</span> ➔ <strong>$1.00</strong></span>
+    </div>
+
+    <!-- Header -->
+    <header class="border-b border-slate-800/80 bg-slate-950/90 backdrop-blur-md sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <a href="/" class="flex items-center space-x-2">
+                    <span class="w-8 h-8 rounded-lg bg-gradient-to-tr from-amber-500 to-orange-500 flex items-center justify-center font-black text-slate-950 text-lg shadow-md shadow-amber-500/30">E</span>
+                    <span class="text-xl font-bold bg-gradient-to-r from-amber-400 via-orange-300 to-white bg-clip-text text-transparent tracking-tight">EduHub AI</span>
+                </a>
+                <span class="hidden sm:inline-block text-[11px] bg-amber-950 text-amber-300 px-2.5 py-0.5 rounded-full border border-amber-800 font-medium">
+                    📦 Marketplace Lab ($1)
+                </span>
+            </div>
+            
+            <div class="flex items-center space-x-3">
+                <div class="inline-flex bg-slate-900 border border-slate-800 rounded-xl p-0.5">
+                    <button onclick="setLocale('ru')" data-lang-btn="ru" class="lang-btn px-2.5 py-1 rounded-lg text-xs font-bold transition bg-amber-500 text-slate-950 shadow-sm">RU</button>
+                    <button onclick="setLocale('uz')" data-lang-btn="uz" class="lang-btn px-2.5 py-1 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition">UZ</button>
+                    <button onclick="setLocale('en')" data-lang-btn="en" class="lang-btn px-2.5 py-1 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition">EN</button>
+                </div>
+                <a href="/blueprints" class="text-xs text-amber-400 hover:text-amber-300 font-medium transition hidden sm:inline-block">
+                    Все ИИ-Заводы &rarr;
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8 w-full flex-grow">
+        
+        <!-- Breadcrumb & Hero -->
+        <div class="mb-8 text-center max-w-3xl mx-auto">
+            <span class="text-[10px] font-extrabold uppercase tracking-widest text-amber-400 bg-amber-950/80 border border-amber-800/80 px-3 py-1 rounded-full shadow">
+                ⚡ Вывод в ТОП-1 &bull; Uzum Market / Wildberries / Ozon
+            </span>
+            <h1 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight mt-3 mb-2">
+                Генератор Продающих Карточек &amp; Unit-Экономики
+            </h1>
+            <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                Введите товар и цену — наш специализированный алгоритм сформирует SEO-заголовок, 5 продающих буллетов выгод, блокировку сомнений покупателя и рассчитает чистую прибыль с учетом комиссии площадки.
+            </p>
+        </div>
+
+        <!-- 2-Column Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            
+            <!-- Left: Input Control Panel -->
+            <div class="lg:col-span-5 space-y-4 bg-slate-900/90 border border-slate-800 rounded-3xl p-5 sm:p-6 shadow-xl">
+                <div class="flex justify-between items-center pb-3 border-b border-slate-800">
+                    <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                        <span>⚙️</span> <span>Параметры Товара</span>
+                    </h3>
+                    <span class="text-[10px] text-emerald-400 font-mono">1 Бесплатный тест</span>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 mb-1">Маркетплейс:</label>
+                    <select id="mp-select" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-slate-200 focus:outline-none focus:border-amber-500 font-medium">
+                        <option value="Uzum Market">🇺🇿 Uzum Market (Узбекистан)</option>
+                        <option value="Wildberries">🇷🇺 Wildberries (СНГ)</option>
+                        <option value="Ozon">📦 Ozon Global</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 mb-1">Название товара или артикул:</label>
+                    <input id="mp-name" type="text" value="Беспроводные наушники Pro с шумоподавлением" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-slate-200 focus:outline-none focus:border-amber-500 placeholder-slate-600" placeholder="Например: Термокружка 500мл, Кроссовки Nike...">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 mb-1">Категория товара:</label>
+                    <input id="mp-cat" type="text" value="Электроника и аудиоаксессуары" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-slate-200 focus:outline-none focus:border-amber-500 placeholder-slate-600">
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-300 mb-1">Себестоимость ($):</label>
+                        <input id="mp-cost" type="number" step="0.5" value="10.0" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-slate-200 focus:outline-none focus:border-amber-500 font-mono">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-300 mb-1">Розничная цена ($):</label>
+                        <input id="mp-price" type="number" step="0.5" value="25.0" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-slate-200 focus:outline-none focus:border-amber-500 font-mono">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 mb-1">Особенности / Преимущества (опционально):</label>
+                    <textarea id="mp-features" rows="2" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-slate-200 focus:outline-none focus:border-amber-500 placeholder-slate-600" placeholder="Например: активный шумодав ANC, автономность 36 часов, быстрая зарядка Type-C..."></textarea>
+                </div>
+
+                <button onclick="generateListing()" id="mp-btn" class="w-full bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-black text-xs sm:text-sm py-3 px-4 rounded-xl shadow-lg shadow-amber-500/20 transition transform active:scale-95 flex items-center justify-center gap-2">
+                    <span>⚡ Сгенерировать Карточку &amp; Маржу (1 сек)</span>
+                </button>
+
+                <!-- Preset Pills -->
+                <div class="flex items-center gap-1.5 pt-2 text-[10px] text-slate-400">
+                    <span>Примеры:</span>
+                    <button onclick="setSample('Термокружка с индикатором температуры', 'Посуда', 4.5, 14.0)" class="underline hover:text-amber-400">Термокружка</button>
+                    <button onclick="setSample('Ортопедическая подушка с эффектом памяти', 'Товары для дома', 8.0, 22.0)" class="underline hover:text-amber-400">Подушка</button>
+                    <button onclick="setSample('Набор инструментов 108 предметов', 'Автотовары', 25.0, 58.0)" class="underline hover:text-amber-400">Инструменты</button>
+                </div>
+            </div>
+
+            <!-- Right: Output & Economics Panel -->
+            <div class="lg:col-span-7 flex flex-col justify-between bg-slate-900/90 border border-slate-800 rounded-3xl p-5 sm:p-6 shadow-xl relative">
+                
+                <!-- Unit Economics Quick Bar -->
+                <div id="mp-econ-bar" class="grid grid-cols-3 gap-3 mb-4 bg-slate-950 p-3.5 rounded-2xl border border-slate-850">
+                    <div class="text-center">
+                        <span class="text-[10px] text-slate-400 uppercase font-semibold block">Чистая Прибыль</span>
+                        <span id="res-profit" class="text-base font-black text-emerald-400 font-mono">$10.00</span>
+                    </div>
+                    <div class="text-center border-x border-slate-850">
+                        <span class="text-[10px] text-slate-400 uppercase font-semibold block">Маржинальность</span>
+                        <span id="res-margin" class="text-base font-black text-amber-400 font-mono">40.0%</span>
+                    </div>
+                    <div class="text-center">
+                        <span class="text-[10px] text-slate-400 uppercase font-semibold block">ROI на вложенные</span>
+                        <span id="res-roi" class="text-base font-black text-cyan-400 font-mono">100.0%</span>
+                    </div>
+                </div>
+
+                <!-- Tabs -->
+                <div class="flex items-center gap-2 mb-3 border-b border-slate-800 pb-2">
+                    <button onclick="switchTab('tab-listing')" id="btn-tab-listing" class="text-xs font-bold text-amber-400 border-b-2 border-amber-400 pb-1">
+                        📋 SEO Карточка &amp; Буллеты
+                    </button>
+                    <button onclick="switchTab('tab-desc')" id="btn-tab-desc" class="text-xs font-medium text-slate-400 hover:text-white pb-1">
+                        📝 LSI Описание
+                    </button>
+                    <button onclick="switchTab('tab-faq')" id="btn-tab-faq" class="text-xs font-medium text-slate-400 hover:text-white pb-1">
+                        🛡️ Снятие Возражений
+                    </button>
+                </div>
+
+                <!-- Tab 1: SEO Title & Bullets -->
+                <div id="tab-listing" class="space-y-3 flex-grow overflow-y-auto max-h-96 pr-1 text-xs">
+                    <div>
+                        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">🔥 SEO-Заголовок (Алгоритм ТОП-1 выдачи):</span>
+                        <div id="res-title" class="bg-slate-950 p-2.5 rounded-xl border border-slate-800 text-slate-100 font-semibold select-all">
+                            Беспроводные наушники Pro с шумоподавлением премиум качество, оригинальный стильный дизайн, хит продаж, быстрая доставка 1 день
+                        </div>
+                    </div>
+
+                    <div>
+                        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">💎 5 Продающих Буллетов (Выгоды покупателя):</span>
+                        <div id="res-bullets" class="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-2 text-slate-200 select-all">
+                            <p>💎 [ВЫСШИЙ СТАНДАРТ] Изготовлено из износостойких компонентов категории А+ — гарантирует долговечность.</p>
+                            <p>⚡ [ЭРГОНОМИКА И УДОБСТВО] Продуманная конструкция делает использование интуитивным с первых секунд.</p>
+                            <p>🎁 [ИДЕАЛЬНЫЙ ПОДАРОК] Фирменная презентабельная упаковка — готовый подарок без лишних трат.</p>
+                            <p>🛡️ [ТРОЙНОЙ КОНТРОЛЬ] Каждый экземпляр проходит ручную предпродажную проверку перед отправкой на склад.</p>
+                            <p>🚀 [ЭКСПРЕСС-ДОСТАВКА] Заберите заказ уже завтра в ближайшем пункте выдачи с возможностью бесплатной примерки!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 2: LSI Description -->
+                <div id="tab-desc" class="hidden space-y-2 flex-grow overflow-y-auto max-h-96 pr-1 text-xs">
+                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">LSI-Оптимизированное описание для индексации:</span>
+                    <div id="res-desc" class="bg-slate-950 p-3 rounded-xl border border-slate-800 text-slate-300 leading-relaxed whitespace-pre-wrap select-all">
+Ищете идеальный товар, который сочетает в себе эстетику, максимальную надежность и практичность? Данная модель разработана специально для тех, кто ценит бескомпромиссное качество. 
+
+Благодаря использованию современных эко-материалов, изделие сохраняет первозданный вид даже при интенсивном ежедневном использовании. В комплекте предусмотрена вся необходимая комплектация и инструкция на русском языке. Заказывайте прямо сейчас и оцените новый уровень комфорта уже завтра!
+                    </div>
+                </div>
+
+                <!-- Tab 3: FAQ -->
+                <div id="tab-faq" class="hidden space-y-2 flex-grow overflow-y-auto max-h-96 pr-1 text-xs">
+                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Блок снятия сомнений (повышает выкуп на 24%):</span>
+                    <div id="res-faq" class="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-2 text-slate-300 select-all">
+                        <p><strong>В: Сомневаетесь в размере или качестве?</strong><br>О: Вы можете вскрыть и проверить товар прямо в пункте выдачи и отказаться без списания средств.</p>
+                        <p><strong>В: Предоставляется ли официальная гарантия?</strong><br>О: Да, на данный товар действует расширенная гарантия 6 месяцев от производителя.</p>
+                    </div>
+                </div>
+
+                <!-- Action Bar & Upsell -->
+                <div class="mt-4 pt-4 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-3">
+                    <button onclick="copyCurrentTab()" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 py-2.5 px-4 rounded-xl border border-slate-700 transition flex items-center gap-1.5 w-full sm:w-auto justify-center">
+                        <span>📋</span> <span>Скопировать текст</span>
+                    </button>
+                    
+                    <div class="flex items-center gap-2 w-full sm:w-auto">
+                        <a href="https://test.dodopayments.com/buy/pdt_0NYV3EevfB7hC3hRkF2kG?quantity=1" class="flex-1 sm:flex-none bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-black text-xs py-2.5 px-5 rounded-xl shadow-lg shadow-amber-500/25 transition text-center whitespace-nowrap">
+                            ⚡ Скачать полный пакет за $1.00 &rarr;
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Contextual Footer -->
+    <footer class="border-t border-slate-800/80 bg-slate-950 py-6 text-xs text-slate-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <span>EduHub AI &mdash; Marketplace Lab 2026. Защищено Dodo Payments PCI DSS Level 1.</span>
+            <div class="flex items-center space-x-4">
+                <a href="/privacy" class="hover:text-slate-400 transition">Privacy</a>
+                <a href="/terms" class="hover:text-slate-400 transition">Terms</a>
+                <a href="/refund" class="hover:text-slate-400 transition">Refund</a>
+                <a href="/blueprints" class="hover:text-amber-400 transition font-semibold">Все ИИ-Заводы</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Client Script -->
+    <script>
+        function setSample(name, cat, cost, price) {
+            document.getElementById('mp-name').value = name;
+            document.getElementById('mp-cat').value = cat;
+            document.getElementById('mp-cost').value = cost;
+            document.getElementById('mp-price').value = price;
+            generateListing();
+        }
+
+        function switchTab(tabId) {
+            ['tab-listing', 'tab-desc', 'tab-faq'].forEach(t => document.getElementById(t).classList.add('hidden'));
+            ['btn-tab-listing', 'btn-tab-desc', 'btn-tab-faq'].forEach(b => {
+                document.getElementById(b).className = 'text-xs font-medium text-slate-400 hover:text-white pb-1';
+            });
+            document.getElementById(tabId).classList.remove('hidden');
+            document.getElementById('btn-' + tabId).className = 'text-xs font-bold text-amber-400 border-b-2 border-amber-400 pb-1';
+        }
+
+        async function generateListing() {
+            const btn = document.getElementById('mp-btn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<span>⏳ Генерация по формуле ТОП-1...</span>';
+            btn.disabled = true;
+
+            const payload = {
+                product_name: document.getElementById('mp-name').value.trim() || 'Товар',
+                category: document.getElementById('mp-cat').value.trim(),
+                marketplace: document.getElementById('mp-select').value,
+                cost_price: parseFloat(document.getElementById('mp-cost').value) || 10.0,
+                selling_price: parseFloat(document.getElementById('mp-price').value) || 25.0,
+                key_features: document.getElementById('mp-features').value.trim()
+            };
+
+            try {
+                const res = await fetch('/api/v1/tools/marketplace-lab', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const data = await res.json();
+
+                if (data.seo_title) document.getElementById('res-title').textContent = data.seo_title;
+                if (data.selling_bullets) {
+                    document.getElementById('res-bullets').innerHTML = data.selling_bullets.map(b => `<p>${b}</p>`).join('');
+                }
+                if (data.description) document.getElementById('res-desc').textContent = data.description;
+                if (data.objection_faq) {
+                    document.getElementById('res-faq').innerHTML = data.objection_faq.map(f => `<p><strong>В: ${f.question}</strong><br>О: ${f.answer}</p>`).join('');
+                }
+                if (data.unit_economics) {
+                    document.getElementById('res-profit').textContent = '$' + data.unit_economics.net_profit.toFixed(2);
+                    document.getElementById('res-margin').textContent = data.unit_economics.margin_percentage.toFixed(1) + '%';
+                    document.getElementById('res-roi').textContent = data.unit_economics.roi_percentage.toFixed(1) + '%';
+                }
+            } catch (err) {
+                console.error(err);
+            } finally {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        }
+
+        function copyCurrentTab() {
+            let activeText = '';
+            if (!document.getElementById('tab-listing').classList.contains('hidden')) {
+                activeText = document.getElementById('res-title').textContent + '\n\n' + document.getElementById('res-bullets').innerText;
+            } else if (!document.getElementById('tab-desc').classList.contains('hidden')) {
+                activeText = document.getElementById('res-desc').innerText;
+            } else {
+                activeText = document.getElementById('res-faq').innerText;
+            }
+            navigator.clipboard.writeText(activeText);
+            alert('Текст скопирован в буфер обмена!');
+        }
+    </script>
+</body>
+</html>

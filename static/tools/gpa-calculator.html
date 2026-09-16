@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College &amp; High-School GPA Predictor — EduHub AI</title>
+    
+    <!-- Programmatic SEO & AEO Meta Tags -->
+    <meta name="description" content="Calculate your cumulative GPA, simulate target semester grades, and build a roadmap to Dean's List and academic honors with EduHub AI GPA Predictor.">
+    <meta name="keywords" content="GPA calculator, college GPA predictor, cumulative GPA formula, honors roadmap, semester grade calculator, academic planning">
+    <link rel="canonical" href="https://eduhub.ai/tools/gpa-calculator">
+    
+    <!-- Multi-Language Hreflang Tags -->
+    <link rel="alternate" hreflang="en" href="https://eduhub.ai/tools/gpa-calculator?lang=en">
+    <link rel="alternate" hreflang="ru" href="https://eduhub.ai/tools/gpa-calculator?lang=ru">
+    <link rel="alternate" hreflang="uz" href="https://eduhub.ai/tools/gpa-calculator?lang=uz">
+    <link rel="alternate" hreflang="es" href="https://eduhub.ai/tools/gpa-calculator?lang=es">
+    <link rel="alternate" hreflang="x-default" href="https://eduhub.ai/tools/gpa-calculator">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Essential User Utilities (Export, History Drawer, Stepper, Camera) -->
+    <script src="/static/js/user-utils.js" defer></script>
+
+    <!-- Lemon Squeezy Overlay Checkout Script -->
+    <script src="https://assets.lemonsqueezy.com/lemon.js" defer></script>
+
+    <!-- Client-side i18n Engine -->
+            <!-- PWA Manifest & App Capability -->
+    <link rel="manifest" href="/static/manifest.json">
+    <meta name="theme-color" content="#030712">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="EduHub AI">
+
+    <!-- PWA & Omni-Channel Viral Share Scripts -->
+    <script src="/static/js/pwa-install.js" defer></script>
+    <script src="/static/js/viral-share.js" defer></script>
+    <!-- Legal Micro-Consent Layer -->
+    <script src="/static/js/legal-consent.js" defer></script>
+    <script src="/static/js/conversion-engine.js" defer></script>
+    <script src="/static/js/i18n.js" defer></script>
+</head>
+<body data-page-tool="gpa-calculator" class="bg-slate-950 text-slate-100 font-sans min-h-screen flex flex-col justify-between selection:bg-blue-600 selection:text-white">
+
+    <!-- Minimal Header (Logo + Language Switcher + Back to Platform) -->
+    <header class="border-b border-slate-800/80 bg-slate-950/90 backdrop-blur-md sticky top-0 z-40">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <a href="/" class="flex items-center space-x-2">
+                    <span class="w-8 h-8 rounded-lg bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center font-black text-white text-lg shadow-md shadow-blue-500/30">E</span>
+                    <span class="text-xl font-bold bg-gradient-to-r from-blue-400 via-indigo-300 to-white bg-clip-text text-transparent tracking-tight">EduHub AI</span>
+                </a>
+                <span class="hidden sm:inline-block text-[11px] bg-emerald-950 text-emerald-300 px-2.5 py-0.5 rounded-full border border-emerald-800 font-medium" data-i18n="gpa_title">GPA Calculator</span>
+            </div>
+            
+            <div class="flex items-center space-x-3">
+                <!-- Sleek Language Switcher -->
+                <div class="inline-flex bg-slate-900 border border-slate-800 rounded-xl p-0.5">
+                    <button onclick="setLocale('en')" data-lang-btn="en" class="lang-btn px-2.5 py-1 rounded-lg text-xs font-bold transition bg-blue-600 text-white shadow-sm shadow-blue-500/20">EN</button>
+                    <button onclick="setLocale('ru')" data-lang-btn="ru" class="lang-btn px-2.5 py-1 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition">RU</button>
+                    <button onclick="setLocale('uz')" data-lang-btn="uz" class="lang-btn px-2.5 py-1 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition">UZ</button>
+                    <button onclick="setLocale('es')" data-lang-btn="es" class="lang-btn px-2.5 py-1 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition">ES</button>
+                </div>
+
+                <!-- Recent Documents Drawer Trigger -->
+                <button onclick="EduHubUtils.openHistoryDrawer()" class="inline-flex items-center gap-1.5 text-xs text-slate-300 hover:text-white bg-slate-900 border border-slate-800 hover:border-slate-700 px-3 py-1.5 rounded-xl transition font-medium" title="Recent Documents">
+                    <span>🕒</span>
+                    <span class="hidden sm:inline" data-i18n="recent_docs">Recent</span>
+                    <span data-history-count class="hidden bg-blue-600 text-white text-[10px] px-1.5 py-0.2 rounded-full font-bold">0</span>
+                </button>
+
+                <a href="/" class="text-xs text-blue-400 hover:text-blue-300 font-medium transition hidden sm:inline-block" data-i18n="explore_all_tools">
+                    Explore all EduHub tools &rarr;
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Distraction-Free Workspace -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 py-10 w-full flex-grow">
+        
+        <!-- Tool Headline -->
+        <div class="text-center mb-8">
+            <span class="text-[11px] font-bold uppercase tracking-widest text-emerald-400 bg-emerald-950/70 border border-emerald-800/80 px-3 py-1 rounded-full">
+                🎯 Academic Standing &amp; Honors Roadmap
+            </span>
+            <h1 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight mt-3 mb-2" data-i18n="gpa_title">
+                College &amp; High-School GPA Predictor
+            </h1>
+            <p class="text-slate-400 text-xs sm:text-sm max-w-2xl mx-auto" data-i18n="gpa_subtitle">
+                Calculate your current semester GPA, simulate target grades, and see what you need to hit Honors or Dean's List.
+            </p>
+        </div>
+
+        <!-- 1-Click Sample Previews -->
+        <div class="bg-slate-900/70 border border-slate-800 rounded-2xl p-4 mb-6">
+            <p class="text-xs font-medium text-slate-400 mb-2.5" data-i18n="sample_presets_label">
+                1-Click Instant Previews (No signup required):
+            </p>
+            <div class="flex flex-wrap gap-2">
+                <button onclick="loadSample(1)" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-lg border border-slate-700 transition" data-i18n="gpa_sample_1">
+                    🎒 Freshman STEM Semester
+                </button>
+                <button onclick="loadSample(2)" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-lg border border-slate-700 transition" data-i18n="gpa_sample_2">
+                    🩺 Pre-Med Sophomore Year
+                </button>
+            </div>
+        </div>
+
+        <!-- Interactive Course Grade Table -->
+        <div class="bg-slate-900/90 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6">
+            
+            <div class="flex justify-between items-center pb-3 border-b border-slate-800">
+                <h3 class="text-xs font-bold text-slate-300 uppercase tracking-wider">Semester Course List</h3>
+                <button onclick="addCourseRow()" class="text-xs bg-slate-800 hover:bg-slate-700 text-blue-400 px-3 py-1.5 rounded-lg font-semibold border border-slate-700 transition" data-i18n="gpa_add_course">
+                    + Add Course
+                </button>
+            </div>
+
+            <!-- Course Rows Container -->
+            <div id="course-list" class="space-y-3">
+                <!-- Injected via JavaScript -->
+            </div>
+
+            <!-- Goal Simulator -->
+            <div class="p-4 bg-slate-950 border border-slate-800 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div class="flex items-center gap-2 w-full sm:w-auto">
+                    <label class="text-xs text-slate-400" data-i18n="gpa_target_label">Target GPA Goal:</label>
+                    <input id="target-gpa" type="number" step="0.05" min="2.0" max="4.0" value="3.80" class="w-24 bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1 text-xs text-center text-emerald-400 font-bold focus:outline-none focus:border-emerald-500">
+                </div>
+                <button onclick="calculateGPA()" class="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs px-6 py-2.5 rounded-xl transition shadow-lg shadow-emerald-600/20" data-i18n="gpa_calc_btn">
+                    Calculate GPA &amp; Roadmap
+                </button>
+            </div>
+
+            <!-- Live Score Card -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-slate-800">
+                <div class="bg-slate-950/80 border border-slate-800 rounded-2xl p-4 text-center">
+                    <span class="text-xs text-slate-400 block mb-1" data-i18n="gpa_current">Cumulative GPA:</span>
+                    <span id="result-gpa" class="text-3xl font-extrabold text-emerald-400">3.75</span>
+                </div>
+                <div class="bg-slate-950/80 border border-slate-800 rounded-2xl p-4 text-center">
+                    <span class="text-xs text-slate-400 block mb-1" data-i18n="gpa_total_credits">Total Credits:</span>
+                    <span id="result-credits" class="text-3xl font-extrabold text-white">16</span>
+                </div>
+                <div class="bg-slate-950/80 border border-slate-800 rounded-2xl p-4 text-center">
+                    <span class="text-xs text-slate-400 block mb-1">Honors Standing:</span>
+                    <span id="result-standing" class="text-sm font-bold text-amber-400">Dean's List Track (Cum Laude)</span>
+                </div>
+            </div>
+
+            <!-- Roadmap Recommendation Output -->
+            <div id="roadmap-box" class="p-4 bg-emerald-950/30 border border-emerald-800/60 rounded-2xl text-xs text-emerald-200 leading-relaxed">
+                🎯 <strong>Roadmap Analysis:</strong> Your current 3.75 GPA places you in the top 15% of your class. To achieve your target of 3.80, maintaining an 'A' in 4 credits next semester will raise your cumulative standing to 3.81.
+            </div>
+
+        </div>
+
+        <!-- Laser-Focused In-Tool Conversion Card (Laser CTA) -->
+        <div class="mt-8 bg-gradient-to-r from-emerald-950/70 via-slate-900 to-blue-950/70 border border-emerald-600/60 rounded-3xl p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl">
+            <div class="space-y-1.5 text-center md:text-left">
+                <span class="text-[10px] font-extrabold uppercase tracking-widest text-emerald-400 bg-emerald-900/60 px-2.5 py-0.5 rounded-full border border-emerald-700">
+                    🎓 Academic Honors Copilot
+                </span>
+                <h3 class="text-base sm:text-lg font-bold text-white" data-i18n="gpa_laser_cta_title">
+                    Want an AI study plan to guarantee your target 3.8+ GPA?
+                </h3>
+                <p class="text-xs text-slate-400 max-w-xl" data-i18n="gpa_laser_cta_desc">
+                    Get daily tailored study sprints, exam question predictions, and 24/7 Socrates tutor access.
+                </p>
+            </div>
+            <div class="flex flex-col sm:flex-row gap-2.5 shrink-0 w-full md:w-auto">
+                <a href="https://eduhub-ai.lemonsqueezy.com/checkout/buy/ca17b5d8-9754-44f3-9a1f-f6d779eb8203" class="lemonsqueezy-button block text-center bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-500 hover:to-blue-500 text-white font-semibold px-5 py-2.5 rounded-xl text-xs transition shadow-lg shadow-emerald-600/30" data-i18n="gpa_laser_cta_btn">
+                    Guarantee Your GPA for $1
+                </a>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Compact Contextual Footer -->
+    <footer class="border-t border-slate-800/80 bg-slate-950 py-6 text-xs text-slate-500">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <span data-i18n="footer_text">EduHub AI — Autonomous Academic Infrastructure. All rights reserved.</span>
+            <div class="flex items-center space-x-4">
+                <a href="/terms" class="hover:text-slate-400" data-i18n="footer_terms">Terms of Service</a>
+                <p class="checkout-micro-consent mt-2 text-[10px] text-slate-400 text-center leading-relaxed" data-i18n="checkout_micro_consent">By clicking, you agree to the <a href="/terms" target="_blank" class="underline text-slate-300 hover:text-white">Terms of Service</a> and our <a href="/refund" target="_blank" class="underline text-slate-300 hover:text-white">14-day money-back guarantee</a>. Cancel anytime in 1 click.</p>
+                <a href="/privacy" class="hover:text-slate-400" data-i18n="footer_privacy">Privacy Policy</a>
+                <a href="/refund" class="hover:text-slate-400" data-i18n="footer_refund">Refund Policy</a>
+                <a href="/support" class="text-indigo-400 hover:text-indigo-300">⚖️ AI Support</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Script for GPA Calculator -->
+    <script>
+        const GRADE_SCALE = {
+            'A+': 4.0, 'A': 4.0, 'A-': 3.7,
+            'B+': 3.3, 'B': 3.0, 'B-': 2.7,
+            'C+': 2.3, 'C': 2.0, 'C-': 1.7,
+            'D': 1.0, 'F': 0.0
+        };
+
+        let courses = [
+            { name: "Calculus I (Math)", credits: 4, grade: "A" },
+            { name: "Intro to Computer Science", credits: 4, grade: "A" },
+            { name: "General Chemistry I", credits: 4, grade: "B+" },
+            { name: "Academic Writing & Rhetoric", credits: 4, grade: "A-" }
+        ];
+
+        function renderRows() {
+            const container = document.getElementById('course-list');
+            container.innerHTML = '';
+            courses.forEach((c, idx) => {
+                const row = document.createElement('div');
+                row.className = "flex flex-col sm:flex-row items-center gap-2.5 bg-slate-950 p-2.5 rounded-xl border border-slate-800/80";
+                row.innerHTML = `
+                    <input type="text" value="${c.name}" placeholder="${t('gpa_course')}" oninput="courses[${idx}].name = this.value" class="flex-grow w-full sm:w-auto bg-slate-900 border border-slate-800 rounded-lg px-3 py-1.5 text-xs text-slate-100 focus:outline-none focus:border-blue-500">
+                    <div class="flex items-center gap-2 w-full sm:w-auto">
+                        <input type="number" min="1" max="6" value="${c.credits}" oninput="courses[${idx}].credits = parseFloat(this.value) || 1; calculateGPA();" class="w-16 bg-slate-900 border border-slate-800 rounded-lg px-2 py-1.5 text-xs text-center text-slate-100 focus:outline-none focus:border-blue-500">
+                        <select onchange="courses[${idx}].grade = this.value; calculateGPA();" class="bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-slate-100 focus:outline-none focus:border-blue-500">
+                            ${Object.keys(GRADE_SCALE).map(g => `<option value="${g}" ${g === c.grade ? 'selected' : ''}>${g} (${GRADE_SCALE[g].toFixed(1)})</option>`).join('')}
+                        </select>
+                        <button onclick="removeCourseRow(${idx})" class="text-rose-400 hover:text-rose-300 p-1.5 text-xs font-bold transition">✕</button>
+                    </div>
+                `;
+                container.appendChild(row);
+            });
+        }
+
+        function addCourseRow() {
+            courses.push({ name: `Course ${courses.length + 1}`, credits: 3, grade: "A" });
+            renderRows();
+            calculateGPA();
+        }
+
+        function removeCourseRow(idx) {
+            if (courses.length > 1) {
+                courses.splice(idx, 1);
+                renderRows();
+                calculateGPA();
+            }
+        }
+
+        function loadSample(id) {
+            if (id === 1) {
+                courses = [
+                    { name: "Calculus I (Math)", credits: 4, grade: "A" },
+                    { name: "Intro to Computer Science", credits: 4, grade: "A" },
+                    { name: "General Chemistry I", credits: 4, grade: "B+" },
+                    { name: "Academic Writing & Rhetoric", credits: 4, grade: "A-" }
+                ];
+            } else if (id === 2) {
+                courses = [
+                    { name: "Organic Chemistry + Lab", credits: 5, grade: "A" },
+                    { name: "Human Genetics", credits: 4, grade: "A-" },
+                    { name: "Physics for Life Sciences", credits: 4, grade: "B+" },
+                    { name: "Biostatistics", credits: 3, grade: "A" }
+                ];
+            }
+            renderRows();
+            calculateGPA();
+        }
+
+        function calculateGPA() {
+            let totalPoints = 0;
+            let totalCredits = 0;
+            courses.forEach(c => {
+                const cred = parseFloat(c.credits) || 0;
+                const pt = GRADE_SCALE[c.grade] || 0;
+                totalPoints += (cred * pt);
+                totalCredits += cred;
+            });
+
+            const gpa = totalCredits > 0 ? (totalPoints / totalCredits) : 0;
+            document.getElementById('result-gpa').textContent = gpa.toFixed(2);
+            document.getElementById('result-credits').textContent = totalCredits.toString();
+
+            const standingEl = document.getElementById('result-standing');
+            if (gpa >= 3.8) {
+                standingEl.textContent = "Summa Cum Laude (Top 5%)";
+                standingEl.className = "text-sm font-bold text-emerald-400";
+            } else if (gpa >= 3.5) {
+                standingEl.textContent = "Dean's List / Magna Cum Laude";
+                standingEl.className = "text-sm font-bold text-amber-400";
+            } else if (gpa >= 3.0) {
+                standingEl.textContent = "Good Academic Standing";
+                standingEl.className = "text-sm font-bold text-blue-400";
+            } else {
+                standingEl.textContent = "Academic Focus Needed";
+                standingEl.className = "text-sm font-bold text-rose-400";
+            }
+
+            const target = parseFloat(document.getElementById('target-gpa').value) || 3.8;
+            const roadmapBox = document.getElementById('roadmap-box');
+            if (gpa >= target) {
+                roadmapBox.innerHTML = `🏆 <strong>Goal Exceeded:</strong> Your current ${gpa.toFixed(2)} GPA exceeds your target of ${target.toFixed(2)}. Maintain an average of B+ next semester to lock in honors graduation.`;
+            } else {
+                const diff = (target * (totalCredits + 15) - totalPoints) / 15;
+                const reqGrade = Math.min(4.0, Math.max(2.0, diff)).toFixed(2);
+                roadmapBox.innerHTML = `🎯 <strong>Roadmap Analysis:</strong> Current GPA is ${gpa.toFixed(2)}. To achieve your target ${target.toFixed(2)} GPA, you need an average grade of <strong>${reqGrade}</strong> across your next 15 semester credits.`;
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            renderRows();
+            calculateGPA();
+        });
+    </script>
+
+    <!-- Slide-Over Drawer: Recent Documents History -->
+    <div id="history-backdrop" onclick="EduHubUtils.closeHistoryDrawer()" class="hidden fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 transition-opacity"></div>
+    <div id="history-drawer" class="fixed inset-y-0 right-0 max-w-md w-full bg-slate-950 border-l border-slate-800 shadow-2xl z-50 transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col justify-between">
+        <div class="p-5 border-b border-slate-800 flex justify-between items-center bg-slate-900/50">
+            <div class="flex items-center gap-2">
+                        <!-- Omni-Channel Viral Share Buttons -->
+                        <button onclick="EduHubShare.shareToWhatsApp('Honors GPA Roadmap Simulation')" class="inline-flex items-center gap-1 px-2.5 py-1 text-xs bg-emerald-950/80 hover:bg-emerald-900 text-emerald-300 hover:text-white rounded-lg border border-emerald-700 transition" title="Share on WhatsApp">
+                            <span>💬</span> <span data-i18n="share_whatsapp">WhatsApp</span>
+                        </button>
+                        <button onclick="EduHubShare.shareToTelegram('Honors GPA Roadmap Simulation')" class="inline-flex items-center gap-1 px-2.5 py-1 text-xs bg-sky-950/80 hover:bg-sky-900 text-sky-300 hover:text-white rounded-lg border border-sky-700 transition" title="Share on Telegram">
+                            <span>✈️</span> <span data-i18n="share_telegram">Telegram</span>
+                        </button>
+                        <button onclick="EduHubShare.generateStoriesCard('Honors GPA Roadmap Simulation', 'Academic GPA Forecaster')" class="inline-flex items-center gap-1 px-2.5 py-1 text-xs bg-amber-950/80 hover:bg-amber-900 text-amber-300 hover:text-white rounded-lg border border-amber-700 transition font-medium" title="Generate Stories Card">
+                            <span>📸</span> <span data-i18n="share_stories">Stories</span>
+                        </button>
+                        <button onclick="EduHubShare.copyLink()" class="inline-flex items-center gap-1 px-2 py-1 text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white rounded-lg border border-slate-700 transition" title="Copy Referral Link">
+                            <span>📋</span>
+                        </button>
+                <span class="text-xl">🕒</span>
+                <h3 class="text-sm font-bold text-white" data-i18n="recent_docs">Recent Documents</h3>
+                <span data-history-count class="hidden bg-blue-600 text-white text-[10px] px-2 py-0.5 rounded-full font-bold">0</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <button onclick="EduHubUtils.clearAllHistory()" class="text-xs text-slate-500 hover:text-rose-400 px-2 py-1 rounded transition" title="Clear all">Clear</button>
+                <button onclick="EduHubUtils.closeHistoryDrawer()" class="text-slate-400 hover:text-white p-1 rounded-lg text-lg transition">✕</button>
+            </div>
+        </div>
+        <div id="history-drawer-list" class="flex-grow overflow-y-auto p-4 space-y-3">
+            <!-- Populated dynamically by EduHubUtils.renderHistoryDrawer() -->
+        </div>
+        <div class="p-4 border-t border-slate-800 bg-slate-900/40 text-center">
+            <p class="text-[11px] text-slate-500">Auto-saved locally in browser storage • Safe &amp; private</p>
+        </div>
+    </div>
+
+    <!-- Exit-Intent High-Converting Modal ($1 Trial) -->
+    <div id="exit-intent-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-md transition-all duration-300">
+        <div class="relative w-full max-w-lg bg-slate-900 border border-amber-500/40 rounded-3xl p-6 sm:p-8 shadow-2xl shadow-amber-500/10 text-center overflow-hidden">
+            <button onclick="EduHubConversion.closeExitModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl p-2 transition">✕</button>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 text-xs font-bold uppercase mb-4">
+                ⚡ <span data-i18n="exit_modal_badge">Wait! Don't Leave Empty-Handed</span>
+            </div>
+            <h3 class="text-2xl sm:text-3xl font-black text-white mb-3" data-i18n="exit_modal_title">Pass Your Exams with Flying Colors for Just $1</h3>
+            <p class="text-slate-300 text-xs sm:text-sm leading-relaxed mb-6" data-i18n="exit_modal_desc">
+                Unlock 3 days of full unlimited Pro Max access. Grade unlimited IELTS essays, solve hard STEM homework with step-by-step Socratic hints, and export high-yield Anki decks.
+            </p>
+            <div class="p-4 rounded-2xl bg-slate-800/80 border border-slate-700/60 mb-6 text-left space-y-2">
+                <div class="flex items-center gap-2 text-xs text-slate-200">
+                    <span class="text-emerald-400 font-bold">✓</span> <span data-i18n="exit_modal_f1">Unlimited essay & homework evaluations</span>
+                </div>
+                <div class="flex items-center gap-2 text-xs text-slate-200">
+                    <span class="text-emerald-400 font-bold">✓</span> <span data-i18n="exit_modal_f2">Band 8.5–9.0 Cambridge examiner model rewrites</span>
+                </div>
+                <div class="flex items-center gap-2 text-xs text-slate-200">
+                    <span class="text-emerald-400 font-bold">✓</span> <span data-i18n="exit_modal_f3">14-Day 100% Money-Back Guarantee</span>
+                </div>
+            </div>
+            <button onclick="EduHubConversion.triggerCheckout('promax_trial')" class="w-full py-4 rounded-2xl font-black text-base text-slate-950 bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 hover:brightness-110 shadow-xl shadow-amber-500/25 transition transform hover:-translate-y-0.5 cursor-pointer mb-3">
+                <span data-i18n="exit_modal_btn">Claim 3-Day Pro Max for $1 →</span>
+            </button>
+            <div class="mb-4 text-[11px] text-slate-400" data-i18n="exit_modal_guarantee">
+                100% Satisfaction 14-Day Money-Back Guarantee. Cancel anytime.
+            </div>
+            <button onclick="EduHubConversion.closeExitModal()" class="text-xs text-slate-500 hover:text-slate-300 transition" data-i18n="exit_modal_dismiss">
+                No thanks, I prefer studying without AI help
+            </button>
+        </div>
+    </div>
+
+    <!-- Live Social Proof Activity Ticker (Floating Toast) -->
+    <div id="conversion-social-ticker" class="fixed bottom-6 left-6 z-40 hidden sm:flex items-center gap-3 p-3.5 pr-5 bg-slate-900/95 backdrop-blur-md border border-slate-700/70 rounded-2xl shadow-2xl transition-all duration-500 transform translate-y-2 opacity-0 pointer-events-auto">
+        <div class="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-lg shrink-0">
+            🎓
+        </div>
+        <div class="text-left">
+            <div id="ticker-text" class="text-xs font-semibold text-slate-200 leading-tight">
+                <!-- Dynamic text populated by EduHubConversion.initSocialTicker() -->
+            </div>
+            <div class="text-[10px] text-emerald-400 font-medium mt-0.5 flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span data-i18n="ticker_verified">Verified Student Activity</span>
+            </div>
+        </div>
+        <button onclick="EduHubConversion.dismissTicker()" class="text-slate-500 hover:text-white text-xs ml-2">✕</button>
+    </div>
+
+
+    <!-- Floating PWA Install Prompt Banner -->
+    <div id="pwa-install-banner" class="fixed bottom-20 right-6 z-40 hidden items-center gap-3 p-3.5 bg-slate-900/95 backdrop-blur-md border border-blue-500/40 rounded-2xl shadow-2xl max-w-sm">
+        <div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-xl shrink-0">
+            📱
+        </div>
+        <div class="text-left flex-grow">
+            <h4 class="text-xs font-bold text-white" data-i18n="pwa_install_title">Install EduHub AI App</h4>
+            <p class="text-[10px] text-slate-400" data-i18n="pwa_install_desc">Fast 1-tap access on iPhone & Android with offline support.</p>
+        </div>
+        <button onclick="EduHubPWA.triggerInstall()" class="px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition whitespace-nowrap" data-i18n="pwa_install_btn">
+            Install App 📱
+        </button>
+        <button onclick="EduHubPWA.dismissBanner()" class="text-slate-500 hover:text-white text-xs ml-1">✕</button>
+    </div>
+
+    <!-- iOS Safari Install Instructions Modal -->
+    <div id="pwa-ios-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+        <div class="relative w-full max-w-sm bg-slate-900 border border-slate-700 rounded-3xl p-6 text-center shadow-2xl">
+            <button onclick="EduHubPWA.closeIosModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg">✕</button>
+            <div class="text-3xl mb-2">📲</div>
+            <h3 class="text-base font-bold text-white mb-3" data-i18n="pwa_ios_title">Install on iPhone & iPad</h3>
+            <div class="text-xs text-slate-300 space-y-2 text-left bg-slate-800/60 p-4 rounded-xl mb-4">
+                <p data-i18n="pwa_ios_step1">1. Tap the Share button at the bottom of Safari (square with arrow up).</p>
+                <p data-i18n="pwa_ios_step2">2. Scroll down and select 'Add to Home Screen' (+).</p>
+                <p data-i18n="pwa_ios_step3">3. Tap 'Add' in the top right corner. Done!</p>
+            </div>
+            <button onclick="EduHubPWA.closeIosModal()" class="w-full py-2.5 rounded-xl bg-blue-600 text-white font-bold text-xs hover:bg-blue-500 transition">
+                Got it!
+            </button>
+        </div>
+    </div>
+
+</body>
+</html>

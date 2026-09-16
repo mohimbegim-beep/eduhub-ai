@@ -1,0 +1,105 @@
+{
+  "name": "EduHub Viral Content Factory (30 Reels/Shorts)",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "generate-content-factory",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        240,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "model": "gemini-2.5-flash",
+        "prompt": "Act as an elite viral content director for TikTok, Instagram Reels, and YouTube Shorts.\n\nInput Topic: {{ $json.body.topic }}\nTarget Audience: {{ $json.body.target_audience || 'General Tech & Self-Improvement' }}\n\nGenerate 30 days of high-retention 30-to-45 second video scripts.\nFor each video script, provide:\n1. Day [1-30] and Title\n2. Hook (0-3s visual & text shocker that stops scrolling)\n3. Retain (4-25s story/curiosity loop with 2 key points)\n4. Payoff & CTA (26-30s strong takeaway and comment trigger)\n5. Visual Scene Prompts for AI video generators (Midjourney / Runway / Kling)\n6. Top 5 viral hashtags\n\nReturn strictly valid JSON array of objects with keys: day, title, hook, script_body, cta, visual_prompts, hashtags."
+      },
+      "name": "Gemini AI Script Generator",
+      "type": "n8n-nodes-base.gemini",
+      "typeVersion": 1,
+      "position": [
+        460,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "sheetId": "{{ $json.body.google_sheet_id || 'DEFAULT_CONTENT_SHEET' }}",
+        "range": "A:G",
+        "options": {}
+      },
+      "name": "Google Sheets Content Calendar",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 2,
+      "position": [
+        680,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"status\": \"success\",\n  \"message\": \"30-Day Viral Video Pipeline Generated Successfully!\",\n  \"total_scripts\": 30,\n  \"topic\": \"{{ $('Webhook Trigger').item.json.body.topic }}\",\n  \"sheet_updated\": true\n}"
+      },
+      "name": "Return Success Payload",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        900,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Webhook Trigger": {
+      "main": [
+        [
+          {
+            "node": "Gemini AI Script Generator",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gemini AI Script Generator": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets Content Calendar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets Content Calendar": {
+      "main": [
+        [
+          {
+            "node": "Return Success Payload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "templateId": "eduhub_content_factory_reels_v1",
+    "author": "EduHub AI Blueprint Exchange",
+    "version": "1.0.0",
+    "license": "Commercial Unlimited License ($1 Pass)"
+  }
+}

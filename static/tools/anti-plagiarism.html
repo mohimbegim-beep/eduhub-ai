@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Anti-Plagiarism & Academic Humanizer — EduHub AI</title>
+    
+    <!-- Programmatic SEO & AEO Meta Tags -->
+    <meta name="description" content="AI Anti-Plagiarism, Academic Humanizer and Text Paraphraser. Boost text originality to 90-98%, eliminate AI patterns, and preserve scientific rigor with 1-click export.">
+    <meta name="keywords" content="anti-plagiarism AI, academic humanizer, bypass AI detection, rewrite coursework, university plagiarism check, thesis rewriter, text originality booster">
+    <link rel="canonical" href="https://eduhub.ai/tools/anti-plagiarism">
+    
+    <!-- Multi-Language Hreflang Tags -->
+    <link rel="alternate" hreflang="en" href="https://eduhub.ai/tools/anti-plagiarism?lang=en">
+    <link rel="alternate" hreflang="ru" href="https://eduhub.ai/tools/anti-plagiarism?lang=ru">
+    <link rel="alternate" hreflang="uz" href="https://eduhub.ai/tools/anti-plagiarism?lang=uz">
+    <link rel="alternate" hreflang="es" href="https://eduhub.ai/tools/anti-plagiarism?lang=es">
+    <link rel="alternate" hreflang="x-default" href="https://eduhub.ai/tools/anti-plagiarism">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Essential User Utilities (Export, History Drawer, Stepper, Camera) -->
+    <script src="/static/js/user-utils.js" defer></script>
+
+    <!-- Lemon Squeezy Overlay Checkout Script -->
+    <script src="https://assets.lemonsqueezy.com/lemon.js" defer></script>
+
+    <!-- PWA Manifest & App Capability -->
+    <link rel="manifest" href="/static/manifest.json">
+    <meta name="theme-color" content="#030712">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="EduHub AI">
+
+    <!-- PWA & Omni-Channel Viral Share Scripts -->
+    <script src="/static/js/pwa-install.js" defer></script>
+    <script src="/static/js/viral-share.js" defer></script>
+    <script src="/static/js/legal-consent.js" defer></script>
+    <script src="/static/js/conversion-engine.js" defer></script>
+    <script src="/static/js/i18n.js" defer></script>
+</head>
+<body data-page-tool="anti-plagiarism" class="bg-slate-950 text-slate-100 font-sans min-h-screen flex flex-col justify-between selection:bg-blue-600 selection:text-white">
+
+    <!-- Minimal Header (Logo + Language Switcher + Navigation) -->
+    <header class="border-b border-slate-800/80 bg-slate-950/90 backdrop-blur-md sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <a href="/" class="flex items-center space-x-2">
+                    <span class="w-8 h-8 rounded-lg bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center font-black text-white text-lg shadow-md shadow-blue-500/30">E</span>
+                    <span class="text-xl font-bold bg-gradient-to-r from-blue-400 via-indigo-300 to-white bg-clip-text text-transparent tracking-tight">EduHub AI</span>
+                </a>
+                <span class="hidden sm:inline-block text-[11px] bg-emerald-950 text-emerald-300 px-2.5 py-0.5 rounded-full border border-emerald-800 font-medium">
+                    🛡️ Anti-Plagiarism & Humanizer
+                </span>
+            </div>
+            
+            <div class="flex items-center space-x-3">
+                <!-- Sleek Language Switcher -->
+                <div class="inline-flex bg-slate-900 border border-slate-800 rounded-xl p-0.5">
+                    <button onclick="setLocale('en')" data-lang-btn="en" class="lang-btn px-2.5 py-1 rounded-lg text-xs font-bold transition bg-blue-600 text-white shadow-sm shadow-blue-500/20">EN</button>
+                    <button onclick="setLocale('ru')" data-lang-btn="ru" class="lang-btn px-2.5 py-1 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition">RU</button>
+                    <button onclick="setLocale('uz')" data-lang-btn="uz" class="lang-btn px-2.5 py-1 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition">UZ</button>
+                    <button onclick="setLocale('es')" data-lang-btn="es" class="lang-btn px-2.5 py-1 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition">ES</button>
+                </div>
+
+                <!-- Recent Documents Drawer Trigger -->
+                <button onclick="EduHubUtils.openHistoryDrawer()" class="inline-flex items-center gap-1.5 text-xs text-slate-300 hover:text-white bg-slate-900 border border-slate-800 hover:border-slate-700 px-3 py-1.5 rounded-xl transition font-medium" title="Recent Documents">
+                    <span>🕒</span>
+                    <span class="hidden sm:inline">Recent</span>
+                    <span data-history-count class="hidden bg-blue-600 text-white text-[10px] px-1.5 py-0.2 rounded-full font-bold">0</span>
+                </button>
+
+                <a href="/" class="text-xs text-blue-400 hover:text-blue-300 font-medium transition hidden sm:inline-block">
+                    Explore all tools &rarr;
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8 w-full flex-grow">
+        
+        <!-- Tool Headline -->
+        <div class="text-center mb-6">
+            <span class="text-[11px] font-bold uppercase tracking-widest text-emerald-400 bg-emerald-950/70 border border-emerald-800/80 px-3 py-1 rounded-full">
+                ⚡ 90-98% Originality &bull; AI Detector Bypass &bull; Academic Polish
+            </span>
+            <h1 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight mt-3 mb-2">
+                AI Anti-Plagiarism &amp; Academic Humanizer
+            </h1>
+            <p class="text-slate-400 text-xs sm:text-sm max-w-2xl mx-auto">
+                Elevate coursework, essays, and theses to high-uniqueness academic standards. Restructures syntax, injects scholarly vocabulary, and preserves 100% of scientific facts.
+            </p>
+        </div>
+
+        <!-- 1-Click Sample Previews -->
+        <div class="bg-slate-900/70 border border-slate-800 rounded-2xl p-4 mb-6">
+            <p class="text-xs font-medium text-slate-400 mb-2.5">
+                ⚡ 1-Click Instant Sample Texts (Try right now):
+            </p>
+            <div class="flex flex-wrap gap-2">
+                <button onclick="loadSample(1)" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-lg border border-slate-700 transition">
+                    📑 Экономика: Анализ инфляции и банковской системы
+                </button>
+                <button onclick="loadSample(2)" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-lg border border-slate-700 transition">
+                    🔬 IT: Искусственный интеллект в медицине
+                </button>
+                <button onclick="loadSample(3)" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-lg border border-slate-700 transition">
+                    🎓 Academic English: Higher Education Innovations
+                </button>
+            </div>
+        </div>
+
+        <!-- Mode Selector Toolbar -->
+        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-3 mb-6 flex flex-wrap items-center justify-between gap-3 shadow-lg">
+            <div class="flex flex-wrap items-center gap-2">
+                <span class="text-xs font-semibold text-slate-400 mr-1">Режим рерайта:</span>
+                <button onclick="setMode('high_uniqueness')" id="mode-high" class="text-xs px-3 py-1.5 rounded-xl font-bold bg-emerald-600 text-white shadow-md shadow-emerald-600/30 transition">
+                    🛡️ Максимальная уникальность (Антиплагиат 95%+)
+                </button>
+                <button onclick="setMode('academic_paraphrase')" id="mode-acad" class="text-xs px-3 py-1.5 rounded-xl font-medium bg-slate-800 hover:bg-slate-700 text-slate-300 transition">
+                    🎓 Академический рерайтер
+                </button>
+                <button onclick="setMode('formal_scientific')" id="mode-sci" class="text-xs px-3 py-1.5 rounded-xl font-medium bg-slate-800 hover:bg-slate-700 text-slate-300 transition">
+                    📚 Научный стиль ГОСТ
+                </button>
+            </div>
+            
+            <div class="flex items-center gap-3 text-xs text-slate-400">
+                <span>Символов: <strong id="src-char-count" class="text-white">0</strong> / 20 000</span>
+            </div>
+        </div>
+
+        <!-- Split View: Source vs Humanized Result -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+            
+            <!-- Left Panel: Input Text -->
+            <div class="bg-slate-900/90 border border-slate-800 rounded-3xl p-5 shadow-2xl flex flex-col justify-between h-[450px]">
+                <div class="flex justify-between items-center mb-3 pb-2 border-b border-slate-800">
+                    <span class="text-xs font-bold text-slate-300 flex items-center gap-2">
+                        <span>📝</span> Исходный текст (Курсовая, реферат, эссе)
+                    </span>
+                    <button onclick="clearInput()" class="text-[11px] text-slate-500 hover:text-red-400 transition">Очистить</button>
+                </div>
+
+                <textarea id="source-text" oninput="updateCharCount()" placeholder="Вставьте сюда текст курсовой, реферата или статьи, который нужно сделать уникальным и защитить от антиплагиата..." class="w-full flex-grow bg-slate-950 border border-slate-800/80 rounded-2xl p-4 text-xs sm:text-sm text-slate-200 focus:outline-none focus:border-emerald-500 resize-none leading-relaxed placeholder:text-slate-600"></textarea>
+
+                <div class="mt-4 pt-3 border-t border-slate-800 flex justify-between items-center">
+                    <span class="text-[11px] text-slate-500">Поддерживает русский, узбекский, английский</span>
+                    <button onclick="humanizeText()" id="btn-process" class="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold px-6 py-2.5 rounded-xl text-xs sm:text-sm transition shadow-lg shadow-emerald-600/30 transform hover:-translate-y-0.5 flex items-center gap-2">
+                        <span>✨</span> Повысить уникальность
+                    </button>
+                </div>
+            </div>
+
+            <!-- Right Panel: Output Text -->
+            <div class="bg-slate-900/90 border border-slate-800 rounded-3xl p-5 shadow-2xl flex flex-col justify-between h-[450px]">
+                <div class="flex justify-between items-center mb-3 pb-2 border-b border-slate-800">
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-bold text-emerald-400 flex items-center gap-1.5">
+                            <span>🛡️</span> Результат повышенной уникальности
+                        </span>
+                        <span id="badge-score" class="hidden text-[10px] bg-emerald-950 text-emerald-300 border border-emerald-700 px-2 py-0.5 rounded-full font-bold">
+                            96% Оригинальность
+                        </span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button onclick="copyResult()" id="btn-copy" class="text-[11px] bg-slate-800 hover:bg-slate-700 text-slate-300 px-2.5 py-1 rounded-lg transition border border-slate-700 flex items-center gap-1">
+                            <span>📋</span> Копировать
+                        </button>
+                        <button onclick="downloadDoc()" class="text-[11px] bg-slate-800 hover:bg-slate-700 text-slate-300 px-2.5 py-1 rounded-lg transition border border-slate-700 flex items-center gap-1">
+                            <span>📥</span> Скачать DOCX
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Output Area / Loading Skeleton -->
+                <div id="result-box" class="w-full flex-grow bg-slate-950 border border-slate-800/80 rounded-2xl p-4 text-xs sm:text-sm text-slate-200 overflow-y-auto leading-relaxed relative">
+                    <div id="placeholder-empty" class="h-full flex flex-col items-center justify-center text-slate-600 text-center">
+                        <span class="text-3xl mb-2">✨</span>
+                        <p class="text-xs">Нажмите «Повысить уникальность», чтобы обработать текст</p>
+                        <p class="text-[11px] text-slate-700 mt-1">Оригинальность поднимется до 90-98% без потери смысла</p>
+                    </div>
+                    <div id="loading-spinner" class="hidden h-full flex flex-col items-center justify-center space-y-3">
+                        <div class="w-8 h-8 border-3 border-emerald-500 border-t-transparent rounded-full animate-spin"></div>
+                        <p class="text-xs text-emerald-400 font-semibold animate-pulse">Перестраиваем синтаксис и удаляем шаблоны ИИ...</p>
+                    </div>
+                    <div id="output-content" class="hidden whitespace-pre-wrap"></div>
+                </div>
+
+                <!-- Footer Status -->
+                <div class="mt-4 pt-3 border-t border-slate-800 flex justify-between items-center text-[11px] text-slate-400">
+                    <span id="stat-words">Слов в результате: 0</span>
+                    <span class="text-emerald-400 font-medium">✓ Готово для сдачи в университет</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Smart Cross-Promotion Banner (Closed-Loop Flywheel) -->
+        <div class="bg-gradient-to-r from-purple-950/60 via-indigo-950/60 to-slate-900 border border-purple-800/50 rounded-3xl p-6 sm:p-7 shadow-2xl flex flex-col sm:flex-row items-center justify-between gap-5 mb-10">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-2xl bg-purple-600/20 border border-purple-500/30 flex items-center justify-center text-2xl shrink-0">
+                    📚
+                </div>
+                <div>
+                    <span class="text-[10px] font-extrabold uppercase tracking-widest text-purple-400 bg-purple-950 border border-purple-800 px-2 py-0.5 rounded-md">
+                        Следующий логический шаг
+                    </span>
+                    <h3 class="text-base sm:text-lg font-bold text-white mt-1">
+                        Оформить список литературы и сноски по ГОСТ 2026?
+                    </h3>
+                    <p class="text-xs text-slate-300 mt-0.5">
+                        Текст готов! Перенесите его в генератор библиографии, чтобы оформить источники в APA, Harvard или ГОСТ за 1 клик.
+                    </p>
+                </div>
+            </div>
+            <div class="flex items-center gap-3 shrink-0 w-full sm:w-auto">
+                <a href="/tools/citation-generator" class="w-full sm:w-auto text-center px-5 py-3 rounded-xl font-bold text-xs bg-purple-600 hover:bg-purple-500 text-white transition shadow-lg shadow-purple-600/30 whitespace-nowrap">
+                    Оформить источники по ГОСТ &rarr;
+                </a>
+                <a href="/tools/essay-grader" class="w-full sm:w-auto text-center px-4 py-3 rounded-xl font-medium text-xs bg-slate-800 hover:bg-slate-700 text-indigo-300 border border-slate-700 transition whitespace-nowrap">
+                    Оценить эссе 1-9
+                </a>
+            </div>
+        </div>
+
+        <!-- Pro Max Unlimited Banner -->
+        <div class="bg-slate-900/80 border border-slate-800 rounded-3xl p-6 sm:p-8 text-center relative overflow-hidden">
+            <div class="absolute -right-10 -top-10 w-40 h-40 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+            <h2 class="text-xl sm:text-2xl font-bold text-white mb-2">
+                Нужно обработать диплом или диссертацию целиком?
+            </h2>
+            <p class="text-xs sm:text-sm text-slate-400 max-w-xl mx-auto mb-5">
+                Подписка <strong>EduHub Pro Max</strong> снимает все лимиты на объем текста, открывает безлимитный доступ ко всем инструментам и экспорт в чистый Word без водяных знаков.
+            </p>
+            <div class="flex flex-wrap justify-center items-center gap-3">
+                <a href="https://eduhub-ai.lemonsqueezy.com/checkout/buy/ca17b5d8-9754-44f3-9a1f-f6d779eb8203" class="lemonsqueezy-button px-6 py-3 rounded-xl font-bold text-xs sm:text-sm bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white shadow-xl shadow-blue-600/30 transition transform hover:-translate-y-0.5">
+                    🚀 Активировать 3 дня Pro Max за $1
+                </a>
+                <a href="/#pricing" class="px-5 py-3 rounded-xl font-medium text-xs text-slate-300 bg-slate-800 hover:bg-slate-700 border border-slate-700 transition">
+                    Посмотреть все тарифы
+                </a>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Minimal Footer -->
+    <footer class="border-t border-slate-800/80 bg-slate-950 py-6 text-center text-xs text-slate-500">
+        <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-3">
+            <p>&copy; 2026 EduHub Global Academic Technologies. All rights reserved.</p>
+            <div class="flex space-x-4 text-slate-400">
+                <a href="/privacy" class="hover:text-white transition">Privacy</a>
+                <a href="/terms" class="hover:text-white transition">Terms</a>
+                <a href="/refund" class="hover:text-white transition">Refund Policy</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Script -->
+    <script>
+        let currentMode = "high_uniqueness";
+
+        const samples = {
+            1: "В условиях современной рыночной экономики инфляционные процессы оказывают дестабилизирующее воздействие на финансовую систему государства. Банковский сектор вынужден адаптировать кредитно-денежную политику, повышая процентные ставки для сдерживания оттока капитала. Таким образом, анализ динамики инфляции является важным инструментом макроэкономического прогнозирования.",
+            2: "Искусственный интеллект и алгоритмы машинного обучения открывают принципиально новые горизонты в клинической диагностике. Нейронные сети способны анализировать томографические снимки с точностью, сопоставимой с ведущими радиологами мира. В заключение можно сказать, что внедрение ИИ снизит вероятность врачебной ошибки и повысит шансы на раннее выявление онкологических патологий.",
+            3: "The widespread adoption of artificial intelligence in tertiary education demands a rigorous pedagogical framework. While automated language models accelerate research synthesis and personalized learning pathways, academic institutions must safeguard academic honesty through continuous critical evaluation."
+        };
+
+        function setMode(mode) {
+            currentMode = mode;
+            document.getElementById('mode-high').className = mode === 'high_uniqueness' 
+                ? 'text-xs px-3 py-1.5 rounded-xl font-bold bg-emerald-600 text-white shadow-md shadow-emerald-600/30 transition'
+                : 'text-xs px-3 py-1.5 rounded-xl font-medium bg-slate-800 hover:bg-slate-700 text-slate-300 transition';
+            
+            document.getElementById('mode-acad').className = mode === 'academic_paraphrase'
+                ? 'text-xs px-3 py-1.5 rounded-xl font-bold bg-indigo-600 text-white shadow-md shadow-indigo-600/30 transition'
+                : 'text-xs px-3 py-1.5 rounded-xl font-medium bg-slate-800 hover:bg-slate-700 text-slate-300 transition';
+
+            document.getElementById('mode-sci').className = mode === 'formal_scientific'
+                ? 'text-xs px-3 py-1.5 rounded-xl font-bold bg-purple-600 text-white shadow-md shadow-purple-600/30 transition'
+                : 'text-xs px-3 py-1.5 rounded-xl font-medium bg-slate-800 hover:bg-slate-700 text-slate-300 transition';
+        }
+
+        function loadSample(num) {
+            document.getElementById('source-text').value = samples[num] || "";
+            updateCharCount();
+        }
+
+        function updateCharCount() {
+            const txt = document.getElementById('source-text').value;
+            document.getElementById('src-char-count').innerText = txt.length;
+        }
+
+        function clearInput() {
+            document.getElementById('source-text').value = "";
+            updateCharCount();
+            document.getElementById('placeholder-empty').classList.remove('hidden');
+            document.getElementById('output-content').classList.add('hidden');
+            document.getElementById('badge-score').classList.add('hidden');
+            document.getElementById('stat-words').innerText = "Слов в результате: 0";
+        }
+
+        async function humanizeText() {
+            const txt = document.getElementById('source-text').value.trim();
+            if (txt.length < 10) {
+                alert("Пожалуйста, введите текст объемом не менее 10 символов.");
+                return;
+            }
+
+            const btn = document.getElementById('btn-process');
+            const placeholder = document.getElementById('placeholder-empty');
+            const spinner = document.getElementById('loading-spinner');
+            const output = document.getElementById('output-content');
+            const badgeScore = document.getElementById('badge-score');
+            const statWords = document.getElementById('stat-words');
+
+            placeholder.classList.add('hidden');
+            output.classList.add('hidden');
+            badgeScore.classList.add('hidden');
+            spinner.classList.remove('hidden');
+            btn.disabled = true;
+            btn.classList.add('opacity-50');
+
+            try {
+                const resp = await fetch('/api/v1/academic/humanize', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        text: txt,
+                        mode: currentMode,
+                        language: 'auto'
+                    })
+                });
+
+                const data = await resp.json();
+                spinner.classList.add('hidden');
+
+                if (data.status === 'success') {
+                    output.innerText = data.rewritten_text;
+                    output.classList.remove('hidden');
+                    
+                    const score = data.originality_score || 95;
+                    badgeScore.innerText = `🛡️ ${score}% Оригинальность`;
+                    badgeScore.classList.remove('hidden');
+
+                    const wordCount = data.rewritten_text.split(/\s+/).filter(Boolean).length;
+                    statWords.innerText = `Слов в результате: ${wordCount} (Символов: ${data.rewritten_char_count})`;
+
+                    if (window.EduHubUtils && window.EduHubUtils.addDocument) {
+                        EduHubUtils.addDocument({
+                            type: 'anti_plagiarism',
+                            title: 'Рерайт: ' + txt.slice(0, 30) + '...',
+                            preview: data.rewritten_text.slice(0, 100)
+                        });
+                    }
+                } else {
+                    alert("Ошибка обработки: " + (data.detail || "Попробуйте снова."));
+                    placeholder.classList.remove('hidden');
+                }
+            } catch (err) {
+                spinner.classList.add('hidden');
+                placeholder.classList.remove('hidden');
+                alert("Сервер временно недоступен. Проверьте подключение.");
+            } finally {
+                btn.disabled = false;
+                btn.classList.remove('opacity-50');
+            }
+        }
+
+        function copyResult() {
+            const out = document.getElementById('output-content').innerText;
+            if (!out) return;
+            navigator.clipboard.writeText(out).then(() => {
+                const btn = document.getElementById('btn-copy');
+                const oldHtml = btn.innerHTML;
+                btn.innerHTML = '<span>✅</span> Скопировано!';
+                setTimeout(() => { btn.innerHTML = oldHtml; }, 2000);
+            });
+        }
+
+        function downloadDoc() {
+            const out = document.getElementById('output-content').innerText;
+            if (!out) {
+                alert("Сначала повысьте уникальность текста.");
+                return;
+            }
+            const blob = new Blob([out], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `eduhub_humanized_text_${Date.now()}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+{
+  "version": "2026.1-PRO",
+  "title": "Мега-Хранилище 500+ Проверенных Промптов Режима Бога (God-Mode Prompts 2026)",
+  "description": "База знаний элитного промпт-инжиниринга, протестированная на Claude 3.7 Sonnet, ChatGPT-4o, DeepSeek-R1 и Midjourney v7.",
+  "categories": {
+    "viral_marketing": {
+      "name": "Вирусный Маркетинг & Reels/Shorts/TikTok",
+      "prompts_count": 95,
+      "core_framework": "Хук (0-3с) -> Удержание через когнитивный диссонанс -> Конкретное решение -> Призыв с триггером FOMO",
+      "sample_prompts": [
+        {
+          "id": "vm_01",
+          "title": "Формула «Парадокс Отрасли» (Reels/Shorts)",
+          "prompt": "Ты ведущий маркетолог с 10-летним стажем. Напиши 5 сценариев для 30-секундных Reels в нише [ВСТАВЬТЕ НИШУ]. Структура каждого ролика: 1) Скандальный хук, ломающий стереотип большинства (например, \"Почему 90% экспертов делают X неправильно\"); 2) 15-секундный разбор реальной механики с цифрами; 3) Кодовое слово для выдачи лид-магнита в комментариях. Стиль — динамичный, без воды."
+        },
+        {
+          "id": "vm_02",
+          "title": "Генератор Каруселей с Сохранениями 40%+",
+          "prompt": "Разработай 10-слайдовую Instagram-карусель на тему [ТЕМА]. Слайд 1: Заголовок с гигантскими цифрами и болью аудитории. Слайды 2-4: Диагностика 3 скрытых ошибок, сжигающих бюджет. Слайды 5-8: Пошаговая схема внедрения (Action Plan). Слайд 9: Чек-лист для самопроверки. Слайд 10: Призыв сохранить и подписаться."
+        }
+      ]
+    },
+    "coding_architecture": {
+      "name": "Разработка & Системный Кодинг",
+      "prompts_count": 110,
+      "core_framework": "Senior Staff Engineer Persona + Strict Clean Architecture + OWASP Guardrails",
+      "sample_prompts": [
+        {
+          "id": "dev_01",
+          "title": "FastAPI & Async Database Production Auditor",
+          "prompt": "Действуй как Principal Backend Architect. Проведи аудит следующего фрагмента кода на Python/FastAPI: [ВСТАВЬТЕ КОД]. Найди: 1) Уязвимости SQL Injection и невалидированного ввода; 2) Блокирующие синхронные вызовы внутри async функций; 3) Потенциальные утечки памяти в сессиях SQLAlchemy. Выдай оптимизированную версию с тайп-хинтами и Pydantic v2."
+        },
+        {
+          "id": "dev_02",
+          "title": "Генератор n8n Webhook Микросервисов",
+          "prompt": "Спроектируй production-ready схему n8n workflow для интеграции Telegram-бота и CRM системы. Входные данные: входящий вебхук с JSON. Логика: валидация номера телефона, проверка дубликата в базе через REST API, отправка пуша менеджеру и возврат HTTP 200 с персонализированным ответом."
+        }
+      ]
+    },
+    "b2b_sales_closing": {
+      "name": "B2B Продажи & Дожимы Сделок",
+      "prompts_count": 85,
+      "core_framework": "No-Pressure Consultative Selling + Value-First Demonstrations",
+      "sample_prompts": [
+        {
+          "id": "b2b_01",
+          "title": "Письмо «Аудит 1 Ошибки» (Open Rate 78%)",
+          "prompt": "Напиши холодное персонализированное сообщение для директора компании в сфере [СФЕРА]. Текст должен быть короче 90 слов. Начни с конкретного наблюдения на их сайте или в рекламе, покажи, сколько денег они теряют на этом каждый месяц, и предложи прислать 60-секундный аудит без каких-либо обязательств."
+        }
+      ]
+    },
+    "marketplace_ecommerce": {
+      "name": "Маркетплейсы (Uzum, WB, Ozon) & Midjourney v7",
+      "prompts_count": 90,
+      "core_framework": "LSI SEO Keyword Matrix + Hyper-Realistic Studio Staging",
+      "sample_prompts": [
+        {
+          "id": "ecom_01",
+          "title": "Midjourney v7 Фотореалистичная Предметка для Карточек",
+          "prompt": "Professional commercial product photography of [ТОВАР], placed on a sleek matte dark slate podium, subtle neon rim lighting, floating water droplets or botanical accents, shot on Hasselblad H6D-100c, 85mm f/1.4 lens, 8k resolution, photorealistic, advertising catalog quality --v 7.0 --ar 3:4 --style raw"
+        }
+      ]
+    },
+    "academic_admissions": {
+      "name": "Академические Эссе, IELTS 8.5+ & Гранты",
+      "prompts_count": 70,
+      "core_framework": "Cambridge Assessment English Rubric + Ivy League Admissions Tone",
+      "sample_prompts": [
+        {
+          "id": "acad_01",
+          "title": "Преобразователь Эссе в Band 8.5-9.0",
+          "prompt": "Проанализируй следующее эссе IELTS Academic: [ВСТАВЬТЕ ЭССЕ]. Перепиши его в стиле Cambridge Band 8.5-9.0. Замени простые глаголы и связки на редкие академические коллокации. Добавь таблицу разбора с грамматическими пояснениями."
+        }
+      ]
+    },
+    "personal_finance_crypto": {
+      "name": "Финансовое Моделирование & Инвестиции",
+      "prompts_count": 55,
+      "core_framework": "DCF Modeling + Unit-Economics Sensitivity Matrix",
+      "sample_prompts": [
+        {
+          "id": "fin_01",
+          "title": "Расчет Юнит-Экономики и Точки Безубыточности",
+          "prompt": "Составь подробную модель юнит-экономики для стартапа [ТИП БИЗНЕСА]. Рассчитай CAC, LTV, Churn rate, маржинальность с учетом эквайринга (2.9% + $0.30) и логистики. Выведи формулы для Excel."
+        }
+      ]
+    }
+  }
+}

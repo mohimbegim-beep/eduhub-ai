@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socratic Step-by-Step Homework Solver — EduHub AI</title>
+    
+    <!-- Programmatic SEO & AEO Meta Tags -->
+    <meta name="description" content="Solve difficult STEM problems with Socratic guided hints. Learn math, physics, and chemistry step-by-step with pedagogical citations and verified zero plagiarism.">
+    <meta name="keywords" content="homework solver, step-by-step math solver, Socratic physics tutor, chemistry problem solver, STEM study assistant, homework checker">
+    <link rel="canonical" href="https://eduhub.ai/tools/homework-solver">
+    
+    <!-- Multi-Language Hreflang Tags -->
+    <link rel="alternate" hreflang="en" href="https://eduhub.ai/tools/homework-solver?lang=en">
+    <link rel="alternate" hreflang="ru" href="https://eduhub.ai/tools/homework-solver?lang=ru">
+    <link rel="alternate" hreflang="uz" href="https://eduhub.ai/tools/homework-solver?lang=uz">
+    <link rel="alternate" hreflang="es" href="https://eduhub.ai/tools/homework-solver?lang=es">
+    <link rel="alternate" hreflang="x-default" href="https://eduhub.ai/tools/homework-solver">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Marked.js for Markdown Parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+
+    <!-- KaTeX for LaTeX Math Rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+
+    <!-- Mermaid.js for Diagrams -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+
+    <!-- Enhanced Document Renderer -->
+    <script src="/static/js/doc-renderer.js" defer></script>
+
+    <!-- Essential User Utilities (Export, History Drawer, Stepper, Camera) -->
+    <script src="/static/js/user-utils.js" defer></script>
+
+    <!-- Lemon Squeezy Overlay Checkout Script -->
+    <script src="https://assets.lemonsqueezy.com/lemon.js" defer></script>
+
+    <!-- Client-side i18n Engine -->
+            <!-- PWA Manifest & App Capability -->
+    <link rel="manifest" href="/static/manifest.json">
+    <meta name="theme-color" content="#030712">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="EduHub AI">
+
+    <!-- PWA & Omni-Channel Viral Share Scripts -->
+    <script src="/static/js/pwa-install.js" defer></script>
+    <script src="/static/js/viral-share.js" defer></script>
+    <!-- Legal Micro-Consent Layer -->
+    <script src="/static/js/legal-consent.js" defer></script>
+    <script src="/static/js/conversion-engine.js" defer></script>
+    <script src="/static/js/i18n.js" defer></script>
+</head>
+<body data-page-tool="homework-solver" class="bg-slate-950 text-slate-100 font-sans min-h-screen flex flex-col justify-between selection:bg-blue-600 selection:text-white">
+
+    <!-- Minimal Header (Logo + Language Switcher + Back to Platform) -->
+    <header class="border-b border-slate-800/80 bg-slate-950/90 backdrop-blur-md sticky top-0 z-40">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <a href="/" class="flex items-center space-x-2">
+                    <span class="w-8 h-8 rounded-lg bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center font-black text-white text-lg shadow-md shadow-blue-500/30">E</span>
+                    <span class="text-xl font-bold bg-gradient-to-r from-blue-400 via-indigo-300 to-white bg-clip-text text-transparent tracking-tight">EduHub AI</span>
+                </a>
+                <span class="hidden sm:inline-block text-[11px] bg-blue-950 text-blue-300 px-2.5 py-0.5 rounded-full border border-blue-800 font-medium" data-i18n="hw_title">Homework Solver</span>
+            </div>
+            
+            <div class="flex items-center space-x-3">
+                <!-- Sleek Language Switcher -->
+                <div class="inline-flex bg-slate-900 border border-slate-800 rounded-xl p-0.5">
+                    <button onclick="setLocale('en')" data-lang-btn="en" class="lang-btn px-2.5 py-1 rounded-lg text-xs font-bold transition bg-blue-600 text-white shadow-sm shadow-blue-500/20">EN</button>
+                    <button onclick="setLocale('ru')" data-lang-btn="ru" class="lang-btn px-2.5 py-1 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition">RU</button>
+                    <button onclick="setLocale('uz')" data-lang-btn="uz" class="lang-btn px-2.5 py-1 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition">UZ</button>
+                    <button onclick="setLocale('es')" data-lang-btn="es" class="lang-btn px-2.5 py-1 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition">ES</button>
+                </div>
+
+                <!-- Recent Documents Drawer Trigger -->
+                <button onclick="EduHubUtils.openHistoryDrawer()" class="inline-flex items-center gap-1.5 text-xs text-slate-300 hover:text-white bg-slate-900 border border-slate-800 hover:border-slate-700 px-3 py-1.5 rounded-xl transition font-medium" title="Recent Documents">
+                    <span>🕒</span>
+                    <span class="hidden sm:inline" data-i18n="recent_docs">Recent</span>
+                    <span data-history-count class="hidden bg-blue-600 text-white text-[10px] px-1.5 py-0.2 rounded-full font-bold">0</span>
+                </button>
+
+                <a href="/" class="text-xs text-blue-400 hover:text-blue-300 font-medium transition hidden sm:inline-block" data-i18n="explore_all_tools">
+                    Explore all EduHub tools &rarr;
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Distraction-Free Workspace -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 py-10 w-full flex-grow">
+        
+        <!-- Tool Headline -->
+        <div class="text-center mb-8">
+            <span class="text-[11px] font-bold uppercase tracking-widest text-indigo-400 bg-indigo-950/70 border border-indigo-800/80 px-3 py-1 rounded-full">
+                🧠 Socratic Learning Methodology
+            </span>
+            <h1 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight mt-3 mb-2" data-i18n="hw_title">
+                Socratic Step-by-Step Homework Solver
+            </h1>
+            <p class="text-slate-400 text-xs sm:text-sm max-w-2xl mx-auto" data-i18n="hw_subtitle">
+                Master difficult STEM problems, proofs, and equations with guided pedagogical hints without copy-pasting or academic cheating.
+            </p>
+        </div>
+
+        <!-- 1-Click Sample Previews -->
+        <div class="bg-slate-900/70 border border-slate-800 rounded-2xl p-4 mb-6">
+            <p class="text-xs font-medium text-slate-400 mb-2.5" data-i18n="sample_presets_label">
+                1-Click Instant Previews (No signup required):
+            </p>
+            <div class="flex flex-wrap gap-2">
+                <button onclick="loadSample(1)" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-lg border border-slate-700 transition" data-i18n="hw_sample_1">
+                    📐 Quadratic Equation with Radicals
+                </button>
+                <button onclick="loadSample(2)" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-lg border border-slate-700 transition" data-i18n="hw_sample_2">
+                    🚀 2D Momentum Conservation (Physics)
+                </button>
+                <button onclick="loadSample(3)" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-lg border border-slate-700 transition" data-i18n="hw_sample_3">
+                    🧪 Esterification Reaction (Chemistry)
+                </button>
+            </div>
+        </div>
+
+        <!-- Workspace Form -->
+        <div class="bg-slate-900/90 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-5">
+            
+            <!-- Controls Bar: Subject & Grade Level -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pb-4 border-b border-slate-800">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">Subject Domain:</label>
+                    <select id="subject-select" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-blue-500">
+                        <option value="Mathematics">Mathematics / Calculus / Algebra</option>
+                        <option value="Physics">Physics / Mechanics / Electromagnetism</option>
+                        <option value="Chemistry">Chemistry / Organic &amp; Inorganic</option>
+                        <option value="Computer Science">Computer Science &amp; Algorithms</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">Academic Grade Level:</label>
+                    <select id="grade-select" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-blue-500">
+                        <option value="Middle School">Middle School (Grades 6-8)</option>
+                        <option value="High School">High School / AP / IB</option>
+                        <option value="Undergraduate" selected>College / Undergraduate</option>
+                        <option value="Graduate">Graduate / Specialized STEM</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Problem Input Area -->
+            <div>
+                <label class="block text-xs font-medium text-slate-400 mb-1.5" data-i18n="hw_input_label">
+                    Assignment question or math problem:
+                </label>
+                <textarea id="assignment-input" rows="4" class="w-full bg-slate-950 border border-slate-800 rounded-2xl p-4 text-sm text-slate-100 placeholder-slate-600 focus:outline-none focus:border-blue-500 transition resize-y font-mono" placeholder="Type problem statement, equation, or prompt..." data-i18n-placeholder="hw_input_placeholder"></textarea>
+                
+                <!-- Mobile Camera Direct Upload Trigger -->
+                <div class="flex items-center justify-between mt-2">
+                    <button id="hw-camera-btn" type="button" class="inline-flex items-center gap-1.5 text-xs bg-indigo-950/60 hover:bg-indigo-900/80 text-indigo-300 border border-indigo-700/60 px-3 py-1.5 rounded-xl transition">
+                        <span>📷</span> <span data-i18n="camera_snap">Snap Homework Photo</span>
+                    </button>
+                    <input id="hw-camera-file" type="file" accept="image/*" capture="environment" class="hidden">
+                    <span class="text-[11px] text-slate-500">Camera OCR for equations &amp; diagrams</span>
+                </div>
+                <div id="hw-photo-preview" class="hidden mt-2"></div>
+            </div>
+
+            <!-- Student Solution Draft Area (Optional) -->
+            <div>
+                <label class="block text-xs font-medium text-slate-400 mb-1.5" data-i18n="hw_student_sol_label">
+                    Your draft solution (optional):
+                </label>
+                <textarea id="draft-input" rows="3" class="w-full bg-slate-950 border border-slate-800 rounded-2xl p-3 text-xs text-slate-300 placeholder-slate-600 focus:outline-none focus:border-blue-500 transition resize-y font-mono" placeholder="Where are you stuck? Paste your initial attempt here..." data-i18n-placeholder="hw_student_sol_placeholder"></textarea>
+            </div>
+
+            <!-- Actions Bar -->
+            <div class="flex flex-col sm:flex-row justify-between items-center gap-3 pt-2">
+                <button onclick="clearSolver()" class="text-xs text-slate-500 hover:text-slate-400 font-medium transition" data-i18n="btn_clear">Clear</button>
+                <button id="solve-btn" onclick="executeSolver()" class="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-semibold text-xs px-6 py-3 rounded-xl transition shadow-lg shadow-blue-500/20 flex items-center justify-center gap-2">
+                    <span data-i18n="btn_submit">Process with AI</span>
+                </button>
+            </div>
+
+            <!-- Streaming / Animated Step Progress Indicator -->
+            <div id="stepper-container" class="hidden"></div>
+
+            <!-- Diagnostic Result Output Box -->
+            <div id="output-container" class="hidden pt-6 border-t border-slate-800">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+                    <h3 class="text-xs font-bold text-indigo-400 uppercase tracking-wider" data-i18n="output_title">Result &amp; Academic Diagnostic</h3>
+                    <!-- Export Action Bar: [Copy Text], [Download PDF], [Export DOCX] -->
+                    <div class="flex items-center gap-2">
+                        <!-- Omni-Channel Viral Share Buttons -->
+                        <button onclick="EduHubShare.shareToWhatsApp('Calculus & STEM Socratic Solution')" class="inline-flex items-center gap-1 px-2.5 py-1 text-xs bg-emerald-950/80 hover:bg-emerald-900 text-emerald-300 hover:text-white rounded-lg border border-emerald-700 transition" title="Share on WhatsApp">
+                            <span>💬</span> <span data-i18n="share_whatsapp">WhatsApp</span>
+                        </button>
+                        <button onclick="EduHubShare.shareToTelegram('Calculus & STEM Socratic Solution')" class="inline-flex items-center gap-1 px-2.5 py-1 text-xs bg-sky-950/80 hover:bg-sky-900 text-sky-300 hover:text-white rounded-lg border border-sky-700 transition" title="Share on Telegram">
+                            <span>✈️</span> <span data-i18n="share_telegram">Telegram</span>
+                        </button>
+                        <button onclick="EduHubShare.generateStoriesCard('Calculus & STEM Socratic Solution', 'Step-by-Step Scaffolding')" class="inline-flex items-center gap-1 px-2.5 py-1 text-xs bg-amber-950/80 hover:bg-amber-900 text-amber-300 hover:text-white rounded-lg border border-amber-700 transition font-medium" title="Generate Stories Card">
+                            <span>📸</span> <span data-i18n="share_stories">Stories</span>
+                        </button>
+                        <button onclick="EduHubShare.copyLink()" class="inline-flex items-center gap-1 px-2 py-1 text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white rounded-lg border border-slate-700 transition" title="Copy Referral Link">
+                            <span>📋</span>
+                        </button>
+                        <button onclick="EduHubUtils.copyText('output-text', this)" class="inline-flex items-center gap-1 px-2.5 py-1 text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white rounded-lg border border-slate-700 transition">
+                            <span>📋</span> <span data-i18n="export_copy">Copy Text</span>
+                        </button>
+                        <button onclick="EduHubUtils.downloadPDF('output-text', 'EduHub_Homework_Solution')" class="inline-flex items-center gap-1 px-2.5 py-1 text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white rounded-lg border border-slate-700 transition">
+                            <span>📄</span> <span data-i18n="export_pdf">Download PDF</span>
+                        </button>
+                        <button onclick="EduHubUtils.exportDOCX('output-text', 'EduHub_Homework_Solution')" class="inline-flex items-center gap-1 px-2.5 py-1 text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white rounded-lg border border-slate-700 transition">
+                            <span>📝</span> <span data-i18n="export_docx">Export DOCX</span>
+                        </button>
+                    </div>
+                </div>
+                <div id="output-text" class="bg-slate-950 border border-slate-800 rounded-2xl p-5 text-xs text-slate-200 whitespace-pre-wrap leading-relaxed"></div>
+            </div>
+
+        </div>
+
+        <!-- Laser-Focused In-Tool Conversion Card (Laser CTA) -->
+        <div class="mt-8 bg-gradient-to-r from-indigo-950/70 via-slate-900 to-blue-950/70 border border-indigo-600/60 rounded-3xl p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl">
+            <div class="space-y-1.5 text-center md:text-left">
+                <span class="text-[10px] font-extrabold uppercase tracking-widest text-indigo-400 bg-indigo-900/60 px-2.5 py-0.5 rounded-full border border-indigo-700">
+                    ⚡ Unlimited STEM Diagnostics
+                </span>
+                <h3 class="text-base sm:text-lg font-bold text-white" data-i18n="hw_laser_cta_title">
+                    Stuck on complex STEM problem sets or finals prep?
+                </h3>
+                <p class="text-xs text-slate-400 max-w-xl" data-i18n="hw_laser_cta_desc">
+                    Get unlimited step-by-step hints, handwritten formula OCR, and mock test generator.
+                </p>
+            </div>
+            <div class="flex flex-col sm:flex-row gap-2.5 shrink-0 w-full md:w-auto">
+                <a href="https://eduhub-ai.lemonsqueezy.com/checkout/buy/ca17b5d8-9754-44f3-9a1f-f6d779eb8203" class="lemonsqueezy-button block text-center bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-semibold px-5 py-2.5 rounded-xl text-xs transition shadow-lg shadow-indigo-600/30" data-i18n="hw_laser_cta_btn">
+                    Unlock Unlimited Hints for $1
+                </a>
+                <a href="https://eduhub-ai.lemonsqueezy.com/buy/sprint-50" class="lemonsqueezy-button block text-center bg-slate-800 hover:bg-slate-700 text-amber-300 font-medium px-4 py-2.5 rounded-xl text-xs transition border border-slate-700" data-i18n="pdf_laser_topup_btn">
+                    Get 50 Flash Credits ($5)
+                </a>
+                <p class="checkout-micro-consent mt-2 text-[10px] text-slate-400 text-center leading-relaxed" data-i18n="checkout_micro_consent">By clicking, you agree to the <a href="/terms" target="_blank" class="underline text-slate-300 hover:text-white">Terms of Service</a> and our <a href="/refund" target="_blank" class="underline text-slate-300 hover:text-white">14-day money-back guarantee</a>. Cancel anytime in 1 click.</p>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Compact Contextual Footer -->
+    <footer class="border-t border-slate-800/80 bg-slate-950 py-6 text-xs text-slate-500">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <span data-i18n="footer_text">EduHub AI — Autonomous Academic Infrastructure. All rights reserved.</span>
+            <div class="flex items-center space-x-4">
+                <a href="/terms" class="hover:text-slate-400" data-i18n="footer_terms">Terms of Service</a>
+                <a href="/privacy" class="hover:text-slate-400" data-i18n="footer_privacy">Privacy Policy</a>
+                <a href="/refund" class="hover:text-slate-400" data-i18n="footer_refund">Refund Policy</a>
+                <a href="/support" class="text-indigo-400 hover:text-indigo-300">⚖️ AI Support</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Script for Homework Solver -->
+    <script>
+        const SAMPLES = {
+            1: {
+                task: "Solve the quadratic equation with radicals: 3x^2 - 12x + 6 = 0. Find the exact roots in simplified radical form.",
+                draft: "I calculated the discriminant: D = (-12)^2 - 4*3*6 = 144 - 72 = 72. How do I simplify sqrt(72) and find the final roots?",
+                subject: "Mathematics"
+            },
+            2: {
+                task: "A 2.0 kg cart moving at 3.0 m/s east collides elastically with a 1.0 kg cart moving at 2.0 m/s west. What are the final velocities of both carts after the collision?",
+                draft: "I set up momentum conservation: m1*v1 + m2*v2 = m1*v1' + m2*v2'. 2*(3) + 1*(-2) = 4 kg*m/s. But I have two unknowns for kinetic energy.",
+                subject: "Physics"
+            },
+            3: {
+                task: "Explain the mechanism of Fischer esterification between acetic acid (CH3COOH) and ethanol (CH3CH2OH) in the presence of an acid catalyst (H2SO4).",
+                draft: "First step: protonation of the carbonyl oxygen. What attacks next?",
+                subject: "Chemistry"
+            }
+        };
+
+        function loadSample(id) {
+            const taskInput = document.getElementById('assignment-input');
+            const draftInput = document.getElementById('draft-input');
+            const subjectSelect = document.getElementById('subject-select');
+            if (SAMPLES[id]) {
+                taskInput.value = SAMPLES[id].task;
+                draftInput.value = SAMPLES[id].draft;
+                subjectSelect.value = SAMPLES[id].subject;
+                taskInput.focus();
+            }
+        }
+
+        function clearSolver() {
+            document.getElementById('assignment-input').value = '';
+            document.getElementById('draft-input').value = '';
+            document.getElementById('output-container').classList.add('hidden');
+        }
+
+        async function executeSolver() {
+            let assignment = document.getElementById('assignment-input').value.trim();
+            const draft = document.getElementById('draft-input').value.trim();
+            const subject = document.getElementById('subject-select').value;
+            const grade = document.getElementById('grade-select').value;
+            const btn = document.getElementById('solve-btn');
+            const outputBox = document.getElementById('output-container');
+            const outputText = document.getElementById('output-text');
+
+            // Handle photo attachment
+            const photoData = (window.EduHubUtils && EduHubUtils.getAttachedPhoto()) || null;
+            let imageBase64 = null;
+            let mimeType = "image/jpeg";
+
+            if (photoData) {
+                const parts = photoData.split(',');
+                if (parts.length === 2) {
+                    imageBase64 = parts[1];
+                    const mimeMatch = parts[0].match(/:(.*?);/);
+                    if (mimeMatch) mimeType = mimeMatch[1];
+                }
+            }
+
+            if (!assignment && imageBase64) {
+                assignment = "Please analyze this homework problem from the attached photo and provide step-by-step Socratic guidance.";
+                document.getElementById('assignment-input').value = assignment;
+            }
+
+            if (assignment.length < 5) {
+                alert(t('hw_input_placeholder'));
+                return;
+            }
+
+            btn.disabled = true;
+            btn.classList.add('opacity-60');
+            btn.innerText = t('btn_processing');
+
+            if (window.EduHubUtils) {
+                EduHubUtils.startStepper('stepper-container');
+            }
+
+            try {
+                const payload = {
+                    assignment: assignment,
+                    student_solution: draft || null,
+                    subject: subject,
+                    grade_level: grade
+                };
+                if (imageBase64) {
+                    payload.image_base64 = imageBase64;
+                    payload.mime_type = mimeType;
+                }
+
+                const res = await fetch('/api/v1/parent/check-homework', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const data = await res.json();
+                outputBox.classList.remove('hidden');
+                if (res.ok) {
+                    if (window.renderAcademicDocument) {
+                        window.renderAcademicDocument(data.guidance, outputText);
+                    } else {
+                        outputText.textContent = data.guidance;
+                    }
+                    if (window.EduHubConversion) {
+                        window.EduHubConversion.applyPaywallBlur(outputText);
+                    }
+
+                    // Auto-save to LocalStorage session history
+                    if (window.EduHubUtils) {
+                        EduHubUtils.saveHistoryItem({
+                            title: assignment.substring(0, 70),
+                            type: 'homework_solver',
+                            content: data.guidance
+                        });
+                    }
+                } else {
+                    outputText.textContent = "Error: " + (data.detail ? JSON.stringify(data.detail) : "Processing failed");
+                }
+            } catch (err) {
+                outputBox.classList.remove('hidden');
+                outputText.textContent = "Network error: " + err.message;
+            } finally {
+                btn.disabled = false;
+                btn.classList.remove('opacity-60');
+                btn.innerHTML = `<span data-i18n="btn_submit">${t('btn_submit')}</span>`;
+                if (window.EduHubUtils) {
+                    EduHubUtils.stopStepper('stepper-container');
+                }
+            }
+        }
+
+        // Initialize camera trigger on DOM ready
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.EduHubUtils) {
+                EduHubUtils.initCameraTrigger('hw-camera-btn', 'hw-camera-file', 'hw-photo-preview');
+            }
+        });
+    </script>
+
+    <!-- Slide-Over Drawer: Recent Documents History -->
+    <div id="history-backdrop" onclick="EduHubUtils.closeHistoryDrawer()" class="hidden fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 transition-opacity"></div>
+    <div id="history-drawer" class="fixed inset-y-0 right-0 max-w-md w-full bg-slate-950 border-l border-slate-800 shadow-2xl z-50 transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col justify-between">
+        <div class="p-5 border-b border-slate-800 flex justify-between items-center bg-slate-900/50">
+            <div class="flex items-center gap-2">
+                <span class="text-xl">🕒</span>
+                <h3 class="text-sm font-bold text-white" data-i18n="recent_docs">Recent Documents</h3>
+                <span data-history-count class="hidden bg-blue-600 text-white text-[10px] px-2 py-0.5 rounded-full font-bold">0</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <button onclick="EduHubUtils.clearAllHistory()" class="text-xs text-slate-500 hover:text-rose-400 px-2 py-1 rounded transition" title="Clear all">Clear</button>
+                <button onclick="EduHubUtils.closeHistoryDrawer()" class="text-slate-400 hover:text-white p-1 rounded-lg text-lg transition">✕</button>
+            </div>
+        </div>
+        <div id="history-drawer-list" class="flex-grow overflow-y-auto p-4 space-y-3">
+            <!-- Populated dynamically by EduHubUtils.renderHistoryDrawer() -->
+        </div>
+        <div class="p-4 border-t border-slate-800 bg-slate-900/40 text-center">
+            <p class="text-[11px] text-slate-500">Auto-saved locally in browser storage • Safe &amp; private</p>
+        </div>
+    </div>
+
+    <!-- Exit-Intent High-Converting Modal ($1 Trial) -->
+    <div id="exit-intent-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-md transition-all duration-300">
+        <div class="relative w-full max-w-lg bg-slate-900 border border-amber-500/40 rounded-3xl p-6 sm:p-8 shadow-2xl shadow-amber-500/10 text-center overflow-hidden">
+            <button onclick="EduHubConversion.closeExitModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl p-2 transition">✕</button>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 text-xs font-bold uppercase mb-4">
+                ⚡ <span data-i18n="exit_modal_badge">Wait! Don't Leave Empty-Handed</span>
+            </div>
+            <h3 class="text-2xl sm:text-3xl font-black text-white mb-3" data-i18n="exit_modal_title">Pass Your Exams with Flying Colors for Just $1</h3>
+            <p class="text-slate-300 text-xs sm:text-sm leading-relaxed mb-6" data-i18n="exit_modal_desc">
+                Unlock 3 days of full unlimited Pro Max access. Grade unlimited IELTS essays, solve hard STEM homework with step-by-step Socratic hints, and export high-yield Anki decks.
+            </p>
+            <div class="p-4 rounded-2xl bg-slate-800/80 border border-slate-700/60 mb-6 text-left space-y-2">
+                <div class="flex items-center gap-2 text-xs text-slate-200">
+                    <span class="text-emerald-400 font-bold">✓</span> <span data-i18n="exit_modal_f1">Unlimited essay & homework evaluations</span>
+                </div>
+                <div class="flex items-center gap-2 text-xs text-slate-200">
+                    <span class="text-emerald-400 font-bold">✓</span> <span data-i18n="exit_modal_f2">Band 8.5–9.0 Cambridge examiner model rewrites</span>
+                </div>
+                <div class="flex items-center gap-2 text-xs text-slate-200">
+                    <span class="text-emerald-400 font-bold">✓</span> <span data-i18n="exit_modal_f3">14-Day 100% Money-Back Guarantee</span>
+                </div>
+            </div>
+            <button onclick="EduHubConversion.triggerCheckout('promax_trial')" class="w-full py-4 rounded-2xl font-black text-base text-slate-950 bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 hover:brightness-110 shadow-xl shadow-amber-500/25 transition transform hover:-translate-y-0.5 cursor-pointer mb-3">
+                <span data-i18n="exit_modal_btn">Claim 3-Day Pro Max for $1 →</span>
+            </button>
+            <div class="mb-4 text-[11px] text-slate-400" data-i18n="exit_modal_guarantee">
+                100% Satisfaction 14-Day Money-Back Guarantee. Cancel anytime.
+            </div>
+            <button onclick="EduHubConversion.closeExitModal()" class="text-xs text-slate-500 hover:text-slate-300 transition" data-i18n="exit_modal_dismiss">
+                No thanks, I prefer studying without AI help
+            </button>
+        </div>
+    </div>
+
+    <!-- Live Social Proof Activity Ticker (Floating Toast) -->
+    <div id="conversion-social-ticker" class="fixed bottom-6 left-6 z-40 hidden sm:flex items-center gap-3 p-3.5 pr-5 bg-slate-900/95 backdrop-blur-md border border-slate-700/70 rounded-2xl shadow-2xl transition-all duration-500 transform translate-y-2 opacity-0 pointer-events-auto">
+        <div class="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-lg shrink-0">
+            🎓
+        </div>
+        <div class="text-left">
+            <div id="ticker-text" class="text-xs font-semibold text-slate-200 leading-tight">
+                <!-- Dynamic text populated by EduHubConversion.initSocialTicker() -->
+            </div>
+            <div class="text-[10px] text-emerald-400 font-medium mt-0.5 flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span data-i18n="ticker_verified">Verified Student Activity</span>
+            </div>
+        </div>
+        <button onclick="EduHubConversion.dismissTicker()" class="text-slate-500 hover:text-white text-xs ml-2">✕</button>
+    </div>
+
+
+    <!-- Floating PWA Install Prompt Banner -->
+    <div id="pwa-install-banner" class="fixed bottom-20 right-6 z-40 hidden items-center gap-3 p-3.5 bg-slate-900/95 backdrop-blur-md border border-blue-500/40 rounded-2xl shadow-2xl max-w-sm">
+        <div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-xl shrink-0">
+            📱
+        </div>
+        <div class="text-left flex-grow">
+            <h4 class="text-xs font-bold text-white" data-i18n="pwa_install_title">Install EduHub AI App</h4>
+            <p class="text-[10px] text-slate-400" data-i18n="pwa_install_desc">Fast 1-tap access on iPhone & Android with offline support.</p>
+        </div>
+        <button onclick="EduHubPWA.triggerInstall()" class="px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition whitespace-nowrap" data-i18n="pwa_install_btn">
+            Install App 📱
+        </button>
+        <button onclick="EduHubPWA.dismissBanner()" class="text-slate-500 hover:text-white text-xs ml-1">✕</button>
+    </div>
+
+    <!-- iOS Safari Install Instructions Modal -->
+    <div id="pwa-ios-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+        <div class="relative w-full max-w-sm bg-slate-900 border border-slate-700 rounded-3xl p-6 text-center shadow-2xl">
+            <button onclick="EduHubPWA.closeIosModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg">✕</button>
+            <div class="text-3xl mb-2">📲</div>
+            <h3 class="text-base font-bold text-white mb-3" data-i18n="pwa_ios_title">Install on iPhone & iPad</h3>
+            <div class="text-xs text-slate-300 space-y-2 text-left bg-slate-800/60 p-4 rounded-xl mb-4">
+                <p data-i18n="pwa_ios_step1">1. Tap the Share button at the bottom of Safari (square with arrow up).</p>
+                <p data-i18n="pwa_ios_step2">2. Scroll down and select 'Add to Home Screen' (+).</p>
+                <p data-i18n="pwa_ios_step3">3. Tap 'Add' in the top right corner. Done!</p>
+            </div>
+            <button onclick="EduHubPWA.closeIosModal()" class="w-full py-2.5 rounded-xl bg-blue-600 text-white font-bold text-xs hover:bg-blue-500 transition">
+                Got it!
+            </button>
+        </div>
+    </div>
+
+</body>
+</html>

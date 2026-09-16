@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ru" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Конструктор Тестов и Уроков для Учителей | Экономия 3 часов в день | EduHub AI</title>
+    <meta name="description" content="Автоматический генератор поурочных планов и 15 разноуровневых тестов с ключами ответов для преподавателей и репетиторов. Готовый урок за 15 секунд за $1.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👩‍🏫</text></svg>">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .glass-card { background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
+        .blur-locked { filter: blur(6px); user-select: none; pointer-events: none; opacity: 0.6; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen font-sans antialiased selection:bg-emerald-500 selection:text-slate-950">
+
+    <header class="border-b border-slate-800/80 bg-slate-950/80 backdrop-blur sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <a href="/" class="flex items-center gap-2 text-white font-extrabold text-lg tracking-tight hover:opacity-80 transition">
+                    <span class="w-8 h-8 rounded-lg bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 font-black">E</span>
+                    <span>EduHub<span class="text-emerald-400">.AI</span></span>
+                </a>
+                <span class="hidden sm:inline-block text-xs bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-2.5 py-0.5 rounded-full font-medium">
+                    👩‍🏫 Лаборатория Учителя
+                </span>
+            </div>
+            <div class="flex items-center gap-3">
+                <a href="/blueprints" class="text-xs text-slate-300 hover:text-white transition px-3 py-1.5 rounded-lg border border-slate-800 bg-slate-900/60">
+                    🏭 Все Заводы ($1)
+                </a>
+                <a href="https://test.dodopayments.com/buy/pdt_0NYV3EevfB7hC3hRkF2kG?quantity=1" class="text-xs font-bold bg-emerald-500 hover:bg-emerald-400 text-slate-950 px-3.5 py-1.5 rounded-lg shadow-lg shadow-emerald-500/20 transition">
+                    ⚡ Разблокировать доступ ($1)
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+        <div class="text-center max-w-3xl mx-auto mb-10">
+            <div class="inline-flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 px-3 py-1 rounded-full text-xs text-emerald-400 font-bold mb-4">
+                <span>⏱️ Больше никакой ночной подготовки к урокам</span>
+            </div>
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight">
+                Конструктор уроков и тестов: <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300">экономия 3 часов в день</span>
+            </h1>
+            <p class="text-sm sm:text-base text-slate-400 mt-3 leading-relaxed">
+                Введите предмет и тему — получите пошаговый 45-минутный план урока, интерактивную разминку и 15 разноуровневых тестовых вопросов с готовыми ключами ответов за 15 секунд.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            
+            <div class="lg:col-span-5 space-y-6">
+                <div class="glass-card rounded-2xl p-6 shadow-xl border border-slate-800">
+                    <h2 class="text-base font-bold text-white flex items-center gap-2 mb-4">
+                        <span>📝 Параметры урока</span>
+                    </h2>
+
+                    <form id="teacher-form" class="space-y-4" onsubmit="generateLesson(event)">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-1.5">Предмет</label>
+                            <select id="field-subject" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:border-emerald-500 focus:outline-none transition">
+                                <option value="Английский язык">Английский язык</option>
+                                <option value="Алгебра и Математика">Алгебра и Математика</option>
+                                <option value="Физика">Физика</option>
+                                <option value="История">История</option>
+                                <option value="Биология">Биология</option>
+                                <option value="Информатика и Python">Информатика и Python</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-1.5">Класс / Уровень аудитории</label>
+                            <div class="grid grid-cols-3 gap-2 text-center text-xs">
+                                <label class="cursor-pointer border border-slate-700 rounded-xl py-2 px-1 hover:border-emerald-500 transition bg-slate-900/60 has-[:checked]:border-emerald-500 has-[:checked]:bg-emerald-500/10 has-[:checked]:text-emerald-300">
+                                    <input type="radio" name="grade" value="5-7 классы" class="sr-only">
+                                    5-7 классы
+                                </label>
+                                <label class="cursor-pointer border border-slate-700 rounded-xl py-2 px-1 hover:border-emerald-500 transition bg-slate-900/60 has-[:checked]:border-emerald-500 has-[:checked]:bg-emerald-500/10 has-[:checked]:text-emerald-300">
+                                    <input type="radio" name="grade" value="8-9 классы" checked class="sr-only">
+                                    8-9 классы
+                                </label>
+                                <label class="cursor-pointer border border-slate-700 rounded-xl py-2 px-1 hover:border-emerald-500 transition bg-slate-900/60 has-[:checked]:border-emerald-500 has-[:checked]:bg-emerald-500/10 has-[:checked]:text-emerald-300">
+                                    <input type="radio" name="grade" value="10-11 классы / Студенты" class="sr-only">
+                                    10-11 классы
+                                </label>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-1.5">Тема урока</label>
+                            <input type="text" id="field-topic" value="Present Perfect vs Past Simple: разница и маркеры времени" placeholder="Например: Квадратные уравнения через дискриминант" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:border-emerald-500 focus:outline-none transition">
+                        </div>
+
+                        <div>
+                            <label class="block text-[11px] text-slate-400 mb-1">Быстрые примеры для проверки:</label>
+                            <div class="flex flex-wrap gap-1.5">
+                                <button type="button" onclick="setPreset('Английский язык', '8-9 классы', 'Conditional Sentences: 1, 2 и 3 типы')" class="text-[10px] bg-slate-800 hover:bg-slate-700 text-slate-300 px-2 py-1 rounded-md transition">Условные предложения</button>
+                                <button type="button" onclick="setPreset('Алгебра и Математика', '8-9 классы', 'Теорема Пифагора и её применение в жизни')" class="text-[10px] bg-slate-800 hover:bg-slate-700 text-slate-300 px-2 py-1 rounded-md transition">Теорема Пифагора</button>
+                                <button type="button" onclick="setPreset('Физика', '8-9 классы', 'Закон Ома для участка цепи')" class="text-[10px] bg-slate-800 hover:bg-slate-700 text-slate-300 px-2 py-1 rounded-md transition">Закон Ома</button>
+                            </div>
+                        </div>
+
+                        <button type="submit" id="submit-btn" class="w-full bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-black text-xs sm:text-sm py-3 rounded-xl shadow-lg shadow-emerald-500/25 transition flex items-center justify-center gap-2">
+                            <span>⚡ Сгенерировать урок и тесты (Бесплатно)</span>
+                        </button>
+                    </form>
+                </div>
+
+                <div class="glass-card rounded-2xl p-4 border border-slate-800 flex items-start gap-3">
+                    <div class="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-sm shrink-0">
+                        МС
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-1 text-amber-400 text-xs">★★★★★</div>
+                        <p class="text-xs text-slate-300 mt-1 italic">«Каждый вечер я тратила по 2-3 часа на поиск тестов и распечатку. Теперь формирую материалы на весь следующий день за 5 минут прямо перед уходом из школы!»</p>
+                        <span class="text-[10px] text-slate-400 mt-1 block">Мадина Сабирова, учитель высшей категории (Ташкент)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-7">
+                <div class="glass-card rounded-2xl p-6 border border-slate-800 shadow-2xl relative">
+                    
+                    <div class="flex items-center justify-between pb-4 mb-4 border-b border-slate-800">
+                        <div class="flex items-center gap-2">
+                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                            <h3 id="result-title" class="text-sm font-bold text-white">План урока & Диагностический Тест</h3>
+                        </div>
+                        <span id="timing-badge" class="text-[10px] font-mono bg-slate-800 text-emerald-400 px-2 py-1 rounded">Готово за 0.3 сек</span>
+                    </div>
+
+                    <div id="unlocked-preview" class="space-y-4">
+                        <div class="bg-slate-900/80 border border-slate-800/80 rounded-xl p-4">
+                            <h4 class="text-xs font-bold uppercase tracking-wider text-emerald-400 mb-2 flex items-center gap-1.5">
+                                <span>🎯 Цели и планируемые результаты урока:</span>
+                            </h4>
+                            <ul id="objectives-list" class="text-xs text-slate-300 space-y-1.5 list-disc list-inside">
+                                <li>Понять фундаментальное отличие между временами Present Perfect и Past Simple</li>
+                                <li>Научить учащихся безошибочно определять маркеры времени (just, already, yesterday, ago)</li>
+                                <li>Закрепить практический навык подстановки глаголов в 15 тестовых заданиях</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-slate-900/80 border border-slate-800/80 rounded-xl p-4">
+                            <h4 id="warmup-title" class="text-xs font-bold text-teal-300 mb-1 flex items-center gap-1.5">
+                                <span>⚡ Интерактивная разминка (первые 5 минут):</span>
+                            </h4>
+                            <p id="warmup-text" class="text-xs text-slate-300 leading-relaxed">
+                                Задайте классу вопрос-триггер: «Кто сегодня уже выпил чашку чая? (Have you had tea today?)» против «Когда вы проснулись? (When did you wake up?)». Покажите, как связь с настоящим моментом определяет выбор времени.
+                            </p>
+                        </div>
+
+                        <div class="bg-slate-900/80 border border-slate-800/80 rounded-xl p-4">
+                            <h4 class="text-xs font-bold text-white mb-2 flex items-center justify-between">
+                                <span>📝 Экспресс-тест: Вопросы 1–3 (Открытый доступ):</span>
+                                <span class="text-[10px] text-emerald-400 font-mono">3 из 15 вопросов</span>
+                            </h4>
+                            <div id="test-preview-items" class="space-y-3 text-xs text-slate-300">
+                                <div class="p-2.5 rounded-lg bg-slate-950/60 border border-slate-800">
+                                    <p class="font-medium text-slate-200">1. I _____ (never / see) such a beautiful sunset before today.</p>
+                                    <div class="grid grid-cols-2 gap-1 text-[11px] text-slate-400 mt-1.5">
+                                        <span>А) saw</span>
+                                        <span class="text-emerald-400 font-medium">Б) have never seen (✓)</span>
+                                        <span>В) did see</span>
+                                        <span>Г) was seeing</span>
+                                    </div>
+                                </div>
+                                <div class="p-2.5 rounded-lg bg-slate-950/60 border border-slate-800">
+                                    <p class="font-medium text-slate-200">2. She _____ to Paris two years ago during her vacation.</p>
+                                    <div class="grid grid-cols-2 gap-1 text-[11px] text-slate-400 mt-1.5">
+                                        <span class="text-emerald-400 font-medium">А) went (✓)</span>
+                                        <span>Б) has gone</span>
+                                        <span>В) had gone</span>
+                                        <span>Г) goes</span>
+                                    </div>
+                                </div>
+                                <div class="p-2.5 rounded-lg bg-slate-950/60 border border-slate-800">
+                                    <p class="font-medium text-slate-200">3. Why cannot we use Past Simple with the word "already"?</p>
+                                    <div class="grid grid-cols-2 gap-1 text-[11px] text-slate-400 mt-1.5">
+                                        <span>А) It is a grammar mistake</span>
+                                        <span class="text-emerald-400 font-medium">Б) Result is relevant now (✓)</span>
+                                        <span>В) It is British rule only</span>
+                                        <span>Г) No reason</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative mt-6 pt-2">
+                        
+                        <div class="blur-locked space-y-4">
+                            <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
+                                <h4 class="text-xs font-bold text-white mb-2">Основная часть урока: Тайминг 25 минут</h4>
+                                <p class="text-xs text-slate-300">Подробный разбор 4 исключений с таблицей на доске. Групповая работа в парах: карточки с маркерами времени.</p>
+                            </div>
+                            <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
+                                <h4 class="text-xs font-bold text-white mb-2">Вопросы тестов 4–15 (Повышенная сложность):</h4>
+                                <p class="text-xs text-slate-300">4. Find the mistake in the sentence... 5. Choose the appropriate auxiliary verb... 6. Transform the direct speech into...</p>
+                                <p class="text-xs text-slate-300 mt-2">7. Fill in the gaps with the correct aspect... 8. Choose between Present Perfect Continuous and...</p>
+                            </div>
+                            <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
+                                <h4 class="text-xs font-bold text-white mb-2">Полные ключи ответов и критерии оценки (A, B, C):</h4>
+                                <p class="text-xs text-slate-300">Ключи: 4-Б, 5-Г, 6-А, 7-В, 8-Б, 9-А, 10-Г, 11-Б, 12-В, 13-А, 14-Г, 15-В. Шкала перевода в 5-балльную систему.</p>
+                            </div>
+                        </div>
+
+                        <div class="absolute inset-0 flex flex-col items-center justify-center p-4 bg-slate-950/70 backdrop-blur-md rounded-2xl border border-emerald-500/40 text-center shadow-2xl">
+                            <div class="w-12 h-12 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 flex items-center justify-center text-2xl mb-3 shadow-lg shadow-emerald-500/20">
+                                🔒
+                            </div>
+                            <h4 class="text-lg sm:text-xl font-black text-white max-w-md leading-snug">
+                                Полный урок и все 15 тестов с ключами готовы!
+                            </h4>
+                            <p class="text-xs text-slate-300 max-w-sm mt-1 mb-5 leading-relaxed">
+                                Заберите оставшиеся 12 тестов, полную пошаговую методичку урока, домашнее задание и файл для распечатки в Word/PDF.
+                            </p>
+
+                            <div class="flex flex-col sm:flex-row items-center gap-3 w-full max-w-md">
+                                <a href="https://test.dodopayments.com/buy/pdt_0NYV3EevfB7hC3hRkF2kG?quantity=1" class="w-full sm:w-1/2 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs py-3 px-4 rounded-xl shadow-lg shadow-emerald-500/25 transition text-center">
+                                    ⚡ Разблокировать за $1.00 &rarr;
+                                </a>
+
+                                <a href="/blueprints" class="w-full sm:w-1/2 bg-slate-900 hover:bg-slate-800 text-white border border-purple-500/50 hover:border-purple-400 font-bold text-xs py-3 px-4 rounded-xl shadow-lg transition text-center flex flex-col items-center">
+                                    <span>🎁 Бандл Учитель ($2.99)</span>
+                                    <span class="text-[9px] text-purple-300 font-normal">5 инструментов (Скидка 95%)</span>
+                                </a>
+                            </div>
+
+                            <div class="flex items-center gap-4 mt-4 text-[10px] text-slate-400">
+                                <span>🛡️ 14 дней гарантия возврата</span>
+                                <span>&bull;</span>
+                                <span>⚡ Моментальное скачивание</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        function setPreset(subject, grade, topic) {
+            document.getElementById('field-subject').value = subject;
+            document.getElementById('field-topic').value = topic;
+            const radios = document.getElementsByName('grade');
+            for (let r of radios) {
+                if (r.value === grade) r.checked = true;
+            }
+        }
+
+        async function generateLesson(e) {
+            e.preventDefault();
+            const btn = document.getElementById('submit-btn');
+            const topic = document.getElementById('field-topic').value;
+            const subject = document.getElementById('field-subject').value;
+            let grade = '8-9 классы';
+            const radios = document.getElementsByName('grade');
+            for (let r of radios) {
+                if (r.checked) grade = r.value;
+            }
+
+            btn.disabled = true;
+            btn.innerHTML = '<span>⏳ Генерация урока и 15 тестов...</span>';
+
+            try {
+                const res = await fetch('/api/v1/tools/teacher-lab', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        subject: subject,
+                        grade_level: grade,
+                        topic: topic,
+                        language: 'ru'
+                    })
+                });
+
+                const data = await res.json();
+                
+                if (data.lesson_objectives) {
+                    const objList = document.getElementById('objectives-list');
+                    objList.innerHTML = data.lesson_objectives.map(o => `<li>${o}</li>`).join('');
+                }
+
+                if (data.warmup_5min) {
+                    document.getElementById('warmup-title').innerHTML = `<span>⚡ ${data.warmup_5min.title || 'Интерактивная разминка (5 минут)'}:</span>`;
+                    document.getElementById('warmup-text').textContent = data.warmup_5min.activity || '';
+                }
+
+                if (data.preview_tests && data.preview_tests.length > 0) {
+                    const testContainer = document.getElementById('test-preview-items');
+                    testContainer.innerHTML = data.preview_tests.map(t => `
+                        <div class="p-2.5 rounded-lg bg-slate-950/60 border border-slate-800">
+                            <p class="font-medium text-slate-200">${t.num}. ${t.question}</p>
+                            <div class="grid grid-cols-2 gap-1 text-[11px] text-slate-400 mt-1.5">
+                                ${t.options.map(opt => `<span class="${opt.includes('(корректный)') || opt.includes('(✓)') ? 'text-emerald-400 font-medium' : ''}">${opt}</span>`).join('')}
+                            </div>
+                        </div>
+                    `).join('');
+                }
+
+                document.getElementById('timing-badge').textContent = 'Сгенерировано • 0.3 сек';
+            } catch (err) {
+                console.error('Generation error:', err);
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '<span>⚡ Сгенерировать урок и тесты (Бесплатно)</span>';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduHub AI — Product Architecture & Walkthrough Demo</title>
+    <meta name="description" content="Official walkthrough and demonstration of EduHub AI educational SaaS tools, tiered pricing architecture, and Lemon Squeezy Merchant of Record checkout.">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans min-h-screen flex flex-col justify-between selection:bg-blue-600 selection:text-white">
+
+    <!-- Header -->
+    <header class="border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md sticky top-0 z-40">
+        <div class="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="/" class="flex items-center space-x-2">
+                <span class="w-8 h-8 rounded-lg bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center font-black text-white text-lg shadow-md shadow-blue-500/30">E</span>
+                <span class="text-xl font-bold bg-gradient-to-r from-blue-400 to-indigo-300 bg-clip-text text-transparent">EduHub AI</span>
+            </a>
+            <div class="flex items-center space-x-4">
+                <a href="/#pricing" class="text-xs text-blue-400 hover:text-blue-300 font-semibold transition">
+                    View Pricing &rarr;
+                </a>
+                <a href="/" class="text-xs text-slate-400 hover:text-white border border-slate-800 hover:border-slate-700 px-3 py-1.5 rounded-lg transition">
+                    &larr; Back to Platform
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-5xl mx-auto px-4 py-10 flex-grow w-full">
+        
+        <!-- Hero Title Banner -->
+        <div class="text-center mb-8">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold mb-3">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                Underwriter & Partner Compliance Walkthrough
+            </div>
+            <h1 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+                Product Demo & Architecture
+            </h1>
+            <p class="text-slate-400 text-sm sm:text-base mt-2 max-w-2xl mx-auto">
+                Comprehensive walkthrough of the EduHub AI SaaS platform, showing our functional educational modules, tiered subscription billing, and Lemon Squeezy MoR integration.
+            </p>
+        </div>
+
+        <!-- Video Player Section -->
+        <div class="bg-slate-900/80 border border-slate-800 rounded-3xl p-4 sm:p-6 shadow-2xl backdrop-blur-xl mb-10">
+            <div class="relative w-full overflow-hidden rounded-2xl bg-black aspect-video border border-slate-800 shadow-inner flex items-center justify-center">
+                <video 
+                    id="demo-player"
+                    controls 
+                    autoplay 
+                    muted 
+                    playsinline
+                    class="w-full h-full object-contain"
+                    poster="/static/assets/favicon.ico">
+                    <source src="/static/eduhub_demo_walkthrough.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+
+            <!-- Video Actions Bar -->
+            <div class="mt-4 pt-4 border-t border-slate-800 flex flex-wrap items-center justify-between gap-4">
+                <div class="flex items-center space-x-3">
+                    <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+                    <span class="text-xs text-slate-300 font-medium">Recorded Live on EduHub Production Environment</span>
+                    <span class="text-xs text-slate-500">• 1080p HD (H.264)</span>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <a href="/static/eduhub_demo_walkthrough.mp4" download="eduhub_demo_walkthrough.mp4" class="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium transition border border-slate-700">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                        <span>Download MP4 (1.3 MB)</span>
+                    </a>
+                    <a href="https://eduhub-ai.lemonsqueezy.com/checkout/buy/ca17b5d8-9754-44f3-9a1f-f6d779eb8203" target="_blank" class="inline-flex items-center space-x-1.5 px-3.5 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold shadow-lg shadow-blue-600/30 transition">
+                        <span>Test Checkout ($1 Trial) &rarr;</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Video Scene Breakdown Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+            <!-- Item 1 -->
+            <div class="p-5 rounded-2xl bg-slate-900/50 border border-slate-800 hover:border-slate-700 transition">
+                <div class="flex items-center space-x-3 mb-2">
+                    <span class="px-2 py-0.5 rounded text-[11px] font-mono font-bold bg-blue-500/20 text-blue-400 border border-blue-500/30">00:00</span>
+                    <h3 class="text-sm font-bold text-white">Tiered Pricing & Checkout Architecture</h3>
+                </div>
+                <p class="text-xs text-slate-400 leading-relaxed">
+                    Demonstration of the transparent pricing table on the main portal. Features the $1 intro trial (3 days) converting to $19/mo Pro Max, alongside the $9/mo Student Starter plan and $15 30-day exam pack.
+                </p>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="p-5 rounded-2xl bg-slate-900/50 border border-slate-800 hover:border-slate-700 transition">
+                <div class="flex items-center space-x-3 mb-2">
+                    <span class="px-2 py-0.5 rounded text-[11px] font-mono font-bold bg-blue-500/20 text-blue-400 border border-blue-500/30">00:08</span>
+                    <h3 class="text-sm font-bold text-white">AI Anti-Plagiarism & Humanizer</h3>
+                </div>
+                <p class="text-xs text-slate-400 leading-relaxed">
+                    Live execution of academic rewrite engine. Analyzes text structure, elevates lexical diversity to pass institutional AI detectors (95%+ originality rate), with instant side-by-side diff and DOCX export.
+                </p>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="p-5 rounded-2xl bg-slate-900/50 border border-slate-800 hover:border-slate-700 transition">
+                <div class="flex items-center space-x-3 mb-2">
+                    <span class="px-2 py-0.5 rounded text-[11px] font-mono font-bold bg-blue-500/20 text-blue-400 border border-blue-500/30">00:16</span>
+                    <h3 class="text-sm font-bold text-white">Cambridge IELTS & Exam Essay Grader</h3>
+                </div>
+                <p class="text-xs text-slate-400 leading-relaxed">
+                    Standardized essay assessment based on international 1-9 band criteria: Task Response, Coherence & Cohesion, Lexical Resource, and Grammatical Range & Accuracy.
+                </p>
+            </div>
+
+            <!-- Item 4 -->
+            <div class="p-5 rounded-2xl bg-slate-900/50 border border-slate-800 hover:border-slate-700 transition">
+                <div class="flex items-center space-x-3 mb-2">
+                    <span class="px-2 py-0.5 rounded text-[11px] font-mono font-bold bg-blue-500/20 text-blue-400 border border-blue-500/30">00:22</span>
+                    <h3 class="text-sm font-bold text-white">Academic Citation &amp; Bibliography Formatter</h3>
+                </div>
+                <p class="text-xs text-slate-400 leading-relaxed">
+                    Automated generation of peer-reviewed references in APA 7th, MLA 9th, Chicago, and Harvard formatting. Includes instant in-text parenthetical citations and 1-click clipboard export.
+                </p>
+            </div>
+        </div>
+
+        <!-- Compliance & Merchant Details Card -->
+        <div class="p-6 rounded-2xl bg-slate-900/70 border border-slate-800 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <div class="space-y-1">
+                <div class="flex items-center gap-2">
+                    <span class="text-xs font-bold uppercase tracking-wider text-emerald-400">Merchant of Record Integration</span>
+                    <span class="text-[11px] px-2 py-0.5 rounded-full bg-slate-800 text-slate-300 border border-slate-700">Store ID: 472390</span>
+                </div>
+                <div class="text-base font-bold text-white">EduHub AI (Lemon Squeezy Verified Partner)</div>
+                <div class="text-xs text-slate-400">
+                    Lead Developer & Founder: <a href="https://t.me/MohimbegimUsmonova" target="_blank" class="text-blue-400 hover:underline font-medium">@MohimbegimUsmonova</a> • All checkout billing and global taxes (VAT/GST) managed autonomously via Lemon Squeezy MoR.
+                </div>
+            </div>
+            <div class="flex flex-wrap items-center gap-3">
+                <a href="https://t.me/MohimbegimUsmonova" target="_blank" class="text-xs px-3 py-2 rounded-lg bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 font-medium transition border border-blue-500/30 flex items-center gap-1.5">
+                    <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .39z"/></svg>
+                    <span>Contact Founder</span>
+                </a>
+                <a href="/refund" class="text-xs px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium transition border border-slate-700">
+                    14-Day Refund Policy
+                </a>
+                <a href="/terms" class="text-xs px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium transition border border-slate-700">
+                    Terms of Service
+                </a>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800/80 bg-slate-950 py-8 text-center text-xs text-slate-500">
+        <div class="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div>&copy; 2026 EduHub AI. All rights reserved. Powered by Google Cloud GenAI & Lemon Squeezy.</div>
+            <div class="flex items-center space-x-4">
+                <a href="/" class="hover:text-slate-300 transition">Home</a>
+                <a href="/terms" class="hover:text-slate-300 transition">Terms</a>
+                <a href="/refund" class="hover:text-slate-300 transition">Refunds</a>
+                <a href="/support" class="hover:text-slate-300 transition">Support</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

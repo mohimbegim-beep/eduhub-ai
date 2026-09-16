@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IELTS & CEFR Essay Grader & Rubric Assessor — EduHub AI</title>
+    
+    <!-- Programmatic SEO & AEO Meta Tags -->
+    <meta name="description" content="Evaluate IELTS Academic & General and CEFR essays with instant Cambridge-level examiner scoring across TR, CC, LR, and GRA rubrics. Includes side-by-side Band 8.5+ model rewrite and 1-click Anki deck export.">
+    <meta name="keywords" content="IELTS essay grader, IELTS writing task 2 checker, CEFR essay evaluation, IELTS band score calculator, IELTS writing correction, Cambridge essay scoring, academic essay AI">
+    <link rel="canonical" href="https://eduhub.ai/tools/essay-grader">
+    
+    <!-- Multi-Language Hreflang Tags -->
+    <link rel="alternate" hreflang="en" href="https://eduhub.ai/tools/essay-grader?lang=en">
+    <link rel="alternate" hreflang="ru" href="https://eduhub.ai/tools/essay-grader?lang=ru">
+    <link rel="alternate" hreflang="uz" href="https://eduhub.ai/tools/essay-grader?lang=uz">
+    <link rel="alternate" hreflang="es" href="https://eduhub.ai/tools/essay-grader?lang=es">
+    <link rel="alternate" hreflang="x-default" href="https://eduhub.ai/tools/essay-grader">
+
+    <!-- Schema.org JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "SoftwareApplication",
+          "name": "EduHub IELTS & CEFR Essay Grader",
+          "operatingSystem": "All modern browsers (Web, iOS, Android, Desktop)",
+          "applicationCategory": "EducationalApplication",
+          "offers": {
+            "@type": "Offer",
+            "price": "1.00",
+            "priceCurrency": "USD"
+          },
+          "description": "Standardized IELTS and CEFR writing evaluator featuring Task Response, Coherence & Cohesion, Lexical Resource, and Grammatical Range analysis."
+        },
+        {
+          "@type": "Course",
+          "name": "IELTS Academic Writing Band 8.0+ Masterclass",
+          "description": "Interactive essay diagnostics, band-score upgrades, and high-yield vocabulary extraction powered by Gemini 2.5 Flash.",
+          "provider": {
+            "@type": "Organization",
+            "name": "EduHub AI",
+            "sameAs": "https://eduhub.ai"
+          }
+        }
+      ]
+    }
+    </script>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Marked.js for Markdown Parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+
+    <!-- KaTeX for LaTeX Math Rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+
+    <!-- Mermaid.js for Diagrams -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+
+    <!-- Enhanced Document Renderer -->
+    <script src="/static/js/doc-renderer.js" defer></script>
+
+    <!-- Essential User Utilities (Export, History Drawer, Stepper, Camera, Anki) -->
+    <script src="/static/js/user-utils.js" defer></script>
+
+    <!-- Lemon Squeezy Overlay Checkout Script -->
+    <script src="https://assets.lemonsqueezy.com/lemon.js" defer></script>
+
+    <!-- Client-side i18n Engine -->
+            <!-- PWA Manifest & App Capability -->
+    <link rel="manifest" href="/static/manifest.json">
+    <meta name="theme-color" content="#030712">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="EduHub AI">
+
+    <!-- PWA & Omni-Channel Viral Share Scripts -->
+    <script src="/static/js/pwa-install.js" defer></script>
+    <script src="/static/js/viral-share.js" defer></script>
+    <!-- Legal Micro-Consent Layer -->
+    <script src="/static/js/legal-consent.js" defer></script>
+    <script src="/static/js/conversion-engine.js" defer></script>
+    <script src="/static/js/i18n.js" defer></script>
+</head>
+<body data-page-tool="essay-grader" class="bg-slate-950 text-slate-100 font-sans min-h-screen flex flex-col justify-between selection:bg-indigo-600 selection:text-white">
+
+    <!-- Minimal Header (Logo + Language Switcher + Back to Platform) -->
+    <header class="border-b border-slate-800/80 bg-slate-950/90 backdrop-blur-md sticky top-0 z-40">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <a href="/" class="flex items-center space-x-2">
+                    <span class="w-8 h-8 rounded-lg bg-gradient-to-tr from-indigo-600 to-blue-500 flex items-center justify-center font-black text-white text-lg shadow-md shadow-indigo-500/30">E</span>
+                    <span class="text-xl font-bold bg-gradient-to-r from-indigo-400 via-purple-300 to-white bg-clip-text text-transparent tracking-tight">EduHub AI</span>
+                </a>
+                <span class="hidden sm:inline-block text-[11px] bg-indigo-950 text-indigo-300 px-2.5 py-0.5 rounded-full border border-indigo-800 font-medium" data-i18n="essay_title">Essay Grader</span>
+            </div>
+            
+            <div class="flex items-center space-x-3">
+                <!-- Sleek Language Switcher -->
+                <div class="inline-flex bg-slate-900 border border-slate-800 rounded-xl p-0.5">
+                    <button onclick="setLocale('en')" data-lang-btn="en" class="lang-btn px-2.5 py-1 rounded-lg text-xs font-bold transition bg-indigo-600 text-white shadow-sm shadow-indigo-500/20">EN</button>
+                    <button onclick="setLocale('ru')" data-lang-btn="ru" class="lang-btn px-2.5 py-1 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition">RU</button>
+                    <button onclick="setLocale('uz')" data-lang-btn="uz" class="lang-btn px-2.5 py-1 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition">UZ</button>
+                    <button onclick="setLocale('es')" data-lang-btn="es" class="lang-btn px-2.5 py-1 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition">ES</button>
+                </div>
+
+                <!-- Recent Documents Drawer Trigger -->
+                <button onclick="EduHubUtils.openHistoryDrawer()" class="inline-flex items-center gap-1.5 text-xs text-slate-300 hover:text-white bg-slate-900 border border-slate-800 hover:border-slate-700 px-3 py-1.5 rounded-xl transition font-medium" title="Recent Documents">
+                    <span>🕒</span>
+                    <span class="hidden sm:inline" data-i18n="recent_docs">Recent</span>
+                    <span data-history-count class="hidden bg-indigo-600 text-white text-[10px] px-1.5 py-0.2 rounded-full font-bold">0</span>
+                </button>
+
+                <a href="/" class="text-xs text-indigo-400 hover:text-indigo-300 font-medium transition hidden sm:inline-block" data-i18n="explore_all_tools">
+                    Explore all EduHub tools &rarr;
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 py-10 w-full flex-grow">
+        
+        <!-- Tool Headline -->
+        <div class="text-center mb-6">
+            <span class="text-[11px] font-bold uppercase tracking-widest text-indigo-400 bg-indigo-950/70 border border-indigo-800/80 px-3 py-1 rounded-full">
+                ✍️ Cambridge &amp; CEFR Standardized Rubrics
+            </span>
+            <h1 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight mt-3 mb-2" data-i18n="essay_title">
+                IELTS &amp; CEFR Essay Grader &amp; Rubric Assessor
+            </h1>
+            <p class="text-slate-400 text-xs sm:text-sm max-w-2xl mx-auto" data-i18n="essay_subtitle">
+                Instant senior examiner evaluation with Band Score breakdown (TR, CC, LR, GRA), side-by-side Band 8.5+ rewrite, and Anki vocabulary export.
+            </p>
+        </div>
+
+        <!-- Flagship Hero $1 Trial Banner -->
+        <div class="mb-6 bg-gradient-to-r from-amber-500/10 via-indigo-600/15 to-purple-600/15 border border-amber-500/40 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xl">
+            <div class="flex items-center gap-3.5 text-center sm:text-left">
+                <div class="w-12 h-12 rounded-xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-2xl shrink-0">
+                    🎓
+                </div>
+                <div>
+                    <div class="flex items-center justify-center sm:justify-start gap-2 mb-0.5">
+                        <span class="text-[10px] font-extrabold uppercase tracking-widest text-amber-300 bg-amber-950/80 border border-amber-700/80 px-2 py-0.5 rounded-full">
+                            Flagship Hero &middot; Limited 3-Day Pass
+                        </span>
+                        <span class="text-xs font-bold text-emerald-400 font-mono">$1.00 Total</span>
+                    </div>
+                    <h2 class="text-sm sm:text-base font-extrabold text-white">
+                        Cambridge Senior IELTS Examiner Diagnostic
+                    </h2>
+                    <p class="text-xs text-slate-400 max-w-xl">
+                        Full Cambridge examiner assessment across all 4 rubrics (TR, CC, LR, GRA), handwritten essay photo OCR, Band 8.5+ model rewrites, and 1-click Anki export.
+                    </p>
+                </div>
+            </div>
+            <div class="shrink-0 w-full sm:w-auto text-center">
+                <a href="https://test.dodopayments.com/buy/pdt_0NYV3EevfB7hC3hRkF2kG?quantity=1" class="block sm:inline-block bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-black text-xs px-5 py-2.5 rounded-xl transition shadow-lg shadow-amber-500/20">
+                    Get 3-Day Pass for $1 &rarr;
+                </a>
+                <p class="text-[10px] text-slate-500 mt-1">Then $19/mo &middot; 1-click cancel anytime</p>
+            </div>
+        </div>
+
+        <!-- 1-Click Sample Previews -->
+        <div class="bg-slate-900/70 border border-slate-800 rounded-2xl p-4 mb-6">
+            <p class="text-xs font-medium text-slate-400 mb-2.5" data-i18n="sample_presets_label">
+                1-Click Instant Previews (No signup required):
+            </p>
+            <div class="flex flex-wrap gap-2">
+                <button onclick="loadSample(1)" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-lg border border-slate-700 transition" data-i18n="essay_sample_1">
+                    🏛️ IELTS Task 2: Free University Tuition (Band 6.0 Draft)
+                </button>
+                <button onclick="loadSample(2)" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-lg border border-slate-700 transition" data-i18n="essay_sample_2">
+                    🤖 IELTS Task 2: AI in Classrooms (Band 6.5 Draft)
+                </button>
+                <button onclick="loadSample(3)" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-lg border border-slate-700 transition" data-i18n="essay_sample_3">
+                    📊 IELTS Academic Task 1: Renewable Energy Trends
+                </button>
+            </div>
+        </div>
+
+        <!-- Workspace Form -->
+        <div class="bg-slate-900/90 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-5">
+            
+            <!-- Controls Bar: Exam Type & Target Band -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pb-4 border-b border-slate-800">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1" data-i18n="essay_type_label">Standardized Exam / Rubric:</label>
+                    <select id="exam-select" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-indigo-500">
+                        <option value="IELTS Academic Writing Task 2" selected>IELTS Academic Writing Task 2 (Essay)</option>
+                        <option value="IELTS Academic Writing Task 1">IELTS Academic Writing Task 1 (Graph / Chart)</option>
+                        <option value="IELTS General Training Task 1">IELTS General Training Task 1 (Formal Letter)</option>
+                        <option value="CEFR C1 Advanced Essay">CEFR C1 Advanced (CAE Writing)</option>
+                        <option value="CEFR B2 First Essay">CEFR B2 First (FCE Writing)</option>
+                        <option value="TOEFL iBT Academic Discussion">TOEFL iBT Writing for an Academic Discussion</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1" data-i18n="essay_target_label">Target Band Score:</label>
+                    <select id="target-band-select" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-indigo-500">
+                        <option value="6.5">Target Band 6.5 (Competent / Undergraduate)</option>
+                        <option value="7.0">Target Band 7.0 (Good User / Masters Admission)</option>
+                        <option value="7.5" selected>Target Band 7.5 (Very Good User / Medical &amp; Law)</option>
+                        <option value="8.0">Target Band 8.0 (Expert User / Ivy League / Oxbridge)</option>
+                        <option value="8.5">Target Band 8.5 - 9.0 (Near-Native Academic Fluency)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Optional Prompt Input -->
+            <div>
+                <label class="block text-xs font-medium text-slate-400 mb-1.5" data-i18n="essay_prompt_label">
+                    Essay Task Prompt / Topic (optional but recommended):
+                </label>
+                <input id="prompt-input" type="text" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-slate-200 placeholder-slate-600 focus:outline-none focus:border-indigo-500 transition" placeholder="e.g., Some people think universities should prioritize job-readiness over theoretical science. Discuss both views..." data-i18n-placeholder="essay_prompt_placeholder">
+            </div>
+
+            <!-- Essay Submission Area -->
+            <div>
+                <div class="flex justify-between items-center mb-1.5">
+                    <label class="block text-xs font-medium text-slate-400" data-i18n="essay_input_label">
+                        Student Essay Submission (Text or Handwritten Photo):
+                    </label>
+                    <span id="word-count" class="text-[11px] text-slate-500 font-mono">0 words</span>
+                </div>
+                <textarea id="essay-input" rows="8" class="w-full bg-slate-950 border border-slate-800 rounded-2xl p-4 text-sm text-slate-100 placeholder-slate-600 focus:outline-none focus:border-indigo-500 transition resize-y font-mono leading-relaxed" placeholder="Paste your full IELTS Task 1/2 or CEFR essay draft here (min 30 words)..." data-i18n-placeholder="essay_input_placeholder" oninput="updateWordCount()"></textarea>
+                
+                <!-- Mobile Camera Direct Upload Trigger for Handwritten Essays -->
+                <div class="flex items-center justify-between mt-2">
+                    <button id="essay-camera-btn" type="button" class="inline-flex items-center gap-1.5 text-xs bg-indigo-950/60 hover:bg-indigo-900/80 text-indigo-300 border border-indigo-700/60 px-3 py-1.5 rounded-xl transition">
+                        <span>📷</span> <span data-i18n="camera_snap">Snap Handwritten Essay</span>
+                    </button>
+                    <input id="essay-camera-file" type="file" accept="image/*" capture="environment" class="hidden">
+                    <span class="text-[11px] text-slate-500">Camera OCR for handwritten answer sheets</span>
+                </div>
+                <div id="essay-photo-preview" class="hidden mt-2"></div>
+            </div>
+
+            <!-- Actions Bar -->
+            <div class="flex flex-col sm:flex-row justify-between items-center gap-3 pt-2">
+                <button onclick="clearEssay()" class="text-xs text-slate-500 hover:text-slate-400 font-medium transition" data-i18n="btn_clear">Clear</button>
+                <button id="grade-btn" onclick="executeGradeEssay()" class="w-full sm:w-auto bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-semibold text-xs px-6 py-3 rounded-xl transition shadow-lg shadow-indigo-500/20 flex items-center justify-center gap-2">
+                    <span data-i18n="essay_submit_btn">Grade Essay with Examiner AI</span>
+                </button>
+            </div>
+
+            <!-- Streaming / Animated Step Progress Indicator -->
+            <div id="stepper-container" class="hidden"></div>
+
+            <!-- Diagnostic Result Output Box -->
+            <div id="output-container" class="hidden pt-6 border-t border-slate-800">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+                    <h3 class="text-xs font-bold text-indigo-400 uppercase tracking-wider" data-i18n="output_title">
+                        Examiner Diagnostic &amp; Band Score Report
+                    </h3>
+                    
+                    <!-- Export Action Bar: [Copy Text], [Download PDF], [Export DOCX], [📇 Export Anki Deck] -->
+                    <div class="flex flex-wrap items-center gap-2">
+                        <!-- Omni-Channel Viral Share Buttons -->
+                        <button onclick="EduHubShare.shareToWhatsApp('IELTS Academic Writing: Band 8.0+')" class="inline-flex items-center gap-1 px-2.5 py-1 text-xs bg-emerald-950/80 hover:bg-emerald-900 text-emerald-300 hover:text-white rounded-lg border border-emerald-700 transition" title="Share on WhatsApp">
+                            <span>💬</span> <span data-i18n="share_whatsapp">WhatsApp</span>
+                        </button>
+                        <button onclick="EduHubShare.shareToTelegram('IELTS Academic Writing: Band 8.0+')" class="inline-flex items-center gap-1 px-2.5 py-1 text-xs bg-sky-950/80 hover:bg-sky-900 text-sky-300 hover:text-white rounded-lg border border-sky-700 transition" title="Share on Telegram">
+                            <span>✈️</span> <span data-i18n="share_telegram">Telegram</span>
+                        </button>
+                        <button onclick="EduHubShare.generateStoriesCard('IELTS Academic Writing: Band 8.0+', 'Cambridge Examiner Rubric')" class="inline-flex items-center gap-1 px-2.5 py-1 text-xs bg-amber-950/80 hover:bg-amber-900 text-amber-300 hover:text-white rounded-lg border border-amber-700 transition font-medium" title="Generate Stories Card">
+                            <span>📸</span> <span data-i18n="share_stories">Stories</span>
+                        </button>
+                        <button onclick="EduHubShare.copyLink()" class="inline-flex items-center gap-1 px-2 py-1 text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white rounded-lg border border-slate-700 transition" title="Copy Referral Link">
+                            <span>📋</span>
+                        </button>
+                        <button onclick="EduHubUtils.copyText('output-text', this)" class="inline-flex items-center gap-1 px-2.5 py-1 text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white rounded-lg border border-slate-700 transition">
+                            <span>📋</span> <span data-i18n="export_copy">Copy Text</span>
+                        </button>
+                        <button onclick="EduHubUtils.downloadPDF('output-text', 'EduHub_IELTS_Essay_Diagnostic')" class="inline-flex items-center gap-1 px-2.5 py-1 text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white rounded-lg border border-slate-700 transition">
+                            <span>📄</span> <span data-i18n="export_pdf">Download PDF</span>
+                        </button>
+                        <button onclick="EduHubUtils.exportDOCX('output-text', 'EduHub_IELTS_Essay_Diagnostic')" class="inline-flex items-center gap-1 px-2.5 py-1 text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white rounded-lg border border-slate-700 transition">
+                            <span>📝</span> <span data-i18n="export_docx">Export DOCX</span>
+                        </button>
+                        <button onclick="exportVocabularyAnki()" class="inline-flex items-center gap-1 px-2.5 py-1 text-xs bg-indigo-950/80 hover:bg-indigo-900 text-indigo-300 hover:text-white rounded-lg border border-indigo-700 transition font-medium" data-i18n="essay_export_anki_btn">
+                            <span>📇</span> <span>Export Anki Deck (.txt)</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="output-text" class="bg-slate-950 border border-slate-800 rounded-2xl p-6 text-xs text-slate-200 leading-relaxed overflow-x-auto"></div>
+            </div>
+
+        </div>
+
+        <!-- Laser-Focused In-Tool Conversion Card (Laser CTA) -->
+        <div class="mt-8 bg-gradient-to-r from-purple-950/70 via-slate-900 to-indigo-950/70 border border-purple-600/60 rounded-3xl p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl">
+            <div class="space-y-1.5 text-center md:text-left">
+                <span class="text-[10px] font-extrabold uppercase tracking-widest text-purple-400 bg-purple-900/60 px-2.5 py-0.5 rounded-full border border-purple-700">
+                    🎯 Band 8.5+ Admissions Guarantee
+                </span>
+                <h3 class="text-base sm:text-lg font-bold text-white" data-i18n="essay_laser_cta_title">
+                    Aiming for an IELTS Band 7.5+ or Top University Admission?
+                </h3>
+                <p class="text-xs text-slate-400 max-w-xl" data-i18n="essay_laser_cta_desc">
+                    Get unlimited essay evaluations, handwriting photo grading, and 1-on-1 Socratic feedback sprints.
+                </p>
+            </div>
+            <div class="flex flex-col sm:flex-row gap-2.5 shrink-0 w-full md:w-auto">
+                <a href="https://test.dodopayments.com/buy/pdt_0NYV3EevfB7hC3hRkF2kG?quantity=1" class="block text-center bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-black px-6 py-3 rounded-xl text-xs transition shadow-lg shadow-amber-500/25">
+                    Start 3-Day IELTS Pass for $1
+                </a>
+                <p class="checkout-micro-consent mt-2 text-[10px] text-slate-400 text-center leading-relaxed" data-i18n="checkout_micro_consent">By clicking, you agree to the <a href="/terms" target="_blank" class="underline text-slate-300 hover:text-white">Terms of Service</a> and our <a href="/refund" target="_blank" class="underline text-slate-300 hover:text-white">14-day money-back guarantee</a>. Cancel anytime in 1 click.</p>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Compact Contextual Footer -->
+    <footer class="border-t border-slate-800/80 bg-slate-950 py-6 text-xs text-slate-500">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <span data-i18n="footer_text">EduHub AI — Autonomous Academic Infrastructure. All rights reserved.</span>
+            <div class="flex items-center space-x-4">
+                <a href="/terms" class="hover:text-slate-400" data-i18n="footer_terms">Terms of Service</a>
+                <a href="/privacy" class="hover:text-slate-400" data-i18n="footer_privacy">Privacy Policy</a>
+                <a href="/refund" class="hover:text-slate-400" data-i18n="footer_refund">Refund Policy</a>
+                <a href="/support" class="text-indigo-400 hover:text-indigo-300">⚖️ AI Support</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Script for Essay Grader -->
+    <script>
+        const SAMPLES = {
+            1: {
+                prompt: "Some people believe that university education should be free for all students, regardless of their financial background. To what extent do you agree or disagree?",
+                essay: "Nowadays university education is very important for young people. Some people think government must pay for all university students. In my opinion I completely agree with this idea because education give good future and help country.\n\nFirst of all, many smart students cannot go to university because they are poor. If university is free, everyone have equal chance to study medicine, engineering and science. For example in my country many talented children work in simple jobs because their family cannot afford high tuition fees. This is unfair for poor people.\n\nSecondly, free education is good for country economy. When more citizens have university degree, country will have many qualified specialists and modern technologies. Governments spend huge money on army and useless things, so they should invest in students instead.\n\nIn conclusion, I think higher education should be free for everybody. It will make society more equal and improve national economy.",
+                exam: "IELTS Academic Writing Task 2",
+                target: "7.5"
+            },
+            2: {
+                prompt: "In many schools, artificial intelligence tools are becoming part of daily learning. Do the advantages of this trend outweigh the disadvantages?",
+                essay: "In recent years, artificial intelligence has entered school classrooms. While some teachers worry about cheating, I believe the advantages of AI tools like smart tutors significantly outweigh the disadvantages.\n\nOn the one hand, over-reliance on AI might reduce critical thinking skills. If students just copy answers without understanding the formulas, their analytical abilities will decline. Furthermore, errors in AI algorithms can sometimes mislead learners.\n\nOn the other hand, AI provides personalized learning at scale. In a traditional classroom of 30 pupils, a teacher cannot give individual attention to everyone. An AI tutor can explain concepts at the student's own pace and generate customized practice problems.\n\nIn conclusion, despite minor risks of misuse, AI tools offer immense educational benefits when integrated responsibly.",
+                exam: "IELTS Academic Writing Task 2",
+                target: "8.0"
+            },
+            3: {
+                prompt: "The chart illustrates the proportion of electricity generated from renewable sources in four European nations between 2010 and 2024. Summarise the information by selecting and reporting the main features.",
+                essay: "The given line graph compares the percentage of electricity produced from renewable energy sources in Germany, Denmark, Spain, and the UK from 2010 to 2024.\n\nOverall, all four countries experienced an upward trend in renewable power generation over the 14-year period, with Denmark maintaining a clear lead throughout the timeframe, while the UK showed the most dramatic growth.\n\nIn 2010, Denmark started at approximately 35%, which steadily climbed to reach a peak of 78% by 2024. In contrast, the UK commenced at just 8%, but accelerated rapidly after 2018, finishing at 46%.\n\nMeanwhile, Germany and Spain displayed comparable trajectories, rising from 17% and 24% to 52% and 49% respectively.",
+                exam: "IELTS Academic Writing Task 1",
+                target: "8.0"
+            }
+        };
+
+        let lastRawFeedback = "";
+
+        function updateWordCount() {
+            const text = document.getElementById('essay-input').value.trim();
+            const words = text ? text.split(/\s+/).filter(w => w.length > 0).length : 0;
+            document.getElementById('word-count').textContent = words + (words === 1 ? ' word' : ' words');
+        }
+
+        function loadSample(id) {
+            const sample = SAMPLES[id];
+            if (sample) {
+                document.getElementById('prompt-input').value = sample.prompt;
+                document.getElementById('essay-input').value = sample.essay;
+                document.getElementById('exam-select').value = sample.exam;
+                document.getElementById('target-band-select').value = sample.target;
+                updateWordCount();
+                document.getElementById('essay-input').focus();
+            }
+        }
+
+        function clearEssay() {
+            document.getElementById('prompt-input').value = '';
+            document.getElementById('essay-input').value = '';
+            document.getElementById('output-container').classList.add('hidden');
+            lastRawFeedback = "";
+            updateWordCount();
+        }
+
+        async function executeGradeEssay() {
+            let essayText = document.getElementById('essay-input').value.trim();
+            const promptText = document.getElementById('prompt-input').value.trim();
+            const examType = document.getElementById('exam-select').value;
+            const targetBand = parseFloat(document.getElementById('target-band-select').value) || 7.5;
+            const btn = document.getElementById('grade-btn');
+            const outputBox = document.getElementById('output-container');
+            const outputText = document.getElementById('output-text');
+
+            // Handle photo attachment if user snapped a handwritten sheet
+            const photoData = (window.EduHubUtils && EduHubUtils.getAttachedPhoto()) || null;
+            let imageBase64 = null;
+            let mimeType = "image/jpeg";
+
+            if (photoData) {
+                const parts = photoData.split(',');
+                if (parts.length === 2) {
+                    imageBase64 = parts[1];
+                    const mimeMatch = parts[0].match(/:(.*?);/);
+                    if (mimeMatch) mimeType = mimeMatch[1];
+                }
+            }
+
+            if (!essayText && imageBase64) {
+                essayText = "Please perform OCR on the attached handwritten essay sheet and evaluate according to standardized examiner rubrics.";
+                document.getElementById('essay-input').value = essayText;
+                updateWordCount();
+            }
+
+            if (essayText.length < 25) {
+                alert(t('essay_input_placeholder'));
+                return;
+            }
+
+            btn.disabled = true;
+            btn.classList.add('opacity-60');
+            btn.innerText = t('btn_processing');
+
+            if (window.EduHubUtils) {
+                EduHubUtils.startStepper('stepper-container');
+            }
+
+            try {
+                const currentLang = (window.currentLocale || localStorage.getItem('eduhub_locale') || 'en');
+                const langMap = { en: 'English', ru: 'Russian', uz: 'Uzbek', es: 'Spanish' };
+                const nativeLang = langMap[currentLang] || 'English';
+
+                const payload = {
+                    essay_text: essayText,
+                    task_prompt: promptText || null,
+                    exam_type: examType,
+                    target_band: targetBand,
+                    native_language: nativeLang
+                };
+                if (imageBase64) {
+                    payload.image_base64 = imageBase64;
+                    payload.mime_type = mimeType;
+                }
+
+                const res = await fetch('/api/v1/language/grade-essay', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const data = await res.json();
+                outputBox.classList.remove('hidden');
+
+                if (res.ok && data.feedback) {
+                    lastRawFeedback = data.feedback;
+                    if (window.renderAcademicDocument) {
+                        window.renderAcademicDocument(data.feedback, outputText);
+                    } else {
+                        outputText.textContent = data.feedback;
+                    }
+                    if (window.EduHubConversion) {
+                        window.EduHubConversion.applyPaywallBlur(outputText);
+                    }
+
+                    if (window.EduHubUtils) {
+                        EduHubUtils.saveHistoryItem({
+                            title: `IELTS Essay: ${(promptText || essayText).substring(0, 60)}`,
+                            type: 'essay_grader',
+                            content: data.feedback
+                        });
+                    }
+                } else {
+                    outputText.textContent = "Error: " + (data.detail ? JSON.stringify(data.detail) : "Grading failed");
+                }
+            } catch (err) {
+                outputBox.classList.remove('hidden');
+                outputText.textContent = "Network error: " + err.message;
+            } finally {
+                btn.disabled = false;
+                btn.classList.remove('opacity-60');
+                btn.innerHTML = `<span data-i18n="essay_submit_btn">${t('essay_submit_btn')}</span>`;
+                if (window.EduHubUtils) {
+                    EduHubUtils.stopStepper('stepper-container');
+                }
+            }
+        }
+
+        function exportVocabularyAnki() {
+            if (!lastRawFeedback) {
+                alert("Please grade an essay first to generate high-yield vocabulary.");
+                return;
+            }
+
+            const cards = [];
+            const lines = lastRawFeedback.split('\n');
+            let inVocabSection = false;
+
+            for (const line of lines) {
+                const trimmed = line.trim();
+                if (trimmed.includes('High-Yield Vocabulary') || trimmed.includes('Словарь') || trimmed.includes('Lug\'at') || trimmed.includes('Vocabulario')) {
+                    inVocabSection = true;
+                    continue;
+                }
+                if (inVocabSection && trimmed.startsWith('##')) {
+                    inVocabSection = false;
+                }
+                if (inVocabSection && trimmed.startsWith('|') && !trimmed.includes('---')) {
+                    const cols = trimmed.split('|').map(c => c.trim()).filter(c => c.length > 0);
+                    if (cols.length >= 3 && !cols[0].toLowerCase().includes('term') && !cols[0].toLowerCase().includes('термин') && !cols[0].toLowerCase().includes('so\'z')) {
+                        cards.push({
+                            front: cols[0],
+                            back: `<strong>${cols[1]}</strong><br><em>Collocation:</em> ${cols[2]}`,
+                            tags: 'IELTS_Band_8_Vocabulary'
+                        });
+                    }
+                }
+            }
+
+            if (cards.length === 0) {
+                cards.push(
+                    { front: "catalyze socio-economic mobility", back: "ускорять социально-экономическую мобильность (fosters equal opportunities)", tags: "IELTS_Writing" },
+                    { front: "mitigate educational disparities", back: "сокращать образовательное неравенство (reduce inequalities)", tags: "IELTS_Writing" },
+                    { front: "fiscal strain on public coffers", back: "финансовое бремя на государственный бюджет (heavy economic cost)", tags: "IELTS_Writing" },
+                    { front: "meritocratic principles", back: "принципы меритократии (fair advancement based on talent)", tags: "IELTS_Writing" }
+                );
+            }
+
+            if (window.EduHubUtils && EduHubUtils.exportAnkiDeck) {
+                EduHubUtils.exportAnkiDeck(cards, 'EduHub_IELTS_Band8_Vocabulary');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            updateWordCount();
+            if (window.EduHubUtils) {
+                EduHubUtils.initCameraTrigger('essay-camera-btn', 'essay-camera-file', 'essay-photo-preview');
+            }
+        });
+    </script>
+
+    <!-- Slide-Over Drawer: Recent Documents History -->
+    <div id="history-backdrop" onclick="EduHubUtils.closeHistoryDrawer()" class="hidden fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 transition-opacity"></div>
+    <div id="history-drawer" class="fixed inset-y-0 right-0 max-w-md w-full bg-slate-950 border-l border-slate-800 shadow-2xl z-50 transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col justify-between">
+        <div class="p-5 border-b border-slate-800 flex justify-between items-center bg-slate-900/50">
+            <div class="flex items-center gap-2">
+                <span class="text-xl">🕒</span>
+                <h3 class="text-sm font-bold text-white" data-i18n="recent_docs">Recent Documents</h3>
+                <span data-history-count class="hidden bg-indigo-600 text-white text-[10px] px-2 py-0.5 rounded-full font-bold">0</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <button onclick="EduHubUtils.clearAllHistory()" class="text-xs text-slate-500 hover:text-rose-400 px-2 py-1 rounded transition" title="Clear all">Clear</button>
+                <button onclick="EduHubUtils.closeHistoryDrawer()" class="text-slate-400 hover:text-white p-1 rounded-lg text-lg transition">✕</button>
+            </div>
+        </div>
+        <div id="history-drawer-list" class="flex-grow overflow-y-auto p-4 space-y-3"></div>
+        <div class="p-4 border-t border-slate-800 bg-slate-900/40 text-center">
+            <p class="text-[11px] text-slate-500">Auto-saved locally in browser storage • Safe &amp; private</p>
+        </div>
+    </div>
+
+    <!-- Exit-Intent High-Converting Modal ($1 Trial) -->
+    <div id="exit-intent-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-md transition-all duration-300">
+        <div class="relative w-full max-w-lg bg-slate-900 border border-amber-500/40 rounded-3xl p-6 sm:p-8 shadow-2xl shadow-amber-500/10 text-center overflow-hidden">
+            <button onclick="EduHubConversion.closeExitModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl p-2 transition">✕</button>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 text-xs font-bold uppercase mb-4">
+                ⚡ <span data-i18n="exit_modal_badge">Wait! Don't Leave Empty-Handed</span>
+            </div>
+            <h3 class="text-2xl sm:text-3xl font-black text-white mb-3" data-i18n="exit_modal_title">Pass Your Exams with Flying Colors for Just $1</h3>
+            <p class="text-slate-300 text-xs sm:text-sm leading-relaxed mb-6" data-i18n="exit_modal_desc">
+                Unlock 3 days of full unlimited Pro Max access. Grade unlimited IELTS essays, solve hard STEM homework with step-by-step Socratic hints, and export high-yield Anki decks.
+            </p>
+            <div class="p-4 rounded-2xl bg-slate-800/80 border border-slate-700/60 mb-6 text-left space-y-2">
+                <div class="flex items-center gap-2 text-xs text-slate-200">
+                    <span class="text-emerald-400 font-bold">✓</span> <span data-i18n="exit_modal_f1">Unlimited essay & homework evaluations</span>
+                </div>
+                <div class="flex items-center gap-2 text-xs text-slate-200">
+                    <span class="text-emerald-400 font-bold">✓</span> <span data-i18n="exit_modal_f2">Band 8.5–9.0 Cambridge examiner model rewrites</span>
+                </div>
+                <div class="flex items-center gap-2 text-xs text-slate-200">
+                    <span class="text-emerald-400 font-bold">✓</span> <span data-i18n="exit_modal_f3">14-Day 100% Money-Back Guarantee</span>
+                </div>
+            </div>
+            <button onclick="EduHubConversion.triggerCheckout('promax_trial')" class="w-full py-4 rounded-2xl font-black text-base text-slate-950 bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 hover:brightness-110 shadow-xl shadow-amber-500/25 transition transform hover:-translate-y-0.5 cursor-pointer mb-3">
+                <span data-i18n="exit_modal_btn">Claim 3-Day Pro Max for $1 →</span>
+            </button>
+            <div class="mb-4 text-[11px] text-slate-400" data-i18n="exit_modal_guarantee">
+                100% Satisfaction 14-Day Money-Back Guarantee. Cancel anytime.
+            </div>
+            <button onclick="EduHubConversion.closeExitModal()" class="text-xs text-slate-500 hover:text-slate-300 transition" data-i18n="exit_modal_dismiss">
+                No thanks, I prefer studying without AI help
+            </button>
+        </div>
+    </div>
+
+    <!-- Live Social Proof Activity Ticker (Floating Toast) -->
+    <div id="conversion-social-ticker" class="fixed bottom-6 left-6 z-40 hidden sm:flex items-center gap-3 p-3.5 pr-5 bg-slate-900/95 backdrop-blur-md border border-slate-700/70 rounded-2xl shadow-2xl transition-all duration-500 transform translate-y-2 opacity-0 pointer-events-auto">
+        <div class="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-lg shrink-0">
+            🎓
+        </div>
+        <div class="text-left">
+            <div id="ticker-text" class="text-xs font-semibold text-slate-200 leading-tight">
+                <!-- Dynamic text populated by EduHubConversion.initSocialTicker() -->
+            </div>
+            <div class="text-[10px] text-emerald-400 font-medium mt-0.5 flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span data-i18n="ticker_verified">Verified Student Activity</span>
+            </div>
+        </div>
+        <button onclick="EduHubConversion.dismissTicker()" class="text-slate-500 hover:text-white text-xs ml-2">✕</button>
+    </div>
+
+
+    <!-- Floating PWA Install Prompt Banner -->
+    <div id="pwa-install-banner" class="fixed bottom-20 right-6 z-40 hidden items-center gap-3 p-3.5 bg-slate-900/95 backdrop-blur-md border border-blue-500/40 rounded-2xl shadow-2xl max-w-sm">
+        <div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-xl shrink-0">
+            📱
+        </div>
+        <div class="text-left flex-grow">
+            <h4 class="text-xs font-bold text-white" data-i18n="pwa_install_title">Install EduHub AI App</h4>
+            <p class="text-[10px] text-slate-400" data-i18n="pwa_install_desc">Fast 1-tap access on iPhone & Android with offline support.</p>
+        </div>
+        <button onclick="EduHubPWA.triggerInstall()" class="px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition whitespace-nowrap" data-i18n="pwa_install_btn">
+            Install App 📱
+        </button>
+        <button onclick="EduHubPWA.dismissBanner()" class="text-slate-500 hover:text-white text-xs ml-1">✕</button>
+    </div>
+
+    <!-- iOS Safari Install Instructions Modal -->
+    <div id="pwa-ios-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+        <div class="relative w-full max-w-sm bg-slate-900 border border-slate-700 rounded-3xl p-6 text-center shadow-2xl">
+            <button onclick="EduHubPWA.closeIosModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg">✕</button>
+            <div class="text-3xl mb-2">📲</div>
+            <h3 class="text-base font-bold text-white mb-3" data-i18n="pwa_ios_title">Install on iPhone & iPad</h3>
+            <div class="text-xs text-slate-300 space-y-2 text-left bg-slate-800/60 p-4 rounded-xl mb-4">
+                <p data-i18n="pwa_ios_step1">1. Tap the Share button at the bottom of Safari (square with arrow up).</p>
+                <p data-i18n="pwa_ios_step2">2. Scroll down and select 'Add to Home Screen' (+).</p>
+                <p data-i18n="pwa_ios_step3">3. Tap 'Add' in the top right corner. Done!</p>
+            </div>
+            <button onclick="EduHubPWA.closeIosModal()" class="w-full py-2.5 rounded-xl bg-blue-600 text-white font-bold text-xs hover:bg-blue-500 transition">
+                Got it!
+            </button>
+        </div>
+    </div>
+
+</body>
+</html>

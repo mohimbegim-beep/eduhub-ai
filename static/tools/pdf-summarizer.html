@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart PDF &amp; Lecture Summarizer — EduHub AI</title>
+    
+    <!-- Programmatic SEO & AEO Meta Tags -->
+    <meta name="description" content="Instantly summarize 100+ page textbook PDFs, academic research papers, and lecture transcripts into structured takeaways and Anki flashcards with EduHub AI.">
+    <meta name="keywords" content="PDF summarizer, lecture summarizer, textbook notes generator, Anki flashcard deck generator, AI research assistant, Socrates AI">
+    <link rel="canonical" href="https://eduhub.ai/tools/pdf-summarizer">
+    
+    <!-- Multi-Language Hreflang Tags -->
+    <link rel="alternate" hreflang="en" href="https://eduhub.ai/tools/pdf-summarizer?lang=en">
+    <link rel="alternate" hreflang="ru" href="https://eduhub.ai/tools/pdf-summarizer?lang=ru">
+    <link rel="alternate" hreflang="uz" href="https://eduhub.ai/tools/pdf-summarizer?lang=uz">
+    <link rel="alternate" hreflang="es" href="https://eduhub.ai/tools/pdf-summarizer?lang=es">
+    <link rel="alternate" hreflang="x-default" href="https://eduhub.ai/tools/pdf-summarizer">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Marked.js for Markdown Parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+
+    <!-- KaTeX for LaTeX Math Rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+
+    <!-- Mermaid.js for Diagrams -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+
+    <!-- Enhanced Document Renderer -->
+    <script src="/static/js/doc-renderer.js" defer></script>
+
+    <!-- Essential User Utilities (Export, History Drawer, Stepper, Camera) -->
+    <script src="/static/js/user-utils.js" defer></script>
+
+    <!-- Lemon Squeezy Overlay Checkout Script -->
+    <script src="https://assets.lemonsqueezy.com/lemon.js" defer></script>
+
+    <!-- Client-side i18n Engine -->
+            <!-- PWA Manifest & App Capability -->
+    <link rel="manifest" href="/static/manifest.json">
+    <meta name="theme-color" content="#030712">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="EduHub AI">
+
+    <!-- PWA & Omni-Channel Viral Share Scripts -->
+    <script src="/static/js/pwa-install.js" defer></script>
+    <script src="/static/js/viral-share.js" defer></script>
+    <!-- Legal Micro-Consent Layer -->
+    <script src="/static/js/legal-consent.js" defer></script>
+    <script src="/static/js/conversion-engine.js" defer></script>
+    <script src="/static/js/i18n.js" defer></script>
+</head>
+<body data-page-tool="pdf-summarizer" class="bg-slate-950 text-slate-100 font-sans min-h-screen flex flex-col justify-between selection:bg-blue-600 selection:text-white">
+
+    <!-- Minimal Header (Logo + Language Switcher + Back to Platform) -->
+    <header class="border-b border-slate-800/80 bg-slate-950/90 backdrop-blur-md sticky top-0 z-40">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <a href="/" class="flex items-center space-x-2">
+                    <span class="w-8 h-8 rounded-lg bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center font-black text-white text-lg shadow-md shadow-blue-500/30">E</span>
+                    <span class="text-xl font-bold bg-gradient-to-r from-blue-400 via-indigo-300 to-white bg-clip-text text-transparent tracking-tight">EduHub AI</span>
+                </a>
+                <span class="hidden sm:inline-block text-[11px] bg-blue-950 text-blue-300 px-2.5 py-0.5 rounded-full border border-blue-800 font-medium" data-i18n="pdf_title">PDF Summarizer</span>
+            </div>
+            
+            <div class="flex items-center space-x-3">
+                <!-- Sleek Language Switcher -->
+                <div class="inline-flex bg-slate-900 border border-slate-800 rounded-xl p-0.5">
+                    <button onclick="setLocale('en')" data-lang-btn="en" class="lang-btn px-2.5 py-1 rounded-lg text-xs font-bold transition bg-blue-600 text-white shadow-sm shadow-blue-500/20">EN</button>
+                    <button onclick="setLocale('ru')" data-lang-btn="ru" class="lang-btn px-2.5 py-1 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition">RU</button>
+                    <button onclick="setLocale('uz')" data-lang-btn="uz" class="lang-btn px-2.5 py-1 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition">UZ</button>
+                    <button onclick="setLocale('es')" data-lang-btn="es" class="lang-btn px-2.5 py-1 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition">ES</button>
+                </div>
+
+                <!-- Recent Documents Drawer Trigger -->
+                <button onclick="EduHubUtils.openHistoryDrawer()" class="inline-flex items-center gap-1.5 text-xs text-slate-300 hover:text-white bg-slate-900 border border-slate-800 hover:border-slate-700 px-3 py-1.5 rounded-xl transition font-medium" title="Recent Documents">
+                    <span>🕒</span>
+                    <span class="hidden sm:inline" data-i18n="recent_docs">Recent</span>
+                    <span data-history-count class="hidden bg-blue-600 text-white text-[10px] px-1.5 py-0.2 rounded-full font-bold">0</span>
+                </button>
+
+                <a href="/" class="text-xs text-blue-400 hover:text-blue-300 font-medium transition hidden sm:inline-block" data-i18n="explore_all_tools">
+                    Explore all EduHub tools &rarr;
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Distraction-Free Workspace -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 py-10 w-full flex-grow">
+        
+        <!-- Tool Headline & Breadcrumb -->
+        <div class="text-center mb-8">
+            <span class="text-[11px] font-bold uppercase tracking-widest text-blue-400 bg-blue-950/70 border border-blue-800/80 px-3 py-1 rounded-full">
+                ⚡ Direct-to-Tool Programmatic Suite
+            </span>
+            <h1 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight mt-3 mb-2" data-i18n="pdf_title">
+                Smart PDF &amp; Lecture Summarizer
+            </h1>
+            <p class="text-slate-400 text-xs sm:text-sm max-w-2xl mx-auto" data-i18n="pdf_subtitle">
+                Transform 100+ page textbooks, research papers, and lecture slides into structured takeaways, flashcard decks, and revision quizzes.
+            </p>
+        </div>
+
+        <!-- 1-Click Sample Previews -->
+        <div class="bg-slate-900/70 border border-slate-800 rounded-2xl p-4 mb-6">
+            <p class="text-xs font-medium text-slate-400 mb-2.5" data-i18n="sample_presets_label">
+                1-Click Instant Previews (No signup required):
+            </p>
+            <div class="flex flex-wrap gap-2">
+                <button onclick="loadSample(1)" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-lg border border-slate-700 transition" data-i18n="pdf_sample_1">
+                    ⚛️ Quantum Physics &amp; Entanglement
+                </button>
+                <button onclick="loadSample(2)" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-lg border border-slate-700 transition" data-i18n="pdf_sample_2">
+                    🌿 Cellular Respiration &amp; ATP Cycle
+                </button>
+                <button onclick="loadSample(3)" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-lg border border-slate-700 transition" data-i18n="pdf_sample_3">
+                    📈 Macroeconomics &amp; Monetary Policy
+                </button>
+            </div>
+        </div>
+
+        <!-- Workspace Form -->
+        <div class="bg-slate-900/90 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-5">
+            
+            <!-- Controls Bar: Format Selector -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-800">
+                <label class="text-xs font-semibold text-slate-300" data-i18n="pdf_format_label">Output Synthesis Format:</label>
+                <select id="format-select" class="bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-blue-500">
+                    <option value="structured" data-i18n="pdf_format_structured">Structured Executive Summary</option>
+                    <option value="bullet_points" data-i18n="pdf_format_keypoints">Bullet-Point Takeaways</option>
+                    <option value="flashcards" data-i18n="pdf_format_flashcards">Active-Recall Flashcards (Anki ready)</option>
+                    <option value="executive" data-i18n="pdf_format_exam">Diagnostic Self-Test Questions</option>
+                </select>
+            </div>
+
+            <!-- Input Area -->
+            <div>
+                <label class="block text-xs font-medium text-slate-400 mb-1.5" data-i18n="pdf_input_label">
+                    Paste lecture notes, paper text, or extract below:
+                </label>
+                <textarea id="text-input" rows="8" class="w-full bg-slate-950 border border-slate-800 rounded-2xl p-4 text-sm text-slate-100 placeholder-slate-600 focus:outline-none focus:border-blue-500 transition resize-y font-mono" placeholder="Paste syllabus text, textbook excerpts, or lecture transcript here (min 15 characters)..." data-i18n-placeholder="pdf_input_placeholder"></textarea>
+            </div>
+
+            <!-- Actions Bar -->
+            <div class="flex flex-col sm:flex-row justify-between items-center gap-3 pt-2">
+                <button onclick="clearText()" class="text-xs text-slate-500 hover:text-slate-400 font-medium transition" data-i18n="btn_clear">Clear</button>
+                <button id="submit-btn" onclick="executeSummarize()" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs px-6 py-3 rounded-xl transition shadow-lg shadow-blue-500/20 flex items-center justify-center gap-2">
+                    <span data-i18n="btn_submit">Process with AI</span>
+                </button>
+            </div>
+
+            <!-- Streaming / Animated Step Progress Indicator -->
+            <div id="stepper-container" class="hidden"></div>
+
+            <!-- Result Output Box -->
+            <div id="output-container" class="hidden pt-6 border-t border-slate-800">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+                    <h3 class="text-xs font-bold text-blue-400 uppercase tracking-wider" data-i18n="output_title">Result &amp; Academic Diagnostic</h3>
+                    <!-- Export Action Bar: [Copy Text], [Download PDF], [Export DOCX] -->
+                    <div class="flex items-center gap-2">
+                        <!-- Omni-Channel Viral Share Buttons -->
+                        <button onclick="EduHubShare.shareToWhatsApp('Academic Lecture Synthesis')" class="inline-flex items-center gap-1 px-2.5 py-1 text-xs bg-emerald-950/80 hover:bg-emerald-900 text-emerald-300 hover:text-white rounded-lg border border-emerald-700 transition" title="Share on WhatsApp">
+                            <span>💬</span> <span data-i18n="share_whatsapp">WhatsApp</span>
+                        </button>
+                        <button onclick="EduHubShare.shareToTelegram('Academic Lecture Synthesis')" class="inline-flex items-center gap-1 px-2.5 py-1 text-xs bg-sky-950/80 hover:bg-sky-900 text-sky-300 hover:text-white rounded-lg border border-sky-700 transition" title="Share on Telegram">
+                            <span>✈️</span> <span data-i18n="share_telegram">Telegram</span>
+                        </button>
+                        <button onclick="EduHubShare.generateStoriesCard('Academic Lecture Synthesis', 'Smart PDF Summarizer')" class="inline-flex items-center gap-1 px-2.5 py-1 text-xs bg-amber-950/80 hover:bg-amber-900 text-amber-300 hover:text-white rounded-lg border border-amber-700 transition font-medium" title="Generate Stories Card">
+                            <span>📸</span> <span data-i18n="share_stories">Stories</span>
+                        </button>
+                        <button onclick="EduHubShare.copyLink()" class="inline-flex items-center gap-1 px-2 py-1 text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white rounded-lg border border-slate-700 transition" title="Copy Referral Link">
+                            <span>📋</span>
+                        </button>
+                        <button onclick="EduHubUtils.copyText('output-text', this)" class="inline-flex items-center gap-1 px-2.5 py-1 text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white rounded-lg border border-slate-700 transition">
+                            <span>📋</span> <span data-i18n="export_copy">Copy Text</span>
+                        </button>
+                        <button onclick="EduHubUtils.downloadPDF('output-text', 'EduHub_Lecture_Summary')" class="inline-flex items-center gap-1 px-2.5 py-1 text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white rounded-lg border border-slate-700 transition">
+                            <span>📄</span> <span data-i18n="export_pdf">Download PDF</span>
+                        </button>
+                        <button onclick="EduHubUtils.exportDOCX('output-text', 'EduHub_Lecture_Summary')" class="inline-flex items-center gap-1 px-2.5 py-1 text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white rounded-lg border border-slate-700 transition">
+                            <span>📝</span> <span data-i18n="export_docx">Export DOCX</span>
+                        </button>
+                    </div>
+                </div>
+                <div id="output-text" class="bg-slate-950 border border-slate-800 rounded-2xl p-5 text-xs text-slate-200 whitespace-pre-wrap leading-relaxed"></div>
+            </div>
+
+        </div>
+
+        <!-- Laser-Focused In-Tool Conversion Card (Laser CTA) -->
+        <div class="mt-8 bg-gradient-to-r from-blue-950/70 via-slate-900 to-indigo-950/70 border border-blue-600/60 rounded-3xl p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl">
+            <div class="space-y-1.5 text-center md:text-left">
+                <span class="text-[10px] font-extrabold uppercase tracking-widest text-blue-400 bg-blue-900/60 px-2.5 py-0.5 rounded-full border border-blue-700">
+                    ⚡ High-Volume Processing Tier
+                </span>
+                <h3 class="text-base sm:text-lg font-bold text-white" data-i18n="pdf_laser_cta_title">
+                    Need to summarize complete 200+ page textbook PDFs?
+                </h3>
+                <p class="text-xs text-slate-400 max-w-xl" data-i18n="pdf_laser_cta_desc">
+                    Unlock multi-megabyte document OCR, priority Gemini 2.5 Flash queues, and batch Anki export.
+                </p>
+            </div>
+            <div class="flex flex-col sm:flex-row gap-2.5 shrink-0 w-full md:w-auto">
+                <a href="https://eduhub-ai.lemonsqueezy.com/checkout/buy/ca17b5d8-9754-44f3-9a1f-f6d779eb8203" class="lemonsqueezy-button block text-center bg-blue-600 hover:bg-blue-500 text-white font-semibold px-5 py-2.5 rounded-xl text-xs transition shadow-lg shadow-blue-600/30" data-i18n="pdf_laser_cta_btn">
+                    Start 3-Day Pro Access for Just $1
+                </a>
+                <a href="https://eduhub-ai.lemonsqueezy.com/buy/sprint-50" class="lemonsqueezy-button block text-center bg-slate-800 hover:bg-slate-700 text-amber-300 font-medium px-4 py-2.5 rounded-xl text-xs transition border border-slate-700" data-i18n="pdf_laser_topup_btn">
+                    Get 50 Flash Credits ($5)
+                </a>
+                <p class="checkout-micro-consent mt-2 text-[10px] text-slate-400 text-center leading-relaxed" data-i18n="checkout_micro_consent">By clicking, you agree to the <a href="/terms" target="_blank" class="underline text-slate-300 hover:text-white">Terms of Service</a> and our <a href="/refund" target="_blank" class="underline text-slate-300 hover:text-white">14-day money-back guarantee</a>. Cancel anytime in 1 click.</p>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Compact Contextual Footer -->
+    <footer class="border-t border-slate-800/80 bg-slate-950 py-6 text-xs text-slate-500">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <span data-i18n="footer_text">EduHub AI — Autonomous Academic Infrastructure. All rights reserved.</span>
+            <div class="flex items-center space-x-4">
+                <a href="/terms" class="hover:text-slate-400" data-i18n="footer_terms">Terms of Service</a>
+                <a href="/privacy" class="hover:text-slate-400" data-i18n="footer_privacy">Privacy Policy</a>
+                <a href="/refund" class="hover:text-slate-400" data-i18n="footer_refund">Refund Policy</a>
+                <a href="/support" class="text-indigo-400 hover:text-indigo-300">⚖️ AI Support</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Script for PDF Summarizer -->
+    <script>
+        const SAMPLES = {
+            1: "Quantum entanglement is a physical phenomenon that occurs when a group of particles are generated, interact, or share spatial proximity in a way such that the quantum state of each particle of the pair cannot be described independently of the state of the others, including when the particles are separated by a large distance. Bell's theorem mathematically proves that no local hidden-variable theory can reproduce the predictions of quantum mechanics.",
+            2: "Cellular respiration is a set of metabolic reactions and processes that take place in the cells of organisms to convert biochemical energy from nutrients into adenosine triphosphate (ATP), and then release waste products. The catabolic reactions involved include glycolysis in the cytoplasm, the citric acid cycle (Krebs cycle) in the mitochondrial matrix, and oxidative phosphorylation via the electron transport chain across the inner mitochondrial membrane.",
+            3: "Monetary policy is the policy adopted by the monetary authority of a nation to control either the interest rate payable for very short-term borrowing or the money supply. When an economy faces inflationary pressure, central banks typically enact contractionary monetary policy by raising policy interest rates, increasing reserve requirements, and reducing balance-sheet asset purchases to cool consumer demand."
+        };
+
+        function loadSample(id) {
+            const input = document.getElementById('text-input');
+            if (input && SAMPLES[id]) {
+                input.value = SAMPLES[id];
+                input.focus();
+            }
+        }
+
+        function clearText() {
+            const input = document.getElementById('text-input');
+            if (input) input.value = '';
+            document.getElementById('output-container').classList.add('hidden');
+        }
+
+        async function executeSummarize() {
+            const input = document.getElementById('text-input');
+            const format = document.getElementById('format-select').value;
+            const btn = document.getElementById('submit-btn');
+            const outputBox = document.getElementById('output-container');
+            const outputText = document.getElementById('output-text');
+
+            const text = input.value.trim();
+            if (text.length < 15) {
+                alert(t('pdf_input_placeholder'));
+                return;
+            }
+
+            btn.disabled = true;
+            btn.classList.add('opacity-60');
+            btn.innerText = t('btn_processing');
+
+            if (window.EduHubUtils) {
+                EduHubUtils.startStepper('stepper-container');
+            }
+
+            try {
+                const res = await fetch('/api/v1/student/summarize', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        text: text,
+                        format: format,
+                        language: currentLocale === 'ru' ? 'Russian' : (currentLocale === 'uz' ? 'Uzbek' : (currentLocale === 'es' ? 'Spanish' : 'English'))
+                    })
+                });
+                const data = await res.json();
+                outputBox.classList.remove('hidden');
+                if (res.ok) {
+                    if (window.renderAcademicDocument) {
+                        window.renderAcademicDocument(data.summary, outputText);
+                    } else {
+                        outputText.textContent = data.summary;
+                    }
+                    if (window.EduHubConversion) {
+                        window.EduHubConversion.applyPaywallBlur(outputText);
+                    }
+
+                    // Auto-save to LocalStorage session history
+                    if (window.EduHubUtils) {
+                        EduHubUtils.saveHistoryItem({
+                            title: text.substring(0, 70),
+                            type: 'pdf_summary',
+                            content: data.summary
+                        });
+                    }
+                } else {
+                    outputText.textContent = "Error: " + (data.detail ? JSON.stringify(data.detail) : "Processing failed");
+                }
+            } catch (err) {
+                outputBox.classList.remove('hidden');
+                outputText.textContent = "Network error: " + err.message;
+            } finally {
+                btn.disabled = false;
+                btn.classList.remove('opacity-60');
+                btn.innerHTML = `<span data-i18n="btn_submit">${t('btn_submit')}</span>`;
+                if (window.EduHubUtils) {
+                    EduHubUtils.stopStepper('stepper-container');
+                }
+            }
+        }
+    </script>
+
+    <!-- Slide-Over Drawer: Recent Documents History -->
+    <div id="history-backdrop" onclick="EduHubUtils.closeHistoryDrawer()" class="hidden fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 transition-opacity"></div>
+    <div id="history-drawer" class="fixed inset-y-0 right-0 max-w-md w-full bg-slate-950 border-l border-slate-800 shadow-2xl z-50 transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col justify-between">
+        <div class="p-5 border-b border-slate-800 flex justify-between items-center bg-slate-900/50">
+            <div class="flex items-center gap-2">
+                <span class="text-xl">🕒</span>
+                <h3 class="text-sm font-bold text-white" data-i18n="recent_docs">Recent Documents</h3>
+                <span data-history-count class="hidden bg-blue-600 text-white text-[10px] px-2 py-0.5 rounded-full font-bold">0</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <button onclick="EduHubUtils.clearAllHistory()" class="text-xs text-slate-500 hover:text-rose-400 px-2 py-1 rounded transition" title="Clear all">Clear</button>
+                <button onclick="EduHubUtils.closeHistoryDrawer()" class="text-slate-400 hover:text-white p-1 rounded-lg text-lg transition">✕</button>
+            </div>
+        </div>
+        <div id="history-drawer-list" class="flex-grow overflow-y-auto p-4 space-y-3">
+            <!-- Populated dynamically by EduHubUtils.renderHistoryDrawer() -->
+        </div>
+        <div class="p-4 border-t border-slate-800 bg-slate-900/40 text-center">
+            <p class="text-[11px] text-slate-500">Auto-saved locally in browser storage • Safe &amp; private</p>
+        </div>
+    </div>
+
+    <!-- Exit-Intent High-Converting Modal ($1 Trial) -->
+    <div id="exit-intent-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-md transition-all duration-300">
+        <div class="relative w-full max-w-lg bg-slate-900 border border-amber-500/40 rounded-3xl p-6 sm:p-8 shadow-2xl shadow-amber-500/10 text-center overflow-hidden">
+            <button onclick="EduHubConversion.closeExitModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl p-2 transition">✕</button>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 text-xs font-bold uppercase mb-4">
+                ⚡ <span data-i18n="exit_modal_badge">Wait! Don't Leave Empty-Handed</span>
+            </div>
+            <h3 class="text-2xl sm:text-3xl font-black text-white mb-3" data-i18n="exit_modal_title">Pass Your Exams with Flying Colors for Just $1</h3>
+            <p class="text-slate-300 text-xs sm:text-sm leading-relaxed mb-6" data-i18n="exit_modal_desc">
+                Unlock 3 days of full unlimited Pro Max access. Grade unlimited IELTS essays, solve hard STEM homework with step-by-step Socratic hints, and export high-yield Anki decks.
+            </p>
+            <div class="p-4 rounded-2xl bg-slate-800/80 border border-slate-700/60 mb-6 text-left space-y-2">
+                <div class="flex items-center gap-2 text-xs text-slate-200">
+                    <span class="text-emerald-400 font-bold">✓</span> <span data-i18n="exit_modal_f1">Unlimited essay & homework evaluations</span>
+                </div>
+                <div class="flex items-center gap-2 text-xs text-slate-200">
+                    <span class="text-emerald-400 font-bold">✓</span> <span data-i18n="exit_modal_f2">Band 8.5–9.0 Cambridge examiner model rewrites</span>
+                </div>
+                <div class="flex items-center gap-2 text-xs text-slate-200">
+                    <span class="text-emerald-400 font-bold">✓</span> <span data-i18n="exit_modal_f3">14-Day 100% Money-Back Guarantee</span>
+                </div>
+            </div>
+            <button onclick="EduHubConversion.triggerCheckout('promax_trial')" class="w-full py-4 rounded-2xl font-black text-base text-slate-950 bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 hover:brightness-110 shadow-xl shadow-amber-500/25 transition transform hover:-translate-y-0.5 cursor-pointer mb-3">
+                <span data-i18n="exit_modal_btn">Claim 3-Day Pro Max for $1 →</span>
+            </button>
+            <div class="mb-4 text-[11px] text-slate-400" data-i18n="exit_modal_guarantee">
+                100% Satisfaction 14-Day Money-Back Guarantee. Cancel anytime.
+            </div>
+            <button onclick="EduHubConversion.closeExitModal()" class="text-xs text-slate-500 hover:text-slate-300 transition" data-i18n="exit_modal_dismiss">
+                No thanks, I prefer studying without AI help
+            </button>
+        </div>
+    </div>
+
+    <!-- Live Social Proof Activity Ticker (Floating Toast) -->
+    <div id="conversion-social-ticker" class="fixed bottom-6 left-6 z-40 hidden sm:flex items-center gap-3 p-3.5 pr-5 bg-slate-900/95 backdrop-blur-md border border-slate-700/70 rounded-2xl shadow-2xl transition-all duration-500 transform translate-y-2 opacity-0 pointer-events-auto">
+        <div class="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-lg shrink-0">
+            🎓
+        </div>
+        <div class="text-left">
+            <div id="ticker-text" class="text-xs font-semibold text-slate-200 leading-tight">
+                <!-- Dynamic text populated by EduHubConversion.initSocialTicker() -->
+            </div>
+            <div class="text-[10px] text-emerald-400 font-medium mt-0.5 flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span data-i18n="ticker_verified">Verified Student Activity</span>
+            </div>
+        </div>
+        <button onclick="EduHubConversion.dismissTicker()" class="text-slate-500 hover:text-white text-xs ml-2">✕</button>
+    </div>
+
+
+    <!-- Floating PWA Install Prompt Banner -->
+    <div id="pwa-install-banner" class="fixed bottom-20 right-6 z-40 hidden items-center gap-3 p-3.5 bg-slate-900/95 backdrop-blur-md border border-blue-500/40 rounded-2xl shadow-2xl max-w-sm">
+        <div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-xl shrink-0">
+            📱
+        </div>
+        <div class="text-left flex-grow">
+            <h4 class="text-xs font-bold text-white" data-i18n="pwa_install_title">Install EduHub AI App</h4>
+            <p class="text-[10px] text-slate-400" data-i18n="pwa_install_desc">Fast 1-tap access on iPhone & Android with offline support.</p>
+        </div>
+        <button onclick="EduHubPWA.triggerInstall()" class="px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition whitespace-nowrap" data-i18n="pwa_install_btn">
+            Install App 📱
+        </button>
+        <button onclick="EduHubPWA.dismissBanner()" class="text-slate-500 hover:text-white text-xs ml-1">✕</button>
+    </div>
+
+    <!-- iOS Safari Install Instructions Modal -->
+    <div id="pwa-ios-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+        <div class="relative w-full max-w-sm bg-slate-900 border border-slate-700 rounded-3xl p-6 text-center shadow-2xl">
+            <button onclick="EduHubPWA.closeIosModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg">✕</button>
+            <div class="text-3xl mb-2">📲</div>
+            <h3 class="text-base font-bold text-white mb-3" data-i18n="pwa_ios_title">Install on iPhone & iPad</h3>
+            <div class="text-xs text-slate-300 space-y-2 text-left bg-slate-800/60 p-4 rounded-xl mb-4">
+                <p data-i18n="pwa_ios_step1">1. Tap the Share button at the bottom of Safari (square with arrow up).</p>
+                <p data-i18n="pwa_ios_step2">2. Scroll down and select 'Add to Home Screen' (+).</p>
+                <p data-i18n="pwa_ios_step3">3. Tap 'Add' in the top right corner. Done!</p>
+            </div>
+            <button onclick="EduHubPWA.closeIosModal()" class="w-full py-2.5 rounded-xl bg-blue-600 text-white font-bold text-xs hover:bg-blue-500 transition">
+                Got it!
+            </button>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATS Resume & Job Match Shield — Beat Workday, Taleo & Greenhouse | EduHub AI</title>
+    
+    <!-- Programmatic SEO & AEO Meta Tags -->
+    <meta name="description" content="Instant ATS resume scanner and job description tailor. Analyze keyword gaps, get a 0-100% ATS match score, metric-driven XYZ bullet point rewrites, and export tailored resumes for just $1.">
+    <meta name="keywords" content="ATS resume checker, ATS resume optimizer, resume keyword scanner, beat Workday ATS, resume builder AI, job description match score, resume tailor">
+    <link rel="canonical" href="https://eduhub.ai/tools/ats-resume">
+    
+    <!-- Multi-Language Hreflang Tags -->
+    <link rel="alternate" hreflang="en" href="https://eduhub.ai/tools/ats-resume?lang=en">
+    <link rel="alternate" hreflang="ru" href="https://eduhub.ai/tools/ats-resume?lang=ru">
+    <link rel="alternate" hreflang="uz" href="https://eduhub.ai/tools/ats-resume?lang=uz">
+    <link rel="alternate" hreflang="es" href="https://eduhub.ai/tools/ats-resume?lang=es">
+    <link rel="alternate" hreflang="x-default" href="https://eduhub.ai/tools/ats-resume">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Marked.js for Markdown Parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+
+    <!-- Essential User Utilities -->
+    <script src="/static/js/user-utils.js" defer></script>
+    <script src="/static/js/legal-consent.js" defer></script>
+    <script src="/static/js/conversion-engine.js" defer></script>
+    <script src="/static/js/i18n.js" defer></script>
+
+    <style>
+        .gradient-border {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.3), rgba(168, 85, 247, 0.3));
+        }
+    </style>
+</head>
+<body data-page-tool="ats-resume" class="bg-slate-950 text-slate-100 font-sans min-h-screen flex flex-col justify-between selection:bg-emerald-500 selection:text-slate-950">
+
+    <!-- Header -->
+    <header class="border-b border-slate-800/80 bg-slate-950/90 backdrop-blur-md sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <a href="/" class="flex items-center space-x-2">
+                    <span class="w-8 h-8 rounded-lg bg-gradient-to-tr from-emerald-500 to-teal-400 flex items-center justify-center font-black text-slate-950 text-lg shadow-md shadow-emerald-500/30">E</span>
+                    <span class="text-xl font-bold bg-gradient-to-r from-emerald-400 via-teal-300 to-white bg-clip-text text-transparent tracking-tight">EduHub AI</span>
+                </a>
+                <span class="hidden sm:inline-block text-[11px] bg-emerald-950 text-emerald-300 px-2.5 py-0.5 rounded-full border border-emerald-800 font-medium">
+                    🎯 ATS Resume Shield ($1)
+                </span>
+            </div>
+            
+            <div class="flex items-center space-x-3">
+                <div class="inline-flex bg-slate-900 border border-slate-800 rounded-xl p-0.5">
+                    <button onclick="setLocale('en')" data-lang-btn="en" class="lang-btn px-2.5 py-1 rounded-lg text-xs font-bold transition bg-emerald-500 text-slate-950 shadow-sm shadow-emerald-500/20">EN</button>
+                    <button onclick="setLocale('ru')" data-lang-btn="ru" class="lang-btn px-2.5 py-1 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition">RU</button>
+                    <button onclick="setLocale('uz')" data-lang-btn="uz" class="lang-btn px-2.5 py-1 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition">UZ</button>
+                    <button onclick="setLocale('es')" data-lang-btn="es" class="lang-btn px-2.5 py-1 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition">ES</button>
+                </div>
+
+                <a href="/" class="text-xs text-emerald-400 hover:text-emerald-300 font-medium transition hidden sm:inline-block">
+                    Explore all tools &rarr;
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 py-10 w-full flex-grow">
+        
+        <!-- Hero Title -->
+        <div class="text-center mb-8">
+            <span class="text-[11px] font-bold uppercase tracking-widest text-emerald-400 bg-emerald-950/70 border border-emerald-800/80 px-3 py-1 rounded-full">
+                ⚡ Beat 75% Automated Rejections
+            </span>
+            <h1 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight mt-3 mb-2">
+                ATS Resume &amp; Job Match Shield
+            </h1>
+            <p class="text-slate-400 text-xs sm:text-sm max-w-2xl mx-auto">
+                Paste your resume alongside the job posting. Get an instant 0–100% ATS score, uncover missing keyword gaps, and transform weak bullet points into high-impact metrics.
+            </p>
+        </div>
+
+        <!-- 1-Click Sample Previews -->
+        <div class="bg-slate-900/70 border border-slate-800 rounded-2xl p-4 mb-6">
+            <p class="text-xs font-medium text-slate-400 mb-2.5">
+                ⚡ 1-Click Fast Presets (No signup required):
+            </p>
+            <div class="flex flex-wrap gap-2">
+                <button onclick="loadSample(1)" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-lg border border-slate-700 transition">
+                    💻 Full-Stack Developer vs Senior SaaS Role
+                </button>
+                <button onclick="loadSample(2)" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-lg border border-slate-700 transition">
+                    📊 Product / Marketing Specialist vs Tech Lead
+                </button>
+                <button onclick="loadSample(3)" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-lg border border-slate-700 transition">
+                    🎓 University Graduate vs Junior Analyst
+                </button>
+            </div>
+        </div>
+
+        <!-- Two Column Workspace -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+            
+            <!-- Left: Job Description -->
+            <div class="bg-slate-900/90 border border-slate-800 rounded-3xl p-5 sm:p-6 shadow-xl flex flex-col justify-between">
+                <div>
+                    <div class="flex justify-between items-center mb-2">
+                        <label class="text-xs font-bold text-slate-200 uppercase tracking-wider flex items-center gap-1.5">
+                            <span>📋</span> Target Job Description / Vacancy
+                        </label>
+                        <span id="jd-word-count" class="text-[11px] text-slate-500 font-mono">0 words</span>
+                    </div>
+                    <input id="target-role-input" type="text" placeholder="Target Role Title (e.g. Senior Frontend Engineer)" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2 text-xs text-slate-200 mb-3 focus:outline-none focus:border-emerald-500 transition">
+                    <textarea id="jd-input" rows="12" class="w-full bg-slate-950 border border-slate-800 rounded-2xl p-4 text-xs text-slate-200 placeholder-slate-600 focus:outline-none focus:border-emerald-500 transition resize-y font-mono leading-relaxed" placeholder="Paste the full job posting requirements, responsibilities, and qualifications here..." oninput="updateCounts()"></textarea>
+                </div>
+                <div class="text-[11px] text-slate-500 mt-2">
+                    💡 Tip: Include qualifications and tech requirements for maximum keyword detection accuracy.
+                </div>
+            </div>
+
+            <!-- Right: Candidate Resume -->
+            <div class="bg-slate-900/90 border border-slate-800 rounded-3xl p-5 sm:p-6 shadow-xl flex flex-col justify-between">
+                <div>
+                    <div class="flex justify-between items-center mb-2">
+                        <label class="text-xs font-bold text-slate-200 uppercase tracking-wider flex items-center gap-1.5">
+                            <span>👤</span> Your Resume / CV Text
+                        </label>
+                        <span id="resume-word-count" class="text-[11px] text-slate-500 font-mono">0 words</span>
+                    </div>
+                    <div class="h-[38px] mb-3 flex items-center justify-between text-xs text-slate-400">
+                        <span>Plain text or Markdown format</span>
+                        <button onclick="clearInputs()" class="text-slate-500 hover:text-slate-400 text-xs">Clear All</button>
+                    </div>
+                    <textarea id="resume-input" rows="12" class="w-full bg-slate-950 border border-slate-800 rounded-2xl p-4 text-xs text-slate-200 placeholder-slate-600 focus:outline-none focus:border-emerald-500 transition resize-y font-mono leading-relaxed" placeholder="Paste your current resume work history, summary, and skills list here..." oninput="updateCounts()"></textarea>
+                </div>
+                <div class="flex items-center justify-between mt-3">
+                    <button id="scan-btn" onclick="executeATSScan()" class="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-slate-950 font-bold text-xs px-6 py-3 rounded-xl transition shadow-lg shadow-emerald-600/30 flex items-center justify-center gap-2">
+                        <span>🔍 Scan &amp; Match ATS Score (Instant)</span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Loading State Indicator -->
+        <div id="loading-spinner" class="hidden text-center py-10">
+            <div class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-emerald-500 mb-3"></div>
+            <p class="text-xs text-slate-400 font-mono">Parsing ATS parsing matrix &amp; comparing keyword densities...</p>
+        </div>
+
+        <!-- Diagnostic Report Output -->
+        <div id="results-card" class="hidden bg-slate-900/90 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6">
+            
+            <!-- Header with Score Ring -->
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-6 pb-6 border-b border-slate-800">
+                <div class="flex items-center gap-4 text-center sm:text-left">
+                    <div class="w-20 h-20 rounded-2xl bg-slate-950 border border-slate-800 flex flex-col items-center justify-center p-2 shadow-inner">
+                        <span id="score-val" class="text-2xl font-black text-emerald-400">82%</span>
+                        <span class="text-[9px] uppercase tracking-wider text-slate-500 font-bold">ATS Score</span>
+                    </div>
+                    <div>
+                        <div class="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-950 text-emerald-300 border border-emerald-800 mb-1" id="score-verdict">
+                            Strong Match
+                        </div>
+                        <h2 class="text-lg font-bold text-white" id="target-role-display">Senior Software Engineer</h2>
+                        <p class="text-xs text-slate-400" id="key-findings-display">Your resume closely aligns with core duties, but is missing 4 key framework terms.</p>
+                    </div>
+                </div>
+
+                <!-- Instant Action Button -->
+                <div class="flex flex-col sm:flex-row gap-2">
+                    <button onclick="copyOptimizedResume()" class="inline-flex items-center gap-1 px-3 py-2 text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl border border-slate-700 transition">
+                        <span>📋</span> Copy Full Markdown
+                    </button>
+                    <a href="https://test.dodopayments.com/buy/pdt_0NYV3EevfB7hC3hRkF2kG?quantity=1" class="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold bg-gradient-to-r from-emerald-500 to-teal-400 text-slate-950 rounded-xl hover:from-emerald-400 hover:to-teal-300 transition shadow-lg shadow-emerald-500/20">
+                        <span>⚡ Unlock Full ATS Tailor for $1</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Keyword Breakdown (Matched vs Missing) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-slate-950/80 border border-emerald-900/50 rounded-2xl p-4">
+                    <h3 class="text-xs font-bold text-emerald-400 uppercase tracking-wider mb-2.5 flex items-center gap-1.5">
+                        <span>✅</span> Matched Keywords In Resume
+                    </h3>
+                    <div id="matched-keywords-container" class="flex flex-wrap gap-1.5"></div>
+                </div>
+
+                <div class="bg-slate-950/80 border border-rose-900/50 rounded-2xl p-4">
+                    <h3 class="text-xs font-bold text-rose-400 uppercase tracking-wider mb-2.5 flex items-center gap-1.5">
+                        <span>⚠️</span> Missing Critical Keywords (Add These!)
+                    </h3>
+                    <div id="missing-keywords-container" class="flex flex-wrap gap-1.5"></div>
+                </div>
+            </div>
+
+            <!-- Metric Improvements (Google XYZ Formula) -->
+            <div>
+                <h3 class="text-xs font-bold text-slate-300 uppercase tracking-wider mb-3 flex items-center gap-1.5">
+                    <span>🚀</span> Metric-Enhanced Bullet Point Rewrites (XYZ Formula)
+                </h3>
+                <div id="metric-improvements-container" class="space-y-3"></div>
+            </div>
+
+            <!-- Tailored Executive Summary -->
+            <div class="bg-slate-950/80 border border-slate-800 rounded-2xl p-4">
+                <h3 class="text-xs font-bold text-indigo-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                    <span>✨</span> Tailored Executive Summary
+                </h3>
+                <p id="tailored-summary-display" class="text-xs text-slate-300 leading-relaxed font-mono"></p>
+            </div>
+
+            <!-- ATS Formatting Rules -->
+            <div class="bg-slate-950/50 border border-slate-800/80 rounded-2xl p-4">
+                <h4 class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2">
+                    🛡️ Recruiter Recommendations to Avoid Algorithmic Rejection:
+                </h4>
+                <ul id="ats-tips-list" class="text-xs text-slate-400 space-y-1 list-disc list-inside"></ul>
+            </div>
+
+        </div>
+
+        <!-- Laser Conversion Card -->
+        <div class="mt-8 bg-gradient-to-r from-emerald-950/60 via-slate-900 to-teal-950/60 border border-emerald-600/50 rounded-3xl p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl">
+            <div class="space-y-1.5 text-center md:text-left">
+                <span class="text-[10px] font-extrabold uppercase tracking-widest text-emerald-400 bg-emerald-900/60 px-2.5 py-0.5 rounded-full border border-emerald-700">
+                    🎯 100% Interview Guarantee
+                </span>
+                <h3 class="text-base sm:text-lg font-bold text-white">
+                    Need Your Resume Completely Tailored for This Specific Job?
+                </h3>
+                <p class="text-xs text-slate-400 max-w-xl">
+                    Download your fully formatted, ATS-compliant resume and personalized cover letter drafted specifically for this vacancy for just $1.
+                </p>
+            </div>
+            <div class="shrink-0 w-full md:w-auto text-center">
+                <a href="https://test.dodopayments.com/buy/pdt_0NYV3EevfB7hC3hRkF2kG?quantity=1" class="block bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-bold px-6 py-3 rounded-xl text-xs transition shadow-lg shadow-emerald-500/25">
+                    Download Tailored Resume for $1
+                </a>
+                <p class="mt-2 text-[10px] text-slate-400 leading-relaxed">
+                    Powered by Dodo Payments &middot; 14-day 100% money-back guarantee &middot; Instant delivery
+                </p>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Contextual Footer -->
+    <footer class="border-t border-slate-800/80 bg-slate-950 py-6 text-xs text-slate-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <span>EduHub AI &mdash; Autonomous Career Infrastructure. All rights reserved.</span>
+            <div class="flex items-center space-x-4">
+                <a href="/privacy" class="hover:text-slate-400 transition">Privacy</a>
+                <a href="/terms" class="hover:text-slate-400 transition">Terms</a>
+                <a href="/refund" class="hover:text-slate-400 transition">Refund</a>
+                <a href="mailto:support@eduhub.ai" class="hover:text-slate-400 transition">Support</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let lastReport = null;
+
+        function updateCounts() {
+            const jd = document.getElementById("jd-input").value.trim();
+            const resume = document.getElementById("resume-input").value.trim();
+            document.getElementById("jd-word-count").textContent = (jd ? jd.split(/\s+/).length : 0) + " words";
+            document.getElementById("resume-word-count").textContent = (resume ? resume.split(/\s+/).length : 0) + " words";
+        }
+
+        function clearInputs() {
+            document.getElementById("jd-input").value = "";
+            document.getElementById("resume-input").value = "";
+            document.getElementById("target-role-input").value = "";
+            updateCounts();
+            document.getElementById("results-card").classList.add("hidden");
+        }
+
+        function loadSample(idx) {
+            if (idx === 1) {
+                document.getElementById("target-role-input").value = "Senior Frontend Engineer";
+                document.getElementById("jd-input").value = "We are seeking a Senior Frontend Engineer with 4+ years of hands-on experience in React, TypeScript, and Next.js. You will lead the migration of legacy views to modern micro-frontends, optimize Core Web Vitals, implement CI/CD with GitHub Actions, and collaborate with backend developers using REST APIs and GraphQL. Experience with Tailwind CSS and Jest testing is required.";
+                document.getElementById("resume-input").value = "John Doe — Frontend Developer
+Experience:
+- Built web applications using React, JavaScript, and HTML/CSS.
+- Worked with backend teams on REST API integration.
+- Managed version control with Git and GitHub.
+- Created reusable UI components and styled pages.
+Skills: React, JavaScript, TypeScript, CSS, Git, HTML, REST APIs.";
+            } else if (idx === 2) {
+                document.getElementById("target-role-input").value = "Product Marketing Manager";
+                document.getElementById("jd-input").value = "Looking for a Data-Driven Product Marketing Manager to scale our B2B SaaS platform. Responsibilities: design multi-channel acquisition funnels, analyze user retention cohorts, conduct customer interviews, coordinate with SEO and content teams, and drive product launches. Requirements: 3+ years SaaS PMM experience, SQL / Google Analytics proficiency, and demonstrated ability to improve CAC and LTV.";
+                document.getElementById("resume-input").value = "Alex Smith — Marketing Specialist
+Summary: Dynamic marketer with 3 years experience creating digital marketing campaigns, social media marketing, and email newsletters.
+Experience:
+- Created weekly email newsletters for 15,000 subscribers.
+- Managed digital ads and wrote blog posts to increase brand awareness.
+- Collaborated with design and sales team.";
+            } else if (idx === 3) {
+                document.getElementById("target-role-input").value = "Junior Data Analyst";
+                document.getElementById("jd-input").value = "Hiring an Entry-Level / Junior Data Analyst. Requirements: Bachelor's degree in STEM, Economics, or Computer Science. Proficiency in Python (Pandas, NumPy), SQL queries, data visualization (Power BI or Tableau), and fundamental statistical methods. Good communication skills and desire to learn.";
+                document.getElementById("resume-input").value = "Recent Computer Science Graduate with strong coursework in database systems, Python programming, and probability.
+Projects:
+- Analyzed student performance dataset using Python Pandas and Matplotlib.
+- Built relational database schema in MySQL for university course management.";
+            }
+            updateCounts();
+        }
+
+        async function executeATSScan() {
+            const jd = document.getElementById("jd-input").value.trim();
+            const resume = document.getElementById("resume-input").value.trim();
+            const role = document.getElementById("target-role-input").value.trim();
+
+            if (!jd || !resume) {
+                alert("Please provide both the Job Description and your Resume text to run the ATS scanner.");
+                return;
+            }
+
+            const btn = document.getElementById("scan-btn");
+            const spinner = document.getElementById("loading-spinner");
+            const results = document.getElementById("results-card");
+
+            btn.disabled = true;
+            btn.classList.add("opacity-50", "cursor-not-allowed");
+            spinner.classList.remove("hidden");
+            results.classList.add("hidden");
+
+            try {
+                const currentLang = localStorage.getItem("eduhub_locale") || "en";
+                const response = await fetch("/api/v1/career/ats-tailor", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        job_description: jd,
+                        resume_text: resume,
+                        target_role: role || null,
+                        language: currentLang
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error("Analysis failed: " + response.statusText);
+                }
+
+                const data = await response.json();
+                lastReport = data;
+                renderResults(data);
+            } catch (err) {
+                console.error("ATS Scan Error:", err);
+                alert("Unable to complete ATS scan. Please ensure input length is valid.");
+            } finally {
+                btn.disabled = false;
+                btn.classList.remove("opacity-50", "cursor-not-allowed");
+                spinner.classList.add("hidden");
+            }
+        }
+
+        function renderResults(data) {
+            document.getElementById("score-val").textContent = data.ats_score + "%";
+            document.getElementById("score-verdict").textContent = data.match_verdict;
+            document.getElementById("target-role-display").textContent = data.target_role || "Target Role";
+            document.getElementById("key-findings-display").textContent = data.key_findings;
+
+            // Matched keywords
+            const matchedBox = document.getElementById("matched-keywords-container");
+            matchedBox.innerHTML = "";
+            (data.matching_keywords || []).forEach(kw => {
+                const span = document.createElement("span");
+                span.className = "text-[11px] font-medium bg-emerald-950 text-emerald-300 border border-emerald-800 px-2.5 py-1 rounded-lg";
+                span.textContent = kw;
+                matchedBox.appendChild(span);
+            });
+
+            // Missing keywords
+            const missingBox = document.getElementById("missing-keywords-container");
+            missingBox.innerHTML = "";
+            (data.missing_keywords || []).forEach(kw => {
+                const span = document.createElement("span");
+                span.className = "text-[11px] font-medium bg-rose-950 text-rose-300 border border-rose-800 px-2.5 py-1 rounded-lg";
+                span.textContent = "+ " + kw;
+                missingBox.appendChild(span);
+            });
+
+            // Metric improvements
+            const metricBox = document.getElementById("metric-improvements-container");
+            metricBox.innerHTML = "";
+            (data.metric_improvements || []).forEach(item => {
+                const card = document.createElement("div");
+                card.className = "bg-slate-950 border border-slate-800 rounded-xl p-3.5 space-y-2 text-xs";
+                card.innerHTML = `
+                    <div class="text-rose-400 line-through opacity-80"><span class="font-bold">Before:</span> ${item.original}</div>
+                    <div class="text-emerald-300 font-medium"><span class="font-bold">ATS Optimized:</span> ${item.optimized}</div>
+                    <div class="text-[11px] text-slate-500 italic font-mono">💡 ${item.why}</div>
+                `;
+                metricBox.appendChild(card);
+            });
+
+            // Tailored summary
+            document.getElementById("tailored-summary-display").textContent = data.tailored_summary || "";
+
+            // ATS formatting tips
+            const tipsBox = document.getElementById("ats-tips-list");
+            tipsBox.innerHTML = "";
+            (data.ats_formatting_tips || []).forEach(tip => {
+                const li = document.createElement("li");
+                li.textContent = tip;
+                tipsBox.appendChild(li);
+            });
+
+            const resultsCard = document.getElementById("results-card");
+            resultsCard.classList.remove("hidden");
+            resultsCard.scrollIntoView({ behavior: "smooth" });
+        }
+
+        function copyOptimizedResume() {
+            if (!lastReport || !lastReport.tailored_resume_markdown) {
+                alert("No optimized resume generated yet.");
+                return;
+            }
+            navigator.clipboard.writeText(lastReport.tailored_resume_markdown);
+            alert("Tailored Resume copied to clipboard in Markdown format!");
+        }
+    </script>
+</body>
+</html>

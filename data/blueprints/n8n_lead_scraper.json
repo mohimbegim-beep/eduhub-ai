@@ -1,0 +1,65 @@
+{
+  "name": "EduHub Autonomous B2B Lead Scraper & Enricher",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "lead-intake"
+      },
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "position": [
+        240,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://api.scraperapi.com?api_key={{$env.SCRAPER_KEY}}&url=https://www.google.com/search?q={{$json.query}}",
+        "options": {
+          "headers": {
+            "User-Agent": "Mozilla/5.0 Chrome/122.0.0.0 Safari/537.36"
+          }
+        }
+      },
+      "name": "HTTP Request / Scraper",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        460,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "model": "gemini-2.5-flash",
+        "prompt": "Analyze extracted text and return clean JSON array of decision makers, verified emails, and LinkedIn handles:\n\n{{$json.data}}"
+      },
+      "name": "AI Lead Extraction & Qualification",
+      "type": "n8n-nodes-base.openAi",
+      "position": [
+        680,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "sheetId": "{{$node[\"Webhook Trigger\"].json.google_sheet_id || \"1A2B3C4D5E6F\"}}",
+        "range": "Leads!A:E",
+        "fields": [
+          "Company",
+          "Contact Person",
+          "Email",
+          "LinkedIn",
+          "Fit Score"
+        ]
+      },
+      "name": "Save to Google Sheets / CRM",
+      "type": "n8n-nodes-base.googleSheets",
+      "position": [
+        900,
+        300
+      ]
+    }
+  ]
+}
