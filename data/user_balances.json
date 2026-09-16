@@ -273,5 +273,32 @@
       "activated_at": 1789205463.478952,
       "trial": true
     }
+  },
+  "tester@lemonsqueezy.com": {
+    "email": "tester@lemonsqueezy.com",
+    "flash_credits": 0,
+    "daily_usage": {
+      "date": "2026-09-16",
+      "count": 0
+    },
+    "last_updated": 1789555598.739629
+  },
+  "customer@eduhub.ai": {
+    "email": "customer@eduhub.ai",
+    "flash_credits": 0,
+    "daily_usage": {
+      "date": "2026-09-16",
+      "count": 0
+    },
+    "last_updated": 1789555598.739629
+  },
+  "subscriber@eduhub.ai": {
+    "email": "subscriber@eduhub.ai",
+    "flash_credits": 0,
+    "daily_usage": {
+      "date": "2026-09-16",
+      "count": 0
+    },
+    "last_updated": 1789555598.749253
   }
 }

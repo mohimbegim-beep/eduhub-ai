@@ -34,7 +34,7 @@ CATALOG = [
 FAQ = {
     "faq_payment": "💳 We accept Visa, Mastercard, Humo/Uzcard, and international cards via Dodo Payments ($1 each).",
     "faq_delivery": "⚡ All products and access tokens are delivered instantly right inside this chat and via email.",
-    "faq_support": "👨‍💻 Support team: Contact @MohimbegimUsmonova or email support@eduhub.ai."
+    "faq_support": "👨‍💻 Support team: Contact @MohimbegimUsmonova or email mohim.mohimbegim@gmail.com."
 }
 
 user_states = {}

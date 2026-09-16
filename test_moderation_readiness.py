@@ -179,8 +179,8 @@ def run_moderation_audit():
 
     report(
         "Комплаенс: Контактная информация поддержки",
-        "support@eduhub.ai" in html,
-        "Указан прямой email технической и финансовой поддержки: support@eduhub.ai"
+        "mohim.mohimbegim@gmail.com" in html,
+        "Указан прямой email технической и финансовой поддержки: mohim.mohimbegim@gmail.com"
     )
 
     # --- 3. АУДИТ API И СИСТЕМНОЙ БЕЗОПАСНОСТИ ---

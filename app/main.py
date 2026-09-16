@@ -1954,7 +1954,7 @@ async def get_product_catalog():
         "products": PRODUCT_CATALOG,
         "total_plans": len(PRODUCT_CATALOG),
         "guarantee": "14-day 100% money-back guarantee",
-        "support_email": "support@eduhub.ai"
+        "support_email": "mohim.mohimbegim@gmail.com"
     }
 
 @app.get("/api/v1/catalog/products/{product_id}", tags=["Catalog & Pricing"])
@@ -2593,7 +2593,7 @@ async def analyze_billing_dispute(payload: DisputeAnalyzeRequest):
             "title": title,
             "legal_basis": legal_basis,
             "resolution_text": resolution_text,
-            "appeal_channel": "support@eduhub.ai"
+            "appeal_channel": "mohim.mohimbegim@gmail.com"
         },
         "gateway_transaction": lemon_res
     }

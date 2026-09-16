@@ -203,7 +203,7 @@ cat << 'HTMLEOF' > static/index.html
               "name": "What is your refund policy?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "EduHub AI offers an unconditional 14-day 100% money-back guarantee on all subscription plans and sprint passes. Simply contact support@eduhub.ai for an immediate, hassle-free refund."
+                "text": "EduHub AI offers an unconditional 14-day 100% money-back guarantee on all subscription plans and sprint passes. Simply contact mohim.mohimbegim@gmail.com for an immediate, hassle-free refund."
               }
             },
             {
@@ -879,7 +879,7 @@ cat << 'HTMLEOF' > static/index.html
                         <span class="text-slate-400 group-open:rotate-180 transition">&darr;</span>
                     </summary>
                     <p class="text-xs text-slate-400 mt-3 leading-relaxed" data-i18n="faq_a2">
-                        We offer a no-questions-asked 100% refund within 14 days of any purchase or renewal. To initiate a refund, simply send an email to support@eduhub.ai, and our team will issue the credit back to your card within 24 hours.
+                        We offer a no-questions-asked 100% refund within 14 days of any purchase or renewal. To initiate a refund, simply send an email to mohim.mohimbegim@gmail.com, and our team will issue the credit back to your card within 24 hours.
                     </p>
                 </details>
 
@@ -909,7 +909,7 @@ cat << 'HTMLEOF' > static/index.html
                         <span class="text-slate-400 group-open:rotate-180 transition">&darr;</span>
                     </summary>
                     <p class="text-xs text-slate-400 mt-3 leading-relaxed" data-i18n="faq_a5">
-                        Yes. You can cancel recurring subscriptions anytime directly from your customer portal link or by emailing support@eduhub.ai. You will retain full access until the end of your prepaid period with no cancellation fees.
+                        Yes. You can cancel recurring subscriptions anytime directly from your customer portal link or by emailing mohim.mohimbegim@gmail.com. You will retain full access until the end of your prepaid period with no cancellation fees.
                     </p>
                 </details>
 
@@ -931,7 +931,7 @@ cat << 'HTMLEOF' > static/index.html
                     <a href="/terms" class="text-slate-400 hover:text-white transition underline">Terms of Service</a>
                     <a href="/privacy" class="text-slate-400 hover:text-white transition underline">Privacy Policy</a>
                     <a href="/refund" class="text-slate-400 hover:text-white transition underline">Refund Policy (14-day)</a>
-                    <a href="mailto:support@eduhub.ai" class="text-slate-400 hover:text-white transition underline">Contact: support@eduhub.ai</a>
+                    <a href="mailto:mohim.mohimbegim@gmail.com" class="text-slate-400 hover:text-white transition underline">Contact: mohim.mohimbegim@gmail.com</a>
                 </div>
             </div>
             <div class="mt-6 pt-6 border-t border-slate-900/80 text-center text-[11px] text-slate-600" data-i18n="footer_disclaimer">
@@ -950,7 +950,7 @@ cat << 'HTMLEOF' > static/index.html
             <div class="p-6 overflow-y-auto space-y-4 text-xs text-slate-300 leading-relaxed">
                 <p><strong>1. Acceptance of Terms:</strong> By subscribing to or using EduHub AI services, you agree to comply with and be bound by these Terms of Service.</p>
                 <p><strong>2. Nature of Service:</strong> EduHub AI provides autonomous study acceleration tools, lecture note synthesizers, pedagogical homework checking, and study assistance powered by artificial intelligence.</p>
-                <p><strong>3. Subscriptions &amp; Billing:</strong> Services are billed on a recurring monthly basis ($9/mo for Student Starter, $19/mo for Pro Max, $39/mo for Tutor &amp; Creator Kit) or one-time ($15 for Exam Sprint Pack). Payments and invoicing are securely processed by Lemon Squeezy (our Merchant of Record). You may cancel your subscription at any time via your account management dashboard or by emailing support@eduhub.ai.</p>
+                <p><strong>3. Subscriptions &amp; Billing:</strong> Services are billed on a recurring monthly basis ($9/mo for Student Starter, $19/mo for Pro Max, $39/mo for Tutor &amp; Creator Kit) or one-time ($15 for Exam Sprint Pack). Payments and invoicing are securely processed by Lemon Squeezy (our Merchant of Record). You may cancel your subscription at any time via your account management dashboard or by emailing mohim.mohimbegim@gmail.com.</p>
                 <p><strong>4. Acceptable Use &amp; Strict 18+ Refusal:</strong> You agree not to misuse the service, attempt unauthorized access, reverse-engineer proprietary algorithms, or generate adult (18+), harmful, or unlawful content. All activities must be educational and lawful.</p>
                 <p><strong>5. Intellectual Property:</strong> Users retain ownership of their uploaded study notes and educational inputs. AI-generated executive summaries and flashcards are provided for your personal academic use.</p>
             </div>
@@ -971,7 +971,7 @@ cat << 'HTMLEOF' > static/index.html
                 <p><strong>1. Data Collection:</strong> We collect only essential user details required to deliver the service, including account email address for authentication and subscription verification.</p>
                 <p><strong>2. Payment Security:</strong> We do not store or process credit card details on our servers. All financial transactions are encrypted and processed by our Merchant of Record, Lemon Squeezy, under PCI-DSS Level 1 compliance.</p>
                 <p><strong>3. Data Protection:</strong> All academic text, notes, and homework queries are processed over encrypted TLS connections. We NEVER sell, license, or distribute your personal or academic data to third-party advertising networks.</p>
-                <p><strong>4. GDPR &amp; Data Subject Rights:</strong> You have the right to request access to, correction of, or permanent deletion of your account and data at any time by contacting support@eduhub.ai.</p>
+                <p><strong>4. GDPR &amp; Data Subject Rights:</strong> You have the right to request access to, correction of, or permanent deletion of your account and data at any time by contacting mohim.mohimbegim@gmail.com.</p>
             </div>
             <div class="p-4 border-t border-slate-800 flex justify-end">
                 <button onclick="closeModal('privacy-modal')" class="bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-lg text-xs font-medium">Close</button>
@@ -991,7 +991,7 @@ cat << 'HTMLEOF' > static/index.html
                     <strong>100% Satisfaction Guarantee:</strong> We offer a full 14-day money-back guarantee on all subscription plans and sprint passes.
                 </div>
                 <p><strong>1. Eligibility:</strong> If you are not completely satisfied with EduHub AI for any reason within 14 days of your initial purchase or billing cycle, you are entitled to a full 100% refund.</p>
-                <p><strong>2. How to Request:</strong> Simply send an email to <a href="mailto:support@eduhub.ai" class="text-blue-400 underline">support@eduhub.ai</a> with your order number or account email. Our support team will process your refund within 24 business hours.</p>
+                <p><strong>2. How to Request:</strong> Simply send an email to <a href="mailto:mohim.mohimbegim@gmail.com" class="text-blue-400 underline">mohim.mohimbegim@gmail.com</a> with your order number or account email. Our support team will process your refund within 24 business hours.</p>
                 <p><strong>3. Refund Processing:</strong> Once approved, the refund will be credited back to your original payment method via Lemon Squeezy within 3–7 business days, depending on your bank.</p>
             </div>
             <div class="p-4 border-t border-slate-800 flex justify-end">
@@ -1434,13 +1434,13 @@ const I18N_DICTIONARY = {
     faq_q1: "How is EduHub AI different from generic AI chatbots?",
     faq_a1: "Generic AI chatbots often spoil answers immediately, encouraging passive memorization. EduHub AI utilizes the Socratic method with pedagogical scaffolding: it diagnoses student misconceptions and guides them step-by-step to the solution, fostering authentic long-term understanding.",
     faq_q2: "What is your 14-day refund policy?",
-    faq_a2: "We offer a no-questions-asked 100% refund within 14 days of any purchase or renewal. To initiate a refund, simply send an email to support@eduhub.ai, and our team will issue the credit back to your card within 24 hours.",
+    faq_a2: "We offer a no-questions-asked 100% refund within 14 days of any purchase or renewal. To initiate a refund, simply send an email to mohim.mohimbegim@gmail.com, and our team will issue the credit back to your card within 24 hours.",
     faq_q3: "How does the Safe Content Filter protect users?",
     faq_a3: "All student queries and document uploads are parsed by our dual-stage Safe Content Filter. Any adult (18+), pornographic, or inappropriate requests are instantly blocked at the edge with HTTP 400 Refusal, maintaining a pristine educational environment.",
     faq_q4: "Which payment methods are accepted?",
     faq_a4: "Payments are securely processed by Lemon Squeezy (our Merchant of Record). We support Visa, Mastercard, American Express, Discover, PayPal, Apple Pay, and Google Pay across 130+ currencies with bank-grade 256-bit encryption.",
     faq_q5: "Can I cancel or change my plan whenever I want?",
-    faq_a5: "Yes. You can cancel recurring subscriptions anytime directly from your customer portal link or by emailing support@eduhub.ai. You will retain full access until the end of your prepaid period with no cancellation fees.",
+    faq_a5: "Yes. You can cancel recurring subscriptions anytime directly from your customer portal link or by emailing mohim.mohimbegim@gmail.com. You will retain full access until the end of your prepaid period with no cancellation fees.",
     pricing_badge: "Transparent &amp; Predictable",
     pricing_title: "Choose Your Learning Tier",
     pricing_subtitle: "All subscriptions include our unconditional 14-day 100% money-back guarantee. Zero hidden fees.",
@@ -1753,13 +1753,13 @@ const I18N_DICTIONARY = {
     faq_q1: "Чем EduHub AI отличается от обычных ИИ-чат-ботов?",
     faq_a1: "Обычные чат-боты сразу выдают готовый ответ, поощряя списывание. EduHub AI использует метод Сократа: выявляет пробелы в понимании и шаг за шагом ведёт студента к решению через наводящие подсказки, развивая мышление.",
     faq_q2: "Как работает 14-дневная политика возврата средств?",
-    faq_a2: "Мы предоставляем 100% возврат средств без лишних вопросов в течение 14 дней с момента оплаты или продления. Напишите на support@eduhub.ai, и средства вернутся на карту в течение 24 часов.",
+    faq_a2: "Мы предоставляем 100% возврат средств без лишних вопросов в течение 14 дней с момента оплаты или продления. Напишите на mohim.mohimbegim@gmail.com, и средства вернутся на карту в течение 24 часов.",
     faq_q3: "Как фильтр безопасного контента защищает пользователей?",
     faq_a3: "Все запросы студентов и загружаемые файлы проверяются двухфакторным фильтром безопасности. Любой контент 18+, непристойные или опасные запросы мгновенно блокируются на уровне шлюза (HTTP 400), сохраняя академическую чистоту.",
     faq_q4: "Какие способы оплаты поддерживаются?",
     faq_a4: "Платежи безопасно обрабатываются официальным оператором Lemon Squeezy (PCI-DSS L1). Мы принимаем Visa, Mastercard, Amex, PayPal, Apple Pay и Google Pay в более чем 130 валютах мира.",
     faq_q5: "Могу ли я отменить или изменить тариф в любой момент?",
-    faq_a5: "Да. Вы можете отменить подписку в любой момент в личном кабинете или написав на support@eduhub.ai. Доступ сохранится до конца оплаченного периода без каких-либо комиссий.",
+    faq_a5: "Да. Вы можете отменить подписку в любой момент в личном кабинете или написав на mohim.mohimbegim@gmail.com. Доступ сохранится до конца оплаченного периода без каких-либо комиссий.",
     pricing_badge: "Прозрачные тарифы",
     pricing_title: "Выберите ваш тариф для ускорения учебы",
     pricing_subtitle: "Все тарифы включают безоговорочную 14-дневную 100% гарантию возврата. Никаких скрытых платежей.",
@@ -2072,13 +2072,13 @@ const I18N_DICTIONARY = {
     faq_q1: "EduHub AI oddiy AI chat-botlardan nimasi bilan farq qiladi?",
     faq_a1: "Oddiy chat-botlar tayyor javobni berib, ko'chirishga o'rgatadi. EduHub AI esa Suqrot metodidan foydalanadi: xatolarni aniqlaydi va tushunib yechish uchun yo'naltiruvchi savollar orqali bosqichma-bosqich yordam beradi.",
     faq_q2: "14 kunlik pulni qaytarish siyosati qanday ishlaydi?",
-    faq_a2: "Xarid yoki obuna uzaytirilgan kundan boshlab 14 kun ichida 100% to'lovni qaytarib beramiz. Buning uchun support@eduhub.ai pochtasiga yozish kifoya, mablag' 24 soat ichida kartangizga qaytariladi.",
+    faq_a2: "Xarid yoki obuna uzaytirilgan kundan boshlab 14 kun ichida 100% to'lovni qaytarib beramiz. Buning uchun mohim.mohimbegim@gmail.com pochtasiga yozish kifoya, mablag' 24 soat ichida kartangizga qaytariladi.",
     faq_q3: "Xavfsiz kontent filtri foydalanuvchilarni qanday himoya qiladi?",
     faq_a3: "Barcha talabalar so'rovlari va yuklangan fayllar ikki bosqichli xavfsizlik filtri orqali tekshiriladi. Har qanday 18+ yoki noo'rin so'rovlar darhol bloklanadi va toza ta'lim muhiti ta'minlanadi.",
     faq_q4: "Qanday to'lov usullari qabul qilinadi?",
     faq_a4: "To'lovlar Lemon Squeezy rasmiy operatori (PCI-DSS L1) orqali xavfsiz amalga oshiriladi. Visa, Mastercard, Amex, PayPal, Apple Pay va Google Pay 130 dan ortiq valyutada qabul qilinadi.",
     faq_q5: "Tarifni istalgan vaqtda bekor qilish yoki o'zgartirish mumkinmi?",
-    faq_a5: "Ha. Obunani istalgan vaqtda shaxsiy kabinetingizdan yoki support@eduhub.ai manziliga yozib bekor qilishingiz mumkin. To'langan muddat oxirigacha barcha imkoniyatlar saqlanib qoladi.",
+    faq_a5: "Ha. Obunani istalgan vaqtda shaxsiy kabinetingizdan yoki mohim.mohimbegim@gmail.com manziliga yozib bekor qilishingiz mumkin. To'langan muddat oxirigacha barcha imkoniyatlar saqlanib qoladi.",
     pricing_badge: "Shaffof narxlar",
     pricing_title: "O'qishni tezlashtirish uchun tarifni tanlang",
     pricing_subtitle: "Barcha tariflar shartsiz 14 kunlik 100% pulni qaytarish kafolatini o'z ichiga oladi. Yashirin to'lovlar yo'q.",
@@ -2391,7 +2391,7 @@ const I18N_DICTIONARY = {
     faq_q1: "¿En qué se diferencia EduHub AI de otros chatbots de IA genéricos?",
     faq_a1: "Los chatbots genéricos dan la respuesta directa fomentando la memorización pasiva. EduHub AI utiliza el método socrático: diagnostica errores y guía paso a paso hacia la solución, fomentando la comprensión real.",
     faq_q2: "¿Cómo funciona la política de reembolso de 14 días?",
-    faq_a2: "Ofrecemos un reembolso del 100% sin preguntas durante los primeros 14 días de cualquier compra. Escribe a support@eduhub.ai y devolveremos el importe a tu tarjeta en 24 horas.",
+    faq_a2: "Ofrecemos un reembolso del 100% sin preguntas durante los primeros 14 días de cualquier compra. Escribe a mohim.mohimbegim@gmail.com y devolveremos el importe a tu tarjeta en 24 horas.",
     faq_q3: "¿Cómo protege a los usuarios el filtro de contenido seguro?",
     faq_a3: "Todas las consultas y archivos subidos son analizados por nuestro filtro seguro. Cualquier contenido para adultos (+18) o inapropiado se bloquea instantáneamente manteniendo un entorno educativo protegido.",
     faq_q4: "¿Qué métodos de pago se aceptan?",
@@ -9768,7 +9768,7 @@ async def get_product_catalog():
         "products": PRODUCT_CATALOG,
         "total_plans": len(PRODUCT_CATALOG),
         "guarantee": "14-day 100% money-back guarantee",
-        "support_email": "support@eduhub.ai"
+        "support_email": "mohim.mohimbegim@gmail.com"
     }
 
 @app.get("/api/v1/catalog/products/{product_id}", tags=["Catalog & Pricing"])
