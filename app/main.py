@@ -4150,6 +4150,129 @@ async def generate_teacher_lesson(payload: TeacherLabRequest):
         return get_fallback_teacher_lab(payload)
 
 
+
+
+TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "8658937944:AAEBJxjc2pz_XeVyJXVZxWAFRmFzDGwSRwM")
+
+@app.get("/api/v1/telegram/webhook", tags=["Telegram Bot"])
+async def telegram_webhook_info():
+    """
+    Информация о статусе Telegram Webhook.
+    """
+    return {
+        "status": "active",
+        "bot_username": "eduhub_autopilot_bot",
+        "service": "EduHub AI Autonomous Telegram Sales Agent",
+        "platform_url": "https://eduhub-ai.onrender.com"
+    }
+
+@app.post("/api/v1/telegram/webhook", tags=["Telegram Bot"])
+async def telegram_webhook(request: Request):
+    """
+    Автономный Telegram Webhook для бота @eduhub_autopilot_bot.
+    Работает 24/7 в облаке Render без локального ПК!
+    """
+    try:
+        data = await request.json()
+    except Exception:
+        return {"ok": True}
+
+    msg = data.get("message", {})
+    chat_id = msg.get("chat", {}).get("id")
+    text = msg.get("text", "").strip()
+    first_name = msg.get("from", {}).get("first_name", "друг")
+
+    if not chat_id:
+        return {"ok": True}
+
+    def send_tg(c_id, txt, reply_markup=None):
+        import urllib.request as u_req
+        url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
+        payload = {"chat_id": c_id, "text": txt, "parse_mode": "HTML"}
+        if reply_markup:
+            payload["reply_markup"] = reply_markup
+        try:
+            req = u_req.Request(
+                url,
+                data=json.dumps(payload).encode("utf-8"),
+                headers={"Content-Type": "application/json"}
+            )
+            u_req.urlopen(req, timeout=5)
+        except Exception as e:
+            print("Telegram send error:", e)
+
+    menu_markup = {
+        "inline_keyboard": [
+            [
+                {"text": "👩‍🏫 Учителям: Уроки & Тесты ($1)", "url": "https://eduhub-ai.onrender.com/tools/teacher-lab"}
+            ],
+            [
+                {"text": "📦 Селлерам Uzum: Карточки ($1)", "url": "https://eduhub-ai.onrender.com/tools/marketplace-lab"},
+                {"text": "📊 Excel-Маг формул ($1)", "url": "https://eduhub-ai.onrender.com/tools/excel-wizard"}
+            ],
+            [
+                {"text": "🎓 Студентам: Гранты & IELTS ($1)", "url": "https://eduhub-ai.onrender.com/tools/sop-builder"},
+                {"text": "🏭 Все Заводы & Промпты ($1)", "url": "https://eduhub-ai.onrender.com/blueprints"}
+            ],
+            [
+                {"text": "🎁 Бандлы «Все-в-Одном» со скидкой 95% ($2.99)", "url": "https://eduhub-ai.onrender.com/blueprints"}
+            ],
+            [
+                {"text": "🌐 Открыть веб-платформу EduHub", "url": "https://eduhub-ai.onrender.com"}
+            ]
+        ]
+    }
+
+    if text.startswith("/start"):
+        welcome_msg = (
+            f"👋 <b>Привет, {first_name}! Добро пожаловать в EduHub AI!</b>\n\n"
+            "Я автономный ИИ-ассистент платформы <b>EduHub</b>. Я помогаю учителям, студентам и предпринимателям решать задачи за секунды вместо часов рутины.\n\n"
+            "🔥 <b>Наши топ-инструменты по $1.00:</b>\n"
+            "• <b>Учителям:</b> Готовый поурочный план + 15 тестов с ключами за 10 сек.\n"
+            "• <b>Селлерам Uzum/WB:</b> SEO-карточки товаров для вывода в ТОП-1.\n"
+            "• <b>Студентам:</b> Мотивационные письма на гранты (SOP) & IELTS 8.5+.\n"
+            "• <b>Excel-Маг:</b> Любая сложная формула или макрос текстом за 3 сек.\n\n"
+            "👇 <b>Выберите нужный инструмент ниже и попробуйте бесплатно:</b>"
+        )
+        send_tg(chat_id, welcome_msg, menu_markup)
+        return {"ok": True}
+
+    # AI Consultation response with Gemini or smart fallback
+    client = get_genai_client()
+    ai_reply = ""
+    if client:
+        try:
+            sys_prompt = (
+                "Ты — дружелюбный ИИ-консультант образовательной платформы EduHub AI (https://eduhub-ai.onrender.com). "
+                "Все наши инструменты стоят ровно $1.00 (или комбо-бандлы по $2.99). "
+                "Ответь пользователю кратко, дружелюбно и вежливо (до 80 слов), реши его вопрос и порекомендуй подходящий инструмент на сайте."
+            )
+            config = types.GenerateContentConfig(
+                system_instruction=sys_prompt,
+                temperature=0.3,
+                safety_settings=get_safety_settings()
+            )
+            resp = client.models.generate_content(
+                model=GEMINI_MODEL,
+                contents=text,
+                config=config
+            )
+            ai_reply = resp.text.strip()
+        except Exception:
+            pass
+
+    if not ai_reply:
+        ai_reply = (
+            f"Спасибо за вопрос: «{text}»!\n\n"
+            "Я зафиксировал ваш запрос. Вы можете протестировать наши ИИ-инструменты прямо сейчас на платформе EduHub:\n"
+            "• Готовые планы уроков и тесты: https://eduhub-ai.onrender.com/tools/teacher-lab\n"
+            "• Карточки для Uzum и маркетплейсов: https://eduhub-ai.onrender.com/tools/marketplace-lab\n"
+            "• Полный каталог цифровых продуктов по $1: https://eduhub-ai.onrender.com/blueprints"
+        )
+
+    send_tg(chat_id, ai_reply, menu_markup)
+    return {"ok": True}
+
 if __name__ == "__main__":
     import uvicorn
     port = int(os.getenv("PORT", 8000))
