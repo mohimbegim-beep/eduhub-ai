@@ -4273,6 +4273,145 @@ async def telegram_webhook(request: Request):
     send_tg(chat_id, ai_reply, menu_markup)
     return {"ok": True}
 
+
+
+# ==========================================================================
+# 24/7 AUTONOMOUS CLOUD ENGINE (KEEPALIVE & RECURRING CHANNEL AUTO-SALES)
+# ==========================================================================
+
+AUTONOMOUS_POSTS = [
+    {
+        "id": "teacher_prep",
+        "text": (
+            "👩‍🏫 <b>Как учителю сэкономить 3 часа каждый вечер на подготовке к уроку?</b>\n\n"
+            "Каждый вечер повторяется одно и то же: поурочный план, дифференцированные задания, тесты с ключами...\n\n"
+            "💡 <b>Решение за 15 секунд в Teacher Lab:</b>\n"
+            "1. Введите предмет, класс и тему урока.\n"
+            "2. Получите поминутный план урока + 15 тестов с полными ключами и обоснованиями.\n\n"
+            "🔥 <i>Стоимость: всего $1.00 (разовый доступ) вместо усталости.</i>"
+        ),
+        "buttons": [
+            [{"text": "👉 Попробовать Teacher Lab ($1.00)", "url": "https://eduhub-ai.onrender.com/tools/teacher-lab"}],
+            [{"text": "🤖 Написать боту-помощнику", "url": "https://t.me/eduhub_autopilot_bot"}]
+        ]
+    },
+    {
+        "id": "uzum_seller",
+        "text": (
+            "📦 <b>Секрет ТОП-1 выдачи на Uzum Market & Wildberries</b>\n\n"
+            "Алгоритмы поиска маркетплейсов ранжируют карточки по плотности правильных поисковых ключей без переспама.\n\n"
+            "🚀 <b>Marketplace Lab:</b>\n"
+            "• Генерирует продающие описания и SEO-буллеты за 10 секунд.\n"
+            "• Собирает скрытые поисковые теги, поднимающие карточку в ТОП выдачи.\n\n"
+            "⚡️ <i>Стоимость: всего $1.00 за разовый вывод товара в ТОП!</i>"
+        ),
+        "buttons": [
+            [{"text": "🚀 Вывести товар в ТОП ($1.00)", "url": "https://eduhub-ai.onrender.com/tools/marketplace-lab"}],
+            [{"text": "🤖 Написать боту-помощнику", "url": "https://t.me/eduhub_autopilot_bot"}]
+        ]
+    },
+    {
+        "id": "excel_wizard",
+        "text": (
+            "📊 <b>3 формулы Excel, которые заменят вам отдел аналитики</b>\n\n"
+            "Забудьте про мучения с вложенными ВПР и зависающими таблицами!\n\n"
+            "✨ <b>Excel Wizard</b> превращает любой запрос на русском в точную рабочую формулу:\n"
+            "• «Посчитай сумму продаж, если менеджер Иванов и дата после 10 числа»\n"
+            "• Мгновенный макрос или формула за 3 секунды с пошаговым объяснением.\n\n"
+            "⚡️ <i>Экономьте от 5 часов рабочего времени каждую неделю за $1.00!</i>"
+        ),
+        "buttons": [
+            [{"text": "📊 Создать формулу за 3 сек ($1.00)", "url": "https://eduhub-ai.onrender.com/tools/excel-wizard"}],
+            [{"text": "🤖 Написать боту-помощнику", "url": "https://t.me/eduhub_autopilot_bot"}]
+        ]
+    },
+    {
+        "id": "student_ielts",
+        "text": (
+            "🎓 <b>Как выиграть зарубежный грант или сдать IELTS на 7.5+?</b>\n\n"
+            "Приемные комиссии зарубежных вузов отсеивают 90% эссе из-за шаблонных формулировок.\n\n"
+            "🏆 <b>SOP & Essay Grader:</b>\n"
+            "• Диагностика по 4 критериям Cambridge (TR, CC, LR, GRA)\n"
+            "• Авторский рерайт слабых предложений на уровень Band 8.5–9.0\n"
+            "• Экспорт словаря в Anki за секунду\n\n"
+            "💎 <i>Твой билет в университет мечты всего за $1.00!</i>"
+        ),
+        "buttons": [
+            [{"text": "🎓 Проверить эссе и SOP ($1.00)", "url": "https://eduhub-ai.onrender.com/tools/sop-builder"}],
+            [{"text": "🤖 Написать боту-помощнику", "url": "https://t.me/eduhub_autopilot_bot"}]
+        ]
+    },
+    {
+        "id": "mega_bundle",
+        "text": (
+            "🎁 <b>БАНДЛ «ВСЕ-В-ОДНОМ» — СКИДКА 95%! ($2.99)</b>\n\n"
+            "Зачем покупать инструменты по отдельности, если можно забрать всю экосистему сразу?\n\n"
+            "🔥 <b>В бандл входит:</b>\n"
+            "✅ Teacher Lab (Поурочные планы и 15 тестов)\n"
+            "✅ Marketplace SEO Wizard (Карточки товаров)\n"
+            "✅ Excel & Macro Generator\n"
+            "✅ SOP & Academic Essay Reviewer\n"
+            "✅ Библиотека из 120+ готовых промптов для работы и учебы\n\n"
+            "💰 <b>Всего $2.99 разово</b> с пожизненным доступом!"
+        ),
+        "buttons": [
+            [{"text": "🎁 Забрать бандл со скидкой 95% ($2.99)", "url": "https://eduhub-ai.onrender.com/blueprints"}],
+            [{"text": "🤖 Написать боту-помощнику", "url": "https://t.me/eduhub_autopilot_bot"}]
+        ]
+    }
+]
+
+async def autonomous_keepalive_daemon():
+    """
+    Фоновый демон поддержания активности сервера Render 24/7 (Prevent Sleep).
+    Пингует собственный эндпоинт каждые 10 минут.
+    """
+    import urllib.request
+    await asyncio.sleep(20)
+    while True:
+        try:
+            url = "https://eduhub-ai.onrender.com/health"
+            req = urllib.request.Request(url, headers={"User-Agent": "EduHub-KeepAlive-24-7/1.0"})
+            urllib.request.urlopen(req, timeout=10)
+        except Exception:
+            pass
+        await asyncio.sleep(600)
+
+async def autonomous_autoposter_daemon():
+    """
+    Фоновый автономный автопостер в канал @eduhub_ai_club каждые 4 часа 24/7.
+    Работает в облаке без участия человека и без локального компьютера.
+    """
+    import urllib.request
+    await asyncio.sleep(60)
+    channel_id = "@eduhub_ai_club"
+    post_idx = 0
+    while True:
+        try:
+            post = AUTONOMOUS_POSTS[post_idx % len(AUTONOMOUS_POSTS)]
+            url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
+            payload = {
+                "chat_id": channel_id,
+                "text": post["text"],
+                "parse_mode": "HTML",
+                "reply_markup": {"inline_keyboard": post["buttons"]}
+            }
+            req = urllib.request.Request(
+                url,
+                data=json.dumps(payload).encode("utf-8"),
+                headers={"Content-Type": "application/json"}
+            )
+            urllib.request.urlopen(req, timeout=10)
+            post_idx += 1
+        except Exception as e:
+            print("[AUTOPOSTER NOTICE]", e)
+        await asyncio.sleep(14400)
+
+@app.on_event("startup")
+async def start_autonomous_24_7_systems():
+    import asyncio
+    asyncio.create_task(autonomous_keepalive_daemon())
+    asyncio.create_task(autonomous_autoposter_daemon())
 if __name__ == "__main__":
     import uvicorn
     port = int(os.getenv("PORT", 8000))
