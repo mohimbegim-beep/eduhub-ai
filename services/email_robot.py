@@ -66,14 +66,14 @@ TARGET_CONFIGS: Dict[str, Dict[str, any]] = {
     "dodo": {
         "name": "Dodo Payments",
         "recipient": "support@dodopayments.com",
-        "subject": "Product Verification Resubmission — EduHub AI (Details Enclosed)",
+        "subject": "Re: [#29346] Product Verification Resubmission — EduHub AI (Details Enclosed)",
         "body_template": """Hi Evan and the Dodo Payments Compliance Team,
 
-Thank you for enabling the product verification resubmission option.
+Thank you for your assistance and for enabling the product verification resubmission option on ticket [#29346].
 
-I checked our merchant dashboard, but the product verification form currently appears locked from editing on our end (likely due to an interface cache or session state).
+We have updated our product compliance profile, verified our corporate legal entity (KIFOYATECH LLC), and prepared our international business payout routing.
 
-To avoid any delays and allow your team to prioritize our compliance review, I have compiled our complete, updated Product Verification Dossier below so you can review and update our account directly:
+As requested, I am notifying you so that your team can prioritize our compliance review. To ensure everything is 100% seamless and expedite our merchant account approval, our complete and verified Product Verification Dossier is enclosed below:
 
 ----------------------------------------------------------------------
 PRODUCT VERIFICATION DOSSIER — EduHub AI
