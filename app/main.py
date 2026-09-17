@@ -467,8 +467,13 @@ def record_daily_ai_call(email: str) -> tuple[bool, int]:
 
     return False, 0
 
+try:
+    from app.security import enforce_ecosystem_manifesto
+except ImportError:
+    from security import enforce_ecosystem_manifesto
+
 # --------------------------------------------------------------------------
-# Фильтрация нежелательного контента (Safe Content Filter: строго БЕЗ 18+)
+# Главный Манифест Безопасности: Ненасилие, Правда, Защита природы и 18+
 # --------------------------------------------------------------------------
 # Регулярное выражение для мгновенной отсечки очевидных тем 18+ (RU & EN)
 ADULT_KEYWORDS_PATTERN = re.compile(
@@ -486,20 +491,12 @@ ADULT_KEYWORDS_PATTERN = re.compile(
 
 def check_content_safety(text: str) -> None:
     """
-    Проверяет текст на наличие контента 18+ и запрещенных тем.
-    При обнаружении отклоняет запрос с пояснением политики безопасности платформы.
+    Проверяет текст на соответствие Главному Манифесту Безопасности.
+    Обеспечивает фильтрацию 18+, ненасилия, защиты от обмана, защиты биосферы и киберугроз.
     """
     if not text:
         return
-    if ADULT_KEYWORDS_PATTERN.search(text):
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail={
-                "error": "ContentPolicyViolation",
-                "message": "EduHub является безопасной образовательной платформой (Safe Content Filtering). Запросы на темы 18+, эротики и откровенного контента строго заблокированы.",
-                "policy": "no_adult_content_18_plus"
-            }
-        )
+    enforce_ecosystem_manifesto(text)
 
 def get_safety_settings():
     """
@@ -514,15 +511,15 @@ def get_safety_settings():
         ),
         types.SafetySetting(
             category="HARM_CATEGORY_DANGEROUS_CONTENT",
-            threshold="BLOCK_MEDIUM_AND_ABOVE",
+            threshold="BLOCK_LOW_AND_ABOVE",
         ),
         types.SafetySetting(
             category="HARM_CATEGORY_HARASSMENT",
-            threshold="BLOCK_MEDIUM_AND_ABOVE",
+            threshold="BLOCK_LOW_AND_ABOVE",
         ),
         types.SafetySetting(
             category="HARM_CATEGORY_HATE_SPEECH",
-            threshold="BLOCK_MEDIUM_AND_ABOVE",
+            threshold="BLOCK_LOW_AND_ABOVE",
         ),
     ]
 
