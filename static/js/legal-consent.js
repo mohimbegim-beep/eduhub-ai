@@ -73,7 +73,10 @@ const EduHubLegal = (function() {
     };
 
     function getLocale() {
-        return localStorage.getItem('eduhub_lang') || document.documentElement.lang || 'ru';
+        const stored = localStorage.getItem('eduhub_locale') || localStorage.getItem('eduhub_lang');
+        const docLang = document.documentElement.lang;
+        const l = (stored || docLang || 'en').toLowerCase();
+        return ['en', 'ru', 'uz', 'es'].includes(l) ? l : 'en';
     }
 
     // 1. Floating Cookie & Legal Consent Bar
@@ -110,7 +113,7 @@ const EduHubLegal = (function() {
 
     function renderCookieBarContent() {
         const lang = getLocale();
-        const dict = DICTIONARY[lang] || DICTIONARY.ru;
+        const dict = DICTIONARY[lang] || DICTIONARY.en;
         const msgEl = document.getElementById('cookie-consent-msg');
         const btnEl = document.getElementById('cookie-consent-btn');
         if (msgEl) msgEl.innerHTML = dict.cookie_msg;
@@ -182,7 +185,7 @@ const EduHubLegal = (function() {
 
     function renderCheckoutModalContent() {
         const lang = getLocale();
-        const dict = DICTIONARY[lang] || DICTIONARY.ru;
+        const dict = DICTIONARY[lang] || DICTIONARY.en;
 
         const badge = document.getElementById('pcm-badge');
         const title = document.getElementById('pcm-title');
@@ -312,8 +315,9 @@ const EduHubLegal = (function() {
     // 4. Update Micro-Consent Captions
     function updateMicroConsent() {
         const lang = getLocale();
-        const dict = DICTIONARY[lang] || DICTIONARY.ru;
-        document.querySelectorAll('.checkout-micro-consent').forEach(el => {
+        const dict = DICTIONARY[lang] || DICTIONARY.en;
+        const targets = document.querySelectorAll('.checkout-micro-consent');
+        targets.forEach(el => {
             el.innerHTML = dict.micro_consent;
         });
     }
@@ -346,6 +350,7 @@ const EduHubLegal = (function() {
             onLanguageChanged();
         };
     }
+    window.addEventListener('eduhub:locale-changed', onLanguageChanged);
 
     return {
         acceptCookieConsent,
