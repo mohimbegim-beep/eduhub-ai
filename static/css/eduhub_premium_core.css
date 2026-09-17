@@ -1,0 +1,211 @@
+/* ==========================================================================
+   💎 EDUHUB AI PREMIUM THEME SYSTEM (LINEAR & STRIPE AESTHETICS 2026)
+   File: static/css/eduhub_premium_core.css
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@500;600;700;800;900&display=swap');
+
+:root {
+    --bg-main: #030712;
+    --bg-card: rgba(11, 15, 25, 0.65);
+    --border-glow: rgba(255, 255, 255, 0.08);
+    --accent-blue: #3B82F6;
+    --accent-purple: #6366F1;
+    --text-head: #FFFFFF;
+    --text-body: #94A3B8;
+    --font-head: 'Montserrat', system-ui, -apple-system, sans-serif;
+    --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* Глобальная перезагрузка фона и шрифтов */
+html {
+    background-color: var(--bg-main) !important;
+}
+
+body {
+    background-color: var(--bg-main) !important;
+    color: var(--text-body) !important;
+    font-family: var(--font-body);
+    position: relative;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Заголовки: системный шрифт Montserrat с точным трекингом */
+h1, h2, h3, h4, h5, h6, .font-heading {
+    font-family: var(--font-head) !important;
+    color: var(--text-head) !important;
+    letter-spacing: -0.025em;
+}
+
+/* Фоновая световая вуаль (Ambient Glow) */
+body::before {
+    content: "";
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.06) 0%, rgba(0,0,0,0) 70%);
+    top: -10%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Премиальные карточки с матовым стеклом */
+.premium-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-glow);
+    border-radius: 14px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.premium-card:hover {
+    border-color: rgba(99, 102, 241, 0.4);
+    box-shadow: 0 0 25px rgba(99, 102, 241, 0.12);
+    transform: translateY(-2px);
+}
+
+/* Флагманская интерактивная кнопка */
+.glow-btn-main, .glow-btn-cta {
+    background: linear-gradient(135deg, #2563EB 0%, #4F46E5 50%, #7C3AED 100%) !important;
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    border-radius: 12px !important;
+    border: none !important;
+    transition: all 0.2s ease-in-out !important;
+    position: relative;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.glow-btn-main:hover, .glow-btn-cta:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 25px rgba(99, 102, 241, 0.5) !important;
+}
+
+.glow-btn-main:active, .glow-btn-cta:active {
+    transform: scale(0.98);
+}
+
+/* Маска размытия для заблокированного контента (Пейволл) */
+.paywall-blur-mask {
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+    filter: blur(2px);
+    pointer-events: none;
+    user-select: none;
+    transition: filter 0.3s ease;
+}
+
+/* Контейнер пейволла и модальная карточка разблокировки */
+.paywall-container {
+    position: relative;
+    overflow: hidden;
+    min-height: 180px;
+}
+
+.paywall-floating-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    z-index: 20;
+    background: radial-gradient(circle at center, rgba(3, 7, 18, 0.4) 0%, rgba(3, 7, 18, 0.88) 100%);
+}
+
+.paywall-glass-card {
+    background: rgba(15, 23, 42, 0.88);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    border-radius: 16px;
+    padding: 1.75rem;
+    text-align: center;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(99, 102, 241, 0.15);
+    max-width: 520px;
+    width: 100%;
+}
+
+/* Поле ввода в песочнице чата */
+.sandbox-chat-input {
+    background: rgba(11, 15, 25, 0.85) !important;
+    border: 1px solid var(--border-glow) !important;
+    color: #F8FAFC !important;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: all 0.25s ease-in-out !important;
+}
+
+.sandbox-chat-input:focus {
+    border-color: rgba(99, 102, 241, 0.6) !important;
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.2) !important;
+    outline: none !important;
+}
+
+.sandbox-chat-input::placeholder {
+    color: #64748B !important;
+}
+
+/* Сегментированные вкладки витрины (Linear Style) */
+.segmented-tabs-container {
+    display: inline-flex;
+    background: rgba(15, 23, 42, 0.7);
+    border: 1px solid var(--border-glow);
+    border-radius: 14px;
+    padding: 4px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.segmented-tab-btn {
+    padding: 8px 18px;
+    border-radius: 10px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-body);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.segmented-tab-btn:hover {
+    color: #FFFFFF;
+}
+
+.segmented-tab-btn.active {
+    background: rgba(255, 255, 255, 0.08);
+    color: #FFFFFF;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.tab-pane-crossfade {
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.tab-pane-crossfade.pane-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Тонкие светящиеся границы 1px для секций */
+.linear-border {
+    border: 1px solid var(--border-glow);
+}
+
+.linear-border-focus:focus-within {
+    border-color: rgba(99, 102, 241, 0.5);
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.15);
+}
