@@ -239,22 +239,22 @@
             <!-- Clear 3-Pillar Navigation Links -->
             <nav class="hidden lg:flex items-center space-x-5 text-xs font-semibold">
                 <a href="#rooms" onclick="switchRoom(1)" class="text-slate-300 hover:text-white transition flex items-center gap-1">
-                    <span>Академический Хаб</span>
+                    <span data-i18n="tab_hub">Академический Хаб</span>
                 </a>
                 <a href="/tools/essay-grader" class="text-amber-400 hover:text-amber-300 transition flex items-center gap-1 bg-amber-950/40 border border-amber-800/60 px-2.5 py-1 rounded-lg">
-                    <span>IELTS $1 (3 Дня)</span>
+                    <span data-i18n="nav_ielts">IELTS $1 (3 Дня)</span>
                 </a>
                 <a href="/tools/ats-resume" class="text-emerald-300 hover:text-white transition flex items-center gap-1">
-                    <span>ATS Резюме ($1)</span>
+                    <span data-i18n="tab_resume">ATS Резюме ($1)</span>
                 </a>
                 <a href="/tools/marketplace-lab" class="text-amber-400 hover:text-amber-300 transition flex items-center gap-1">
                     <span>Uzum/WB Lab ($1)</span>
                 </a>
                 <a href="/blueprints" class="text-purple-300 hover:text-white transition flex items-center gap-1">
-                    <span>ИИ-Заводы ($1)</span>
+                    <span data-i18n="tab_factory">ИИ-Заводы ($1)</span>
                 </a>
                 <a href="/report" class="text-blue-300 hover:text-white transition flex items-center gap-1">
-                    <span>Отчет 2026</span>
+                    <span data-i18n="nav_reports">Отчет 2026</span>
                 </a>
                 <a href="#pricing" class="text-slate-400 hover:text-white transition" data-i18n="nav_pricing">Тарифы</a>
             </nav>
@@ -276,7 +276,7 @@
 
                 <!-- Hero Action Button -->
                 <a href="#checkout" class="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-black text-xs px-3.5 py-2 rounded-xl shadow-lg shadow-amber-500/20 transition transform active:scale-95 whitespace-nowrap">
-                    IELTS 3 Дня за $1
+                    <span data-i18n="cta_trial">IELTS 3 Дня за $1</span>
                 </a>
             </div>
         </div>
@@ -302,7 +302,10 @@
                     </a>
                 </div>
 
-                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-tight mb-6" data-i18n="hero_title">Your Autonomous AI Academic Copilot — <br><span class="bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-400 bg-clip-text text-transparent">Learn Faster, Grade Smarter, Master Any Subject</span></h1>
+                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-tight mb-6">
+                    <span data-i18n="hero_title">Your Autonomous AI Academic Copilot</span> &mdash; <br>
+                    <span class="bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-400 bg-clip-text text-transparent" data-i18n="hero_subtitle">Learn Faster, Grade Smarter, Master Any Subject</span>
+                </h1>
 
                 <p class="text-base sm:text-xl text-slate-400 max-w-3xl mx-auto mb-10 leading-relaxed" data-i18n="hero_desc">Designed for ambitious students, proactive educators, and engaged parents. Synthesize messy lecture recordings into flashcards, diagnose homework through guided Socratic hints, and automate classroom grading with zero academic dishonesty.</p>
 
@@ -354,8 +357,8 @@
                                 <span class="text-[10px] font-extrabold uppercase tracking-widest text-amber-300 bg-amber-950/90 border border-amber-700 px-2.5 py-0.5 rounded-full">
                                     <span data-i18n="ielts_flagship_badge">Флагманский Оффер &middot; 3 Дня за $1</span>
                                 </span>
-                                <span class="text-xs font-bold text-emerald-400 font-mono">1.00 USD Всего</span>
-                                <span class="text-[10px] text-slate-400">Затем $19/мес &middot; 1-клик отмена</span>
+                                <span class="text-xs font-bold text-emerald-400 font-mono" data-i18n="ielts_flagship_price_badge">1.00 USD Всего</span>
+                                <span class="text-[10px] text-slate-400" data-i18n="ielts_flagship_price_sub">Затем $19/мес &middot; 1-клик отмена</span>
                             </div>
                             <h2 class="text-xl sm:text-3xl font-extrabold text-white tracking-tight" data-i18n="ielts_flagship_title">
                                 Экзаменатор Cambridge IELTS AI &mdash; Проверка эссе экспертом
@@ -367,11 +370,11 @@
                     </div>
                     
                     <div class="flex flex-col sm:flex-row lg:flex-col gap-2.5 shrink-0 w-full sm:w-auto text-center">
-                        <a href="#checkout" class="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-black text-xs sm:text-sm px-6 py-3.5 rounded-xl shadow-xl shadow-amber-500/25 transition transform active:scale-95 block whitespace-nowrap">
-                            Включить 3 Дня IELTS за $1 &rarr;
+                        <a href="#checkout" class="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-black text-xs sm:text-sm px-6 py-3.5 rounded-xl shadow-xl shadow-amber-500/25 transition transform active:scale-95 block whitespace-nowrap" data-i18n="cta_ielts_trial">
+                            Start 3-Day IELTS Access for $1 &rarr;
                         </a>
-                        <a href="/tools/essay-grader" class="bg-slate-900/90 hover:bg-slate-800 text-slate-200 border border-slate-700 text-xs font-semibold px-4 py-2.5 rounded-xl transition block">
-                            Проверить черновик бесплатно
+                        <a href="/tools/essay-grader" class="bg-slate-900/90 hover:bg-slate-800 text-slate-200 border border-slate-700 text-xs font-semibold px-4 py-2.5 rounded-xl transition block" data-i18n="cta_ielts_free_draft">
+                            Check draft for free
                         </a>
                     </div>
                 </div>
@@ -379,11 +382,11 @@
 
             <!-- The 3 Cozy Rooms Section Heading -->
             <div class="text-center max-w-3xl mx-auto mb-8">
-                <span class="text-xs font-bold uppercase tracking-widest text-blue-400">Навигация без путаницы</span>
-                <h2 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight mt-1">
+                <span class="text-xs font-bold uppercase tracking-widest text-blue-400" data-i18n="rooms_badge">Навигация без путаницы</span>
+                <h2 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight mt-1" data-i18n="rooms_title">
                     3 Простых Направления &mdash; Всё на своём месте
                 </h2>
-                <p class="text-xs sm:text-sm text-slate-400 mt-2">
+                <p class="text-xs sm:text-sm text-slate-400 mt-2" data-i18n="rooms_subtitle">
                     Никаких сложных инструкций: выберите нужную задачу и сразу получите готовый результат.
                 </p>
             </div>
@@ -392,13 +395,13 @@
             <div class="max-w-xl mx-auto mb-10">
                 <div class="segmented-tabs-container">
                     <button id="room-tab-1" onclick="switchRoom(1)" class="segmented-tab-btn active-tab-hub">
-                        <span>Академический Хаб</span>
+                        <span data-i18n="tab_hub">Академический Хаб</span>
                     </button>
                     <button id="room-tab-2" onclick="switchRoom(2)" class="segmented-tab-btn">
-                        <span>Карьера и Резюме</span>
+                        <span data-i18n="tab_resume">Карьера и Резюме</span>
                     </button>
                     <button id="room-tab-3" onclick="switchRoom(3)" class="segmented-tab-btn">
-                        <span>ИИ-Фабрика</span>
+                        <span data-i18n="tab_factory">ИИ-Фабрика</span>
                     </button>
                 </div>
             </div>
@@ -409,9 +412,7 @@
                     
                     <!-- Tool 1: Essay Grader (IELTS) -->
                     <div class="bg-slate-900/90 border border-amber-500/40 rounded-3xl p-6 flex flex-col justify-between hover:border-amber-400 transition-all shadow-xl relative group">
-                        <span class="absolute top-4 right-4 text-[10px] font-extrabold uppercase tracking-wider bg-amber-950 text-amber-300 border border-amber-800 px-2 py-0.5 rounded-full">
-                            Флагман $1
-                        </span>
+                        <span class="absolute top-4 right-4 text-[10px] font-extrabold uppercase tracking-wider bg-amber-950 text-amber-300 border border-amber-800 px-2 py-0.5 rounded-full" data-i18n="tool_1_badge">Флагман $1</span>
                         <div>
                             <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-2xl mb-4">
                                 ✍️
@@ -419,15 +420,11 @@
                             <h3 class="text-base font-bold text-white group-hover:text-amber-300 transition mb-1">
                                 IELTS &amp; Cambridge Essay Grader
                             </h3>
-                            <p class="text-xs text-slate-400 leading-relaxed mb-4">
-                                Проверка эссе по 4 критериям Cambridge (TR, CC, LR, GRA), оценка Band 1–9, OCR по фото рукописи и рерайт на Band 8.5+.
-                            </p>
+                            <p class="text-xs text-slate-400 leading-relaxed mb-4" data-i18n="tool_1_desc">Проверка эссе по 4 критериям Cambridge (TR, CC, LR, GRA), оценка Band 1–9, OCR по фото рукописи и рерайт на Band 8.5+.</p>
                         </div>
                         <div class="pt-4 border-t border-white/[0.08] flex items-center justify-between">
-                            <span class="text-[11px] text-amber-400 font-mono font-bold">$1 за 3 дня</span>
-                            <a href="/tools/essay-grader" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs px-3.5 py-1.5 rounded-xl transition">
-                                Открыть инструмент &rarr;
-                            </a>
+                            <span class="text-[11px] text-amber-400 font-mono font-bold" data-i18n="tool_1_tag">$1 за 3 дня</span>
+                            <a href="/tools/essay-grader" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs px-3.5 py-1.5 rounded-xl transition" data-i18n="tool_open_btn">Открыть инструмент &rarr;</a>
                         </div>
                     </div>
 
@@ -438,15 +435,11 @@
                             <h3 class="text-base font-bold text-white group-hover:text-blue-300 transition mb-1">
                                 Smart PDF Summarizer
                             </h3>
-                            <p class="text-xs text-slate-400 leading-relaxed mb-4">
-                                Загрузите 100-страничные учебники или статьи &mdash; ИИ выделит главное, создаст конспект и карточки для повторения.
-                            </p>
+                            <p class="text-xs text-slate-400 leading-relaxed mb-4" data-i18n="tool_2_desc">Загрузите 100-страничные учебники или статьи &mdash; ИИ выделит главное, создаст конспект и карточки для повторения.</p>
                         </div>
                         <div class="pt-4 border-t border-white/[0.08] flex items-center justify-between">
                             <span class="text-[11px] text-slate-500 font-mono">PDF &middot; DOCX &middot; Audio</span>
-                            <a href="/tools/pdf-summarizer" class="bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs px-3.5 py-1.5 rounded-xl border border-slate-700 transition">
-                                Открыть инструмент &rarr;
-                            </a>
+                            <a href="/tools/pdf-summarizer" class="bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs px-3.5 py-1.5 rounded-xl border border-slate-700 transition" data-i18n="tool_open_btn">Открыть инструмент &rarr;</a>
                         </div>
                     </div>
 
@@ -454,18 +447,12 @@
                     <div class="bg-slate-900/90 border border-white/[0.08] hover:border-blue-500/50 rounded-3xl p-6 flex flex-col justify-between transition-all shadow-xl group">
                         <div>
                             <div class="w-12 h-12 rounded-xl bg-slate-900 border border-white/[0.08] flex items-center justify-center mb-4"><svg class="w-5 h-5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg></div>
-                            <h3 class="text-base font-bold text-white group-hover:text-indigo-300 transition mb-1">
-                                Сократовский решебник задач
-                            </h3>
-                            <p class="text-xs text-slate-400 leading-relaxed mb-4">
-                                Пошаговые наводящие подсказки по математике, физике и коду. Учит понимать суть без бездумного списывания.
-                            </p>
+                            <h3 class="text-base font-bold text-white group-hover:text-indigo-300 transition mb-1" data-i18n="tool_3_title">Сократовский решебник задач</h3>
+                            <p class="text-xs text-slate-400 leading-relaxed mb-4" data-i18n="tool_3_desc">Пошаговые наводящие подсказки по математике, физике и коду. Учит понимать суть без бездумного списывания.</p>
                         </div>
                         <div class="pt-4 border-t border-white/[0.08] flex items-center justify-between">
                             <span class="text-[11px] text-slate-500 font-mono">STEM &middot; Формулы LaTeX</span>
-                            <a href="/tools/homework-solver" class="bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs px-3.5 py-1.5 rounded-xl border border-slate-700 transition">
-                                Открыть инструмент &rarr;
-                            </a>
+                            <a href="/tools/homework-solver" class="bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs px-3.5 py-1.5 rounded-xl border border-slate-700 transition" data-i18n="tool_open_btn">Открыть инструмент &rarr;</a>
                         </div>
                     </div>
 
@@ -473,18 +460,12 @@
                     <div class="bg-slate-900/90 border border-white/[0.08] hover:border-emerald-500/50 rounded-3xl p-6 flex flex-col justify-between transition-all shadow-xl group">
                         <div>
                             <div class="w-12 h-12 rounded-xl bg-slate-900 border border-white/[0.08] flex items-center justify-center mb-4"><svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg></div>
-                            <h3 class="text-base font-bold text-white group-hover:text-emerald-300 transition mb-1">
-                                AI-Антиплагиат &amp; Гуманизатор
-                            </h3>
-                            <p class="text-xs text-slate-400 leading-relaxed mb-4">
-                                Защита от ложных срабатываний Turnitin и GPTZero. Перефразирование в живой академический стиль без потери смысла.
-                            </p>
+                            <h3 class="text-base font-bold text-white group-hover:text-emerald-300 transition mb-1" data-i18n="tool_4_title">AI-Антиплагиат &amp; Гуманизатор</h3>
+                            <p class="text-xs text-slate-400 leading-relaxed mb-4" data-i18n="tool_4_desc">Защита от ложных срабатываний Turnitin и GPTZero. Перефразирование в живой академический стиль без потери смысла.</p>
                         </div>
                         <div class="pt-4 border-t border-white/[0.08] flex items-center justify-between">
                             <span class="text-[11px] text-slate-500 font-mono">100% Академично</span>
-                            <a href="/tools/anti-plagiarism" class="bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs px-3.5 py-1.5 rounded-xl border border-slate-700 transition">
-                                Открыть инструмент &rarr;
-                            </a>
+                            <a href="/tools/anti-plagiarism" class="bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs px-3.5 py-1.5 rounded-xl border border-slate-700 transition" data-i18n="tool_open_btn">Открыть инструмент &rarr;</a>
                         </div>
                     </div>
 
@@ -492,18 +473,12 @@
                     <div class="bg-slate-900/90 border border-white/[0.08] hover:border-amber-500/50 rounded-3xl p-6 flex flex-col justify-between transition-all shadow-xl group">
                         <div>
                             <div class="w-12 h-12 rounded-xl bg-slate-900 border border-white/[0.08] flex items-center justify-center mb-4"><svg class="w-5 h-5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
-                            <h3 class="text-base font-bold text-white group-hover:text-amber-300 transition mb-1">
-                                AI-Профориентатор 2026&ndash;2030
-                            </h3>
-                            <p class="text-xs text-slate-400 leading-relaxed mb-4">
-                                Анализ психотипа, выбор востребованной профессии будущего, зарплатные вилки в USD и подбор лучших факультетов.
-                            </p>
+                            <h3 class="text-base font-bold text-white group-hover:text-amber-300 transition mb-1" data-i18n="tool_5_title">AI-Профориентатор 2026&ndash;2030</h3>
+                            <p class="text-xs text-slate-400 leading-relaxed mb-4" data-i18n="tool_5_desc">Анализ психотипа, выбор востребованной профессии будущего, зарплатные вилки в USD и подбор лучших факультетов.</p>
                         </div>
                         <div class="pt-4 border-t border-white/[0.08] flex items-center justify-between">
                             <span class="text-[11px] text-slate-500 font-mono">Зарплаты &middot; Вузы</span>
-                            <a href="/tools/career-navigator" class="bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs px-3.5 py-1.5 rounded-xl border border-slate-700 transition">
-                                Открыть инструмент &rarr;
-                            </a>
+                            <a href="/tools/career-navigator" class="bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs px-3.5 py-1.5 rounded-xl border border-slate-700 transition" data-i18n="tool_open_btn">Открыть инструмент &rarr;</a>
                         </div>
                     </div>
 
@@ -511,18 +486,12 @@
                     <div class="bg-slate-900/90 border border-white/[0.08] hover:border-teal-500/50 rounded-3xl p-6 flex flex-col justify-between transition-all shadow-xl group">
                         <div>
                             <div class="w-12 h-12 rounded-xl bg-slate-900 border border-white/[0.08] flex items-center justify-center mb-4"><svg class="w-5 h-5 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg></div>
-                            <h3 class="text-base font-bold text-white group-hover:text-teal-300 transition mb-1">
-                                AI Language &amp; Roleplay Tutor
-                            </h3>
-                            <p class="text-xs text-slate-400 leading-relaxed mb-4">
-                                Практика разговорного английского, подготовка к собеседованиям в посольстве и разбор грамматических ошибок вслух.
-                            </p>
+                            <h3 class="text-base font-bold text-white group-hover:text-teal-300 transition mb-1" data-i18n="tool_6_title">AI Language &amp; Roleplay Tutor</h3>
+                            <p class="text-xs text-slate-400 leading-relaxed mb-4" data-i18n="tool_6_desc">Практика разговорного английского, подготовка к собеседованиям в посольстве и разбор грамматических ошибок вслух.</p>
                         </div>
                         <div class="pt-4 border-t border-white/[0.08] flex items-center justify-between">
                             <span class="text-[11px] text-slate-500 font-mono">CEFR A1 &ndash; C2</span>
-                            <a href="/tools/language-tutor" class="bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs px-3.5 py-1.5 rounded-xl border border-slate-700 transition">
-                                Открыть инструмент &rarr;
-                            </a>
+                            <a href="/tools/language-tutor" class="bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs px-3.5 py-1.5 rounded-xl border border-slate-700 transition" data-i18n="tool_open_btn">Открыть инструмент &rarr;</a>
                         </div>
                     </div>
 
@@ -530,18 +499,12 @@
                     <div class="bg-slate-900/90 border border-white/[0.08] hover:border-blue-500/50 rounded-3xl p-6 flex flex-col justify-between transition-all shadow-xl group">
                         <div>
                             <div class="w-12 h-12 rounded-xl bg-slate-900 border border-white/[0.08] flex items-center justify-center mb-4"><svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg></div>
-                            <h3 class="text-base font-bold text-white group-hover:text-blue-300 transition mb-1">
-                                Калькулятор и прогнозист GPA
-                            </h3>
-                            <p class="text-xs text-slate-400 leading-relaxed mb-4">
-                                Расчет среднего балла по шкалам 4.0, 5.0 и ECTS. Моделирование оценок для сохранения стипендии и гранта.
-                            </p>
+                            <h3 class="text-base font-bold text-white group-hover:text-blue-300 transition mb-1" data-i18n="tool_7_title">Калькулятор и прогнозист GPA</h3>
+                            <p class="text-xs text-slate-400 leading-relaxed mb-4" data-i18n="tool_7_desc">Расчет среднего балла по шкалам 4.0, 5.0 и ECTS. Моделирование оценок для сохранения стипендии и гранта.</p>
                         </div>
                         <div class="pt-4 border-t border-white/[0.08] flex items-center justify-between">
                             <span class="text-[11px] text-slate-500 font-mono">4.0 &middot; 5.0 &middot; ECTS</span>
-                            <a href="/tools/gpa-calculator" class="bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs px-3.5 py-1.5 rounded-xl border border-slate-700 transition">
-                                Открыть инструмент &rarr;
-                            </a>
+                            <a href="/tools/gpa-calculator" class="bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs px-3.5 py-1.5 rounded-xl border border-slate-700 transition" data-i18n="tool_open_btn">Открыть инструмент &rarr;</a>
                         </div>
                     </div>
 
@@ -549,18 +512,12 @@
                     <div class="bg-slate-900/90 border border-white/[0.08] hover:border-blue-500/50 rounded-3xl p-6 flex flex-col justify-between transition-all shadow-xl group">
                         <div>
                             <div class="w-12 h-12 rounded-xl bg-slate-900 border border-white/[0.08] flex items-center justify-center mb-4"><svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg></div>
-                            <h3 class="text-base font-bold text-white group-hover:text-purple-300 transition mb-1">
-                                Генератор цитирований &amp; ГОСТ
-                            </h3>
-                            <p class="text-xs text-slate-400 leading-relaxed mb-4">
-                                Мгновенное оформление библиографического списка по стандартам APA 7, MLA 9, Chicago, Harvard и ГОСТ Р 7.0.5.
-                            </p>
+                            <h3 class="text-base font-bold text-white group-hover:text-purple-300 transition mb-1" data-i18n="tool_8_title">Генератор цитирований &amp; ГОСТ</h3>
+                            <p class="text-xs text-slate-400 leading-relaxed mb-4" data-i18n="tool_8_desc">Мгновенное оформление библиографического списка по стандартам APA 7, MLA 9, Chicago, Harvard и ГОСТ Р 7.0.5.</p>
                         </div>
                         <div class="pt-4 border-t border-white/[0.08] flex items-center justify-between">
                             <span class="text-[11px] text-slate-500 font-mono">APA &middot; MLA &middot; ГОСТ</span>
-                            <a href="/tools/citation-generator" class="bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs px-3.5 py-1.5 rounded-xl border border-slate-700 transition">
-                                Открыть инструмент &rarr;
-                            </a>
+                            <a href="/tools/citation-generator" class="bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs px-3.5 py-1.5 rounded-xl border border-slate-700 transition" data-i18n="tool_open_btn">Открыть инструмент &rarr;</a>
                         </div>
                     </div>
 
@@ -568,18 +525,12 @@
                     <div class="bg-slate-900/90 border border-white/[0.08] hover:border-teal-500/50 rounded-3xl p-6 flex flex-col justify-between transition-all shadow-xl group">
                         <div>
                             <div class="w-12 h-12 rounded-xl bg-slate-900 border border-white/[0.08] flex items-center justify-center mb-4"><svg class="w-5 h-5 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg></div>
-                            <h3 class="text-base font-bold text-white group-hover:text-teal-300 transition mb-1">
-                                Peer Study Rooms &amp; Репетиторы
-                            </h3>
-                            <p class="text-xs text-slate-400 leading-relaxed mb-4">
-                                Совместные эфирные комнаты для подготовки к экзаменам со студентами ведущих мировых и локальных вузов.
-                            </p>
+                            <h3 class="text-base font-bold text-white group-hover:text-teal-300 transition mb-1" data-i18n="tool_9_title">Peer Study Rooms &amp; Репетиторы</h3>
+                            <p class="text-xs text-slate-400 leading-relaxed mb-4" data-i18n="tool_9_desc">Совместные эфирные комнаты для подготовки к экзаменам со студентами ведущих мировых и локальных вузов.</p>
                         </div>
                         <div class="pt-4 border-t border-white/[0.08] flex items-center justify-between">
                             <span class="text-[11px] text-slate-500 font-mono">Комнаты &middot; P2P</span>
-                            <a href="/tools/peer-exchange" class="bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs px-3.5 py-1.5 rounded-xl border border-slate-700 transition">
-                                Открыть инструмент &rarr;
-                            </a>
+                            <a href="/tools/peer-exchange" class="bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs px-3.5 py-1.5 rounded-xl border border-slate-700 transition" data-i18n="tool_open_btn">Открыть инструмент &rarr;</a>
                         </div>
                     </div>
 
@@ -591,43 +542,31 @@
                 <div class="premium-card p-6 sm:p-8 shadow-2xl">
                     <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pb-6 border-b border-white/[0.08] mb-6">
                         <div>
-                            <span class="text-[10px] font-extrabold uppercase tracking-widest text-emerald-400 bg-emerald-950 px-2.5 py-0.5 rounded-full border border-emerald-800">
-                                Микро-сервис &middot; Обход роботов HR
-                            </span>
-                            <h3 class="text-xl sm:text-2xl font-extrabold text-white mt-2">
-                                Сканер соответствия резюме под конкретную вакансию
-                            </h3>
-                            <p class="text-xs text-slate-400 mt-1">
-                                Узнайте, почему ваше резюме отсеивают автоматические фильтры Workday и Taleo, и получите адаптированный вариант.
-                            </p>
+                            <span class="text-[10px] font-extrabold uppercase tracking-widest text-emerald-400 bg-emerald-950 px-2.5 py-0.5 rounded-full border border-emerald-800" data-i18n="ats_badge">Микро-сервис &middot; Обход роботов HR</span>
+                            <h3 class="text-xl sm:text-2xl font-extrabold text-white mt-2" data-i18n="ats_title">Сканер соответствия резюме под конкретную вакансию</h3>
+                            <p class="text-xs text-slate-400 mt-1" data-i18n="ats_subtitle">Узнайте, почему ваше резюме отсеивают автоматические фильтры Workday и Taleo, и получите адаптированный вариант.</p>
                         </div>
-                        <a href="/tools/ats-resume" class="bg-gradient-to-r from-emerald-500 to-teal-400 text-slate-950 font-bold text-xs px-5 py-2.5 rounded-xl transition shadow-lg shadow-emerald-500/20 whitespace-nowrap">
-                            Открыть полный сканер &rarr;
-                        </a>
+                        <a href="/tools/ats-resume" class="bg-gradient-to-r from-emerald-500 to-teal-400 text-slate-950 font-bold text-xs px-5 py-2.5 rounded-xl transition shadow-lg shadow-emerald-500/20 whitespace-nowrap" data-i18n="ats_open_btn">Открыть полный сканер &rarr;</a>
                     </div>
 
                     <!-- Mini 2-Column Scanner -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
                         <div>
-                            <label class="block text-xs font-bold text-slate-300 mb-1.5">Требования вакансии:</label>
-                            <textarea id="home-ats-jd" rows="5" class="w-full bg-slate-950 border border-white/[0.08] rounded-xl p-3 text-xs text-slate-200 placeholder-slate-600 focus:outline-none focus:border-emerald-500 transition" placeholder="Вставьте сюда текст вакансии или ключевые требования..."></textarea>
+                            <label class="block text-xs font-bold text-slate-300 mb-1.5" data-i18n="ats_jd_label">Требования вакансии:</label>
+                            <textarea id="home-ats-jd" rows="5" class="w-full bg-slate-950 border border-white/[0.08] rounded-xl p-3 text-xs text-slate-200 placeholder-slate-600 focus:outline-none focus:border-emerald-500 transition" placeholder="Вставьте сюда текст вакансии или ключевые требования..." data-i18n-placeholder="ats_jd_ph"></textarea>
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-slate-300 mb-1.5">Текст резюме:</label>
-                            <textarea id="home-ats-resume" rows="5" class="w-full bg-slate-950 border border-white/[0.08] rounded-xl p-3 text-xs text-slate-200 placeholder-slate-600 focus:outline-none focus:border-emerald-500 transition" placeholder="Вставьте сюда текст вашего резюме или навыки..."></textarea>
+                            <label class="block text-xs font-bold text-slate-300 mb-1.5" data-i18n="ats_resume_label">Текст резюме:</label>
+                            <textarea id="home-ats-resume" rows="5" class="w-full bg-slate-950 border border-white/[0.08] rounded-xl p-3 text-xs text-slate-200 placeholder-slate-600 focus:outline-none focus:border-emerald-500 transition" placeholder="Вставьте сюда текст вашего резюме или навыки..." data-i18n-placeholder="ats_resume_ph"></textarea>
                         </div>
                     </div>
 
                     <div class="flex flex-col sm:flex-row justify-between items-center gap-3">
                         <div class="flex items-center gap-2">
                             <span class="text-xs text-slate-400">Пресет:</span>
-                            <button onclick="fillHomeATSSample()" class="text-xs text-emerald-400 underline hover:text-white">
-                                Вставить пример (Frontend React)
-                            </button>
+                            <button onclick="fillHomeATSSample()" class="text-xs text-emerald-400 underline hover:text-white" data-i18n="ats_preset_btn">Вставить пример (Frontend React)</button>
                         </div>
-                        <button onclick="runHomeATS()" id="home-ats-btn" class="w-full sm:w-auto bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-slate-950 font-black text-xs px-6 py-2.5 rounded-xl transition shadow-lg shadow-emerald-600/20">
-                            Проверить совпадение ATS (Бесплатно)
-                        </button>
+                        <button onclick="runHomeATS()" id="home-ats-btn" class="w-full sm:w-auto bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-slate-950 font-black text-xs px-6 py-2.5 rounded-xl transition shadow-lg shadow-emerald-600/20" data-i18n="ats_scan_btn">Проверить совпадение ATS (Бесплатно)</button>
                     </div>
 
                     <!-- Mini Results -->
@@ -640,9 +579,7 @@
                                     <p class="text-[11px] text-slate-400" id="home-ats-gaps">Пропущены 3 ключевых слова из вакансии</p>
                                 </div>
                             </div>
-                            <a href="#checkout" class="bg-gradient-to-r from-emerald-500 to-teal-400 text-slate-950 font-black text-xs px-5 py-2.5 rounded-xl transition shadow-lg shadow-emerald-500/25">
-                                Скачать адаптированное резюме за 1 $
-                            </a>
+                            <a href="#checkout" class="bg-gradient-to-r from-emerald-500 to-teal-400 text-slate-950 font-black text-xs px-5 py-2.5 rounded-xl transition shadow-lg shadow-emerald-500/25" data-i18n="ats_download_btn">Скачать адаптированное резюме за 1 $</a>
                         </div>
                     </div>
                 </div>
@@ -654,21 +591,13 @@
                     <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pb-6 border-b border-white/[0.08] mb-6">
                         <div>
                             <div class="flex items-center gap-2">
-                                <span class="text-[10px] font-extrabold uppercase tracking-widest text-purple-300 bg-purple-950 px-2.5 py-0.5 rounded-full border border-purple-800">
-                                    ИИ-Фабрика &middot; Готовые бизнес-активы за $1
-                                </span>
+                                <span class="text-[10px] font-extrabold uppercase tracking-widest text-purple-300 bg-purple-950 px-2.5 py-0.5 rounded-full border border-purple-800" data-i18n="factory_badge">ИИ-Фабрика &middot; Готовые бизнес-активы за $1</span>
                                 <span class="text-xs font-mono font-bold text-emerald-400">840+ загрузок сегодня</span>
                             </div>
-                            <h3 class="text-xl sm:text-2xl font-extrabold text-white mt-2">
-                                Супермаркет Готовых ИИ-Заводов &amp; Цифровых Полуфабрикатов
-                            </h3>
-                            <p class="text-xs text-slate-400 mt-1">
-                                Готовые рабочие фабрики: контент-заводы для Reels, автономные Telegram-боты, карточки для Uzum Market и B2B продажи без сложного кода.
-                            </p>
+                            <h3 class="text-xl sm:text-2xl font-extrabold text-white mt-2" data-i18n="factory_title">Супермаркет Готовых ИИ-Заводов &amp; Цифровых Полуфабрикатов</h3>
+                            <p class="text-xs text-slate-400 mt-1" data-i18n="factory_subtitle">Готовые рабочие фабрики: контент-заводы для Reels, автономные Telegram-боты, карточки для Uzum Market и B2B продажи без сложного кода.</p>
                         </div>
-                        <a href="/blueprints" class="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold text-xs px-5 py-2.5 rounded-xl transition shadow-lg shadow-purple-600/25 whitespace-nowrap">
-                            Открыть Супермаркет Заводов &rarr;
-                        </a>
+                        <a href="/blueprints" class="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold text-xs px-5 py-2.5 rounded-xl transition shadow-lg shadow-purple-600/25 whitespace-nowrap" data-i18n="factory_open_btn">Открыть Супермаркет Заводов &rarr;</a>
                     </div>
 
                     <!-- 6 Featured Factory Cards Grid -->
@@ -678,15 +607,11 @@
                         <div class="bg-slate-950 border border-white/[0.08] rounded-2xl p-4 flex flex-col justify-between hover:border-purple-500/50 transition group">
                             <div>
                                 <div class="flex justify-between items-center mb-2">
-                                    <span class="text-[10px] bg-red-950 text-red-300 px-2 py-0.5 rounded-full border border-red-800/80 font-semibold">Хит Продаж</span>
+                                    <span class="text-[10px] bg-red-950 text-red-300 px-2 py-0.5 rounded-full border border-red-800/80 font-semibold" data-i18n="factory_1_badge">Хит Продаж</span>
                                     <span class="text-sm font-black text-emerald-400 font-mono">1.00 $</span>
                                 </div>
-                                <h4 class="text-sm font-bold text-white group-hover:text-purple-300 transition mb-1">
-                                    Контент-Завод: 30 Reels / Shorts
-                                </h4>
-                                <p class="text-xs text-slate-400 leading-relaxed mb-3">
-                                    Вводите 1 тему — получаете 30 сценариев с хуками, текстом озвучки, промптами для AI-видео и хештегами прямо в Google Sheets.
-                                </p>
+                                <h4 class="text-sm font-bold text-white group-hover:text-purple-300 transition mb-1" data-i18n="factory_1_title">Контент-Завод: 30 Reels / Shorts</h4>
+                                <p class="text-xs text-slate-400 leading-relaxed mb-3" data-i18n="factory_1_desc">Вводите 1 тему — получаете 30 сценариев с хуками, текстом озвучки, промптами для AI-видео и хештегами прямо в Google Sheets.</p>
                             </div>
                             <div class="flex items-center gap-2 pt-3 border-t border-slate-850">
                                 <a href="/blueprints" class="flex-1 text-center bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs py-2 rounded-lg border border-white/[0.08] transition">
@@ -702,15 +627,11 @@
                         <div class="bg-slate-950 border border-white/[0.08] rounded-2xl p-4 flex flex-col justify-between hover:border-blue-500/50 transition group">
                             <div>
                                 <div class="flex justify-between items-center mb-2">
-                                    <span class="text-[10px] bg-blue-950 text-blue-300 px-2 py-0.5 rounded-full border border-blue-800/80 font-semibold">Автоматизация</span>
+                                    <span class="text-[10px] bg-blue-950 text-blue-300 px-2 py-0.5 rounded-full border border-blue-800/80 font-semibold" data-i18n="factory_2_badge">Автоматизация</span>
                                     <span class="text-sm font-black text-emerald-400 font-mono">1.00 $</span>
                                 </div>
-                                <h4 class="text-sm font-bold text-white group-hover:text-blue-300 transition mb-1">
-                                    Завод Telegram-Ботов 24/7
-                                </h4>
-                                <p class="text-xs text-slate-400 leading-relaxed mb-3">
-                                    Автономный Python-бот: каталог товаров с ценами, сбор телефонов клиентов и мгновенная пересылка заявок владельцу в личку.
-                                </p>
+                                <h4 class="text-sm font-bold text-white group-hover:text-blue-300 transition mb-1" data-i18n="factory_2_title">Завод Telegram-Ботов 24/7</h4>
+                                <p class="text-xs text-slate-400 leading-relaxed mb-3" data-i18n="factory_2_desc">Автономный Python-бот: каталог товаров с ценами, сбор телефонов клиентов и мгновенная пересылка заявок владельцу в личку.</p>
                             </div>
                             <div class="flex items-center gap-2 pt-3 border-t border-slate-850">
                                 <a href="/blueprints" class="flex-1 text-center bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs py-2 rounded-lg border border-white/[0.08] transition">
@@ -726,15 +647,11 @@
                         <div class="bg-slate-950 border border-white/[0.08] rounded-2xl p-4 flex flex-col justify-between hover:border-amber-500/50 transition group">
                             <div>
                                 <div class="flex justify-between items-center mb-2">
-                                    <span class="text-[10px] bg-amber-950 text-amber-300 px-2 py-0.5 rounded-full border border-amber-800/80 font-semibold">Для селлеров</span>
+                                    <span class="text-[10px] bg-amber-950 text-amber-300 px-2 py-0.5 rounded-full border border-amber-800/80 font-semibold" data-i18n="factory_3_badge">Для селлеров</span>
                                     <span class="text-sm font-black text-emerald-400 font-mono">1.00 $</span>
                                 </div>
-                                <h4 class="text-sm font-bold text-white group-hover:text-amber-300 transition mb-1">
-                                    Завод Карточек Uzum &amp; WB
-                                </h4>
-                                <p class="text-xs text-slate-400 leading-relaxed mb-3">
-                                    SEO-заголовок, 5 буллетов выгод, LSI-описание до 3500 знаков и блокировка возражений для роста конверсии на 30%.
-                                </p>
+                                <h4 class="text-sm font-bold text-white group-hover:text-amber-300 transition mb-1" data-i18n="factory_3_title">Завод Карточек Uzum &amp; WB</h4>
+                                <p class="text-xs text-slate-400 leading-relaxed mb-3" data-i18n="factory_3_desc">SEO-заголовок, 5 буллетов выгод, LSI-описание до 3500 знаков и блокировка возражений для роста конверсии на 30%.</p>
                             </div>
                             <div class="flex items-center gap-2 pt-3 border-t border-slate-850">
                                 <a href="/blueprints" class="flex-1 text-center bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs py-2 rounded-lg border border-white/[0.08] transition">
@@ -750,15 +667,11 @@
                         <div class="bg-slate-950 border border-white/[0.08] rounded-2xl p-4 flex flex-col justify-between hover:border-emerald-500/50 transition group">
                             <div>
                                 <div class="flex justify-between items-center mb-2">
-                                    <span class="text-[10px] bg-emerald-950 text-emerald-300 px-2 py-0.5 rounded-full border border-emerald-800/80 font-semibold">B2B Контракты</span>
+                                    <span class="text-[10px] bg-emerald-950 text-emerald-300 px-2 py-0.5 rounded-full border border-emerald-800/80 font-semibold" data-i18n="factory_4_badge">B2B Контракты</span>
                                     <span class="text-sm font-black text-emerald-400 font-mono">1.00 $</span>
                                 </div>
-                                <h4 class="text-sm font-bold text-white group-hover:text-emerald-300 transition mb-1">
-                                    Завод B2B-Клиентов (78% Open Rate)
-                                </h4>
-                                <p class="text-xs text-slate-400 leading-relaxed mb-3">
-                                    Метод аудита 1 ошибки для Upwork &amp; LinkedIn, B2B-зацепки в Telegram и follow-up цепочки без навязчивого спама.
-                                </p>
+                                <h4 class="text-sm font-bold text-white group-hover:text-emerald-300 transition mb-1" data-i18n="factory_4_title">Завод B2B-Клиентов (78% Open Rate)</h4>
+                                <p class="text-xs text-slate-400 leading-relaxed mb-3" data-i18n="factory_4_desc">Метод аудита 1 ошибки для Upwork &amp; LinkedIn, B2B-зацепки в Telegram и follow-up цепочки без навязчивого спама.</p>
                             </div>
                             <div class="flex items-center gap-2 pt-3 border-t border-slate-850">
                                 <a href="/blueprints" class="flex-1 text-center bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs py-2 rounded-lg border border-white/[0.08] transition">
@@ -774,15 +687,11 @@
                         <div class="bg-slate-950 border border-white/[0.08] rounded-2xl p-4 flex flex-col justify-between hover:border-blue-500/50 transition group">
                             <div>
                                 <div class="flex justify-between items-center mb-2">
-                                    <span class="text-[10px] bg-blue-950 text-blue-300 px-2 py-0.5 rounded-full border border-blue-800/80 font-semibold">Dev Стек</span>
+                                    <span class="text-[10px] bg-blue-950 text-blue-300 px-2 py-0.5 rounded-full border border-blue-800/80 font-semibold" data-i18n="factory_5_badge">Dev Стек</span>
                                     <span class="text-sm font-black text-emerald-400 font-mono">1.00 $</span>
                                 </div>
-                                <h4 class="text-sm font-bold text-white group-hover:text-blue-300 transition mb-1">
-                                    Senior Full-Stack .cursorrules
-                                </h4>
-                                <p class="text-xs text-slate-400 leading-relaxed mb-3">
-                                    Выверенные системные правила для Cursor и Copilot: строгий TypeScript, шаблоны Next.js + FastAPI и -65% галлюцинаций.
-                                </p>
+                                <h4 class="text-sm font-bold text-white group-hover:text-blue-300 transition mb-1" data-i18n="factory_5_title">Senior Full-Stack .cursorrules</h4>
+                                <p class="text-xs text-slate-400 leading-relaxed mb-3" data-i18n="factory_5_desc">Выверенные системные правила для Cursor и Copilot: строгий TypeScript, шаблоны Next.js + FastAPI и -65% галлюцинаций.</p>
                             </div>
                             <div class="flex items-center gap-2 pt-3 border-t border-slate-850">
                                 <a href="/blueprints" class="flex-1 text-center bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs py-2 rounded-lg border border-white/[0.08] transition">
@@ -798,15 +707,11 @@
                         <div class="bg-slate-950 border border-white/[0.08] rounded-2xl p-4 flex flex-col justify-between hover:border-emerald-500/50 transition group">
                             <div>
                                 <div class="flex justify-between items-center mb-2">
-                                    <span class="text-[10px] bg-emerald-950 text-emerald-300 px-2 py-0.5 rounded-full border border-emerald-800/80 font-semibold">Anki Карточки</span>
+                                    <span class="text-[10px] bg-emerald-950 text-emerald-300 px-2 py-0.5 rounded-full border border-emerald-800/80 font-semibold" data-i18n="factory_6_badge">Anki Карточки</span>
                                     <span class="text-sm font-black text-emerald-400 font-mono">1.00 $</span>
                                 </div>
-                                <h4 class="text-sm font-bold text-white group-hover:text-emerald-300 transition mb-1">
-                                    Cambridge IELTS 8.5+ &amp; STEM Decks
-                                </h4>
-                                <p class="text-xs text-slate-400 leading-relaxed mb-3">
-                                    Готовая колода Anki для интервального повторения: академические коллокации Band 8.5+ и доказательства STEM алгоритмов.
-                                </p>
+                                <h4 class="text-sm font-bold text-white group-hover:text-emerald-300 transition mb-1" data-i18n="factory_6_title">Cambridge IELTS 8.5+ &amp; STEM Decks</h4>
+                                <p class="text-xs text-slate-400 leading-relaxed mb-3" data-i18n="factory_6_desc">Готовая колода Anki для интервального повторения: академические коллокации Band 8.5+ и доказательства STEM алгоритмов.</p>
                             </div>
                             <div class="flex items-center gap-2 pt-3 border-t border-slate-850">
                                 <a href="/blueprints" class="flex-1 text-center bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs py-2 rounded-lg border border-white/[0.08] transition">
@@ -941,7 +846,7 @@
                                 <div id="ai-paywall-overlay" class="paywall-floating-overlay">
                                     <div class="paywall-glass-card">
                                         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-300 text-xs font-bold mb-2">
-                                            <span>Полный ответ ассистента заблокирован</span>
+                                            <span data-i18n="paywall_text">Полный ответ ассистента заблокирован</span>
                                         </div>
                                         <h4 class="text-base sm:text-lg font-extrabold text-white mb-1.5 font-heading">
                                             Разблокируйте пошаговый разбор и полный ответ

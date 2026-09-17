@@ -63,6 +63,10 @@ STATIC_DIR = Path("/server/static") if Path("/server/static").exists() else (BAS
 if STATIC_DIR.exists():
     app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
 
+LOCALES_DIR = Path("/server/locales") if Path("/server/locales").exists() else (BASE_DIR / "locales")
+if LOCALES_DIR.exists():
+    app.mount("/locales", StaticFiles(directory=str(LOCALES_DIR)), name="locales")
+
 # Загрузка переменных из .env, если они не заданы в окружении
 env_file = BASE_DIR / ".env"
 if env_file.exists():
