@@ -20,8 +20,8 @@
     "cookie_consent_text": "Xavfsizlik va shaxsiylashtirish uchun cookies fayllaridan foydalanamiz. EduHub AI dan foydalanishni davom ettirish orqali siz <a href='/terms' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Xizmat ko'rsatish shartlari</a>, <a href='/privacy' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Maxfiylik siyosati</a> va <a href='/refund' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Qaytarish siyosati</a>ga rozilik bildirasiz.",
     "cookie_consent_btn": "Qabul qilish va davom etish",
     "pwa_install_title": "EduHub AI ilovasini o'rnatish",
-    "pwa_install_desc": "iPhone va Android-da 1 bosishda tezkor kirish va oflayn rejim.",
-    "pwa_install_btn": "O'rnatish",
+    "pwa_install_desc": "EduHub AI ilovasini o'rnatish — 1 bosish orqali tezkor kirish va oflayn rejim.",
+    "pwa_install_btn": "Ilovani o'rnatish",
     "pwa_ios_title": "iPhone va iPad-ga o'rnatish",
     "pwa_ios_step1": "1. Safari pastidagi «Ulashish» tugmasini bosing (strelkali kvadrat).",
     "pwa_ios_step2": "2. Pastga tushib, «Asosiy ekranga qo'shish» (+) bandini tanlang.",
@@ -312,7 +312,7 @@
     "footer_text": "EduHub AI — Avtonom akademik ta'lim platformasi. Barcha huquqlar himoyalangan.",
     "footer_terms": "Foydalanish shartlari",
     "footer_privacy": "Maxfiylik siyosati",
-    "footer_refund": "Mablag'ni qaytarish",
+    "footer_refund": "Qaytarish siyosati (14 kun)",
     "footer_guarantee": "14-Day 100% Money-Back Guarantee. Encrypted & PCI-DSS Level 1 Compliant Checkout.",
     "hero_subtitle": "Tezroq o'rganing, aqlliroq tekshiring, har qanday fanni o'zlashtiring.",
     "tab_hub": "Akademik Hub",
@@ -329,7 +329,7 @@
     "tool_1_badge": "Asosiy $1",
     "tool_1_desc": "4 ta Cambridge mezoni (TR, CC, LR, GRA) bo'yicha tahlil, Band 1–9 baholash, fotodan OCR va Band 8.5+ darajaga qayta yozish.",
     "tool_1_tag": "3 kun uchun $1",
-    "tool_open_btn": "Vositaning ishga tushirish →",
+    "tool_open_btn": "Panelni ochish →",
     "tool_2_desc": "100 sahifalik darslik yoki maqolalarni yuklang — AI muhim qismlarni ajratadi, konspekt va flesh-kartalar tuzadi.",
     "tool_3_title": "Suqrot uslubidagi masalalar yechuvchisi",
     "tool_3_desc": "Matematika, fizika va dasturlash bo'yicha bosqichma-bosqich yo'naltiruvchi maslahatlar. Ko'chirmasdan tushunishni o'rgatadi.",
@@ -442,5 +442,7 @@
     "pillar_4_b1": "Mezonlar bo'yicha ommaviy tekshirish",
     "pillar_4_b2": "O'quv rejalari va testlar konstruktori",
     "pillar_4_b3": "O'zlashtirish tahlilini eksport qilish",
-    "paywall_btn": "To'liq yechimni .00 evaziga ochish →"
+    "paywall_btn": "To'liq yechimni .00 evaziga ochish →",
+    "footer_demo": "Mahsulot Demosi",
+    "footer_support": "Qo'llab-quvvatlash xizmati"
 }

@@ -20,7 +20,7 @@
     "cookie_consent_text": "We use cookies for security and personalization. By continuing to use EduHub AI, you agree to our <a href='/terms' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Terms of Service</a>, <a href='/privacy' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Privacy Policy</a>, and <a href='/refund' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Refund Policy</a>.",
     "cookie_consent_btn": "Accept & Continue",
     "pwa_install_title": "Install EduHub AI App",
-    "pwa_install_desc": "Fast 1-tap access on iPhone & Android with offline support.",
+    "pwa_install_desc": "EduHub AI App — Fast 1-tap access on iPhone & Android with offline support.",
     "pwa_install_btn": "Install App",
     "pwa_ios_title": "Install on iPhone & iPad",
     "pwa_ios_step1": "1. Tap the Share button at the bottom of Safari (square with arrow up).",
@@ -312,7 +312,7 @@
     "footer_text": "EduHub AI — Autonomous Academic Infrastructure. All rights reserved.",
     "footer_terms": "Terms of Service",
     "footer_privacy": "Privacy Policy",
-    "footer_refund": "Refund Policy",
+    "footer_refund": "Refund Policy (14-day)",
     "footer_guarantee": "14-Day 100% Money-Back Guarantee. Encrypted & PCI-DSS Level 1 Compliant Checkout.",
     "hero_subtitle": "Learn Faster, Grade Smarter, Master Any Subject.",
     "tab_hub": "Academic Hub",
@@ -329,7 +329,7 @@
     "tool_1_badge": "Flagship $1",
     "tool_1_desc": "Full diagnostic across 4 Cambridge criteria (TR, CC, LR, GRA), Band 1–9 scoring, camera OCR, and instant rewrite to Band 8.5+.",
     "tool_1_tag": "$1 for 3 days",
-    "tool_open_btn": "Launch Tool →",
+    "tool_open_btn": "Open Panel →",
     "tool_2_desc": "Upload 100-page textbooks or research papers — AI highlights essentials, creates summaries and flashcards.",
     "tool_3_title": "Socratic Homework Solver",
     "tool_3_desc": "Step-by-step guided hints for math, physics, and code. Learn concepts deeply without mindless copying.",
@@ -442,5 +442,7 @@
     "pillar_4_b1": "Bulk rubric-based grading",
     "pillar_4_b2": "Curriculum & quiz builder",
     "pillar_4_b3": "Exportable student analytics",
-    "paywall_btn": "Unlock Full Solution for .00 →"
+    "paywall_btn": "Unlock Full Solution for .00 →",
+    "footer_demo": "Product Demo",
+    "footer_support": "AI Support & Dispute Resolver"
 }

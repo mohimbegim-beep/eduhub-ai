@@ -209,3 +209,19 @@ body::before {
     border-color: rgba(99, 102, 241, 0.5);
     box-shadow: 0 0 20px rgba(99, 102, 241, 0.15);
 }
+
+/* ==============================================================================
+   SAFARI & IOS WEBKIT BACKDROP-FILTER FIX (Auto-applied by QA Guard Engine)
+   ============================================================================== */
+header,
+nav,
+.backdrop-blur-md,
+.backdrop-blur-sm,
+.backdrop-blur-lg,
+.backdrop-blur-xl,
+.paywall-floating-overlay,
+.paywall-glass-card,
+.premium-card {
+    -webkit-backdrop-filter: blur(12px) !important;
+    backdrop-filter: blur(12px) !important;
+}

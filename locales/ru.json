@@ -20,7 +20,7 @@
     "cookie_consent_text": "Мы используем cookies для безопасности и персонализации. Продолжая использовать EduHub AI, вы соглашаетесь с <a href='/terms' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Условиями обслуживания</a>, <a href='/privacy' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Политикой конфиденциальности</a> и <a href='/refund' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Политикой возвратов</a>.",
     "cookie_consent_btn": "Принять и продолжить",
     "pwa_install_title": "Установить приложение EduHub AI",
-    "pwa_install_desc": "Быстрый доступ в 1 клик на iPhone и Android с поддержкой работы офлайн.",
+    "pwa_install_desc": "Приложение EduHub AI — быстрый доступ в 1 клик на iPhone и Android с поддержкой офлайн.",
     "pwa_install_btn": "Установить",
     "pwa_ios_title": "Установка на iPhone и iPad",
     "pwa_ios_step1": "1. Нажмите кнопку «Поделиться» внизу экрана Safari (квадрат со стрелкой вверх).",
@@ -311,8 +311,8 @@
     "tutor_laser_cta_btn": "Открыть Pro-разговорный клуб за $1",
     "footer_text": "EduHub AI — Автономная академическая платформа. Все права защищены.",
     "footer_terms": "Условия использования",
-    "footer_privacy": "Конфиденциальность",
-    "footer_refund": "Политика возврата",
+    "footer_privacy": "Политика конфиденциальности",
+    "footer_refund": "Политика возврата (14 дней)",
     "footer_guarantee": "14-Day 100% Money-Back Guarantee. Encrypted & PCI-DSS Level 1 Compliant Checkout.",
     "hero_subtitle": "Учитесь быстрее, проверяйте умнее, осваивайте любые предметы.",
     "tab_hub": "Академический Хаб",
@@ -329,7 +329,7 @@
     "tool_1_badge": "Флагман $1",
     "tool_1_desc": "Проверка эссе по 4 критериям Cambridge (TR, CC, LR, GRA), оценка Band 1–9, OCR по фото и авторский рерайт на Band 8.5+.",
     "tool_1_tag": "$1 за 3 дня",
-    "tool_open_btn": "Открыть инструмент →",
+    "tool_open_btn": "Открыть панель →",
     "tool_2_desc": "Загрузите 100-страничные учебники или статьи — ИИ выделит главное, создаст конспект и карточки для повторения.",
     "tool_3_title": "Сократовский решебник задач",
     "tool_3_desc": "Пошаговые наводящие подсказки по математике, физике и коду. Учит понимать суть без бездумного списывания.",
@@ -442,5 +442,7 @@
     "pillar_4_b1": "Массовая проверка по критериям",
     "pillar_4_b2": "Конструктор учебных планов и тестов",
     "pillar_4_b3": "Экспорт аналитики успеваемости",
-    "paywall_btn": "Разблокировать полный ответ за .00 →"
+    "paywall_btn": "Разблокировать полный ответ за .00 →",
+    "footer_demo": "Демо продукта",
+    "footer_support": "Служба поддержки и споры"
 }
