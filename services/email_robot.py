@@ -79,18 +79,24 @@ To avoid any delays and allow your team to prioritize our compliance review, I h
 PRODUCT VERIFICATION DOSSIER — EduHub AI
 ----------------------------------------------------------------------
 1. Business / Product Name:
-   EduHub AI
+   EduHub AI (operated by KIFOYATECH LLC)
 
-2. Production Website URL:
+2. Operating Legal Entity:
+   KIFOYATECH LLC (STIR / Tax ID: 312206850)
+   Founder & CEO: Usmonova Mohimbegim Ilhom qizi
+   Registered Address: Muminova street, 1, apt 8, Tashkent, Uzbekistan
+   Activity Classification: 62.01.0 (Computer Programming & Educational Software)
+
+3. Production Website URL:
    {prod_url}/
 
-3. Industry / Category:
+4. Industry / Category:
    SaaS / EdTech / Digital Educational Services (MCC 8299 / 5734)
 
-4. Product Description:
+5. Product Description:
    EduHub AI is a cloud-hosted pedagogical learning assistant providing Socratic tutoring, homework scaffolding, lecture summarization (PDF/audio), and standardized exam rubrics (Cambridge Examiner Band 8.5+ IELTS/TOEFL) powered by Google Gemini AI models. The platform is designed strictly for lawful student learning and educator productivity.
 
-5. Pricing Architecture & Billing Model (100% White-Hat):
+6. Pricing Architecture & Billing Model (100% White-Hat):
    We operate a transparent SaaS model with zero deceptive billing, zero trial traps, and zero negative option billing:
    • Student Starter: $9.00 / month (Recurring monthly subscription)
    • EduHub Pro Max: $19.00 / month (Recurring monthly subscription with 14-day 100% money-back guarantee)
@@ -99,16 +105,16 @@ PRODUCT VERIFICATION DOSSIER — EduHub AI
 
    All subscriptions feature instant 1-click self-service cancellation, itemized receipts, and an unconditional 14-day refund policy.
 
-6. Delivery Method & Fulfillment:
+7. Delivery Method & Fulfillment:
    Immediate digital delivery. Access credentials and AI computing allocations are provisioned instantly via web browser session upon checkout.
 
-7. Legal & Consumer Protection Policies:
+8. Legal & Consumer Protection Policies:
    • Terms of Service: {prod_url}/terms
    • Refund Policy (14-Day 100% Guarantee): {prod_url}/refund
    • Privacy Policy: {prod_url}/privacy
    • Dispute & AI Resolution Portal: {prod_url}/support
 
-8. Customer Support Contact & SLA:
+9. Customer Support Contact & SLA:
    Email: mohim.mohimbegim@gmail.com (24/7 coverage, response SLA under 24 hours).
 ----------------------------------------------------------------------
 
