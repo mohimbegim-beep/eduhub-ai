@@ -1,0 +1,12 @@
+{
+    "timestamp": "2026-09-17 21:27:52",
+    "trigger_event": "PRODUCT_MARKETING_PUSH",
+    "data": {
+        "promote_product": "AI E-com Factory",
+        "user_pain_point": "Как создать 30 сценариев для Reels и карточки Uzum за 1 клик",
+        "target_youtube_slot": "Channel_5_Marketplace_AI",
+        "destination_url": "https://eduhub-ai.onrender.com/tools/marketplace-lab?utm_source=youtube_shorts&utm_medium=organic_video&utm_campaign=channel_5_marketplace_ai&utm_content=ai_e-com_factory"
+    },
+    "status": "PROCESSED_BY_YOUTUBE",
+    "consumed_at": "2026-09-17 21:27:52"
+}
