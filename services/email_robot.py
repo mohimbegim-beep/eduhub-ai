@@ -144,27 +144,32 @@ Below is our company and product profile:
 MERCHANT PROFILE — EduHub AI
 ----------------------------------------------------------------------
 1. Company / Project Name:
-   EduHub AI
+   EduHub AI (operated by KIFOYATECH LLC)
 
-2. Website:
+2. Operating Legal Entity:
+   KIFOYATECH LLC (STIR / Tax ID: 312206850, Tashkent, Uzbekistan)
+   Founder & CEO: Usmonova Mohimbegim Ilhom qizi
+   Activity Classification: 62.01.0 (Computer Programming & Educational Software)
+
+3. Website:
    {prod_url}/
 
-3. Business Model & Product Description:
+4. Business Model & Product Description:
    Cloud-based educational software (EdTech SaaS). We provide autonomous Socratic study assistance, lecture summarization, homework scaffolding, and IELTS/TOEFL exam preparation powered by AI.
 
-4. Pricing Structure:
+5. Pricing Structure:
    • Student Starter: $9.00 / month
    • EduHub Pro Max: $19.00 / month
    • Exam Sprint Pass: $15.00 (One-time 30-day utility pass)
    • Tutor & Creator Kit: $39.00 / month
 
-5. Compliance & Consumer Guarantees:
+6. Compliance & Consumer Guarantees:
    • Terms of Service: {prod_url}/terms
    • Refund Policy: {prod_url}/refund (14-day 100% money-back guarantee)
    • Strict 18+ content filtering & non-violence ethical safeguards in place.
    • Immediate digital fulfillment upon successful payment.
 
-6. Contact & Support:
+7. Contact & Support:
    Mohim (Founder)
    Email: mohim.mohimbegim@gmail.com
    Support Desk: {prod_url}/support
