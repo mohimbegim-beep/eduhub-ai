@@ -48,6 +48,9 @@
     <!-- Enhanced Document Renderer -->
     <script src="/static/js/doc-renderer.js" defer></script>
 
+    <!-- EduHub AI Premium Theme (Linear Pro Max Dark Aesthetic 2026) -->
+    <link rel="stylesheet" href="/static/css/premium_theme.css">
+
     <!-- Essential User Utilities (Export, History Drawer, Stepper, Camera) -->
     <script src="/static/js/user-utils.js" defer></script>
 
@@ -362,21 +365,23 @@
                 </p>
             </div>
 
-            <!-- The 3 Room Tab Switcher Buttons -->
-            <div class="flex flex-col sm:flex-row justify-center items-center gap-3 mb-8 max-w-2xl mx-auto">
-                <button id="room-tab-1" onclick="switchRoom(1)" class="room-tab-btn w-full sm:w-auto flex-1 py-3 px-4 rounded-2xl text-xs sm:text-sm font-bold transition flex items-center justify-center gap-2 bg-blue-600 text-white shadow-lg shadow-blue-500/25">
-                    <span>🎓</span> <span>1. Академический Хаб (9 Инструментов)</span>
-                </button>
-                <button id="room-tab-2" onclick="switchRoom(2)" class="room-tab-btn w-full sm:w-auto flex-1 py-3 px-4 rounded-2xl text-xs sm:text-sm font-semibold transition flex items-center justify-center gap-2 bg-slate-900 text-slate-400 hover:text-white border border-slate-800">
-                    <span>💼</span> <span>2. Резюме под ATS ($1)</span>
-                </button>
-                <button id="room-tab-3" onclick="switchRoom(3)" class="room-tab-btn w-full sm:w-auto flex-1 py-3 px-4 rounded-2xl text-xs sm:text-sm font-semibold transition flex items-center justify-center gap-2 bg-slate-900 text-slate-400 hover:text-white border border-slate-800">
-                    <span>🏭</span> <span>3. ИИ-Заводы &amp; Полуфабрикаты ($1)</span>
-                </button>
+            <!-- The 3 Room Tab Switcher (Linear & Stripe Segmented Control: Хаб | Резюме | Заводы) -->
+            <div class="max-w-xl mx-auto mb-10">
+                <div class="segmented-tabs-container">
+                    <button id="room-tab-1" onclick="switchRoom(1)" class="segmented-tab-btn active-tab-hub">
+                        <span>🎓</span> <span>Хаб</span>
+                    </button>
+                    <button id="room-tab-2" onclick="switchRoom(2)" class="segmented-tab-btn">
+                        <span>💼</span> <span>Резюме</span>
+                    </button>
+                    <button id="room-tab-3" onclick="switchRoom(3)" class="segmented-tab-btn">
+                        <span>🏭</span> <span>Заводы</span>
+                    </button>
+                </div>
             </div>
 
             <!-- PANE 1: ACADEMIC HUB (9 TOOLS CARDS GRID) -->
-            <div id="room-pane-1" class="room-pane">
+            <div id="room-pane-1" class="room-pane tab-pane-crossfade pane-visible">
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                     
                     <!-- Tool 1: Essay Grader (IELTS) -->
@@ -575,8 +580,8 @@
             </div>
 
             <!-- PANE 2: ATS RESUME & JOB TAILOR ($1) -->
-            <div id="room-pane-2" class="room-pane hidden">
-                <div class="bg-slate-900/90 border border-emerald-500/40 rounded-3xl p-6 sm:p-8 shadow-2xl">
+            <div id="room-pane-2" class="room-pane tab-pane-crossfade hidden">
+                <div class="premium-card p-6 sm:p-8 shadow-2xl">
                     <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pb-6 border-b border-slate-800 mb-6">
                         <div>
                             <span class="text-[10px] font-extrabold uppercase tracking-widest text-emerald-400 bg-emerald-950 px-2.5 py-0.5 rounded-full border border-emerald-800">
@@ -637,8 +642,8 @@
             </div>
 
             <!-- PANE 3: AI BLUEPRINT EXCHANGE ($1) -->
-            <div id="room-pane-3" class="room-pane hidden">
-                <div class="bg-slate-900/90 border border-purple-500/40 rounded-3xl p-6 sm:p-8 shadow-2xl">
+            <div id="room-pane-3" class="room-pane tab-pane-crossfade hidden">
+                <div class="premium-card p-6 sm:p-8 shadow-2xl">
                     <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pb-6 border-b border-slate-800 mb-6">
                         <div>
                             <div class="flex items-center gap-2">
@@ -877,7 +882,7 @@
                     </div>
 
                     <div class="relative">
-                        <textarea id="ai-input" rows="3" placeholder="Задайте академический вопрос или вставьте текст задачи..." class="w-full bg-slate-950/80 border border-slate-800 rounded-2xl p-4 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition resize-none"></textarea>
+                        <textarea id="ai-input" rows="3" placeholder="Задайте академический вопрос или вставьте текст задачи..." class="sandbox-chat-input w-full rounded-2xl p-4 text-sm resize-none"></textarea>
                     </div>
                     <!-- Mobile Camera Direct Upload Trigger -->
                     <div class="flex items-center justify-between">
@@ -890,7 +895,7 @@
                     <div id="photo-preview" class="hidden"></div>
                     <div class="flex flex-col sm:flex-row justify-between items-center gap-3">
                         <span id="ai-status" class="text-xs text-slate-400"></span>
-                        <button id="ai-submit" onclick="askEduHub()" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-500 text-white font-medium text-sm px-6 py-2.5 rounded-xl transition flex items-center justify-center gap-2 shadow-lg shadow-blue-500/20">
+                        <button id="ai-submit" onclick="askEduHub()" class="glow-btn-cta w-full sm:w-auto text-white font-medium text-sm px-6 py-2.5 rounded-xl transition flex items-center justify-center gap-2 shadow-lg shadow-blue-500/20">
                             <span>Спросить ассистента</span>
                         </button>
                     </div>
@@ -899,25 +904,64 @@
                 <!-- Streaming / Animated Step Progress Indicator -->
                 <div id="stepper-container" class="hidden"></div>
 
-                <!-- Response Box -->
+                <!-- Response Box with 70% Blur Paywall -->
                 <div id="ai-result-box" class="mt-6 hidden">
                     <div class="border-t border-slate-800 pt-5">
                         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
                             <h3 class="text-xs font-semibold uppercase tracking-wider text-slate-400" data-i18n="output_title">Ответ EduHub AI:</h3>
                             <!-- Export Action Bar: [Copy Text], [Download PDF], [Export DOCX] -->
                             <div class="flex items-center gap-2">
-                                <button onclick="EduHubUtils.copyText('ai-response', this)" class="inline-flex items-center gap-1 px-2.5 py-1 text-xs bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white rounded-lg border border-slate-800 transition">
+                                <button onclick="EduHubUtils.copyText('ai-response-preview', this)" class="inline-flex items-center gap-1 px-2.5 py-1 text-xs bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white rounded-lg border border-slate-800 transition">
                                     <span>📋</span> <span data-i18n="export_copy">Copy Text</span>
                                 </button>
-                                <button onclick="EduHubUtils.downloadPDF('ai-response', 'EduHub_Academic_Analysis')" class="inline-flex items-center gap-1 px-2.5 py-1 text-xs bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white rounded-lg border border-slate-800 transition">
+                                <button onclick="EduHubUtils.downloadPDF('ai-response-preview', 'EduHub_Academic_Analysis')" class="inline-flex items-center gap-1 px-2.5 py-1 text-xs bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white rounded-lg border border-slate-800 transition">
                                     <span>📄</span> <span data-i18n="export_pdf">Download PDF</span>
                                 </button>
-                                <button onclick="EduHubUtils.exportDOCX('ai-response', 'EduHub_Academic_Analysis')" class="inline-flex items-center gap-1 px-2.5 py-1 text-xs bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white rounded-lg border border-slate-800 transition">
+                                <button onclick="EduHubUtils.exportDOCX('ai-response-preview', 'EduHub_Academic_Analysis')" class="inline-flex items-center gap-1 px-2.5 py-1 text-xs bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white rounded-lg border border-slate-800 transition">
                                     <span>📝</span> <span data-i18n="export_docx">Export DOCX</span>
                                 </button>
                             </div>
                         </div>
-                        <div id="ai-response" class="bg-slate-950/90 border border-slate-800 rounded-2xl p-5 text-sm text-slate-200 whitespace-pre-wrap leading-relaxed"></div>
+
+                        <!-- Response Wrapper with Linear Glass Styling -->
+                        <div id="ai-response-wrapper" class="premium-card p-6 text-sm leading-relaxed overflow-hidden relative">
+                            <!-- 30% Clear Unblurred Content -->
+                            <div id="ai-response-preview" class="text-slate-100"></div>
+                            
+                            <!-- 70% Blurred Paywalled Content Container -->
+                            <div id="ai-paywall-block" class="paywall-container relative mt-4 hidden">
+                                <div id="ai-response-blurred" class="paywall-blur-mask text-slate-300"></div>
+                                <div id="ai-paywall-overlay" class="paywall-floating-overlay">
+                                    <div class="paywall-glass-card">
+                                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-300 text-xs font-bold mb-2">
+                                            <span>🔒</span> <span>Полный ответ ассистента заблокирован</span>
+                                        </div>
+                                        <h4 class="text-base sm:text-lg font-extrabold text-white mb-1.5 font-heading">
+                                            Разблокируйте пошаговый разбор и полный ответ
+                                        </h4>
+                                        <p class="text-xs text-slate-300 mb-4 leading-relaxed max-w-md mx-auto">
+                                            Вам показаны первые 30% решения задачи. Получите доступ ко всем шагам, формулам, таблицам и шпаргалке всего за <strong>$1.00</strong> (3 дня полного доступа).
+                                        </p>
+                                        <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+                                            <a href="#checkout" class="glow-btn-cta w-full sm:w-auto text-white text-xs sm:text-sm font-bold py-2.5 px-6 rounded-xl shadow-lg shadow-purple-600/30">
+                                                ⚡ Разблокировать за $1.00 &rarr;
+                                            </a>
+                                            <button type="button" onclick="unblurSandboxResponse()" class="text-xs text-slate-400 hover:text-slate-200 underline py-1.5 px-3 transition">
+                                                👁️ Режим предпросмотра
+                                            </button>
+                                        </div>
+                                        <div class="mt-2 text-[11px] text-slate-400 flex items-center justify-center gap-2">
+                                            <span>🛡️ 14 дней гарантия возврата</span>
+                                            <span>•</span>
+                                            <span>Отмена в 1 клик</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Fallback / Error Container -->
+                        <div id="ai-response" class="hidden bg-slate-950/90 border border-slate-800 rounded-2xl p-5 text-sm text-slate-200 whitespace-pre-wrap leading-relaxed"></div>
                     </div>
                 </div>
 
@@ -1635,20 +1679,35 @@
         let currentComplexity = 'academic';
 
         function switchRoom(num) {
-            document.querySelectorAll('.room-tab-btn').forEach(btn => {
-                btn.classList.remove('bg-blue-600', 'bg-emerald-600', 'bg-purple-600', 'text-white', 'shadow-lg', 'shadow-blue-500/25', 'shadow-emerald-500/25', 'shadow-purple-500/25');
-                btn.classList.add('bg-slate-900', 'text-slate-400', 'border', 'border-slate-800');
-            });
-            document.querySelectorAll('.room-pane').forEach(pane => pane.classList.add('hidden'));
+            const tabs = [
+                { id: 1, activeClass: 'active-tab-hub' },
+                { id: 2, activeClass: 'active-tab-resume' },
+                { id: 3, activeClass: 'active-tab-factories' }
+            ];
 
-            const targetPane = document.getElementById('room-pane-' + num);
-            const targetBtn = document.getElementById('room-tab-' + num);
-            if (targetPane) targetPane.classList.remove('hidden');
-            if (targetBtn) {
-                targetBtn.classList.remove('bg-slate-900', 'text-slate-400', 'border', 'border-slate-800');
-                if (num === 1) targetBtn.classList.add('bg-blue-600', 'text-white', 'shadow-lg', 'shadow-blue-500/25');
-                if (num === 2) targetBtn.classList.add('bg-emerald-600', 'text-white', 'shadow-lg', 'shadow-emerald-500/25');
-                if (num === 3) targetBtn.classList.add('bg-purple-600', 'text-white', 'shadow-lg', 'shadow-purple-500/25');
+            tabs.forEach(tab => {
+                const btn = document.getElementById('room-tab-' + tab.id);
+                const pane = document.getElementById('room-pane-' + tab.id);
+                if (btn) {
+                    btn.classList.remove('active-tab-hub', 'active-tab-resume', 'active-tab-factories', 'bg-blue-600', 'bg-emerald-600', 'bg-purple-600', 'text-white', 'shadow-lg', 'shadow-blue-500/25', 'shadow-emerald-500/25', 'shadow-purple-500/25');
+                }
+                if (pane) {
+                    pane.classList.remove('pane-visible');
+                    pane.classList.add('hidden');
+                }
+            });
+
+            const activeTab = tabs.find(t => t.id === num) || tabs[0];
+            const activeBtn = document.getElementById('room-tab-' + activeTab.id);
+            const activePane = document.getElementById('room-pane-' + activeTab.id);
+
+            if (activeBtn) {
+                activeBtn.classList.add(activeTab.activeClass);
+            }
+            if (activePane) {
+                activePane.classList.remove('hidden');
+                void activePane.offsetWidth;
+                activePane.classList.add('pane-visible');
             }
         }
 
@@ -1694,14 +1753,14 @@
             const btn = document.getElementById('home-ats-btn');
             btn.disabled = true;
             btn.textContent = 'Анализ...';
+
             try {
-                const res = await fetch('/api/v1/career/ats-tailor', {
+                const res = await fetch('/api/v1/career/ats-check', {
                     method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         job_description: jd,
-                        resume_text: resume,
-                        language: 'ru'
+                        resume_text: resume
                     })
                 });
                 const data = await res.json();
@@ -1717,13 +1776,34 @@
             }
         }
 
-        // Live AI Assistant API Call
+        function unblurSandboxResponse() {
+            const blurDiv = document.getElementById('ai-response-blurred');
+            const overlay = document.getElementById('ai-paywall-overlay');
+            if (blurDiv) {
+                blurDiv.classList.remove('paywall-blur-mask');
+                blurDiv.style.filter = 'none';
+                blurDiv.style.maskImage = 'none';
+                blurDiv.style.webkitMaskImage = 'none';
+                blurDiv.style.opacity = '1';
+                blurDiv.style.maxHeight = 'none';
+            }
+            if (overlay) {
+                overlay.classList.add('hidden');
+            }
+        }
+
+        // Live AI Assistant API Call with 70% Blur Paywall
         async function askEduHub() {
             const input = document.getElementById('ai-input');
             const status = document.getElementById('ai-status');
             const submitBtn = document.getElementById('ai-submit');
             const resultBox = document.getElementById('ai-result-box');
             const responseDiv = document.getElementById('ai-response');
+            const wrapper = document.getElementById('ai-response-wrapper');
+            const previewDiv = document.getElementById('ai-response-preview');
+            const paywallBlock = document.getElementById('ai-paywall-block');
+            const blurDiv = document.getElementById('ai-response-blurred');
+            const overlay = document.getElementById('ai-paywall-overlay');
 
             let question = input.value.trim();
             if (!question) {
@@ -1757,6 +1837,9 @@
                 resultBox.classList.remove('hidden');
 
                 if (!res.ok) {
+                    if (wrapper) wrapper.classList.add('hidden');
+                    responseDiv.classList.remove('hidden');
+
                     if (res.status === 400 && data.detail && data.detail.error === 'ContentPolicyViolation') {
                         responseDiv.className = "bg-rose-950/40 border border-rose-800 text-rose-200 rounded-2xl p-5 text-sm leading-relaxed";
                         responseDiv.innerHTML = "<strong>⛔ Защитный фильтр 18+:</strong><br>" + data.detail.message;
@@ -1768,12 +1851,58 @@
                         responseDiv.innerHTML = "<strong>Ошибка:</strong> " + (data.detail ? JSON.stringify(data.detail) : 'Сбой вызова API');
                     }
                 } else {
-                    responseDiv.className = "bg-slate-950/90 border border-slate-800 text-slate-100 rounded-2xl p-6 text-sm leading-relaxed";
-                    if (window.renderAcademicDocument) {
-                        window.renderAcademicDocument(data.answer, responseDiv);
+                    responseDiv.classList.add('hidden');
+                    if (wrapper) wrapper.classList.remove('hidden');
+
+                    // Split answer into 30% preview and 70% blur-paywall
+                    if (data.answer && data.answer.length > 180) {
+                        let targetLen = Math.floor(data.answer.length * 0.30);
+                        let splitIndex = data.answer.indexOf('\n\n', targetLen);
+                        if (splitIndex === -1 || splitIndex > targetLen + 150) {
+                            splitIndex = data.answer.indexOf('. ', targetLen);
+                            if (splitIndex !== -1) splitIndex += 1;
+                        }
+                        if (splitIndex === -1) splitIndex = targetLen;
+
+                        const previewText = data.answer.slice(0, splitIndex).trim();
+                        const blurredText = data.answer.slice(splitIndex).trim();
+
+                        if (previewDiv && window.renderAcademicDocument) {
+                            window.renderAcademicDocument(previewText, previewDiv);
+                        } else if (previewDiv) {
+                            previewDiv.textContent = previewText;
+                        }
+
+                        if (blurDiv && window.renderAcademicDocument) {
+                            window.renderAcademicDocument(blurredText, blurDiv);
+                        } else if (blurDiv) {
+                            blurDiv.textContent = blurredText;
+                        }
+
+                        // Reset blur mask styles in case previously unblurred
+                        if (blurDiv) {
+                            blurDiv.classList.add('paywall-blur-mask');
+                            blurDiv.style.filter = '';
+                            blurDiv.style.maskImage = '';
+                            blurDiv.style.webkitMaskImage = '';
+                            blurDiv.style.opacity = '';
+                            blurDiv.style.maxHeight = '';
+                        }
+
+                        if (paywallBlock) paywallBlock.classList.remove('hidden');
+                        if (overlay) overlay.classList.remove('hidden');
                     } else {
-                        responseDiv.textContent = data.answer;
+                        // Short answer - show complete
+                        if (previewDiv && window.renderAcademicDocument) {
+                            window.renderAcademicDocument(data.answer, previewDiv);
+                        } else if (previewDiv) {
+                            previewDiv.textContent = data.answer;
+                        }
+                        if (paywallBlock) paywallBlock.classList.add('hidden');
                     }
+
+                    // Keep responseDiv updated for any legacy/tests
+                    responseDiv.textContent = data.answer;
 
                     // Auto-save to LocalStorage session history
                     if (window.EduHubUtils) {
@@ -1787,6 +1916,8 @@
                 status.textContent = 'Готово';
             } catch (err) {
                 resultBox.classList.remove('hidden');
+                if (wrapper) wrapper.classList.add('hidden');
+                responseDiv.classList.remove('hidden');
                 responseDiv.className = "bg-rose-950/40 border border-rose-800 text-rose-200 rounded-2xl p-5 text-sm leading-relaxed";
                 responseDiv.textContent = 'Ошибка сети: ' + err.message;
                 status.textContent = 'Ошибка';
