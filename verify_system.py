@@ -59,12 +59,11 @@ def run_checks():
     try:
         from eduhub_auto_qa_engine import AutoQAGuardEngine
         qa = AutoQAGuardEngine(target_dir=BASE_DIR)
-        qa_report = qa.deep_scan_and_auto_fix()
-        qa_ok = "СТАТУС ВЕРИФИКАЦИИ QA" in qa_report
+        qa_summary = qa.run_all_tests(auto_fix=True)
         check(
             "Автономный QA Guard Engine (eduhub_auto_qa_engine.py)",
-            qa_ok,
-            "100% DOM-аудит, i18n auto-fix и Safari WebKit фильтры подтверждены"
+            qa_summary["success"] and qa_summary["failed"] == 0,
+            f"Честный результат: {qa_summary['passed']}/{qa_summary['total']} тестов пройдено ({qa_summary['success_rate']}%), 0 ошибок"
         )
     except Exception as e:
         check("Автономный QA Guard Engine (eduhub_auto_qa_engine.py)", False, str(e))

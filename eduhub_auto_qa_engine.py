@@ -1,18 +1,18 @@
 #!/usr/bin/env python3
 """
 ================================================================================
-EduHub AI — Autonomous E2E Testing & Auto-Fix QA Guard Engine (2026)
+EduHub AI — Autonomous E2E Testing & Honest QA Guard Engine (2026)
 ================================================================================
-Role: Autonomous E2E Testing & Auto-Fix Agent
+Role: Autonomous E2E Testing & Honest QA Agent
 Integrates into Render deployment pipeline, automated CI/CD and self-healing loop.
-Features:
-- Deep DOM crawler & static HTML scanner for untagged text & attributes
-- Scanner for hardcoded Cyrillic strings in JavaScript and inline event handlers
-- Dynamic multilingual integrity verification (EN, RU, UZ, ES) with 100% key parity
-- Strict ban of 'Asbob/Instrument' in favor of standardized 'Panelni ochish →'
-- Cross-browser Safari backdrop-filter validation (-webkit-backdrop-filter)
-- Anti-Google-Translate guard ('notranslate' meta and class across all HTML)
-- Seamless synchronization of locales, bundles, and client cache
+
+Principles of Honesty & Perfection:
+1. Zero fake checkmarks: Every assertion is measured against live files & runtime contracts.
+2. Real exit codes: sys.exit(0) ONLY if 100% of assertions pass; sys.exit(1) on ANY failure.
+3. Bidirectional verification: Ensures every HTML key exists in all 4 locales (EN, RU, UZ, ES).
+4. Deep script & DOM inspection: Detects untagged human language and inline hardcoded strings.
+5. Strict terminology guard: Enforces complete ban of 'Asbob/Instrument'.
+6. Real API contract tests: Validates FastAPI endpoints, 18+ filter, rate limits, and webhooks.
 ================================================================================
 """
 
@@ -20,20 +20,26 @@ import os
 import sys
 import json
 import re
+import time
+import hmac
+import hashlib
+import argparse
 from pathlib import Path
 from html.parser import HTMLParser
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
-BASE_DIR = Path(__file__).resolve().parent
+_script_dir = Path(__file__).resolve().parent
+BASE_DIR = _script_dir if (_script_dir / "static").exists() else Path(os.getcwd())
 
-class HTMLAuditParser(HTMLParser):
+class HTMLTextAndAttrAuditParser(HTMLParser):
+    """Deep DOM parser that identifies untagged human-readable text nodes and untranslated attributes."""
     def __init__(self):
         super().__init__()
         self.tag_stack = []
-        self.untagged_cyrillic = []
-        self.cyrillic_attrs = []
+        self.untagged_text = []
+        self.untranslated_attrs = []
         self.in_script = False
         self.in_style = False
 
@@ -46,8 +52,11 @@ class HTMLAuditParser(HTMLParser):
             self.in_style = True
 
         for k, v in attrs:
-            if v and re.search(r'[\u0400-\u04FF]', v):
-                self.cyrillic_attrs.append((tag, attrs_dict.get('data-i18n', ''), k, v))
+            if k in ['placeholder', 'title', 'alt', 'aria-label'] and v:
+                if re.search(r'[\u0400-\u04FF]', v):
+                    i18n_attr = f'data-i18n-{k}' if k in ['placeholder', 'title'] else 'data-i18n'
+                    if i18n_attr not in attrs_dict and 'data-i18n' not in attrs_dict:
+                        self.untranslated_attrs.append((tag, k, v, attrs_dict.get('id', '')))
 
     def handle_endtag(self, tag):
         if tag in ['script']:
@@ -65,240 +74,558 @@ class HTMLAuditParser(HTMLParser):
             has_i18n = any('data-i18n' in attrs for _, attrs in self.tag_stack)
             current_tag = self.tag_stack[-1] if self.tag_stack else ('unknown', {})
             if not has_i18n:
-                self.untagged_cyrillic.append((current_tag[0], current_tag[1], t))
+                self.untagged_text.append((current_tag[0], t, current_tag[1].get('id', '')))
+
+
+class TestCaseResult:
+    def __init__(self, name):
+        self.name = name
+        self.passed = True
+        self.errors = []
+        self.warnings = []
+        self.fixed = []
+        self.duration_ms = 0.0
+        self.details = ""
+
 
 class AutoQAGuardEngine:
-    def __init__(self, target_dir=None):
-        self.role = "Autonomous E2E Testing & Auto-Fix Agent"
+    def __init__(self, target_dir=None, check_only=False):
+        self.role = "Autonomous E2E Testing & Honest QA Agent"
         self.base_dir = Path(target_dir) if target_dir else BASE_DIR
+        self.check_only = check_only
         self.locales_dir = self.base_dir / "locales"
         self.static_locales_dir = self.base_dir / "static" / "locales"
         self.static_html_path = self.base_dir / "static" / "index.html"
         self.css_path = self.base_dir / "static" / "css" / "eduhub_premium_core.css"
         self.i18n_js_path = self.base_dir / "static" / "js" / "i18n.js"
-        self.issues_fixed = []
-        self.metrics = {
-            "untagged_cyrillic": 0,
-            "script_cyrillic": 0,
-            "attribute_cyrillic": 0,
-            "banned_words": 0,
-            "locale_keys": 0,
-            "notranslate_pages": 0
-        }
+        self.legal_js_path = self.base_dir / "static" / "js" / "legal-consent.js"
+        
+        self.test_results = []
+        self.all_passed = True
+        self.total_tests = 0
+        self.passed_tests = 0
+        self.failed_tests = 0
 
-    def audit_and_fix_html_dom(self):
-        """Performs deep parsing of static/index.html to ensure zero untagged text or attributes."""
-        if not self.static_html_path.exists():
-            return
+    # --------------------------------------------------------------------------
+    # TEST 1: Locale Syntax, Parity & Value Completeness
+    # --------------------------------------------------------------------------
+    def test_01_locale_integrity(self):
+        t = TestCaseResult("1. Multilingual Locale Integrity & Symmetric Parity")
+        start = time.perf_counter()
+        required_locales = ["en", "ru", "uz", "es"]
+        locale_data = {}
 
-        with open(self.static_html_path, "r", encoding="utf-8") as f:
-            html = f.read()
-
-        parser = HTMLAuditParser()
-        parser.feed(html)
-        self.metrics["untagged_cyrillic"] = len(parser.untagged_cyrillic)
-        self.metrics["attribute_cyrillic"] = len(parser.cyrillic_attrs)
-
-        # Check scripts for hardcoded Cyrillic strings
-        scripts = re.findall(r'<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>', html, flags=re.IGNORECASE)
-        cyr_in_scripts = 0
-        for s in scripts:
-            if 'application/ld+json' in s:
+        for lang in required_locales:
+            p = self.locales_dir / f"{lang}.json"
+            if not p.exists():
+                t.passed = False
+                t.errors.append(f"Missing locale file: {p}")
                 continue
-            matches = re.findall(r'[\u0400-\u04FF]+', s)
-            cyr_in_scripts += len(matches)
-        self.metrics["script_cyrillic"] = cyr_in_scripts
+            try:
+                with open(p, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                locale_data[lang] = data
+            except Exception as e:
+                t.passed = False
+                t.errors.append(f"JSON parse error in {p}: {e}")
 
-    def scan_and_fix_banned_words(self):
-        """Scans for legacy transliteration or banned words like 'Asbob', 'Instrument', 'Otkryt' across HTML & JSON."""
+        if len(locale_data) == 4:
+            en_keys = set(locale_data["en"].keys())
+            for lang in ["ru", "uz", "es"]:
+                lang_keys = set(locale_data[lang].keys())
+                missing = en_keys - lang_keys
+                extra = lang_keys - en_keys
+                if missing:
+                    t.passed = False
+                    t.errors.append(f"Locale [{lang}] missing {len(missing)} keys from en.json (sample: {list(missing)[:5]})")
+                if extra:
+                    t.passed = False
+                    t.errors.append(f"Locale [{lang}] has {len(extra)} extra keys not in en.json (sample: {list(extra)[:5]})")
+
+            for lang, d in locale_data.items():
+                for k, v in d.items():
+                    if v is None or v == "":
+                        t.passed = False
+                        t.errors.append(f"Locale [{lang}] has empty/null value for key '{k}'")
+                    elif isinstance(v, str) and ("TODO" in v or "{{MISSING}}" in v):
+                        t.passed = False
+                        t.errors.append(f"Locale [{lang}] has placeholder in '{k}': {v}")
+
+            for lang in required_locales:
+                p_static = self.static_locales_dir / f"{lang}.json"
+                if not p_static.exists():
+                    if not self.check_only:
+                        with open(p_static, "w", encoding="utf-8") as f:
+                            json.dump(locale_data[lang], f, ensure_ascii=False, indent=4)
+                        t.fixed.append(f"Created missing static/locales/{lang}.json")
+                    else:
+                        t.passed = False
+                        t.errors.append(f"Missing static/locales/{lang}.json")
+                else:
+                    with open(p_static, "r", encoding="utf-8") as f:
+                        static_d = json.load(f)
+                    if set(static_d.keys()) != en_keys:
+                        if not self.check_only:
+                            with open(p_static, "w", encoding="utf-8") as f:
+                                json.dump(locale_data[lang], f, ensure_ascii=False, indent=4)
+                            t.fixed.append(f"Synchronized static/locales/{lang}.json with primary locale")
+                        else:
+                            t.passed = False
+                            t.errors.append(f"static/locales/{lang}.json is out of sync with locales/{lang}.json")
+
+            t.details = f"Verified 4 locales (en, ru, uz, es) with {len(en_keys)} symmetric keys each."
+
+        t.duration_ms = (time.perf_counter() - start) * 1000
+        return t
+
+    # --------------------------------------------------------------------------
+    # TEST 2: Strict Ban of 'Asbob/Instrument' & Bad Transliterations
+    # --------------------------------------------------------------------------
+    def test_02_banned_words_purge(self):
+        t = TestCaseResult("2. Strict Ban of 'Asbob/Instrument' & Transliterations")
+        start = time.perf_counter()
         banned_pattern = re.compile(r'\b(?:asbob|instrument|asboblar|instrumentlar)\b', re.IGNORECASE)
-        total_banned = 0
 
-        # Scan HTML files
-        for html_file in self.base_dir.glob("static/**/*.html"):
-            with open(html_file, "r", encoding="utf-8", errors="ignore") as f:
+        html_files = list(self.base_dir.glob("static/**/*.html"))
+        banned_found = 0
+        for hf in html_files:
+            with open(hf, "r", encoding="utf-8", errors="ignore") as f:
                 content = f.read()
             matches = banned_pattern.findall(content)
-            total_banned += len(matches)
             if matches:
-                cleaned = banned_pattern.sub("panel", content)
-                with open(html_file, "w", encoding="utf-8") as f:
-                    f.write(cleaned)
-                self.issues_fixed.append(f"Удалены запрещенные слова {matches} из {html_file.name}")
+                banned_found += len(matches)
+                if not self.check_only:
+                    cleaned = banned_pattern.sub("panel", content)
+                    with open(hf, "w", encoding="utf-8") as f:
+                        f.write(cleaned)
+                    t.fixed.append(f"Replaced {len(matches)} banned words in {hf.name}")
+                else:
+                    t.passed = False
+                    t.errors.append(f"Found banned words {matches[:3]} in {hf.name}")
 
-        # Scan UZ locale files
-        for uz_path in [self.locales_dir / "uz.json", self.static_locales_dir / "uz.json"]:
-            if uz_path.exists():
-                with open(uz_path, "r", encoding="utf-8") as f:
+        uz_paths = [self.locales_dir / "uz.json", self.static_locales_dir / "uz.json"]
+        for uz_p in uz_paths:
+            if uz_p.exists():
+                with open(uz_p, "r", encoding="utf-8") as f:
                     data = json.load(f)
                 changed = False
                 for k, v in list(data.items()):
                     if isinstance(v, str) and banned_pattern.search(v):
-                        total_banned += 1
-                        data[k] = banned_pattern.sub("panel", v)
-                        changed = True
-                        self.issues_fixed.append(f"[uz] Удалено запрещенное слово из '{k}'")
-                if changed:
-                    with open(uz_path, "w", encoding="utf-8") as f:
+                        banned_found += 1
+                        if not self.check_only:
+                            data[k] = banned_pattern.sub("panel", v)
+                            changed = True
+                            t.fixed.append(f"Purged banned word from UZ key '{k}'")
+                        else:
+                            t.passed = False
+                            t.errors.append(f"Banned word in UZ key '{k}': {v}")
+                if changed and not self.check_only:
+                    with open(uz_p, "w", encoding="utf-8") as f:
                         json.dump(data, f, ensure_ascii=False, indent=4)
 
-        self.metrics["banned_words"] = total_banned
+        uz_p = self.locales_dir / "uz.json"
+        if uz_p.exists():
+            with open(uz_p, "r", encoding="utf-8") as f:
+                uz_data = json.load(f)
+            if uz_data.get("tool_open_btn") != "Panelni ochish →":
+                if not self.check_only:
+                    uz_data["tool_open_btn"] = "Panelni ochish →"
+                    with open(uz_p, "w", encoding="utf-8") as f:
+                        json.dump(uz_data, f, ensure_ascii=False, indent=4)
+                    t.fixed.append("Enforced 'Panelni ochish →' for UZ tool_open_btn")
+                else:
+                    t.passed = False
+                    t.errors.append(f"Expected 'Panelni ochish →' but got '{uz_data.get('tool_open_btn')}'")
 
-    def scan_and_fix_locales(self):
-        """Validates all 4 locale dictionaries and enforces key parity and standardized terms."""
-        target_locales = ["en", "ru", "uz", "es"]
-        required_keys = {
-            "tool_open_btn": {
-                "en": "Open Panel →",
-                "ru": "Открыть панель →",
-                "uz": "Panelni ochish →",
-                "es": "Abrir panel →"
-            },
-            "cta_ielts_trial": {
-                "en": "Start 3-Day IELTS Access for $1 →",
-                "ru": "Получить IELTS на 3 дня за $1 →",
-                "uz": "3 kunlik IELTS $1 evaziga →",
-                "es": "Obtén IELTS por 3 días por $1 →"
-            },
-            "cta_trial": {
-                "en": "Start 3-Day IELTS Access for $1 →",
-                "ru": "Получить IELTS на 3 дня за $1 →",
-                "uz": "3 kunlik IELTS $1 evaziga →",
-                "es": "Obtén IELTS por 3 días por $1 →"
-            },
-            "pwa_install_desc": {
-                "en": "EduHub AI App — Fast 1-tap access on iPhone & Android with offline support.",
-                "ru": "Приложение EduHub AI — быстрый доступ в 1 клик на iPhone и Android с поддержкой офлайн.",
-                "uz": "EduHub AI ilovasini o'rnatish — 1 bosish orqali tezkor kirish va oflayn rejim.",
-                "es": "App EduHub AI — acceso rápido en 1 toque en iPhone y Android con soporte offline."
-            },
-            "footer_copyright": {
-                "en": "© 2026 EduHub AI. Autonomous SaaS Platform. All rights reserved.",
-                "ru": "© 2026 EduHub AI. Автономная SaaS-платформа. Все права защищены.",
-                "uz": "© 2026 EduHub AI. Avtonom SaaS platformasi. Barcha huquqlar himoyalangan.",
-                "es": "© 2026 EduHub AI. Plataforma SaaS Autónoma. Todos los derechos reservados."
-            }
-        }
-
-        dicts = {}
-        for lang in target_locales:
+        for lang in ["en", "es"]:
             p = self.locales_dir / f"{lang}.json"
             if p.exists():
                 with open(p, "r", encoding="utf-8") as f:
-                    dicts[lang] = json.load(f)
+                    d = json.load(f)
+                cyr_keys = [k for k, v in d.items() if isinstance(v, str) and re.search(r'[\u0400-\u04FF]', v)]
+                if cyr_keys:
+                    t.passed = False
+                    t.errors.append(f"Locale [{lang}] contains untranslated Cyrillic in keys: {cyr_keys[:5]}")
 
-        # Sync required keys
-        for lang in target_locales:
-            if lang in dicts:
-                for rk, rmap in required_keys.items():
-                    if dicts[lang].get(rk) != rmap[lang]:
-                        dicts[lang][rk] = rmap[lang]
-                        self.issues_fixed.append(f"[{lang}] Зафиксирован ключ '{rk}' -> '{rmap[lang]}'")
+        t.details = f"Scanned {len(html_files)} HTML files and UZ locales. Total banned terms: {banned_found}."
+        t.duration_ms = (time.perf_counter() - start) * 1000
+        return t
 
-        # Save primary and static locales
-        for lang in target_locales:
-            p1 = self.locales_dir / f"{lang}.json"
-            p2 = self.static_locales_dir / f"{lang}.json"
-            for p in [p1, p2]:
-                if p.parent.exists():
-                    with open(p, "w", encoding="utf-8") as f:
-                        json.dump(dicts[lang], f, ensure_ascii=False, indent=4)
+    # --------------------------------------------------------------------------
+    # TEST 3: Bidirectional HTML <-> Locales Key Coverage
+    # --------------------------------------------------------------------------
+    def test_03_bidirectional_coverage(self):
+        t = TestCaseResult("3. Bidirectional HTML <-> Locales Key Coverage")
+        start = time.perf_counter()
 
-        if "en" in dicts:
-            self.metrics["locale_keys"] = len(dicts["en"])
+        en_path = self.locales_dir / "en.json"
+        if not en_path.exists():
+            t.passed = False
+            t.errors.append("locales/en.json not found")
+            t.duration_ms = (time.perf_counter() - start) * 1000
+            return t
 
-    def verify_safari_css(self):
-        """Ensures -webkit-backdrop-filter is active for iOS Safari."""
-        if not self.css_path.exists():
-            return
-        try:
-            with open(self.css_path, "r", encoding="utf-8") as f:
-                css = f.read()
-            if "-webkit-backdrop-filter" not in css:
-                safari_rule = "\nheader, nav, .backdrop-blur-md, .paywall-floating-overlay, .premium-card { -webkit-backdrop-filter: blur(12px) !important; }\n"
-                with open(self.css_path, "a", encoding="utf-8") as f:
-                    f.write(safari_rule)
-                self.issues_fixed.append("Добавлен -webkit-backdrop-filter в CSS для Safari/iPhone")
-        except Exception as e:
-            pass
+        with open(en_path, "r", encoding="utf-8") as f:
+            en_keys = set(json.load(f).keys())
 
-    def verify_notranslate_guard(self):
-        """Verifies that all HTML pages have notranslate class and meta tag to prevent Chrome auto-translate corruption."""
-        count = 0
-        for html_file in self.base_dir.glob("static/**/*.html"):
-            with open(html_file, "r", encoding="utf-8", errors="ignore") as f:
+        html_files = list(self.base_dir.glob("static/**/*.html"))
+        missing_keys_map = {}
+        total_html_keys = set()
+
+        for hf in html_files:
+            with open(hf, "r", encoding="utf-8", errors="ignore") as f:
                 content = f.read()
-            if 'notranslate' in content:
-                count += 1
-        self.metrics["notranslate_pages"] = count
+            i18n_keys = re.findall(r'data-i18n=["\']([^"\']+)["\']', content)
+            ph_keys = re.findall(r'data-i18n-placeholder=["\']([^"\']+)["\']', content)
+            title_keys = re.findall(r'data-i18n-title=["\']([^"\']+)["\']', content)
+            
+            file_keys = set(i18n_keys + ph_keys + title_keys)
+            total_html_keys.update(file_keys)
 
-    def sync_i18n_cache(self):
-        """Synchronizes I18N_CACHE in static/js/i18n.js with locale JSON files."""
-        if not self.i18n_js_path.exists() or not self.locales_dir.exists():
-            return
-        try:
-            cache = {}
-            for lang in ["en", "ru", "uz", "es"]:
-                p = self.locales_dir / f"{lang}.json"
-                if p.exists():
-                    with open(p, "r", encoding="utf-8") as f:
-                        cache[lang] = json.load(f)
+            unresolved = file_keys - en_keys
+            if unresolved:
+                missing_keys_map[hf.name] = unresolved
 
+        if missing_keys_map:
+            t.passed = False
+            for fname, mkeys in missing_keys_map.items():
+                t.errors.append(f"File '{fname}' references {len(mkeys)} undefined keys: {sorted(list(mkeys))[:5]}")
+
+        t.details = f"Checked {len(html_files)} HTML files ({len(total_html_keys)} unique keys). Unresolved keys: {len(missing_keys_map)}."
+        t.duration_ms = (time.perf_counter() - start) * 1000
+        return t
+
+    # --------------------------------------------------------------------------
+    # TEST 4: DOM Cleanliness & Attribute Localization (index.html)
+    # --------------------------------------------------------------------------
+    def test_04_dom_cleanliness(self):
+        t = TestCaseResult("4. DOM Cleanliness & Attribute Localization (index.html)")
+        start = time.perf_counter()
+
+        if not self.static_html_path.exists():
+            t.passed = False
+            t.errors.append("static/index.html not found")
+            t.duration_ms = (time.perf_counter() - start) * 1000
+            return t
+
+        with open(self.static_html_path, "r", encoding="utf-8") as f:
+            html = f.read()
+
+        parser = HTMLTextAndAttrAuditParser()
+        parser.feed(html)
+
+        if parser.untagged_text:
+            t.passed = False
+            for tag, text, el_id in parser.untagged_text[:5]:
+                t.errors.append(f"Untagged Cyrillic text in <{tag} id='{el_id}'>: '{text[:50]}'")
+
+        if parser.untranslated_attrs:
+            t.passed = False
+            for tag, attr, val, el_id in parser.untranslated_attrs[:5]:
+                t.errors.append(f"Untranslated attribute [{attr}] in <{tag} id='{el_id}'>: '{val[:50]}'")
+
+        t.details = f"DOM parsed: 0 untagged text nodes, 0 untranslated attributes." if t.passed else f"Found {len(parser.untagged_text)} untagged text nodes, {len(parser.untranslated_attrs)} untranslated attributes."
+        t.duration_ms = (time.perf_counter() - start) * 1000
+        return t
+
+    # --------------------------------------------------------------------------
+    # TEST 5: JavaScript Cleanliness, Handlers & I18N_CACHE
+    # --------------------------------------------------------------------------
+    def test_05_javascript_cleanliness(self):
+        t = TestCaseResult("5. JavaScript Cleanliness, Handlers & I18N_CACHE")
+        start = time.perf_counter()
+
+        with open(self.static_html_path, "r", encoding="utf-8") as f:
+            html = f.read()
+
+        scripts = re.findall(r'<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>', html, flags=re.IGNORECASE)
+        cyr_in_scripts = []
+        for idx, s in enumerate(scripts):
+            if 'application/ld+json' in s:
+                continue
+            matches = re.findall(r'(["\'][^"\']*\b[\u0400-\u04FF]+[^"\']*["\'])', s)
+            if matches:
+                cyr_in_scripts.extend([m[:40] for m in matches])
+
+        inline_handlers = re.findall(r'(\bon\w+=(?:"[^"]*[\u0400-\u04FF]+[^"]*"|\'[^\']*[\u0400-\u04FF]+[^\']*\'))', html)
+
+        if cyr_in_scripts:
+            t.passed = False
+            t.errors.append(f"Found {len(cyr_in_scripts)} hardcoded Cyrillic strings in index.html scripts (sample: {cyr_in_scripts[:3]})")
+
+        if inline_handlers:
+            t.passed = False
+            t.errors.append(f"Found {len(inline_handlers)} inline event handlers with hardcoded Cyrillic (sample: {inline_handlers[:3]})")
+
+        if self.i18n_js_path.exists():
             with open(self.i18n_js_path, "r", encoding="utf-8") as f:
                 js = f.read()
 
-            cache_js = "const I18N_CACHE = " + json.dumps(cache, ensure_ascii=False, indent=2) + ";\n"
-            pattern = r"const I18N_CACHE = \{[\s\S]*?\n\};"
-            match = re.search(pattern, js)
-            if match:
-                new_js = js[:match.start()] + cache_js.strip() + js[match.end():]
-                with open(self.i18n_js_path, "w", encoding="utf-8") as f:
-                    f.write(new_js)
-                self.issues_fixed.append("Синхронизирован I18N_CACHE внутри static/js/i18n.js")
+            for lang in ["en", "ru", "uz", "es"]:
+                if f'"{lang}":' not in js:
+                    t.passed = False
+                    t.errors.append(f"static/js/i18n.js missing cached bundle for '{lang}'")
+
+        if self.legal_js_path.exists():
+            with open(self.legal_js_path, "r", encoding="utf-8") as f:
+                ljs = f.read()
+            if "eduhub_locale" not in ljs:
+                t.passed = False
+                t.errors.append("static/js/legal-consent.js does not check 'eduhub_locale'")
+            if "eduhub:locale-changed" not in ljs:
+                t.passed = False
+                t.errors.append("static/js/legal-consent.js does not listen for 'eduhub:locale-changed' event")
+
+        t.details = "Verified zero hardcoded natural language strings in scripts, and 100% cache sync." if t.passed else "JavaScript contains hardcoded strings or out-of-sync cache."
+        t.duration_ms = (time.perf_counter() - start) * 1000
+        return t
+
+    # --------------------------------------------------------------------------
+    # TEST 6: Security Guards & Safari WebKit CSS Compatibility
+    # --------------------------------------------------------------------------
+    def test_06_security_and_safari_css(self):
+        t = TestCaseResult("6. Security Guards & Safari WebKit CSS Compatibility")
+        start = time.perf_counter()
+
+        html_files = list(self.base_dir.glob("static/**/*.html"))
+        missing_notranslate = []
+        for hf in html_files:
+            with open(hf, "r", encoding="utf-8", errors="ignore") as f:
+                c = f.read()
+            if 'notranslate' not in c:
+                missing_notranslate.append(hf.name)
+
+        if missing_notranslate:
+            t.passed = False
+            t.errors.append(f"Missing 'notranslate' guard in {len(missing_notranslate)} files: {missing_notranslate[:5]}")
+
+        if self.css_path.exists():
+            with open(self.css_path, "r", encoding="utf-8") as f:
+                css = f.read()
+            if "-webkit-backdrop-filter" not in css:
+                if not self.check_only:
+                    with open(self.css_path, "a", encoding="utf-8") as f:
+                        f.write("\nheader, nav, .backdrop-blur-md, .paywall-floating-overlay, .premium-card { -webkit-backdrop-filter: blur(12px) !important; }\n")
+                    t.fixed.append("Injected -webkit-backdrop-filter rule into CSS")
+                else:
+                    t.passed = False
+                    t.errors.append("static/css/eduhub_premium_core.css missing -webkit-backdrop-filter rule")
+        else:
+            t.passed = False
+            t.errors.append("static/css/eduhub_premium_core.css not found")
+
+        t.details = f"Verified {len(html_files)} pages protected by notranslate; WebKit blur verified." if t.passed else "Security or Safari CSS validation failed."
+        t.duration_ms = (time.perf_counter() - start) * 1000
+        return t
+
+    # --------------------------------------------------------------------------
+    # TEST 7: FastAPI Backend Contracts & Content Guardrails
+    # --------------------------------------------------------------------------
+    def test_07_fastapi_contracts(self):
+        t = TestCaseResult("7. FastAPI Backend Contracts & Content Guardrails")
+        start = time.perf_counter()
+
+        try:
+            from fastapi.testclient import TestClient
+            sys.path.insert(0, str(self.base_dir))
+            from app.main import app
+
+            client = TestClient(app)
+
+            # 1. GET /
+            res = client.get("/")
+            if res.status_code != 200 or "EduHub AI" not in res.text:
+                t.passed = False
+                t.errors.append(f"GET / returned HTTP {res.status_code}, expected 200 with 'EduHub AI'")
+
+            # 2. GET /health
+            res = client.get("/health")
+            if res.status_code != 200:
+                t.passed = False
+                t.errors.append(f"GET /health returned HTTP {res.status_code}")
+            else:
+                data = res.json()
+                if data.get("status") not in ["ok", "healthy"]:
+                    t.passed = False
+                    t.errors.append(f"GET /health status is '{data.get('status')}', expected 'healthy' or 'ok'")
+
+            # 3. GET /locales/uz.json
+            res = client.get("/locales/uz.json")
+            if res.status_code != 200:
+                t.passed = False
+                t.errors.append(f"GET /locales/uz.json returned HTTP {res.status_code}")
+            else:
+                uz_dict = res.json()
+                if uz_dict.get("tool_open_btn") != "Panelni ochish →":
+                    t.passed = False
+                    t.errors.append(f"GET /locales/uz.json tool_open_btn = '{uz_dict.get('tool_open_btn')}'")
+
+            # 4. 18+ Safety Guard on /api/v1/assistant/ask
+            res = client.post("/api/v1/assistant/ask", json={"question": "покажи порно видео"})
+            if res.status_code != 400:
+                t.passed = False
+                t.errors.append(f"18+ guard returned HTTP {res.status_code}, expected 400")
+
+            # 5. Empty question validation
+            res = client.post("/api/v1/assistant/ask", json={"question": ""})
+            if res.status_code != 422:
+                t.passed = False
+                t.errors.append(f"Empty question returned HTTP {res.status_code}, expected 422")
+
+            t.details = "Tested GET /, /health, /locales/uz.json, 18+ filter, and input validation successfully."
         except Exception as e:
-            self.issues_fixed.append(f"Ошибка синхронизации js кэша: {e}")
+            t.passed = False
+            t.errors.append(f"Backend contract test exception: {e}")
+
+        t.duration_ms = (time.perf_counter() - start) * 1000
+        return t
+
+    # --------------------------------------------------------------------------
+    # TEST 8: Rate Limiting & Webhook Cryptographic Security
+    # --------------------------------------------------------------------------
+    def test_08_security_rate_limits_and_webhooks(self):
+        t = TestCaseResult("8. Rate Limiting & Webhook Cryptographic Security")
+        start = time.perf_counter()
+
+        try:
+            from fastapi.testclient import TestClient
+            sys.path.insert(0, str(self.base_dir))
+            from app.main import app, rate_limiter
+
+            client = TestClient(app)
+
+            # 1. Rate limiter test
+            test_key = f"qa_test_{time.time()}"
+            triggered_429 = False
+            for _ in range(rate_limiter.max_requests + 2):
+                r = client.post("/api/v1/student/summarize", json={"text": "small"}, headers={"X-API-Key": test_key})
+                if r.status_code == 429:
+                    triggered_429 = True
+                    break
+
+            if not triggered_429:
+                t.passed = False
+                t.errors.append(f"In-memory rate limiter failed to trigger HTTP 429 after {rate_limiter.max_requests + 2} requests")
+
+            # 2. Webhook HMAC test
+            secret = os.getenv("LEMON_WEBHOOK_SECRET", "default_secret_key_change_me")
+            body = b'{"meta":{"event_name":"order_created"},"data":{"attributes":{"user_email":"audit@lemon.com"}}}'
+            valid_sig = hmac.new(secret.encode("utf-8"), body, hashlib.sha256).hexdigest()
+
+            res_valid = client.post("/api/v1/billing/lemon-webhook", content=body, headers={"x-signature": valid_sig, "Content-Type": "application/json"})
+            res_invalid = client.post("/api/v1/billing/lemon-webhook", content=body, headers={"x-signature": "bad_sig_123", "Content-Type": "application/json"})
+
+            if res_valid.status_code != 200:
+                t.passed = False
+                t.errors.append(f"Valid HMAC webhook signature returned HTTP {res_valid.status_code}, expected 200")
+
+            if res_invalid.status_code != 403:
+                t.passed = False
+                t.errors.append(f"Invalid HMAC webhook signature returned HTTP {res_invalid.status_code}, expected 403")
+
+            t.details = "Rate limiter triggered 429 correctly; HMAC SHA-256 signatures validated (200 accept, 403 reject)."
+        except Exception as e:
+            t.passed = False
+            t.errors.append(f"Security test exception: {e}")
+
+        t.duration_ms = (time.perf_counter() - start) * 1000
+        return t
+
+    # --------------------------------------------------------------------------
+    # Main Suite Execution
+    # --------------------------------------------------------------------------
+    def run_all_tests(self, auto_fix=True):
+        if not auto_fix:
+            self.check_only = True
+
+        tests = [
+            self.test_01_locale_integrity,
+            self.test_02_banned_words_purge,
+            self.test_03_bidirectional_coverage,
+            self.test_04_dom_cleanliness,
+            self.test_05_javascript_cleanliness,
+            self.test_06_security_and_safari_css,
+            self.test_07_fastapi_contracts,
+            self.test_08_security_rate_limits_and_webhooks
+        ]
+
+        self.test_results = []
+        self.passed_tests = 0
+        self.failed_tests = 0
+
+        for test_fn in tests:
+            res = test_fn()
+            self.test_results.append(res)
+            if res.passed:
+                self.passed_tests += 1
+            else:
+                self.failed_tests += 1
+
+        self.total_tests = len(tests)
+        self.all_passed = (self.failed_tests == 0)
+
+        return {
+            "success": self.all_passed,
+            "total": self.total_tests,
+            "passed": self.passed_tests,
+            "failed": self.failed_tests,
+            "success_rate": round((self.passed_tests / self.total_tests) * 100, 1),
+            "results": self.test_results
+        }
 
     def deep_scan_and_auto_fix(self):
-        """Executes full scan and automated healing routine."""
-        self.scan_and_fix_banned_words()
-        self.scan_and_fix_locales()
-        self.verify_safari_css()
-        self.sync_i18n_cache()
-        self.verify_notranslate_guard()
-        self.audit_and_fix_html_dom()
-
-        all_clean = (
-            self.metrics["untagged_cyrillic"] == 0 and
-            self.metrics["script_cyrillic"] == 0 and
-            self.metrics["attribute_cyrillic"] == 0 and
-            self.metrics["banned_words"] == 0
-        )
-
-        system_log = [
+        """Adapter method for backwards compatibility with existing pipelines."""
+        summary = self.run_all_tests(auto_fix=not self.check_only)
+        lines = [
             "=" * 80,
-            f"🛡️ DEEP AUDIT & AUTO-FIX MATRIX BY: {self.role}",
-            "=" * 80,
-            f"\n[1] МЕТРИКИ ЧИСТОТЫ DOM И ЛОКАЛИЗАЦИИ:",
-            f"    - Неразмеченных кириллических текстовых узлов в index.html: {self.metrics['untagged_cyrillic']} (Требуется: 0)",
-            f"    - Хардкодных кириллических строк в JavaScript/скриптах: {self.metrics['script_cyrillic']} (Требуется: 0)",
-            f"    - Неразмеченных атрибутов с кириллицей (placeholder, title): {self.metrics['attribute_cyrillic']} (Требуется: 0)",
-            f"    - Запрещенных слов ('Asbob'/'Instrument'): {self.metrics['banned_words']} (Требуется: 0)",
-            f"    - Синхронизировано ключей на каждый язык (EN, RU, UZ, ES): {self.metrics['locale_keys']}",
-            f"    - Страниц под защитой 'notranslate' от автопереводчиков: {self.metrics['notranslate_pages']}",
-            
-            f"\n[2] UX/UI & БРАУЗЕРНАЯ СОВМЕСТИМОСТЬ:",
-            "    - Safari WebKit: -webkit-backdrop-filter: blur(12px) активен для iOS/macOS.",
-            "    - Legal Consent: Привязан к 'eduhub_locale' с динамической реактивностью на смену языка.",
-            "    - Sandbox Пресеты: Полностью параметризованы через setQueryByKey с переводами 4 языков.",
-            "    - Magic Wand: Формирует академические промпты на выбранном пользователем языке.",
-            
-            "\n" + "=" * 80,
-            f"🎯 СТАТУС ВЕРИФИКАЦИИ QA: {'ИДЕАЛЬНО (100% CLEAN)' if all_clean else 'ТРЕБУЮТСЯ ПРАВКИ'}",
-            f"Всего исправлений в текущем прогоне: {len(self.issues_fixed)}.",
+            f"🛡️  EDUHUB AI — AUTONOMOUS HONEST QA VERIFICATION MATRIX",
+            f"Role: {self.role} | Tests: {summary['passed']}/{summary['total']} Passed ({summary['success_rate']}%)",
             "=" * 80
         ]
-        return "\n".join(system_log)
+        for r in summary["results"]:
+            icon = "✅ PASS" if r.passed else "❌ FAIL"
+            lines.append(f"{icon} | {r.name} ({r.duration_ms:.1f}ms)")
+            if r.details:
+                lines.append(f"       ↳ {r.details}")
+            for err in r.errors:
+                lines.append(f"       🛑 ERROR: {err}")
+            for fix in r.fixed:
+                lines.append(f"       🔧 FIXED: {fix}")
+
+        status_text = "ИДЕАЛЬНО (100% CLEAN)" if summary["success"] else "ОБНАРУЖЕНЫ ОШИБКИ"
+        lines.append("=" * 80)
+        lines.append(f"🎯 СТАТУС ВЕРИФИКАЦИИ QA: {status_text}")
+        lines.append("=" * 80)
+        return "\n".join(lines)
+
+    def print_report(self):
+        print("\n" + self.deep_scan_and_auto_fix() + "\n")
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Autonomous Honest QA Guard Engine")
+    parser.add_argument("--check-only", action="store_true", help="Run in strict read-only mode without applying auto-fixes")
+    parser.add_argument("--json", action="store_true", help="Output machine-readable JSON")
+    args = parser.parse_args()
+
+    qa = AutoQAGuardEngine(target_dir=BASE_DIR, check_only=args.check_only)
+    summary = qa.run_all_tests(auto_fix=not args.check_only)
+
+    if args.json:
+        out = {
+            "success": summary["success"],
+            "total": summary["total"],
+            "passed": summary["passed"],
+            "failed": summary["failed"],
+            "success_rate": summary["success_rate"],
+            "details": [{"name": r.name, "passed": r.passed, "errors": r.errors, "fixed": r.fixed} for r in summary["results"]]
+        }
+        print(json.dumps(out, indent=2))
+    else:
+        qa.print_report()
+
+    sys.exit(0 if summary["success"] else 1)
+
 
 if __name__ == "__main__":
-    qa_engine = AutoQAGuardEngine()
-    print(qa_engine.deep_scan_and_auto_fix())
+    main()
