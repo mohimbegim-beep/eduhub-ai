@@ -49,8 +49,8 @@ def load_env_file(filepath: str = ".env"):
 
 load_env_file()
 
-SENDER_EMAIL = os.getenv("SMTP_SENDER_EMAIL", "mohim.mohimbegim@gmail.com")
-GOOGLE_APP_PASSWORD = os.getenv("SMTP_APP_PASSWORD", "zsoc uayp yyzg arul").replace(" ", "")
+SENDER_EMAIL = os.getenv("SMTP_SENDER_EMAIL", "")
+GOOGLE_APP_PASSWORD = os.getenv("SMTP_APP_PASSWORD", "").replace(" ", "")
 SMTP_HOST = os.getenv("SMTP_HOST", "smtp.gmail.com")
 SMTP_PORT = int(os.getenv("SMTP_PORT", "587"))
 PRODUCTION_URL = os.getenv("PRODUCTION_URL", "https://eduhub-ai.onrender.com")
