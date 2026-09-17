@@ -497,9 +497,7 @@ const I18N_CACHE = {
     "prompt_wand_default": "Explain quantum entanglement using the Socratic method: provide a real-world analogy and ask me 2 guiding questions for self-check.",
     "prompt_wand_short_prefix": "Explain the topic in detail with academic rigor and textbook examples: ",
     "prompt_wand_short_suffix": ". Highlight key concepts and provide a step-by-step breakdown.",
-    "prompt_wand_long_prefix": "Conduct an in-depth Socratic analysis of the following question, explaining the steps, citing foundational sources, and providing practical conclusions:
-
-",
+    "prompt_wand_long_prefix": "Conduct an in-depth Socratic analysis of the following question, explaining the steps, citing foundational sources, and providing practical conclusions:\n\n",
     "sandbox_enhance_title": "Automatically enrich query with academic context",
     "ats_sample_jd": "Looking for a Senior Frontend Developer with strong experience in React, TypeScript, Next.js, and REST APIs. Experience with CI/CD, Core Web Vitals optimization, and Jest testing is preferred.",
     "ats_sample_resume": "Frontend Developer, 3 years experience. Tech stack: JavaScript, React, Redux, HTML5, CSS3, Git. Developed responsive e-commerce web applications, integrated REST APIs.",
@@ -1024,9 +1022,7 @@ const I18N_CACHE = {
     "prompt_wand_default": "Объясни квантовую запутанность через метод Сократа: приведи аналогию из реальной жизни и задай мне 2 наводящих вопроса для самопроверки.",
     "prompt_wand_short_prefix": "Разбери тему детально с академическими формулировками и примерами из учебников: ",
     "prompt_wand_short_suffix": ". Выдели ключевые понятия и дай пошаговое объяснение.",
-    "prompt_wand_long_prefix": "Проведи глубокий Сократовский анализ следующего вопроса с пояснением шагов, ссылками на первоисточники и практическими выводами:
-
-",
+    "prompt_wand_long_prefix": "Проведи глубокий Сократовский анализ следующего вопроса с пояснением шагов, ссылками на первоисточники и практическими выводами:\n\n",
     "sandbox_enhance_title": "Автоматически обогатить запрос академическим контекстом",
     "ats_sample_jd": "Ищем Senior Frontend разработчика с уверенным знанием React, TypeScript, Next.js и REST API. Опыт построения CI/CD, оптимизации Core Web Vitals и написания тестов на Jest.",
     "ats_sample_resume": "Frontend разработчик, 3 года опыта. Стек: JavaScript, React, Redux, HTML5, CSS3, Git. Разрабатывал страницы интернет-магазина, подключал REST API.",
@@ -1551,9 +1547,7 @@ const I18N_CACHE = {
     "prompt_wand_default": "Kvant chalkashligini Suqrot metodi orqali tushuntirib bering: hayotiy misol keltiring va o'z-o'zini tekshirish uchun 2 ta yo'naltiruvchi savol bering.",
     "prompt_wand_short_prefix": "Mavzuni akademik iboralar va darslik misollari bilan batafsil tahlil qiling: ",
     "prompt_wand_short_suffix": ". Asosiy tushunchalarni ajratib ko'rsating va bosqichma-bosqich tushuntiring.",
-    "prompt_wand_long_prefix": "Quyidagi savolni bosqichlarni tushuntirgan holda, manbalarga tayangan holda va amaliy xulosalar bilan chuqur Suqrot tahlilidan o'tkazing:
-
-",
+    "prompt_wand_long_prefix": "Quyidagi savolni bosqichlarni tushuntirgan holda, manbalarga tayangan holda va amaliy xulosalar bilan chuqur Suqrot tahlilidan o'tkazing:\n\n",
     "sandbox_enhance_title": "So'rovni avtomatik ravishda akademik kontekst bilan boyitish",
     "ats_sample_jd": "React, TypeScript, Next.js va REST API bo'yicha mustahkam tajribaga ega bo'lgan Senior Frontend dasturchi qidirilmoqda. CI/CD, Core Web Vitals optimallashtirish va Jest testlari bo'yicha tajriba ma'qullanadi.",
     "ats_sample_resume": "Frontend dasturchi, 3 yillik tajriba. Texnologiyalar: JavaScript, React, Redux, HTML5, CSS3, Git. Onlayn-do'kon veb-sahifalarini ishlab chiqqan, REST API bilan integratsiya qilgan.",
@@ -2078,9 +2072,7 @@ const I18N_CACHE = {
     "prompt_wand_default": "Explica el entrelazamiento cuántico usando el método socrático: proporciona una analogía de la vida real y hazme 2 preguntas guía para autocomprobación.",
     "prompt_wand_short_prefix": "Explica el tema detalladamente con rigor académico y ejemplos de libros de texto: ",
     "prompt_wand_short_suffix": ". Destaca los conceptos clave y proporciona un desglose paso a paso.",
-    "prompt_wand_long_prefix": "Realiza un análisis socrático exhaustivo de la siguiente pregunta, explicando los pasos, citando fuentes académicas y aportando conclusiones prácticas:
-
-",
+    "prompt_wand_long_prefix": "Realiza un análisis socrático exhaustivo de la siguiente pregunta, explicando los pasos, citando fuentes académicas y aportando conclusiones prácticas:\n\n",
     "sandbox_enhance_title": "Enriquecer automáticamente la consulta con contexto académico",
     "ats_sample_jd": "Buscamos un Desarrollador Frontend Senior con sólida experiencia en React, TypeScript, Next.js y APIs REST. Se valora experiencia en CI/CD, optimización de Core Web Vitals y pruebas con Jest.",
     "ats_sample_resume": "Desarrollador Frontend, 3 años de experiencia. Stack técnico: JavaScript, React, Redux, HTML5, CSS3, Git. Desarrollo de aplicaciones web responsivas para comercio electrónico e integración de APIs REST.",
@@ -2257,7 +2249,7 @@ const I18N_CACHE = {
     });
 
     // 4. Update title for specialized tools if marked
-    const pageTool = document.body.getAttribute('data-page-tool');
+    const pageTool = (document.body && typeof document.body.getAttribute === 'function') ? document.body.getAttribute('data-page-tool') : null;
     if (pageTool) {
       const titleKey = pageTool + '_title';
       const pageTitle = t(titleKey);
