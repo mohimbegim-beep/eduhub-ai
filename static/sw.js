@@ -44,7 +44,7 @@ self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
 
   // Network-only for API requests and checkouts
-  if (url.pathname.startsWith('/api/') || url.hostname.includes('lemonsqueezy')) {
+  if (url.pathname.startsWith('/api/')) {
     return;
   }
 

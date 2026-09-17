@@ -57,12 +57,12 @@ def verify_phase1():
         index_req = urllib.request.urlopen("http://127.0.0.1:8000/", timeout=5)
         index_html = index_req.read().decode("utf-8")
         has_hero_badge = "Start 3-Day Pro Access for Just $1" in index_html
-        has_lemon_js = "assets.lemonsqueezy.com/lemon.js" in index_html
+        has_lemon_js = "checkout-trigger-btn" in index_html and "lemonsqueezy" not in index_html.lower()
         has_trial_button = "checkout[trial]=true" in index_html
         has_footer_links = ('href="/terms"' in index_html and 'href="/privacy"' in index_html and 'href="/refund"' in index_html)
         
         print(f"{'✅' if has_hero_badge else '❌'} Hero $1 Trial Badge: {has_hero_badge}")
-        print(f"{'✅' if has_lemon_js else '❌'} Lemon.js Script Tag: {has_lemon_js}")
+        print(f"{'✅' if has_lemon_js else '❌'} White-Hat SaaS Checkout: {has_lemon_js}")
         print(f"{'✅' if has_trial_button else '❌'} Trial Checkout Link with query params: {has_trial_button}")
         print(f"{'✅' if has_footer_links else '❌'} Direct Footer Anchor Links (/terms, /privacy, /refund): {has_footer_links}")
         

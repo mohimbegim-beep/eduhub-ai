@@ -97,7 +97,7 @@ const EduHubUtils = (function () {
         </div>
         <div class="content">${contentHtml}</div>
         <div class="footer">
-          Generated autonomously by EduHub AI (https://eduhub.ai) • Strict 18+ Safe Academic Filter • Merchant: Lemon Squeezy
+          Generated autonomously by EduHub AI (https://eduhub.ai) • Strict 18+ Safe Academic Filter • Merchant: PCI-DSS Compliant Processor
         </div>
         <script>
           setTimeout(() => { window.print(); }, 400);

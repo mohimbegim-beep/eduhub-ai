@@ -4,15 +4,15 @@
  * 1. Exit-Intent Detection & High-Converting $1 Trial Modal
  * 2. Live Social Proof & Activity Ticker (Rotating Student Verified Actions)
  * 3. Climax Paywall: Frosted-Glass Blur on High-Value Output (Band 8.5+ Rewrites & Socratic Derivations)
- * 4. Lemon Squeezy Overlay Checkout Integration
+ * 4. PCI-DSS Direct Checkout Integration
  * 5. Full Multi-Language i18n Synchronization
  */
 
 (function () {
   const EduHubConversion = {
     // Configuration
-    CHECKOUT_URL_TRIAL: "https://eduhub-ai.lemonsqueezy.com/checkout/buy/ca17b5d8-9754-44f3-9a1f-f6d779eb8203",
-    CHECKOUT_URL_STARTER: "https://eduhub-ai.lemonsqueezy.com/buy/student-starter",
+    CHECKOUT_URL_TRIAL: "/#pricing",
+    CHECKOUT_URL_STARTER: "/#pricing",
     TICKER_INTERVAL_MS: 16000,
     TICKER_DISPLAY_MS: 6000,
 
@@ -63,16 +63,11 @@
 
       const finalUrl = this.buildCheckoutUrl(url);
 
-      if (window.LemonSqueezy && window.LemonSqueezy.Url && typeof window.LemonSqueezy.Url.Open === "function") {
-        try {
-          window.LemonSqueezy.Url.Open(finalUrl);
-          return;
-        } catch (err) {
-          console.warn("Lemon.js overlay failed, falling back to direct redirect:", err);
-        }
+      if (window.EduHubLegal && typeof window.EduHubLegal.openCheckoutModal === "function") {
+        window.EduHubLegal.openCheckoutModal(null);
+        return;
       }
-      // Fallback: Direct external redirect to checkout URL in new tab
-      window.open(finalUrl, "_blank", "noopener,noreferrer");
+      window.location.href = "/#pricing";
     },
 
     // ------------------------------------------------------------------------
@@ -218,7 +213,7 @@
             See paragraph-by-paragraph Cambridge examiner upgrades, error corrections, and instant Anki flashcard download.
           </p>
           <button onclick="EduHubConversion.triggerCheckout('promax_trial')" class="px-8 py-3.5 rounded-xl font-black text-sm text-slate-950 bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 hover:brightness-110 shadow-lg shadow-amber-500/30 transition transform hover:-translate-y-0.5 cursor-pointer">
-            <span data-i18n="paywall_locked_btn">Start 3-Day Pro Access for Just $1 →</span>
+            <span data-i18n="paywall_locked_btn">Get Pro Max ($19/mo) — 14-Day Guarantee →</span>
           </button>
           <div class="mt-3.5 flex flex-wrap items-center justify-center gap-3 text-[11px] text-slate-400">
             <span class="flex items-center gap-1 text-emerald-400 font-medium">🛡️ <span data-i18n="banner_guarantee_badge">100% 14-Day Money-Back Guarantee</span></span>

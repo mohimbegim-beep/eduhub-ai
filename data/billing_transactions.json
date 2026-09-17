@@ -844,5 +844,35 @@
         "product_name": "EduHub Pro Max"
       }
     }
+  },
+  {
+    "timestamp": 1789619182.229485,
+    "event": "order_created",
+    "order_id": null,
+    "customer_email": "student@eduhub.ai",
+    "status": "completed",
+    "attributes": {
+      "user_email": "student@eduhub.ai"
+    }
+  },
+  {
+    "timestamp": 1789619193.1307108,
+    "event": "order_created",
+    "order_id": null,
+    "customer_email": "audit@lemon.com",
+    "status": "completed",
+    "attributes": {
+      "user_email": "audit@lemon.com"
+    }
+  },
+  {
+    "timestamp": 1789619201.5899825,
+    "event": "order_created",
+    "order_id": null,
+    "customer_email": "audit@lemon.com",
+    "status": "completed",
+    "attributes": {
+      "user_email": "audit@lemon.com"
+    }
   }
 ]

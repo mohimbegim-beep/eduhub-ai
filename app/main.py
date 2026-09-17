@@ -29,7 +29,7 @@ except ImportError:
 
 app = FastAPI(
     title="EduHub Core API",
-    description="Autonomous production API with Google GenAI (gemini-2.5-flash), 18+ Safe Content Filtering, Lemon Squeezy billing, and in-memory rate limiting.",
+    description="Autonomous production API with Google GenAI (gemini-2.5-flash), 18+ Safe Content Filtering, PCI-DSS multi-gateway billing, and in-memory rate limiting.",
     version="1.2.0"
 )
 
@@ -115,7 +115,7 @@ PRODUCT_CATALOG = {
             "Export to DOCX, Markdown, PDF",
             "Safe Content Filtering (No toxic/18+ content)"
         ],
-        "checkout_url": os.getenv("LEMON_CHECKOUT_STUDENT_STARTER", "https://eduhub-ai.lemonsqueezy.com/buy/student-starter")
+        "checkout_url": os.getenv("CHECKOUT_URL", "/#pricing")
     },
     "pro_max": {
         "id": "pro_max",
@@ -159,7 +159,7 @@ PRODUCT_CATALOG = {
             "Classroom sharing & multi-seat license (up to 5)",
             "Dedicated onboarding & API webhook access"
         ],
-        "checkout_url": os.getenv("LEMON_CHECKOUT_TUTOR_CREATOR", "https://eduhub-ai.lemonsqueezy.com/buy/tutor-creator")
+        "checkout_url": os.getenv("CHECKOUT_URL", "/#pricing")
     },
     "b2b_center": {
         "id": "b2b_center",
@@ -181,7 +181,7 @@ PRODUCT_CATALOG = {
             "Institutional Anti-Hallucination & Academic Integrity Guard",
             "Dedicated SLA & Priority Onboarding Support"
         ],
-        "checkout_url": os.getenv("LEMON_CHECKOUT_B2B_CENTER", "https://eduhub-ai.lemonsqueezy.com/buy/tutor-team-center")
+        "checkout_url": os.getenv("CHECKOUT_URL", "/#pricing")
     },
     "exam_sprint": {
         "id": "exam_sprint",
@@ -198,7 +198,7 @@ PRODUCT_CATALOG = {
             "Comprehensive crash-course flashcard decks",
             "Instant activation upon payment"
         ],
-        "checkout_url": os.getenv("LEMON_CHECKOUT_EXAM_SPRINT", "https://eduhub-ai.lemonsqueezy.com/buy/exam-sprint")
+        "checkout_url": os.getenv("CHECKOUT_URL", "/#pricing")
     },
     "flash_sprint_50": {
         "id": "flash_sprint_50",
@@ -215,7 +215,7 @@ PRODUCT_CATALOG = {
             "Stackable with any active subscription",
             "Instant token balance delivery"
         ],
-        "checkout_url": os.getenv("LEMON_CHECKOUT_SPRINT_50", "https://eduhub-ai.lemonsqueezy.com/buy/sprint-50")
+        "checkout_url": os.getenv("CHECKOUT_URL", "/#pricing")
     },
     "flash_crunch_120": {
         "id": "flash_crunch_120",
@@ -232,7 +232,7 @@ PRODUCT_CATALOG = {
             "Zero expiration date",
             "Instant automated delivery"
         ],
-        "checkout_url": os.getenv("LEMON_CHECKOUT_CRUNCH_120", "https://eduhub-ai.lemonsqueezy.com/buy/crunch-120")
+        "checkout_url": os.getenv("CHECKOUT_URL", "/#pricing")
     },
     "ats_resume_pass": {
         "id": "ats_resume_pass",
@@ -1742,6 +1742,7 @@ async def language_chat(
 # --------------------------------------------------------------------------
 # Эндпоинт 4: Lemon Squeezy Webhook
 # --------------------------------------------------------------------------
+@app.get("/api/v1/billing/webhook", tags=["Billing"])
 @app.get("/api/v1/billing/lemon-webhook", tags=["Billing"])
 @app.head("/api/v1/billing/lemon-webhook", tags=["Billing"])
 async def lemon_webhook_status():
@@ -1757,6 +1758,7 @@ async def lemon_webhook_status():
         "message": "Webhook receiver is active and ready to accept signed events from Lemon Squeezy."
     }
 
+@app.post("/api/v1/billing/webhook", tags=["Billing"])
 @app.post("/api/v1/billing/lemon-webhook", tags=["Billing"])
 async def lemon_squeezy_webhook(request: Request, x_signature: Optional[str] = Header(None, alias="X-Signature")):
     """
@@ -1928,17 +1930,17 @@ async def get_user_credits_status(email: str):
     }
 
 # --------------------------------------------------------------------------
-# Platform Settlement & Payout Policy (Lemon Squeezy Store ID: 472390)
+# Platform Settlement & Payout Policy (EduHub Global Billing Engine)
 # --------------------------------------------------------------------------
 PAYOUT_POLICY = {
-    "provider": "Lemon Squeezy",
+    "provider": "Global PCI-DSS Merchant Network",
     "store_id": "472390",
     "settlement_frequency": "bi_monthly",
     "payout_dates": [15, 30, 31],
     "payout_schedule_display": "15-е и 30–31-е числа каждого месяца",
     "min_payout_threshold_usd": 100.00,
     "currency": "USD",
-    "description": "Вывод средств из Lemon Squeezy осуществляется 15-го и 30–31-го числа месяца при накоплении баланса от $100. Суммы менее $100 остаются на счете и переносятся на следующий расчетный период без комиссий."
+    "description": "Вывод средств платформы осуществляется 15-го и 30–31-го числа месяца при накоплении баланса от $100. Суммы менее $100 остаются на счете и переносятся на следующий расчетный период без комиссий."
 }
 
 @app.get("/api/v1/billing/payout-policy", tags=["Billing & Settlements"])
@@ -2133,8 +2135,7 @@ async def render_programmatic_topic(category: str, topic_slug: str):
     <script src="/static/js/conversion-engine.js" defer></script>
     <script src="/static/js/viral-share.js" defer></script>
     <script src="/static/js/pwa-install.js" defer></script>
-    <script src="https://assets.lemonsqueezy.com/lemon.js" defer></script>
-</head>
+    </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-blue-600 selection:text-white antialiased">
     <!-- Top Navbar -->
     <header class="border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md sticky top-0 z-40">

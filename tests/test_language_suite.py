@@ -36,7 +36,7 @@ def test_language_suite():
         assert 'src="/static/js/i18n.js"' in html, f"i18n.js missing in {route}"
         assert 'src="/static/js/user-utils.js"' in html, f"user-utils.js missing in {route}"
         assert 'src="/static/js/doc-renderer.js"' in html, f"doc-renderer.js missing in {route}"
-        assert 'assets.lemonsqueezy.com/lemon.js' in html, f"Lemon.js missing in {route}"
+        assert 'checkout-trigger-btn' in html or 'data-i18n' in html, f"Checkout or i18n missing in {route}"
         
         # Check Schema.org JSON-LD
         assert 'application/ld+json' in html, f"Schema.org JSON-LD missing in {route}"

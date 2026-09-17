@@ -279,12 +279,8 @@ const EduHubLegal = (function() {
                     targetUrl = u.toString();
                 } catch(e) {}
 
-                if (window.LemonSqueezy && window.LemonSqueezy.Url && typeof window.LemonSqueezy.Url.Open === 'function') {
-                    try {
-                        window.LemonSqueezy.Url.Open(targetUrl);
-                    } catch(err) {
-                        window.open(targetUrl, '_blank', 'noopener,noreferrer');
-                    }
+                if (!targetUrl || targetUrl.startsWith('#') || targetUrl.includes('#checkout')) {
+                    window.location.href = '/#pricing';
                 } else {
                     window.open(targetUrl, '_blank', 'noopener,noreferrer');
                 }
@@ -297,7 +293,7 @@ const EduHubLegal = (function() {
     // 3. Checkout Click Interceptor (Catches all checkout buttons)
     function setupCheckoutInterceptors() {
         document.addEventListener('click', function(e) {
-            const btn = e.target.closest('a.lemonsqueezy-button, button.lemonsqueezy-button, a[href*="lemonsqueezy.com"]');
+            const btn = e.target.closest('a.checkout-trigger-btn, button.checkout-trigger-btn, a[href*="#checkout"], a[href*="/checkout"]');
             if (!btn) return;
 
             // If already confirmed in this session, let it pass directly
@@ -310,7 +306,7 @@ const EduHubLegal = (function() {
             e.stopPropagation();
 
             openCheckoutModal(btn);
-        }, true); // Capture phase to intercept before Lemon.js
+        }, true); // Capture phase to intercept before checkout
     }
 
     // 4. Update Micro-Consent Captions

@@ -16,7 +16,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="icon" href="/static/favicon.ico">
     <script src="/static/js/legal-consent.js" defer></script>
-    <script src="https://assets.lemonsqueezy.com/lemon.js" defer></script>
     <!-- Client-side i18n & Google Translate Bridge Engine -->
     <script src="/static/js/i18n.js" defer></script>
 </head>
@@ -854,11 +853,7 @@
     }
 
     function triggerProMaxTrial() {
-        if (window.LemonSqueezy) {
-            window.LemonSqueezy.Url.Open("https://eduhub-ai.lemonsqueezy.com/checkout/buy/ca17b5d8-9754-44f3-9a1f-f6d779eb8203");
-        } else {
-            window.location.href = "https://eduhub-ai.lemonsqueezy.com/checkout/buy/ca17b5d8-9754-44f3-9a1f-f6d779eb8203";
-        }
+        window.location.href = "/#pricing";
     }
 
     // 5-Star Rating Logic

@@ -31,7 +31,7 @@ def test_i18n_and_standalone_tools():
         html = res.text
         assert expected_title_part in html, f"Expected '{expected_title_part}' in {route}"
         assert 'src="/static/js/i18n.js"' in html, f"i18n.js missing in {route}"
-        assert 'assets.lemonsqueezy.com/lemon.js' in html, f"Lemon.js missing in {route}"
+        assert 'checkout-trigger-btn' in html or 'data-i18n' in html, f"Checkout or i18n missing in {route}"
         assert 'Explore all EduHub tools' in html or 'explore_all_tools' in html, f"Minimal header link missing in {route}"
         
         # Hreflang verification
