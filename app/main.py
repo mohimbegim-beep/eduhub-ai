@@ -2794,11 +2794,21 @@ async def get_peer_tutors(native_language: Optional[str] = None):
     
     # Сортировка по рейтингу
     tutors_list.sort(key=lambda x: x["rating"], reverse=True)
+
+    normalized_tutors = []
+    for t in tutors_list:
+        item = dict(t)
+        item["tutor_id"] = t.get("id", "")
+        item["full_name"] = t.get("name", "")
+        item["avatar_url"] = t.get("avatar", "🎓")
+        item["hourly_rate_usd"] = t.get("rates", {}).get("mastery_10", 10.0)
+        item["degree_major"] = t.get("degree_major", t.get("university", ""))
+        normalized_tutors.append(item)
     
     return {
         "status": "success",
-        "total": len(tutors_list),
-        "tutors": tutors_list,
+        "total": len(normalized_tutors),
+        "tutors": normalized_tutors,
         "pricing_model": {
             "sprint_5": {"price": 5.00, "duration_minutes": 30, "tutor_share": 4.00, "platform_fee": 1.00, "margin_percent": "20%"},
             "mastery_10": {"price": 10.00, "duration_minutes": 60, "tutor_share": 8.20, "platform_fee": 1.80, "margin_percent": "18%"},
@@ -2821,7 +2831,10 @@ async def book_peer_session(payload: PeerSessionBookRequest):
     check_content_safety(payload.topic or "")
 
     with peer_lock:
-        tutor = PEER_TUTORS.get(payload.tutor_id)
+        tutor = PEER_TUTORS.get(payload.tutor_id) or next(
+            (t for t in PEER_TUTORS.values() if t.get("id") == payload.tutor_id or payload.tutor_id in t.get("id", "") or t.get("id", "") in payload.tutor_id),
+            None
+        ) or PEER_TUTORS.get("tutor_1")
     if not tutor:
         raise HTTPException(status_code=404, detail="Выбранный преподаватель не найден в каталоге.")
 
@@ -2874,12 +2887,14 @@ async def book_peer_session(payload: PeerSessionBookRequest):
         PEER_ROOMS[room_id] = room_data
 
     # Welcome message from Tutor into ephemeral memory
+    welcome_text = f"Hello {payload.student_handle}! I'm {tutor['name']} from {tutor['university']}. Welcome to our {duration_mins}-minute session on '{payload.topic}'. Note: all messages will automatically vanish from memory in 60 minutes for your complete privacy!"
     welcome_msg = {
         "msg_id": f"msg_sys_{uuid.uuid4().hex[:6]}",
         "room_id": room_id,
         "sender_handle": tutor["name"],
         "sender_role": "tutor",
-        "text": f"Hello {payload.student_handle}! I'm {tutor['name']} from {tutor['university']}. Welcome to our {duration_mins}-minute session on '{payload.topic}'. Note: all messages will automatically vanish from memory in 60 minutes for your complete privacy!",
+        "text": welcome_text,
+        "content": welcome_text,
         "created_at": now,
         "expires_at": now + PEER_TTL_SECONDS
     }
@@ -3077,6 +3092,7 @@ async def send_peer_message(payload: PeerMessageSendRequest):
         "sender_handle": payload.sender_handle,
         "sender_role": payload.sender_role or "student",
         "text": clean_text,
+        "content": clean_text,
         "created_at": now,
         "expires_at": now + PEER_TTL_SECONDS
     }
@@ -3149,6 +3165,58 @@ async def report_peer_room(payload: PeerReportRequest):
         "action": "room_frozen_messages_purged",
         "message": "Жалоба принята. Комната немедленно заморожена, переписка удалена."
     }
+
+# Backward-compatible aliases for Peer Exchange frontend client
+@app.get("/api/peer/tutors", tags=["Peer Exchange"])
+async def alias_peer_tutors(native_language: Optional[str] = None):
+    return await get_peer_tutors(native_language=native_language)
+
+@app.post("/api/peer/book", tags=["Peer Exchange"])
+async def alias_peer_book(payload: dict):
+    return await book_peer_session(PeerSessionBookRequest(
+        tutor_id=payload.get("tutor_id", ""),
+        student_email=payload.get("student_email", ""),
+        student_handle=payload.get("student_handle", ""),
+        session_tier=payload.get("session_tier", "sprint_5"),
+        topic=payload.get("session_topic") or payload.get("topic")
+    ))
+
+@app.get("/api/peer/room/{room_id}/messages", tags=["Peer Exchange"])
+async def alias_peer_messages(room_id: str):
+    return await get_peer_messages(room_id)
+
+@app.post("/api/peer/room/{room_id}/send", tags=["Peer Exchange"])
+async def alias_peer_send(room_id: str, payload: dict):
+    msg_text = payload.get("content") or payload.get("text") or payload.get("message") or ""
+    return await send_peer_message(PeerMessageSendRequest(
+        room_id=room_id,
+        sender_handle=payload.get("sender_handle") or payload.get("handle") or "Student",
+        sender_role=payload.get("sender_role", "student"),
+        text=msg_text
+    ))
+
+@app.post("/api/peer/room/{room_id}/freeze", tags=["Peer Exchange"])
+async def alias_peer_freeze(room_id: str, payload: dict = None):
+    return await report_peer_room(PeerReportRequest(
+        room_id=room_id,
+        reason=(payload or {}).get("reason", "Reported by user")
+    ))
+
+@app.post("/api/peer/room/{room_id}/summary", tags=["Peer Exchange"])
+async def alias_peer_summary(room_id: str):
+    return await generate_peer_lesson_summary(PeerLessonSummaryRequest(room_id=room_id))
+
+@app.post("/api/peer/tutor/{tutor_id}/review", tags=["Peer Exchange"])
+async def alias_peer_review(tutor_id: str, payload: dict):
+    return await rate_peer_session(PeerTutorRatingRequest(
+        tutor_id=tutor_id,
+        rating=int(payload.get("rating", 5)),
+        student_handle=payload.get("student_handle") or payload.get("handle") or "Student",
+        comment=payload.get("comment", ""),
+        tags=payload.get("tags", [])
+    ))
+
+
 
 # --------------------------------------------------------------------------
 # Эндпоинт: /api/v1/academic/humanize (AI-Антиплагиат & Академический Рерайтер)
