@@ -86,6 +86,7 @@ WEBHOOK_SECRET = os.getenv("LEMON_SQUEEZY_WEBHOOK_SECRET") or os.getenv("LEMON_W
 LEMON_API_KEY = os.getenv("LEMON_API_KEY", "")
 GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
 REQUIRE_API_KEY = os.getenv("REQUIRE_API_KEY", "false").lower() in ("true", "1", "yes")
+PRODUCTION_URL = os.getenv("PRODUCTION_URL", "https://eduhub-ai.onrender.com").rstrip("/")
 
 # Инициализация Lemon Squeezy API клиента
 def init_lemon_squeezy():
@@ -2012,56 +2013,30 @@ async def get_latest_trends():
 # --------------------------------------------------------------------------
 # Programmatic SEO (pSEO) & Dynamic Real-Time Topic Database
 # --------------------------------------------------------------------------
-TOPICS_DATABASE = {
-    "ielts": {
-        "technology-in-education-essay": {
-            "title": "IELTS Writing Task 2: Technology in Education Sample Band 9",
-            "category": "IELTS Academic Writing",
-            "prompt": "Some people believe that computers and the internet will soon replace teachers in schools. To what extent do you agree or disagree?",
-            "sample_feedback": "Task Response: Band 6.5 (clear position but underdeveloped examples). Coherence: Band 6.0. Lexical Resource: Band 6.5. Grammatical Range: Band 6.0.",
-            "meta_desc": "Cambridge-standard IELTS Writing Task 2 evaluation on technology in education. Compare Band 6.0 vs Band 9.0 rewrite with high-yield academic vocabulary."
-        },
-        "environmental-protection-responsibility": {
-            "title": "IELTS Writing Task 2: Environmental Protection — Government vs Individuals",
-            "category": "IELTS Academic Writing",
-            "prompt": "Environmental problems are too big for individuals to solve alone. Only governments and large companies can make real differences. To what extent do you agree or disagree?",
-            "sample_feedback": "Task Response: Band 6.5. Coherence: Band 6.5. Lexical Resource: Band 6.0. Grammatical Range: Band 6.0.",
-            "meta_desc": "Cambridge-level IELTS evaluation on environmental responsibility. Step-by-step scoring rubric and Band 8.5+ model rewrite."
-        },
-        "remote-work-society": {
-            "title": "IELTS Writing Task 2: Remote Work and Future Society",
-            "category": "IELTS Academic Writing",
-            "prompt": "An increasing number of people are choosing to work from home instead of commuting to an office. Do the advantages of this trend outweigh the disadvantages?",
-            "sample_feedback": "Task Response: Band 7.0. Coherence: Band 6.5. Lexical Resource: Band 6.5. Grammatical Range: Band 6.5.",
-            "meta_desc": "Examiner evaluation of remote work IELTS Task 2 essay. Discover Oxford-level academic collocations and Anki deck download."
-        }
-    },
-    "math": {
-        "calculus-chain-rule-derivative-steps": {
-            "title": "Calculus: Step-by-Step Chain Rule Derivative Derivations",
-            "category": "Higher Mathematics",
-            "prompt": "Find the derivative of f(x) = (3x^2 - 5x + 2)^4 using the chain rule with full pedagogical Socratic steps.",
-            "sample_feedback": "Step 1: Identify the outer function u^4 and inner function u = 3x^2 - 5x + 2. Apply du/dx and power rule scaffolding.",
-            "meta_desc": "Master calculus derivatives with step-by-step chain rule derivations. Socratic hints, LaTeX rendering, and practice problems."
-        },
-        "integration-by-parts-formula-examples": {
-            "title": "Calculus: Integration by Parts with Step-by-Step Scaffolding",
-            "category": "Higher Mathematics",
-            "prompt": "Evaluate the indefinite integral of x * e^(2x) dx using the integration by parts formula: integral u dv = u v - integral v du.",
-            "sample_feedback": "Step 1: Choose u = x (by LIATE rule) and dv = e^(2x) dx. Compute du = dx and v = (1/2)e^(2x).",
-            "meta_desc": "Learn integration by parts step-by-step. Pedagogical AI guidance, formula proofs, and Anki formula cards."
-        }
-    },
-    "sat": {
-        "digital-sat-reading-inference-strategies": {
-            "title": "Digital SAT Reading: Logical Inference and Text Evidence Mastery",
-            "category": "Digital SAT Prep",
-            "prompt": "Analyze paired scientific passages on neurological plasticity and determine which claim is best supported by experimental data.",
-            "sample_feedback": "Analysis: Option C is supported by direct empirical control groups. Eliminating traps with Socratic elimination.",
-            "meta_desc": "Master Digital SAT Reading inference questions with College Board standardized rubric scoring and diagnostic reasoning."
+PSEO_TOPICS_FILE = DATA_DIR / "pseo_topics.json"
+
+def load_pseo_topics() -> dict:
+    """Загружает расширенную базу тем для pSEO из файла data/pseo_topics.json."""
+    if PSEO_TOPICS_FILE.exists():
+        try:
+            with open(PSEO_TOPICS_FILE, "r", encoding="utf-8") as f:
+                import json as pj
+                return pj.load(f)
+        except Exception as e:
+            print(f"[pSEO WARNING] Failed to load {PSEO_TOPICS_FILE}: {e}")
+    return {
+        "ielts": {
+            "technology-in-education-essay": {
+                "title": "IELTS Writing Task 2: Technology in Education Sample Band 9",
+                "category": "IELTS Academic Writing",
+                "prompt": "Some people believe that computers and the internet will soon replace teachers in schools. To what extent do you agree or disagree?",
+                "sample_feedback": "Task Response: Band 6.5 (clear position but underdeveloped examples). Coherence: Band 6.0. Lexical Resource: Band 6.5. Grammatical Range: Band 6.0.",
+                "meta_desc": "Cambridge-standard IELTS Writing Task 2 evaluation on technology in education. Compare Band 6.0 vs Band 9.0 rewrite with high-yield academic vocabulary."
+            }
         }
     }
-}
+
+TOPICS_DATABASE = load_pseo_topics()
 
 @app.get("/topics/{category}/{topic_slug}", response_class=HTMLResponse, tags=["Programmatic SEO"])
 async def render_programmatic_topic(category: str, topic_slug: str):
@@ -2078,7 +2053,7 @@ async def render_programmatic_topic(category: str, topic_slug: str):
     else:
         topic_info = cat_data[topic_slug.lower()]
 
-    canonical_url = f"https://eduhub.ai/topics/{category}/{topic_slug}"
+    canonical_url = f"{PRODUCTION_URL}/topics/{category}/{topic_slug}"
     
     html = f"""<!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
@@ -2263,7 +2238,7 @@ async def render_robots():
         "Allow: /\n\n"
         "User-agent: PerplexityBot\n"
         "Allow: /\n\n"
-        "Sitemap: https://eduhub.ai/sitemap.xml\n"
+        f"Sitemap: {PRODUCTION_URL}/sitemap.xml\n"
     )
     return Response(content=robots_text, media_type="text/plain")
 
@@ -2273,7 +2248,7 @@ async def render_sitemap():
     """
     Автоматическая генерация XML-карты сайта для поисковых систем Google, Bing, Yandex.
     """
-    base_url = "https://eduhub.ai"
+    base_url = PRODUCTION_URL
     urls = [
         {"loc": f"{base_url}/", "priority": "1.0", "changefreq": "daily"},
         {"loc": f"{base_url}/privacy", "priority": "0.5", "changefreq": "monthly"},

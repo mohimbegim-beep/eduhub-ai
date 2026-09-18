@@ -1,0 +1,360 @@
+{
+    "ielts": {
+        "technology-in-education-essay": {
+            "title": "IELTS Writing Task 2: Technology in Education Sample Band 9",
+            "category": "IELTS Academic Writing",
+            "prompt": "Some people believe that computers and the internet will soon replace teachers in schools. To what extent do you agree or disagree?",
+            "sample_feedback": "Task Response: Band 6.5 (clear position but underdeveloped examples). Coherence: Band 6.0. Lexical Resource: Band 6.5. Grammatical Range: Band 6.0.",
+            "meta_desc": "Cambridge-standard IELTS Writing Task 2 evaluation on technology in education. Compare Band 6.0 vs Band 9.0 rewrite with high-yield academic vocabulary."
+        },
+        "environmental-protection-responsibility": {
+            "title": "IELTS Writing Task 2: Environmental Protection — Government vs Individuals",
+            "category": "IELTS Academic Writing",
+            "prompt": "Environmental problems are too big for individuals to solve alone. Only governments and large companies can make real differences. To what extent do you agree or disagree?",
+            "sample_feedback": "Task Response: Band 6.5. Coherence: Band 6.5. Lexical Resource: Band 6.0. Grammatical Range: Band 6.0.",
+            "meta_desc": "Cambridge-level IELTS evaluation on environmental responsibility. Step-by-step scoring rubric and Band 8.5+ model rewrite."
+        },
+        "remote-work-society": {
+            "title": "IELTS Writing Task 2: Remote Work and Future Society",
+            "category": "IELTS Academic Writing",
+            "prompt": "An increasing number of people are choosing to work from home instead of commuting to an office. Do the advantages of this trend outweigh the disadvantages?",
+            "sample_feedback": "Task Response: Band 7.0. Coherence: Band 6.5. Lexical Resource: Band 6.5. Grammatical Range: Band 6.5.",
+            "meta_desc": "Examiner evaluation of remote work IELTS Task 2 essay. Discover Oxford-level academic collocations and Anki deck download."
+        },
+        "artificial-intelligence-human-labor": {
+            "title": "IELTS Writing Task 2: Artificial Intelligence and Automation in the Workforce",
+            "category": "IELTS Academic Writing",
+            "prompt": "As artificial intelligence advances, many occupations will become obsolete, causing widespread unemployment. To what extent do you agree or disagree?",
+            "sample_feedback": "Task Response: Band 7.0. Coherence: Band 7.0. Lexical Resource: Band 7.5. Grammatical Range: Band 6.5.",
+            "meta_desc": "Band 8.5 model essay on AI and job displacement. Learn examiner-approved cohesion devices and complex syntactic structures."
+        },
+        "higher-education-free-tuition": {
+            "title": "IELTS Writing Task 2: Should University Education Be Free for All Students?",
+            "category": "IELTS Academic Writing",
+            "prompt": "Some argue that tertiary education should be fully funded by governments, while others believe students should pay tuition fees. Discuss both views and give your opinion.",
+            "sample_feedback": "Task Response: Band 6.5. Coherence: Band 6.5. Lexical Resource: Band 6.5. Grammatical Range: Band 6.0.",
+            "meta_desc": "Balanced discussion essay on free university education. Full breakdown of Task Response and Band 9 model rewrite."
+        },
+        "tourism-cultural-impact-advantages": {
+            "title": "IELTS Writing Task 2: Impact of International Tourism on Local Cultures",
+            "category": "IELTS Academic Writing",
+            "prompt": "International tourism brings significant economic benefits to countries, but it can also undermine traditional local customs. Discuss the advantages and disadvantages.",
+            "sample_feedback": "Task Response: Band 7.0. Coherence: Band 6.5. Lexical Resource: Band 7.0. Grammatical Range: Band 6.5.",
+            "meta_desc": "Master advantages and disadvantages essays in IELTS Academic. High-scoring lexical items on globalization and heritage preservation."
+        },
+        "fast-food-taxation-public-health": {
+            "title": "IELTS Writing Task 2: Sugar Tax and Regulating Unhealthy Food",
+            "category": "IELTS Academic Writing",
+            "prompt": "The best way to improve public health is to increase taxes on fast food and sugary drinks. To what extent do you agree or disagree?",
+            "sample_feedback": "Task Response: Band 6.5. Coherence: Band 7.0. Lexical Resource: Band 6.5. Grammatical Range: Band 6.5.",
+            "meta_desc": "IELTS Task 2 opinion essay on health policies and junk food taxation. Detailed Cambridge scoring and Band 9 rewrite."
+        },
+        "traditional-newspapers-vs-social-media": {
+            "title": "IELTS Writing Task 2: Decline of Print Media vs Online News Platforms",
+            "category": "IELTS Academic Writing",
+            "prompt": "Printed newspapers and books will soon disappear as digital media and social networks become dominant. Do you agree or disagree?",
+            "sample_feedback": "Task Response: Band 6.5. Coherence: Band 6.5. Lexical Resource: Band 6.0. Grammatical Range: Band 6.5.",
+            "meta_desc": "Cambridge examiner model response on journalism in the digital age. Learn how to craft sophisticated concessive clauses."
+        },
+        "gap-year-before-university-pros-cons": {
+            "title": "IELTS Writing Task 2: Taking a Gap Year Between High School and College",
+            "category": "IELTS Academic Writing",
+            "prompt": "In many countries, young people choose to work or travel for a year before starting university. Do the advantages of taking a gap year outweigh the disadvantages?",
+            "sample_feedback": "Task Response: Band 7.0. Coherence: Band 6.5. Lexical Resource: Band 7.0. Grammatical Range: Band 7.0.",
+            "meta_desc": "Detailed analysis of gap year pros and cons for IELTS Academic candidates. Formal academic register and cohesive transitions."
+        },
+        "space-exploration-budget-justification": {
+            "title": "IELTS Writing Task 2: Government Spending on Space Exploration vs Earth Problems",
+            "category": "IELTS Academic Writing",
+            "prompt": "Spending billions on exploring outer space is unjustified when millions on Earth lack food, healthcare, and education. To what extent do you agree or disagree?",
+            "sample_feedback": "Task Response: Band 6.5. Coherence: Band 6.0. Lexical Resource: Band 6.5. Grammatical Range: Band 6.0.",
+            "meta_desc": "High-scoring argumentative essay on space funding vs domestic welfare. Full diagnostic review with Band 8.5 rewrite."
+        },
+        "crime-punishment-rehabilitation-prisons": {
+            "title": "IELTS Writing Task 2: Prison Sentencing vs Rehabilitation of Criminals",
+            "category": "IELTS Academic Writing",
+            "prompt": "Some people believe that long prison terms are the most effective deterrent to crime, while others favor community rehabilitation. Discuss both views.",
+            "sample_feedback": "Task Response: Band 7.0. Coherence: Band 6.5. Lexical Resource: Band 6.5. Grammatical Range: Band 6.5.",
+            "meta_desc": "Cambridge IELTS essay on criminal justice and reform programs. Academic vocabulary for legal and penal discourse."
+        },
+        "overpopulation-urbanization-megacities": {
+            "title": "IELTS Writing Task 2: Causes and Solutions for Megacity Overcrowding",
+            "category": "IELTS Academic Writing",
+            "prompt": "Mass migration from rural areas to megacities has created immense pressure on infrastructure and housing. What are the causes, and what solutions can governments implement?",
+            "sample_feedback": "Task Response: Band 6.5. Coherence: Band 6.5. Lexical Resource: Band 7.0. Grammatical Range: Band 6.5.",
+            "meta_desc": "Problem and solution essay structure for IELTS Academic. Urban planning terminology and examiner-evaluated sample answer."
+        },
+        "arts-music-funding-vs-science-stem": {
+            "title": "IELTS Writing Task 2: State Subsidies for Arts and Music vs STEM Disciplines",
+            "category": "IELTS Academic Writing",
+            "prompt": "Governments should allocate budgets primarily to STEM education and scientific research rather than creative arts and music. To what extent do you agree?",
+            "sample_feedback": "Task Response: Band 7.0. Coherence: Band 7.0. Lexical Resource: Band 7.0. Grammatical Range: Band 6.5.",
+            "meta_desc": "Explore academic arguments defending public funding for cultural heritage. Full scoring rubric and Band 8.5 model rewrite."
+        },
+        "zoos-animal-rights-biodiversity": {
+            "title": "IELTS Writing Task 2: The Ethical Role of Zoos in Contemporary Wildlife Conservation",
+            "category": "IELTS Academic Writing",
+            "prompt": "Some argue that keeping wild animals in zoos is cruel and unnecessary, while others believe zoos are vital for protecting endangered species. Discuss both views.",
+            "sample_feedback": "Task Response: Band 6.5. Coherence: Band 6.5. Lexical Resource: Band 6.5. Grammatical Range: Band 6.5.",
+            "meta_desc": "Balanced IELTS essay analyzing wildlife sanctuaries and captive breeding. Oxford collocations and Cambridge Band 9 answer."
+        },
+        "globalization-traditional-culture-preservation": {
+            "title": "IELTS Writing Task 2: Cultural Homogenization vs Preserving National Identity",
+            "category": "IELTS Academic Writing",
+            "prompt": "As globalization spreads Western culture and corporate brands, unique local customs and languages are fading. Is this a positive or negative development?",
+            "sample_feedback": "Task Response: Band 7.0. Coherence: Band 6.5. Lexical Resource: Band 7.5. Grammatical Range: Band 7.0.",
+            "meta_desc": "Band 8.5 model essay on cultural homogenization. High-level rhetorical structures and examiner feedback."
+        }
+    },
+    "ats": {
+        "software-engineer-ats-resume-keywords": {
+            "title": "Software Engineer Resume: Top ATS Keywords & Clean Harvard Format",
+            "category": "Career & ATS Resume Optimization",
+            "prompt": "How do I optimize my Full-Stack Software Engineer resume for ATS systems like Greenhouse and Workday to achieve 90%+ match scores?",
+            "sample_feedback": "Identified 14 high-impact technical keywords missing: CI/CD Pipelines, Microservices Architecture, Docker, Kubernetes, Jest Unit Testing, Core Web Vitals.",
+            "meta_desc": "Pass Greenhouse and Workday ATS bots. Software Engineer resume template with proven impact bullet points and keyword density guide."
+        },
+        "data-analyst-harvard-resume-template": {
+            "title": "Data Analyst Resume: Harvard Format & High-Converting Metric Bullets",
+            "category": "Career & ATS Resume Optimization",
+            "prompt": "How to structure a Junior to Mid-level Data Analyst resume using the Google 'X-Y-Z' formula for maximum recruiter callbacks?",
+            "sample_feedback": "Parsed experience bullets: Rewrote descriptive tasks into quantified business impact (e.g., 'Optimized SQL queries by 35%, saving $12K monthly in AWS compute').",
+            "meta_desc": "Download Harvard-style Data Analyst resume template. Learn SQL, Python, Tableau keyword placement to bypass enterprise ATS filters."
+        },
+        "product-manager-impact-bullet-points": {
+            "title": "Product Manager Resume: Strategic Impact Bullets & ATS Optimization",
+            "category": "Career & ATS Resume Optimization",
+            "prompt": "What metrics and keywords do hiring managers look for in SaaS Product Manager resumes?",
+            "sample_feedback": "Enhanced product leadership highlights: PLG (Product-Led Growth), CAC to LTV ratio, Sprint planning, User retention cohorts, and A/B test experiments.",
+            "meta_desc": "Proven PM resume framework. Convert vague responsibilities into quantifiable metrics that pass both ATS algorithms and VP of Product reviews."
+        },
+        "digital-marketing-ats-friendly-format": {
+            "title": "Digital Marketing Manager: ATS-Compliant CV Template & Keyword Guide",
+            "category": "Career & ATS Resume Optimization",
+            "prompt": "How to beat the applicant tracking system for Growth and Performance Marketing positions?",
+            "sample_feedback": "Inserted essential performance marketing keywords: ROAS, Omnichannel Attribution, Google Ads, Meta Ads Manager, Klaviyo CRM, CAC reduction.",
+            "meta_desc": "ATS-friendly Marketing CV template. Showcase multi-channel paid acquisition, SEO growth, and conversion rate optimization metrics."
+        },
+        "project-manager-pmp-ats-optimization": {
+            "title": "Project Manager Resume: PMP & Agile Scrum ATS Resume Rubric",
+            "category": "Career & ATS Resume Optimization",
+            "prompt": "How to highlight Agile, Scrum, and PMP methodologies in a project management resume for ATS parsing?",
+            "sample_feedback": "Added structural keyword anchors: Stakeholder Management, Risk Mitigation Matrix, Budget Allocation ($1.5M+), Jira, Gantt milestone tracking.",
+            "meta_desc": "Pass corporate ATS screening for Project Manager roles. PMP-aligned resume template with single-column clean typography."
+        },
+        "finance-investment-banking-cv-rubric": {
+            "title": "Investment Banking & Corporate Finance CV: Wall Street Standard",
+            "category": "Career & ATS Resume Optimization",
+            "prompt": "What is the standard one-page finance resume format accepted by top-tier investment banks and private equity firms?",
+            "sample_feedback": "Format verified: 1-page strict, 10pt Garamond font, zero graphics/tables. Incorporated DCF modeling, M&A due diligence, and financial statement analysis.",
+            "meta_desc": "Wall Street standard investment banking CV template. Pass automated applicant filtering at bulge bracket and boutique financial institutions."
+        },
+        "career-change-skills-gap-analysis": {
+            "title": "Career Change Resume: Transferable Skills & Functional ATS Format",
+            "category": "Career & ATS Resume Optimization",
+            "prompt": "How to write a resume when pivoting from non-tech or education into tech and software roles without direct experience?",
+            "sample_feedback": "Mapped transferable competencies: Project coordination, cross-functional communication, analytical problem solving, and portfolio capstone projects.",
+            "meta_desc": "Pivot careers successfully. Functional hybrid resume format designed to showcase transferable skills and bypass keyword gating."
+        },
+        "junior-frontend-developer-react-portfolio-resume": {
+            "title": "Junior Frontend Developer Resume: React, TypeScript, Next.js",
+            "category": "Career & ATS Resume Optimization",
+            "prompt": "How should an entry-level developer structure their resume to stand out among 500+ applicants for junior frontend roles?",
+            "sample_feedback": "Positioned live deployed URLs prominently. Highlighted GitHub contributions, state management (Redux/Zustand), and responsive Tailwind CSS builds.",
+            "meta_desc": "Junior frontend developer resume guide. Stand out to engineering leads with production-ready project descriptions and clean ATS structure."
+        },
+        "ui-ux-designer-resume-case-study-wording": {
+            "title": "Product & UI/UX Designer Resume: Case Study Framing & ATS Keywords",
+            "category": "Career & ATS Resume Optimization",
+            "prompt": "How to make a design resume ATS-readable without sacrificing aesthetic layout?",
+            "sample_feedback": "Extracted key design system keywords: Figma Component Libraries, User Journey Mapping, Usability Testing, WCAG 2.1 Accessibility, Heuristic Evaluation.",
+            "meta_desc": "Dual-purpose UI/UX designer resume. Machine-readable for ATS parsers while maintaining clean typography for Design Directors."
+        },
+        "executive-coo-leadership-ats-cv": {
+            "title": "Executive Leadership CV: C-Suite & VP Operations ATS Structure",
+            "category": "Career & ATS Resume Optimization",
+            "prompt": "How to draft an executive resume highlighting P&L management, organizational scaling, and Board governance?",
+            "sample_feedback": "Structured leadership narrative: EBITDA expansion (+28%), cross-border team scaling (120+ FTEs), organizational restructuring, and Series B fundraising.",
+            "meta_desc": "Executive C-level CV template. Articulate strategic vision, corporate governance, and multi-million dollar revenue stewardship."
+        },
+        "cybersecurity-analyst-soc-certifications-resume": {
+            "title": "Cybersecurity Analyst Resume: SOC, CompTIA Security+, CISSP",
+            "category": "Career & ATS Resume Optimization",
+            "prompt": "What technical certifications and tool keywords are mandatory for entry-level to senior Cybersecurity resumes?",
+            "sample_feedback": "Embedded defensive security stack: SIEM (Splunk/Sentinel), Incident Response, Vulnerability Assessment, Wireshark, NIST Framework, Zero Trust.",
+            "meta_desc": "Cybersecurity SOC analyst resume template. Pass automated scanning for defense contractors, fintech, and enterprise IT security roles."
+        },
+        "devops-cloud-engineer-kubernetes-resume-score": {
+            "title": "DevOps & Cloud Engineer Resume: AWS, Terraform, CI/CD, Docker",
+            "category": "Career & ATS Resume Optimization",
+            "prompt": "How to showcase cloud infrastructure architecture and automation scripts on a DevOps engineer resume?",
+            "sample_feedback": "Configured infrastructure keywords: Infrastructure as Code (Terraform), Kubernetes Pod Autoscaling, AWS EKS, Prometheus/Grafana, GitOps.",
+            "meta_desc": "DevOps engineer resume optimization guide. Land top infrastructure engineering interviews with verified ATS keyword density."
+        }
+    },
+    "math": {
+        "calculus-chain-rule-derivative-steps": {
+            "title": "Calculus: Step-by-Step Chain Rule Derivative Derivations",
+            "category": "Higher Mathematics",
+            "prompt": "Find the derivative of f(x) = (3x^2 - 5x + 2)^4 using the chain rule with full pedagogical Socratic steps.",
+            "sample_feedback": "Step 1: Identify the outer function u^4 and inner function u = 3x^2 - 5x + 2. Apply du/dx and power rule scaffolding.",
+            "meta_desc": "Master calculus derivatives with step-by-step chain rule derivations. Socratic hints, LaTeX rendering, and practice problems."
+        },
+        "integration-by-parts-formula-examples": {
+            "title": "Calculus: Integration by Parts with Step-by-Step Scaffolding",
+            "category": "Higher Mathematics",
+            "prompt": "Evaluate the indefinite integral of x * e^(2x) dx using the integration by parts formula: integral u dv = u v - integral v du.",
+            "sample_feedback": "Step 1: Choose u = x (by LIATE rule) and dv = e^(2x) dx. Compute du = dx and v = (1/2)e^(2x).",
+            "meta_desc": "Learn integration by parts step-by-step. Pedagogical AI guidance, formula proofs, and Anki formula cards."
+        },
+        "laplace-transform-differential-equations": {
+            "title": "Differential Equations: Solving Initial Value Problems via Laplace Transforms",
+            "category": "Higher Mathematics",
+            "prompt": "Solve y'' + 4y' + 4y = e^(-2t) with initial conditions y(0) = 0 and y'(0) = 1 using the Laplace transform method.",
+            "sample_feedback": "Step 1: Take Laplace transform of both sides using linearity: L{y''} = s^2 Y(s) - sy(0) - y'(0). Solve for Y(s) algebraically.",
+            "meta_desc": "Solve 2nd order differential equations step-by-step using Laplace transforms. Complete partial fraction expansion and inverse transform."
+        },
+        "linear-algebra-eigenvalues-eigenvectors-proof": {
+            "title": "Linear Algebra: Computing Eigenvalues and Eigenvectors of a 3x3 Matrix",
+            "category": "Higher Mathematics",
+            "prompt": "Find the eigenvalues and corresponding eigenspaces for the matrix A = [[2, 1, 0], [0, 2, 0], [0, 0, 3]].",
+            "sample_feedback": "Step 1: Compute the characteristic polynomial det(A - lambda * I) = 0. Roots are lambda_1 = 2 (multiplicity 2) and lambda_2 = 3.",
+            "meta_desc": "Linear algebra tutorial on eigenvalues, eigenvectors, and algebraic vs geometric multiplicity. LaTeX mathematical derivations."
+        },
+        "matrix-multiplication-rank-nullity-theorem": {
+            "title": "Linear Algebra: Rank-Nullity Theorem Proof & Vector Space Dimensions",
+            "category": "Higher Mathematics",
+            "prompt": "State and apply the Rank-Nullity Theorem for a linear transformation T: V -> W where dim(V) = 5 and rank(T) = 3.",
+            "sample_feedback": "Step 1: Recall theorem: dim(V) = rank(T) + nullity(T). Substitute dim(V)=5, rank(T)=3 -> nullity(T) = 2. Eigenspace dimension is 2.",
+            "meta_desc": "Step-by-step guide to the Rank-Nullity Theorem. Master vector space dimensions, kernel bases, and image span verification."
+        },
+        "fourier-series-decomposition-steps": {
+            "title": "Applied Math: Fourier Series Decomposition for Square Waves",
+            "category": "Higher Mathematics",
+            "prompt": "Derive the Fourier trigonometric series representation of a periodic square wave f(x) with period 2*pi.",
+            "sample_feedback": "Step 1: Note that f(x) is an odd function, so a_0 = 0 and a_n = 0. Compute b_n using Dirichlet integral conditions.",
+            "meta_desc": "Fourier series decomposition made simple. Step-by-step harmonic coefficient calculations with Socratic math hints."
+        },
+        "taylor-series-maclaurin-expansion-calc": {
+            "title": "Calculus: Taylor and Maclaurin Series Expansions with Remainder Bounds",
+            "category": "Higher Mathematics",
+            "prompt": "Find the 4th-degree Taylor polynomial for f(x) = ln(1 + x) centered at x = 0 and estimate the Lagrange error bound on [0, 0.5].",
+            "sample_feedback": "Step 1: Compute derivatives f'(x) to f^(4)(x) evaluated at 0. Formulate alternating series sum x - x^2/2 + x^3/3 - x^4/4.",
+            "meta_desc": "Taylor series and Maclaurin expansions explained. Calculate error bounds with step-by-step Socratic guidance and LaTeX formatting."
+        },
+        "multivariable-calculus-gradient-hessian": {
+            "title": "Multivariable Calculus: Gradient Vectors, Hessian Matrices, & Extrema",
+            "category": "Higher Mathematics",
+            "prompt": "Classify the critical points of f(x, y) = x^3 + y^3 - 3xy using the Second Partial Derivative Test (Hessian determinant).",
+            "sample_feedback": "Step 1: Set grad(f) = (3x^2 - 3y, 3y^2 - 3x) = (0, 0). Find critical points (0, 0) and (1, 1). Compute D = f_xx * f_yy - (f_xy)^2.",
+            "meta_desc": "Classify multivariable critical points using Hessian matrices. Master saddle points, local minima, and gradient vector fields."
+        },
+        "probability-bayes-theorem-conditional": {
+            "title": "Probability Theory: Bayes' Theorem with Diagnostic Test Scenarios",
+            "category": "Higher Mathematics",
+            "prompt": "A disease has a 1% prevalence. A diagnostic test has a 95% sensitivity and 90% specificity. Find the posterior probability of disease given a positive test.",
+            "sample_feedback": "Step 1: State Bayes' formula: P(D|+) = [P(+|D)*P(D)] / [P(+|D)*P(D) + P(+|no D)*P(no D)]. Compute numerator 0.95 * 0.01 = 0.0095.",
+            "meta_desc": "Bayes' Theorem explained with real-world clinical examples. Socratic step-by-step conditional probability calculations."
+        },
+        "discrete-math-proof-by-induction": {
+            "title": "Discrete Mathematics: Formal Mathematical Induction Proofs",
+            "category": "Higher Mathematics",
+            "prompt": "Prove by mathematical induction that for all positive integers n, 1 + 2 + 3 + ... + n = n(n + 1)/2.",
+            "sample_feedback": "Step 1: Base case n = 1: LHS = 1, RHS = 1(2)/2 = 1 (True). Step 2: Inductive hypothesis assume true for n = k. Step 3: Prove for k + 1.",
+            "meta_desc": "Mathematical induction tutorial for computer science and math students. Master base cases, inductive steps, and formal logic proofs."
+        },
+        "organic-chemistry-reaction-mechanisms-sn1-sn2": {
+            "title": "Organic Chemistry: SN1 vs SN2 Reaction Mechanisms & Stereochemistry",
+            "category": "STEM & Chemistry",
+            "prompt": "Compare the mechanism, kinetics, solvent preferences, and stereochemical outcomes of SN1 vs SN2 nucleophilic substitutions.",
+            "sample_feedback": "SN1: Two-step mechanism via carbocation intermediate, 1st-order kinetics, racemization. SN2: Concerted bimolecular backside attack with Walden inversion.",
+            "meta_desc": "SN1 vs SN2 reaction mechanisms explained with step-by-step electron arrow pushing, stereochemistry inversions, and polar solvent effects."
+        },
+        "quantum-mechanics-schrodinger-particle-box": {
+            "title": "Quantum Physics: 1D Infinite Potential Well (Particle in a Box) Solution",
+            "category": "STEM & Physics",
+            "prompt": "Solve the time-independent Schrodinger equation for a particle of mass m confined in an infinite square well of width L.",
+            "sample_feedback": "Step 1: Write -hbar^2 / (2m) * d^2 psi / dx^2 = E * psi inside the well (V=0). Apply boundary conditions psi(0) = 0 and psi(L) = 0.",
+            "meta_desc": "Solve the particle in a box quantum problem step-by-step. Wavefunction normalization, energy quantization, and Socratic physics derivations."
+        }
+    },
+    "teacher": {
+        "ielts-writing-rubric-classroom-grading-rubric": {
+            "title": "IELTS Writing Task 2 Grading Rubric for ESL & Academic English Teachers",
+            "category": "Teacher AI Lab & Lesson Planning",
+            "prompt": "How can teachers standardize classroom grading for IELTS Writing Task 2 essays according to official Cambridge Band Descriptors?",
+            "sample_feedback": "Configured standardized teacher scoring sheet: Granular 9-band matrix for TR, CC, LR, and GRA with pre-written corrective student comments.",
+            "meta_desc": "Download ready-to-use IELTS Writing grading rubric for ESL teachers. Accelerate student feedback by 70% with standardized criteria."
+        },
+        "lesson-plan-english-b2-technology-vocabulary": {
+            "title": "B2 Upper-Intermediate Lesson Plan: Artificial Intelligence & Future Tech",
+            "category": "Teacher AI Lab & Lesson Planning",
+            "prompt": "Generate a 60-minute communicative lesson plan for B2 ESL students on the topic of AI ethics and technological innovation.",
+            "sample_feedback": "Generated 60-min lesson structure: Warm-up debate (10m), Vocabulary in Context (15m), Jigsaw reading (20m), Socratic group discussion (15m).",
+            "meta_desc": "Free 60-minute B2 ESL lesson plan on technology and AI ethics. Printable student worksheets, speaking prompts, and vocabulary flashcards."
+        },
+        "multiple-choice-quiz-generator-world-history": {
+            "title": "Automated Multiple-Choice Quiz Generator: Industrial Revolution (History)",
+            "category": "Teacher AI Lab & Lesson Planning",
+            "prompt": "Create a 15-question formative assessment quiz with 4 options each, plausible distractors, and pedagogical answer keys.",
+            "sample_feedback": "Formulated 15 balanced questions covering steam engine adoption, urbanization, labor laws, and economic transformation with answer explanations.",
+            "meta_desc": "Instant quiz generator for educators. Export formatted multiple-choice tests with answer keys to Google Forms and Word documents."
+        },
+        "blooms-taxonomy-stem-learning-objectives": {
+            "title": "Bloom's Taxonomy Framework: Crafting Measurable STEM Learning Objectives",
+            "category": "Teacher AI Lab & Lesson Planning",
+            "prompt": "How to convert passive learning goals into active, measurable objectives across Bloom's cognitive taxonomy levels (Remember to Create)?",
+            "sample_feedback": "Mapped action verbs: Apply (calculate, implement), Analyze (differentiate, contrast), Evaluate (defend, critique), Create (design, synthesize).",
+            "meta_desc": "Teacher guide to Bloom's Revised Taxonomy in STEM education. Transform syllabus goals into measurable, accredited student competencies."
+        },
+        "differentiated-instruction-worksheet-builder": {
+            "title": "Differentiated Instruction Worksheet Builder: 3 Tiers for Mixed-Ability Classes",
+            "category": "Teacher AI Lab & Lesson Planning",
+            "prompt": "Design a scaffolded algebra worksheet with Foundation (Tier 1), Intermediate (Tier 2), and Advanced Challenge (Tier 3) questions.",
+            "sample_feedback": "Assembled 3-tiered assignment: Tier 1 with visual cues and worked examples, Tier 2 standard applications, Tier 3 multi-step synthesis proofs.",
+            "meta_desc": "Differentiated instruction templates for mixed-ability classrooms. Scaffold worksheets across 3 difficulty tiers to engage every student."
+        },
+        "socratic-seminar-discussion-prompts-literature": {
+            "title": "Socratic Seminar Question Guide: Dystopian Fiction (1984 & Brave New World)",
+            "category": "Teacher AI Lab & Lesson Planning",
+            "prompt": "Develop 12 open-ended interpretive discussion questions for high school literature Socratic circles comparing totalitarian themes.",
+            "sample_feedback": "Prepared 12 high-order discussion prompts examining state surveillance, psychological conditioning, censorship, and individual autonomy.",
+            "meta_desc": "Conduct engaging Socratic seminars in literature classes. Download discussion prompt guides and student peer-evaluation rubrics."
+        },
+        "uzum-marketplace-seo-card-generator-electronics": {
+            "title": "Uzum & Wildberries SEO Card Generator: High-Converting Product Listings",
+            "category": "E-Commerce & Marketplace AI",
+            "prompt": "How to generate SEO-optimized product titles, bullet features, and search tags for electronics on the Uzum marketplace?",
+            "sample_feedback": "Generated high-ranking listing: Uzum search algorithm title, 5 benefit-driven bullet points, rich description, and 20 high-frequency search keywords.",
+            "meta_desc": "AI listing generator for Uzum and Wildberries sellers. Triple organic marketplace visibility with automated SEO descriptions and tags."
+        },
+        "wildberries-clothing-card-ai-copywriting": {
+            "title": "Wildberries Fashion & Apparel Listing: SEO Copywriting & Size Guides",
+            "category": "E-Commerce & Marketplace AI",
+            "prompt": "Create an engaging, search-indexed product description for apparel on Wildberries that reduces customer returns.",
+            "sample_feedback": "Formatted card: Clear fabric composition (100% organic cotton), care instructions, precise sizing table, and seasonal fashion hooks.",
+            "meta_desc": "Wildberries apparel description generator. Boost click-through rates and reduce return rates with detailed fit and fabric copy."
+        },
+        "ecommerce-reels-script-generator-viral-hook": {
+            "title": "Viral E-Commerce Reels & TikTok Script Generator: 3-Second Hook Formulas",
+            "category": "E-Commerce & Marketplace AI",
+            "prompt": "Generate 3 high-converting 30-second short-form video scripts promoting consumer products with high problem-agitation hooks.",
+            "sample_feedback": "Script 1: 'Stop wasting money on X' (Negative Hook), Script 2: 'Secret hack nobody tells you' (Curiosity), Script 3: 'Before vs After' (Visual proof).",
+            "meta_desc": "Generate viral TikTok and Instagram Reels scripts for e-commerce brands. Hook templates, retention pacing, and direct conversion CTAs."
+        },
+        "course-syllabus-generator-python-programming": {
+            "title": "12-Week Course Syllabus Generator: Python for Data Science & Automation",
+            "category": "Teacher AI Lab & Lesson Planning",
+            "prompt": "Generate an industry-accredited 12-week course syllabus for beginners covering Python fundamentals to web scraping and Pandas.",
+            "sample_feedback": "Created comprehensive 12-week roadmap: Week-by-week lectures, coding lab assignments, midterm project, and final capstone project guidelines.",
+            "meta_desc": "Complete 12-week Python course syllabus template. Ready for universities, coding bootcamps, and independent corporate tutors."
+        },
+        "rubric-builder-peer-assessment-standards": {
+            "title": "Peer Assessment Rubric Builder: Collaborative Student Review Sheets",
+            "category": "Teacher AI Lab & Lesson Planning",
+            "prompt": "How to structure an objective peer review worksheet so students can evaluate classmates' oral presentations constructive and fairly?",
+            "sample_feedback": "Built 4-pillar rubric: Content depth (25%), Visual aid design (25%), Vocal delivery (25%), Q&A engagement (25%) with constructive feedback prompts.",
+            "meta_desc": "Empower student collaboration with structured peer assessment rubrics. Download printable and digital rubrics for classroom presentations."
+        }
+    }
+}
