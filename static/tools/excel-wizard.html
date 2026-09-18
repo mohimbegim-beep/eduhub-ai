@@ -1,14 +1,21 @@
 <!DOCTYPE html>
-<html lang="ru" class="scroll-smooth notranslate">
+<html lang="en" class="scroll-smooth notranslate">
 <head>
     <meta name="google" content="notranslate">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ИИ-Маг Формул Excel &amp; Google Sheets — Мгновенные Формулы Без Ошибок | EduHub AI</title>
+    <title>AI Formula Wizard for Excel &amp; Google Sheets — Instant Error-Free Formulas | EduHub AI</title>
     
-    <meta name="description" content="Бесплатный онлайн генератор сложных формул Excel и Google Sheets по словесному описанию. ВПР, СУММЕСЛИМН, ИНДЕКС/ПОИСКПОЗ и макросы VBA за секунду.">
-    <meta name="keywords" content="формулы excel онлайн нейросеть, генератор формул excel, как сделать ВПР, формулы google таблицы ИИ, excel макросы vba генератор">
+    <meta name="description" content="Free online AI formula generator for Excel and Google Sheets from plain English text. VLOOKUP, SUMIFS, INDEX/MATCH, and VBA macros in seconds.">
+    <meta name="keywords" content="excel formula generator ai, google sheets formula ai, vlookup formula generator, sumifs helper, vba macro generator">
     <link rel="canonical" href="https://eduhub.ai/tools/excel-wizard">
+
+    <!-- Multi-Language Hreflang Tags -->
+    <link rel="alternate" hreflang="en" href="https://eduhub.ai/tools/excel-wizard?lang=en">
+    <link rel="alternate" hreflang="ru" href="https://eduhub.ai/tools/excel-wizard?lang=ru">
+    <link rel="alternate" hreflang="uz" href="https://eduhub.ai/tools/excel-wizard?lang=uz">
+    <link rel="alternate" hreflang="es" href="https://eduhub.ai/tools/excel-wizard?lang=es">
+    <link rel="alternate" hreflang="x-default" href="https://eduhub.ai/tools/excel-wizard">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="/static/js/user-utils.js" defer></script>
@@ -19,7 +26,7 @@
 <body data-page-tool="excel-wizard" class="bg-slate-950 text-slate-100 font-sans min-h-screen flex flex-col justify-between selection:bg-emerald-500 selection:text-slate-950">
 
     <div class="bg-gradient-to-r from-emerald-700 via-teal-700 to-green-800 py-2 px-4 text-center text-xs font-bold text-white flex items-center justify-center gap-2 shadow-md">
-        <span>⚡ <strong>Экономия 3 часов в день:</strong> Напишите задачу словами &rarr; получите идеальную формулу Excel/Sheets без ошибок</span>
+        <span data-i18n="excel_banner_text" data-i18n-html="true">⚡ <strong>Save 3 hours daily:</strong> Describe your task in plain words &rarr; get error-free Excel/Sheets formulas instantly</span>
     </div>
 
     <!-- Header -->
@@ -37,14 +44,14 @@
                     <span class="w-8 h-8 rounded-lg bg-gradient-to-tr from-emerald-500 to-teal-400 flex items-center justify-center font-black text-slate-950 text-lg shadow-md shadow-emerald-500/30">E</span>
                     <span class="text-xl font-bold bg-gradient-to-r from-emerald-400 via-teal-300 to-white bg-clip-text text-transparent tracking-tight">EduHub AI</span>
                 </a>
-                <span class="hidden sm:inline-block text-[11px] bg-emerald-950 text-emerald-300 px-2.5 py-0.5 rounded-full border border-emerald-800 font-medium">
+                <span class="hidden sm:inline-block text-[11px] bg-emerald-950 text-emerald-300 px-2.5 py-0.5 rounded-full border border-emerald-800 font-medium" data-i18n="excel_brand_badge">
                     📊 Excel Wizard ($1)
                 </span>
             </div>
             
             <div class="flex items-center space-x-3">
-                <a href="/" class="text-xs text-emerald-400 hover:text-emerald-300 font-medium transition hidden sm:inline-block">
-                    &larr; На главную
+                <a href="/" class="text-xs text-emerald-400 hover:text-emerald-300 font-medium transition hidden sm:inline-block" data-i18n="excel_back_btn">
+                    &larr; Back to Platform
                 </a>
             </div>
         </div>
@@ -53,14 +60,14 @@
     <main class="max-w-5xl mx-auto px-4 sm:px-6 py-10 w-full flex-grow">
         
         <div class="mb-8 text-center max-w-2xl mx-auto">
-            <span class="text-[10px] font-extrabold uppercase tracking-widest text-emerald-400 bg-emerald-950/80 border border-emerald-800/80 px-3 py-1 rounded-full shadow">
-                📊 Формулы &bull; Макросы &bull; Автоматизация Таблиц
+            <span class="text-[10px] font-extrabold uppercase tracking-widest text-emerald-400 bg-emerald-950/80 border border-emerald-800/80 px-3 py-1 rounded-full shadow" data-i18n="excel_hero_badge">
+                📊 Formulas &bull; Macros &bull; Spreadsheet Automation
             </span>
-            <h1 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight mt-3 mb-2">
-                Генератор Формул Excel &amp; Google Таблиц
+            <h1 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight mt-3 mb-2" data-i18n="excel_hero_title">
+                AI Formula Generator for Excel &amp; Google Sheets
             </h1>
-            <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
-                Забудьте о ручных поисках синтаксиса. Опишите задачу обычным языком на русском или узбекском — нейросеть моментально выдаст готовую формулу с разбором каждого аргумента.
+            <p class="text-xs sm:text-sm text-slate-400 leading-relaxed" data-i18n="excel_hero_subtitle">
+                Stop wrestling with complex syntax. Describe what you need in plain language — AI generates ready-to-use formulas with step-by-step argument breakdowns.
             </p>
         </div>
 
@@ -69,25 +76,25 @@
             <!-- Controls -->
             <div class="space-y-4">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                    <label class="text-xs font-bold text-slate-300">Опишите, что нужно посчитать или найти в таблице:</label>
+                    <label class="text-xs font-bold text-slate-300" data-i18n="excel_lbl_query">Describe what you want to calculate or find in your sheet:</label>
                     <div class="inline-flex bg-slate-950 border border-slate-800 rounded-xl p-1">
                         <button onclick="setApp('Excel', this)" id="btn-excel" class="px-3 py-1 rounded-lg text-xs font-bold bg-emerald-600 text-white transition">Excel</button>
-                        <button onclick="setApp('Google Sheets', this)" id="btn-sheets" class="px-3 py-1 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition">Google Таблицы</button>
+                        <button onclick="setApp('Google Sheets', this)" id="btn-sheets" class="px-3 py-1 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition">Google Sheets</button>
                     </div>
                 </div>
 
-                <textarea id="excel-query" rows="3" class="w-full bg-slate-950 border border-slate-800 rounded-2xl p-4 text-xs sm:text-sm text-slate-200 focus:outline-none focus:border-emerald-500 placeholder-slate-600 leading-relaxed" placeholder="Например: Посчитай сумму в столбце B, если в столбце C статус Оплачено и дата в столбце D за прошлый месяц..."></textarea>
+                <textarea id="excel-query" rows="3" class="w-full bg-slate-950 border border-slate-800 rounded-2xl p-4 text-xs sm:text-sm text-slate-200 focus:outline-none focus:border-emerald-500 placeholder-slate-600 leading-relaxed" placeholder="e.g. Sum values in column B if column C is 'Paid' and date in column D is from last month..." data-i18n-placeholder="excel_ph_query"></textarea>
 
                 <div class="flex flex-wrap items-center justify-between gap-3">
                     <div class="flex items-center gap-1.5 text-[11px] text-slate-400">
-                        <span>Популярные задачи:</span>
-                        <button onclick="setQuery('Найти цену товара по артикулу из другой таблицы (аналог ВПР)')" class="underline text-emerald-400 hover:text-white">Поиск цены (ВПР)</button>
-                        <button onclick="setQuery('Сложить продажи если город Ташкент и статус Оплачено')" class="underline text-emerald-400 hover:text-white">Сумма по условию</button>
-                        <button onclick="setQuery('Посчитать количество уникальных клиентов в списке')" class="underline text-emerald-400 hover:text-white">Уникальные клиенты</button>
+                        <span data-i18n="excel_popular_lbl">Popular tasks:</span>
+                        <button onclick="setQuery('Look up item price by SKU from another sheet (XLOOKUP equivalent)')" class="underline text-emerald-400 hover:text-white" data-i18n="excel_pop_1">Price lookup (XLOOKUP)</button>
+                        <button onclick="setQuery('Sum sales if region is Tashkent and status is Paid')" class="underline text-emerald-400 hover:text-white" data-i18n="excel_pop_2">Conditional sum (SUMIFS)</button>
+                        <button onclick="setQuery('Count number of unique customer IDs in list')" class="underline text-emerald-400 hover:text-white" data-i18n="excel_pop_3">Unique count (UNIQUE)</button>
                     </div>
 
                     <button onclick="generateFormula()" id="excel-btn" class="w-full sm:w-auto bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-black text-xs sm:text-sm py-2.5 px-6 rounded-xl shadow-lg shadow-emerald-500/25 transition transform active:scale-95 flex items-center justify-center gap-2">
-                        <span>⚡ Получить формулу (0.4 сек)</span>
+                        <span data-i18n="excel_btn_generate">⚡ Generate Formula (0.4s)</span>
                     </button>
                 </div>
             </div>
@@ -95,41 +102,41 @@
             <!-- Result Box -->
             <div id="excel-res-box" class="pt-6 border-t border-slate-800 space-y-4">
                 <div>
-                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Готовая формула для вставки:</span>
+                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1" data-i18n="excel_out_formula_lbl">Ready formula to paste:</span>
                     <div class="flex items-center gap-3 bg-slate-950 border border-slate-800 p-3.5 rounded-2xl">
-                        <code id="res-formula" class="font-mono text-sm sm:text-base font-bold text-emerald-400 flex-grow select-all break-all">=XLOOKUP(A2, Table2[ID], Table2[Name], "Не найдено", 0)</code>
-                        <button onclick="copyFormula()" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 px-3.5 py-1.5 rounded-xl border border-slate-700 transition whitespace-nowrap">
-                            📋 Копировать
+                        <code id="res-formula" class="font-mono text-sm sm:text-base font-bold text-emerald-400 flex-grow select-all break-all">=XLOOKUP(A2, Table2[ID], Table2[Name], "Not found", 0)</code>
+                        <button onclick="copyFormula()" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 px-3.5 py-1.5 rounded-xl border border-slate-700 transition whitespace-nowrap" data-i18n="excel_btn_copy">
+                            📋 Copy
                         </button>
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div class="bg-slate-950/70 border border-slate-850 p-4 rounded-2xl">
-                        <span class="text-xs font-bold text-slate-300 block mb-2">🔍 Пошаговый разбор аргументов:</span>
+                        <span class="text-xs font-bold text-slate-300 block mb-2" data-i18n="excel_expl_title">🔍 Step-by-Step Argument Breakdown:</span>
                         <ul id="res-expl" class="text-xs text-slate-400 space-y-1.5 list-disc pl-4">
-                            <li>A2 — искомое значение (артикул или имя).</li>
-                            <li>Table2[ID] — диапазон поиска.</li>
-                            <li>Table2[Name] — возвращаемый результат.</li>
+                            <li>A2 — lookup value (item code or name).</li>
+                            <li>Table2[ID] — lookup array to search in.</li>
+                            <li>Table2[Name] — return array with desired output.</li>
                         </ul>
                     </div>
 
                     <div class="bg-slate-950/70 border border-slate-850 p-4 rounded-2xl">
-                        <span class="text-xs font-bold text-slate-300 block mb-2">⚠️ Частые ошибки, которых стоит избегать:</span>
+                        <span class="text-xs font-bold text-slate-300 block mb-2" data-i18n="excel_pitfalls_title">⚠️ Common Pitfalls to Avoid:</span>
                         <ul id="res-pitfalls" class="text-xs text-slate-400 space-y-1.5 list-disc pl-4">
-                            <li>В русской версии разделитель аргументов — точка с запятой (;).</li>
-                            <li>Диапазоны должны быть строго одинаковой длины.</li>
+                            <li>In non-English locales, argument separators may be semicolons (;) rather than commas (,).</li>
+                            <li>Lookup and return ranges must have identical dimensions.</li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="pt-3 flex flex-col sm:flex-row items-center justify-between gap-3 bg-slate-950 p-4 rounded-2xl border border-slate-850">
                     <div>
-                        <h4 class="text-xs font-bold text-white">Пакет «Мега-Шпаргалка 100 формул &amp; макросов Excel»</h4>
-                        <p class="text-[11px] text-slate-400">Готовый справочник с формулами и VBA-скриптами для автоматизации рутины.</p>
+                        <h4 class="text-xs font-bold text-white" data-i18n="excel_upsell_title">Mega Cheat Sheet: 100 Pro Excel Formulas &amp; VBA Macros</h4>
+                        <p class="text-[11px] text-slate-400" data-i18n="excel_upsell_desc">Production-ready reference guide with automated formulas and scripts to eliminate manual data entry.</p>
                     </div>
-                    <a href="/#pricing" class="w-full sm:w-auto bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-black text-xs py-2.5 px-5 rounded-xl transition text-center whitespace-nowrap shadow-md">
-                        Скачать шпаргалку за $1.00 &rarr;
+                    <a href="/#pricing" class="w-full sm:w-auto bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-black text-xs py-2.5 px-5 rounded-xl transition text-center whitespace-nowrap shadow-md" data-i18n="excel_upsell_btn">
+                        Download Cheat Sheet for $1.00 &rarr;
                     </a>
                 </div>
             </div>
@@ -138,7 +145,7 @@
 
     </main>
 
-    <footer class="border-t border-slate-800/80 bg-slate-950 py-6 text-xs text-slate-500 text-center">
+    <footer class="border-t border-slate-800/80 bg-slate-950 py-6 text-xs text-slate-500 text-center" data-i18n="excel_footer_copy">
         EduHub AI &mdash; Excel &amp; Spreadsheet Automation Wizard. PCI DSS Level 1 Secured.
     </footer>
 
@@ -158,11 +165,11 @@
 
         async function generateFormula() {
             const btn = document.getElementById('excel-btn');
-            btn.innerHTML = '<span>⏳ Генерация...</span>';
+            btn.innerHTML = '<span>⏳ Generating...</span>';
             btn.disabled = true;
 
             const payload = {
-                query: document.getElementById('excel-query').value.trim() || 'Поиск цены по артикулу',
+                query: document.getElementById('excel-query').value.trim() || 'Look up item price by SKU',
                 app_type: currentApp
             };
 
@@ -183,14 +190,15 @@
             } catch (err) {
                 console.error(err);
             } finally {
-                btn.innerHTML = '<span>⚡ Получить формулу (0.4 сек)</span>';
+                btn.innerHTML = '<span>⚡ Generate Formula (0.4s)</span>';
                 btn.disabled = false;
             }
         }
 
         function copyFormula() {
             navigator.clipboard.writeText(document.getElementById('res-formula').textContent);
-            alert('Формула скопирована в буфер обмена!');
+            const notice = (typeof window.t === 'function' ? window.t('copied_notice') : '') || 'Formula copied to clipboard!';
+            alert(notice);
         }
     </script>
 </body>

@@ -4,7 +4,7 @@
     <meta name="google" content="notranslate">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Career Navigator & Major Selector 2026 — EduHub AI</title>
+    <title>AI Career Navigator &amp; Major Selector 2026 — EduHub AI</title>
     
     <!-- Programmatic SEO & AEO Meta Tags -->
     <meta name="description" content="Intelligent AI Career Guidance, University Major Selector and Personality Archetype Navigator. Find high-paying 2026-2030 professions with USD salary benchmarks and custom study roadmaps.">
@@ -24,7 +24,6 @@
     <!-- Essential User Utilities -->
     <script src="/static/js/user-utils.js" defer></script>
 
-    <!-- Secure Payment Gateway Overlay Checkout Script -->
     <!-- PWA Manifest & App Capability -->
     <link rel="manifest" href="/static/manifest.json">
     <meta name="theme-color" content="#030712">
@@ -49,14 +48,14 @@
                     <span class="w-8 h-8 rounded-lg bg-gradient-to-tr from-amber-500 to-orange-500 flex items-center justify-center font-black text-slate-950 text-lg shadow-md shadow-amber-500/30">E</span>
                     <span class="text-xl font-bold bg-gradient-to-r from-amber-400 via-orange-300 to-white bg-clip-text text-transparent tracking-tight">EduHub AI</span>
                 </a>
-                <span class="hidden sm:inline-block text-[11px] bg-amber-950 text-amber-300 px-2.5 py-0.5 rounded-full border border-amber-800 font-medium">
+                <span class="hidden sm:inline-block text-[11px] bg-amber-950 text-amber-300 px-2.5 py-0.5 rounded-full border border-amber-800 font-medium" data-i18n="career_brand_badge">
                     🧭 AI Career Navigator
                 </span>
             </div>
             
             <div class="flex items-center space-x-3">
                 <div class="inline-flex bg-slate-900 border border-slate-800 rounded-xl p-0.5">
-                    <button onclick="setLocale('en')" data-lang-btn="en" class="lang-btn px-2.5 py-1 rounded-lg text-xs font-bold transition bg-amber-500 text-slate-950 shadow-sm shadow-amber-500/20">EN</button>
+                    <button onclick="setLocale('en')" data-lang-btn="en" class="lang-btn px-2.5 py-1 rounded-lg text-xs font-bold transition bg-blue-600 text-white shadow-sm shadow-blue-500/20">EN</button>
                     <button onclick="setLocale('ru')" data-lang-btn="ru" class="lang-btn px-2.5 py-1 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition">RU</button>
                     <button onclick="setLocale('uz')" data-lang-btn="uz" class="lang-btn px-2.5 py-1 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition">UZ</button>
                     <button onclick="setLocale('es')" data-lang-btn="es" class="lang-btn px-2.5 py-1 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition">ES</button>
@@ -64,11 +63,11 @@
 
                 <button onclick="EduHubUtils.openHistoryDrawer()" class="inline-flex items-center gap-1.5 text-xs text-slate-300 hover:text-white bg-slate-900 border border-slate-800 hover:border-slate-700 px-3 py-1.5 rounded-xl transition font-medium" title="Recent Documents">
                     <span>🕒</span>
-                    <span class="hidden sm:inline">Recent</span>
+                    <span class="hidden sm:inline" data-i18n="recent_docs">Recent</span>
                     <span data-history-count class="hidden bg-amber-500 text-slate-950 text-[10px] px-1.5 py-0.2 rounded-full font-bold">0</span>
                 </button>
 
-                <a href="/" class="text-xs text-amber-400 hover:text-amber-300 font-medium transition hidden sm:inline-block">
+                <a href="/" class="text-xs text-amber-400 hover:text-amber-300 font-medium transition hidden sm:inline-block" data-i18n="explore_all_tools">
                     Explore all tools &rarr;
                 </a>
             </div>
@@ -80,14 +79,14 @@
         
         <!-- Headline -->
         <div class="text-center mb-8">
-            <span class="text-[11px] font-bold uppercase tracking-widest text-amber-400 bg-amber-950/70 border border-amber-800/80 px-3.5 py-1 rounded-full">
-                🚀 Карьерный компас 2026-2030 &bull; Для школьников, студентов и свитчеров
+            <span class="text-[11px] font-bold uppercase tracking-widest text-amber-400 bg-amber-950/70 border border-amber-800/80 px-3.5 py-1 rounded-full" data-i18n="career_hero_badge">
+                🚀 Career Compass 2026-2030 &bull; For High School, College &amp; Career Switchers
             </span>
-            <h1 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight mt-3 mb-3">
-                Интеллектуальный AI-Профориентатор
+            <h1 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight mt-3 mb-3" data-i18n="career_hero_title">
+                Intelligent AI Career Guidance &amp; Major Navigator
             </h1>
-            <p class="text-slate-400 text-xs sm:text-base max-w-2xl mx-auto">
-                Откройте ваши скрытые суперсилы за 3 минуты. ИИ подберёт профессии будущего, вилки зарплат в долларах и персональную дорожную карту развития без навязанных стереотипов.
+            <p class="text-slate-400 text-xs sm:text-base max-w-2xl mx-auto" data-i18n="career_hero_subtitle">
+                Discover your latent strengths in 3 minutes. AI maps out high-growth professions of 2026-2030, USD salary benchmarks, and tailored learning roadmaps.
             </p>
         </div>
 
@@ -97,7 +96,7 @@
             <!-- Progress Bar -->
             <div class="space-y-2">
                 <div class="flex justify-between text-xs text-slate-400 font-medium">
-                    <span id="step-indicator">Шаг 1 из 4: Жизненный этап</span>
+                    <span id="step-indicator" data-i18n="career_step_1_indicator">Step 1 of 4: Life Stage</span>
                     <span id="progress-percent">25%</span>
                 </div>
                 <div class="w-full bg-slate-950 rounded-full h-2 overflow-hidden border border-slate-800">
@@ -105,136 +104,136 @@
                 </div>
             </div>
 
-            <!-- STEP 1: Жизненный этап -->
+            <!-- STEP 1: Life stage -->
             <div id="step-1" class="step-card space-y-4">
                 <h3 class="text-lg sm:text-xl font-bold text-white flex items-center gap-2">
-                    <span>🌱</span> На каком этапе жизни вы находитесь прямо сейчас?
+                    <span>🌱</span> <span data-i18n="career_q1_title">What stage of life are you in right now?</span>
                 </h3>
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    <div onclick="selectOption('stage', 'school', this)" class="opt-card p-5 rounded-2xl bg-slate-950 border border-slate-800 hover:border-amber-500/60 cursor-pointer transition flex flex-col justify-between space-y-3 group">
+                    <div onclick="selectOption('stage', 'school', this)" class="opt-card p-5 rounded-2xl bg-slate-950 border border-slate-800 hover:border-amber-500/60 cursor-pointer transition flex flex-col justify-between space-y-3 group border-amber-500 bg-amber-950/20 ring-2 ring-amber-500/50">
                         <span class="text-3xl">🎒</span>
                         <div>
-                            <h4 class="text-sm font-bold text-white group-hover:text-amber-400 transition">Школьник / Абитуриент</h4>
-                            <p class="text-xs text-slate-400 mt-1">9-11 классы: выбираю вуз, факультет, профильные предметы и экзамены</p>
+                            <h4 class="text-sm font-bold text-white group-hover:text-amber-400 transition" data-i18n="career_opt_school_title">High School Student / Applicant</h4>
+                            <p class="text-xs text-slate-400 mt-1" data-i18n="career_opt_school_desc">Grades 9–11: Choosing university faculties, majors, and required entrance exams.</p>
                         </div>
                     </div>
                     <div onclick="selectOption('stage', 'student', this)" class="opt-card p-5 rounded-2xl bg-slate-950 border border-slate-800 hover:border-amber-500/60 cursor-pointer transition flex flex-col justify-between space-y-3 group">
                         <span class="text-3xl">🎓</span>
                         <div>
-                            <h4 class="text-sm font-bold text-white group-hover:text-amber-400 transition">Студент вуза</h4>
-                            <p class="text-xs text-slate-400 mt-1">1-4 курсы: ищу первую стажировку, сомневаюсь в специальности, магистратура</p>
+                            <h4 class="text-sm font-bold text-white group-hover:text-amber-400 transition" data-i18n="career_opt_student_title">University Student</h4>
+                            <p class="text-xs text-slate-400 mt-1" data-i18n="career_opt_student_desc">Years 1–4: Looking for first internships, re-evaluating major, planning master's degree.</p>
                         </div>
                     </div>
                     <div onclick="selectOption('stage', 'adult', this)" class="opt-card p-5 rounded-2xl bg-slate-950 border border-slate-800 hover:border-amber-500/60 cursor-pointer transition flex flex-col justify-between space-y-3 group">
                         <span class="text-3xl">💼</span>
                         <div>
-                            <h4 class="text-sm font-bold text-white group-hover:text-amber-400 transition">Взрослый специалист</h4>
-                            <p class="text-xs text-slate-400 mt-1">23+ года: хочу сменить сферу, перейти в IT/цифровой бизнес, расти в доходе</p>
+                            <h4 class="text-sm font-bold text-white group-hover:text-amber-400 transition" data-i18n="career_opt_adult_title">Working Professional / Switcher</h4>
+                            <p class="text-xs text-slate-400 mt-1" data-i18n="career_opt_adult_desc">Age 23+: Switching into high-growth tech / digital business, maximizing income.</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- STEP 2: Тип энергии / таланта -->
+            <!-- STEP 2: Energy & Talent -->
             <div id="step-2" class="step-card hidden space-y-4">
                 <h3 class="text-lg sm:text-xl font-bold text-white flex items-center gap-2">
-                    <span>⚡</span> В чём ваша естественная сила и интерес?
+                    <span>⚡</span> <span data-i18n="career_q2_title">Where does your natural talent and enthusiasm lie?</span>
                 </h3>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                     <div onclick="selectOption('energy_type', 'logic', this)" class="opt-card p-4 rounded-2xl bg-slate-950 border border-slate-800 hover:border-amber-500/60 cursor-pointer transition space-y-2 group">
                         <span class="text-2xl">🧠</span>
-                        <h4 class="text-sm font-bold text-white group-hover:text-amber-400 transition">Логика & Системы</h4>
-                        <p class="text-xs text-slate-400">IT, алгоритмы, базы данных, цифры, инженерия и автоматизация</p>
+                        <h4 class="text-sm font-bold text-white group-hover:text-amber-400 transition" data-i18n="career_opt_logic_title">Logic &amp; Systems</h4>
+                        <p class="text-xs text-slate-400" data-i18n="career_opt_logic_desc">Software engineering, algorithms, databases, mathematics, and automation.</p>
                     </div>
                     <div onclick="selectOption('energy_type', 'people', this)" class="opt-card p-4 rounded-2xl bg-slate-950 border border-slate-800 hover:border-amber-500/60 cursor-pointer transition space-y-2 group">
                         <span class="text-2xl">🤝</span>
-                        <h4 class="text-sm font-bold text-white group-hover:text-amber-400 transition">Люди & Общение</h4>
-                        <p class="text-xs text-slate-400">Переговоры, психология, дипломатия, HR, обучение и медиа</p>
+                        <h4 class="text-sm font-bold text-white group-hover:text-amber-400 transition" data-i18n="career_opt_people_title">People &amp; Communication</h4>
+                        <p class="text-xs text-slate-400" data-i18n="career_opt_people_desc">Negotiation, psychology, leadership, coaching, HR, and media relations.</p>
                     </div>
                     <div onclick="selectOption('energy_type', 'creativity', this)" class="opt-card p-4 rounded-2xl bg-slate-950 border border-slate-800 hover:border-amber-500/60 cursor-pointer transition space-y-2 group">
                         <span class="text-2xl">🎨</span>
-                        <h4 class="text-sm font-bold text-white group-hover:text-amber-400 transition">Творчество & Визуал</h4>
-                        <p class="text-xs text-slate-400">UI/UX дизайн, 3D графика, GameDev, архитектура, режиссура</p>
+                        <h4 class="text-sm font-bold text-white group-hover:text-amber-400 transition" data-i18n="career_opt_creative_title">Creative &amp; Visual Design</h4>
+                        <p class="text-xs text-slate-400" data-i18n="career_opt_creative_desc">UI/UX design, 3D graphics, GameDev, architecture, and creative storytelling.</p>
                     </div>
                     <div onclick="selectOption('energy_type', 'business', this)" class="opt-card p-4 rounded-2xl bg-slate-950 border border-slate-800 hover:border-amber-500/60 cursor-pointer transition space-y-2 group">
                         <span class="text-2xl">💰</span>
-                        <h4 class="text-sm font-bold text-white group-hover:text-amber-400 transition">Бизнес & Финансы</h4>
-                        <p class="text-xs text-slate-400">Стартапы, инвестиции, e-commerce маркетплейсы, FinTech, управление</p>
+                        <h4 class="text-sm font-bold text-white group-hover:text-amber-400 transition" data-i18n="career_opt_biz_title">Business &amp; Finance</h4>
+                        <p class="text-xs text-slate-400" data-i18n="career_opt_biz_desc">Startups, investments, e-commerce, FinTech, and strategic management.</p>
                     </div>
                     <div onclick="selectOption('energy_type', 'science', this)" class="opt-card p-4 rounded-2xl bg-slate-950 border border-slate-800 hover:border-amber-500/60 cursor-pointer transition space-y-2 group">
                         <span class="text-2xl">🔬</span>
-                        <h4 class="text-sm font-bold text-white group-hover:text-amber-400 transition">Наука & Био-Технологии</h4>
-                        <p class="text-xs text-slate-400">Медицина будущего, фармацевтика, биотехнологии, экология</p>
+                        <h4 class="text-sm font-bold text-white group-hover:text-amber-400 transition" data-i18n="career_opt_sci_title">Science &amp; Biotech</h4>
+                        <p class="text-xs text-slate-400" data-i18n="career_opt_sci_desc">Future medicine, biotechnology, pharmaceuticals, and sustainable ecology.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- STEP 3: Идеальный образ жизни -->
+            <!-- STEP 3: Dream Lifestyle -->
             <div id="step-3" class="step-card hidden space-y-4">
                 <h3 class="text-lg sm:text-xl font-bold text-white flex items-center gap-2">
-                    <span>🌍</span> Какой образ жизни вас по-настоящему вдохновляет?
+                    <span>🌍</span> <span data-i18n="career_q3_title">Which lifestyle truly inspires you?</span>
                 </h3>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div onclick="selectOption('dream_lifestyle', 'remote', this)" class="opt-card p-4 rounded-2xl bg-slate-950 border border-slate-800 hover:border-amber-500/60 cursor-pointer transition space-y-2 group">
                         <span class="text-2xl">💻</span>
-                        <h4 class="text-sm font-bold text-white group-hover:text-amber-400 transition">Глобальная удалёнка из дома</h4>
-                        <p class="text-xs text-slate-400">Работать за ноутбуком из любой точки мира, получая зарплату в долларах США</p>
+                        <h4 class="text-sm font-bold text-white group-hover:text-amber-400 transition" data-i18n="career_opt_remote_title">Global Remote Freedom</h4>
+                        <p class="text-xs text-slate-400" data-i18n="career_opt_remote_desc">Work from anywhere with your laptop while earning in US Dollars.</p>
                     </div>
                     <div onclick="selectOption('dream_lifestyle', 'travel', this)" class="opt-card p-4 rounded-2xl bg-slate-950 border border-slate-800 hover:border-amber-500/60 cursor-pointer transition space-y-2 group">
                         <span class="text-2xl">✈️</span>
-                        <h4 class="text-sm font-bold text-white group-hover:text-amber-400 transition">Международные проекты & Релокация</h4>
-                        <p class="text-xs text-slate-400">Командировки, работа в зарубежных филиалах (Европа, ОАЭ, США, Азия)</p>
+                        <h4 class="text-sm font-bold text-white group-hover:text-amber-400 transition" data-i18n="career_opt_travel_title">International Relocation &amp; Projects</h4>
+                        <p class="text-xs text-slate-400" data-i18n="career_opt_travel_desc">Frequent travel, working with global branches in Europe, UAE, USA, or Asia.</p>
                     </div>
                     <div onclick="selectOption('dream_lifestyle', 'office', this)" class="opt-card p-4 rounded-2xl bg-slate-950 border border-slate-800 hover:border-amber-500/60 cursor-pointer transition space-y-2 group">
                         <span class="text-2xl">🏢</span>
-                        <h4 class="text-sm font-bold text-white group-hover:text-amber-400 transition">Карьера в крупной компании</h4>
-                        <p class="text-xs text-slate-400">Красивый офис, стабильный рост по карьерной лестнице, сильная команда рядом</p>
+                        <h4 class="text-sm font-bold text-white group-hover:text-amber-400 transition" data-i18n="career_opt_office_title">Corporate Headquarters Career</h4>
+                        <p class="text-xs text-slate-400" data-i18n="career_opt_office_desc">Modern offices, structured promotion ladders, and high-caliber teams.</p>
                     </div>
                     <div onclick="selectOption('dream_lifestyle', 'academic', this)" class="opt-card p-4 rounded-2xl bg-slate-950 border border-slate-800 hover:border-amber-500/60 cursor-pointer transition space-y-2 group">
                         <span class="text-2xl">🧪</span>
-                        <h4 class="text-sm font-bold text-white group-hover:text-amber-400 transition">Наука, исследования & Университет</h4>
-                        <p class="text-xs text-slate-400">Глубокие исследования, гранты, разработка инновационных решений для человечества</p>
+                        <h4 class="text-sm font-bold text-white group-hover:text-amber-400 transition" data-i18n="career_opt_acad_title">Research, Grants &amp; Academia</h4>
+                        <p class="text-xs text-slate-400" data-i18n="career_opt_acad_desc">Groundbreaking research, grant funding, and solving fundamental challenges.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- STEP 4: Приоритеты и интересы -->
+            <!-- STEP 4: Priorities & Interests -->
             <div id="step-4" class="step-card hidden space-y-5">
                 <h3 class="text-lg sm:text-xl font-bold text-white flex items-center gap-2">
-                    <span>🎯</span> Что для вас на первом месте в работе?
+                    <span>🎯</span> <span data-i18n="career_q4_title">What matters most to you in your future career?</span>
                 </h3>
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <div onclick="selectOption('income_priority', 'high_wealth', this)" class="opt-card p-4 rounded-2xl bg-slate-950 border border-slate-800 hover:border-amber-500/60 cursor-pointer transition space-y-2 group">
                         <span class="text-2xl">💎</span>
-                        <h4 class="text-sm font-bold text-white group-hover:text-amber-400 transition">Максимум дохода</h4>
-                        <p class="text-xs text-slate-400">Высокий финансовый доход, капитал, быстрый рост заработка</p>
+                        <h4 class="text-sm font-bold text-white group-hover:text-amber-400 transition" data-i18n="career_opt_wealth_title">Maximum Wealth &amp; Growth</h4>
+                        <p class="text-xs text-slate-400" data-i18n="career_opt_wealth_desc">High compensation, capital growth, and rapid financial advancement.</p>
                     </div>
                     <div onclick="selectOption('income_priority', 'work_life_balance', this)" class="opt-card p-4 rounded-2xl bg-slate-950 border border-slate-800 hover:border-amber-500/60 cursor-pointer transition space-y-2 group">
                         <span class="text-2xl">🧘</span>
-                        <h4 class="text-sm font-bold text-white group-hover:text-amber-400 transition">Баланс & Спокойствие</h4>
-                        <p class="text-xs text-slate-400">Без бессонных ночей и выгорания, время на хобби и семью</p>
+                        <h4 class="text-sm font-bold text-white group-hover:text-amber-400 transition" data-i18n="career_opt_balance_title">Work-Life Balance &amp; Peace</h4>
+                        <p class="text-xs text-slate-400" data-i18n="career_opt_balance_desc">Healthy boundary, zero burnout, and abundant time for personal passions.</p>
                     </div>
                     <div onclick="selectOption('income_priority', 'impact', this)" class="opt-card p-4 rounded-2xl bg-slate-950 border border-slate-800 hover:border-amber-500/60 cursor-pointer transition space-y-2 group">
                         <span class="text-2xl">🌟</span>
-                        <h4 class="text-sm font-bold text-white group-hover:text-amber-400 transition">Польза обществу</h4>
-                        <p class="text-xs text-slate-400">Смысл, помощь людям, вклад в образование или экологию</p>
+                        <h4 class="text-sm font-bold text-white group-hover:text-amber-400 transition" data-i18n="career_opt_impact_title">Societal Impact &amp; Purpose</h4>
+                        <p class="text-xs text-slate-400" data-i18n="career_opt_impact_desc">Meaningful contribution, helping communities, and advancing education or ecology.</p>
                     </div>
                 </div>
 
                 <div class="space-y-2 pt-2">
-                    <label class="block text-xs font-semibold text-slate-300">Ваши любимые предметы, хобби или навыки (необязательно):</label>
-                    <input type="text" id="favourite-subjects" placeholder="Например: математика, английский, рисование, видеоигры, психология..." class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-slate-200 focus:outline-none focus:border-amber-500">
+                    <label class="block text-xs font-semibold text-slate-300" data-i18n="career_favourite_label">Favorite subjects, hobbies, or specific interests (optional):</label>
+                    <input type="text" id="favourite-subjects" placeholder="e.g. mathematics, english, digital art, video games, psychology..." data-i18n-placeholder="career_favourite_placeholder" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-slate-200 focus:outline-none focus:border-amber-500">
                 </div>
             </div>
 
             <!-- Navigation Buttons -->
             <div class="flex justify-between items-center pt-4 border-t border-slate-800">
-                <button onclick="prevStep()" id="btn-prev" class="hidden text-xs text-slate-400 hover:text-white px-4 py-2 rounded-xl transition">
-                    &larr; Назад
+                <button onclick="prevStep()" id="btn-prev" class="hidden text-xs text-slate-400 hover:text-white px-4 py-2 rounded-xl transition" data-i18n="btn_back">
+                    &larr; Back
                 </button>
                 <div class="ml-auto">
-                    <button onclick="nextStep()" id="btn-next" class="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-bold px-7 py-3 rounded-xl text-xs sm:text-sm transition shadow-lg shadow-amber-500/25 transform hover:-translate-y-0.5">
-                        Продолжить &rarr;
+                    <button onclick="nextStep()" id="btn-next" class="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-bold px-7 py-3 rounded-xl text-xs sm:text-sm transition shadow-lg shadow-amber-500/25 transform hover:-translate-y-0.5" data-i18n="btn_continue">
+                        Continue &rarr;
                     </button>
                 </div>
             </div>
@@ -242,46 +241,46 @@
             <!-- Loader Screen -->
             <div id="quiz-loader" class="hidden absolute inset-0 bg-slate-950/95 backdrop-blur-md flex flex-col items-center justify-center p-6 text-center space-y-4 z-20">
                 <div class="w-14 h-14 border-4 border-amber-500 border-t-transparent rounded-full animate-spin"></div>
-                <h3 class="text-base sm:text-lg font-bold text-white animate-pulse" id="loader-status">
-                    Анализируем ваш профиль по 120 профессиям 2026-2030 годов...
+                <h3 class="text-base sm:text-lg font-bold text-white animate-pulse" id="loader-status" data-i18n="career_loading_status">
+                    Analyzing your profile across 120 forward-looking professions of 2026-2030...
                 </h3>
-                <p class="text-xs text-slate-400 max-w-sm">
-                    Сопоставляем рынок труда, зарплатные вилки в USD и международные гранты
+                <p class="text-xs text-slate-400 max-w-sm" data-i18n="career_loading_sub">
+                    Matching job market dynamics, USD salary brackets, and international merit grants
                 </p>
             </div>
 
         </div>
 
-        <!-- RESULTS SECTION (Hidden initially) -->
+        <!-- RESULTS SECTION -->
         <div id="results-container" class="hidden space-y-8 animate-fade-in">
             
             <!-- Career Dossier Header Banner -->
             <div class="bg-gradient-to-r from-amber-950/70 via-orange-950/60 to-slate-900 border border-amber-500/40 rounded-3xl p-6 sm:p-10 shadow-2xl relative overflow-hidden">
                 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                     <div>
-                        <span class="text-[11px] font-extrabold uppercase tracking-widest text-amber-400 bg-amber-950 border border-amber-700 px-3 py-1 rounded-full">
-                            🎓 Ваш подтвержденный карьерный архетип
+                        <span class="text-[11px] font-extrabold uppercase tracking-widest text-amber-400 bg-amber-950 border border-amber-700 px-3 py-1 rounded-full" data-i18n="career_archetype_badge">
+                            🎓 Verified Career Archetype
                         </span>
                         <h2 id="res-archetype" class="text-2xl sm:text-4xl font-black text-white mt-2 mb-1">
-                            Архитектор Цифровых Систем
+                            Digital Systems Architect
                         </h2>
                         <p id="res-superpower" class="text-xs sm:text-sm text-amber-200/90 font-medium">
-                            Суперсила: Умение соединять аналитику с проектированием масштабных систем
+                            Superpower: Translating complex business analytics into scalable digital architecture
                         </p>
                     </div>
                     <div class="flex items-center gap-2 shrink-0">
-                        <button onclick="shareStories()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-4 py-2 rounded-xl text-xs font-semibold transition flex items-center gap-1.5">
-                            <span>📲</span> В Stories / TG
+                        <button onclick="shareStories()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-4 py-2 rounded-xl text-xs font-semibold transition flex items-center gap-1.5" data-i18n="career_btn_stories">
+                            <span>📲</span> Stories / TG
                         </button>
-                        <button onclick="downloadPassport()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-4 py-2 rounded-xl text-xs transition flex items-center gap-1.5 shadow-md shadow-amber-500/20">
-                            <span>📥</span> Скачать план (DOCX)
+                        <button onclick="downloadPassport()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-4 py-2 rounded-xl text-xs transition flex items-center gap-1.5 shadow-md shadow-amber-500/20" data-i18n="career_btn_download">
+                            <span>📥</span> Download Plan (DOCX)
                         </button>
                     </div>
                 </div>
 
                 <div class="mt-6 pt-5 border-t border-amber-800/40">
                     <p id="res-personality" class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                        Ваш психотип сочетает структурное мышление с высокой ориентацией на конечный финансовый результат.
+                        Your profile blends systematic logical thinking with high outcome orientation.
                     </p>
                 </div>
             </div>
@@ -289,31 +288,25 @@
             <!-- Top 3 Careers Cards -->
             <div class="space-y-4">
                 <h3 class="text-lg sm:text-xl font-bold text-white flex items-center gap-2">
-                    <span>🎯</span> ТОП-3 идеально подходящие профессии будущего:
+                    <span>🎯</span> <span data-i18n="career_top3_title">TOP-3 High-Impact Future Careers:</span>
                 </h3>
-                <div id="careers-list" class="grid grid-cols-1 md:grid-cols-3 gap-5">
-                    <!-- Dynamic career cards will be rendered here -->
-                </div>
+                <div id="careers-list" class="grid grid-cols-1 md:grid-cols-3 gap-5"></div>
             </div>
 
             <!-- Recommended Universities & Grants -->
             <div class="bg-slate-900/90 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-xl space-y-4">
                 <h3 class="text-base sm:text-lg font-bold text-white flex items-center gap-2">
-                    <span>🏛️</span> Рекомендованные вузы, факультеты и международные гранты:
+                    <span>🏛️</span> <span data-i18n="career_uni_title">Recommended Universities, Faculties &amp; Grants:</span>
                 </h3>
-                <div id="universities-list" class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-slate-300">
-                    <!-- Dynamic uni list -->
-                </div>
+                <div id="universities-list" class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-slate-300"></div>
             </div>
 
             <!-- Immediate Action Steps Checklist -->
             <div class="bg-slate-900/90 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-xl space-y-4">
                 <h3 class="text-base sm:text-lg font-bold text-emerald-400 flex items-center gap-2">
-                    <span>📋</span> Пошаговый план: 3 шага на этой неделе
+                    <span>📋</span> <span data-i18n="career_plan_title">Immediate 3-Step Action Roadmap for This Week:</span>
                 </h3>
-                <div id="steps-list" class="space-y-2 text-xs sm:text-sm text-slate-200">
-                    <!-- Dynamic steps list -->
-                </div>
+                <div id="steps-list" class="space-y-2 text-xs sm:text-sm text-slate-200"></div>
             </div>
 
             <!-- Smart Cross-Promotion Funnel Banner -->
@@ -323,26 +316,26 @@
                         🚀
                     </div>
                     <div>
-                        <span class="text-[10px] font-extrabold uppercase tracking-widest text-blue-400 bg-blue-950 border border-blue-800 px-2 py-0.5 rounded-md">
-                            Следующий шаг к вашей профессии
+                        <span class="text-[10px] font-extrabold uppercase tracking-widest text-blue-400 bg-blue-950 border border-blue-800 px-2 py-0.5 rounded-md" data-i18n="career_funnel_badge">
+                            Next Strategic Milestone
                         </span>
-                        <h4 id="funnel-title" class="text-base sm:text-lg font-bold text-white mt-1">
-                            Подготовьтесь к вступительным и международным грантам
+                        <h4 id="funnel-title" class="text-base sm:text-lg font-bold text-white mt-1" data-i18n="career_funnel_title">
+                            Prepare for University Admissions &amp; International Grants
                         </h4>
-                        <p id="funnel-reason" class="text-xs text-slate-300 mt-0.5">
-                            Для выхода на доход $2,000+ критически необходим английский язык и высокий балл IELTS.
+                        <p id="funnel-reason" class="text-xs text-slate-300 mt-0.5" data-i18n="career_funnel_desc">
+                            Reaching a $2,000+ global salary bracket requires certified English proficiency and high IELTS scores.
                         </p>
                     </div>
                 </div>
-                <a id="funnel-btn" href="/tools/essay-grader" class="w-full sm:w-auto text-center px-6 py-3 rounded-xl font-bold text-xs bg-blue-600 hover:bg-blue-500 text-white transition shadow-lg shadow-blue-600/30 whitespace-nowrap">
-                    Начать подготовку в IELTS Grader &rarr;
+                <a id="funnel-btn" href="/tools/essay-grader" class="w-full sm:w-auto text-center px-6 py-3 rounded-xl font-bold text-xs bg-blue-600 hover:bg-blue-500 text-white transition shadow-lg shadow-blue-600/30 whitespace-nowrap" data-i18n="career_funnel_cta">
+                    Start IELTS Prep Now &rarr;
                 </a>
             </div>
 
             <!-- Retake Button -->
             <div class="text-center pt-4">
-                <button onclick="resetQuiz()" class="text-xs text-slate-500 hover:text-slate-300 transition underline">
-                    Пройти тест заново с другими параметрами
+                <button onclick="resetQuiz()" class="text-xs text-slate-500 hover:text-slate-300 transition underline" data-i18n="career_btn_retake">
+                    Retake assessment with different preferences
                 </button>
             </div>
 
@@ -373,7 +366,7 @@
             dream_lifestyle: 'remote',
             income_priority: 'high_wealth',
             favourite_subjects: '',
-            language: 'ru'
+            language: 'en'
         };
 
         let lastResult = null;
@@ -394,16 +387,27 @@
             document.getElementById('progress-percent').innerText = `${pct}%`;
             document.getElementById('progress-bar').style.width = `${pct}%`;
             
-            const stepTitles = [
-                "Шаг 1 из 4: Жизненный этап",
-                "Шаг 2 из 4: Главная сила и интересы",
-                "Шаг 3 из 4: Идеальный образ жизни",
-                "Шаг 4 из 4: Приоритеты и цели"
+            const stepKeys = [
+                "career_step_1_indicator",
+                "career_step_2_indicator",
+                "career_step_3_indicator",
+                "career_step_4_indicator"
             ];
-            document.getElementById('step-indicator').innerText = stepTitles[currentStep - 1] || "";
+            const defaultTitles = [
+                "Step 1 of 4: Life Stage",
+                "Step 2 of 4: Core Strengths & Talents",
+                "Step 3 of 4: Ideal Lifestyle",
+                "Step 4 of 4: Career Priorities"
+            ];
+            const key = stepKeys[currentStep - 1];
+            const title = (typeof window.t === 'function' ? window.t(key) : '') || defaultTitles[currentStep - 1];
+            document.getElementById('step-indicator').innerText = title;
             
             document.getElementById('btn-prev').classList.toggle('hidden', currentStep === 1);
-            document.getElementById('btn-next').innerText = currentStep === totalSteps ? "Сформировать карьерный паспорт ✨" : "Продолжить →";
+            
+            const btnContinue = (typeof window.t === 'function' ? window.t('btn_continue') : '') || 'Continue →';
+            const btnSubmit = (typeof window.t === 'function' ? window.t('career_btn_submit') : '') || 'Generate Career Passport ✨';
+            document.getElementById('btn-next').innerText = currentStep === totalSteps ? btnSubmit : btnContinue;
         }
 
         function nextStep() {
@@ -428,15 +432,17 @@
 
         async function submitQuiz() {
             formData.favourite_subjects = document.getElementById('favourite-subjects').value;
+            formData.language = (typeof window.getCurrentLocale === 'function' ? window.getCurrentLocale() : 'en') || 'en';
+            
             const loader = document.getElementById('quiz-loader');
             loader.classList.remove('hidden');
 
             const loaderStatus = document.getElementById('loader-status');
             const messages = [
-                "Сканируем 120 профессий 2026-2030 годов...",
-                "Анализируем международные зарплатные вилки в USD...",
-                "Сопоставляем гранты и лучшие профильные факультеты...",
-                "Формируем персональный карьерный паспорт..."
+                "Scanning 120 high-growth professions of 2026-2030...",
+                "Benchmarking global USD salary ranges...",
+                "Matching relevant scholarship grants and faculties...",
+                "Synthesizing your personalized Career Dossier..."
             ];
             let msgIdx = 0;
             const interval = setInterval(() => {
@@ -454,148 +460,108 @@
                 clearInterval(interval);
                 loader.classList.add('hidden');
 
-                if (data.status === 'success') {
-                    lastResult = data;
-                    renderResults(data);
+                if (data.status === 'success' && data.result) {
+                    renderResults(data.result);
                 } else {
-                    alert("Ошибка: " + (data.detail || "Попробуйте снова"));
+                    alert("Analysis error: " + (data.detail || "Please try again."));
                 }
             } catch (err) {
                 clearInterval(interval);
                 loader.classList.add('hidden');
-                alert("Сервер временно недоступен. Проверьте соединение.");
+                alert("Network error. Please try again.");
             }
         }
 
-        function renderResults(data) {
+        function renderResults(res) {
+            lastResult = res;
             document.getElementById('quiz-container').classList.add('hidden');
-            const resBox = document.getElementById('results-container');
-            resBox.classList.remove('hidden');
+            document.getElementById('results-container').classList.remove('hidden');
 
-            document.getElementById('res-archetype').innerText = data.archetype;
-            document.getElementById('res-superpower').innerText = "Суперсила: " + data.superpower;
-            document.getElementById('res-personality').innerText = data.personality_summary;
+            document.getElementById('res-archetype').innerText = res.archetype || "Strategic Innovator";
+            document.getElementById('res-superpower').innerText = "Superpower: " + (res.superpower || "Problem Architecture");
+            document.getElementById('res-personality').innerText = res.personality_summary || "";
 
-            // Render Careers
-            const cList = document.getElementById('careers-list');
-            cList.innerHTML = '';
-            (data.top_careers || []).forEach(c => {
-                const card = document.createElement('div');
-                card.className = "bg-slate-950 border border-slate-800 hover:border-amber-500/50 rounded-2xl p-5 shadow-lg flex flex-col justify-between space-y-4 transition";
-                card.innerHTML = `
-                    <div class="space-y-2">
-                        <div class="flex justify-between items-center">
-                            <span class="text-[10px] bg-emerald-950 text-emerald-300 border border-emerald-800 px-2 py-0.5 rounded-full font-bold">
-                                ${c.match_percentage}% Совместимость
-                            </span>
-                            <span class="text-[10px] text-slate-500 font-medium">Сложность: ${c.difficulty || 'Средняя'}</span>
+            const careersList = document.getElementById('careers-list');
+            careersList.innerHTML = (res.top_professions || []).map(c => `
+                <div class="bg-slate-900 border border-slate-800 hover:border-amber-500/60 p-5 rounded-2xl transition space-y-3 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-amber-400 bg-amber-950 px-2 py-0.5 rounded border border-amber-800">Match ${c.match_percent || 95}%</span>
+                            <span class="text-xs font-mono text-emerald-400 font-bold">${c.salary_range_usd || '$2,500 - $6,000/mo'}</span>
                         </div>
                         <h4 class="text-base font-bold text-white">${c.title}</h4>
-                        <p class="text-xs text-slate-400 leading-relaxed">${c.why_fits}</p>
+                        <p class="text-xs text-slate-400 mt-1">${c.why_fit}</p>
                     </div>
-                    <div class="pt-3 border-t border-slate-800/80 space-y-1">
-                        <div class="text-[11px] text-slate-400 flex justify-between">
-                            <span>Локально:</span> <strong class="text-slate-200">${c.salary_local}</strong>
-                        </div>
-                        <div class="text-[11px] text-amber-400 flex justify-between font-bold">
-                            <span>Global Remote ($):</span> <strong>${c.salary_usd}</strong>
+                    <div class="pt-3 border-t border-slate-800 text-[11px] text-slate-400">
+                        <span class="text-slate-300 font-semibold block mb-1">Key Competencies:</span>
+                        <div class="flex flex-wrap gap-1">
+                            ${(c.key_skills || []).map(s => `<span class="bg-slate-950 px-2 py-0.5 rounded text-[10px] text-slate-300 border border-slate-850">${s}</span>`).join('')}
                         </div>
                     </div>
-                `;
-                cList.appendChild(card);
-            });
+                </div>
+            `).join('');
 
-            // Render Unis
-            const uList = document.getElementById('universities-list');
-            uList.innerHTML = '';
-            (data.recommended_faculties_and_universities || []).forEach(u => {
-                const item = document.createElement('div');
-                item.className = "flex items-center gap-2 p-2.5 rounded-xl bg-slate-950 border border-slate-800/80";
-                item.innerHTML = `<span class="text-amber-400 font-bold">✓</span> <span>${u}</span>`;
-                uList.appendChild(item);
-            });
+            const uniList = document.getElementById('universities-list');
+            uniList.innerHTML = (res.recommended_universities || []).map(u => `
+                <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-between gap-3">
+                    <div>
+                        <h5 class="font-bold text-white">${u.name}</h5>
+                        <span class="text-[11px] text-slate-400">${u.faculty || 'Faculty of Computing & Technology'}</span>
+                    </div>
+                    <span class="text-[10px] font-mono bg-indigo-950 text-indigo-300 border border-indigo-800 px-2 py-1 rounded shrink-0">${u.grant_type || 'Merit Grant'}</span>
+                </div>
+            `).join('');
 
-            // Render Steps
-            const sList = document.getElementById('steps-list');
-            sList.innerHTML = '';
-            (data.immediate_next_steps || []).forEach((s, idx) => {
-                const item = document.createElement('div');
-                item.className = "flex items-start gap-3 p-3 rounded-xl bg-slate-950 border border-slate-800/80";
-                item.innerHTML = `<span class="w-6 h-6 rounded-lg bg-emerald-600/20 text-emerald-400 font-bold flex items-center justify-center shrink-0 text-xs">${idx + 1}</span> <span class="text-xs text-slate-300 leading-relaxed">${s}</span>`;
-                sList.appendChild(item);
-            });
+            const stepsList = document.getElementById('steps-list');
+            stepsList.innerHTML = (res.next_steps || []).map((s, idx) => `
+                <div class="p-3 rounded-xl bg-slate-950/70 border border-slate-850 flex items-start gap-3">
+                    <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-xs shrink-0">${idx + 1}</span>
+                    <p class="text-slate-300">${s}</p>
+                </div>
+            `).join('');
 
-            // Funnel
-            if (data.next_eduhub_tool) {
-                document.getElementById('funnel-title').innerText = "Инструмент для старта: " + data.next_eduhub_tool.name;
-                document.getElementById('funnel-reason').innerText = data.next_eduhub_tool.reason;
-                document.getElementById('funnel-btn').href = data.next_eduhub_tool.url;
-                document.getElementById('funnel-btn').innerText = `Открыть ${data.next_eduhub_tool.name} →`;
-            }
-
-            resBox.scrollIntoView({ behavior: 'smooth' });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function resetQuiz() {
+            currentStep = 1;
             document.getElementById('results-container').classList.add('hidden');
             document.getElementById('quiz-container').classList.remove('hidden');
-            currentStep = 1;
-            for (let i = 1; i <= totalSteps; i++) {
-                document.getElementById(`step-${i}`).classList.toggle('hidden', i !== 1);
-            }
+            document.querySelectorAll('.step-card').forEach((sc, idx) => {
+                sc.classList.toggle('hidden', idx !== 0);
+            });
             updateProgress();
-        }
-
-        function shareStories() {
-            if (!lastResult) return;
-            const text = `🔥 Мой подтвержденный карьерный архетип в EduHub AI: "${lastResult.archetype}"! ИИ подобрал 3 профессии с доходом до $4,000/мес. Пройди тест за 3 минуты: ${window.location.href}`;
-            if (navigator.share) {
-                navigator.share({ title: 'EduHub AI Career Navigator', text: text, url: window.location.href });
-            } else {
-                navigator.clipboard.writeText(text).then(() => {
-                    alert("Ссылка и ваш результат скопированы в буфер обмена! Можете отправить в Telegram или выложить в Stories 📋");
-                });
-            }
         }
 
         function downloadPassport() {
             if (!lastResult) return;
-            let doc = `========================================================\n`;
-            doc += `EDUHUB AI — ПЕРСОНАЛЬНЫЙ КАРЬЕРНЫЙ ПАСПОРТ (2026-2030)\n`;
-            doc += `========================================================\n\n`;
-            doc += `АРХЕТИП: ${lastResult.archetype}\n`;
-            doc += `СУПЕРСИЛА: ${lastResult.superpower}\n\n`;
-            doc += `ХАРАКТЕРИСТИКА:\n${lastResult.personality_summary}\n\n`;
-            doc += `--------------------------------------------------------\n`;
-            doc += `ТОП-3 РЕКОМЕНДОВАННЫЕ ПРОФЕССИИ БУДУЩЕГО:\n`;
-            doc += `--------------------------------------------------------\n`;
-            (lastResult.top_careers || []).forEach((c, idx) => {
-                doc += `${idx + 1}. ${c.title} (Совместимость: ${c.match_percentage}%)\n`;
-                doc += `   Почему подходит: ${c.why_fits}\n`;
-                doc += `   Локальный доход: ${c.salary_local}\n`;
-                doc += `   Международный доход (USD): ${c.salary_usd}\n\n`;
-            });
-            doc += `--------------------------------------------------------\n`;
-            doc += `РЕКОМЕНДОВАННЫЕ ВУЗЫ И ГРАНТЫ:\n`;
-            (lastResult.recommended_faculties_and_universities || []).forEach(u => {
-                doc += `• ${u}\n`;
-            });
-            doc += `\n--------------------------------------------------------\n`;
-            doc += `ПЕРВЫЕ 3 ШАГА НА ЭТОЙ НЕДЕЛЕ:\n`;
-            (lastResult.immediate_next_steps || []).forEach((s, idx) => {
-                doc += `${idx + 1}. ${s}\n`;
-            });
-            doc += `\nСформировано на платформе: eduhub.ai\n`;
+            const content = `EduHub AI Career Dossier 2026-2030
+Archetype: ${lastResult.archetype}
+Superpower: ${lastResult.superpower}
+Summary: ${lastResult.personality_summary}
 
-            const blob = new Blob([doc], { type: 'text/plain;charset=utf-8' });
+Top Careers:
+` + 
+                (lastResult.top_professions || []).map(p => `- ${p.title} (${p.salary_range_usd}): ${p.why_fit}`).join('
+');
+            const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = `eduhub_career_passport_${Date.now()}.txt`;
+            a.download = `Career_Dossier_${Date.now()}.txt`;
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
+        }
+
+        function shareStories() {
+            if (window.EduHubShare) {
+                EduHubShare.generateStoriesCard('Career Navigator', 'Career Archetype: ' + (lastResult ? lastResult.archetype : 'Architect'));
+            } else {
+                navigator.clipboard.writeText(window.location.href);
+                alert("Link copied!");
+            }
         }
     </script>
 </body>

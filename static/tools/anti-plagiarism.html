@@ -4,7 +4,7 @@
     <meta name="google" content="notranslate">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Anti-Plagiarism & Academic Humanizer — EduHub AI</title>
+    <title>AI Anti-Plagiarism &amp; Academic Humanizer — EduHub AI</title>
     
     <!-- Programmatic SEO & AEO Meta Tags -->
     <meta name="description" content="AI Anti-Plagiarism, Academic Humanizer and Text Paraphraser. Boost text originality to 90-98%, eliminate AI patterns, and preserve scientific rigor with 1-click export.">
@@ -24,7 +24,6 @@
     <!-- Essential User Utilities (Export, History Drawer, Stepper, Camera) -->
     <script src="/static/js/user-utils.js" defer></script>
 
-    <!-- Secure Payment Gateway Overlay Checkout Script -->
     <!-- PWA Manifest & App Capability -->
     <link rel="manifest" href="/static/manifest.json">
     <meta name="theme-color" content="#030712">
@@ -49,8 +48,8 @@
                     <span class="w-8 h-8 rounded-lg bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center font-black text-white text-lg shadow-md shadow-blue-500/30">E</span>
                     <span class="text-xl font-bold bg-gradient-to-r from-blue-400 via-indigo-300 to-white bg-clip-text text-transparent tracking-tight">EduHub AI</span>
                 </a>
-                <span class="hidden sm:inline-block text-[11px] bg-emerald-950 text-emerald-300 px-2.5 py-0.5 rounded-full border border-emerald-800 font-medium">
-                    🛡️ Anti-Plagiarism & Humanizer
+                <span class="hidden sm:inline-block text-[11px] bg-emerald-950 text-emerald-300 px-2.5 py-0.5 rounded-full border border-emerald-800 font-medium" data-i18n="ap_badge">
+                    🛡️ Anti-Plagiarism &amp; Humanizer
                 </span>
             </div>
             
@@ -66,11 +65,11 @@
                 <!-- Recent Documents Drawer Trigger -->
                 <button onclick="EduHubUtils.openHistoryDrawer()" class="inline-flex items-center gap-1.5 text-xs text-slate-300 hover:text-white bg-slate-900 border border-slate-800 hover:border-slate-700 px-3 py-1.5 rounded-xl transition font-medium" title="Recent Documents">
                     <span>🕒</span>
-                    <span class="hidden sm:inline">Recent</span>
+                    <span class="hidden sm:inline" data-i18n="recent_docs">Recent</span>
                     <span data-history-count class="hidden bg-blue-600 text-white text-[10px] px-1.5 py-0.2 rounded-full font-bold">0</span>
                 </button>
 
-                <a href="/" class="text-xs text-blue-400 hover:text-blue-300 font-medium transition hidden sm:inline-block">
+                <a href="/" class="text-xs text-blue-400 hover:text-blue-300 font-medium transition hidden sm:inline-block" data-i18n="explore_all_tools">
                     Explore all tools &rarr;
                 </a>
             </div>
@@ -82,30 +81,30 @@
         
         <!-- Tool Headline -->
         <div class="text-center mb-6">
-            <span class="text-[11px] font-bold uppercase tracking-widest text-emerald-400 bg-emerald-950/70 border border-emerald-800/80 px-3 py-1 rounded-full">
+            <span class="text-[11px] font-bold uppercase tracking-widest text-emerald-400 bg-emerald-950/70 border border-emerald-800/80 px-3 py-1 rounded-full" data-i18n="ap_hero_badge">
                 ⚡ 90-98% Originality &bull; AI Detector Bypass &bull; Academic Polish
             </span>
-            <h1 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight mt-3 mb-2">
+            <h1 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight mt-3 mb-2" data-i18n="ap_hero_title">
                 AI Anti-Plagiarism &amp; Academic Humanizer
             </h1>
-            <p class="text-slate-400 text-xs sm:text-sm max-w-2xl mx-auto">
+            <p class="text-slate-400 text-xs sm:text-sm max-w-2xl mx-auto" data-i18n="ap_hero_subtitle">
                 Elevate coursework, essays, and theses to high-uniqueness academic standards. Restructures syntax, injects scholarly vocabulary, and preserves 100% of scientific facts.
             </p>
         </div>
 
         <!-- 1-Click Sample Previews -->
         <div class="bg-slate-900/70 border border-slate-800 rounded-2xl p-4 mb-6">
-            <p class="text-xs font-medium text-slate-400 mb-2.5">
+            <p class="text-xs font-medium text-slate-400 mb-2.5" data-i18n="ap_presets_lbl">
                 ⚡ 1-Click Instant Sample Texts (Try right now):
             </p>
             <div class="flex flex-wrap gap-2">
-                <button onclick="loadSample(1)" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-lg border border-slate-700 transition">
-                    📑 Экономика: Анализ инфляции и банковской системы
+                <button onclick="loadSample(1)" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-lg border border-slate-700 transition" data-i18n="ap_preset_1">
+                    📑 Economics: Inflation &amp; Monetary Policy Analysis
                 </button>
-                <button onclick="loadSample(2)" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-lg border border-slate-700 transition">
-                    🔬 IT: Искусственный интеллект в медицине
+                <button onclick="loadSample(2)" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-lg border border-slate-700 transition" data-i18n="ap_preset_2">
+                    🔬 IT: Artificial Intelligence in Diagnostics
                 </button>
-                <button onclick="loadSample(3)" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-lg border border-slate-700 transition">
+                <button onclick="loadSample(3)" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-lg border border-slate-700 transition" data-i18n="ap_preset_3">
                     🎓 Academic English: Higher Education Innovations
                 </button>
             </div>
@@ -114,20 +113,20 @@
         <!-- Mode Selector Toolbar -->
         <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-3 mb-6 flex flex-wrap items-center justify-between gap-3 shadow-lg">
             <div class="flex flex-wrap items-center gap-2">
-                <span class="text-xs font-semibold text-slate-400 mr-1">Режим рерайта:</span>
-                <button onclick="setMode('high_uniqueness')" id="mode-high" class="text-xs px-3 py-1.5 rounded-xl font-bold bg-emerald-600 text-white shadow-md shadow-emerald-600/30 transition">
-                    🛡️ Максимальная уникальность (Антиплагиат 95%+)
+                <span class="text-xs font-semibold text-slate-400 mr-1" data-i18n="ap_mode_lbl">Rewrite Mode:</span>
+                <button onclick="setMode('high_uniqueness')" id="mode-high" class="text-xs px-3 py-1.5 rounded-xl font-bold bg-emerald-600 text-white shadow-md shadow-emerald-600/30 transition" data-i18n="ap_mode_high">
+                    🛡️ Maximum Originality (Anti-Plagiarism 95%+)
                 </button>
-                <button onclick="setMode('academic_paraphrase')" id="mode-acad" class="text-xs px-3 py-1.5 rounded-xl font-medium bg-slate-800 hover:bg-slate-700 text-slate-300 transition">
-                    🎓 Академический рерайтер
+                <button onclick="setMode('academic_paraphrase')" id="mode-acad" class="text-xs px-3 py-1.5 rounded-xl font-medium bg-slate-800 hover:bg-slate-700 text-slate-300 transition" data-i18n="ap_mode_acad">
+                    🎓 Academic Paraphraser
                 </button>
-                <button onclick="setMode('formal_scientific')" id="mode-sci" class="text-xs px-3 py-1.5 rounded-xl font-medium bg-slate-800 hover:bg-slate-700 text-slate-300 transition">
-                    📚 Научный стиль ГОСТ
+                <button onclick="setMode('formal_scientific')" id="mode-sci" class="text-xs px-3 py-1.5 rounded-xl font-medium bg-slate-800 hover:bg-slate-700 text-slate-300 transition" data-i18n="ap_mode_sci">
+                    📚 Formal Scientific Rigor
                 </button>
             </div>
             
             <div class="flex items-center gap-3 text-xs text-slate-400">
-                <span>Символов: <strong id="src-char-count" class="text-white">0</strong> / 20 000</span>
+                <span><span data-i18n="ap_chars_lbl">Characters:</span> <strong id="src-char-count" class="text-white">0</strong> / 20 000</span>
             </div>
         </div>
 
@@ -138,17 +137,17 @@
             <div class="bg-slate-900/90 border border-slate-800 rounded-3xl p-5 shadow-2xl flex flex-col justify-between h-[450px]">
                 <div class="flex justify-between items-center mb-3 pb-2 border-b border-slate-800">
                     <span class="text-xs font-bold text-slate-300 flex items-center gap-2">
-                        <span>📝</span> Исходный текст (Курсовая, реферат, эссе)
+                        <span>📝</span> <span data-i18n="ap_input_title">Source Text (Coursework, Thesis, Essay)</span>
                     </span>
-                    <button onclick="clearInput()" class="text-[11px] text-slate-500 hover:text-red-400 transition">Очистить</button>
+                    <button onclick="clearInput()" class="text-[11px] text-slate-500 hover:text-red-400 transition" data-i18n="ap_btn_clear">Clear</button>
                 </div>
 
-                <textarea id="source-text" oninput="updateCharCount()" placeholder="Вставьте сюда текст курсовой, реферата или статьи, который нужно сделать уникальным и защитить от антиплагиата..." class="w-full flex-grow bg-slate-950 border border-slate-800/80 rounded-2xl p-4 text-xs sm:text-sm text-slate-200 focus:outline-none focus:border-emerald-500 resize-none leading-relaxed placeholder:text-slate-600"></textarea>
+                <textarea id="source-text" oninput="updateCharCount()" placeholder="Paste your essay, thesis chapter, or research paper to enhance uniqueness and pass Turnitin / StrikePlagiarism checks..." data-i18n-placeholder="ap_ph_input" class="w-full flex-grow bg-slate-950 border border-slate-800/80 rounded-2xl p-4 text-xs sm:text-sm text-slate-200 focus:outline-none focus:border-emerald-500 resize-none leading-relaxed placeholder:text-slate-600"></textarea>
 
                 <div class="mt-4 pt-3 border-t border-slate-800 flex justify-between items-center">
-                    <span class="text-[11px] text-slate-500">Поддерживает русский, узбекский, английский</span>
+                    <span class="text-[11px] text-slate-500" data-i18n="ap_lang_support">Supports English, Russian, Uzbek, and Spanish</span>
                     <button onclick="humanizeText()" id="btn-process" class="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold px-6 py-2.5 rounded-xl text-xs sm:text-sm transition shadow-lg shadow-emerald-600/30 transform hover:-translate-y-0.5 flex items-center gap-2">
-                        <span>✨</span> Повысить уникальность
+                        <span>✨</span> <span data-i18n="ap_btn_process">Boost Originality</span>
                     </button>
                 </div>
             </div>
@@ -158,18 +157,18 @@
                 <div class="flex justify-between items-center mb-3 pb-2 border-b border-slate-800">
                     <div class="flex items-center gap-2">
                         <span class="text-xs font-bold text-emerald-400 flex items-center gap-1.5">
-                            <span>🛡️</span> Результат повышенной уникальности
+                            <span>🛡️</span> <span data-i18n="ap_out_title">High-Originality Academic Output</span>
                         </span>
                         <span id="badge-score" class="hidden text-[10px] bg-emerald-950 text-emerald-300 border border-emerald-700 px-2 py-0.5 rounded-full font-bold">
-                            96% Оригинальность
+                            96% Originality
                         </span>
                     </div>
                     <div class="flex items-center gap-2">
                         <button onclick="copyResult()" id="btn-copy" class="text-[11px] bg-slate-800 hover:bg-slate-700 text-slate-300 px-2.5 py-1 rounded-lg transition border border-slate-700 flex items-center gap-1">
-                            <span>📋</span> Копировать
+                            <span>📋</span> <span data-i18n="ap_btn_copy">Copy</span>
                         </button>
                         <button onclick="downloadDoc()" class="text-[11px] bg-slate-800 hover:bg-slate-700 text-slate-300 px-2.5 py-1 rounded-lg transition border border-slate-700 flex items-center gap-1">
-                            <span>📥</span> Скачать DOCX
+                            <span>📥</span> <span data-i18n="ap_btn_download">Download DOCX/TXT</span>
                         </button>
                     </div>
                 </div>
@@ -178,49 +177,49 @@
                 <div id="result-box" class="w-full flex-grow bg-slate-950 border border-slate-800/80 rounded-2xl p-4 text-xs sm:text-sm text-slate-200 overflow-y-auto leading-relaxed relative">
                     <div id="placeholder-empty" class="h-full flex flex-col items-center justify-center text-slate-600 text-center">
                         <span class="text-3xl mb-2">✨</span>
-                        <p class="text-xs">Нажмите «Повысить уникальность», чтобы обработать текст</p>
-                        <p class="text-[11px] text-slate-700 mt-1">Оригинальность поднимется до 90-98% без потери смысла</p>
+                        <p class="text-xs" data-i18n="ap_empty_prompt">Click 'Boost Originality' to process your text</p>
+                        <p class="text-[11px] text-slate-700 mt-1" data-i18n="ap_empty_sub">Originality will increase to 90-98% while maintaining factual precision</p>
                     </div>
                     <div id="loading-spinner" class="hidden h-full flex flex-col items-center justify-center space-y-3">
                         <div class="w-8 h-8 border-3 border-emerald-500 border-t-transparent rounded-full animate-spin"></div>
-                        <p class="text-xs text-emerald-400 font-semibold animate-pulse">Перестраиваем синтаксис и удаляем шаблоны ИИ...</p>
+                        <p class="text-xs text-emerald-400 font-semibold animate-pulse" data-i18n="ap_loading_text">Restructuring syntax and removing AI patterns...</p>
                     </div>
                     <div id="output-content" class="hidden whitespace-pre-wrap"></div>
                 </div>
 
                 <!-- Footer Status -->
                 <div class="mt-4 pt-3 border-t border-slate-800 flex justify-between items-center text-[11px] text-slate-400">
-                    <span id="stat-words">Слов в результате: 0</span>
-                    <span class="text-emerald-400 font-medium">✓ Готово для сдачи в университет</span>
+                    <span id="stat-words">Words in result: 0</span>
+                    <span class="text-emerald-400 font-medium" data-i18n="ap_status_ready">✓ Ready for university submission</span>
                 </div>
             </div>
 
         </div>
 
-        <!-- Smart Cross-Promotion Banner (Closed-Loop Flywheel) -->
+        <!-- Smart Cross-Promotion Banner -->
         <div class="bg-gradient-to-r from-purple-950/60 via-indigo-950/60 to-slate-900 border border-purple-800/50 rounded-3xl p-6 sm:p-7 shadow-2xl flex flex-col sm:flex-row items-center justify-between gap-5 mb-10">
             <div class="flex items-center gap-4">
                 <div class="w-12 h-12 rounded-2xl bg-purple-600/20 border border-purple-500/30 flex items-center justify-center text-2xl shrink-0">
                     📚
                 </div>
                 <div>
-                    <span class="text-[10px] font-extrabold uppercase tracking-widest text-purple-400 bg-purple-950 border border-purple-800 px-2 py-0.5 rounded-md">
-                        Следующий логический шаг
+                    <span class="text-[10px] font-extrabold uppercase tracking-widest text-purple-400 bg-purple-950 border border-purple-800 px-2 py-0.5 rounded-md" data-i18n="ap_next_step_badge">
+                        Recommended Next Step
                     </span>
-                    <h3 class="text-base sm:text-lg font-bold text-white mt-1">
-                        Оформить список литературы и сноски по ГОСТ 2026?
+                    <h3 class="text-base sm:text-lg font-bold text-white mt-1" data-i18n="ap_citation_cross_title">
+                        Format Bibliography &amp; Citations to APA/Harvard Standards?
                     </h3>
-                    <p class="text-xs text-slate-300 mt-0.5">
-                        Текст готов! Перенесите его в генератор библиографии, чтобы оформить источники в APA, Harvard или ГОСТ за 1 клик.
+                    <p class="text-xs text-slate-300 mt-0.5" data-i18n="ap_citation_cross_desc">
+                        Text is polished! Send it to our Citation Generator to produce perfect bibliography references in 1 click.
                     </p>
                 </div>
             </div>
             <div class="flex items-center gap-3 shrink-0 w-full sm:w-auto">
-                <a href="/tools/citation-generator" class="w-full sm:w-auto text-center px-5 py-3 rounded-xl font-bold text-xs bg-purple-600 hover:bg-purple-500 text-white transition shadow-lg shadow-purple-600/30 whitespace-nowrap">
-                    Оформить источники по ГОСТ &rarr;
+                <a href="/tools/citation-generator" class="w-full sm:w-auto text-center px-5 py-3 rounded-xl font-bold text-xs bg-purple-600 hover:bg-purple-500 text-white transition shadow-lg shadow-purple-600/30 whitespace-nowrap" data-i18n="ap_citation_cross_btn">
+                    Format Citations Now &rarr;
                 </a>
-                <a href="/tools/essay-grader" class="w-full sm:w-auto text-center px-4 py-3 rounded-xl font-medium text-xs bg-slate-800 hover:bg-slate-700 text-indigo-300 border border-slate-700 transition whitespace-nowrap">
-                    Оценить эссе 1-9
+                <a href="/tools/essay-grader" class="w-full sm:w-auto text-center px-4 py-3 rounded-xl font-medium text-xs bg-slate-800 hover:bg-slate-700 text-indigo-300 border border-slate-700 transition whitespace-nowrap" data-i18n="ap_grade_cross_btn">
+                    Evaluate Essay Band 1-9
                 </a>
             </div>
         </div>
@@ -228,18 +227,18 @@
         <!-- Pro Max Unlimited Banner -->
         <div class="bg-slate-900/80 border border-slate-800 rounded-3xl p-6 sm:p-8 text-center relative overflow-hidden">
             <div class="absolute -right-10 -top-10 w-40 h-40 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
-            <h2 class="text-xl sm:text-2xl font-bold text-white mb-2">
-                Нужно обработать диплом или диссертацию целиком?
+            <h2 class="text-xl sm:text-2xl font-bold text-white mb-2" data-i18n="ap_unlimited_title">
+                Need to process an entire thesis or dissertation?
             </h2>
-            <p class="text-xs sm:text-sm text-slate-400 max-w-xl mx-auto mb-5">
-                Подписка <strong>EduHub Pro Max</strong> снимает все лимиты на объем текста, открывает безлимитный доступ ко всем инструментам и экспорт в чистый Word без водяных знаков.
+            <p class="text-xs sm:text-sm text-slate-400 max-w-xl mx-auto mb-5" data-i18n="ap_unlimited_desc">
+                EduHub Pro Max removes all character limits, unlocks unlimited access to all tools, and provides clean DOCX export with zero watermarks.
             </p>
             <div class="flex flex-wrap justify-center items-center gap-3">
-                <a href="/#pricing" class="checkout-trigger-btn px-6 py-3 rounded-xl font-bold text-xs sm:text-sm bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white shadow-xl shadow-blue-600/30 transition transform hover:-translate-y-0.5">
-                    🚀 Активировать 3 дня Pro Max за $1
+                <a href="/#pricing" class="checkout-trigger-btn px-6 py-3 rounded-xl font-bold text-xs sm:text-sm bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white shadow-xl shadow-blue-600/30 transition transform hover:-translate-y-0.5" data-i18n="ap_unlimited_cta">
+                    🚀 Activate 3 Days Pro Max for $1
                 </a>
-                <a href="/#pricing" class="px-5 py-3 rounded-xl font-medium text-xs text-slate-300 bg-slate-800 hover:bg-slate-700 border border-slate-700 transition">
-                    Посмотреть все тарифы
+                <a href="/#pricing" class="px-5 py-3 rounded-xl font-medium text-xs text-slate-300 bg-slate-800 hover:bg-slate-700 border border-slate-700 transition" data-i18n="ap_view_pricing">
+                    View All Pricing
                 </a>
             </div>
         </div>
@@ -263,8 +262,8 @@
         let currentMode = "high_uniqueness";
 
         const samples = {
-            1: "В условиях современной рыночной экономики инфляционные процессы оказывают дестабилизирующее воздействие на финансовую систему государства. Банковский сектор вынужден адаптировать кредитно-денежную политику, повышая процентные ставки для сдерживания оттока капитала. Таким образом, анализ динамики инфляции является важным инструментом макроэкономического прогнозирования.",
-            2: "Искусственный интеллект и алгоритмы машинного обучения открывают принципиально новые горизонты в клинической диагностике. Нейронные сети способны анализировать томографические снимки с точностью, сопоставимой с ведущими радиологами мира. В заключение можно сказать, что внедрение ИИ снизит вероятность врачебной ошибки и повысит шансы на раннее выявление онкологических патологий.",
+            1: "In modern market economies, inflationary dynamics exert destabilizing pressures on state financial systems. Central banking institutions are compelled to adjust monetary policy, raising interest rates to curb capital flight. Therefore, empirical inflation modeling constitutes an indispensable panel for macroeconomic forecasting.",
+            2: "Artificial intelligence and machine learning architectures open fundamentally new frontiers in clinical diagnostics. Deep neural networks analyze radiological imaging with precision comparable to world-leading radiologists, significantly reducing medical error probabilities and advancing early oncological detection.",
             3: "The widespread adoption of artificial intelligence in tertiary education demands a rigorous pedagogical framework. While automated language models accelerate research synthesis and personalized learning pathways, academic institutions must safeguard academic honesty through continuous critical evaluation."
         };
 
@@ -299,13 +298,14 @@
             document.getElementById('placeholder-empty').classList.remove('hidden');
             document.getElementById('output-content').classList.add('hidden');
             document.getElementById('badge-score').classList.add('hidden');
-            document.getElementById('stat-words').innerText = "Слов в результате: 0";
+            document.getElementById('stat-words').innerText = "Words in result: 0";
         }
 
         async function humanizeText() {
             const txt = document.getElementById('source-text').value.trim();
             if (txt.length < 10) {
-                alert("Пожалуйста, введите текст объемом не менее 10 символов.");
+                const notice = (typeof window.t === 'function' ? window.t('ap_min_length_notice') : '') || 'Please enter at least 10 characters.';
+                alert(notice);
                 return;
             }
 
@@ -342,27 +342,27 @@
                     output.classList.remove('hidden');
                     
                     const score = data.originality_score || 95;
-                    badgeScore.innerText = `🛡️ ${score}% Оригинальность`;
+                    badgeScore.innerText = `🛡️ ${score}% Originality`;
                     badgeScore.classList.remove('hidden');
 
                     const wordCount = data.rewritten_text.split(/\s+/).filter(Boolean).length;
-                    statWords.innerText = `Слов в результате: ${wordCount} (Символов: ${data.rewritten_char_count})`;
+                    statWords.innerText = `Words in result: ${wordCount} (Characters: ${data.rewritten_char_count})`;
 
                     if (window.EduHubUtils && window.EduHubUtils.addDocument) {
                         EduHubUtils.addDocument({
                             type: 'anti_plagiarism',
-                            title: 'Рерайт: ' + txt.slice(0, 30) + '...',
+                            title: 'Humanized: ' + txt.slice(0, 30) + '...',
                             preview: data.rewritten_text.slice(0, 100)
                         });
                     }
                 } else {
-                    alert("Ошибка обработки: " + (data.detail || "Попробуйте снова."));
+                    alert("Processing error: " + (data.detail || "Please try again."));
                     placeholder.classList.remove('hidden');
                 }
             } catch (err) {
                 spinner.classList.add('hidden');
                 placeholder.classList.remove('hidden');
-                alert("Сервер временно недоступен. Проверьте подключение.");
+                alert("Server connection issue. Please try again.");
             } finally {
                 btn.disabled = false;
                 btn.classList.remove('opacity-50');
@@ -375,7 +375,7 @@
             navigator.clipboard.writeText(out).then(() => {
                 const btn = document.getElementById('btn-copy');
                 const oldHtml = btn.innerHTML;
-                btn.innerHTML = '<span>✅</span> Скопировано!';
+                btn.innerHTML = '<span>✅</span> Copied!';
                 setTimeout(() => { btn.innerHTML = oldHtml; }, 2000);
             });
         }
@@ -383,7 +383,7 @@
         function downloadDoc() {
             const out = document.getElementById('output-content').innerText;
             if (!out) {
-                alert("Сначала повысьте уникальность текста.");
+                alert("Please boost text originality first.");
                 return;
             }
             const blob = new Blob([out], { type: 'text/plain;charset=utf-8' });

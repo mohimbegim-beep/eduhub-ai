@@ -1,11 +1,20 @@
 <!DOCTYPE html>
-<html lang="ru" class="dark notranslate">
+<html lang="en" class="dark notranslate">
 <head>
     <meta name="google" content="notranslate">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Конструктор Тестов и Уроков для Учителей | Экономия 3 часов в день | EduHub AI</title>
-    <meta name="description" content="Автоматический генератор поурочных планов и 15 разноуровневых тестов с ключами ответов для преподавателей и репетиторов. Готовый урок за 15 секунд за $1.">
+    <title>AI Lesson &amp; Test Builder for Educators | Save 3 Hours Daily | EduHub AI</title>
+    <meta name="description" content="Autonomous lesson plan and 15-tiered quiz generator with answer keys for teachers, professors, and private tutors. Ready in 15 seconds for just $1.">
+    <link rel="canonical" href="https://eduhub.ai/tools/teacher-lab">
+
+    <!-- Multi-Language Hreflang Tags -->
+    <link rel="alternate" hreflang="en" href="https://eduhub.ai/tools/teacher-lab?lang=en">
+    <link rel="alternate" hreflang="ru" href="https://eduhub.ai/tools/teacher-lab?lang=ru">
+    <link rel="alternate" hreflang="uz" href="https://eduhub.ai/tools/teacher-lab?lang=uz">
+    <link rel="alternate" hreflang="es" href="https://eduhub.ai/tools/teacher-lab?lang=es">
+    <link rel="alternate" hreflang="x-default" href="https://eduhub.ai/tools/teacher-lab">
+
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👩‍🏫</text></svg>">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -15,7 +24,7 @@
     <!-- Client-side i18n & Google Translate Bridge Engine -->
     <script src="/static/js/i18n.js" defer></script>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen font-sans antialiased selection:bg-emerald-500 selection:text-slate-950">
+<body data-page-tool="teacher-lab" class="bg-slate-950 text-slate-100 min-h-screen font-sans antialiased selection:bg-emerald-500 selection:text-slate-950">
 
     <header class="border-b border-slate-800/80 bg-slate-950/80 backdrop-blur sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
@@ -31,16 +40,16 @@
                     <span class="w-8 h-8 rounded-lg bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 font-black">E</span>
                     <span>EduHub<span class="text-emerald-400">.AI</span></span>
                 </a>
-                <span class="hidden sm:inline-block text-xs bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-2.5 py-0.5 rounded-full font-medium">
-                    👩‍🏫 Лаборатория Учителя
+                <span class="hidden sm:inline-block text-xs bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-2.5 py-0.5 rounded-full font-medium" data-i18n="teacher_badge">
+                    👩‍🏫 Teacher's Lab
                 </span>
             </div>
             <div class="flex items-center gap-3">
-                <a href="/blueprints" class="text-xs text-slate-300 hover:text-white transition px-3 py-1.5 rounded-lg border border-slate-800 bg-slate-900/60">
-                    🏭 Все Заводы ($1)
+                <a href="/blueprints" class="text-xs text-slate-300 hover:text-white transition px-3 py-1.5 rounded-lg border border-slate-800 bg-slate-900/60" data-i18n="nav_blueprints">
+                    All Blueprints ($1) &rarr;
                 </a>
-                <a href="/#pricing" class="text-xs font-bold bg-emerald-500 hover:bg-emerald-400 text-slate-950 px-3.5 py-1.5 rounded-lg shadow-lg shadow-emerald-500/20 transition">
-                    ⚡ Разблокировать доступ ($1)
+                <a href="/#pricing" class="text-xs font-bold bg-emerald-500 hover:bg-emerald-400 text-slate-950 px-3.5 py-1.5 rounded-lg shadow-lg shadow-emerald-500/20 transition" data-i18n="teacher_btn_unlock_header">
+                    ⚡ Unlock Pro ($1)
                 </a>
             </div>
         </div>
@@ -48,14 +57,14 @@
 
     <main class="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
         <div class="text-center max-w-3xl mx-auto mb-10">
-            <div class="inline-flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 px-3 py-1 rounded-full text-xs text-emerald-400 font-bold mb-4">
-                <span>⏱️ Больше никакой ночной подготовки к урокам</span>
+            <div class="inline-flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 px-3 py-1 rounded-full text-xs text-emerald-400 font-bold mb-4" data-i18n="teacher_hero_pill">
+                <span>⏱️ No more late-night lesson planning</span>
             </div>
-            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight">
-                Конструктор уроков и тестов: <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300">экономия 3 часов в день</span>
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight" data-i18n="teacher_hero_title">
+                Lesson &amp; Test Builder: <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300">Save 3 Hours Daily</span>
             </h1>
-            <p class="text-sm sm:text-base text-slate-400 mt-3 leading-relaxed">
-                Введите предмет и тему — получите пошаговый 45-минутный план урока, интерактивную разминку и 15 разноуровневых тестовых вопросов с готовыми ключами ответов за 15 секунд.
+            <p class="text-sm sm:text-base text-slate-400 mt-3 leading-relaxed" data-i18n="teacher_hero_subtitle">
+                Enter your subject and topic — receive a structured 45-minute lesson plan, an engaging 5-minute warmup, and 15 multi-tiered assessment questions with answer keys in 15 seconds.
             </p>
         </div>
 
@@ -64,68 +73,68 @@
             <div class="lg:col-span-5 space-y-6">
                 <div class="glass-card rounded-2xl p-6 shadow-xl border border-slate-800">
                     <h2 class="text-base font-bold text-white flex items-center gap-2 mb-4">
-                        <span>📝 Параметры урока</span>
+                        <span>📝</span> <span data-i18n="teacher_params_title">Lesson Parameters</span>
                     </h2>
 
                     <form id="teacher-form" class="space-y-4" onsubmit="generateLesson(event)">
                         <div>
-                            <label class="block text-xs font-semibold text-slate-300 mb-1.5">Предмет</label>
+                            <label class="block text-xs font-semibold text-slate-300 mb-1.5" data-i18n="teacher_lbl_subject">Subject</label>
                             <select id="field-subject" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:border-emerald-500 focus:outline-none transition">
-                                <option value="Английский язык">Английский язык</option>
-                                <option value="Алгебра и Математика">Алгебра и Математика</option>
-                                <option value="Физика">Физика</option>
-                                <option value="История">История</option>
-                                <option value="Биология">Биология</option>
-                                <option value="Информатика и Python">Информатика и Python</option>
+                                <option value="English Language">English Language</option>
+                                <option value="Algebra & Mathematics">Algebra &amp; Mathematics</option>
+                                <option value="Physics">Physics</option>
+                                <option value="World History">World History</option>
+                                <option value="Biology">Biology</option>
+                                <option value="Computer Science & Python">Computer Science &amp; Python</option>
                             </select>
                         </div>
 
                         <div>
-                            <label class="block text-xs font-semibold text-slate-300 mb-1.5">Класс / Уровень аудитории</label>
+                            <label class="block text-xs font-semibold text-slate-300 mb-1.5" data-i18n="teacher_lbl_grade">Target Grade / Audience Level</label>
                             <div class="grid grid-cols-3 gap-2 text-center text-xs">
                                 <label class="cursor-pointer border border-slate-700 rounded-xl py-2 px-1 hover:border-emerald-500 transition bg-slate-900/60 has-[:checked]:border-emerald-500 has-[:checked]:bg-emerald-500/10 has-[:checked]:text-emerald-300">
-                                    <input type="radio" name="grade" value="5-7 классы" class="sr-only">
-                                    5-7 классы
+                                    <input type="radio" name="grade" value="Middle School (Grades 5-7)" class="sr-only">
+                                    Grades 5–7
                                 </label>
                                 <label class="cursor-pointer border border-slate-700 rounded-xl py-2 px-1 hover:border-emerald-500 transition bg-slate-900/60 has-[:checked]:border-emerald-500 has-[:checked]:bg-emerald-500/10 has-[:checked]:text-emerald-300">
-                                    <input type="radio" name="grade" value="8-9 классы" checked class="sr-only">
-                                    8-9 классы
+                                    <input type="radio" name="grade" value="High School (Grades 8-9)" checked class="sr-only">
+                                    Grades 8–9
                                 </label>
                                 <label class="cursor-pointer border border-slate-700 rounded-xl py-2 px-1 hover:border-emerald-500 transition bg-slate-900/60 has-[:checked]:border-emerald-500 has-[:checked]:bg-emerald-500/10 has-[:checked]:text-emerald-300">
-                                    <input type="radio" name="grade" value="10-11 классы / Студенты" class="sr-only">
-                                    10-11 классы
+                                    <input type="radio" name="grade" value="Advanced / College (Grades 10-11)" class="sr-only">
+                                    Grades 10–11
                                 </label>
                             </div>
                         </div>
 
                         <div>
-                            <label class="block text-xs font-semibold text-slate-300 mb-1.5">Тема урока</label>
-                            <input type="text" id="field-topic" value="Present Perfect vs Past Simple: разница и маркеры времени" placeholder="Например: Квадратные уравнения через дискриминант" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:border-emerald-500 focus:outline-none transition">
+                            <label class="block text-xs font-semibold text-slate-300 mb-1.5" data-i18n="teacher_lbl_topic">Lesson Topic</label>
+                            <input type="text" id="field-topic" value="Present Perfect vs Past Simple: Differences &amp; Time Markers" placeholder="e.g. Quadratic Equations via Discriminant Formula" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:border-emerald-500 focus:outline-none transition" data-i18n-placeholder="teacher_ph_topic">
                         </div>
 
                         <div>
-                            <label class="block text-[11px] text-slate-400 mb-1">Быстрые примеры для проверки:</label>
+                            <label class="block text-[11px] text-slate-400 mb-1" data-i18n="teacher_lbl_presets">Quick Presets for Testing:</label>
                             <div class="flex flex-wrap gap-1.5">
-                                <button type="button" onclick="setPreset('Английский язык', '8-9 классы', 'Conditional Sentences: 1, 2 и 3 типы')" class="text-[10px] bg-slate-800 hover:bg-slate-700 text-slate-300 px-2 py-1 rounded-md transition">Условные предложения</button>
-                                <button type="button" onclick="setPreset('Алгебра и Математика', '8-9 классы', 'Теорема Пифагора и её применение в жизни')" class="text-[10px] bg-slate-800 hover:bg-slate-700 text-slate-300 px-2 py-1 rounded-md transition">Теорема Пифагора</button>
-                                <button type="button" onclick="setPreset('Физика', '8-9 классы', 'Закон Ома для участка цепи')" class="text-[10px] bg-slate-800 hover:bg-slate-700 text-slate-300 px-2 py-1 rounded-md transition">Закон Ома</button>
+                                <button type="button" onclick="setPreset('English Language', 'High School (Grades 8-9)', 'Conditional Sentences: Types 1, 2, and 3')" class="text-[10px] bg-slate-800 hover:bg-slate-700 text-slate-300 px-2 py-1 rounded-md transition" data-i18n="teacher_preset_1">Conditionals</button>
+                                <button type="button" onclick="setPreset('Algebra & Mathematics', 'High School (Grades 8-9)', 'Pythagorean Theorem and Real-Life Applications')" class="text-[10px] bg-slate-800 hover:bg-slate-700 text-slate-300 px-2 py-1 rounded-md transition" data-i18n="teacher_preset_2">Pythagorean Theorem</button>
+                                <button type="button" onclick="setPreset('Physics', 'High School (Grades 8-9)', 'Ohm's Law for Electrical Circuits')" class="text-[10px] bg-slate-800 hover:bg-slate-700 text-slate-300 px-2 py-1 rounded-md transition" data-i18n="teacher_preset_3">Ohm's Law</button>
                             </div>
                         </div>
 
                         <button type="submit" id="submit-btn" class="w-full bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-black text-xs sm:text-sm py-3 rounded-xl shadow-lg shadow-emerald-500/25 transition flex items-center justify-center gap-2">
-                            <span>⚡ Сгенерировать урок и тесты (Бесплатно)</span>
+                            <span data-i18n="teacher_btn_generate">⚡ Generate Lesson &amp; Tests (Free Preview)</span>
                         </button>
                     </form>
                 </div>
 
                 <div class="glass-card rounded-2xl p-4 border border-slate-800 flex items-start gap-3">
                     <div class="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-sm shrink-0">
-                        МС
+                        MS
                     </div>
                     <div>
                         <div class="flex items-center gap-1 text-amber-400 text-xs">★★★★★</div>
-                        <p class="text-xs text-slate-300 mt-1 italic">«Каждый вечер я тратила по 2-3 часа на поиск тестов и распечатку. Теперь формирую материалы на весь следующий день за 5 минут прямо перед уходом из школы!»</p>
-                        <span class="text-[10px] text-slate-400 mt-1 block">Мадина Сабирова, учитель высшей категории (Ташкент)</span>
+                        <p class="text-xs text-slate-300 mt-1 italic" data-i18n="teacher_testimonial_quote">"Every evening I used to spend 2-3 hours finding tests and printing handouts. Now I prepare complete materials for the next day in 5 minutes before leaving campus!"</p>
+                        <span class="text-[10px] text-slate-400 mt-1 block" data-i18n="teacher_testimonial_author">Madina S., Senior Certified Educator</span>
                     </div>
                 </div>
             </div>
@@ -136,63 +145,63 @@
                     <div class="flex items-center justify-between pb-4 mb-4 border-b border-slate-800">
                         <div class="flex items-center gap-2">
                             <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                            <h3 id="result-title" class="text-sm font-bold text-white">План урока & Диагностический Тест</h3>
+                            <h3 id="result-title" class="text-sm font-bold text-white" data-i18n="teacher_out_title">Lesson Plan &amp; Diagnostic Assessment</h3>
                         </div>
-                        <span id="timing-badge" class="text-[10px] font-mono bg-slate-800 text-emerald-400 px-2 py-1 rounded">Готово за 0.3 сек</span>
+                        <span id="timing-badge" class="text-[10px] font-mono bg-slate-800 text-emerald-400 px-2 py-1 rounded" data-i18n="teacher_out_timing">Ready in 0.3s</span>
                     </div>
 
                     <div id="unlocked-preview" class="space-y-4">
                         <div class="bg-slate-900/80 border border-slate-800/80 rounded-xl p-4">
                             <h4 class="text-xs font-bold uppercase tracking-wider text-emerald-400 mb-2 flex items-center gap-1.5">
-                                <span>🎯 Цели и планируемые результаты урока:</span>
+                                <span data-i18n="teacher_out_objectives">🎯 Lesson Objectives &amp; Learning Outcomes:</span>
                             </h4>
                             <ul id="objectives-list" class="text-xs text-slate-300 space-y-1.5 list-disc list-inside">
-                                <li>Понять фундаментальное отличие между временами Present Perfect и Past Simple</li>
-                                <li>Научить учащихся безошибочно определять маркеры времени (just, already, yesterday, ago)</li>
-                                <li>Закрепить практический навык подстановки глаголов в 15 тестовых заданиях</li>
+                                <li>Master the core distinction between Present Perfect and Past Simple structures.</li>
+                                <li>Enable students to reliably identify temporal markers (just, already, yesterday, ago).</li>
+                                <li>Consolidate hands-on verb inflection skills across 15 tiered assessment exercises.</li>
                             </ul>
                         </div>
 
                         <div class="bg-slate-900/80 border border-slate-800/80 rounded-xl p-4">
                             <h4 id="warmup-title" class="text-xs font-bold text-teal-300 mb-1 flex items-center gap-1.5">
-                                <span>⚡ Интерактивная разминка (первые 5 минут):</span>
+                                <span data-i18n="teacher_out_warmup">⚡ Interactive Warmup (First 5 Minutes):</span>
                             </h4>
                             <p id="warmup-text" class="text-xs text-slate-300 leading-relaxed">
-                                Задайте классу вопрос-триггер: «Кто сегодня уже выпил чашку чая? (Have you had tea today?)» против «Когда вы проснулись? (When did you wake up?)». Покажите, как связь с настоящим моментом определяет выбор времени.
+                                Prompt the class with an engaging trigger question: "Have you had tea today?" vs. "When did you wake up?". Demonstrate how connection to the present moment dictates correct tense selection.
                             </p>
                         </div>
 
                         <div class="bg-slate-900/80 border border-slate-800/80 rounded-xl p-4">
                             <h4 class="text-xs font-bold text-white mb-2 flex items-center justify-between">
-                                <span>📝 Экспресс-тест: Вопросы 1–3 (Открытый доступ):</span>
-                                <span class="text-[10px] text-emerald-400 font-mono">3 из 15 вопросов</span>
+                                <span data-i18n="teacher_out_test_preview">📝 Express Test: Questions 1–3 (Free Preview):</span>
+                                <span class="text-[10px] text-emerald-400 font-mono" data-i18n="teacher_out_questions_count">3 of 15 questions</span>
                             </h4>
                             <div id="test-preview-items" class="space-y-3 text-xs text-slate-300">
                                 <div class="p-2.5 rounded-lg bg-slate-950/60 border border-slate-800">
                                     <p class="font-medium text-slate-200">1. I _____ (never / see) such a beautiful sunset before today.</p>
                                     <div class="grid grid-cols-2 gap-1 text-[11px] text-slate-400 mt-1.5">
-                                        <span>А) saw</span>
-                                        <span class="text-emerald-400 font-medium">Б) have never seen (✓)</span>
-                                        <span>В) did see</span>
-                                        <span>Г) was seeing</span>
+                                        <span>A) saw</span>
+                                        <span class="text-emerald-400 font-medium">B) have never seen (✓)</span>
+                                        <span>C) did see</span>
+                                        <span>D) was seeing</span>
                                     </div>
                                 </div>
                                 <div class="p-2.5 rounded-lg bg-slate-950/60 border border-slate-800">
                                     <p class="font-medium text-slate-200">2. She _____ to Paris two years ago during her vacation.</p>
                                     <div class="grid grid-cols-2 gap-1 text-[11px] text-slate-400 mt-1.5">
-                                        <span class="text-emerald-400 font-medium">А) went (✓)</span>
-                                        <span>Б) has gone</span>
-                                        <span>В) had gone</span>
-                                        <span>Г) goes</span>
+                                        <span class="text-emerald-400 font-medium">A) went (✓)</span>
+                                        <span>B) has gone</span>
+                                        <span>C) had gone</span>
+                                        <span>D) goes</span>
                                     </div>
                                 </div>
                                 <div class="p-2.5 rounded-lg bg-slate-950/60 border border-slate-800">
                                     <p class="font-medium text-slate-200">3. Why cannot we use Past Simple with the word "already"?</p>
                                     <div class="grid grid-cols-2 gap-1 text-[11px] text-slate-400 mt-1.5">
-                                        <span>А) It is a grammar mistake</span>
-                                        <span class="text-emerald-400 font-medium">Б) Result is relevant now (✓)</span>
-                                        <span>В) It is British rule only</span>
-                                        <span>Г) No reason</span>
+                                        <span>A) It is a grammar mistake</span>
+                                        <span class="text-emerald-400 font-medium">B) Result is relevant now (✓)</span>
+                                        <span>C) It is British rule only</span>
+                                        <span>D) No reason</span>
                                     </div>
                                 </div>
                             </div>
@@ -203,17 +212,17 @@
                         
                         <div class="blur-locked space-y-4">
                             <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
-                                <h4 class="text-xs font-bold text-white mb-2">Основная часть урока: Тайминг 25 минут</h4>
-                                <p class="text-xs text-slate-300">Подробный разбор 4 исключений с таблицей на доске. Групповая работа в парах: карточки с маркерами времени.</p>
+                                <h4 class="text-xs font-bold text-white mb-2">Main Lesson Phase: 25 Minutes</h4>
+                                <p class="text-xs text-slate-300">Detailed breakdown of 4 exceptions with whiteboard diagram. Paired practice exercises with time marker flashcards.</p>
                             </div>
                             <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
-                                <h4 class="text-xs font-bold text-white mb-2">Вопросы тестов 4–15 (Повышенная сложность):</h4>
-                                <p class="text-xs text-slate-300">4. Find the mistake in the sentence... 5. Choose the appropriate auxiliary verb... 6. Transform the direct speech into...</p>
-                                <p class="text-xs text-slate-300 mt-2">7. Fill in the gaps with the correct aspect... 8. Choose between Present Perfect Continuous and...</p>
+                                <h4 class="text-xs font-bold text-white mb-2">Assessment Questions 4–15 (Tiered Difficulty):</h4>
+                                <p class="text-xs text-slate-300">4. Find the mistake in the sentence... 5. Choose the appropriate auxiliary verb... 6. Transform direct speech...</p>
+                                <p class="text-xs text-slate-300 mt-2">7. Fill in gaps with correct aspect... 8. Choose between Present Perfect Continuous and...</p>
                             </div>
                             <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
-                                <h4 class="text-xs font-bold text-white mb-2">Полные ключи ответов и критерии оценки (A, B, C):</h4>
-                                <p class="text-xs text-slate-300">Ключи: 4-Б, 5-Г, 6-А, 7-В, 8-Б, 9-А, 10-Г, 11-Б, 12-В, 13-А, 14-Г, 15-В. Шкала перевода в 5-балльную систему.</p>
+                                <h4 class="text-xs font-bold text-white mb-2">Full Answer Keys &amp; Rubrics:</h4>
+                                <p class="text-xs text-slate-300">Keys: 4-B, 5-D, 6-A, 7-C, 8-B, 9-A, 10-D, 11-B, 12-C, 13-A, 14-D, 15-C. Comprehensive 5-point grading scale.</p>
                             </div>
                         </div>
 
@@ -221,28 +230,28 @@
                             <div class="w-12 h-12 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 flex items-center justify-center text-2xl mb-3 shadow-lg shadow-emerald-500/20">
                                 🔒
                             </div>
-                            <h4 class="text-lg sm:text-xl font-black text-white max-w-md leading-snug">
-                                Полный урок и все 15 тестов с ключами готовы!
+                            <h4 class="text-lg sm:text-xl font-black text-white max-w-md leading-snug" data-i18n="teacher_locked_title">
+                                Complete Lesson Plan &amp; All 15 Questions Ready!
                             </h4>
-                            <p class="text-xs text-slate-300 max-w-sm mt-1 mb-5 leading-relaxed">
-                                Заберите оставшиеся 12 тестов, полную пошаговую методичку урока, домашнее задание и файл для распечатки в Word/PDF.
+                            <p class="text-xs text-slate-300 max-w-sm mt-1 mb-5 leading-relaxed" data-i18n="teacher_locked_desc">
+                                Unlock the remaining 12 assessment questions, full 45-minute step-by-step teaching guide, homework worksheets, and print-ready DOCX/PDF export.
                             </p>
 
                             <div class="flex flex-col sm:flex-row items-center gap-3 w-full max-w-md">
-                                <a href="/#pricing" class="w-full sm:w-1/2 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs py-3 px-4 rounded-xl shadow-lg shadow-emerald-500/25 transition text-center">
-                                    ⚡ Разблокировать за $1.00 &rarr;
+                                <a href="/#pricing" class="w-full sm:w-1/2 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs py-3 px-4 rounded-xl shadow-lg shadow-emerald-500/25 transition text-center" data-i18n="teacher_btn_unlock">
+                                    ⚡ Unlock for $1.00 &rarr;
                                 </a>
 
                                 <a href="/blueprints" class="w-full sm:w-1/2 bg-slate-900 hover:bg-slate-800 text-white border border-purple-500/50 hover:border-purple-400 font-bold text-xs py-3 px-4 rounded-xl shadow-lg transition text-center flex flex-col items-center">
-                                    <span>🎁 Бандл Учитель ($2.99)</span>
-                                    <span class="text-[9px] text-purple-300 font-normal">5 инструментов (Скидка 95%)</span>
+                                    <span data-i18n="teacher_btn_bundle">🎁 Teacher's Toolkit ($2.99)</span>
+                                    <span class="text-[9px] text-purple-300 font-normal" data-i18n="teacher_bundle_sub">5 Teaching Tools (95% Off)</span>
                                 </a>
                             </div>
 
                             <div class="flex items-center gap-4 mt-4 text-[10px] text-slate-400">
-                                <span>🛡️ 14 дней гарантия возврата</span>
+                                <span data-i18n="teacher_trust_guarantee">🛡️ 14-Day Money-Back Guarantee</span>
                                 <span>&bull;</span>
-                                <span>⚡ Моментальное скачивание</span>
+                                <span data-i18n="teacher_trust_instant">⚡ Instant Download</span>
                             </div>
                         </div>
 
@@ -268,14 +277,16 @@
             const btn = document.getElementById('submit-btn');
             const topic = document.getElementById('field-topic').value;
             const subject = document.getElementById('field-subject').value;
-            let grade = '8-9 классы';
+            let grade = 'High School (Grades 8-9)';
             const radios = document.getElementsByName('grade');
             for (let r of radios) {
                 if (r.checked) grade = r.value;
             }
 
             btn.disabled = true;
-            btn.innerHTML = '<span>⏳ Генерация урока и 15 тестов...</span>';
+            btn.innerHTML = '<span>⏳ Generating lesson &amp; 15 questions...</span>';
+
+            const userLang = (typeof window.getCurrentLocale === 'function' ? window.getCurrentLocale() : 'en') || 'en';
 
             try {
                 const res = await fetch('/api/v1/tools/teacher-lab', {
@@ -285,7 +296,7 @@
                         subject: subject,
                         grade_level: grade,
                         topic: topic,
-                        language: 'ru'
+                        language: userLang
                     })
                 });
 
@@ -297,7 +308,7 @@
                 }
 
                 if (data.warmup_5min) {
-                    document.getElementById('warmup-title').innerHTML = `<span>⚡ ${data.warmup_5min.title || 'Интерактивная разминка (5 минут)'}:</span>`;
+                    document.getElementById('warmup-title').innerHTML = `<span>⚡ ${data.warmup_5min.title || 'Interactive Warmup (5 min)'}:</span>`;
                     document.getElementById('warmup-text').textContent = data.warmup_5min.activity || '';
                 }
 
@@ -307,18 +318,18 @@
                         <div class="p-2.5 rounded-lg bg-slate-950/60 border border-slate-800">
                             <p class="font-medium text-slate-200">${t.num}. ${t.question}</p>
                             <div class="grid grid-cols-2 gap-1 text-[11px] text-slate-400 mt-1.5">
-                                ${t.options.map(opt => `<span class="${opt.includes('(корректный)') || opt.includes('(✓)') ? 'text-emerald-400 font-medium' : ''}">${opt}</span>`).join('')}
+                                ${t.options.map(opt => `<span class="${opt.includes('(correct)') || opt.includes('(✓)') ? 'text-emerald-400 font-medium' : ''}">${opt}</span>`).join('')}
                             </div>
                         </div>
                     `).join('');
                 }
 
-                document.getElementById('timing-badge').textContent = 'Сгенерировано • 0.3 сек';
+                document.getElementById('timing-badge').textContent = 'Generated in 0.3s';
             } catch (err) {
                 console.error('Generation error:', err);
             } finally {
                 btn.disabled = false;
-                btn.innerHTML = '<span>⚡ Сгенерировать урок и тесты (Бесплатно)</span>';
+                btn.innerHTML = '<span>⚡ Generate Lesson &amp; Tests (Free Preview)</span>';
             }
         }
     </script>

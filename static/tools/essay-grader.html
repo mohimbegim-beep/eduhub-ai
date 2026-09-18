@@ -495,7 +495,7 @@
 
             for (const line of lines) {
                 const trimmed = line.trim();
-                if (trimmed.includes('High-Yield Vocabulary') || trimmed.includes('Словарь') || trimmed.includes('Lug\'at') || trimmed.includes('Vocabulario')) {
+                if (trimmed.includes('High-Yield Vocabulary') || trimmed.includes('\u0421\u043b\u043e\u0432\u0430\u0440\u044c') || trimmed.includes('Lug\'at') || trimmed.includes('Vocabulario')) {
                     inVocabSection = true;
                     continue;
                 }
@@ -504,7 +504,7 @@
                 }
                 if (inVocabSection && trimmed.startsWith('|') && !trimmed.includes('---')) {
                     const cols = trimmed.split('|').map(c => c.trim()).filter(c => c.length > 0);
-                    if (cols.length >= 3 && !cols[0].toLowerCase().includes('term') && !cols[0].toLowerCase().includes('термин') && !cols[0].toLowerCase().includes('so\'z')) {
+                    if (cols.length >= 3 && !cols[0].toLowerCase().includes('term') && !cols[0].toLowerCase().includes('\u0442\u0435\u0440\u043c\u0438\u043d') && !cols[0].toLowerCase().includes('so\'z')) {
                         cards.push({
                             front: cols[0],
                             back: `<strong>${cols[1]}</strong><br><em>Collocation:</em> ${cols[2]}`,
@@ -516,10 +516,10 @@
 
             if (cards.length === 0) {
                 cards.push(
-                    { front: "catalyze socio-economic mobility", back: "ускорять социально-экономическую мобильность (fosters equal opportunities)", tags: "IELTS_Writing" },
-                    { front: "mitigate educational disparities", back: "сокращать образовательное неравенство (reduce inequalities)", tags: "IELTS_Writing" },
-                    { front: "fiscal strain on public coffers", back: "финансовое бремя на государственный бюджет (heavy economic cost)", tags: "IELTS_Writing" },
-                    { front: "meritocratic principles", back: "принципы меритократии (fair advancement based on talent)", tags: "IELTS_Writing" }
+                    { front: "catalyze socio-economic mobility", back: "accelerate social and economic progress (fosters equal opportunities)", tags: "IELTS_Writing" },
+                    { front: "mitigate educational disparities", back: "narrow the academic achievement gap (reduce inequalities)", tags: "IELTS_Writing" },
+                    { front: "fiscal strain on public coffers", back: "heavy financial burden on the state budget (economic pressure)", tags: "IELTS_Writing" },
+                    { front: "meritocratic principles", back: "fair advancement based on talent and hard work", tags: "IELTS_Writing" }
                 );
             }
 

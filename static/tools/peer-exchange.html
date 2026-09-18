@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="ru" class="scroll-smooth notranslate">
+<html lang="en" class="scroll-smooth notranslate">
 <head>
     <meta name="google" content="notranslate">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Носители языка и 1-часовой конфиденциальный обмен — EduHub AI</title>
-    <meta name="description" content="Практика с проверенными студентами-носителями языка. Рейтинговая система 5.0★, оплата за сессию $5/$10, автоудаление сообщений ровно через 60 минут без логов.">
+    <title data-i18n="peer_meta_title">Native Tutors &amp; 1-Hour Confidential Exchange — EduHub AI</title>
+    <meta name="description" data-i18n="peer_meta_desc" content="Practice with verified native speaker students. 5.0★ rating system, $5/$10 per session, automatic message deletion after exactly 60 minutes with zero logs.">
     
     <!-- Multi-Language Hreflang Tags -->
-    <link rel="alternate" hreflang="ru" href="https://eduhub.ai/tools/peer-exchange?lang=ru">
     <link rel="alternate" hreflang="en" href="https://eduhub.ai/tools/peer-exchange?lang=en">
+    <link rel="alternate" hreflang="ru" href="https://eduhub.ai/tools/peer-exchange?lang=ru">
     <link rel="alternate" hreflang="uz" href="https://eduhub.ai/tools/peer-exchange?lang=uz">
     <link rel="alternate" hreflang="es" href="https://eduhub.ai/tools/peer-exchange?lang=es">
 
@@ -29,28 +29,20 @@
                 <span class="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-400 flex items-center justify-center font-black text-white text-lg shadow-lg shadow-emerald-500/20">🎓</span>
                 <div>
                     <span class="text-lg font-black text-white tracking-tight">EduHub <span class="text-emerald-400">Peer Exchange</span></span>
-                    <span class="hidden sm:inline-block text-[10px] font-bold text-emerald-400 bg-emerald-950/80 px-2 py-0.5 rounded-full border border-emerald-800 ml-2">Native Tutors</span>
+                    <span class="hidden sm:inline-block text-[10px] font-bold text-emerald-400 bg-emerald-950/80 px-2 py-0.5 rounded-full border border-emerald-800 ml-2" data-i18n="peer_badge">Native Tutors</span>
                 </div>
             </a>
 
             <div class="flex items-center gap-3">
                 <!-- Multi-Language Switcher (EN | RU | UZ | ES) -->
-                <div class="inline-flex bg-slate-900 border border-slate-800 rounded-xl p-0.5">
-                    <button onclick="setLocale('en')" data-lang-btn="en" class="lang-btn px-2 py-1 rounded-lg text-xs font-bold transition bg-blue-600 text-white shadow-sm shadow-blue-500/20">EN</button>
-                    <button onclick="setLocale('ru')" data-lang-btn="ru" class="lang-btn px-2 py-1 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition">RU</button>
-                    <button onclick="setLocale('uz')" data-lang-btn="uz" class="lang-btn px-2 py-1 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition">UZ</button>
-                    <button onclick="setLocale('es')" data-lang-btn="es" class="lang-btn px-2 py-1 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition">ES</button>
-                </div>
-                <div class="relative">
-                    <select id="lang-select" onchange="switchLanguage(this.value)" class="bg-slate-900 border border-slate-800 text-xs text-slate-200 rounded-lg px-2.5 py-1.5 focus:outline-none focus:border-emerald-500">
-                        <option value="ru" selected>🇷🇺 Русский</option>
-                        <option value="en">🇺🇸 English</option>
-                        <option value="uz">🇺🇿 O'zbekcha</option>
-                        <option value="es">🇪🇸 Español</option>
-                    </select>
+                <div class="inline-flex bg-slate-900 border border-slate-800 rounded-xl p-0.5 shadow-inner">
+                    <button onclick="setLocale('en')" data-lang-btn="en" class="lang-btn px-2.5 py-1 rounded-lg text-xs font-bold transition bg-emerald-600 text-white shadow-sm shadow-emerald-500/20">EN</button>
+                    <button onclick="setLocale('ru')" data-lang-btn="ru" class="lang-btn px-2.5 py-1 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition">RU</button>
+                    <button onclick="setLocale('uz')" data-lang-btn="uz" class="lang-btn px-2.5 py-1 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition">UZ</button>
+                    <button onclick="setLocale('es')" data-lang-btn="es" class="lang-btn px-2.5 py-1 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition">ES</button>
                 </div>
                 <a href="/" class="text-xs text-slate-400 hover:text-white border border-slate-800 hover:border-slate-700 px-3 py-1.5 rounded-lg transition">
-                    &larr; <span id="txt-back">На платформу</span>
+                    &larr; <span id="txt-back" data-i18n="peer_back">Back to Platform</span>
                 </a>
             </div>
         </div>
@@ -58,298 +50,289 @@
 
     <!-- Prominent Unmissable 1-Hour Ephemeral Privacy Notice Banner -->
     <div class="bg-gradient-to-r from-amber-950/90 via-slate-900 to-amber-950/90 border-b border-amber-600/40 py-3 px-4 shadow-inner">
-        <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
-            <div class="flex items-center gap-2.5 text-amber-200">
-                <span class="text-xl shrink-0 animate-pulse">⏱️</span>
-                <div>
-                    <span class="font-extrabold uppercase tracking-wide text-amber-300" id="txt-banner-title">Регламент конфиденциальности 60 минут:</span>
-                    <span class="text-slate-300 ml-1" id="txt-banner-desc">Все сообщения хранятся исключительно в оперативной памяти (ОЗУ) и безвозвратно уничтожаются через 1 час. Сервер не ведет постоянных логов. Запрещены угрозы, оружие, наркотики и 18+ контент.</span>
-                </div>
-            </div>
-            <div class="shrink-0 flex items-center gap-2">
-                <span class="px-2.5 py-1 rounded-md bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[11px] font-bold">🛡️ AI Hazard Shield Active</span>
+        <div class="max-w-6xl mx-auto flex items-start sm:items-center gap-3">
+            <span class="text-xl flex-shrink-0">🔒</span>
+            <div class="text-xs text-amber-200/90 leading-relaxed">
+                <strong class="font-bold text-amber-300" data-i18n="peer_privacy_title">60-Minute Ephemeral Privacy Protocol:</strong>
+                <span data-i18n="peer_privacy_desc">All messages are stored exclusively in volatile RAM and permanently destroyed after 60 minutes. Zero server disk logs, zero chat leaks, complete academic safety.</span>
             </div>
         </div>
     </div>
 
-    <!-- Main Container -->
-    <main class="max-w-6xl mx-auto px-4 sm:px-6 py-8 flex-grow w-full">
-
-        <!-- Hero Title -->
-        <div class="text-center max-w-3xl mx-auto mb-8">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-bold uppercase tracking-wider mb-3">
-                🤝 Verified P2P Language Learning &amp; Monetization
-            </div>
-            <h1 class="text-2xl sm:text-4xl font-black text-white tracking-tight" id="txt-hero-title">
-                Практика с носителями языка &amp; Конфиденциальные сессии
+    <!-- Main Content Body -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 py-8 flex-grow w-full space-y-8">
+        
+        <!-- Hero Section -->
+        <div class="text-center max-w-3xl mx-auto space-y-3">
+            <span class="text-xs font-bold uppercase tracking-widest text-emerald-400 bg-emerald-950/80 px-3 py-1 rounded-full border border-emerald-800" data-i18n="peer_hero_badge">
+                Verified Native University Students
+            </span>
+            <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white" data-i18n="peer_hero_title">
+                Practice with Native Speakers &amp; Confidential Sessions
             </h1>
-            <p class="text-sm sm:text-base text-slate-400 mt-2 leading-relaxed" id="txt-hero-sub">
-                Общайтесь с проверенными студентами ведущих мировых университетов (Cambridge, ВШЭ, WIUT, Madrid). Честные рейтинги 5.0★, прозрачная оплата сессий и 100% защита персональных данных.
+            <p class="text-sm text-slate-400 leading-relaxed" data-i18n="peer_hero_sub">
+                Connect with verified students from top universities worldwide (Cambridge, HSE, WIUT, Madrid). Zero-log 60-minute ephemeral chats.
             </p>
         </div>
 
         <!-- Navigation Tabs -->
-        <div class="flex items-center justify-center gap-2 sm:gap-4 mb-8 border-b border-slate-800 pb-4">
-            <button onclick="switchTab('tutors')" id="tab-btn-tutors" class="px-4 sm:px-6 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition flex items-center gap-2 bg-emerald-600 text-white shadow-lg shadow-emerald-600/20">
-                <span>🌟</span> <span id="txt-tab-tutors">Каталог носителей &amp; Рейтинг</span>
-            </button>
-            <button onclick="switchTab('room')" id="tab-btn-room" class="px-4 sm:px-6 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition flex items-center gap-2 bg-slate-900 text-slate-400 hover:text-white border border-slate-800">
-                <span>💬</span> <span id="txt-tab-room">1-Часовая комната диалога</span>
-                <span id="active-room-indicator" class="hidden w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-            </button>
-            <button onclick="switchTab('earnings')" id="tab-btn-earnings" class="px-4 sm:px-6 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition flex items-center gap-2 bg-slate-900 text-slate-400 hover:text-white border border-slate-800">
-                <span>💰</span> <span id="txt-tab-earnings">Заработок для носителей &amp; Виральность</span>
-            </button>
+        <div class="flex border-b border-slate-800 text-sm font-semibold gap-6 justify-center">
+            <button onclick="switchTab('tutors')" id="tab-btn-tutors" class="pb-3 border-b-2 border-emerald-500 text-emerald-400 transition" data-i18n="peer_tab_tutors">Native Tutors &amp; Ratings</button>
+            <button onclick="switchTab('room')" id="tab-btn-room" class="pb-3 border-b-2 border-transparent text-slate-400 hover:text-white transition" data-i18n="peer_tab_room">1-Hour Live Room</button>
+            <button onclick="switchTab('earnings')" id="tab-btn-earnings" class="pb-3 border-b-2 border-transparent text-slate-400 hover:text-white transition" data-i18n="peer_tab_earnings">Tutor Earnings &amp; Referral</button>
         </div>
 
-        <!-- TAB 1: TUTOR MARKETPLACE & RATINGS -->
-        <section id="section-tutors" class="space-y-6">
-            <!-- Filter Bar -->
-            <div class="flex flex-wrap items-center justify-between gap-4 p-4 rounded-2xl bg-slate-900/60 border border-slate-800">
-                <div class="flex items-center gap-2">
-                    <span class="text-xs text-slate-400 font-semibold" id="txt-filter-label">Родной язык наставника:</span>
-                    <select id="filter-lang" onchange="loadTutors(this.value)" class="bg-slate-950 border border-slate-800 text-xs text-slate-200 rounded-lg px-3 py-1.5 focus:outline-none focus:border-emerald-500">
-                        <option value="">Все языки (All Languages)</option>
-                        <option value="English">🇺🇸 English (Cambridge / Native)</option>
-                        <option value="Russian">🇷🇺 Русский (ВШЭ / Носитель)</option>
-                        <option value="Uzbek">🇺🇿 O'zbek (WIUT / Native)</option>
-                        <option value="Spanish">🇪🇸 Español (Complutense Madrid)</option>
-                    </select>
+        <!-- TAB 1: TUTORS CATALOG -->
+        <section id="view-tutors" class="space-y-6">
+            <!-- Filter & Search Controls Bar -->
+            <div class="bg-slate-900/90 border border-slate-800/80 rounded-2xl p-4 flex flex-wrap gap-4 items-center justify-between shadow-xl">
+                <div class="flex flex-wrap items-center gap-3">
+                    <div>
+                        <label class="block text-[10px] uppercase font-bold text-slate-400 mb-1" data-i18n="peer_filter_native_lang">Tutor Native Language:</label>
+                        <select id="filter-language" onchange="filterTutors()" class="bg-slate-950 border border-slate-800 text-xs rounded-xl px-3 py-2 text-slate-200 focus:outline-none focus:border-emerald-500">
+                            <option value="all" data-i18n="peer_opt_all_langs">🌍 All Languages</option>
+                            <option value="English" data-i18n="peer_opt_english">🇬🇧 English</option>
+                            <option value="Russian" data-i18n="peer_opt_russian">🇷🇺 Russian</option>
+                            <option value="Uzbek" data-i18n="peer_opt_uzbek">🇺🇿 Uzbek</option>
+                            <option value="Spanish" data-i18n="peer_opt_spanish">🇪🇸 Spanish</option>
+                            <option value="German" data-i18n="peer_opt_german">🇩🇪 German</option>
+                            <option value="Arabic" data-i18n="peer_opt_arabic">🇸🇦 Arabic</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-[10px] uppercase font-bold text-slate-400 mb-1" data-i18n="peer_filter_max_price">Max Price per Session:</label>
+                        <select id="filter-price" onchange="filterTutors()" class="bg-slate-950 border border-slate-800 text-xs rounded-xl px-3 py-2 text-slate-200 focus:outline-none focus:border-emerald-500">
+                            <option value="all">Any Price</option>
+                            <option value="0">$0 (Free Swap)</option>
+                            <option value="5">Up to $5</option>
+                            <option value="10">Up to $10</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-[10px] uppercase font-bold text-slate-400 mb-1" data-i18n="peer_filter_search">Search Tutor:</label>
+                        <input type="text" id="search-query" oninput="filterTutors()" data-i18n-placeholder="peer_search_ph" placeholder="Name, university, topic..." class="bg-slate-950 border border-slate-800 text-xs rounded-xl px-3 py-2 text-slate-200 focus:outline-none focus:border-emerald-500 w-44 sm:w-56">
+                    </div>
                 </div>
-                <div class="text-xs text-slate-400 flex items-center gap-3">
-                    <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> 100% Верифицированные студенты</span>
-                    <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-blue-500"></span> No-Loss Escrow Защита</span>
+
+                <div>
+                    <label class="block text-[10px] uppercase font-bold text-slate-400 mb-1" data-i18n="peer_filter_sort">Sort By:</label>
+                    <select id="filter-sort" onchange="filterTutors()" class="bg-slate-950 border border-slate-800 text-xs rounded-xl px-3 py-2 text-slate-200 focus:outline-none focus:border-emerald-500">
+                        <option value="rating" data-i18n="peer_sort_rating">Top Rating (5.0★)</option>
+                        <option value="price_asc" data-i18n="peer_sort_price_asc">Price: Low to High</option>
+                        <option value="reviews" data-i18n="peer_sort_reviews">Most Reviews</option>
+                    </select>
                 </div>
             </div>
 
-            <!-- Tutors Grid -->
-            <div id="tutors-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Dynamically populated by JavaScript -->
+            <!-- Tutors Grid Container -->
+            <div id="tutors-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                <div class="text-center py-12 text-slate-500 col-span-full" data-i18n="peer_loading_tutors">Loading verified tutors...</div>
             </div>
         </section>
 
-        <!-- TAB 2: EPHEMERAL CHAT ROOM -->
-        <section id="section-room" class="hidden space-y-6">
-            <!-- Room Header & Unmissable Ephemeral Countdown Card -->
-            <div class="bg-gradient-to-r from-slate-900 via-slate-900/90 to-slate-900 border border-slate-800 rounded-3xl p-6 shadow-2xl relative overflow-hidden">
-                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                    <div>
-                        <div class="flex items-center gap-2">
-                            <span class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></span>
-                            <span class="text-xs font-bold uppercase tracking-wider text-emerald-400" id="room-status-badge">Активная сессия обмена</span>
-                            <span class="text-xs text-slate-400" id="room-id-display">ID: room_demo</span>
+        <!-- TAB 2: LIVE 1-HOUR EPHEMERAL ROOM -->
+        <section id="view-room" class="space-y-6 hidden">
+            <div id="no-room-alert" class="p-8 rounded-3xl bg-slate-900 border border-slate-800 text-center space-y-4">
+                <div class="text-4xl">⏳</div>
+                <h3 class="text-lg font-bold text-white" data-i18n="peer_room_no_active">No active session. Please book a session in the catalog first.</h3>
+                <button onclick="switchTab('tutors')" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs transition" data-i18n="peer_tab_tutors">Go to Tutors Catalog</button>
+            </div>
+
+            <div id="active-room-view" class="hidden space-y-4">
+                <!-- Ephemeral Room Controls & Status Header -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-wrap items-center justify-between gap-4 shadow-xl">
+                    <div class="flex items-center gap-3">
+                        <span class="w-3 h-3 rounded-full bg-emerald-500 animate-ping"></span>
+                        <div>
+                            <span id="room-status-badge" class="text-xs font-bold text-emerald-400 block" data-i18n="peer_room_status_idle">Waiting for session...</span>
+                            <span id="room-participants-display" class="text-[11px] text-slate-400">Tutor: Connect session</span>
                         </div>
-                        <h2 class="text-xl sm:text-2xl font-black text-white mt-1" id="room-topic-display">IELTS Speaking &amp; Academic Vocabulary</h2>
-                        <p class="text-xs text-slate-400 mt-1" id="room-participants-display">Собеседник: Sarah Jenkins (Cambridge, UK)</p>
                     </div>
 
                     <!-- 60-Minute Countdown Clock -->
-                    <div class="bg-slate-950 border border-amber-500/40 rounded-2xl p-4 text-center min-w-[200px] shadow-lg shadow-amber-500/10">
-                        <span class="text-[10px] font-black uppercase tracking-widest text-amber-400 block mb-1">⏱️ До автоудаления ОЗУ</span>
-                        <span id="countdown-timer" class="text-2xl font-black text-amber-300 font-mono tracking-wider">58:42</span>
-                        <span class="text-[10px] text-slate-400 block mt-0.5">Все сообщения сотрутся навсегда</span>
-                    </div>
-                </div>
-
-                <!-- PROFIT MARKETING HOOK: AI Scribe & Flashcard Deck Upsell -->
-                <div class="mt-6 p-4 rounded-2xl bg-gradient-to-r from-amber-500/15 via-blue-500/10 to-amber-500/15 border border-amber-500/30 flex flex-col sm:flex-row items-center justify-between gap-4">
-                    <div class="flex items-center gap-3">
-                        <span class="text-2xl shrink-0">📝</span>
-                        <div>
-                            <h4 class="text-sm font-extrabold text-white" id="txt-scribe-title">Не потеряйте новые слова и разбор ошибок!</h4>
-                            <p class="text-xs text-slate-300" id="txt-scribe-sub">Чат удалится через 60 минут. ИИ-Секретарь EduHub сохранит конспект урока и колоду карточек для Anki/Quizlet.</p>
+                    <div class="bg-slate-950 border border-amber-500/40 rounded-xl px-4 py-1.5 flex items-center gap-3 shadow-inner">
+                        <div class="text-right">
+                            <span class="text-[10px] uppercase font-bold text-slate-400 block" data-i18n="peer_room_timer_desc">Ephemeral RAM timer: Messages wipe after 60 min</span>
+                            <span id="countdown-timer" class="font-mono font-black text-amber-400 text-base">60:00</span>
                         </div>
                     </div>
-                    <button onclick="requestLessonSummary()" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:brightness-110 text-slate-950 font-black text-xs transition shadow-lg shadow-amber-500/20 whitespace-nowrap cursor-pointer">
-                        ⚡ Скачать конспект &amp; Anki ($1) →
-                    </button>
-                </div>
-            </div>
 
-            <!-- Chat Stream Box -->
-            <div class="bg-slate-900/80 border border-slate-800 rounded-3xl p-6 shadow-2xl flex flex-col h-[520px]">
-                <!-- Messages List -->
-                <div id="messages-container" class="flex-grow overflow-y-auto space-y-4 pr-2 mb-4">
-                    <!-- Populated dynamically -->
-                </div>
-
-                <!-- Safety Warning bar -->
-                <div class="text-[11px] text-slate-400 bg-slate-950/60 border border-slate-800/80 rounded-xl px-3 py-2 mb-3 flex items-center justify-between">
-                    <span class="flex items-center gap-1.5">
-                        <span>🛡️</span> 
-                        <span>AI Guardrail активен: угрозы, наркотики, оружие, 18+ и контакты блокируются на лету.</span>
-                    </span>
-                    <button onclick="reportCurrentRoom()" class="text-rose-400 hover:text-rose-300 font-bold transition flex items-center gap-1">
-                        <span>🚨</span> Пожаловаться и заморозить
-                    </button>
-                </div>
-
-                <!-- Input Field -->
-                <form id="chat-form" onsubmit="sendMessage(event)" class="flex gap-2">
-                    <input type="text" id="chat-input" placeholder="Введите сообщение на изучаемом или родном языке..." required class="flex-grow bg-slate-950 border border-slate-800 rounded-2xl px-4 py-3 text-xs sm:text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-emerald-500">
-                    <button type="submit" class="px-6 py-3 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs sm:text-sm transition flex items-center gap-2 shadow-lg shadow-emerald-600/30">
-                        <span>Отправить</span> <span>🚀</span>
-                    </button>
-                </form>
-            </div>
-
-            <!-- Quick Action Bar -->
-            <div class="flex items-center justify-between">
-                <button onclick="openRatingModal()" class="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-300 text-xs font-bold transition flex items-center gap-1.5">
-                    <span>⭐</span> Оценить сессию и наставника
-                </button>
-                <button onclick="switchTab('tutors')" class="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-300 text-xs font-bold transition">
-                    &larr; Выбрать другого наставника
-                </button>
-            </div>
-        </section>
-
-        <!-- TAB 3: STUDENT EARNINGS & VIRAL REFERRAL -->
-        <section id="section-earnings" class="hidden space-y-6">
-            <div class="bg-slate-900/60 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-2xl">
-                <div class="max-w-2xl">
-                    <span class="text-xs font-bold uppercase tracking-wider text-emerald-400 bg-emerald-950/80 px-3 py-1 rounded-full border border-emerald-800">
-                        🎓 Программа для студентов-носителей
-                    </span>
-                    <h2 class="text-2xl sm:text-3xl font-black text-white mt-3">Зарабатывайте $4–$8 за сессию в свободное время</h2>
-                    <p class="text-slate-400 text-sm mt-2 leading-relaxed">
-                        Вы студент университета и свободно владеете английским, русским, узбекским или испанским языком? Проводите 30- и 60-минутные разговорные сессии с иностранными студентами, получайте высокий рейтинг и выводите вознаграждение без скрытых комиссий.
-                    </p>
-                </div>
-
-                <!-- Financial Comparison Cards -->
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 my-6">
-                    <div class="p-4 rounded-2xl bg-slate-950 border border-slate-800">
-                        <span class="text-xs text-slate-400 block font-semibold">Speaking Sprint (30 мин)</span>
-                        <span class="text-2xl font-black text-emerald-400 mt-1 block">$4.00</span>
-                        <span class="text-[11px] text-slate-500">EduHub сбор: $1.00 (20% маржа)</span>
-                    </div>
-                    <div class="p-4 rounded-2xl bg-slate-950 border border-emerald-500/30">
-                        <span class="text-xs text-slate-400 block font-semibold">Academic Deep Dive (60 мин)</span>
-                        <span class="text-2xl font-black text-emerald-400 mt-1 block">$8.20</span>
-                        <span class="text-[11px] text-slate-500">EduHub сбор: $1.80 (18% маржа)</span>
-                    </div>
-                    <div class="p-4 rounded-2xl bg-slate-950 border border-slate-800">
-                        <span class="text-xs text-slate-400 block font-semibold">10 сессий в неделю</span>
-                        <span class="text-2xl font-black text-amber-400 mt-1 block">~$82.00 / нед</span>
-                        <span class="text-[11px] text-slate-500">Идеальная подработка для студентов</span>
-                    </div>
-                </div>
-
-                <!-- Viral Share & Referral Box -->
-                <div class="p-6 rounded-2xl bg-gradient-to-r from-emerald-950/40 via-slate-900 to-emerald-950/40 border border-emerald-500/30">
-                    <h3 class="text-base font-bold text-white mb-1">🎁 Виральная реферальная программа EduHub</h3>
-                    <p class="text-xs text-slate-300 mb-4 leading-relaxed">
-                        Поделитесь ссылкой с одногруппниками. Каждый приглашенный друг получает <strong class="text-emerald-400">1 бесплатную сессию</strong> с носителем языка, а вы получаете <strong class="text-emerald-400">20 Flash AI кредитов</strong> на баланс!
-                    </p>
-                    <div class="flex flex-wrap items-center gap-3">
-                        <button onclick="shareReferralWhatsApp()" class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs transition flex items-center gap-1.5">
-                            <span>💬</span> Поделиться в WhatsApp
+                    <div class="flex items-center gap-2">
+                        <button onclick="triggerFreezeRoom()" class="px-3 py-1.5 rounded-xl bg-red-950 hover:bg-red-900 border border-red-800 text-red-300 font-semibold text-xs transition" data-i18n="peer_room_freeze_btn">
+                            🚨 Report &amp; Freeze Room
                         </button>
-                        <button onclick="shareReferralTelegram()" class="px-4 py-2 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs transition flex items-center gap-1.5">
-                            <span>✈️</span> Поделиться в Telegram
-                        </button>
-                        <button onclick="copyReferralLink()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs transition flex items-center gap-1.5">
-                            <span>📋</span> Скопировать ссылку
+                        <button onclick="triggerGenerateSummary()" class="px-3 py-1.5 rounded-xl bg-blue-950 hover:bg-blue-900 border border-blue-800 text-blue-300 font-semibold text-xs transition" data-i18n="peer_room_summary_btn">
+                            ⚡ AI Summary &amp; Anki Export
                         </button>
                     </div>
+                </div>
+
+                <!-- Chat Feed Box -->
+                <div class="bg-slate-900/60 border border-slate-800 rounded-3xl p-4 sm:p-6 h-[460px] flex flex-col justify-between shadow-2xl">
+                    <!-- Messages Stream Container -->
+                    <div id="messages-container" class="overflow-y-auto space-y-3.5 pr-2 flex-grow">
+                        <!-- Dynamic Messages -->
+                    </div>
+
+                    <!-- Input Bar -->
+                    <form onsubmit="sendMessage(event)" class="mt-4 pt-4 border-t border-slate-800 flex items-center gap-3">
+                        <input type="text" id="chat-input" data-i18n-placeholder="peer_room_type_ph" placeholder="Type your message (stored in RAM only)..." class="flex-grow bg-slate-950 border border-slate-800 rounded-2xl px-4 py-3 text-xs text-slate-100 focus:outline-none focus:border-emerald-500 transition">
+                        <button type="submit" class="px-6 py-3 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-500 hover:brightness-110 text-white font-bold text-xs transition shadow-lg shadow-emerald-600/30 flex items-center gap-2" data-i18n="peer_room_send_btn">
+                            Send
+                        </button>
+                    </form>
                 </div>
             </div>
         </section>
 
+        <!-- TAB 3: TUTOR EARNINGS & REFERRAL PROGRAM -->
+        <section id="view-earnings" class="space-y-6 hidden">
+            <!-- Tutor Application Banner -->
+            <div class="p-8 rounded-3xl bg-gradient-to-br from-emerald-950/60 via-slate-900 to-slate-900 border border-emerald-800/40 shadow-2xl space-y-4">
+                <div class="flex items-center gap-2">
+                    <span class="text-xs font-bold uppercase tracking-widest text-emerald-400 bg-emerald-950 px-3 py-1 rounded-full border border-emerald-800" data-i18n="peer_earnings_badge">Become an EduHub Peer Tutor</span>
+                </div>
+                <h2 class="text-2xl sm:text-3xl font-black text-white" data-i18n="peer_earnings_title">Earn $10–$30/hour Practicing Your Native Language</h2>
+                <p class="text-xs sm:text-sm text-slate-300 max-w-2xl leading-relaxed" data-i18n="peer_earnings_sub">
+                    Are you a student fluent in your native language? Open your schedule, practice with learners worldwide, and get payouts directly to your bank card.
+                </p>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+                    <div class="bg-slate-950/60 border border-slate-800 p-4 rounded-2xl">
+                        <span class="text-xl">📅</span>
+                        <h4 class="text-xs font-bold text-white mt-1" data-i18n="peer_earn_step1_t">1. Set Your Schedule</h4>
+                        <p class="text-[11px] text-slate-400 mt-0.5" data-i18n="peer_earn_step1_d">Choose convenient hours between classes or work.</p>
+                    </div>
+                    <div class="bg-slate-950/60 border border-slate-800 p-4 rounded-2xl">
+                        <span class="text-xl">💬</span>
+                        <h4 class="text-xs font-bold text-white mt-1" data-i18n="peer_earn_step2_t">2. Practice via Ephemeral Chat</h4>
+                        <p class="text-[11px] text-slate-400 mt-0.5" data-i18n="peer_earn_step2_d">Help students speak fluently. Chat wipes cleanly in 60 minutes.</p>
+                    </div>
+                    <div class="bg-slate-950/60 border border-slate-800 p-4 rounded-2xl">
+                        <span class="text-xl">💳</span>
+                        <h4 class="text-xs font-bold text-white mt-1" data-i18n="peer_earn_step3_t">3. Instant Payouts</h4>
+                        <p class="text-[11px] text-slate-400 mt-0.5" data-i18n="peer_earn_step3_d">Earn $5 to $10 per session with instant withdrawals.</p>
+                    </div>
+                </div>
+
+                <div class="pt-2">
+                    <button onclick="openTutorApplication()" class="px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs transition shadow-lg shadow-emerald-600/30" data-i18n="peer_earn_btn_apply">
+                        Apply as a Tutor ($15 Welcome Bonus) &rarr;
+                    </button>
+                </div>
+            </div>
+
+            <!-- Viral Referral Engine -->
+            <div class="p-6 rounded-3xl bg-slate-900 border border-slate-800 space-y-4">
+                <h3 class="text-base font-bold text-white mb-1" data-i18n="peer_ref_title">🎁 EduHub Viral Referral Program</h3>
+                <p class="text-xs text-slate-400" data-i18n="peer_ref_sub">
+                    Share your referral link with classmates. Every friend gets a <strong class="text-emerald-400">$5 bonus</strong>, and you earn <strong class="text-white">20% commission</strong> on every session they complete.
+                </p>
+                <div class="flex flex-wrap gap-3">
+                    <button onclick="shareReferral('whatsapp')" class="px-4 py-2 rounded-xl bg-emerald-950 hover:bg-emerald-900 border border-emerald-800 text-emerald-300 font-semibold text-xs transition flex items-center gap-1.5" data-i18n="peer_ref_wa">
+                        <span>💬</span> Share on WhatsApp
+                    </button>
+                    <button onclick="shareReferral('telegram')" class="px-4 py-2 rounded-xl bg-sky-950 hover:bg-sky-900 border border-sky-800 text-sky-300 font-semibold text-xs transition flex items-center gap-1.5" data-i18n="peer_ref_tg">
+                        <span>✈️</span> Share on Telegram
+                    </button>
+                    <button onclick="shareReferral('copy')" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs transition flex items-center gap-1.5" data-i18n="peer_ref_copy">
+                        <span>📋</span> Copy Referral Link
+                    </button>
+                </div>
+            </div>
+        </section>
     </main>
 
-    <!-- MODAL 1: BOOKING MODAL WITH NO-LOSS COMMISSION & PRE-CHECKOUT CONSENT -->
-    <div id="booking-modal" class="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-sm hidden flex items-center justify-center p-4">
-        <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative">
+    <!-- MODAL 1: BOOKING & CHECKOUT MODAL -->
+    <div id="booking-modal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-md w-full p-6 shadow-2xl space-y-5 relative">
             <button onclick="closeBookingModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white text-lg font-bold">&times;</button>
             
-            <div class="flex items-center gap-3 mb-4">
-                <span id="modal-tutor-avatar" class="text-3xl">👩‍🎓</span>
-                <div>
-                    <h3 id="modal-tutor-name" class="text-lg font-black text-white">Sarah Jenkins</h3>
-                    <span id="modal-tutor-meta" class="text-xs text-emerald-400 font-bold">University of Cambridge • 4.96★</span>
-                </div>
+            <div>
+                <span id="booking-tutor-badge" class="text-[10px] font-bold uppercase tracking-wider text-emerald-400 bg-emerald-950 px-2.5 py-0.5 rounded-full border border-emerald-800">Cambridge Student</span>
+                <h3 id="booking-tutor-name" class="text-lg font-black text-white mt-2">Book a 60-Minute Session</h3>
+                <p class="text-xs text-slate-400 mt-0.5" data-i18n="peer_modal_booking_sub">Direct live dialogue with native speaker. Messages wipe after 60 min.</p>
             </div>
 
             <form id="booking-form" onsubmit="submitBooking(event)" class="space-y-4">
                 <div>
-                    <label class="block text-xs font-semibold text-slate-300 mb-1">Формат сессии и стоимость:</label>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1" data-i18n="peer_modal_plan_lbl">Session format and cost:</label>
                     <div class="space-y-2">
-                        <label class="flex items-center justify-between p-3 rounded-xl bg-slate-950 border border-slate-800 hover:border-emerald-500 cursor-pointer">
-                            <div class="flex items-center gap-2">
-                                <input type="radio" name="session_tier" value="sprint_5" checked class="text-emerald-500 focus:ring-0">
+                        <label class="flex items-center justify-between p-3 rounded-xl bg-slate-950 border border-slate-800 cursor-pointer hover:border-emerald-500 transition">
+                            <div class="flex items-center gap-2.5">
+                                <input type="radio" name="session_tier" value="sprint_5" checked class="text-emerald-500">
                                 <div>
-                                    <span class="text-xs font-bold text-white block">Speaking Sprint (30 мин)</span>
-                                    <span class="text-[11px] text-slate-400">Экспресс-тренировка беглости речи</span>
+                                    <span class="text-xs font-bold text-white block" data-i18n="peer_modal_plan_sprint">Speaking Sprint (30 min)</span>
+                                    <span class="text-[11px] text-slate-400" data-i18n="peer_modal_plan_sprint_d">Express conversational fluency workout</span>
                                 </div>
                             </div>
-                            <span class="text-xs font-black text-emerald-400">$5.00</span>
+                            <span class="text-xs font-black text-emerald-400 font-mono">$5.00</span>
                         </label>
 
-                        <label class="flex items-center justify-between p-3 rounded-xl bg-slate-950 border border-slate-800 hover:border-emerald-500 cursor-pointer">
-                            <div class="flex items-center gap-2">
-                                <input type="radio" name="session_tier" value="mastery_10" class="text-emerald-500 focus:ring-0">
+                        <label class="flex items-center justify-between p-3 rounded-xl bg-slate-950 border border-slate-800 cursor-pointer hover:border-emerald-500 transition">
+                            <div class="flex items-center gap-2.5">
+                                <input type="radio" name="session_tier" value="mastery_10" class="text-emerald-500">
                                 <div>
-                                    <span class="text-xs font-bold text-white block">Academic Deep Dive (60 мин)</span>
-                                    <span class="text-[11px] text-slate-400">Подготовка к IELTS/SAT/DELE</span>
+                                    <span class="text-xs font-bold text-white block" data-i18n="peer_modal_plan_deep">Academic Deep Dive (60 min)</span>
+                                    <span class="text-[11px] text-slate-400" data-i18n="peer_modal_plan_deep_d">Targeted IELTS / TOEFL / DELE preparation</span>
                                 </div>
                             </div>
-                            <span class="text-xs font-black text-emerald-400">$10.00</span>
+                            <span class="text-xs font-black text-emerald-400 font-mono">$10.00</span>
                         </label>
 
-                        <label class="flex items-center justify-between p-3 rounded-xl bg-slate-950 border border-slate-800 hover:border-emerald-500 cursor-pointer">
-                            <div class="flex items-center gap-2">
-                                <input type="radio" name="session_tier" value="free_swap" class="text-emerald-500 focus:ring-0">
+                        <label class="flex items-center justify-between p-3 rounded-xl bg-slate-950 border border-slate-800 cursor-pointer hover:border-emerald-500 transition">
+                            <div class="flex items-center gap-2.5">
+                                <input type="radio" name="session_tier" value="free_swap" class="text-emerald-500">
                                 <div>
-                                    <span class="text-xs font-bold text-white block">Community Swap (30 мин)</span>
-                                    <span class="text-[11px] text-slate-400">Бесплатный взаимный обмен</span>
+                                    <span class="text-xs font-bold text-white block" data-i18n="peer_modal_plan_free">Community Swap (30 min)</span>
+                                    <span class="text-[11px] text-slate-400" data-i18n="peer_modal_plan_free_d">Mutual 1-on-1 language exchange</span>
                                 </div>
                             </div>
-                            <span class="text-xs font-black text-slate-400">Бесплатно</span>
+                            <span class="text-xs font-black text-slate-400" data-i18n="peer_modal_plan_free_tag">Free</span>
                         </label>
                     </div>
                 </div>
 
                 <div>
-                    <label class="block text-xs font-semibold text-slate-300 mb-1">Ваше имя или псевдоним:</label>
-                    <input type="text" id="booking-handle" required placeholder="Например: Rustam_Oxford" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-emerald-500">
+                    <label class="block text-xs font-semibold text-slate-300 mb-1" data-i18n="peer_modal_name_lbl">Your Name or Nickname:</label>
+                    <input type="text" id="booking-handle" required data-i18n-placeholder="peer_modal_name_ph" placeholder="e.g. Alex_Oxford" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2 text-xs text-slate-200 focus:outline-none focus:border-emerald-500">
                 </div>
 
                 <div>
-                    <label class="block text-xs font-semibold text-slate-300 mb-1">Email для квитанции и доступа:</label>
-                    <input type="email" id="booking-email" required placeholder="student@example.com" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-emerald-500">
+                    <label class="block text-xs font-semibold text-slate-300 mb-1" data-i18n="peer_modal_email_lbl">Email for receipt &amp; access:</label>
+                    <input type="email" id="booking-email" required data-i18n-placeholder="peer_modal_email_ph" placeholder="student@example.com" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2 text-xs text-slate-200 focus:outline-none focus:border-emerald-500">
                 </div>
 
                 <div>
-                    <label class="block text-xs font-semibold text-slate-300 mb-1">Тема сессии:</label>
-                    <input type="text" id="booking-topic" placeholder="IELTS Speaking Part 2 &amp; Academic Vocab" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-emerald-500">
+                    <label class="block text-xs font-semibold text-slate-300 mb-1" data-i18n="peer_modal_topic_lbl">Session Goal or Topic:</label>
+                    <input type="text" id="booking-topic" required data-i18n-placeholder="peer_modal_topic_ph" placeholder="e.g. IELTS Speaking Part 3, Tech Interview, Travel English" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2 text-xs text-slate-200 focus:outline-none focus:border-emerald-500">
                 </div>
 
-                <!-- Pre-Checkout Legal Micro-Consent Checkbox -->
-                <div class="pt-2 border-t border-slate-800 text-[11px] text-slate-400 leading-tight space-y-2">
-                    <label class="flex items-start gap-2 cursor-pointer">
-                        <input type="checkbox" id="booking-legal-check" required class="mt-0.5 rounded bg-slate-950 border-slate-700 text-emerald-500 focus:ring-0">
-                        <span>Я ознакомлен и согласен с <a href="/terms" target="_blank" class="text-emerald-400 underline">Правилами пользования</a>, <a href="/refund" target="_blank" class="text-emerald-400 underline">Политикой возврата</a> и понимаю, что чат <strong>хранится ровно 60 минут</strong> в ОЗУ.</span>
+                <div class="pt-2">
+                    <label class="flex items-start gap-2 text-[11px] text-slate-400 cursor-pointer">
+                        <input type="checkbox" required checked class="mt-0.5 text-emerald-500">
+                        <span data-i18n="peer_modal_terms">I agree to the <a href="/terms" target="_blank" class="text-emerald-400 underline">Terms</a> and 1-hour ephemeral privacy policy.</span>
                     </label>
                 </div>
 
-                <button type="submit" id="btn-submit-booking" class="w-full py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:brightness-110 text-white font-black text-xs transition shadow-lg shadow-emerald-500/20 cursor-pointer">
-                    Подтвердить и открыть 60-минутную комнату →
+                <button type="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-500 hover:brightness-110 text-white font-bold text-xs transition shadow-lg shadow-emerald-500/20 cursor-pointer" data-i18n="peer_modal_confirm_btn">
+                    Confirm &amp; Open 60-Minute Room &rarr;
                 </button>
             </form>
         </div>
     </div>
 
-    <!-- MODAL 2: 5-STAR RATING & REVIEW MODAL -->
-    <div id="rating-modal" class="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-sm hidden flex items-center justify-center p-4">
-        <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative">
+    <!-- MODAL 2: 5-STAR RATING & REVIEW -->
+    <div id="rating-modal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-md w-full p-6 shadow-2xl space-y-4 relative">
             <button onclick="closeRatingModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white text-lg font-bold">&times;</button>
             
             <div class="text-center mb-5">
                 <span class="text-3xl">⭐</span>
-                <h3 class="text-lg font-black text-white mt-1">Оценка наставника</h3>
-                <p class="text-xs text-slate-400 mt-1">Помогите сообществу поддерживать высочайшее академическое качество</p>
+                <h3 class="text-lg font-black text-white mt-1" data-i18n="peer_modal_rate_title">Rate Your Tutor</h3>
+                <p class="text-xs text-slate-400 mt-1" data-i18n="peer_modal_rate_sub">Help the community maintain world-class academic quality.</p>
             </div>
 
             <form id="rating-form" onsubmit="submitRating(event)" class="space-y-4">
@@ -365,7 +348,7 @@
 
                 <!-- Badges / Tags -->
                 <div>
-                    <label class="block text-xs font-semibold text-slate-300 mb-1.5">Отметьте сильные стороны:</label>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1.5" data-i18n="peer_modal_rate_strengths">Select Strengths:</label>
                     <div class="flex flex-wrap gap-2 text-[11px]">
                         <button type="button" onclick="toggleTag(this)" class="tag-pill px-2.5 py-1 rounded-lg bg-slate-950 border border-slate-800 text-slate-400 hover:text-emerald-400 transition">Native Accent</button>
                         <button type="button" onclick="toggleTag(this)" class="tag-pill px-2.5 py-1 rounded-lg bg-slate-950 border border-slate-800 text-slate-400 hover:text-emerald-400 transition">Patient &amp; Helpful</button>
@@ -375,12 +358,12 @@
                 </div>
 
                 <div>
-                    <label class="block text-xs font-semibold text-slate-300 mb-1">Ваш отзыв:</label>
-                    <textarea id="rating-comment" rows="3" placeholder="Что вам больше всего понравилось во время 60-минутной сессии?" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-emerald-500"></textarea>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1" data-i18n="peer_modal_rate_comment_lbl">Your Feedback:</label>
+                    <textarea id="rating-comment" rows="3" data-i18n-placeholder="peer_modal_rate_comment_ph" placeholder="What did you like most during your 60-minute session?" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-emerald-500"></textarea>
                 </div>
 
-                <button type="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:brightness-110 text-slate-950 font-black text-xs transition shadow-lg shadow-amber-500/20 cursor-pointer">
-                    Опубликовать оценку →
+                <button type="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:brightness-110 text-slate-950 font-black text-xs transition shadow-lg shadow-amber-500/20 cursor-pointer" data-i18n="peer_modal_rate_submit">
+                    Publish Review &rarr;
                 </button>
             </form>
         </div>
@@ -392,25 +375,25 @@
             <button onclick="closeSummaryModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white text-lg font-bold">&times;</button>
             
             <div class="mb-4">
-                <span class="text-xs font-bold uppercase tracking-wider text-amber-400 bg-amber-950/80 px-3 py-1 rounded-full border border-amber-800">
-                    ⚡ ИИ-Конспект &amp; Anki Export
+                <span class="text-xs font-bold uppercase tracking-wider text-amber-400 bg-amber-950/80 px-3 py-1 rounded-full border border-amber-800" data-i18n="peer_modal_sum_badge">
+                    ⚡ AI Scribe &amp; Anki Export
                 </span>
-                <h3 class="text-xl font-black text-white mt-2">Академический конспект сессии (до удаления чата)</h3>
-                <p class="text-xs text-slate-400 mt-0.5">Сформировано ИИ-Секретарем EduHub на основе переписки в оперативной памяти</p>
+                <h3 class="text-xl font-black text-white mt-2" data-i18n="peer_modal_sum_title">Academic Session Summary (Before Chat Deletion)</h3>
+                <p class="text-xs text-slate-400 mt-0.5" data-i18n="peer_modal_sum_sub">Synthesized by EduHub AI Scribe directly from volatile RAM conversation.</p>
             </div>
 
-            <div id="summary-content" class="flex-grow overflow-y-auto bg-slate-950 border border-slate-800 rounded-2xl p-5 text-xs text-slate-200 font-mono whitespace-pre-wrap leading-relaxed mb-4">
-                Загрузка синтеза урока...
+            <div id="summary-content" class="flex-grow overflow-y-auto bg-slate-950 border border-slate-800 rounded-2xl p-5 text-xs text-slate-200 font-mono whitespace-pre-wrap leading-relaxed mb-4" data-i18n="peer_modal_sum_loading">
+                Loading lesson synthesis...
             </div>
 
             <!-- Climax Upsell CTA -->
             <div class="p-4 rounded-xl bg-gradient-to-r from-amber-500/20 via-blue-500/15 to-amber-500/20 border border-amber-500/40 flex flex-col sm:flex-row items-center justify-between gap-3">
                 <div class="text-xs">
-                    <span class="font-extrabold text-white block">Хотите скачивать неограниченные конспекты и аудио?</span>
-                    <span class="text-slate-300">Включено во все тарифы EduHub Pro Max. 14 дней гарантия возврата денег.</span>
+                    <span class="font-extrabold text-white block" data-i18n="peer_modal_sum_upsell_t">Want to download unlimited summaries &amp; audio flashcards?</span>
+                    <span class="text-slate-300" data-i18n="peer_modal_sum_upsell_d">Included in all EduHub Pro Max plans. 14-day money-back guarantee.</span>
                 </div>
-                <button onclick="triggerProMaxTrial()" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:brightness-110 text-slate-950 font-black text-xs transition shadow-lg shadow-amber-500/30 whitespace-nowrap cursor-pointer">
-                    Попробовать Pro Max за $1 →
+                <button onclick="triggerProMaxTrial()" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:brightness-110 text-slate-950 font-black text-xs transition shadow-lg shadow-amber-500/30 whitespace-nowrap cursor-pointer" data-i18n="peer_modal_sum_upsell_btn">
+                    Try Pro Max for $1 &rarr;
                 </button>
             </div>
         </div>
@@ -419,8 +402,8 @@
     <!-- Footer -->
     <footer class="border-t border-slate-800/80 bg-slate-950 py-8 text-center text-xs text-slate-500">
         <div class="max-w-6xl mx-auto px-4">
-            <p>© 2026 EduHub AI. All rights reserved. • <a href="/privacy" class="hover:text-slate-400">Политика конфиденциальности</a> • <a href="/terms" class="hover:text-slate-400">Условия использования</a> • <a href="/refund" class="hover:text-slate-400">Гарантия возврата 14 дней</a> • <a href="/support" class="hover:text-slate-400">Арбитраж и поддержка</a></p>
-            <p class="text-[11px] text-slate-600 mt-2">Эфемерный P2P обмен: физическое удаление сообщений ровно через 60 минут. Сервер не ведет долговременного логирования.</p>
+            <p data-i18n="peer_footer_copy">&copy; 2026 EduHub AI. All rights reserved. &bull; <a href="/privacy" class="hover:text-slate-400">Privacy Policy</a> &bull; <a href="/terms" class="hover:text-slate-400">Terms of Service</a> &bull; <a href="/refund" class="hover:text-slate-400">14-Day Refund Guarantee</a> &bull; <a href="/support" class="hover:text-slate-400">Arbitration &amp; Support</a></p>
+            <p class="text-[11px] text-slate-600 mt-2" data-i18n="peer_footer_ephemeral">Ephemeral P2P Exchange: Messages permanently destroyed after 60 minutes. Zero server logging.</p>
         </div>
     </footer>
 
@@ -433,197 +416,185 @@
     let messagePollInterval = null;
     let selectedTags = [];
 
-    // Localized strings dictionary
-    const PEER_I18N = {
-        ru: {
-            back: "На платформу",
-            banner_title: "Регламент конфиденциальности 60 минут:",
-            banner_desc: "Все сообщения хранятся исключительно в оперативной памяти (ОЗУ) и безвозвратно уничтожаются через 1 час. Сервер не ведет постоянных логов. Запрещены угрозы, оружие, наркотики и 18+ контент.",
-            hero_title: "Практика с носителями языка & Конфиденциальные сессии",
-            hero_sub: "Общайтесь с проверенными студентами ведущих мировых университетов (Cambridge, ВШЭ, WIUT, Madrid). Честные рейтинги 5.0★, прозрачная оплата сессий и 100% защита персональных данных.",
-            tab_tutors: "Каталог носителей & Рейтинг",
-            tab_room: "1-Часовая комната диалога",
-            tab_earnings: "Заработок для носителей & Виральность",
-            filter_label: "Родной язык наставника:",
-            book_btn: "Забронировать сессию",
-            review_btn: "Оставить отзыв",
-            session_sprint: "Speaking Sprint (30 мин)",
-            session_deep: "Academic Deep Dive (60 мин)",
-            session_free: "Community Swap (30 мин)"
-        },
-        en: {
-            back: "To Platform",
-            banner_title: "60-Minute Ephemeral Privacy Rule:",
-            banner_desc: "All messages are stored strictly in RAM and are permanently deleted after 1 hour (60 minutes). Zero server logs. Zero tolerance for threats, weapons, drugs, or adult content.",
-            hero_title: "Native Peer Practice & Confidential Sessions",
-            hero_sub: "Connect with verified students from top universities (Cambridge, HSE, WIUT, Madrid). 5.0★ rating system, fair pay-per-session, and 100% confidential ephemeral chat.",
-            tab_tutors: "Native Tutors & Ratings",
-            tab_room: "1-Hour Ephemeral Room",
-            tab_earnings: "Tutor Earnings & Referral",
-            filter_label: "Tutor's Native Language:",
-            book_btn: "Book Session",
-            review_btn: "Rate Tutor",
-            session_sprint: "Speaking Sprint (30 min)",
-            session_deep: "Academic Deep Dive (60 min)",
-            session_free: "Community Swap (30 min)"
-        },
-        uz: {
-            back: "Platformaga",
-            banner_title: "60 daqiqalik maxfiylik qoidasi:",
-            banner_desc: "Barcha xabarlar faqat operativ xotirada (RAM) saqlanadi va 1 soatdan so'ng butunlay o'chiriladi. Serverda hech qanday loglar saqlanmaydi.",
-            hero_title: "Til egalari bilan amaliyot va maxfiy suhbat",
-            hero_sub: "Dunyoning nufuzli universitetlari talabalari bilan jonli muloqot qiling. 5.0★ reyting, shaffof to'lov va to'liq maxfiylik.",
-            tab_tutors: "Ustozlar katalogi va reyting",
-            tab_room: "1 soatlik muloqot xonasi",
-            tab_earnings: "Talabalar uchun daromad",
-            filter_label: "Ona tili:",
-            book_btn: "Sessiyani band qilish",
-            review_btn: "Baholash",
-            session_sprint: "Speaking Sprint (30 daq)",
-            session_deep: "Academic Deep Dive (60 daq)",
-            session_free: "Community Swap (30 daq)"
-        },
-        es: {
-            back: "A la Plataforma",
-            banner_title: "Regla de Privacidad Efímera de 60 Minutos:",
-            banner_desc: "Todos los mensajes se almacenan estrictamente en la memoria RAM y se eliminan permanentemente tras 1 hora. Cero registros en servidor.",
-            hero_title: "Práctica con Nativos y Sesiones Confidenciales",
-            hero_sub: "Conéctate con estudiantes verificados de las mejores universidades. Sistema de valoración 5.0★, tarifas transparentes y chat efímero.",
-            tab_tutors: "Catálogo de Nativos y Valoraciones",
-            tab_room: "Sala Efímera de 1 Hora",
-            tab_earnings: "Ingresos para Nativos y Viralidad",
-            filter_label: "Lengua materna del tutor:",
-            book_btn: "Reservar sesión",
-            review_btn: "Calificar tutor",
-            session_sprint: "Speaking Sprint (30 min)",
-            session_deep: "Academic Deep Dive (60 min)",
-            session_free: "Community Swap (30 min)"
-        }
-    };
+    function switchTab(tabId) {
+        document.querySelectorAll('[id^="view-"]').forEach(el => el.classList.add('hidden'));
+        document.querySelectorAll('[id^="tab-btn-"]').forEach(btn => {
+            btn.classList.remove('border-emerald-500', 'text-emerald-400');
+            btn.classList.add('border-transparent', 'text-slate-400');
+        });
 
-    function switchLanguage(lang) {
-        const d = PEER_I18N[lang] || PEER_I18N.ru;
-        document.getElementById('txt-back').innerText = d.back;
-        document.getElementById('txt-banner-title').innerText = d.banner_title;
-        document.getElementById('txt-banner-desc').innerText = d.banner_desc;
-        document.getElementById('txt-hero-title').innerText = d.hero_title;
-        document.getElementById('txt-hero-sub').innerText = d.hero_sub;
-        document.getElementById('txt-tab-tutors').innerText = d.tab_tutors;
-        document.getElementById('txt-tab-room').innerText = d.tab_room;
-        document.getElementById('txt-tab-earnings').innerText = d.tab_earnings;
-        document.getElementById('txt-filter-label').innerText = d.filter_label;
-        renderTutors();
-    }
-
-    function switchTab(tab) {
-        document.getElementById('section-tutors').classList.add('hidden');
-        document.getElementById('section-room').classList.add('hidden');
-        document.getElementById('section-earnings').classList.add('hidden');
-
-        document.getElementById('tab-btn-tutors').className = "px-4 sm:px-6 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition flex items-center gap-2 bg-slate-900 text-slate-400 hover:text-white border border-slate-800";
-        document.getElementById('tab-btn-room').className = "px-4 sm:px-6 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition flex items-center gap-2 bg-slate-900 text-slate-400 hover:text-white border border-slate-800";
-        document.getElementById('tab-btn-earnings').className = "px-4 sm:px-6 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition flex items-center gap-2 bg-slate-900 text-slate-400 hover:text-white border border-slate-800";
-
-        if (tab === 'tutors') {
-            document.getElementById('section-tutors').classList.remove('hidden');
-            document.getElementById('tab-btn-tutors').className = "px-4 sm:px-6 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition flex items-center gap-2 bg-emerald-600 text-white shadow-lg shadow-emerald-600/20";
-        } else if (tab === 'room') {
-            document.getElementById('section-room').classList.remove('hidden');
-            document.getElementById('tab-btn-room').className = "px-4 sm:px-6 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition flex items-center gap-2 bg-emerald-600 text-white shadow-lg shadow-emerald-600/20";
-        } else if (tab === 'earnings') {
-            document.getElementById('section-earnings').classList.remove('hidden');
-            document.getElementById('tab-btn-earnings').className = "px-4 sm:px-6 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition flex items-center gap-2 bg-emerald-600 text-white shadow-lg shadow-emerald-600/20";
+        const targetView = document.getElementById(`view-${tabId}`);
+        const targetBtn = document.getElementById(`tab-btn-${tabId}`);
+        if (targetView) targetView.classList.remove('hidden');
+        if (targetBtn) {
+            targetBtn.classList.remove('border-transparent', 'text-slate-400');
+            targetBtn.classList.add('border-emerald-500', 'text-emerald-400');
         }
     }
 
-    async function loadTutors(language = '') {
+    async function loadTutors() {
         try {
-            const url = language ? `/api/v1/peer/tutors?native_language=${encodeURIComponent(language)}` : '/api/v1/peer/tutors';
-            const res = await fetch(url);
+            const res = await fetch('/api/peer/tutors');
             const data = await res.json();
-            if (data.status === 'success') {
-                currentTutors = data.tutors;
-                renderTutors();
-            }
-        } catch (e) {
-            console.error("Failed to load tutors:", e);
+            currentTutors = data.tutors || [];
+            renderTutors(currentTutors);
+        } catch (err) {
+            console.error("Failed to load tutors:", err);
+            // Fallback default list
+            currentTutors = [
+                {
+                    tutor_id: "tut_cambridge_sarah",
+                    full_name: "Sarah Jenkins",
+                    avatar_url: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
+                    native_language: "English",
+                    university: "University of Cambridge",
+                    degree_major: "Linguistics & Education",
+                    rating: 5.0,
+                    review_count: 48,
+                    hourly_rate_usd: 10,
+                    bio: "Native British English speaker. Specializes in IELTS Speaking Part 2 & 3 band 8.5+ prep.",
+                    badges: ["Verified Student", "Cambridge Scholar", "Top Rated 5.0"],
+                    is_online: true
+                },
+                {
+                    tutor_id: "tut_hse_maxim",
+                    full_name: "Maxim Voronov",
+                    avatar_url: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=150&auto=format&fit=crop&q=80",
+                    native_language: "Russian",
+                    university: "HSE University (HSE)",
+                    degree_major: "Applied Mathematics",
+                    rating: 4.95,
+                    review_count: 32,
+                    hourly_rate_usd: 5,
+                    bio: "Native Russian speaker with fluent academic English. Great for conversational Russian practice.",
+                    badges: ["Verified Student", "Top Rated 5.0"],
+                    is_online: true
+                },
+                {
+                    tutor_id: "tut_wiut_madina",
+                    full_name: "Madina Alimova",
+                    avatar_url: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=80",
+                    native_language: "Uzbek",
+                    university: "Westminster Int University (WIUT)",
+                    degree_major: "Business Information Systems",
+                    rating: 4.98,
+                    review_count: 54,
+                    hourly_rate_usd: 5,
+                    bio: "Native Uzbek and Russian bilingual speaker. Helpful, structured, and friendly tutor.",
+                    badges: ["Verified Student", "Bilingual", "Top Rated 5.0"],
+                    is_online: true
+                }
+            ];
+            renderTutors(currentTutors);
         }
     }
 
-    function renderTutors() {
+    function renderTutors(tutors) {
         const grid = document.getElementById('tutors-grid');
-        grid.innerHTML = '';
+        if (!grid) return;
+        if (!tutors || tutors.length === 0) {
+            grid.innerHTML = `<div class="text-center py-12 text-slate-500 col-span-full">No tutors found matching your criteria.</div>`;
+            return;
+        }
 
-        const curLang = document.getElementById('lang-select').value;
-        const d = PEER_I18N[curLang] || PEER_I18N.ru;
-
-        currentTutors.forEach(t => {
-            const card = document.createElement('div');
-            card.className = "bg-slate-900/80 border border-slate-800 rounded-3xl p-6 shadow-xl flex flex-col justify-between hover:border-emerald-500/50 transition relative overflow-hidden group";
-
-            const badgesHtml = (t.badges || []).map(b => `<span class="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 text-[10px] font-bold">${b}</span>`).join(' ');
-            const tagsHtml = (t.tags || []).map(tg => `<span class="px-2 py-0.5 rounded-md bg-slate-950 text-slate-400 border border-slate-800 text-[10px]">${tg}</span>`).join(' ');
-
-            card.innerHTML = `
-                <div>
-                    <div class="flex items-start justify-between gap-3 mb-3">
+        grid.innerHTML = tutors.map(t => `
+            <div class="bg-slate-900 border border-slate-800/80 rounded-3xl p-5 flex flex-col justify-between hover:border-emerald-500/40 transition shadow-xl group">
+                <div class="space-y-4">
+                    <div class="flex items-start justify-between">
                         <div class="flex items-center gap-3">
-                            <span class="w-12 h-12 rounded-2xl bg-slate-800 border border-slate-700 flex items-center justify-center text-2xl">${t.avatar || '👩‍🎓'}</span>
+                            <div class="relative">
+                                <img src="${t.avatar_url}" alt="${t.full_name}" class="w-12 h-12 rounded-2xl object-cover border border-slate-700">
+                                <span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full ${t.is_online ? 'bg-emerald-500 ring-2 ring-slate-900' : 'bg-slate-600'}"></span>
+                            </div>
                             <div>
-                                <h3 class="text-base font-black text-white">${t.name}</h3>
-                                <p class="text-xs text-slate-400 font-medium">${t.university}</p>
+                                <h3 class="text-sm font-black text-white group-hover:text-emerald-400 transition">${t.full_name}</h3>
+                                <span class="text-[11px] text-slate-400 block">${t.university}</span>
+                                <span class="text-[10px] text-slate-500 block font-mono">${t.degree_major}</span>
                             </div>
                         </div>
                         <div class="text-right">
-                            <div class="inline-flex items-center gap-1 px-2.5 py-1 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-black">
-                                <span>⭐</span> <span>${t.rating.toFixed(2)}</span>
-                            </div>
-                            <span class="block text-[10px] text-slate-500 mt-0.5">${t.review_count} отзывов</span>
+                            <span class="inline-flex items-center gap-1 text-xs font-black text-amber-400 bg-amber-950/60 px-2 py-0.5 rounded-lg border border-amber-800/40 font-mono">
+                                ★ ${Number(t.rating).toFixed(2)}
+                            </span>
+                            <span class="block text-[10px] text-slate-500 mt-0.5">${t.review_count} reviews</span>
                         </div>
                     </div>
 
-                    <div class="flex flex-wrap gap-1.5 mb-3">
-                        ${badgesHtml}
+                    <div class="flex flex-wrap gap-1.5">
+                        <span class="text-[10px] font-bold text-emerald-400 bg-emerald-950/80 px-2 py-0.5 rounded-md border border-emerald-800">
+                            🗣️ Native: ${t.native_language}
+                        </span>
+                        ${(t.badges || []).map(b => `<span class="text-[10px] text-slate-400 bg-slate-950 px-2 py-0.5 rounded-md border border-slate-800">${b}</span>`).join('')}
                     </div>
 
-                    <p class="text-xs text-slate-300 leading-relaxed mb-4">
+                    <p class="text-xs text-slate-300 leading-relaxed line-clamp-2">
                         ${t.bio}
                     </p>
-
-                    <div class="flex flex-wrap gap-1.5 mb-4">
-                        ${tagsHtml}
-                    </div>
                 </div>
 
-                <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between gap-3">
+                <div class="pt-4 mt-4 border-t border-slate-800 flex items-center justify-between gap-3">
                     <div>
-                        <span class="text-[10px] text-slate-400 block uppercase font-bold tracking-wider">Сессия от:</span>
+                        <span class="text-[10px] text-slate-400 block uppercase font-bold tracking-wider">Session from:</span>
                         <div class="flex items-baseline gap-1">
-                            <span class="text-lg font-black text-emerald-400">$5.00</span>
-                            <span class="text-[10px] text-slate-500">/ 30 мин</span>
+                            <span class="text-base font-black text-white font-mono">$${t.hourly_rate_usd === 0 ? '0' : (t.hourly_rate_usd / 2).toFixed(0)}</span>
+                            <span class="text-[10px] text-slate-500">/ 30 min</span>
                         </div>
                     </div>
                     <div class="flex items-center gap-2">
-                        <button onclick="openRatingForTutor('${t.id}')" class="px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 hover:border-slate-700 text-slate-300 text-xs font-bold transition">
+                        <button onclick="openRatingModal('${t.tutor_id}', '${t.full_name}')" class="p-2 rounded-xl bg-slate-950 hover:bg-slate-800 text-slate-400 hover:text-amber-400 border border-slate-800 transition" title="Rate Tutor">
                             ⭐
                         </button>
-                        <button onclick="openBookingModal('${t.id}')" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:brightness-110 text-white text-xs font-bold transition shadow-lg shadow-emerald-500/20">
-                            ${d.book_btn} →
+                        <button onclick="openBookingModal('${t.tutor_id}')" class="px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-500 hover:brightness-110 text-white font-bold text-xs transition shadow-md shadow-emerald-500/20 whitespace-nowrap">
+                            Book Session &rarr;
                         </button>
                     </div>
                 </div>
-            `;
-            grid.appendChild(card);
-        });
+            </div>
+        `).join('');
+    }
+
+    function filterTutors() {
+        const lang = document.getElementById('filter-language').value;
+        const maxPrice = document.getElementById('filter-price').value;
+        const query = document.getElementById('search-query').value.toLowerCase().trim();
+        const sort = document.getElementById('filter-sort').value;
+
+        let filtered = [...currentTutors];
+
+        if (lang !== 'all') {
+            filtered = filtered.filter(t => t.native_language.toLowerCase() === lang.toLowerCase());
+        }
+
+        if (maxPrice !== 'all') {
+            const price = parseFloat(maxPrice);
+            filtered = filtered.filter(t => (t.hourly_rate_usd / 2) <= price);
+        }
+
+        if (query) {
+            filtered = filtered.filter(t => 
+                t.full_name.toLowerCase().includes(query) ||
+                t.university.toLowerCase().includes(query) ||
+                t.bio.toLowerCase().includes(query)
+            );
+        }
+
+        if (sort === 'rating') {
+            filtered.sort((a, b) => b.rating - a.rating);
+        } else if (sort === 'price_asc') {
+            filtered.sort((a, b) => a.hourly_rate_usd - b.hourly_rate_usd);
+        } else if (sort === 'reviews') {
+            filtered.sort((a, b) => b.review_count - a.review_count);
+        }
+
+        renderTutors(filtered);
     }
 
     function openBookingModal(tutorId) {
-        selectedTutor = currentTutors.find(t => t.id === tutorId) || currentTutors[0];
+        selectedTutor = currentTutors.find(t => t.tutor_id === tutorId) || currentTutors[0];
         if (!selectedTutor) return;
 
-        document.getElementById('modal-tutor-avatar').innerText = selectedTutor.avatar || '👩‍🎓';
-        document.getElementById('modal-tutor-name').innerText = selectedTutor.name;
-        document.getElementById('modal-tutor-meta').innerText = `${selectedTutor.university} • ${selectedTutor.rating.toFixed(2)}★ (${selectedTutor.review_count} reviews)`;
+        document.getElementById('booking-tutor-name').innerText = `Book session with ${selectedTutor.full_name}`;
+        document.getElementById('booking-tutor-badge').innerText = `${selectedTutor.university} Native Tutor`;
         document.getElementById('booking-modal').classList.remove('hidden');
     }
 
@@ -634,218 +605,208 @@
     async function submitBooking(e) {
         e.preventDefault();
         const tier = document.querySelector('input[name="session_tier"]:checked').value;
-        const handle = document.getElementById('booking-handle').value.trim();
-        const email = document.getElementById('booking-email').value.trim();
-        const topic = document.getElementById('booking-topic').value.trim() || 'Conversational Practice';
+        const studentHandle = document.getElementById('booking-handle').value.trim();
+        const studentEmail = document.getElementById('booking-email').value.trim();
+        const sessionTopic = document.getElementById('booking-topic').value.trim();
 
         try {
-            const res = await fetch('/api/v1/peer/book-session', {
+            const res = await fetch('/api/peer/book', {
                 method: 'POST',
-                headers: {'Content-Type': 'application/json'},
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    tutor_id: selectedTutor.id,
-                    student_email: email,
-                    student_handle: handle,
-                    session_tier: tier,
-                    topic: topic
+                    tutor_id: selectedTutor.tutor_id,
+                    student_handle: studentHandle,
+                    student_email: studentEmail,
+                    session_topic: sessionTopic,
+                    session_tier: tier
                 })
             });
 
             const data = await res.json();
-            if (data.status === 'success') {
+            if (res.ok && data.room) {
                 closeBookingModal();
-                activeRoom = data.room;
-                startRoomSession(data.room, data.initial_message);
+                enterRoom(data.room);
             } else {
-                alert("Ошибка бронирования: " + JSON.stringify(data.detail));
+                alert("Booking error: " + (data.detail ? JSON.stringify(data.detail) : "Please try again."));
             }
         } catch (err) {
             console.error("Booking error:", err);
-            alert("Не удалось забронировать сессию. Попробуйте еще раз.");
+            alert("Could not complete booking. Please try again.");
         }
     }
 
-    function startRoomSession(room, initialMsg) {
-        document.getElementById('room-status-badge').innerText = `Сессия активна (${room.session_tier === 'mastery_10' ? '60 мин' : '30 мин'})`;
-        document.getElementById('room-id-display').innerText = `ID: ${room.room_id}`;
-        document.getElementById('room-topic-display').innerText = room.topic;
-        document.getElementById('room-participants-display').innerText = `Наставник: ${room.tutor_name} (${room.tutor_native_language}) • Студент: ${room.student_handle}`;
-        document.getElementById('active-room-indicator').classList.remove('hidden');
-
-        // Render initial welcome message
-        const container = document.getElementById('messages-container');
-        container.innerHTML = '';
-        if (initialMsg) {
-            appendMessage(initialMsg);
-        }
-
-        // Start 60-minute countdown
-        startCountdown(room.expires_at);
-
-        // Switch to room tab
+    function enterRoom(room) {
+        activeRoom = room;
         switchTab('room');
+        document.getElementById('no-room-alert').classList.add('hidden');
+        document.getElementById('active-room-view').classList.remove('hidden');
+        
+        document.getElementById('room-status-badge').innerText = `Active Session (${room.session_tier === 'mastery_10' ? '60 min' : '30 min'})`;
+        document.getElementById('room-participants-display').innerText = `Tutor: ${room.tutor_name} (${room.tutor_native_language}) | Student: ${room.student_handle}`;
 
-        // Start message polling
-        if (messagePollInterval) clearInterval(messagePollInterval);
-        messagePollInterval = setInterval(pollMessages, 3000);
+        startCountdown(room.expires_at_epoch);
+        startPollingMessages(room.room_id);
     }
 
-    function startCountdown(expiresAtTimestamp) {
+    function startCountdown(expiresEpoch) {
         if (countdownInterval) clearInterval(countdownInterval);
 
         function updateClock() {
-            const now = Date.now() / 1000;
-            const diff = Math.max(0, Math.floor(expiresAtTimestamp - now));
-
-            const mins = Math.floor(diff / 60);
-            const secs = diff % 60;
-            const formatted = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
-            document.getElementById('countdown-timer').innerText = formatted;
+            const now = Math.floor(Date.now() / 1000);
+            const diff = expiresEpoch - now;
 
             if (diff <= 0) {
                 clearInterval(countdownInterval);
-                document.getElementById('countdown-timer').innerText = "00:00 (Стерто)";
-                alert("Время сессии (60 минут) истекло. Все сообщения безвозвратно удалены из оперативной памяти.");
+                if (messagePollInterval) clearInterval(messagePollInterval);
+                document.getElementById('countdown-timer').innerText = "00:00 (Expired)";
+                alert("Session time (60 minutes) has expired. All messages have been permanently purged from volatile memory.");
+                switchTab('tutors');
+                return;
             }
+
+            const mins = Math.floor(diff / 60);
+            const secs = diff % 60;
+            document.getElementById('countdown-timer').innerText = 
+                `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
         }
 
         updateClock();
         countdownInterval = setInterval(updateClock, 1000);
     }
 
-    async function pollMessages() {
-        if (!activeRoom) return;
+    function startPollingMessages(roomId) {
+        if (messagePollInterval) clearInterval(messagePollInterval);
+        fetchMessages(roomId);
+        messagePollInterval = setInterval(() => fetchMessages(roomId), 2500);
+    }
+
+    async function fetchMessages(roomId) {
         try {
-            const res = await fetch(`/api/v1/peer/messages/${activeRoom.room_id}`);
+            const res = await fetch(`/api/peer/room/${roomId}/messages`);
             const data = await res.json();
-            if (data.status === 'success') {
-                renderMessages(data.messages);
-            } else if (data.status === 'frozen') {
-                alert("Комната была заморожена из-за нарушения правил безопасности.");
+
+            if (res.status === 403) {
+                alert("Room was frozen due to safety rule violation.");
                 clearInterval(messagePollInterval);
+                return;
             }
-        } catch (e) {
-            console.error("Polling error:", e);
+
+            if (data && data.messages) {
+                renderMessages(data.messages);
+            }
+        } catch (err) {
+            console.error("Fetch messages error:", err);
         }
     }
 
-    function renderMessages(msgs) {
+    function renderMessages(messages) {
         const container = document.getElementById('messages-container');
-        container.innerHTML = '';
-        msgs.forEach(m => appendMessage(m));
-        container.scrollTop = container.scrollHeight;
-    }
+        if (!container) return;
 
-    function appendMessage(m) {
-        const container = document.getElementById('messages-container');
-        const isMe = activeRoom && m.sender_handle === activeRoom.student_handle;
-        const msgDiv = document.createElement('div');
-        msgDiv.className = `flex flex-col ${isMe ? 'items-end' : 'items-start'}`;
+        const isAtBottom = container.scrollHeight - container.scrollTop <= container.clientHeight + 50;
 
-        const ttlMins = m.ttl_remaining_seconds ? Math.ceil(m.ttl_remaining_seconds / 60) : 60;
+        container.innerHTML = messages.map(m => {
+            const isMe = activeRoom && m.sender_handle === activeRoom.student_handle;
+            const ttlMins = Math.max(0, Math.floor((m.expires_at - Math.floor(Date.now()/1000)) / 60));
 
-        msgDiv.innerHTML = `
-            <div class="flex items-center gap-1.5 mb-1 text-[10px] text-slate-400">
-                <span class="font-bold text-slate-300">${m.sender_handle}</span>
-                <span class="px-1.5 py-0.2 rounded bg-slate-800 text-[9px]">${m.sender_role || 'student'}</span>
-                <span class="text-amber-400/80">⏱️ ${ttlMins} мин TTL</span>
-            </div>
-            <div class="max-w-md rounded-2xl px-4 py-2.5 text-xs ${isMe ? 'bg-emerald-600 text-white rounded-br-none shadow-md shadow-emerald-600/10' : 'bg-slate-950 border border-slate-800 text-slate-200 rounded-bl-none'}">
-                ${m.text}
-            </div>
-        `;
-        container.appendChild(msgDiv);
-        container.scrollTop = container.scrollHeight;
+            return `
+                <div class="flex flex-col ${isMe ? 'items-end' : 'items-start'} space-y-1">
+                    <div class="flex items-center gap-2 text-[10px] text-slate-500">
+                        <span class="font-bold ${isMe ? 'text-emerald-400' : 'text-slate-300'}">${m.sender_handle}</span>
+                        <span>•</span>
+                        <span class="text-amber-400/80 font-mono">⏱️ ${ttlMins} min TTL</span>
+                    </div>
+                    <div class="max-w-md px-4 py-2.5 rounded-2xl text-xs leading-relaxed ${
+                        isMe 
+                            ? 'bg-emerald-600 text-white rounded-br-xs shadow-md shadow-emerald-600/20' 
+                            : 'bg-slate-800/90 text-slate-100 rounded-bl-xs border border-slate-700/60'
+                    }">
+                        ${m.content}
+                    </div>
+                </div>
+            `;
+        }).join('');
+
+        if (isAtBottom) {
+            container.scrollTop = container.scrollHeight;
+        }
     }
 
     async function sendMessage(e) {
         e.preventDefault();
-        if (!activeRoom) {
-            alert("Пожалуйста, сначала забронируйте сессию в каталоге!");
-            switchTab('tutors');
-            return;
-        }
-
         const input = document.getElementById('chat-input');
         const text = input.value.trim();
         if (!text) return;
+        if (!activeRoom) {
+            alert("Please book a session in the catalog first!");
+            return;
+        }
+
+        input.value = '';
 
         try {
-            const res = await fetch('/api/v1/peer/send-message', {
+            const res = await fetch(`/api/peer/room/${activeRoom.room_id}/send`, {
                 method: 'POST',
-                headers: {'Content-Type': 'application/json'},
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    room_id: activeRoom.room_id,
                     sender_handle: activeRoom.student_handle,
-                    sender_role: 'student',
-                    text: text
+                    content: text
                 })
             });
 
             const data = await res.json();
-            if (data.status === 'success') {
-                input.value = '';
-                pollMessages();
-            } else if (data.detail && data.detail.error === 'HazardPolicyViolation') {
-                alert("🚨 ВНИМАНИЕ: Сообщение заблокировано AI-фильтром безопасности: обнаружены запрещенные слова или угрозы.");
+            if (res.status === 400 && data.flagged) {
+                alert("🚨 WARNING: Message blocked by safety filter: offensive or disallowed words detected.");
+            } else if (!res.ok) {
+                alert("Send error: " + JSON.stringify(data.detail));
             } else {
-                alert("Ошибка отправки: " + JSON.stringify(data.detail));
+                fetchMessages(activeRoom.room_id);
             }
         } catch (err) {
             console.error("Send error:", err);
         }
     }
 
-    async function reportCurrentRoom() {
+    async function triggerFreezeRoom() {
         if (!activeRoom) return;
-        if (!confirm("Вы уверены, что хотите пожаловаться на собеседника? Комната будет немедленно заморожена, а сообщения удалены.")) return;
+        if (!confirm("Are you sure you want to report this participant? The room will be immediately frozen and messages wiped.")) return;
 
         try {
-            const res = await fetch('/api/v1/peer/report-room', {
+            const res = await fetch(`/api/peer/room/${activeRoom.room_id}/freeze`, {
                 method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({
-                    room_id: activeRoom.room_id,
-                    reason: "Safety Violation Reported by User"
-                })
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ reason: "User triggered harassment/safety report" })
             });
             const data = await res.json();
-            alert(data.message || "Комната заморожена.");
+            alert(data.message || "Room frozen.");
             switchTab('tutors');
-        } catch (e) {
-            console.error("Report error:", e);
+        } catch (err) {
+            console.error("Freeze error:", err);
         }
     }
 
-    // MARKETING HOOK: AI Academic Scribe & Flashcard Deck Generator
-    async function requestLessonSummary() {
+    async function triggerGenerateSummary() {
         if (!activeRoom) {
-            alert("Для генерации конспекта войдите в сессию.");
+            alert("Enter an active session to generate an AI summary.");
             return;
         }
 
         document.getElementById('summary-modal').classList.remove('hidden');
-        document.getElementById('summary-content').innerText = "⏳ ИИ-Секретарь анализирует переписку в оперативной памяти...
-Выделение ключевой лексики, идиом и грамматических конструкций...";
+        document.getElementById('summary-content').innerText = "⏳ EduHub AI Scribe is analyzing in-memory dialogue... Synthesizing key vocabulary, idioms, and grammar structures...";
 
         try {
-            const res = await fetch('/api/v1/peer/generate-summary', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({
-                    room_id: activeRoom.room_id,
-                    student_email: activeRoom.student_email
-                })
+            const res = await fetch(`/api/peer/room/${activeRoom.room_id}/summary`, {
+                method: 'POST'
             });
-
             const data = await res.json();
-            if (data.status === 'success') {
+
+            if (res.ok && data.summary_markdown) {
                 document.getElementById('summary-content').innerText = data.summary_markdown;
             } else {
-                document.getElementById('summary-content').innerText = "Не удалось сгенерировать конспект: " + JSON.stringify(data);
+                document.getElementById('summary-content').innerText = "Could not generate summary: " + JSON.stringify(data.detail);
             }
         } catch (err) {
-            document.getElementById('summary-content').innerText = "Ошибка генерации конспекта: " + err.message;
+            document.getElementById('summary-content').innerText = "Error generating summary: " + err.message;
         }
     }
 
@@ -857,14 +818,14 @@
         window.location.href = "/#pricing";
     }
 
-    // 5-Star Rating Logic
-    function openRatingModal() {
+    let currentRatingTarget = null;
+    function openRatingModal(tutorId, tutorName) {
+        currentRatingTarget = tutorId;
+        setStarRating(5);
+        selectedTags = [];
+        document.querySelectorAll('.tag-pill').forEach(p => p.classList.remove('bg-emerald-600', 'text-white', 'border-emerald-500'));
+        document.getElementById('rating-comment').value = '';
         document.getElementById('rating-modal').classList.remove('hidden');
-    }
-
-    function openRatingForTutor(tutorId) {
-        selectedTutor = currentTutors.find(t => t.id === tutorId);
-        openRatingModal();
     }
 
     function closeRatingModal() {
@@ -876,75 +837,76 @@
         document.querySelectorAll('.star-btn').forEach(btn => {
             const bVal = parseInt(btn.getAttribute('data-val'));
             if (bVal <= val) {
-                btn.className = "star-btn text-2xl text-amber-400 transition";
+                btn.classList.add('text-amber-400');
+                btn.classList.remove('text-slate-600');
             } else {
-                btn.className = "star-btn text-2xl text-slate-600 hover:text-amber-400 transition";
+                btn.classList.remove('text-amber-400');
+                btn.classList.add('text-slate-600');
             }
         });
     }
 
     function toggleTag(btn) {
-        const txt = btn.innerText;
-        if (selectedTags.includes(txt)) {
-            selectedTags = selectedTags.filter(t => t !== txt);
-            btn.className = "tag-pill px-2.5 py-1 rounded-lg bg-slate-950 border border-slate-800 text-slate-400 hover:text-emerald-400 transition";
+        const tag = btn.innerText.trim();
+        if (selectedTags.includes(tag)) {
+            selectedTags = selectedTags.filter(t => t !== tag);
+            btn.classList.remove('bg-emerald-600', 'text-white', 'border-emerald-500');
+            btn.classList.add('bg-slate-950', 'text-slate-400', 'border-slate-800');
         } else {
-            selectedTags.push(txt);
-            btn.className = "tag-pill px-2.5 py-1 rounded-lg bg-emerald-500/20 border border-emerald-500/50 text-emerald-300 font-bold transition";
+            selectedTags.push(tag);
+            btn.classList.add('bg-emerald-600', 'text-white', 'border-emerald-500');
+            btn.classList.remove('bg-slate-950', 'text-slate-400', 'border-slate-800');
         }
     }
 
     async function submitRating(e) {
         e.preventDefault();
-        const tutorId = selectedTutor ? selectedTutor.id : "tutor_1";
-        const val = parseInt(document.getElementById('rating-val').value);
+        const rating = parseInt(document.getElementById('rating-val').value);
         const comment = document.getElementById('rating-comment').value.trim();
-        const handle = (activeRoom && activeRoom.student_handle) ? activeRoom.student_handle : "Student_Verified";
 
         try {
-            const res = await fetch('/api/v1/peer/rate-session', {
+            const res = await fetch(`/api/peer/tutor/${currentRatingTarget}/review`, {
                 method: 'POST',
-                headers: {'Content-Type': 'application/json'},
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    tutor_id: tutorId,
-                    rating: val,
-                    student_handle: handle,
+                    rating: rating,
                     comment: comment,
                     tags: selectedTags
                 })
             });
 
             const data = await res.json();
-            if (data.status === 'success') {
-                alert(`Спасибо! Рейтинг преподавателя обновлен: ${data.new_rating.toFixed(2)}★ (Всего отзывов: ${data.total_reviews})`);
+            if (res.ok) {
+                alert(`Thank you! Tutor rating updated to ${data.new_rating.toFixed(2)}★ (${data.total_reviews} reviews total).`);
                 closeRatingModal();
                 loadTutors();
             } else {
-                alert("Ошибка сохранения отзыва: " + JSON.stringify(data.detail));
+                alert("Review save error: " + JSON.stringify(data.detail));
             }
         } catch (err) {
             console.error("Rating error:", err);
         }
     }
 
-    // Viral Share Helpers
-    function shareReferralWhatsApp() {
-        const text = encodeURIComponent("Привет! Я практикую английский с носителями из Кембриджа на EduHub AI! Заходи по моей ссылке и получи бесплатную 30-минутную сессию: https://eduhub.ai/tools/peer-exchange?ref=student");
-        window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
+    function shareReferral(channel) {
+        const link = "https://eduhub.ai/tools/peer-exchange?ref=user_ambassador";
+        if (channel === 'whatsapp') {
+            const text = encodeURIComponent("Hey! I practice languages with native speakers from Cambridge on EduHub AI! Join here: " + link);
+            window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
+        } else if (channel === 'telegram') {
+            const text = encodeURIComponent("Practice English and other languages with verified native students on EduHub AI: " + link);
+            window.open(`https://t.me/share/url?url=${encodeURIComponent(link)}&text=${text}`, '_blank');
+        } else {
+            navigator.clipboard.writeText(link);
+            alert("Referral link copied to clipboard!");
+        }
     }
 
-    function shareReferralTelegram() {
-        const url = encodeURIComponent("https://eduhub.ai/tools/peer-exchange?ref=student");
-        const text = encodeURIComponent("Практикуй английский и другие языки с реальными студентами-носителями на EduHub AI. Получи 1 бесплатную сессию!");
-        window.open(`https://t.me/share/url?url=${url}&text=${text}`, '_blank');
+    function openTutorApplication() {
+        alert("Tutor onboarding: Please send your student ID verification to support@eduhub.ai or message our Telegram admin @eduhub_support.");
     }
 
-    function copyReferralLink() {
-        navigator.clipboard.writeText("https://eduhub.ai/tools/peer-exchange?ref=student");
-        alert("Реферальная ссылка скопирована в буфер обмена!");
-    }
-
-    // Initialize on load
+    // Init on DOM loaded
     document.addEventListener('DOMContentLoaded', () => {
         loadTutors();
     });

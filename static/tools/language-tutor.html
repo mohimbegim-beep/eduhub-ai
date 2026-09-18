@@ -182,10 +182,10 @@
                 <div>
                     <label class="block text-xs font-semibold text-slate-300 mb-1" data-i18n="tutor_native_lang_label">Pedagogical Feedback Language:</label>
                     <select id="native-lang-select" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-emerald-500">
-                        <option value="Russian" selected>Русский (Russian)</option>
+                        <option value="English" selected>English (Full Immersion)</option>
+                        <option value="Russian">Russian</option>
                         <option value="Uzbek">O'zbekcha (Uzbek)</option>
                         <option value="Spanish">Español (Spanish)</option>
-                        <option value="English">English (Full Immersion)</option>
                     </select>
                 </div>
             </div>
@@ -472,10 +472,10 @@
 
         function exportTutorAnkiDeck() {
             const cards = [
-                { front: "compelling perspective", back: "убедительная точка зрения (persuasive point of view)", tags: "English_Conversation" },
-                { front: "proliferate across domains", back: "стремительно распространяться по сферам", tags: "English_Conversation" },
-                { front: "articulate a nuanced counterargument", back: "сформулировать взвешенный контраргумент", tags: "English_Conversation" },
-                { front: "bridge educational disparities", back: "сократить разрыв в образовании", tags: "English_Conversation" }
+                { front: "compelling perspective", back: "persuasive and well-founded viewpoint", tags: "English_Conversation" },
+                { front: "proliferate across domains", back: "spread and multiply rapidly across different domains", tags: "English_Conversation" },
+                { front: "articulate a nuanced counterargument", back: "formulate a balanced and well-reasoned opposing point", tags: "English_Conversation" },
+                { front: "bridge educational disparities", back: "narrow systemic disparities in educational opportunities", tags: "English_Conversation" }
             ];
 
             if (window.EduHubUtils && EduHubUtils.exportAnkiDeck) {

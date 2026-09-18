@@ -296,37 +296,49 @@ class AutoQAGuardEngine:
         return t
 
     # --------------------------------------------------------------------------
-    # TEST 4: DOM Cleanliness & Attribute Localization (index.html)
+    # TEST 4: DOM Cleanliness & Attribute Localization across ALL HTML Files
     # --------------------------------------------------------------------------
     def test_04_dom_cleanliness(self):
-        t = TestCaseResult("4. DOM Cleanliness & Attribute Localization (index.html)")
+        t = TestCaseResult("4. DOM Cleanliness & Localization across ALL HTML Files")
         start = time.perf_counter()
 
-        if not self.static_html_path.exists():
+        html_files = list(self.base_dir.glob("static/**/*.html"))
+        if not html_files:
             t.passed = False
-            t.errors.append("static/index.html not found")
+            t.errors.append("No HTML files found in static/")
             t.duration_ms = (time.perf_counter() - start) * 1000
             return t
 
-        with open(self.static_html_path, "r", encoding="utf-8") as f:
-            html = f.read()
+        total_untagged = 0
+        total_untranslated = 0
 
-        parser = HTMLTextAndAttrAuditParser()
-        parser.feed(html)
+        for hf in html_files:
+            with open(hf, "r", encoding="utf-8", errors="ignore") as f:
+                html = f.read()
 
-        if parser.untagged_text:
-            t.passed = False
-            for tag, text, el_id in parser.untagged_text[:5]:
-                t.errors.append(f"Untagged Cyrillic text in <{tag} id='{el_id}'>: '{text[:50]}'")
+            parser = HTMLTextAndAttrAuditParser()
+            parser.feed(html)
 
-        if parser.untranslated_attrs:
-            t.passed = False
-            for tag, attr, val, el_id in parser.untranslated_attrs[:5]:
-                t.errors.append(f"Untranslated attribute [{attr}] in <{tag} id='{el_id}'>: '{val[:50]}'")
+            if parser.untagged_text:
+                total_untagged += len(parser.untagged_text)
+                t.passed = False
+                for tag, text, el_id in parser.untagged_text[:3]:
+                    t.errors.append(f"[{hf.name}] Untagged Cyrillic text in <{tag} id='{el_id}'>: '{text[:50]}'")
 
-        t.details = f"DOM parsed: 0 untagged text nodes, 0 untranslated attributes." if t.passed else f"Found {len(parser.untagged_text)} untagged text nodes, {len(parser.untranslated_attrs)} untranslated attributes."
+            if parser.untranslated_attrs:
+                total_untranslated += len(parser.untranslated_attrs)
+                t.passed = False
+                for tag, attr, val, el_id in parser.untranslated_attrs[:3]:
+                    t.errors.append(f"[{hf.name}] Untranslated attribute [{attr}] in <{tag} id='{el_id}'>: '{val[:50]}'")
+
+            if not re.search(r'<html[^>]*\blang=["\']en["\']', html, re.IGNORECASE):
+                t.passed = False
+                t.errors.append(f"[{hf.name}] Root <html lang='...'> does not default to 'en'")
+
+        t.details = f"Audited {len(html_files)} HTML files: 0 untagged text nodes, 0 untranslated attributes, 100% English root defaults." if t.passed else f"Found {total_untagged} untagged text nodes and {total_untranslated} untranslated attributes across {len(html_files)} files."
         t.duration_ms = (time.perf_counter() - start) * 1000
         return t
+
 
     # --------------------------------------------------------------------------
     # TEST 5: JavaScript Cleanliness, Handlers & I18N_CACHE
