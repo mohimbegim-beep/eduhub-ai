@@ -541,3 +541,28 @@ const EduHubUtils = (function () {
   };
 })();
 
+// Privacy-Preserving Lightweight Telemetry Beacon
+(function () {
+  try {
+    const searchParams = new URLSearchParams(window.location.search);
+    const payload = {
+      path: window.location.pathname,
+      referrer: document.referrer || "Direct",
+      utm_source: searchParams.get("utm_source") || undefined,
+      utm_medium: searchParams.get("utm_medium") || undefined,
+      screen: `${window.innerWidth}x${window.innerHeight}`
+    };
+    if (navigator.sendBeacon) {
+      navigator.sendBeacon("/api/v1/analytics/track", new Blob([JSON.stringify(payload)], { type: "application/json" }));
+    } else {
+      fetch("/api/v1/analytics/track", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+        keepalive: true
+      }).catch(function () {});
+    }
+  } catch (e) {}
+})();
+
+

@@ -10,6 +10,7 @@ from collections import defaultdict
 from pathlib import Path
 from threading import Lock
 from typing import Optional, List, Dict, Any
+from services.analytics_engine import analytics_engine
 
 from fastapi import FastAPI, Request, HTTPException, Header, status, Depends
 from fastapi.middleware.cors import CORSMiddleware
@@ -46,6 +47,19 @@ app.add_middleware(
 
 @app.middleware("http")
 async def add_security_headers(request: Request, call_next):
+    # Privacy-friendly automated visitor telemetry
+    if request.method == "GET":
+        path = request.url.path
+        if not path.startswith(("/static", "/locales", "/api", "/health", "/docs", "/openapi")):
+            ip = request.client.host if request.client else "127.0.0.1"
+            forwarded = request.headers.get("x-forwarded-for")
+            if forwarded:
+                ip = forwarded.split(",")[0].strip()
+            ua = request.headers.get("user-agent", "")
+            ref = request.headers.get("referer", "")
+            country = request.headers.get("cf-ipcountry", "Unknown")
+            analytics_engine.record_hit(path=path, ip=ip, user_agent=ua, referrer=ref, country=country)
+
     response = await call_next(request)
     response.headers["X-Content-Type-Options"] = "nosniff"
     response.headers["X-Frame-Options"] = "SAMEORIGIN"
@@ -3215,6 +3229,42 @@ async def alias_peer_review(tutor_id: str, payload: dict):
         comment=payload.get("comment", ""),
         tags=payload.get("tags", [])
     ))
+
+
+
+# --------------------------------------------------------------------------
+# Analytics & Live Traffic Telemetry
+# --------------------------------------------------------------------------
+class AnalyticsTrackRequest(BaseModel):
+    path: str = Field(default="/")
+    referrer: Optional[str] = Field(default="Direct")
+    utm_source: Optional[str] = None
+    utm_medium: Optional[str] = None
+    screen: Optional[str] = None
+
+@app.post("/api/v1/analytics/track", tags=["Analytics"])
+async def track_client_event(payload: AnalyticsTrackRequest, request: Request):
+    ip = request.client.host if request.client else "127.0.0.1"
+    forwarded = request.headers.get("x-forwarded-for")
+    if forwarded:
+        ip = forwarded.split(",")[0].strip()
+    ua = request.headers.get("user-agent", "")
+    country = request.headers.get("cf-ipcountry", "Unknown")
+    analytics_engine.record_hit(
+        path=payload.path,
+        ip=ip,
+        user_agent=ua,
+        referrer=payload.referrer,
+        utm_source=payload.utm_source,
+        utm_medium=payload.utm_medium,
+        country=country
+    )
+    return {"status": "recorded"}
+
+@app.get("/api/v1/analytics/stats", tags=["Analytics"])
+async def get_traffic_stats():
+    """Live traffic metrics and visitor analytics."""
+    return analytics_engine.get_summary()
 
 
 
