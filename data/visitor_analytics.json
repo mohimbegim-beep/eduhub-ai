@@ -1,8 +1,8 @@
 {
   "created_at": "2026-09-19T03:52:41.952423+00:00",
   "all_time": {
-    "total_pageviews": 8,
-    "human_pageviews": 8,
+    "total_pageviews": 12,
+    "human_pageviews": 12,
     "bot_pageviews": 0,
     "unique_visitors": [
       "6d571dc805cb",
@@ -12,8 +12,8 @@
   },
   "daily": {
     "2026-09-19": {
-      "total_pageviews": 8,
-      "human_pageviews": 8,
+      "total_pageviews": 12,
+      "human_pageviews": 12,
       "bot_pageviews": 0,
       "unique_visitors": [
         "6d571dc805cb",
@@ -21,7 +21,7 @@
         "cf8a96440636"
       ],
       "pages": {
-        "/": 6,
+        "/": 10,
         "/tools/excel-wizard": 2
       },
       "referrers": {
@@ -29,10 +29,10 @@
         "Render System": 1,
         "YouTube": 1,
         "Telegram": 1,
-        "Direct": 4
+        "Direct": 8
       },
       "devices": {
-        "desktop": 7,
+        "desktop": 11,
         "mobile": 1,
         "bot": 0
       },
@@ -42,6 +42,46 @@
     }
   },
   "recent_events": [
+    {
+      "time": "04:52:41 UTC",
+      "date": "2026-09-19",
+      "path": "/",
+      "visitor_id": "9d7f400eef74",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "04:52:41 UTC",
+      "date": "2026-09-19",
+      "path": "/",
+      "visitor_id": "9d7f400eef74",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "04:52:37 UTC",
+      "date": "2026-09-19",
+      "path": "/",
+      "visitor_id": "9d7f400eef74",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "04:52:36 UTC",
+      "date": "2026-09-19",
+      "path": "/",
+      "visitor_id": "9d7f400eef74",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
     {
       "time": "03:56:22 UTC",
       "date": "2026-09-19",

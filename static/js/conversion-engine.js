@@ -16,7 +16,11 @@
     TICKER_INTERVAL_MS: 16000,
     TICKER_DISPLAY_MS: 6000,
 
+    // Configuration: 100% Free Open Beta Access
+    isBetaMode: true,
+
     isSubscribed: function () {
+      if (this.isBetaMode) return true;
       return localStorage.getItem("eduhub_user_subscribed") === "true" ||
              sessionStorage.getItem("eduhub_user_subscribed") === "true";
     },
@@ -74,6 +78,7 @@
     // 1. Exit-Intent Detection & Modal
     // ------------------------------------------------------------------------
     initExitIntent: function () {
+      if (this.isBetaMode) return;
       let hasShown = sessionStorage.getItem("eduhub_exit_intent_shown");
       if (hasShown) return;
 
