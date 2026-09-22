@@ -970,6 +970,9 @@ async def serve_citation_generator():
     raise HTTPException(status_code=404, detail="Tool page '/tools/citation-generator' not found.")
 
 @app.get("/tools/essay-grader", tags=["Standalone Tools"])
+@app.get("/ielts-checker", tags=["Standalone Tools"])
+@app.get("/ielts-essay-checker", tags=["Standalone Tools"])
+@app.get("/ielts-writing-checker", tags=["Standalone Tools"])
 async def serve_essay_grader():
     tool_file = STATIC_DIR / "tools" / "essay-grader.html"
     if tool_file.exists():
@@ -2374,6 +2377,9 @@ async def render_sitemap():
         {"loc": f"{base_url}/terms", "priority": "0.5", "changefreq": "monthly"},
         {"loc": f"{base_url}/refund", "priority": "0.5", "changefreq": "monthly"},
         {"loc": f"{base_url}/support", "priority": "0.7", "changefreq": "monthly"},
+        {"loc": f"{base_url}/ielts-checker", "priority": "1.0", "changefreq": "daily"},
+        {"loc": f"{base_url}/ielts-essay-checker", "priority": "0.9", "changefreq": "daily"},
+        {"loc": f"{base_url}/ielts-writing-checker", "priority": "0.9", "changefreq": "daily"},
         {"loc": f"{base_url}/tools/essay-grader", "priority": "0.9", "changefreq": "daily"},
         {"loc": f"{base_url}/tools/language-tutor", "priority": "0.9", "changefreq": "daily"},
         {"loc": f"{base_url}/tools/pdf-summarizer", "priority": "0.9", "changefreq": "daily"},

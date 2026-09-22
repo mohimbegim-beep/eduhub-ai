@@ -49,6 +49,15 @@
         const userId = this.getOrCreateUserId();
         u.searchParams.set("checkout[custom][user_id]", userId);
         
+        // Forward Google Ads / Search UTM parameters to checkout metadata
+        const pageParams = new URLSearchParams(window.location.search);
+        ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].forEach(key => {
+          const val = pageParams.get(key);
+          if (val) {
+            u.searchParams.set(`checkout[custom][${key}]`, val);
+          }
+        });
+
         const email = localStorage.getItem("eduhub_user_email") || localStorage.getItem("user_email");
         if (email && email.includes("@")) {
           u.searchParams.set("checkout[email]", email.trim().toLowerCase());

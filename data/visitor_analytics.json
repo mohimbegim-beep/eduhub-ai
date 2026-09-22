@@ -1,13 +1,14 @@
 {
   "created_at": "2026-09-19T03:52:41.952423+00:00",
   "all_time": {
-    "total_pageviews": 12,
-    "human_pageviews": 12,
+    "total_pageviews": 15,
+    "human_pageviews": 15,
     "bot_pageviews": 0,
     "unique_visitors": [
       "6d571dc805cb",
       "9d7f400eef74",
-      "cf8a96440636"
+      "cf8a96440636",
+      "8df3fbf4792e"
     ]
   },
   "daily": {
@@ -39,9 +40,61 @@
       "utm_sources": {
         "youtube_shorts": 1
       }
+    },
+    "2026-09-22": {
+      "total_pageviews": 3,
+      "human_pageviews": 3,
+      "bot_pageviews": 0,
+      "unique_visitors": [
+        "8df3fbf4792e"
+      ],
+      "pages": {
+        "/ielts-checker": 1,
+        "/ielts-writing-checker": 1,
+        "/sitemap.xml": 1
+      },
+      "referrers": {
+        "Direct": 3
+      },
+      "devices": {
+        "desktop": 3,
+        "mobile": 0,
+        "bot": 0
+      },
+      "utm_sources": {}
     }
   },
   "recent_events": [
+    {
+      "time": "11:58:24 UTC",
+      "date": "2026-09-22",
+      "path": "/sitemap.xml",
+      "visitor_id": "8df3fbf4792e",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "11:58:24 UTC",
+      "date": "2026-09-22",
+      "path": "/ielts-writing-checker",
+      "visitor_id": "8df3fbf4792e",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "11:58:24 UTC",
+      "date": "2026-09-22",
+      "path": "/ielts-checker",
+      "visitor_id": "8df3fbf4792e",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
     {
       "time": "04:52:41 UTC",
       "date": "2026-09-19",
