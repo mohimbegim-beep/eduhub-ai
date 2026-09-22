@@ -730,6 +730,18 @@
                     <input id="edit-proj-topic" type="text" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-slate-200 text-xs">
                 </div>
                 <div class="flex flex-col gap-1.5">
+                    <label class="font-bold text-slate-200">Академический уровень:</label>
+                    <select id="edit-proj-level" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-slate-200 focus:outline-none text-xs">
+                        <option value="masters_dissertation">🎓 Магистерская диссертация (70–100 стр.)</option>
+                        <option value="coursework">Курсовая работа (25–35 стр.)</option>
+                        <option value="thesis_bachelor">Выпускная квалификационная работа (ВКР / Диплом)</option>
+                        <option value="article_vak">Научная статья ВАК / РИНЦ</option>
+                        <option value="article_scopus">Международная статья Scopus / WoS (IMRAD)</option>
+                        <option value="phd_dissertation">Кандидатская / PhD диссертация</option>
+                        <option value="essay">Академический реферат / Научный эссе</option>
+                    </select>
+                </div>
+                <div class="flex flex-col gap-1.5">
                     <label class="font-bold text-slate-200">Дисциплина:</label>
                     <input id="edit-proj-discipline" type="text" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-slate-200 text-xs">
                 </div>
@@ -1829,6 +1841,7 @@ ${app.novelty || 'Заключается в авторском подходе к
             if (!proj) return;
             document.getElementById("edit-proj-topic").value = proj.topic;
             document.getElementById("edit-proj-discipline").value = proj.discipline || "";
+            document.getElementById("edit-proj-level").value = proj.level || "masters_dissertation";
             document.getElementById("modal-edit-project").classList.remove("hidden");
         }
 
@@ -1837,6 +1850,7 @@ ${app.novelty || 'Заключается в авторском подходе к
             if (!proj) return;
             proj.topic = document.getElementById("edit-proj-topic").value.trim();
             proj.discipline = document.getElementById("edit-proj-discipline").value.trim();
+            proj.level = document.getElementById("edit-proj-level").value;
             saveAcademicState();
             closeModal('modal-edit-project');
             renderActiveProject();

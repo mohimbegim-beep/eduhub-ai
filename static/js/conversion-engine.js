@@ -248,6 +248,16 @@
           window.applyTranslations();
         }
       }
+    },
+
+    grantFreeAccess: function (role) {
+      this.setSubscribed(true);
+      try {
+        localStorage.setItem("eduhub_user_tier", "pro_max");
+        localStorage.setItem("eduhub_user_role", role || "founder");
+      } catch (e) {}
+      console.log("[EduHub VIP] Free Pro Max Lifetime Access Granted!");
+      return true;
     }
   };
 
@@ -259,9 +269,13 @@
     EduHubConversion.initExitIntent();
     EduHubConversion.initSocialTicker();
 
-    // Check if user arrived via payment success
-    if (window.location.search.includes("payment=success") || window.location.search.includes("trial=activated")) {
-      EduHubConversion.setSubscribed(true);
+    // Check if user has VIP, Founder, or Payment Success URL flags
+    const s = (window.location.search || "").toLowerCase();
+    if (s.includes("payment=success") || s.includes("trial=activated") || 
+        s.includes("vip=") || s.includes("access=founder") || 
+        s.includes("role=founder") || s.includes("free=true") || 
+        s.includes("free=1")) {
+      EduHubConversion.grantFreeAccess("founder");
     }
   });
 })();
