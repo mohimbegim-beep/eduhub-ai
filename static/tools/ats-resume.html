@@ -70,20 +70,20 @@
         
         <!-- Hero Title -->
         <div class="text-center mb-8">
-            <span class="text-[11px] font-bold uppercase tracking-widest text-emerald-400 bg-emerald-950/70 border border-emerald-800/80 px-3 py-1 rounded-full">
+            <span class="text-[11px] font-bold uppercase tracking-widest text-emerald-400 bg-emerald-950/70 border border-emerald-800/80 px-3 py-1 rounded-full" data-i18n="ats_badge">
                 ⚡ Beat 75% Automated Rejections
             </span>
-            <h1 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight mt-3 mb-2">
+            <h1 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight mt-3 mb-2" data-i18n="ats_title">
                 ATS Resume &amp; Job Match Shield
             </h1>
-            <p class="text-slate-400 text-xs sm:text-sm max-w-2xl mx-auto">
+            <p class="text-slate-400 text-xs sm:text-sm max-w-2xl mx-auto" data-i18n="ats_subtitle">
                 Paste your resume alongside the job posting. Get an instant 0–100% ATS score, uncover missing keyword gaps, and transform weak bullet points into high-impact metrics.
             </p>
         </div>
 
         <!-- 1-Click Sample Previews -->
         <div class="bg-slate-900/70 border border-slate-800 rounded-2xl p-4 mb-6">
-            <p class="text-xs font-medium text-slate-400 mb-2.5">
+            <p class="text-xs font-medium text-slate-400 mb-2.5" data-i18n="ats_preset_label">
                 ⚡ 1-Click Fast Presets (No signup required):
             </p>
             <div class="flex flex-wrap gap-2">
@@ -107,12 +107,12 @@
                 <div>
                     <div class="flex justify-between items-center mb-2">
                         <label class="text-xs font-bold text-slate-200 uppercase tracking-wider flex items-center gap-1.5">
-                            <span>📋</span> Target Job Description / Vacancy
+                            <span>📋</span> <span data-i18n="ats_jd_label">Target Job Description / Vacancy</span>
                         </label>
                         <span id="jd-word-count" class="text-[11px] text-slate-500 font-mono">0 words</span>
                     </div>
                     <input id="target-role-input" type="text" placeholder="Target Role Title (e.g. Senior Frontend Engineer)" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2 text-xs text-slate-200 mb-3 focus:outline-none focus:border-emerald-500 transition">
-                    <textarea id="jd-input" rows="12" class="w-full bg-slate-950 border border-slate-800 rounded-2xl p-4 text-xs text-slate-200 placeholder-slate-600 focus:outline-none focus:border-emerald-500 transition resize-y font-mono leading-relaxed" placeholder="Paste the full job posting requirements, responsibilities, and qualifications here..." oninput="updateCounts()"></textarea>
+                    <textarea id="jd-input" rows="12" class="w-full bg-slate-950 border border-slate-800 rounded-2xl p-4 text-xs text-slate-200 placeholder-slate-600 focus:outline-none focus:border-emerald-500 transition resize-y font-mono leading-relaxed" placeholder="Paste the full job posting requirements, responsibilities, and qualifications here..." data-i18n-placeholder="ats_jd_ph" oninput="updateCounts()"></textarea>
                 </div>
                 <div class="text-[11px] text-slate-500 mt-2">
                     💡 Tip: Include qualifications and tech requirements for maximum keyword detection accuracy.
@@ -124,7 +124,7 @@
                 <div>
                     <div class="flex justify-between items-center mb-2">
                         <label class="text-xs font-bold text-slate-200 uppercase tracking-wider flex items-center gap-1.5">
-                            <span>👤</span> Your Resume / CV Text
+                            <span>👤</span> <span data-i18n="ats_resume_label">Your Resume / CV Text</span>
                         </label>
                         <span id="resume-word-count" class="text-[11px] text-slate-500 font-mono">0 words</span>
                     </div>
@@ -132,11 +132,11 @@
                         <span>Plain text or Markdown format</span>
                         <button onclick="clearInputs()" class="text-slate-500 hover:text-slate-400 text-xs">Clear All</button>
                     </div>
-                    <textarea id="resume-input" rows="12" class="w-full bg-slate-950 border border-slate-800 rounded-2xl p-4 text-xs text-slate-200 placeholder-slate-600 focus:outline-none focus:border-emerald-500 transition resize-y font-mono leading-relaxed" placeholder="Paste your current resume work history, summary, and skills list here..." oninput="updateCounts()"></textarea>
+                    <textarea id="resume-input" rows="12" class="w-full bg-slate-950 border border-slate-800 rounded-2xl p-4 text-xs text-slate-200 placeholder-slate-600 focus:outline-none focus:border-emerald-500 transition resize-y font-mono leading-relaxed" placeholder="Paste your current resume work history, summary, and skills list here..." data-i18n-placeholder="ats_resume_ph" oninput="updateCounts()"></textarea>
                 </div>
                 <div class="flex items-center justify-between mt-3">
                     <button id="scan-btn" onclick="executeATSScan()" class="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-slate-950 font-bold text-xs px-6 py-3 rounded-xl transition shadow-lg shadow-emerald-600/30 flex items-center justify-center gap-2">
-                        <span>🔍 Scan &amp; Match ATS Score (Instant)</span>
+                        <span data-i18n="ats_scan_btn">🔍 Scan &amp; Match ATS Score (Instant)</span>
                     </button>
                 </div>
             </div>

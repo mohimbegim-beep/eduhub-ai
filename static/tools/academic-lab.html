@@ -107,21 +107,21 @@
                 <div class="flex items-center gap-2">
                     <span class="text-sm font-bold text-slate-200 flex items-center gap-1.5">
                         <span>🏛️</span>
-                        <span>Academic & Research Lab</span>
+                        <span data-i18n="acad_brand_title">Academic & Research Lab</span>
                     </span>
-                    <span class="hidden md:inline-block text-[10px] bg-indigo-950 text-indigo-300 px-2.5 py-0.5 rounded-full border border-indigo-800 font-medium tracking-wide">Мировой стандарт ГОСТ / IMRAD</span>
+                    <span class="hidden md:inline-block text-[10px] bg-indigo-950 text-indigo-300 px-2.5 py-0.5 rounded-full border border-indigo-800 font-medium tracking-wide" data-i18n="acad_brand_badge">Мировой стандарт ГОСТ / IMRAD</span>
                 </div>
             </div>
 
             <!-- Middle: Active Project Selector Dropdown -->
             <div class="hidden lg:flex items-center gap-2">
-                <span class="text-xs text-slate-400">Проект:</span>
+                <span class="text-xs text-slate-400" data-i18n="acad_project_label">Проект:</span>
                 <select id="project-selector" onchange="switchProject(this.value)" class="bg-slate-900 border border-slate-700/80 text-xs font-semibold text-indigo-300 rounded-xl px-3 py-1.5 focus:outline-none focus:border-indigo-500 max-w-[280px] truncate">
                     <!-- Dynamic Projects -->
                 </select>
                 <button onclick="openNewProjectModal()" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 px-2.5 py-1.5 rounded-xl border border-slate-700 transition flex items-center gap-1" title="Создать новое исследование">
                     <span>+</span>
-                    <span>Новое</span>
+                    <span data-i18n="acad_btn_new">Новое</span>
                 </button>
             </div>
 
@@ -130,49 +130,51 @@
                 <!-- VIP Founder Badge -->
                 <div id="vip-founder-badge" class="hidden sm:flex items-center gap-1.5 text-[11px] text-amber-300 bg-amber-950/60 border border-amber-800/80 px-2.5 py-1 rounded-full font-bold shadow-sm">
                     <span>👑</span>
-                    <span>VIP Founder (Free Access)</span>
+                    <span data-i18n="acad_founder_vip">VIP Founder (Free Access)</span>
                 </div>
 
                 <!-- Auto-Save Pulse Indicator -->
                 <div class="hidden sm:flex items-center gap-1.5 text-[11px] text-emerald-400 bg-emerald-950/40 border border-emerald-800/60 px-2.5 py-1 rounded-full">
                     <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                    <span id="save-status-indicator">Память активна</span>
+                    <span id="save-status-indicator" data-i18n="acad_save_active">Память активна</span>
                 </div>
 
                 <!-- Export Action Dropdown -->
                 <div class="relative group">
                     <button class="bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs px-3.5 py-1.5 rounded-xl shadow-md shadow-indigo-600/30 transition flex items-center gap-1.5">
                         <span>📥</span>
-                        <span>Экспорт</span>
+                        <span data-i18n="acad_export">Экспорт</span>
                         <svg class="w-3.5 h-3.5 ml-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                     </button>
                     <div class="absolute right-0 mt-1 w-48 bg-slate-900 border border-slate-800 rounded-xl shadow-2xl py-1.5 hidden group-hover:block z-50">
                         <button onclick="exportFullDocumentWord()" class="w-full text-left px-3.5 py-2 text-xs text-slate-200 hover:bg-slate-800 flex items-center gap-2">
                             <span>📄</span>
                             <div>
-                                <div class="font-medium text-white">Скачать Word (.doc)</div>
-                                <div class="text-[10px] text-slate-400">Полная работа по ГОСТу</div>
+                                <div class="font-medium text-white" data-i18n="acad_export_word">Скачать Word (.doc)</div>
+                                <div class="text-[10px] text-slate-400" data-i18n="acad_export_word_sub">Полная работа по ГОСТу</div>
                             </div>
                         </button>
                         <button onclick="exportFullDocumentPDF()" class="w-full text-left px-3.5 py-2 text-xs text-slate-200 hover:bg-slate-800 flex items-center gap-2">
                             <span>📑</span>
                             <div>
-                                <div class="font-medium text-white">Печать / PDF</div>
-                                <div class="text-[10px] text-slate-400">Чистая верстка для ГЭК</div>
+                                <div class="font-medium text-white" data-i18n="acad_export_pdf">Печать / PDF</div>
+                                <div class="text-[10px] text-slate-400" data-i18n="acad_export_pdf_sub">Чистая верстка для ГЭК</div>
                             </div>
                         </button>
                         <div class="h-px bg-slate-800 my-1"></div>
                         <button onclick="exportProjectJSON()" class="w-full text-left px-3.5 py-2 text-xs text-slate-400 hover:text-white hover:bg-slate-800 flex items-center gap-2">
                             <span>💾</span>
-                            <span>Бэкап проекта (JSON)</span>
+                            <span data-i18n="acad_export_backup">Бэкап проекта (JSON)</span>
                         </button>
                     </div>
                 </div>
 
-                <!-- Language Switcher -->
+                <!-- Language Switcher (RU | UZ | EN | ES) -->
                 <div class="inline-flex bg-slate-900 border border-slate-800 rounded-xl p-0.5">
                     <button onclick="setLocale('ru')" data-lang-btn="ru" class="lang-btn px-2 py-0.5 rounded-lg text-xs font-bold transition bg-indigo-600 text-white">RU</button>
+                    <button onclick="setLocale('uz')" data-lang-btn="uz" class="lang-btn px-2 py-0.5 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition">UZ</button>
                     <button onclick="setLocale('en')" data-lang-btn="en" class="lang-btn px-2 py-0.5 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition">EN</button>
+                    <button onclick="setLocale('es')" data-lang-btn="es" class="lang-btn px-2 py-0.5 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition">ES</button>
                 </div>
             </div>
         </div>
@@ -199,16 +201,13 @@
 
                 <div class="flex items-center gap-2.5 shrink-0 flex-wrap">
                     <button onclick="loadWaterDissertationTemplate()" class="text-xs bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/40 px-3.5 py-2 rounded-xl transition flex items-center gap-1.5 shadow-sm font-semibold" title="Открыть исследование: Водное право & Мелиорация Узбекистана">
-                        <span>🎓</span>
-                        <span>Диссертация: Водное право РУз</span>
+                        <span data-i18n="acad_btn_water_dissertation">🎓 Диссертация: Водное право РУз</span>
                     </button>
                     <button onclick="openEditProjectModal()" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-3.5 py-2 rounded-xl transition flex items-center gap-1.5 shadow-sm">
-                        <span>✏️</span>
-                        <span>Свойства темы</span>
+                        <span data-i18n="acad_btn_edit_meta">✏️ Свойства темы</span>
                     </button>
                     <button onclick="openNewProjectModal()" class="text-xs bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-300 border border-indigo-500/40 px-3.5 py-2 rounded-xl transition flex items-center gap-1.5">
-                        <span>➕</span>
-                        <span>Другое исследование</span>
+                        <span data-i18n="acad_btn_new_study">➕ Другое исследование</span>
                     </button>
                 </div>
             </div>
@@ -217,32 +216,32 @@
             <div class="flex items-center space-x-1 border-t border-slate-800/80 pt-4 mt-5 overflow-x-auto pb-1 text-xs">
                 <button onclick="switchTab('apparatus')" id="tab-btn-apparatus" class="tab-btn px-4 py-2 rounded-xl font-semibold transition flex items-center gap-2 bg-indigo-600 text-white shadow-sm shadow-indigo-600/20">
                     <span>📑</span>
-                    <span>1. Научный аппарат</span>
+                    <span data-i18n="acad_tab_apparatus">1. Научный аппарат</span>
                 </button>
                 <button onclick="switchTab('outline')" id="tab-btn-outline" class="tab-btn px-4 py-2 rounded-xl font-medium text-slate-400 hover:text-white hover:bg-slate-800 transition flex items-center gap-2">
                     <span>🌳</span>
-                    <span>2. Структура и оглавление</span>
+                    <span data-i18n="acad_tab_outline">2. Структура и оглавление</span>
                 </button>
                 <button onclick="switchTab('composer')" id="tab-btn-composer" class="tab-btn px-4 py-2 rounded-xl font-medium text-slate-400 hover:text-white hover:bg-slate-800 transition flex items-center gap-2">
                     <span>✍️</span>
-                    <span>3. Написание глав (Текст)</span>
+                    <span data-i18n="acad_tab_composer">3. Написание глав (Текст)</span>
                 </button>
                 <button onclick="switchTab('literature')" id="tab-btn-literature" class="tab-btn px-4 py-2 rounded-xl font-medium text-slate-400 hover:text-white hover:bg-slate-800 transition flex items-center gap-2">
                     <span>📚</span>
-                    <span>4. Литература (ГОСТ / APA)</span>
+                    <span data-i18n="acad_tab_literature">4. Литература (ГОСТ / APA)</span>
                     <span id="tab-lit-badge" class="ml-1 text-[10px] bg-slate-800 text-indigo-300 px-1.5 py-0.2 rounded-full border border-slate-700">0</span>
                 </button>
                 <button onclick="switchTab('notes')" id="tab-btn-notes" class="tab-btn px-4 py-2 rounded-xl font-medium text-slate-400 hover:text-white hover:bg-slate-800 transition flex items-center gap-2">
                     <span>💡</span>
-                    <span>5. Дневник & Замечания</span>
+                    <span data-i18n="acad_tab_notes">5. Дневник & Замечания</span>
                 </button>
                 <button onclick="switchTab('defense')" id="tab-btn-defense" class="tab-btn px-4 py-2 rounded-xl font-medium text-slate-400 hover:text-white hover:bg-slate-800 transition flex items-center gap-2">
                     <span>🎙️</span>
-                    <span>6. Доклад на защиту</span>
+                    <span data-i18n="acad_tab_defense">6. Доклад на защиту</span>
                 </button>
                 <button onclick="switchTab('articles')" id="tab-btn-articles" class="tab-btn px-4 py-2 rounded-xl font-medium text-amber-300 hover:text-white hover:bg-amber-950/50 border border-amber-800/40 transition flex items-center gap-2">
                     <span>📜</span>
-                    <span>7. 3 Научные статьи (ВАК / WoS)</span>
+                    <span data-i18n="acad_tab_articles">7. 3 Научные статьи (ВАК / WoS)</span>
                 </button>
             </div>
         </section>
@@ -715,13 +714,13 @@
                 <!-- Subtabs: 3 Articles -->
                 <div class="flex items-center gap-2 pt-2 border-t border-slate-800/80 overflow-x-auto">
                     <button id="art-subtab-btn-0" onclick="switchArticleSubtab(0)" class="article-subtab-btn text-xs px-4 py-2 rounded-xl font-bold transition bg-indigo-600 text-white shadow-sm">
-                        Статья 1 (по Главе 1: Теория &amp; Кодификация)
+                        <span data-i18n="acad_art_subtab_1">Статья 1 (Глава 1: Теория и Кодекс)</span>
                     </button>
                     <button id="art-subtab-btn-1" onclick="switchArticleSubtab(1)" class="article-subtab-btn text-xs px-4 py-2 rounded-xl font-medium text-slate-400 hover:text-white hover:bg-slate-800 transition">
-                        Статья 2 (по Главе 2: Институты &amp; АВП)
+                        <span data-i18n="acad_art_subtab_2">Статья 2 (Глава 2: Договоры и АВП)</span>
                     </button>
                     <button id="art-subtab-btn-2" onclick="switchArticleSubtab(2)" class="article-subtab-btn text-xs px-4 py-2 rounded-xl font-medium text-slate-400 hover:text-white hover:bg-slate-800 transition">
-                        Статья 3 (по Главе 3: «Aqlli suv» &amp; Водосбережение)
+                        <span data-i18n="acad_art_subtab_3">Статья 3 (Глава 3: Смарт-учет и Субсидии)</span>
                     </button>
                 </div>
             </div>
@@ -736,15 +735,15 @@
                     <div class="flex items-center gap-2 flex-wrap">
                         <button onclick="generateCurrentArticleAI()" class="text-xs bg-gradient-to-r from-amber-500 via-indigo-600 to-indigo-700 hover:brightness-110 text-white font-bold px-4 py-2 rounded-xl shadow-md transition flex items-center gap-1.5">
                             <span id="art-spinner" class="hidden animate-spin">🔄</span>
-                            <span>🤖 Сформировать / Дополнить через ИИ</span>
+                            <span data-i18n="acad_btn_regen_ai">🤖 Сформировать / Дополнить через ИИ</span>
                         </button>
                         <button onclick="copyCurrentArticle()" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-3 py-2 rounded-xl transition flex items-center gap-1">
                             <span>📋</span>
-                            <span>Скопировать</span>
+                            <span data-i18n="acad_btn_copy">Скопировать</span>
                         </button>
                         <button onclick="exportCurrentArticleWord()" class="text-xs bg-indigo-600/30 hover:bg-indigo-600/50 text-indigo-200 border border-indigo-500/40 px-3.5 py-2 rounded-xl transition flex items-center gap-1 font-semibold">
                             <span>📄</span>
-                            <span>Word (.doc)</span>
+                            <span data-i18n="acad_btn_export_doc">Word (.doc)</span>
                         </button>
                     </div>
                 </div>
@@ -756,7 +755,7 @@
                         <input id="art-field-title" type="text" oninput="updateCurrentArticleMeta('title', this.value)" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-indigo-500 font-medium">
                     </div>
                     <div class="md:col-span-4 flex flex-col gap-1.5">
-                        <label class="font-bold text-slate-300">Рекомендуемое издание / Журнал:</label>
+                        <label class="font-bold text-slate-300" data-i18n="acad_art_rec_journal">Рекомендуемое издание / Журнал:</label>
                         <input id="art-field-journal" type="text" oninput="updateCurrentArticleMeta('targetJournal', this.value)" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-indigo-300 focus:outline-none focus:border-indigo-500">
                     </div>
                 </div>
