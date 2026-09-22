@@ -98,7 +98,7 @@ if env_file.exists():
 
 WEBHOOK_SECRET = os.getenv("LEMON_SQUEEZY_WEBHOOK_SECRET") or os.getenv("LEMON_WEBHOOK_SECRET", "default_secret_key_change_me")
 LEMON_API_KEY = os.getenv("LEMON_API_KEY", "")
-GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
+GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-3.5-flash")
 REQUIRE_API_KEY = os.getenv("REQUIRE_API_KEY", "false").lower() in ("true", "1", "yes")
 PRODUCTION_URL = os.getenv("PRODUCTION_URL", "https://eduhub-ai.onrender.com").rstrip("/")
 
@@ -978,6 +978,14 @@ async def serve_essay_grader():
     if tool_file.exists():
         return FileResponse(str(tool_file))
     raise HTTPException(status_code=404, detail="Tool page '/tools/essay-grader' not found.")
+
+@app.get("/academic-lab", tags=["Academic Tools"])
+@app.get("/tools/academic-lab", tags=["Academic Tools"])
+async def serve_academic_lab():
+    tool_file = STATIC_DIR / "tools" / "academic-lab.html"
+    if tool_file.exists():
+        return FileResponse(str(tool_file))
+    raise HTTPException(status_code=404, detail="Tool page '/tools/academic-lab' not found.")
 
 @app.get("/tools/language-tutor", tags=["Standalone Tools"])
 async def serve_language_tutor():
@@ -2377,6 +2385,8 @@ async def render_sitemap():
         {"loc": f"{base_url}/terms", "priority": "0.5", "changefreq": "monthly"},
         {"loc": f"{base_url}/refund", "priority": "0.5", "changefreq": "monthly"},
         {"loc": f"{base_url}/support", "priority": "0.7", "changefreq": "monthly"},
+        {"loc": f"{base_url}/academic-lab", "priority": "1.0", "changefreq": "daily"},
+        {"loc": f"{base_url}/tools/academic-lab", "priority": "0.9", "changefreq": "daily"},
         {"loc": f"{base_url}/ielts-checker", "priority": "1.0", "changefreq": "daily"},
         {"loc": f"{base_url}/ielts-essay-checker", "priority": "0.9", "changefreq": "daily"},
         {"loc": f"{base_url}/ielts-writing-checker", "priority": "0.9", "changefreq": "daily"},
@@ -3456,6 +3466,197 @@ async def humanize_academic_text(payload: HumanizeRequest, request: Request):
             "original_char_count": len(payload.text),
             "rewritten_char_count": len(fallback),
             "mode": f"{payload.mode}-fallback"
+        }
+
+# --------------------------------------------------------------------------
+# Эндпоинт: /api/v1/academic/research-compose (World-Class Academic & Dissertation Engine)
+# --------------------------------------------------------------------------
+class AcademicResearchRequest(BaseModel):
+    topic: str = Field(..., min_length=3, max_length=500)
+    level: str = Field(default="coursework") # essay, coursework, thesis_bachelor, article_vak, article_scopus, masters_dissertation, phd_dissertation
+    mode: str = Field(default="apparatus") # apparatus, outline, chapter, imrad, literature_review, defense_speech
+    discipline: Optional[str] = Field(default="Общенаучная дисциплина")
+    chapter_title: Optional[str] = Field(default="")
+    apparatus_context: Optional[str] = Field(default="")
+    sources_context: Optional[str] = Field(default="")
+    language: Optional[str] = Field(default="ru")
+
+@app.post("/api/v1/academic/research-compose", tags=["Academic Tools"])
+async def compose_academic_research(payload: AcademicResearchRequest, request: Request):
+    """
+    Профессиональный генератор академических исследований мирового стандарта (ВАК, РИНЦ, Scopus Q1-Q2, Диссертации).
+    Обеспечивает строгость научного стиля, точность категориального аппарата и методологическую глубину.
+    """
+    check_content_safety(payload.topic + " " + (payload.chapter_title or ""))
+    client = get_genai_client()
+
+    level_names = {
+        "essay": "Реферат / Научный доклад (Undergraduate)",
+        "coursework": "Курсовая исследовательская работа (Bachelor / Specialist)",
+        "thesis_bachelor": "Выпускная квалификационная работа (ВКР / Диплом бакалавра)",
+        "article_vak": "Научная статья ВАК / РИНЦ (Peer-Reviewed Scholarly Article)",
+        "article_scopus": "Международная научная публикация Scopus / Web of Science (Q1-Q2 IMRAD Standard)",
+        "masters_dissertation": "Магистерская диссертация (Master's Thesis / M.Sc / M.A.)",
+        "phd_dissertation": "Диссертация на соискание ученой степени кандидата наук / Doctor of Philosophy (PhD)"
+    }
+    level_label = level_names.get(payload.level, "Академическая работа")
+
+    system_prompt = (
+        "You are the Chief Academic Research Director and Senior Reviewer for higher attestation commissions (ВАК) "
+        "and editorial boards of Q1 peer-reviewed international scientific journals (Elsevier, Springer Nature, IEEE, Oxford University Press).\n"
+        "Your mission is to produce authoritative, world-class scholarly content adhering strictly to highest academic criteria.\n\n"
+        "STRICT ACADEMIC REGISTERS & NORMS:\n"
+        "1. NO CONVERSATIONAL FILLER OR CLICHES: Never use informal language, empty rhetoric, or robotic cliches ('In today's fast-paced world', 'It is crucial to note', 'delves into', 'a tapestry of').\n"
+        "2. SCIENTIFIC PRECISION: Use formal, impersonal academic voice. In Russian: строгий безличный академический стиль (например: 'на основе дедуктивного анализа доказано', 'представляется целесообразным классифицировать', 'исследование базируется на фундаментальных положениях'). In English: objective, nuanced academic prose with rigorous hedged assertions ('empirical indicators suggest', 'synthesizing the variance across cohorts').\n"
+        "3. EPISTEMOLOGICAL RIGOR: Formulate verifiable scientific novelties, precise categorical frameworks, clear object-subject boundaries, and substantiated hypotheses.\n"
+        "4. CITATIONS & GROUNDING: Adhere to standard academic citation logic (ГОСТ 7.0.5-2008 / APA 7th). Embed simulated in-text citations [1, c. 45] or (Author, 2024).\n"
+        "5. Output must be in formatted Markdown with clear academic headings, LaTeX formulas where relevant, and structural bullet points."
+    )
+
+    mode_instructions = {
+        "apparatus": (
+            f"Generate a comprehensive, peer-review-grade Scientific Apparatus (Научный аппарат исследования) for the topic: '{payload.topic}'.\n"
+            f"Academic Level: {level_label}. Discipline: {payload.discipline}.\n"
+            "Include the following mandatory components in full academic depth:\n"
+            "1. 📌 Актуальность темы исследования (Scientific relevance, socio-economic/technological rationale, pressing research contradictions).\n"
+            "2. 📚 Степень научной разработанности проблемы (Historiographical review & literature gap: identify classical founders and contemporary scholars).\n"
+            "3. 🎯 Объект исследования (Object of study).\n"
+            "4. 🔍 Предмет исследования (Subject of study — precise aspects/properties examined).\n"
+            "5. 🏆 Цель исследования (Comprehensive research objective).\n"
+            "6. 📋 Задачи исследования (4–6 sequential analytical and practical tasks).\n"
+            "7. 💡 Научная гипотеза (Rigorous falsifiable working hypothesis).\n"
+            "8. 🔬 Теоретико-методологическая база исследования (Epistemological framework: dialectical, systemic, comparative, statistical methods).\n"
+            "9. ✨ Научная новизна исследования (Explicit theoretical contribution and innovative findings).\n"
+            "10. 💼 Теоретическая и практическая значимость (Actionable academic and industrial value).\n"
+            "11. 🛡️ Основные положения, выносимые на защиту (Theses submitted for defense — 3–4 formulated scientific propositions)."
+        ),
+        "outline": (
+            f"Generate an exhaustive, multi-level Academic Table of Contents / Research Plan (Оглавление / План исследования) for: '{payload.topic}'.\n"
+            f"Academic Level: {level_label}. Discipline: {payload.discipline}.\n"
+            "Structure must include:\n"
+            "- Введение (Introduction)\n"
+            "- Глава 1: Теоретико-методологические основы (3 параграфа с названиями и научной логикой)\n"
+            "- Глава 2: Аналитическая / Эмпирическая часть (3 параграфа с анализом данных/практики)\n"
+            "- Глава 3 (для ВКР и диссертаций): Разработка рекомендаций, моделей и путей решения\n"
+            "- Заключение (Conclusion)\n"
+            "- Список использованных источников (с указанием необходимого объема)\n"
+            "- Приложения (Appendices)\n"
+            "For each paragraph provide a 2-sentence rationale of what scientific contradiction is resolved."
+        ),
+        "chapter": (
+            f"Write a rigorous, fully developed scientific paragraph/chapter on: '{payload.chapter_title or payload.topic}'.\n"
+            f"Overall Research Topic: '{payload.topic}'. Academic Level: {level_label}. Discipline: {payload.discipline}.\n"
+            f"Apparatus Context: {payload.apparatus_context or 'Consistent with academic research norms'}.\n"
+            f"Sources & Literature Context: {payload.sources_context or 'Standard peer-reviewed literature'}.\n"
+            "REQUIREMENTS:\n"
+            "- Write in comprehensive, deep scholarly exposition (aim for 500-800 substantive words).\n"
+            "- Integrate precise terminology, definitions of key concepts, analytical comparisons between theoretical approaches.\n"
+            "- Embed in-text citation anchors [1], [2] referencing scholarly publications.\n"
+            "- Conclude with a rigorous synthesized deduction summarizing the chapter's contribution."
+        ),
+        "imrad": (
+            f"Compose a top-tier international scientific paper section according to the IMRAD standard (Scopus / Web of Science Q1) for topic: '{payload.topic}'.\n"
+            f"Section Focus: '{payload.chapter_title or 'Introduction & Methodology'}'. Discipline: {payload.discipline}.\n"
+            "REQUIREMENTS:\n"
+            "- Strict academic English or Russian conforming to Nature/Elsevier standards.\n"
+            "- High conceptual density, objective hedging, explicit operationalization of variables, reproducible methodology.\n"
+            "- Synthesis of current 2023-2026 empirical studies."
+        ),
+        "literature_review": (
+            f"Synthesize an authoritative State-of-the-Art Literature Review (Научный аналитический обзор литературы) for topic: '{payload.topic}'.\n"
+            f"Academic Level: {level_label}. Discipline: {payload.discipline}.\n"
+            "REQUIREMENTS:\n"
+            "- Group literature into 3 thematic schools of thought / research paradigms.\n"
+            "- Critically highlight the existing research gap (что осталось неисследованным).\n"
+            "- Format full bibliographic citations in ГОСТ 7.0.5-2008 or APA 7th."
+        ),
+        "defense_speech": (
+            f"Draft a formal 7-minute Defense Speech (Доклад на защиту перед ГЭК / Диссертационным советом) for topic: '{payload.topic}'.\n"
+            f"Academic Level: {level_label}.\n"
+            "Format:\n"
+            "- Обращение к председателю и членам комиссии\n"
+            "- Четкое изложение актуальности, цели и положений на защиту\n"
+            "- Ключевые результаты и экономический/научный эффект\n"
+            "- Финальное заключение и готовность ответить на вопросы."
+        )
+    }
+
+    user_prompt = mode_instructions.get(payload.mode, mode_instructions["apparatus"])
+
+    try:
+        config = types.GenerateContentConfig(
+            system_instruction=system_prompt,
+            temperature=0.35,
+            safety_settings=get_safety_settings()
+        )
+        response = None
+        candidate_models = [GEMINI_MODEL, "gemini-3.5-flash", "gemini-3.5-flash-lite", "gemini-3.6-flash"]
+        unique_models = []
+        for m in candidate_models:
+            if m and m not in unique_models:
+                unique_models.append(m)
+
+        for mod_name in unique_models:
+            try:
+                response = client.models.generate_content(
+                    model=mod_name,
+                    contents=user_prompt,
+                    config=config
+                )
+                if response and response.text:
+                    break
+            except Exception as mod_err:
+                print(f"[ACADEMIC LAB MODEL ATTEMPT {mod_name} FAILED] {mod_err}")
+                continue
+
+        result_text = response.text.strip() if (response and response.text) else None
+        if not result_text:
+            raise ValueError("All candidate models returned empty or failed.")
+        
+        return {
+            "status": "success",
+            "topic": payload.topic,
+            "level": payload.level,
+            "level_label": level_label,
+            "mode": payload.mode,
+            "discipline": payload.discipline,
+            "content": result_text,
+            "char_count": len(result_text),
+            "generated_at": time.time()
+        }
+    except Exception as e:
+        print(f"[ACADEMIC LAB EXCEPTION] {e}")
+        # High-standard academic fallback
+        fallback_apparatus = (
+            f"## НАУЧНЫЙ АППАРАТ ИССЛЕДОВАНИЯ\n\n"
+            f"**Тема:** {payload.topic}\n"
+            f"**Уровень:** {level_label}\n"
+            f"**Дисциплина:** {payload.discipline}\n\n"
+            f"### 1. Актуальность темы исследования\n"
+            f"В современных условиях социально-экономической и технологической трансформации исследование проблемы '{payload.topic}' приобретает первостепенное научно-практическое значение. Существующие методологические подходы требуют критического переосмысления с учетом новейших эмпирических данных и вызовов современности.\n\n"
+            f"### 2. Объект и предмет исследования\n"
+            f"- **Объект исследования:** системный комплекс социально-экономических и институциональных процессов в области '{payload.topic}'.\n"
+            f"- **Предмет исследования:** сущностные закономерности, структурно-функциональные взаимосвязи и практические механизмы реализации исследуемых процессов.\n\n"
+            f"### 3. Цель и задачи исследования\n"
+            f"**Цель работы:** теоретическое обоснование и научно-методическая разработка комплексной модели решения исследуемой проблемы.\n"
+            f"Для достижения поставленной цели решаются следующие **задачи**:\n"
+            f"1. Осуществить историко-генетический и теоретический анализ основных концепций по теме.\n"
+            f"2. Исследовать категориальный аппарат и систематизировать ключевые факторы влияния.\n"
+            f"3. Провести эмпирический анализ текущего состояния объекта исследования на репрезентативных данных.\n"
+            f"4. Сформировать научно обоснованные рекомендации и алгоритмы оптимизации практической деятельности.\n\n"
+            f"### 4. Научная новизна исследования\n"
+            f"Научная новизна заключается в авторской модификации теоретико-прикладных положений, позволяющей обеспечить измеримый прирост эффективности и концептуальную непротиворечивость научных выводов."
+        )
+        return {
+            "status": "success",
+            "topic": payload.topic,
+            "level": payload.level,
+            "level_label": level_label,
+            "mode": payload.mode,
+            "discipline": payload.discipline,
+            "content": fallback_apparatus,
+            "char_count": len(fallback_apparatus),
+            "fallback": True
         }
 
 # --------------------------------------------------------------------------
