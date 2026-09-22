@@ -11,13 +11,13 @@
 (function () {
   const EduHubConversion = {
     // Configuration
-    CHECKOUT_URL_TRIAL: "/#pricing",
-    CHECKOUT_URL_STARTER: "/#pricing",
+    CHECKOUT_URL_TRIAL: "https://checkout.dodopayments.com/buy/pdt_0No9KRSRGMZyhypjqIEfu?quantity=1&redirect_url=https://eduhub-ai.onrender.com%2Fstatic%2Fpayment-success.html",
+    CHECKOUT_URL_STARTER: "https://checkout.dodopayments.com/buy/pdt_0No9KRSRGMZyhypjqIEfu?quantity=1&redirect_url=https://eduhub-ai.onrender.com%2Fstatic%2Fpayment-success.html",
     TICKER_INTERVAL_MS: 16000,
     TICKER_DISPLAY_MS: 6000,
 
-    // Configuration: 100% Free Open Beta Access
-    isBetaMode: true,
+    // Production Live Mode Active
+    isBetaMode: false,
 
     isSubscribed: function () {
       if (this.isBetaMode) return true;
@@ -68,10 +68,12 @@
       const finalUrl = this.buildCheckoutUrl(url);
 
       if (window.EduHubLegal && typeof window.EduHubLegal.openCheckoutModal === "function") {
-        window.EduHubLegal.openCheckoutModal(null);
+        const dummyLink = document.createElement("a");
+        dummyLink.href = finalUrl;
+        window.EduHubLegal.openCheckoutModal(dummyLink);
         return;
       }
-      window.location.href = "/#pricing";
+      window.location.href = finalUrl;
     },
 
     // ------------------------------------------------------------------------

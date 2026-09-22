@@ -160,7 +160,7 @@ PRODUCT_CATALOG = {
             "Unlimited homework grading & exam prep generator",
             "Cancel anytime in 1 click"
         ],
-        "checkout_url": os.getenv("DODO_CHECKOUT_PRO_MAX", "https://test.dodopayments.com/buy/pdt_0NYV3EevfB7hC3hRkF2kG?quantity=1")
+        "checkout_url": os.getenv("DODO_CHECKOUT_PRO_MAX", "https://checkout.dodopayments.com/buy/pdt_0No9KRSRGMZyhypjqIEfu?quantity=1&redirect_url=https://eduhub-ai.onrender.com%2Fstatic%2Fpayment-success.html")
     },
     "tutor_creator": {
         "id": "tutor_creator",
