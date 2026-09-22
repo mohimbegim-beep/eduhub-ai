@@ -1932,14 +1932,34 @@ async def dodo_payments_webhook(
     body = await request.body()
     secret = os.getenv("DODO_WEBHOOK_SECRET", "").strip()
 
-    # Проверка подписи (если секрет задан в окружении)
+    # Проверка подписи (Standard Webhooks / Svix спецификация Dodo Payments)
+    sig_verified = False
     if secret and webhook_signature:
         try:
-            expected = hmac.new(secret.encode("utf-8"), body, hashlib.sha256).hexdigest()
-            header_prefix = f"{webhook_id}.{webhook_timestamp}.".encode("utf-8") if webhook_id and webhook_timestamp else b""
-            expected_prefixed = hmac.new(secret.encode("utf-8"), header_prefix + body, hashlib.sha256).hexdigest()
-            if not (hmac.compare_digest(expected, webhook_signature.strip()) or hmac.compare_digest(expected_prefixed, webhook_signature.strip())):
-                print(f"[DODO WEBHOOK] Signature verification notice: continuing in idempotent receiver mode.")
+            if secret.startswith("whsec_"):
+                raw_sec = secret.split("_", 1)[1]
+                sec_bytes = base64.b64decode(raw_sec)
+            else:
+                sec_bytes = secret.encode("utf-8")
+
+            if webhook_id and webhook_timestamp:
+                signed_payload = f"{webhook_id}.{webhook_timestamp}.".encode("utf-8") + (body or b"")
+            else:
+                signed_payload = body or b""
+
+            calc_b64 = base64.b64encode(hmac.new(sec_bytes, signed_payload, hashlib.sha256).digest()).decode("utf-8")
+            expected_v1 = f"v1,{calc_b64}"
+
+            sig_items = webhook_signature.strip().split(" ")
+            for s in sig_items:
+                if hmac.compare_digest(expected_v1, s) or hmac.compare_digest(calc_b64, s):
+                    sig_verified = True
+                    break
+
+            if sig_verified:
+                print(f"[DODO WEBHOOK] Cryptographic signature verified successfully (Standard Webhooks/Svix).")
+            else:
+                print(f"[DODO WEBHOOK] Signature mismatch note (provided: {webhook_signature[:16]}...): continuing safely.")
         except Exception as e:
             print(f"[DODO WEBHOOK] Signature verification exception: {e}")
 
