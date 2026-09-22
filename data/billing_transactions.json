@@ -874,5 +874,201 @@
     "attributes": {
       "user_email": "audit@lemon.com"
     }
+  },
+  {
+    "timestamp": 1789719437.643499,
+    "event": "order_created",
+    "order_id": null,
+    "customer_email": "audit@lemon.com",
+    "status": "completed",
+    "attributes": {
+      "user_email": "audit@lemon.com"
+    }
+  },
+  {
+    "timestamp": 1789719437.7268426,
+    "event": "order_created",
+    "order_id": null,
+    "customer_email": "audit@lemon.com",
+    "status": "completed",
+    "attributes": {
+      "user_email": "audit@lemon.com"
+    }
+  },
+  {
+    "timestamp": 1789720148.4136064,
+    "event": "order_created",
+    "order_id": null,
+    "customer_email": "audit@lemon.com",
+    "status": "completed",
+    "attributes": {
+      "user_email": "audit@lemon.com"
+    }
+  },
+  {
+    "timestamp": 1789720148.655839,
+    "event": "order_created",
+    "order_id": null,
+    "customer_email": "audit@lemon.com",
+    "status": "completed",
+    "attributes": {
+      "user_email": "audit@lemon.com"
+    }
+  },
+  {
+    "timestamp": 1789720165.0855675,
+    "event": "order_created",
+    "order_id": null,
+    "customer_email": "audit@lemon.com",
+    "status": "completed",
+    "attributes": {
+      "user_email": "audit@lemon.com"
+    }
+  },
+  {
+    "timestamp": 1789720165.164022,
+    "event": "order_created",
+    "order_id": null,
+    "customer_email": "audit@lemon.com",
+    "status": "completed",
+    "attributes": {
+      "user_email": "audit@lemon.com"
+    }
+  },
+  {
+    "timestamp": 1789780130.679316,
+    "event": "order_created",
+    "order_id": null,
+    "customer_email": "audit@lemon.com",
+    "status": "completed",
+    "attributes": {
+      "user_email": "audit@lemon.com"
+    }
+  },
+  {
+    "timestamp": 1789780130.898961,
+    "event": "order_created",
+    "order_id": null,
+    "customer_email": "audit@lemon.com",
+    "status": "completed",
+    "attributes": {
+      "user_email": "audit@lemon.com"
+    }
+  },
+  {
+    "timestamp": 1789780134.5758655,
+    "event": "order_created",
+    "order_id": null,
+    "customer_email": "audit@lemon.com",
+    "status": "completed",
+    "attributes": {
+      "user_email": "audit@lemon.com"
+    }
+  },
+  {
+    "timestamp": 1789780134.6685252,
+    "event": "order_created",
+    "order_id": null,
+    "customer_email": "audit@lemon.com",
+    "status": "completed",
+    "attributes": {
+      "user_email": "audit@lemon.com"
+    }
+  },
+  {
+    "timestamp": 1789790176.379163,
+    "event": "order_created",
+    "order_id": null,
+    "customer_email": "audit@lemon.com",
+    "status": "completed",
+    "attributes": {
+      "user_email": "audit@lemon.com"
+    }
+  },
+  {
+    "timestamp": 1789790176.5896547,
+    "event": "order_created",
+    "order_id": null,
+    "customer_email": "audit@lemon.com",
+    "status": "completed",
+    "attributes": {
+      "user_email": "audit@lemon.com"
+    }
+  },
+  {
+    "timestamp": 1789790182.8068492,
+    "event": "order_created",
+    "order_id": null,
+    "customer_email": "audit@lemon.com",
+    "status": "completed",
+    "attributes": {
+      "user_email": "audit@lemon.com"
+    }
+  },
+  {
+    "timestamp": 1789790182.9298398,
+    "event": "order_created",
+    "order_id": null,
+    "customer_email": "audit@lemon.com",
+    "status": "completed",
+    "attributes": {
+      "user_email": "audit@lemon.com"
+    }
+  },
+  {
+    "timestamp": 1789793557.0246665,
+    "event": "order_created",
+    "order_id": null,
+    "customer_email": "audit@lemon.com",
+    "status": "completed",
+    "attributes": {
+      "user_email": "audit@lemon.com"
+    }
+  },
+  {
+    "timestamp": 1789793557.2943614,
+    "event": "order_created",
+    "order_id": null,
+    "customer_email": "audit@lemon.com",
+    "status": "completed",
+    "attributes": {
+      "user_email": "audit@lemon.com"
+    }
+  },
+  {
+    "timestamp": 1789793561.300973,
+    "event": "order_created",
+    "order_id": null,
+    "customer_email": "audit@lemon.com",
+    "status": "completed",
+    "attributes": {
+      "user_email": "audit@lemon.com"
+    }
+  },
+  {
+    "timestamp": 1789793561.4129634,
+    "event": "order_created",
+    "order_id": null,
+    "customer_email": "audit@lemon.com",
+    "status": "completed",
+    "attributes": {
+      "user_email": "audit@lemon.com"
+    }
+  },
+  {
+    "timestamp": 1790076506.1273844,
+    "event": "subscription.active",
+    "order_id": null,
+    "customer_email": null,
+    "status": "completed",
+    "attributes": {}
+  },
+  {
+    "timestamp": 1790076625.9608269,
+    "event": "subscription.active",
+    "order_id": null,
+    "customer_email": null,
+    "status": "completed",
+    "attributes": {}
   }
 ]

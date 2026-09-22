@@ -300,5 +300,49 @@
       "count": 0
     },
     "last_updated": 1789555598.749253
+  },
+  "student@eduhub.ai": {
+    "email": "student@eduhub.ai",
+    "flash_credits": 120,
+    "daily_usage": {
+      "date": "2026-09-22",
+      "count": 0
+    },
+    "last_updated": 1790076506.130385,
+    "role": "pro_max",
+    "tier": "pro_max",
+    "is_subscribed": true,
+    "user_id": "usr_e52c2a0f",
+    "subscription": {
+      "status": "active",
+      "tier": "pro_max",
+      "role": "pro_max",
+      "variant_id": "ca17b5d8-9754-44f3-9a1f-f6d779eb8203",
+      "order_id": "evt_test_12345",
+      "activated_at": 1790076506.130385,
+      "trial": true
+    }
+  },
+  "verified_student@eduhub.ai": {
+    "email": "verified_student@eduhub.ai",
+    "flash_credits": 120,
+    "daily_usage": {
+      "date": "2026-09-22",
+      "count": 0
+    },
+    "last_updated": 1790076625.9638252,
+    "role": "pro_max",
+    "tier": "pro_max",
+    "is_subscribed": true,
+    "user_id": "usr_4811c4e2",
+    "subscription": {
+      "status": "active",
+      "tier": "pro_max",
+      "role": "pro_max",
+      "variant_id": "ca17b5d8-9754-44f3-9a1f-f6d779eb8203",
+      "order_id": "msg_live_test_001",
+      "activated_at": 1790076625.9638252,
+      "trial": true
+    }
   }
 }

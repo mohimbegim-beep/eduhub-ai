@@ -1,5 +1,5 @@
 {
-    "timestamp": "2026-09-17 21:27:52",
+    "timestamp": "2026-09-19 06:08:56",
     "trigger_event": "PRODUCT_MARKETING_PUSH",
     "data": {
         "promote_product": "AI E-com Factory",
@@ -7,6 +7,48 @@
         "target_youtube_slot": "Channel_5_Marketplace_AI",
         "destination_url": "https://eduhub-ai.onrender.com/tools/marketplace-lab?utm_source=youtube_shorts&utm_medium=organic_video&utm_campaign=channel_5_marketplace_ai&utm_content=ai_e-com_factory"
     },
-    "status": "PROCESSED_BY_YOUTUBE",
-    "consumed_at": "2026-09-17 21:27:52"
+    "status": "COMPLETED_MEDIA_PRODUCED",
+    "consumed_at": "2026-09-19 06:08:56",
+    "youtube_production": {
+        "title": "Секрет ИИ: Как решить проблему 'AI E-com Factory' за 60 секунд | Лайфхак",
+        "target_channel": "Channel_5_Marketplace_AI",
+        "duration_seconds": 58,
+        "format": "Interactive Shorts / Fast-Paced Lifehack",
+        "pacing": "160-170 words per minute, high energy, no fluff",
+        "storyboard": [
+            {
+                "timing": "00:00 - 00:03",
+                "speaker": "Voiceover (ElevenLabs Adam / Dynamic Energy)",
+                "visual_cue": "[Быстрый зум на экран, красный акцент, звук 'Whoosh']",
+                "script_text": "Ты до сих пор делаешь это вручную?! Как создать 30 сценариев для Reels и карточки Uzum за 1 клик?!"
+            },
+            {
+                "timing": "00:03 - 00:15",
+                "speaker": "Voiceover",
+                "visual_cue": "[Таймлапс уставшего человека за полночь, счетчик упущенного времени и денег]",
+                "script_text": "Перестань сливать время впустую. 90% специалистов даже не догадываются, что этот процесс уже полностью автоматизирован нейросетями."
+            },
+            {
+                "timing": "00:15 - 00:42",
+                "speaker": "Voiceover + Screen Capture",
+                "visual_cue": "[Запись экрана: сайт EduHub AI, запуск AI E-com Factory, 1 клик, генерация решения]",
+                "script_text": "Смотри: открываем AI E-com Factory. Вставляем исходный запрос, жмем 'Сгенерировать' — и ИИ за 5 секунд выдает безупречный результат академического уровня с готовым оформлением."
+            },
+            {
+                "timing": "00:42 - 00:58",
+                "speaker": "Voiceover",
+                "visual_cue": "[Указательная стрелка вниз, интерфейс матового стекла, кликабельный бейдж]",
+                "script_text": "Хочешь протестировать бесплатно прямо сейчас? Прямая ссылка закреплена в первом комментарии под этим видео. Сохрани, чтобы не потерять!"
+            }
+        ],
+        "pinned_comment": "🚀 Протестируй 'AI E-com Factory' онлайн: 👉 https://eduhub-ai.onrender.com/tools/marketplace-lab?utm_source=youtube_shorts&utm_medium=organic_video&utm_campaign=channel_5_marketplace_ai&utm_content=ai_e-com_factory\n\nПопробуй в интерактивной песочнице прямо сейчас без сложных настроек!",
+        "hashtags": [
+            "#Shorts",
+            "#ИИ",
+            "#Лайфхак",
+            "#EduHub",
+            "#Нейросети",
+            "#Продуктивность"
+        ]
+    }
 }
