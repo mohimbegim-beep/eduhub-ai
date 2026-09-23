@@ -152,7 +152,15 @@ async def add_security_headers(request: Request, call_next):
             ua = request.headers.get("user-agent", "")
             ref = request.headers.get("referer", "")
             country = request.headers.get("cf-ipcountry", "Unknown")
-            analytics_engine.record_hit(path=path, ip=ip, user_agent=ua, referrer=ref, country=country)
+            
+            # Автоматическая детекция кликов Google Ads (gclid / gbraid / wbraid)
+            utm_src = request.query_params.get("utm_source")
+            if not utm_src and any(k in request.query_params for k in ("gclid", "gbraid", "wbraid")):
+                utm_src = "google_ads"
+                if not ref or ref == "Direct":
+                    ref = "https://www.google.com"
+
+            analytics_engine.record_hit(path=path, ip=ip, user_agent=ua, referrer=ref, utm_source=utm_src, country=country)
 
     response = await call_next(request)
     dur_ms = (time.perf_counter() - t_start) * 1000
