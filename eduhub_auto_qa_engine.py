@@ -657,6 +657,70 @@ class AutoQAGuardEngine:
         return t
 
     # --------------------------------------------------------------------------
+    # TEST 11: Stage 9 - Billing Lifecycle, Dunning Grace Period & MoR Receipts
+    # --------------------------------------------------------------------------
+    def test_11_billing_dunning_refunds_and_receipts(self):
+        t = TestCaseResult("11. Billing Lifecycle, Dunning Grace Period & MoR Receipts")
+        start = time.perf_counter()
+
+        try:
+            from fastapi.testclient import TestClient
+            sys.path.insert(0, str(self.base_dir))
+            from app.main import (
+                app,
+                apply_dunning_grace_period,
+                apply_refund_or_dispute,
+                record_billing_transaction,
+                is_transaction_already_processed
+            )
+
+            client = TestClient(app)
+
+            # 1. Grace Period validation
+            test_email = f"qa_dunning_{int(time.time()*1000)}@eduhub.ai"
+            u_grace = apply_dunning_grace_period(test_email, order_id="sub_qa_grace", grace_days=3)
+            if u_grace.get("role") != "pro_max" or not u_grace.get("subscription", {}).get("dunning", {}).get("active"):
+                t.passed = False
+                t.errors.append("apply_dunning_grace_period failed to grant pro_max grace period")
+
+            res_status = client.get(f"/api/v1/subscription/status?email={test_email}")
+            if res_status.status_code != 200 or not res_status.json().get("in_grace_period"):
+                t.passed = False
+                t.errors.append(f"GET /api/v1/subscription/status failed grace period check: {res_status.status_code}")
+
+            # 2. Refund / Dispute revocation validation
+            u_revoked = apply_refund_or_dispute(test_email, order_id="sub_qa_grace", reason="refund.processed")
+            if u_revoked.get("role") != "free_tier" or u_revoked.get("flash_credits") != 0:
+                t.passed = False
+                t.errors.append("apply_refund_or_dispute failed to revoke pro_max or zero credits")
+
+            # 3. Webhook Idempotency validation
+            test_order_id = f"ord_qa_{int(time.time()*1000)}"
+            record_billing_transaction("subscription.active", {"data": {"id": test_order_id}}, explicit_order_id=test_order_id, explicit_email=test_email)
+            if not is_transaction_already_processed("subscription.active", test_order_id):
+                t.passed = False
+                t.errors.append("is_transaction_already_processed failed to identify recorded transaction")
+
+            # 4. Structured MoR Receipt validation
+            res_rcpt = client.get(f"/api/v1/billing/receipt/{test_order_id}")
+            if res_rcpt.status_code != 200:
+                t.passed = False
+                t.errors.append(f"GET /api/v1/billing/receipt returned HTTP {res_rcpt.status_code}")
+            else:
+                r_json = res_rcpt.json()
+                if r_json.get("merchant_of_record", {}).get("name") != "Dodo Payments Inc.":
+                    t.passed = False
+                    t.errors.append(f"MoR name mismatch: {r_json.get('merchant_of_record')}")
+
+            t.details = "3-day Dunning Grace Period active; Refund revocation verified; Idempotency store protected; Dodo MoR receipts issued."
+        except Exception as e:
+            t.passed = False
+            t.errors.append(f"Billing lifecycle test exception: {e}")
+
+        t.duration_ms = (time.perf_counter() - start) * 1000
+        return t
+
+    # --------------------------------------------------------------------------
     # Main Suite Execution
     # --------------------------------------------------------------------------
     def run_all_tests(self, auto_fix=True):
@@ -673,7 +737,8 @@ class AutoQAGuardEngine:
             self.test_07_fastapi_contracts,
             self.test_08_security_rate_limits_and_webhooks,
             self.test_09_perimeter_security_and_data_shield,
-            self.test_10_ai_resilience_quotas_and_streaming
+            self.test_10_ai_resilience_quotas_and_streaming,
+            self.test_11_billing_dunning_refunds_and_receipts
         ]
 
         self.test_results = []

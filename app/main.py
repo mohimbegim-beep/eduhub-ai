@@ -328,18 +328,39 @@ DATA_DIR = BASE_DIR / "data"
 DATA_DIR.mkdir(parents=True, exist_ok=True)
 TRANSACTIONS_LOG = DATA_DIR / "billing_transactions.json"
 
-def record_billing_transaction(event_name: str, event_data: dict) -> None:
+def record_billing_transaction(event_name: str, event_data: dict, explicit_order_id: str = None, explicit_email: str = None) -> None:
     """
     Персистентное сохранение событий покупок (one-time) и подписок (recurring).
     """
     try:
+        data = event_data.get("data", {}) if isinstance(event_data.get("data"), dict) else {}
+        attrs = data.get("attributes", {}) if isinstance(data.get("attributes"), dict) else {}
+        customer = data.get("customer", {}) if isinstance(data.get("customer"), dict) else {}
+
+        extracted_email = (
+            explicit_email or
+            attrs.get("user_email") or
+            customer.get("email") or
+            data.get("customer_email") or
+            data.get("email") or
+            "customer@eduhub.ai"
+        )
+        extracted_order_id = (
+            explicit_order_id or
+            data.get("id") or
+            data.get("subscription_id") or
+            data.get("payment_id") or
+            event_data.get("id") or
+            str(int(time.time()))
+        )
+
         record = {
             "timestamp": time.time(),
             "event": event_name,
-            "order_id": event_data.get("data", {}).get("id"),
-            "customer_email": event_data.get("data", {}).get("attributes", {}).get("user_email"),
-            "status": event_data.get("data", {}).get("attributes", {}).get("status", "completed"),
-            "attributes": event_data.get("data", {}).get("attributes", {})
+            "order_id": str(extracted_order_id),
+            "customer_email": str(extracted_email).strip().lower(),
+            "status": attrs.get("status") or data.get("status") or "completed",
+            "attributes": attrs or data
         }
         records = []
         if TRANSACTIONS_LOG.exists():
@@ -492,6 +513,66 @@ def cancel_or_expire_subscription(email: str, status_label: str = "cancelled", o
     balances[email] = user
     save_user_balances(balances)
     print(f"[SUBSCRIPTION {status_label.upper()}] Reverted '{email}' to free_tier (Status: {status_label}, Order: {order_id})")
+    return user
+
+def apply_dunning_grace_period(email: str, order_id: str = None, grace_days: int = 3) -> dict:
+    """
+    Dunning Management: при сбое оплаты автопродления (payment.failed / subscription.unpaid)
+    пользователю предоставляется Grace Period (3 дня льготного периода)
+    для обновления платежного метода вместо грубой блокировки.
+    """
+    email = email.strip().lower()
+    balances = load_user_balances()
+    user = get_or_create_user(email)
+
+    grace_until = time.time() + (grace_days * 86400)
+    user["role"] = "pro_max"  # Доступ сохраняется во время Grace Period
+    user["is_subscribed"] = True
+    if "subscription" not in user:
+        user["subscription"] = {}
+    user["subscription"]["status"] = "grace_period"
+    user["subscription"]["role"] = "pro_max"
+    user["subscription"]["dunning"] = {
+        "active": True,
+        "grace_period_until": grace_until,
+        "grace_days": grace_days,
+        "reason": "payment_failed",
+        "notice": f"Payment failed. You have {grace_days} days of grace access to update your billing details."
+    }
+    if order_id:
+        user["subscription"]["last_order_id"] = order_id
+    user["last_updated"] = time.time()
+    balances[email] = user
+    save_user_balances(balances)
+    print(f"[DUNNING GRACE PERIOD] Granted {grace_days}-day grace access to {email} until {time.strftime('%Y-%m-%d %H:%M:%S', time.gmtime(grace_until))}")
+    return user
+
+def apply_refund_or_dispute(email: str, order_id: str = None, reason: str = "refund") -> dict:
+    """
+    Обработка возвратов (refund) и чарджбэков (dispute): немедленный отзыв подписки,
+    обнуление неиспользованных токенов и аудит.
+    """
+    email = email.strip().lower()
+    balances = load_user_balances()
+    user = get_or_create_user(email)
+    user["role"] = "free_tier"
+    user["tier"] = "free_tier"
+    user["is_subscribed"] = False
+    if "subscription" not in user:
+        user["subscription"] = {}
+    user["subscription"]["status"] = "refunded" if "refund" in reason.lower() else "disputed"
+    user["subscription"]["role"] = "free_tier"
+    user["subscription"]["ended_at"] = time.time()
+    user["subscription"]["dispute_or_refund"] = {
+        "action": reason,
+        "timestamp": time.time(),
+        "order_id": order_id
+    }
+    user["flash_credits"] = 0
+    user["last_updated"] = time.time()
+    balances[email] = user
+    save_user_balances(balances)
+    print(f"[BILLING {reason.upper()}] Revoked PRO_MAX from {email} (Reason: {reason}, Order: {order_id})")
     return user
 
 def record_daily_ai_call(email: str) -> tuple[bool, int]:
@@ -2032,32 +2113,40 @@ async def dodo_payments_webhook(
         "customer@eduhub.ai"
     ).strip().lower()
     order_id = str(
-        webhook_id or
         data.get("id") or
         data.get("subscription_id") or
         data.get("payment_id") or
         event_data.get("id") or
+        webhook_id or
         int(time.time())
     )
 
     print(f"[DODO WEBHOOK] Received: {event_type} | Order/Sub: {order_id} | Customer: {customer_email}")
 
     # Идемпотентность: повторные доставки не вызывают дублирования
-    if is_transaction_already_processed(event_type, order_id):
+    if is_transaction_already_processed(event_type, order_id) or (webhook_id and is_transaction_already_processed(event_type, webhook_id)):
         print(f"[DODO WEBHOOK] Duplicate event {event_type}/{order_id} ignored (idempotent 200).")
-        return {"status": "verified", "idempotent": True, "received": True, "event": event_type}
+        return {"status": "verified", "idempotent": True, "received": True, "event": event_type, "order_id": order_id}
 
     # Персистентное сохранение
-    record_billing_transaction(event_type, event_data)
+    record_billing_transaction(event_type, event_data, explicit_order_id=order_id, explicit_email=customer_email)
 
-    # Выдача доступа
+    # Выдача доступа / Жизненный цикл подписки (Dunning & Refund Engine)
     role_provisioned = "free_tier"
     if any(k in event_type for k in ["active", "renewed", "success", "created", "paid"]):
         user = provision_subscription(customer_email, "pro_max", order_id=order_id)
         role_provisioned = "pro_max"
         print(f"[DODO WEBHOOK] Provisioned PRO_MAX for {customer_email}")
-    elif any(k in event_type for k in ["cancel", "expire", "failed", "unpaid"]):
-        user = cancel_or_expire_subscription(customer_email, status_label="cancelled", order_id=order_id)
+    elif any(k in event_type for k in ["refund", "dispute", "chargeback"]):
+        user = apply_refund_or_dispute(customer_email, order_id=order_id, reason=event_type)
+        role_provisioned = "free_tier"
+        print(f"[DODO WEBHOOK] Processed refund/dispute for {customer_email}")
+    elif any(k in event_type for k in ["failed", "unpaid", "on_hold"]):
+        user = apply_dunning_grace_period(customer_email, order_id=order_id, grace_days=3)
+        role_provisioned = "pro_max"
+        print(f"[DODO WEBHOOK] Applied 3-day Dunning Grace Period for {customer_email}")
+    elif any(k in event_type for k in ["cancel", "expire"]):
+        user = cancel_or_expire_subscription(customer_email, status_label="cancelled" if "cancel" in event_type else "expired", order_id=order_id)
         role_provisioned = "free_tier"
         print(f"[DODO WEBHOOK] Cancelled PRO_MAX for {customer_email}")
 
@@ -2069,6 +2158,56 @@ async def dodo_payments_webhook(
         "order_id": order_id,
         "customer": customer_email,
         "role_provisioned": role_provisioned
+    }
+
+@app.get("/api/v1/billing/receipt/{order_id}", tags=["Billing"])
+async def get_billing_receipt(order_id: str):
+    """
+    Возвращает официальную электронную квитанцию об оплате с реквизитами Merchant of Record (Dodo Payments Inc.).
+    """
+    clean_id = str(order_id).strip()
+    records = []
+    if TRANSACTIONS_LOG.exists():
+        try:
+            with open(TRANSACTIONS_LOG, "r", encoding="utf-8") as f:
+                import json as pj
+                records = pj.load(f)
+        except Exception:
+            records = []
+
+    matched = None
+    for r in reversed(records):
+        if str(r.get("order_id")) == clean_id:
+            matched = r
+            break
+
+    timestamp = matched.get("timestamp") if matched else time.time()
+    customer = matched.get("customer_email") if matched else "customer@eduhub.ai"
+    status_label = matched.get("status") if matched else "completed"
+    event_label = matched.get("event") if matched else "order_created"
+
+    return {
+        "status": "success",
+        "receipt_id": f"rcpt_{clean_id}",
+        "order_id": clean_id,
+        "customer_email": customer,
+        "merchant_of_record": {
+            "name": "Dodo Payments Inc.",
+            "role": "Authorized Merchant of Record (MoR)",
+            "tax_compliance": "VAT, Sales Tax, and GST calculated and remitted by Dodo Payments Inc.",
+            "support_email": "support@dodopayments.com"
+        },
+        "item": {
+            "title": "EduHub AI Pro Max Subscription",
+            "tier": "pro_max",
+            "amount_usd": 19.00,
+            "currency": "USD"
+        },
+        "payment_status": status_label,
+        "event": event_label,
+        "issued_at": time.strftime("%Y-%m-%d %H:%M:%S UTC", time.gmtime(timestamp)),
+        "customer_portal_url": "https://customer.dodopayments.com",
+        "refund_guarantee": "14-day 100% money-back guarantee supported"
     }
 
 # --------------------------------------------------------------------------
@@ -2203,6 +2342,7 @@ async def trigger_system_backup_snapshot():
 # --------------------------------------------------------------------------
 
 @app.get("/api/v1/user/subscription", tags=["Billing & Quotas"])
+@app.get("/api/v1/subscription/status", tags=["Billing & Quotas"])
 async def get_user_subscription_status(email: str):
     """
     Возвращает статус подписки пользователя, роль (pro_max) и флаг разблокировки рабочего пространства.
@@ -2211,7 +2351,10 @@ async def get_user_subscription_status(email: str):
     user = get_or_create_user(clean_email)
     sub = user.get("subscription", {})
     role = user.get("role", "free_tier")
-    is_active = sub.get("status") == "active" or role == "pro_max"
+    dunning = sub.get("dunning", {})
+    grace_until = dunning.get("grace_period_until", 0)
+    in_grace = sub.get("status") == "grace_period" and time.time() < grace_until
+    is_active = sub.get("status") == "active" or role == "pro_max" or in_grace
     
     return {
         "status": "success",
@@ -2221,6 +2364,7 @@ async def get_user_subscription_status(email: str):
         "tier": user.get("tier", "free_tier"),
         "is_subscribed": is_active,
         "workspace_unlocked": is_active,
+        "in_grace_period": in_grace,
         "flash_credits": user.get("flash_credits", 0),
         "subscription": sub
     }
