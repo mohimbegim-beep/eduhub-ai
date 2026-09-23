@@ -1258,5 +1258,6 @@
   "acad_footer_all_tools": "Todas las herramientas →",
   "acad_btn_sample_study": "🎓 Ejemplo: Disertación",
   "acad_btn_sample_title": "Abrir proyecto de investigación académica de muestra",
-  "footer_mor_disclosure": "Los pagos son procesados de forma segura por Dodo Payments Inc., actuando como comerciante de registro (Merchant of Record) autorizado."
+  "footer_mor_disclosure": "Los pagos son procesados de forma segura por Dodo Payments Inc., actuando como comerciante de registro (Merchant of Record) autorizado.",
+  "telegram_bot_badge": "Bot de Telegram: @eduhub_ielts_bot →"
 }

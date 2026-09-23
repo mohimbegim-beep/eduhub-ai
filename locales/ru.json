@@ -1258,5 +1258,6 @@
   "acad_footer_all_tools": "Все инструменты →",
   "acad_btn_sample_study": "🎓 Пример: Диссертация",
   "acad_btn_sample_title": "Открыть готовый пример академического исследования",
-  "footer_mor_disclosure": "Платежи безопасно обрабатываются компанией Dodo Payments Inc., выступающей в качестве уполномоченного продавца (Merchant of Record)."
+  "footer_mor_disclosure": "Платежи безопасно обрабатываются компанией Dodo Payments Inc., выступающей в качестве уполномоченного продавца (Merchant of Record).",
+  "telegram_bot_badge": "Telegram-бот: @eduhub_ielts_bot →"
 }

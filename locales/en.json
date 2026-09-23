@@ -1258,5 +1258,6 @@
   "acad_footer_all_tools": "All tools →",
   "acad_btn_sample_study": "🎓 Sample Research Template",
   "acad_btn_sample_title": "Open sample academic research project",
-  "footer_mor_disclosure": "Payments are securely processed by Dodo Payments Inc., acting as the authorized Merchant of Record."
+  "footer_mor_disclosure": "Payments are securely processed by Dodo Payments Inc., acting as the authorized Merchant of Record.",
+  "telegram_bot_badge": "Telegram Bot: @eduhub_ielts_bot →"
 }
