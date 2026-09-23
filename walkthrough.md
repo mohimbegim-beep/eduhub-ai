@@ -100,3 +100,26 @@
    - python test_moderation_readiness.py &rarr; 17 из 17 тестов (100.0% Pass).
    - python verify_system.py &rarr; 17 из 17 проверок (100.0% Pass).
    - Боевой деплой на https://eduhub-ai.onrender.com/ активен (HTTP 200 OK, 0 упоминаний Lemon Squeezy).
+
+---
+
+## 28. Полная Миграция Официального Email на mahallamade.uz@gmail.com
+
+### 28.1 Выполненные задачи:
+1. **Статический интерфейс и правовые документы:**
+   - `static/index.html`: Обновлен JSON-LD FAQ структурированных данных Schema.org, аккордеоны FAQ (a2, a5), контактная ссылка в футере, модальные окна Terms, Privacy, Refund Guarantee.
+   - `static/privacy.html`: Обновлен контактный email в разделе GDPR и разделе связи с оператором.
+   - `static/terms.html`: Обновлен email в разделах отмены подписки, досудебного урегулирования споров и официальных реквизитов.
+   - `static/refund.html`: Обновлен прямой email для запроса возвратов и обращения в биллинг-службу.
+   - `static/payment-success.html`, `static/tools/ats-resume.html`, `static/tools/peer-exchange.html`: Синхронизированы контакты поддержки.
+2. **Интернационализация (i18n):**
+   - `static/js/i18n.js`: Заменен адрес во всех локалях (EN, RU, UZ, ES).
+   - `locales/*.json` и `static/locales/*.json`: Синхронизированы ответы FAQ во всех 4 языках.
+   - `static/js/legal-consent.js`: Обновлены модальные окна гарантии возврата на 4 языках.
+3. **Бэкенд, автоматизация и шаблоны:**
+   - `app/main.py`: Эндпоинты `/api/v1/catalog/products` и `/api/v1/support/dispute`.
+   - `services/email_robot.py`: Шаблоны писем для верификации и комплаенса.
+   - `data/blueprints/telegram_bot_factory.py`: Контакты поддержки в шаблоне Telegram-бота.
+4. **Тестирование и развертывание:**
+   - Все 17 тестов `test_moderation_readiness.py` и все 17 тестов `verify_system.py` успешно пройдены (100%).
+   - Изменения зафиксированы в Git и отправлены в `main` для автоматического деплоя на Render.com.
