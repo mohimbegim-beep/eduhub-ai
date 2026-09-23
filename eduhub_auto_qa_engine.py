@@ -548,6 +548,63 @@ class AutoQAGuardEngine:
         return t
 
     # --------------------------------------------------------------------------
+    # TEST 9: Stage 7 - Perimeter Security, Strict Headers, Auth & Data Shield
+    # --------------------------------------------------------------------------
+    def test_09_perimeter_security_and_data_shield(self):
+        t = TestCaseResult("9. Perimeter Security, Strict Headers, Auth & Data Shield")
+        start = time.perf_counter()
+
+        try:
+            from fastapi.testclient import TestClient
+            sys.path.insert(0, str(self.base_dir))
+            from app.main import app, verify_session_token
+            from services.backup_engine import backup_engine
+
+            client = TestClient(app)
+
+            # 1. Проверка строгих заголовков (HSTS, CSP, X-Frame-Options)
+            res_root = client.get("/")
+            headers = res_root.headers
+            if "strict-transport-security" not in headers:
+                t.passed = False
+                t.errors.append("Missing Strict-Transport-Security header")
+            if "content-security-policy" not in headers:
+                t.passed = False
+                t.errors.append("Missing Content-Security-Policy header")
+            elif "checkout.dodopayments.com" not in headers["content-security-policy"]:
+                t.passed = False
+                t.errors.append("CSP missing Dodo Payments checkout allowlist")
+
+            # 2. Проверка CORS защиты (отклонение неавторизованного Origin)
+            res_cors = client.options(
+                "/api/v1/catalog/products",
+                headers={"Origin": "https://attacker-fake-site.com", "Access-Control-Request-Method": "GET"}
+            )
+            if res_cors.headers.get("access-control-allow-origin") == "https://attacker-fake-site.com":
+                t.passed = False
+                t.errors.append("CORS allowed unauthorized external origin")
+
+            # 3. Проверка сессий и Auth API
+            res_login = client.post("/api/v1/auth/login", json={"email": "audit_user@eduhub.ai"})
+            if res_login.status_code != 200 or not res_login.json().get("session_token"):
+                t.passed = False
+                t.errors.append(f"POST /api/v1/auth/login failed: HTTP {res_login.status_code}")
+
+            # 4. Проверка Backup Engine
+            snap = backup_engine.create_snapshot()
+            if snap.get("status") != "success":
+                t.passed = False
+                t.errors.append(f"BackupEngine failed snapshot: {snap}")
+
+            t.details = "HSTS & CSP verified; CORS whitelist active; Auth session lifecycle functional; Data snapshot created."
+        except Exception as e:
+            t.passed = False
+            t.errors.append(f"Perimeter security & Data Shield exception: {e}")
+
+        t.duration_ms = (time.perf_counter() - start) * 1000
+        return t
+
+    # --------------------------------------------------------------------------
     # Main Suite Execution
     # --------------------------------------------------------------------------
     def run_all_tests(self, auto_fix=True):
@@ -562,7 +619,8 @@ class AutoQAGuardEngine:
             self.test_05_javascript_cleanliness,
             self.test_06_security_and_safari_css,
             self.test_07_fastapi_contracts,
-            self.test_08_security_rate_limits_and_webhooks
+            self.test_08_security_rate_limits_and_webhooks,
+            self.test_09_perimeter_security_and_data_shield
         ]
 
         self.test_results = []

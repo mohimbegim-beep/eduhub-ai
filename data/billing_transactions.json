@@ -1024,5 +1024,93 @@
     "customer_email": null,
     "status": "completed",
     "attributes": {}
+  },
+  {
+    "timestamp": 1790138217.7075813,
+    "event": "order_created",
+    "order_id": null,
+    "customer_email": "student@eduhub.ai",
+    "status": "completed",
+    "attributes": {
+      "user_email": "student@eduhub.ai"
+    }
+  },
+  {
+    "timestamp": 1790138274.426907,
+    "event": "payment.succeeded",
+    "order_id": null,
+    "customer_email": null,
+    "status": "completed",
+    "attributes": {}
+  },
+  {
+    "timestamp": 1790138274.8099225,
+    "event": "payment.succeeded",
+    "order_id": null,
+    "customer_email": null,
+    "status": "completed",
+    "attributes": {}
+  },
+  {
+    "timestamp": 1790138280.035948,
+    "event": "payment.succeeded",
+    "order_id": null,
+    "customer_email": null,
+    "status": "completed",
+    "attributes": {}
+  },
+  {
+    "timestamp": 1790138280.2297263,
+    "event": "order_created",
+    "order_id": null,
+    "customer_email": "audit@dodo.com",
+    "status": "completed",
+    "attributes": {
+      "user_email": "audit@dodo.com"
+    }
+  },
+  {
+    "timestamp": 1790138301.2274888,
+    "event": "order_created",
+    "order_id": null,
+    "customer_email": "student@eduhub.ai",
+    "status": "completed",
+    "attributes": {
+      "user_email": "student@eduhub.ai"
+    }
+  },
+  {
+    "timestamp": 1790138307.9108253,
+    "event": "payment.succeeded",
+    "order_id": null,
+    "customer_email": null,
+    "status": "completed",
+    "attributes": {}
+  },
+  {
+    "timestamp": 1790138308.2713573,
+    "event": "payment.succeeded",
+    "order_id": null,
+    "customer_email": null,
+    "status": "completed",
+    "attributes": {}
+  },
+  {
+    "timestamp": 1790138312.6958303,
+    "event": "payment.succeeded",
+    "order_id": null,
+    "customer_email": null,
+    "status": "completed",
+    "attributes": {}
+  },
+  {
+    "timestamp": 1790138312.857538,
+    "event": "order_created",
+    "order_id": null,
+    "customer_email": "audit@dodo.com",
+    "status": "completed",
+    "attributes": {
+      "user_email": "audit@dodo.com"
+    }
   }
 ]

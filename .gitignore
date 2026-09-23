@@ -15,3 +15,5 @@ secrets/
 logs/
 scratch/
 scratch_frames/
+data/backups/
+data/*.tmp

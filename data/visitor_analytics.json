@@ -1,8 +1,8 @@
 {
   "created_at": "2026-09-19T03:52:41.952423+00:00",
   "all_time": {
-    "total_pageviews": 51,
-    "human_pageviews": 51,
+    "total_pageviews": 71,
+    "human_pageviews": 71,
     "bot_pageviews": 0,
     "unique_visitors": [
       "6d571dc805cb",
@@ -67,24 +67,24 @@
       "utm_sources": {}
     },
     "2026-09-23": {
-      "total_pageviews": 33,
-      "human_pageviews": 33,
+      "total_pageviews": 53,
+      "human_pageviews": 53,
       "bot_pageviews": 0,
       "unique_visitors": [
         "2f0ce84d4870"
       ],
       "pages": {
-        "/": 29,
+        "/": 49,
         "/privacy": 1,
         "/terms": 1,
         "/refund": 1,
         "/payment-success": 1
       },
       "referrers": {
-        "Direct": 33
+        "Direct": 53
       },
       "devices": {
-        "desktop": 33,
+        "desktop": 53,
         "mobile": 0,
         "bot": 0
       },
@@ -92,6 +92,206 @@
     }
   },
   "recent_events": [
+    {
+      "time": "04:38:36 UTC",
+      "date": "2026-09-23",
+      "path": "/",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "04:38:32 UTC",
+      "date": "2026-09-23",
+      "path": "/",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "04:38:32 UTC",
+      "date": "2026-09-23",
+      "path": "/",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "04:38:32 UTC",
+      "date": "2026-09-23",
+      "path": "/",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "04:38:28 UTC",
+      "date": "2026-09-23",
+      "path": "/",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "04:38:28 UTC",
+      "date": "2026-09-23",
+      "path": "/",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "04:38:27 UTC",
+      "date": "2026-09-23",
+      "path": "/",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "04:38:27 UTC",
+      "date": "2026-09-23",
+      "path": "/",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "04:38:21 UTC",
+      "date": "2026-09-23",
+      "path": "/",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "04:38:16 UTC",
+      "date": "2026-09-23",
+      "path": "/",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "04:38:00 UTC",
+      "date": "2026-09-23",
+      "path": "/",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "04:38:00 UTC",
+      "date": "2026-09-23",
+      "path": "/",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "04:37:59 UTC",
+      "date": "2026-09-23",
+      "path": "/",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "04:37:54 UTC",
+      "date": "2026-09-23",
+      "path": "/",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "04:37:54 UTC",
+      "date": "2026-09-23",
+      "path": "/",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "04:37:54 UTC",
+      "date": "2026-09-23",
+      "path": "/",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "04:37:54 UTC",
+      "date": "2026-09-23",
+      "path": "/",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "04:37:33 UTC",
+      "date": "2026-09-23",
+      "path": "/",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "04:37:19 UTC",
+      "date": "2026-09-23",
+      "path": "/",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "04:36:57 UTC",
+      "date": "2026-09-23",
+      "path": "/",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
     {
       "time": "04:30:17 UTC",
       "date": "2026-09-23",
@@ -390,206 +590,6 @@
       "is_bot": false,
       "device": "desktop",
       "referrer": "Direct",
-      "country": "Unknown"
-    },
-    {
-      "time": "03:47:23 UTC",
-      "date": "2026-09-23",
-      "path": "/",
-      "visitor_id": "2f0ce84d4870",
-      "is_bot": false,
-      "device": "desktop",
-      "referrer": "Direct",
-      "country": "Unknown"
-    },
-    {
-      "time": "03:47:22 UTC",
-      "date": "2026-09-23",
-      "path": "/",
-      "visitor_id": "2f0ce84d4870",
-      "is_bot": false,
-      "device": "desktop",
-      "referrer": "Direct",
-      "country": "Unknown"
-    },
-    {
-      "time": "03:47:05 UTC",
-      "date": "2026-09-23",
-      "path": "/",
-      "visitor_id": "2f0ce84d4870",
-      "is_bot": false,
-      "device": "desktop",
-      "referrer": "Direct",
-      "country": "Unknown"
-    },
-    {
-      "time": "13:05:49 UTC",
-      "date": "2026-09-22",
-      "path": "/sitemap.xml",
-      "visitor_id": "8df3fbf4792e",
-      "is_bot": false,
-      "device": "desktop",
-      "referrer": "Direct",
-      "country": "Unknown"
-    },
-    {
-      "time": "13:05:49 UTC",
-      "date": "2026-09-22",
-      "path": "/tools/academic-lab",
-      "visitor_id": "8df3fbf4792e",
-      "is_bot": false,
-      "device": "desktop",
-      "referrer": "Direct",
-      "country": "Unknown"
-    },
-    {
-      "time": "13:05:49 UTC",
-      "date": "2026-09-22",
-      "path": "/academic-lab",
-      "visitor_id": "8df3fbf4792e",
-      "is_bot": false,
-      "device": "desktop",
-      "referrer": "Direct",
-      "country": "Unknown"
-    },
-    {
-      "time": "11:58:24 UTC",
-      "date": "2026-09-22",
-      "path": "/sitemap.xml",
-      "visitor_id": "8df3fbf4792e",
-      "is_bot": false,
-      "device": "desktop",
-      "referrer": "Direct",
-      "country": "Unknown"
-    },
-    {
-      "time": "11:58:24 UTC",
-      "date": "2026-09-22",
-      "path": "/ielts-writing-checker",
-      "visitor_id": "8df3fbf4792e",
-      "is_bot": false,
-      "device": "desktop",
-      "referrer": "Direct",
-      "country": "Unknown"
-    },
-    {
-      "time": "11:58:24 UTC",
-      "date": "2026-09-22",
-      "path": "/ielts-checker",
-      "visitor_id": "8df3fbf4792e",
-      "is_bot": false,
-      "device": "desktop",
-      "referrer": "Direct",
-      "country": "Unknown"
-    },
-    {
-      "time": "04:52:41 UTC",
-      "date": "2026-09-19",
-      "path": "/",
-      "visitor_id": "9d7f400eef74",
-      "is_bot": false,
-      "device": "desktop",
-      "referrer": "Direct",
-      "country": "Unknown"
-    },
-    {
-      "time": "04:52:41 UTC",
-      "date": "2026-09-19",
-      "path": "/",
-      "visitor_id": "9d7f400eef74",
-      "is_bot": false,
-      "device": "desktop",
-      "referrer": "Direct",
-      "country": "Unknown"
-    },
-    {
-      "time": "04:52:37 UTC",
-      "date": "2026-09-19",
-      "path": "/",
-      "visitor_id": "9d7f400eef74",
-      "is_bot": false,
-      "device": "desktop",
-      "referrer": "Direct",
-      "country": "Unknown"
-    },
-    {
-      "time": "04:52:36 UTC",
-      "date": "2026-09-19",
-      "path": "/",
-      "visitor_id": "9d7f400eef74",
-      "is_bot": false,
-      "device": "desktop",
-      "referrer": "Direct",
-      "country": "Unknown"
-    },
-    {
-      "time": "03:56:22 UTC",
-      "date": "2026-09-19",
-      "path": "/",
-      "visitor_id": "9d7f400eef74",
-      "is_bot": false,
-      "device": "desktop",
-      "referrer": "Direct",
-      "country": "Unknown"
-    },
-    {
-      "time": "03:56:22 UTC",
-      "date": "2026-09-19",
-      "path": "/",
-      "visitor_id": "9d7f400eef74",
-      "is_bot": false,
-      "device": "desktop",
-      "referrer": "Direct",
-      "country": "Unknown"
-    },
-    {
-      "time": "03:56:16 UTC",
-      "date": "2026-09-19",
-      "path": "/",
-      "visitor_id": "9d7f400eef74",
-      "is_bot": false,
-      "device": "desktop",
-      "referrer": "Direct",
-      "country": "Unknown"
-    },
-    {
-      "time": "03:56:16 UTC",
-      "date": "2026-09-19",
-      "path": "/",
-      "visitor_id": "9d7f400eef74",
-      "is_bot": false,
-      "device": "desktop",
-      "referrer": "Direct",
-      "country": "Unknown"
-    },
-    {
-      "time": "03:56:10 UTC",
-      "date": "2026-09-19",
-      "path": "/",
-      "visitor_id": "cf8a96440636",
-      "is_bot": false,
-      "device": "mobile",
-      "referrer": "Telegram",
-      "country": "Unknown"
-    },
-    {
-      "time": "03:56:10 UTC",
-      "date": "2026-09-19",
-      "path": "/tools/excel-wizard",
-      "visitor_id": "9d7f400eef74",
-      "is_bot": false,
-      "device": "desktop",
-      "referrer": "YouTube",
-      "country": "Unknown"
-    },
-    {
-      "time": "03:52:41 UTC",
-      "date": "2026-09-19",
-      "path": "/tools/excel-wizard",
-      "visitor_id": "6d571dc805cb",
-      "is_bot": false,
-      "device": "desktop",
-      "referrer": "Render System",
       "country": "Unknown"
     }
   ]

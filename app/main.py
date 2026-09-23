@@ -11,6 +11,7 @@ from pathlib import Path
 from threading import Lock
 from typing import Optional, List, Dict, Any
 from services.analytics_engine import analytics_engine
+from services.backup_engine import backup_engine, atomic_write_json
 
 from fastapi import FastAPI, Request, HTTPException, Header, status, Depends
 from fastapi.middleware.cors import CORSMiddleware
@@ -35,13 +36,31 @@ app = FastAPI(
 )
 
 # --------------------------------------------------------------------------
-# Безопасность: CORS и HTTP Security Headers
+# Безопасность: Production CORS и HTTP Security Headers
 # --------------------------------------------------------------------------
+PRODUCTION_URL = os.getenv("PRODUCTION_URL", "https://eduhub-ai.onrender.com").rstrip("/")
+allowed_origins_env = os.getenv("ALLOWED_ORIGINS", "")
+if allowed_origins_env:
+    raw_origins = [o.strip() for o in allowed_origins_env.split(",") if o.strip()]
+else:
+    raw_origins = [
+        PRODUCTION_URL,
+        "https://eduhub-ai.onrender.com",
+        "https://eduhub.study",
+        "https://eduhub-ai.com",
+        "http://localhost:8000",
+        "http://127.0.0.1:8000",
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+    ]
+ALLOWED_ORIGINS = list(dict.fromkeys(raw_origins))
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=ALLOWED_ORIGINS,
+    allow_origin_regex=r"^https?://(localhost|127\.0\.0\.1)(:\d+)?$|^https://.*\.onrender\.com$",
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD"],
     allow_headers=["*"],
 )
 
@@ -66,6 +85,20 @@ async def add_security_headers(request: Request, call_next):
     response.headers["X-XSS-Protection"] = "1; mode=block"
     response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
     response.headers["Permissions-Policy"] = "geolocation=(), microphone=(), payment=*"
+    response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains; preload"
+
+    csp = (
+        "default-src 'self'; "
+        "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://checkout.dodopayments.com; "
+        "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; "
+        "font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; "
+        "img-src 'self' data: blob: https:; "
+        "frame-src 'self' https://checkout.dodopayments.com; "
+        "connect-src 'self' https: http:; "
+        "object-src 'none'; "
+        "base-uri 'self';"
+    )
+    response.headers["Content-Security-Policy"] = csp
     return response
 
 # --------------------------------------------------------------------------
@@ -317,9 +350,11 @@ def record_billing_transaction(event_name: str, event_data: dict) -> None:
             except Exception:
                 records = []
         records.append(record)
-        with open(TRANSACTIONS_LOG, "w", encoding="utf-8") as f:
-            import json as pj
-            pj.dump(records, f, indent=2, ensure_ascii=False)
+        atomic_write_json(TRANSACTIONS_LOG, records)
+        try:
+            backup_engine.create_snapshot()
+        except Exception as be_err:
+            print(f"[BACKUP WARNING] Snapshot after billing failed: {be_err}")
     except Exception as e:
         print(f"[BILLING STORE WARNING] Failed to persist transaction: {e}")
 
@@ -359,9 +394,7 @@ def load_user_balances() -> dict:
 
 def save_user_balances(data: dict) -> None:
     try:
-        with open(USER_BALANCES_FILE, "w", encoding="utf-8") as f:
-            import json as pj
-            pj.dump(data, f, indent=2, ensure_ascii=False)
+        atomic_write_json(USER_BALANCES_FILE, data)
     except Exception as e:
         print(f"[BALANCE STORE ERROR] Failed to save balances: {e}")
 
@@ -1916,6 +1949,133 @@ async def dodo_payments_webhook(
         "customer": customer_email,
         "role_provisioned": role_provisioned
     }
+
+# --------------------------------------------------------------------------
+# Auth & Session Lifecycle Manager (Secure HttpOnly Cookie + HMAC Token)
+# --------------------------------------------------------------------------
+SESSION_SECRET = os.getenv("SESSION_SECRET") or os.getenv("DODO_WEBHOOK_SECRET") or "eduhub_secure_session_secret_2026"
+
+def generate_session_token(email: str, duration_days: int = 30) -> str:
+    clean_email = email.strip().lower()
+    exp = int(time.time()) + (duration_days * 86400)
+    payload = f"{clean_email}:{exp}"
+    sig = hmac.new(SESSION_SECRET.encode("utf-8"), payload.encode("utf-8"), hashlib.sha256).hexdigest()[:32]
+    raw_token = f"{payload}:{sig}"
+    return base64.urlsafe_b64encode(raw_token.encode("utf-8")).decode("utf-8")
+
+def verify_session_token(token: Optional[str]) -> Optional[str]:
+    if not token:
+        return None
+    try:
+        decoded = base64.urlsafe_b64decode(token.encode("utf-8")).decode("utf-8")
+        parts = decoded.split(":")
+        if len(parts) != 3:
+            return None
+        email, exp_str, sig = parts
+        exp = int(exp_str)
+        if time.time() > exp:
+            return None
+        payload = f"{email}:{exp}"
+        expected_sig = hmac.new(SESSION_SECRET.encode("utf-8"), payload.encode("utf-8"), hashlib.sha256).hexdigest()[:32]
+        if hmac.compare_digest(sig, expected_sig):
+            return email.lower()
+    except Exception:
+        return None
+    return None
+
+class AuthLoginRequest(BaseModel):
+    email: str
+
+@app.get("/api/v1/auth/session", tags=["Auth & Sessions"])
+async def get_auth_session(request: Request, x_session_token: Optional[str] = Header(None, alias="x-session-token")):
+    """
+    Проверяет сессионный токен из HttpOnly cookie или заголовка и возвращает статус пользователя.
+    """
+    cookie_token = request.cookies.get("eduhub_session")
+    auth_header = request.headers.get("authorization", "")
+    bearer_token = auth_header.replace("Bearer ", "").strip() if auth_header.startswith("Bearer ") else None
+    token = cookie_token or bearer_token or x_session_token
+
+    email = verify_session_token(token)
+    if not email:
+        return {
+            "authenticated": False,
+            "role": "free_tier",
+            "flash_credits": 0,
+            "user": None
+        }
+
+    user = get_or_create_user(email)
+    sub = user.get("subscription", {})
+    role = user.get("role", "free_tier")
+    is_active = sub.get("status") == "active" or role == "pro_max"
+
+    return {
+        "authenticated": True,
+        "email": email,
+        "user_id": user.get("user_id"),
+        "role": role,
+        "is_subscribed": is_active,
+        "flash_credits": user.get("flash_credits", 0),
+        "subscription": sub
+    }
+
+@app.post("/api/v1/auth/login", tags=["Auth & Sessions"])
+async def login_user_session(payload: AuthLoginRequest, request: Request, response: Response):
+    """
+    Генерирует криптографически подписанную сессию и устанавливает HttpOnly cookie.
+    """
+    clean_email = payload.email.strip().lower()
+    if not clean_email or "@" not in clean_email or len(clean_email) < 5:
+        raise HTTPException(status_code=400, detail="Invalid email address format.")
+
+    user = get_or_create_user(clean_email)
+    token = generate_session_token(clean_email)
+    is_secure = request.url.scheme == "https" or request.headers.get("x-forwarded-proto") == "https"
+
+    response.set_cookie(
+        key="eduhub_session",
+        value=token,
+        max_age=30 * 86400,
+        httponly=True,
+        samesite="lax",
+        secure=is_secure,
+        path="/"
+    )
+    return {
+        "status": "success",
+        "email": clean_email,
+        "role": user.get("role", "free_tier"),
+        "session_token": token
+    }
+
+@app.post("/api/v1/auth/logout", tags=["Auth & Sessions"])
+async def logout_user_session(response: Response):
+    """
+    Удаляет сессионную cookie пользователя.
+    """
+    response.delete_cookie(key="eduhub_session", path="/")
+    return {"status": "success", "message": "Logged out successfully"}
+
+@app.get("/api/v1/system/backups", tags=["System & Backups"])
+async def get_system_backups_list():
+    """
+    Возвращает список доступных автоматических снимков состояния базы данных.
+    """
+    snapshots = backup_engine.list_snapshots()
+    return {
+        "status": "active",
+        "total_snapshots": len(snapshots),
+        "snapshots": snapshots
+    }
+
+@app.post("/api/v1/system/backup", tags=["System & Backups"])
+async def trigger_system_backup_snapshot():
+    """
+    Инициирует немедленное создание снимка состояния базы данных.
+    """
+    result = backup_engine.create_snapshot()
+    return result
 
 # --------------------------------------------------------------------------
 # Эндпоинт 5: Баланс Flash Credits пользователя и Fair Usage статус
