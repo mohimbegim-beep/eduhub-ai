@@ -1,8 +1,8 @@
 {
   "created_at": "2026-09-19T03:52:41.952423+00:00",
   "all_time": {
-    "total_pageviews": 71,
-    "human_pageviews": 71,
+    "total_pageviews": 81,
+    "human_pageviews": 81,
     "bot_pageviews": 0,
     "unique_visitors": [
       "6d571dc805cb",
@@ -67,24 +67,24 @@
       "utm_sources": {}
     },
     "2026-09-23": {
-      "total_pageviews": 53,
-      "human_pageviews": 53,
+      "total_pageviews": 63,
+      "human_pageviews": 63,
       "bot_pageviews": 0,
       "unique_visitors": [
         "2f0ce84d4870"
       ],
       "pages": {
-        "/": 49,
+        "/": 59,
         "/privacy": 1,
         "/terms": 1,
         "/refund": 1,
         "/payment-success": 1
       },
       "referrers": {
-        "Direct": 53
+        "Direct": 63
       },
       "devices": {
-        "desktop": 53,
+        "desktop": 63,
         "mobile": 0,
         "bot": 0
       },
@@ -92,6 +92,106 @@
     }
   },
   "recent_events": [
+    {
+      "time": "04:43:58 UTC",
+      "date": "2026-09-23",
+      "path": "/",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "04:43:53 UTC",
+      "date": "2026-09-23",
+      "path": "/",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "04:43:51 UTC",
+      "date": "2026-09-23",
+      "path": "/",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "04:43:51 UTC",
+      "date": "2026-09-23",
+      "path": "/",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "04:43:42 UTC",
+      "date": "2026-09-23",
+      "path": "/",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "04:43:42 UTC",
+      "date": "2026-09-23",
+      "path": "/",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "04:43:40 UTC",
+      "date": "2026-09-23",
+      "path": "/",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "04:43:40 UTC",
+      "date": "2026-09-23",
+      "path": "/",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "04:43:18 UTC",
+      "date": "2026-09-23",
+      "path": "/",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "04:43:13 UTC",
+      "date": "2026-09-23",
+      "path": "/",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
     {
       "time": "04:38:36 UTC",
       "date": "2026-09-23",
@@ -484,106 +584,6 @@
     },
     {
       "time": "04:21:08 UTC",
-      "date": "2026-09-23",
-      "path": "/",
-      "visitor_id": "2f0ce84d4870",
-      "is_bot": false,
-      "device": "desktop",
-      "referrer": "Direct",
-      "country": "Unknown"
-    },
-    {
-      "time": "04:14:25 UTC",
-      "date": "2026-09-23",
-      "path": "/",
-      "visitor_id": "2f0ce84d4870",
-      "is_bot": false,
-      "device": "desktop",
-      "referrer": "Direct",
-      "country": "Unknown"
-    },
-    {
-      "time": "04:14:24 UTC",
-      "date": "2026-09-23",
-      "path": "/",
-      "visitor_id": "2f0ce84d4870",
-      "is_bot": false,
-      "device": "desktop",
-      "referrer": "Direct",
-      "country": "Unknown"
-    },
-    {
-      "time": "04:02:53 UTC",
-      "date": "2026-09-23",
-      "path": "/",
-      "visitor_id": "2f0ce84d4870",
-      "is_bot": false,
-      "device": "desktop",
-      "referrer": "Direct",
-      "country": "Unknown"
-    },
-    {
-      "time": "04:02:53 UTC",
-      "date": "2026-09-23",
-      "path": "/",
-      "visitor_id": "2f0ce84d4870",
-      "is_bot": false,
-      "device": "desktop",
-      "referrer": "Direct",
-      "country": "Unknown"
-    },
-    {
-      "time": "03:58:17 UTC",
-      "date": "2026-09-23",
-      "path": "/",
-      "visitor_id": "2f0ce84d4870",
-      "is_bot": false,
-      "device": "desktop",
-      "referrer": "Direct",
-      "country": "Unknown"
-    },
-    {
-      "time": "03:58:16 UTC",
-      "date": "2026-09-23",
-      "path": "/",
-      "visitor_id": "2f0ce84d4870",
-      "is_bot": false,
-      "device": "desktop",
-      "referrer": "Direct",
-      "country": "Unknown"
-    },
-    {
-      "time": "03:52:38 UTC",
-      "date": "2026-09-23",
-      "path": "/",
-      "visitor_id": "2f0ce84d4870",
-      "is_bot": false,
-      "device": "desktop",
-      "referrer": "Direct",
-      "country": "Unknown"
-    },
-    {
-      "time": "03:52:38 UTC",
-      "date": "2026-09-23",
-      "path": "/",
-      "visitor_id": "2f0ce84d4870",
-      "is_bot": false,
-      "device": "desktop",
-      "referrer": "Direct",
-      "country": "Unknown"
-    },
-    {
-      "time": "03:51:24 UTC",
-      "date": "2026-09-23",
-      "path": "/",
-      "visitor_id": "2f0ce84d4870",
-      "is_bot": false,
-      "device": "desktop",
-      "referrer": "Direct",
-      "country": "Unknown"
-    },
-    {
-      "time": "03:51:24 UTC",
       "date": "2026-09-23",
       "path": "/",
       "visitor_id": "2f0ce84d4870",

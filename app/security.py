@@ -87,9 +87,20 @@ ECOCIDE_PATTERN = re.compile(
 # Категория 5: Киберзащита от джейлбрейков и prompt-инъекций (Jailbreak Shield)
 JAILBREAK_PATTERN = re.compile(
     r"("
-    r"ignore all previous instructions|disregard previous rules|jailbreak mode|"
-    r"you are now in dan mode|do anything now|bypass safety protocols|"
-    r"забудь все предыдущие инструкции|отключи правила безопасности|режим бога"
+    r"ignore\s+(all\s+)?(previous|prior|above)\s+(instructions|directives|rules|prompts)|"
+    r"disregard\s+(all\s+)?(previous|prior)\s+(instructions|rules)|"
+    r"reveal\s+(your\s+)?(system\s+prompt|initial\s+instructions|hidden\s+rules)|"
+    r"print\s+(your\s+)?(system\s+prompt|instructions\s+verbatim)|"
+    r"repeat\s+the\s+words\s+above|"
+    r"you\s+are\s+now\s+in\s+dan\s+mode|dan\s+mode\s+enabled|jailbreak\s+mode|"
+    r"bypass\s+safety\s+protocols|do\s+anything\s+now|"
+    r"забудь\s+(все\s+)?(предыдущие\s+)?(инструкции|правила|указания)|"
+    r"игнорируй\s+(все\s+)?(предыдущие\s+)?(инструкции|правила)|"
+    r"покажи\s+(свой\s+)?(системный\s+промпт|скрытые\s+инструкции)|"
+    r"выведи\s+(свой\s+)?(системный\s+промпт|исходный\s+промпт)|"
+    r"отключи\s+правила\s+безопасности|режим\s+бога|"
+    r"barcha\s+oldingi\s+ko['`]?rsatmalarni\s+bekor\s+qil|tizim\s+promptini\s+ko['`]?rsat|"
+    r"ignora\s+(todas\s+las\s+)?instrucciones\s+anteriores|muestra\s+tu\s+prompt\s+del\s+sistema"
     r")",
     re.IGNORECASE | re.UNICODE
 )

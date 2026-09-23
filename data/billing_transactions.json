@@ -1112,5 +1112,49 @@
     "attributes": {
       "user_email": "audit@dodo.com"
     }
+  },
+  {
+    "timestamp": 1790138598.5596182,
+    "event": "order_created",
+    "order_id": null,
+    "customer_email": "student@eduhub.ai",
+    "status": "completed",
+    "attributes": {
+      "user_email": "student@eduhub.ai"
+    }
+  },
+  {
+    "timestamp": 1790138620.307845,
+    "event": "payment.succeeded",
+    "order_id": null,
+    "customer_email": null,
+    "status": "completed",
+    "attributes": {}
+  },
+  {
+    "timestamp": 1790138622.2068496,
+    "event": "payment.succeeded",
+    "order_id": null,
+    "customer_email": null,
+    "status": "completed",
+    "attributes": {}
+  },
+  {
+    "timestamp": 1790138631.9059234,
+    "event": "payment.succeeded",
+    "order_id": null,
+    "customer_email": null,
+    "status": "completed",
+    "attributes": {}
+  },
+  {
+    "timestamp": 1790138633.5823014,
+    "event": "order_created",
+    "order_id": null,
+    "customer_email": "audit@dodo.com",
+    "status": "completed",
+    "attributes": {
+      "user_email": "audit@dodo.com"
+    }
   }
 ]

@@ -16,7 +16,7 @@ from services.backup_engine import backup_engine, atomic_write_json
 from fastapi import FastAPI, Request, HTTPException, Header, status, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse, JSONResponse, HTMLResponse, Response
+from fastapi.responses import FileResponse, JSONResponse, HTMLResponse, Response, StreamingResponse
 from pydantic import BaseModel, Field, field_validator
 
 # Официальный Google GenAI SDK
@@ -679,6 +679,35 @@ def get_genai_client() -> "genai.Client":
         )
     return genai.Client(api_key=api_key)
 
+def call_genai_with_retry(client, model: str, contents, config, max_retries: int = 3, base_delay: float = 0.4):
+    """
+    Выполняет вызов Gemini API с экспоненциальной задержкой и джиттером (Exponential Backoff with Jitter).
+    Автоматически восстанавливается после временных сетевых ошибок и 429/503.
+    """
+    import random
+    last_exception = None
+    for attempt in range(max_retries):
+        try:
+            return client.models.generate_content(
+                model=model,
+                contents=contents,
+                config=config
+            )
+        except Exception as e:
+            last_exception = e
+            err_str = str(e).lower()
+            is_transient = any(k in err_str for k in [
+                "429", "503", "504", "502", "resourceexhausted", 
+                "quota", "overloaded", "unavailable", "timeout", "timed out"
+            ])
+            if is_transient and attempt < max_retries - 1:
+                sleep_sec = (base_delay * (2 ** attempt)) + random.uniform(0.05, 0.2)
+                print(f"[GENAI RETRY] Attempt {attempt + 1} failed with transient error: {e}. Retrying in {sleep_sec:.2f}s...")
+                time.sleep(sleep_sec)
+            else:
+                break
+    raise last_exception
+
 # --------------------------------------------------------------------------
 # Схемы валидации входных данных (Pydantic Models)
 # --------------------------------------------------------------------------
@@ -1094,7 +1123,13 @@ async def ask_question(
 
     # 2. Fair Usage Policy Guardrail (защита от расхода токенов: макс. 60 вызовов/день)
     client_ip = request.client.host if request.client else "127.0.0.1"
-    caller_email = x_user_email.strip().lower() if x_user_email else f"guest_{client_ip}@eduhub.ai"
+    cookie_token = request.cookies.get("eduhub_session")
+    caller_email = (
+        x_user_email.strip().lower() if x_user_email
+        else (verify_session_token(cookie_token) if cookie_token else None)
+        or (x_api_key.strip().lower() if x_api_key and "@" in x_api_key else None)
+        or f"guest_{client_ip}@eduhub.ai"
+    )
     allowed, calls_remaining = record_daily_ai_call(caller_email)
     if not allowed:
         raise HTTPException(
@@ -1144,7 +1179,8 @@ async def ask_question(
             temperature=0.3,
             safety_settings=get_safety_settings()
         )
-        response = client.models.generate_content(
+        response = call_genai_with_retry(
+            client=client,
             model=GEMINI_MODEL,
             contents="\n".join(user_parts),
             config=config
@@ -1186,6 +1222,91 @@ async def ask_question(
             "safety_checked": True,
             "calls_remaining_today": calls_remaining
         }
+
+# --------------------------------------------------------------------------
+# Эндпоинт 1.1: /api/v1/assistant/stream (Streaming SSE Assistant)
+# --------------------------------------------------------------------------
+@app.post(
+    "/api/v1/assistant/stream",
+    tags=["AI Copilot"],
+    dependencies=[Depends(apply_rate_limit)]
+)
+async def ask_question_stream(
+    payload: AskQuestionRequest,
+    request: Request,
+    api_key: Optional[str] = Header(None, alias="X-API-Key"),
+    auth_header: Optional[str] = Header(None, alias="Authorization")
+):
+    """
+    Потоковый эндпоинт (Server-Sent Events) для мгновенной генерации ответов без риска таймаута на Render.
+    """
+    check_content_safety(payload.question)
+    if payload.context:
+        check_content_safety(payload.context)
+
+    client_ip = request.client.host if request.client else "127.0.0.1"
+    cookie_token = request.cookies.get("eduhub_session")
+    bearer_token = auth_header.replace("Bearer ", "").strip() if auth_header and auth_header.startswith("Bearer ") else None
+    caller_email = (
+        verify_session_token(cookie_token or bearer_token)
+        or (api_key.strip().lower() if api_key and "@" in api_key else None)
+        or f"guest_{client_ip}@eduhub.ai"
+    )
+
+    allowed, calls_remaining = record_daily_ai_call(caller_email)
+    if not allowed:
+        raise HTTPException(
+            status_code=status.HTTP_429_TOO_MANY_REQUESTS,
+            detail={
+                "error": "FairUsagePolicyExceeded",
+                "message": f"Достигнут суточный лимит добросовестного использования Fair Usage ({FAIR_USAGE_DAILY_LIMIT} вызовов/день).",
+                "daily_limit": FAIR_USAGE_DAILY_LIMIT,
+                "email": caller_email
+            }
+        )
+
+    clean_question = payload.question[:15000]
+    clean_context = payload.context[:30000] if payload.context else ""
+
+    async def event_generator():
+        yield "data: {\"event\": \"start\", \"model\": \"" + GEMINI_MODEL + "\"}\n\n"
+        
+        try:
+            client = get_genai_client()
+            system_prompt = (
+                "You are EduHub Universal AI Assistant — an omni-competent educational academic copilot. "
+                "Provide comprehensive, structured academic explanations with utmost clarity."
+            )
+            config = types.GenerateContentConfig(
+                system_instruction=system_prompt,
+                temperature=0.3,
+                safety_settings=get_safety_settings()
+            )
+            user_parts = [
+                f"Detail Level: {payload.detail_level}",
+                f"Target Language: {payload.language or 'Auto-detect'}",
+            ]
+            if clean_context:
+                user_parts.append(f"\n--- CONTEXT ---\n{clean_context}")
+            user_parts.append(f"\n--- QUESTION ---\n{clean_question}")
+
+            stream = client.models.generate_content_stream(
+                model=GEMINI_MODEL,
+                contents="\n".join(user_parts),
+                config=config
+            )
+            for chunk in stream:
+                if chunk.text:
+                    payload_chunk = json.dumps({"event": "chunk", "text": chunk.text})
+                    yield f"data: {payload_chunk}\n\n"
+        except Exception:
+            fallback_text = get_fallback_assistant_answer(clean_question, clean_context, payload.language or "Russian")
+            for word in fallback_text.split(" "):
+                yield f"data: {json.dumps({'event': 'chunk', 'text': word + ' '})}\n\n"
+
+        yield "data: {\"event\": \"end\"}\n\n"
+
+    return StreamingResponse(event_generator(), media_type="text/event-stream")
 
 # --------------------------------------------------------------------------
 # Эндпоинт 2: /api/v1/student/summarize (Student Synthesizer)
