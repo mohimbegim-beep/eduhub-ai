@@ -182,8 +182,8 @@ def run_moderation_audit():
 
     report(
         "Комплаенс: Контактная информация поддержки",
-        "mohim.mohimbegim@gmail.com" in html,
-        "Указан прямой email технической и финансовой поддержки: mohim.mohimbegim@gmail.com"
+        "mahallamade.uz@gmail.com" in html,
+        "Указан прямой email технической и финансовой поддержки: mahallamade.uz@gmail.com"
     )
 
     # --- 3. АУДИТ API И СИСТЕМНОЙ БЕЗОПАСНОСТИ ---

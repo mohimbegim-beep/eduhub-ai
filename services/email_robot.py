@@ -115,7 +115,7 @@ PRODUCT VERIFICATION DOSSIER — EduHub AI
    • Dispute & AI Resolution Portal: {prod_url}/support
 
 9. Customer Support Contact & SLA:
-   Email: mohim.mohimbegim@gmail.com (24/7 coverage, response SLA under 24 hours).
+   Email: mahallamade.uz@gmail.com (24/7 coverage, response SLA under 24 hours).
 ----------------------------------------------------------------------
 
 Could you please review these details directly or manually update our verification status in your system? If there is any additional information or documentation required, please let us know.
@@ -125,7 +125,7 @@ Thank you once again for your prompt support.
 Best regards,
 Mohim
 Founder, EduHub AI
-mohim.mohimbegim@gmail.com
+mahallamade.uz@gmail.com
 """
     },
     "paypro": {
@@ -171,7 +171,7 @@ MERCHANT PROFILE — EduHub AI
 
 7. Contact & Support:
    Mohim (Founder)
-   Email: mohim.mohimbegim@gmail.com
+   Email: mahallamade.uz@gmail.com
    Support Desk: {prod_url}/support
 ----------------------------------------------------------------------
 
@@ -180,7 +180,7 @@ We would be delighted to partner with PayPro Global as our global MoR. Please le
 Sincerely,
 Mohim
 Founder, EduHub AI
-mohim.mohimbegim@gmail.com
+mahallamade.uz@gmail.com
 """
     },
     "paddle": {
@@ -223,7 +223,7 @@ PRODUCT DOSSIER — EduHub AI
 
 7. Contact:
    Mohim (Founder)
-   Email: mohim.mohimbegim@gmail.com
+   Email: mahallamade.uz@gmail.com
 ----------------------------------------------------------------------
 
 Please review our product profile for Paddle Seller approval. We are ready to integrate the Paddle Billing v2 API as soon as our account is approved.
@@ -233,7 +233,7 @@ Thank you for your consideration.
 Warm regards,
 Mohim
 Founder, EduHub AI
-mohim.mohimbegim@gmail.com
+mahallamade.uz@gmail.com
 """
     }
 }

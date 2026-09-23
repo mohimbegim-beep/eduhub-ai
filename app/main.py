@@ -3129,7 +3129,7 @@ async def get_product_catalog():
         "products": PRODUCT_CATALOG,
         "total_plans": len(PRODUCT_CATALOG),
         "guarantee": "14-day 100% money-back guarantee",
-        "support_email": "mohim.mohimbegim@gmail.com"
+        "support_email": "mahallamade.uz@gmail.com"
     }
 
 @app.get("/api/v1/catalog/products/{product_id}", tags=["Catalog & Pricing"])
@@ -3829,7 +3829,7 @@ async def analyze_billing_dispute(payload: DisputeAnalyzeRequest):
             "title": title,
             "legal_basis": legal_basis,
             "resolution_text": resolution_text,
-            "appeal_channel": "mohim.mohimbegim@gmail.com"
+            "appeal_channel": "mahallamade.uz@gmail.com"
         },
         "gateway_transaction": dodo_res
     }

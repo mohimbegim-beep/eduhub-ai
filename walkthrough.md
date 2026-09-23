@@ -64,7 +64,7 @@
    - Подписанные события: order_created, order_refunded, subscription_created, subscription_updated, subscription_cancelled, subscription_resumed, subscription_expired, subscription_payment_success, subscription_payment_failed.
    - Криптографическая защита: HMAC-SHA256 с мульти-ключевой верификацией.
 2. **Синхронизация официального контакта мерчанта:**
-   - Во всех юридических документах (/terms, /privacy, /refund, /support) и на главной странице контактный email заменен на реальный рабочий адрес: mohim.mohimbegim@gmail.com.
+   - Во всех юридических документах (/terms, /privacy, /refund, /support) и на главной странице контактный email заменен на реальный рабочий адрес: mahallamade.uz@gmail.com.
    - Изменения зафиксированы в репозитории и развернуты на боевом сервере Render.
 3. **Отправка официального запроса на активацию:**
    - Письмо комплаенса с полным аудитом инфраструктуры, ссылками на политики и описанием бизнес-модели (\ триал, \ цифровые продукты) отправлено в службу поддержки Lemon Squeezy.
