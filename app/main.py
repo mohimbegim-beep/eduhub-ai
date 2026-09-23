@@ -1264,6 +1264,10 @@ async def serve_citation_generator():
 @app.get("/ielts-checker", tags=["Standalone Tools"])
 @app.get("/ielts-essay-checker", tags=["Standalone Tools"])
 @app.get("/ielts-writing-checker", tags=["Standalone Tools"])
+@app.get("/ielts/checker", tags=["Standalone Tools"])
+@app.get("/ielts/checker/", tags=["Standalone Tools"])
+@app.get("/ielts", tags=["Standalone Tools"])
+@app.get("/ielts/", tags=["Standalone Tools"])
 async def serve_essay_grader():
     tool_file = STATIC_DIR / "tools" / "essay-grader.html"
     if tool_file.exists():
