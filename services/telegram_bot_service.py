@@ -226,8 +226,46 @@ def process_telegram_update(update: dict) -> bool:
     full_text = (text or caption).strip()
 
     if full_text.startswith("/start"):
+        parts = full_text.split()
+        if len(parts) > 1 and parts[1].startswith("auth_"):
+            auth_token = parts[1].replace("auth_", "").strip()
+            try:
+                from services.db_engine import link_telegram_account
+                linked = link_telegram_account(chat_id, auth_token)
+                if linked and linked.get("tier") == "pro_max":
+                    welcome_auth = (
+                        f"🎉 *Добро пожаловать, {first_name}!*\n\n"
+                        "✅ *Ваш аккаунт EduHub Pro Max успешно синхронизирован!*\n"
+                        "💎 У вас активен *безлимитный доступ* к проверке эссе и разборам Cambridge 8.5+ прямо в этом чате.\n\n"
+                        "📸 Отправьте фото или текст эссе для мгновенной проверки!"
+                    )
+                    send_message(chat_id, welcome_auth, reply_markup=build_welcome_keyboard())
+                    return True
+                elif linked:
+                    welcome_auth = (
+                        f"👋 *Привет, {first_name}!*\n\n"
+                        "✅ *Ваш веб-аккаунт EduHub AI успешно привязан к этому чату!*\n"
+                        f"Текущий баланс: *{linked.get('credits', 3)} проверок*.\n\n"
+                        "📸 Отправьте фото или текст эссе прямо сейчас!"
+                    )
+                    send_message(chat_id, welcome_auth, reply_markup=build_welcome_keyboard())
+                    return True
+            except Exception as e:
+                print(f"[AUTH LINK ERROR] {e}")
         handle_start_command(chat_id, first_name)
         return True
+
+    if full_text.startswith("/web"):
+        try:
+            from services.db_engine import get_user_by_telegram
+            user = get_user_by_telegram(chat_id)
+            token = user.get("session_id") if user else f"tg_{chat_id}"
+            web_link = f"{PRODUCTION_URL}/tools/essay-grader?token={token}"
+            send_message(chat_id, f"🌐 *Ваша персональная ссылка для входа на сайт:* [Открыть EduHub AI]({web_link})\n\nВаш статус Pro Max и история будут автоматически синхронизированы.")
+            return True
+        except Exception as e:
+            send_message(chat_id, f"🌐 [Открыть EduHub AI]({PRODUCTION_URL}/tools/essay-grader)")
+            return True
 
     photos = message.get("photo")
     if photos:

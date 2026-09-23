@@ -537,8 +537,22 @@ const EduHubUtils = (function () {
     stopStepper,
     initCameraTrigger,
     removeAttachedPhoto,
-    getAttachedPhoto
+    getAttachedPhoto,
+    openTelegramBotWithAuth
   };
+
+  function openTelegramBotWithAuth(e, botUsername) {
+    if (e && e.preventDefault) e.preventDefault();
+    const username = botUsername || 'eduhub_ielts_bot';
+    let token = localStorage.getItem('eduhub_session_token') || localStorage.getItem('eduhub_user_email') || '';
+    if (!token) {
+      token = 'usr_' + Math.random().toString(36).substring(2, 10);
+      localStorage.setItem('eduhub_session_token', token);
+    }
+    const cleanToken = encodeURIComponent(token.replace(/[^a-zA-Z0-9_-]/g, ''));
+    const url = 'https://t.me/' + username + '?start=auth_' + cleanToken;
+    window.open(url, '_blank', 'noopener,noreferrer');
+  }
 })();
 
 // Privacy-Preserving Lightweight Telemetry Beacon

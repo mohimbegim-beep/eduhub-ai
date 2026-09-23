@@ -479,6 +479,27 @@ def record_billing_transaction(event_name: str, event_data: dict, explicit_order
                 records = []
         records.append(record)
         atomic_write_json(TRANSACTIONS_LOG, records)
+        # Mirror transaction to SQLite WAL database for persistent resilience
+        try:
+            from services.db_engine import get_connection
+            conn = get_connection()
+            now_str = time.strftime("%Y-%m-%d %H:%M:%S")
+            tx_id = record.get("transaction_id") or f"tx_{int(time.time()*1000)}"
+            oid = str(record.get("order_id", ""))
+            cemail = record.get("customer_email") or record.get("email", "")
+            amt = float(record.get("amount", 0.0))
+            curr = record.get("currency", "USD")
+            st = record.get("status", "succeeded")
+            ev = record.get("event", "payment.succeeded")
+            raw = json.dumps(record, ensure_ascii=False)
+            with conn:
+                conn.execute("""
+                    INSERT OR REPLACE INTO transactions
+                    (tx_id, order_id, customer_email, amount, currency, status, event_type, raw_json, created_at)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """, (tx_id, oid, cemail, amt, curr, st, ev, raw, now_str))
+        except Exception as sq_err:
+            print(f"[SQLITE WAL TX SYNC WARNING] {sq_err}")
         try:
             backup_engine.create_snapshot()
         except Exception as be_err:
@@ -515,9 +536,28 @@ def load_user_balances() -> dict:
         try:
             with open(USER_BALANCES_FILE, "r", encoding="utf-8") as f:
                 import json as pj
-                return pj.load(f)
+                data = pj.load(f)
+                if data:
+                    return data
         except Exception:
-            return {}
+            pass
+    # Resilient fallback: auto-restore from SQLite WAL database if JSON is missing or empty
+    try:
+        from services.db_engine import get_connection
+        conn = get_connection()
+        cur = conn.cursor()
+        cur.execute("SELECT session_id, raw_json FROM user_balances")
+        rows = cur.fetchall()
+        if rows:
+            res = {}
+            for r in rows:
+                if r["raw_json"]:
+                    res[r["session_id"]] = json.loads(r["raw_json"])
+            if res:
+                atomic_write_json(USER_BALANCES_FILE, res)
+                return res
+    except Exception:
+        pass
     return {}
 
 def save_user_balances(data: dict) -> None:
@@ -525,6 +565,30 @@ def save_user_balances(data: dict) -> None:
         atomic_write_json(USER_BALANCES_FILE, data)
     except Exception as e:
         print(f"[BALANCE STORE ERROR] Failed to save balances: {e}")
+    # Mirror into SQLite WAL database for persistent zero-data-loss resilience
+    try:
+        from services.db_engine import get_connection
+        conn = get_connection()
+        now_str = time.strftime("%Y-%m-%d %H:%M:%S")
+        with conn:
+            for sid, val in data.items():
+                if isinstance(val, dict):
+                    email = val.get("email", "")
+                    bal = float(val.get("balance", 0.0))
+                    credits = int(val.get("credits", 0))
+                    tier = val.get("tier", "free_tier")
+                    tier_exp = val.get("tier_expiry", "")
+                    dunn_st = val.get("dunning_status", "")
+                    dunn_exp = val.get("dunning_expiry", "")
+                    is_pm = 1 if tier == "pro_max" else 0
+                    raw = json.dumps(val, ensure_ascii=False)
+                    conn.execute("""
+                        INSERT OR REPLACE INTO user_balances
+                        (session_id, email, balance, credits, tier, tier_expiry, dunning_status, dunning_expiry, is_pro_max, raw_json, updated_at)
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    """, (sid, email, bal, credits, tier, tier_exp, dunn_st, dunn_exp, is_pm, raw, now_str))
+    except Exception as e:
+        print(f"[SQLITE WAL SYNC WARNING] Mirroring to SQLite failed: {e}")
 
 def get_or_create_user(email: str) -> dict:
     email = email.strip().lower()
@@ -900,6 +964,8 @@ async def apply_rate_limit(
 def get_genai_client() -> "genai.Client":
     """
     Инициализирует официальный клиент Google GenAI SDK с проверкой API-ключа.
+    Поддерживает мульти-ключевую цепочку (GEMINI_API_KEY, GOOGLE_API_KEY, GENAI_API_KEY),
+    файловые секреты и устойчивость к сбоям.
     """
     if not GENAI_AVAILABLE:
         raise HTTPException(
@@ -907,11 +973,31 @@ def get_genai_client() -> "genai.Client":
             detail="Google GenAI SDK (google-genai) is not installed on the server."
         )
 
-    api_key = os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY") or os.getenv("GENAI_API_KEY")
-    if not api_key or api_key.startswith("placeholder"):
+    candidate_keys = [
+        os.getenv("GEMINI_API_KEY"),
+        os.getenv("GOOGLE_API_KEY"),
+        os.getenv("GENAI_API_KEY"),
+        os.getenv("GEMINI_BACKUP_KEY"),
+        os.getenv("GOOGLE_GENAI_API_KEY")
+    ]
+    api_key = next((k.strip() for k in candidate_keys if k and not k.strip().startswith("placeholder")), None)
+
+    # Проверка безопасного файла секретов при наличии
+    if not api_key:
+        for p in [BASE_DIR / "secrets" / "gemini_api_key.txt", DATA_DIR / ".gemini_key"]:
+            if p.exists():
+                try:
+                    c = p.read_text(encoding="utf-8").strip()
+                    if c and not c.startswith("placeholder"):
+                        api_key = c
+                        break
+                except Exception:
+                    pass
+
+    if not api_key:
         raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="GEMINI_API_KEY environment variable is not configured on server."
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="AI inference engine is updating credentials. Please configure GEMINI_API_KEY in server environment."
         )
     return genai.Client(api_key=api_key)
 

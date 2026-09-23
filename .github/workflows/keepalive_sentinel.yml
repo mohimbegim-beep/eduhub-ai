@@ -1,0 +1,26 @@
+name: EduHub Cloud Keepalive Sentinel 24/7
+
+on:
+  schedule:
+    # Run every 5 minutes 24/7 in GitHub Actions Cloud
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+
+jobs:
+  ping-render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Ping EduHub AI Render Production Endpoint
+        run: |
+          echo "Pinging EduHub AI production server to maintain zero cold-start latency..."
+          HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 30 https://eduhub-ai.onrender.com/health || true)
+          echo "Response HTTP Status: $HTTP_STATUS"
+          if [ "$HTTP_STATUS" -eq 200 ]; then
+            echo "EduHub AI is ONLINE and Healthy (HTTP 200)."
+          else
+            echo "Server waking up or status $HTTP_STATUS, retrying in 10s..."
+            sleep 10
+            curl -s --max-time 45 https://eduhub-ai.onrender.com/health
+          fi

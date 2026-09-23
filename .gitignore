@@ -20,3 +20,5 @@ data/backups/
 data/*.tmp
 data/sentinel_status.json
 data/sweeper_state.json
+data/*.db-wal
+data/*.db-shm
