@@ -851,6 +851,37 @@ def check_content_safety(text: str) -> None:
         return
     enforce_ecosystem_manifesto(text)
 
+def sanitize_uzbek_content(obj: Any, seen: Optional[set] = None) -> Any:
+    """
+    Enforces Quality Gate 2: Replaces any occurrences of 'asbob' and 'instrument'
+    with native, compliant terms like 'vosita' or 'jihoz'.
+    Works recursively on strings, lists, and dicts, safely handling circular references.
+    """
+    if seen is None:
+        seen = set()
+
+    obj_id = id(obj)
+    if isinstance(obj, (list, dict)):
+        if obj_id in seen:
+            return obj
+        seen.add(obj_id)
+
+    if isinstance(obj, str):
+        cleaned = re.sub(r'\binstrumentlar\b', 'vositalar', obj, flags=re.IGNORECASE)
+        cleaned = re.sub(r'\binstrumenti\b', 'vositasi', cleaned, flags=re.IGNORECASE)
+        cleaned = re.sub(r'\binstrument\b', 'vosita', cleaned, flags=re.IGNORECASE)
+        cleaned = re.sub(r'\binstrument\w*', 'vosita', cleaned, flags=re.IGNORECASE)
+        cleaned = re.sub(r'\basboblar\b', 'vositalar', cleaned, flags=re.IGNORECASE)
+        cleaned = re.sub(r'\basbobi\b', 'vositasi', cleaned, flags=re.IGNORECASE)
+        cleaned = re.sub(r'\basbob\b', 'vosita', cleaned, flags=re.IGNORECASE)
+        cleaned = re.sub(r'\basbob\w*', 'vosita', cleaned, flags=re.IGNORECASE)
+        return cleaned
+    elif isinstance(obj, list):
+        return [sanitize_uzbek_content(item, seen) for item in obj]
+    elif isinstance(obj, dict):
+        return {k: sanitize_uzbek_content(v, seen) for k, v in obj.items()}
+    return obj
+
 def get_safety_settings():
     """
     Конфигурация Safety Settings для Google GenAI SDK (блокировка 18+ и токсичности).
@@ -1148,6 +1179,10 @@ class CheckHomeworkRequest(BaseModel):
     guidance_style: Optional[str] = Field(
         "pedagogical",
         description="Стиль: 'pedagogical' (педагогические подсказки без готовых ответов), 'detailed_hints', 'quick_check'"
+    )
+    language: Optional[str] = Field(
+        "uz",
+        description="Целевой язык ответа (uz, ru, en, es)"
     )
 
     @field_validator("assignment")
@@ -1877,6 +1912,23 @@ async def check_homework(
         "### 🔑 Guiding Questions for the Student"
     )
 
+    target_lang = (payload.language or "uz").lower()
+    lang_names = {"uz": "Uzbek", "en": "English", "ru": "Russian", "es": "Spanish"}
+    lang_str = lang_names.get(target_lang, "Uzbek" if "uz" in target_lang else "Russian")
+
+    system_prompt = (
+        "You are EduHub Parent Vision AI — an empathetic, encouraging, and pedagogically trained "
+        f"homework guide for parents and educators. All explanations, steps, and questions MUST be written strictly in {lang_str}.\n\n"
+        "STRICT SAFETY DIRECTIVE: Strictly refuse any inappropriate, adult (18+), or vulgar topics.\n\n"
+        "PEDAGOGICAL DIRECTIVES:\n"
+        "1. DO NOT give a blunt, ready-made answer for the student to simply copy.\n"
+        "2. Analyze the student's solution or draft to find where their reasoning is sound, "
+        "   and pinpoint the exact misunderstanding or arithmetic/conceptual slip.\n"
+        "3. Provide step-by-step guidance tailored for a parent to explain to their child.\n"
+        "4. Include 2-3 guiding questions or hints that will empower the student to reach the correct answer on their own.\n"
+        "5. Keep the tone warm, constructive, and motivating."
+    )
+
     contents.append("\n".join(text_parts))
 
     try:
@@ -1891,16 +1943,21 @@ async def check_homework(
             config=config
         )
 
+        guidance_out = response.text or "No guidance generated."
+        if "uz" in target_lang:
+            guidance_out = sanitize_uzbek_content(guidance_out)
         return {
             "status": "success",
             "model": GEMINI_MODEL,
             "subject": payload.subject,
             "grade_level": payload.grade_level,
-            "guidance": response.text or "No guidance generated."
+            "guidance": guidance_out
         }
 
     except Exception as e:
-        guidance_text = get_fallback_homework_guidance(payload.assignment, payload.student_solution, payload.subject, payload.grade_level)
+        guidance_text = get_fallback_homework_guidance(payload.assignment, payload.student_solution, payload.subject or "General", payload.grade_level or "All", payload.language or "uz")
+        if "uz" in target_lang:
+            guidance_text = sanitize_uzbek_content(guidance_text)
         return {
             "status": "success",
             "model": f"{GEMINI_MODEL}-resilient",
@@ -1912,11 +1969,86 @@ async def check_homework(
 
 # --------------------------------------------------------------------------
 
-def get_fallback_homework_guidance(assignment: str, student_solution: Optional[str], subject: str, grade_level: str) -> str:
+def get_fallback_homework_guidance(assignment: str, student_solution: Optional[str], subject: str, grade_level: str, language: str = "uz") -> str:
     """
-    Педагогический генератор подсказок по методу Сократа для условий отсутствия ключа Gemini.
+    Педагогический генератор подсказок по методу Сократа для условий отсутствия ключа Gemini (uz, en, es, ru).
     """
-    return f"""### 💡 Пошаговый разбор и педагогические подсказки (Метод Сократа)
+    l = (language or "uz").lower()
+    is_uz = "uz" in l
+    is_es = "es" in l
+    is_en = "en" in l
+
+    if is_uz:
+        return f"""### 💡 Bosqichma-bosqich tahlil va pedagogik ko'rsatmalar (Suqrot metodi)
+
+#### 1. Masala shartini tahlil qilish va asosiy tushunchani aniqlash
+- **Fan:** {subject} (Daraja: {grade_level})
+- **Masala matni:** "{assignment[:120]}..."
+- **Muammoning mohiyati:** Masalani muvaffaqiyatli yechish uchun uni tarkibiy qismlarga ajratish va shoshilinch xulosalarga bormasdan, fanning fundamental qoidalarini izchil qo'llash talab etiladi.
+
+#### 2. Fikrlash yo'nalishi diagnostikasi
+{'O\'quvchi dastlabki qoralamani taqdim etgan. Fikr yo\'nalishi to\'g\'ri, biroq oraliq hisob-kitoblarni aniqlashtirish va ishoralarni qayta tekshirish lozim.' if student_solution else 'Yechim noma\'lum miqdorlarni belgilash va dastlabki tenglamani kanonik ko\'rinishda yozishdan boshlanadi.'}
+
+#### 3. Mustaqil yechish uchun bosqichma-bosqich ko'rsatmalar (Scaffolding)
+1. **1-qadam (Aniqlash):** Ifoda qaysi standart turga tegishli ekanini aniqlang. Barcha ma'lum koeffitsiyentlar va doimiylarni alohida yozing.
+2. **2-qadam (O'zgartirish):** Ifodaning har ikki tomonini umumiy maxrajga keltiring yoki o'xshash hadlarni guruhlang.
+3. **3-qadam (Tekshirish):** Topilgan oraliq natijani dastlabki tenglikka qo'yib, to'g'riligini isbotlang.
+
+#### 🔑 Mustaqil yechish uchun yo'naltiruvchi savollar:
+1. *Shartdagi ma'lum miqdorlarni bir-biri bilan qaysi qonuniyat bog'laydi?*
+2. *Agar sonli koeffitsiyentlarni vaqtincha birga tenglashtirib ko'rsangiz nima o'zgaradi?*
+3. *Chap tomondagi qavslar ochilganda qaysi matematik ishora hosil bo'lishi kerak?*
+
+---
+*💡 EduHub AI tavsiyasi: Suqrot metodidan foydalaning — tayyor javobni ko'chirmasdan, yo'naltiruvchi savollarga qadam-baqadam javob bering.*"""
+    elif is_en:
+        return f"""### 💡 Socratic Step-by-Step Guidance & Pedagogical Prompts
+
+#### 1. Problem Decomposition & Core Concept Identification
+- **Subject:** {subject} (Level: {grade_level})
+- **Assignment Prompt:** "{assignment[:120]}..."
+- **Core Objective:** Deconstruct the problem into foundational primitives and apply core disciplinary rules without premature arithmetic assumptions.
+
+#### 2. Diagnostic Reasoning
+{'The student provided an initial attempt. The conceptual trajectory is promising; verify intermediate algebraic transformations and sign distributions.' if student_solution else 'Begin by formalizing unknown parameters and structuring the primary governing equation.'}
+
+#### 3. Guided Scaffolding Steps
+1. **Step 1 (Identification):** Classify the expression into its foundational canonical form. Record all known constants and constraints.
+2. **Step 2 (Transformation):** Rebalance both sides of the relation or isolate target variables through symmetric operations.
+3. **Step 3 (Verification):** Substitute candidate solutions back into the original boundary statement to test consistency.
+
+#### 🔑 Guiding Questions for Student Self-Discovery:
+1. *Which underlying invariant or conservation property relates the known parameters?*
+2. *What happens to the structure if you evaluate limiting cases or unit coefficients?*
+3. *What sign must result when distributing across terms on the left side?*
+
+---
+*💡 EduHub AI Guidance: Leverage the Socratic method — empower learners to uncover the solution through targeted reflection rather than direct answer replication.*"""
+    elif is_es:
+        return f"""### 💡 Guía Pedagógica y Desglose Paso a Paso (Método Socrático)
+
+#### 1. Análisis del Problema y Concepto Fundamental
+- **Materia:** {subject} (Nivel: {grade_level})
+- **Enunciado:** "{assignment[:120]}..."
+- **Objetivo Central:** Descomponer el problema en componentes esenciales y aplicar principios formales evitando suposiciones precipitadas.
+
+#### 2. Diagnóstico del Razonamiento
+{'El estudiante presentó un borrador preliminar. La orientación general es adecuada; conviene verificar la transposición de términos y signos.' if student_solution else 'El abordaje inicia formalizando las incógnitas y formulando la ecuación canónica inicial.'}
+
+#### 3. Pasos Guiados de Aprendizaje (Andamiaje)
+1. **Paso 1 (Identificación):** Identifique a qué tipo estándar pertenece la expresión. Anote constantes y condiciones iniciales.
+2. **Paso 2 (Transformación):** Simplifique ambos lados reduciendo términos semejantes o aplicando factor común.
+3. **Paso 3 (Verificación):** Sustituya el resultado tentativo en la condición original para comprobar la igualdad.
+
+#### 🔑 Preguntas Orientadoras para el Estudiante:
+1. *¿Qué propiedad matemática vincula directamente los valores dados en el enunciado?*
+2. *¿Qué ocurriría si simplifica momentáneamente los coeficientes a la unidad?*
+3. *¿Qué signo algebraico debe resultar al expandir los paréntesis del miembro izquierdo?*
+
+---
+*💡 Consejo de EduHub AI: Aplique el método socrático guiando con preguntas reflexivas en lugar de dictar el resultado final.*"""
+    else:
+        return f"""### 💡 Пошаговый разбор и педагогические подсказки (Метод Сократа)
 
 #### 1. Анализ условия задачи и выявление ключевой концепции
 - **Предмет:** {subject} (Уровень: {grade_level})
@@ -1942,12 +2074,83 @@ def get_fallback_homework_guidance(assignment: str, student_solution: Optional[s
 
 def get_fallback_lecture_summary(text: str, format_type: str, language: str) -> str:
     """
-    Интеллектуальный синтезатор конспектов и лекций для условий отсутствия ключа Gemini.
+    Интеллектуальный синтезатор конспектов и лекций для условий отсутствия ключа Gemini (uz, en, es, ru).
     """
     words = text.split()
     first_sentence = text.split('.')[0] if '.' in text else text[:80]
-    
-    return f"""### 📚 Академический структурированный конспект (Smart Synthesis)
+    l = (language or "uz").lower()
+    is_uz = "uz" in l
+    is_es = "es" in l
+    is_en = "en" in l
+
+    if is_uz:
+        return f"""### 📚 Akademik tizimli konspekt (Smart Synthesis)
+
+#### 🎯 Asosiy tezis va muammo mohiyati
+> **Bosh g'oya:** {first_sentence}. Ushbu material fanning muhim jarayonlarini amaliy tahlil qilish uchun mustahkam nazariy poydevor yaratadi.
+
+#### 📌 Asosiy qoidalar va xulosalar
+- **Fundamental tamoyil:** Konseptsiya qat'iy empirik tekshiruvga va parametrlarning tizimli bog'liqligiga asoslanadi.
+- **Amaliy ahamiyat:** Taqdim etilgan metodikalarni qo'llash xatoliklarni minimallashtirish va tahliliy hisob-kitoblarni optimallashtirish imkonini beradi.
+- **Muhim jihat:** Nostandart muhitlarda modelning qo'llanilish chegaralarini inobatga olish zarur.
+
+#### 🗂️ Terminologik minimum (Anki kartochkalari uchun)
+| Termin / Tushuncha | Akademik ta'rifi |
+| :--- | :--- |
+| **Asosiy omil** | Butun tizim dinamikasini belgilab beruvchi ustuvor parametr. |
+| **Tizimli invariant** | Har qanday ruxsat etilgan o'zgarishlarda o'zgarmasdan qoluvchi xususiyat. |
+| **Empirik asos** | Nazariy gipotezani tasdiqlovchi amaliy tajriba ma'lumotlari to'plami. |
+
+#### ❓ Imtihonga tayyorgarlik uchun savollar
+1. *Ko'rib chiqilayotgan nazariy yondashuvning asosiy cheklovlari nimalardan iborat?*
+2. *Dastlabki chegara shartlari o'zgarganda yakuniy natijalar qanday o'zgaradi?*
+"""
+    elif is_en:
+        return f"""### 📚 Academic Structured Synthesis (Smart Outline)
+
+#### 🎯 Core Thesis & Problem Statement
+> **Central Premise:** {first_sentence}. The reviewed content provides empirical footing for rigorous cross-disciplinary analysis.
+
+#### 📌 Principal Takeaways & Invariants
+- **Foundational Mechanism:** Grounded in verifiable hypotheses and reproducible empirical benchmarks.
+- **Applied Efficacy:** Directly reduces analytical variance and streamlines procedural workflows.
+- **Boundary Conditions:** Critical sensitivity must be maintained across non-standard environmental bounds.
+
+#### 🗂️ Key Terminology (Anki Flashcard Deck)
+| Concept / Term | Rigorous Definition |
+| :--- | :--- |
+| **Primary Driver** | High-leverage variable determining systemic trajectory. |
+| **Systemic Invariant** | Intrinsic state property conserved under all valid transformations. |
+| **Empirical Baseline** | Validated observational cohort grounding theoretical models. |
+
+#### ❓ Examination Review Questions
+1. *What specific boundary conditions limit the generalizability of this framework?*
+2. *How do primary outputs shift under extreme parameter variance?*
+"""
+    elif is_es:
+        return f"""### 📚 Síntesis Académica Estructurada (Smart Synthesis)
+
+#### 🎯 Tesis Principal y Planteamiento
+> **Idea Central:** {first_sentence}. El material expuesto establece el marco teórico riguroso para la comprensión de los procesos fundamentales.
+
+#### 📌 Conclusiones Clave y Principios
+- **Principio Fundamental:** Sustentado en comprobación empírica y coherencia metodológica interna.
+- **Relevancia Práctica:** Minimiza discrepancias analíticas y optimiza el cálculo experimental.
+- **Contexto Crítico:** Es indispensable evaluar las restricciones de frontera del modelo.
+
+#### 🗂️ Vocabulario Esencial (Tarjetas Anki)
+| Concepto / Término | Definición Académica |
+| :--- | :--- |
+| **Factor Determinante** | Parámetro dominante que condiciona la respuesta del sistema. |
+| **Invariante de Estado** | Propiedad que permanece constante frente a transformaciones válidas. |
+| **Base Empírica** | Conjunto de observaciones sistemáticas que validan la hipótesis. |
+
+#### ❓ Preguntas para Repaso de Examen
+1. *¿Cuáles son los supuestos restrictivos del marco conceptual expuesto?*
+2. *¿De qué manera varían las conclusiones ante perturbaciones en los datos iniciales?*
+"""
+    else:
+        return f"""### 📚 Академический структурированный конспект (Smart Synthesis)
 
 #### 🎯 Главный тезис и проблематика
 > **Центральная идея:** {first_sentence}. Рассматриваемый материал закладывает теоретическую основу для практического анализа ключевых процессов дисциплины.
@@ -1972,9 +2175,54 @@ def get_fallback_lecture_summary(text: str, format_type: str, language: str) -> 
 
 def get_fallback_assistant_answer(question: str, context: Optional[str], language: str) -> str:
     """
-    Универсальный академический ответ ассистента для условий отсутствия ключа Gemini.
+    Универсальный академический ответ ассистента для условий отсутствия ключа Gemini (uz, en, es, ru).
     """
-    return f"""### 🎓 Академический ответ EduHub AI
+    l = (language or "uz").lower()
+    is_uz = "uz" in l
+    is_es = "es" in l
+    is_en = "en" in l
+
+    if is_uz:
+        return f"""### 🎓 EduHub AI Akademik Javobi
+
+Sizning **«{question[:100]}»** savolingiz bo'yicha:
+
+Mazkur masala fanning fundamental asoslarini qamrab oladi. Uni tahlil qilishda uchta asosiy jihatni ajratib ko'rsatish mumkin:
+
+1. **Nazariy poydevor:** Dastlabki qoida akademik adabiyotlarda keltirilgan qat'iy ta'riflar va tizimli bog'lanishlarga tayanadi.
+2. **Amaliy algoritm:** Konsepsiyani amaliyotda to'g'ri qo'llash uchun natijalarni oraliq nazorat qilgan holda bosqichma-bosqich bajarish tavsiya etiladi.
+3. **Ko'p uchraydigan xatolar:** Eng ko'p yo'l qo'yiladigan xatolik — o'xshash terminlarni adashtirish va kontekst cheklovlarini e'tibordan chetda qoldirishdir.
+
+---
+💡 *EduHub AI tavsiyasi: Mavzuni to'liq mustahkamlash uchun o'zingizni tekshirish maqsadida 3 ta savol tuzing yoki PDF Summarizer moduli orqali qisqa konspekt hosil qiling.*"""
+    elif is_en:
+        return f"""### 🎓 EduHub AI Academic Response
+
+Regarding your inquiry **"{question[:100]}"**:
+
+This inquiry directly addresses core principles of the field. A scholarly analysis reveals three pivotal dimensions:
+
+1. **Theoretical Foundations:** The premise is established upon precise axiomatic definitions and structural relations documented in literature.
+2. **Applied Methodology:** Effective implementation relies on modular execution with iterative checkpoints to ensure validity.
+3. **Common Pitfalls:** The most frequent misstep involves blurring closely related terminology and ignoring context constraints.
+
+---
+💡 *EduHub AI Recommendation: Formulate 3 self-test questions or generate a structured brief using the PDF Summarizer module to consolidate mastery.*"""
+    elif is_es:
+        return f"""### 🎓 Respuesta Académica de EduHub AI
+
+En relación con su consulta **«{question[:100]}»**:
+
+La cuestión planteada incide en los fundamentos de la disciplina. Un análisis académico sistemático distingue tres aspectos clave:
+
+1. **Base Teórica:** El planteamiento se sustenta en definiciones rigurosas y relaciones formales descritas en la bibliografía especializada.
+2. **Procedimiento Práctico:** La aplicación óptima exige una ejecución secuencial con verificación intermedia de resultados.
+3. **Errores Habituales:** La confusión recurrente radica en equiparar términos afines y desatender los límites contextuales.
+
+---
+💡 *Recomendación de EduHub AI: Para afianzar el aprendizaje, elabore 3 preguntas de autoevaluación o un resumen con el módulo PDF Summarizer.*"""
+    else:
+        return f"""### 🎓 Академический ответ EduHub AI
 
 По вашему вопросу **«{question[:100]}»**:
 
@@ -4344,6 +4592,379 @@ class AcademicResearchRequest(BaseModel):
     sources_context: Optional[str] = Field(default="")
     language: Optional[str] = Field(default="ru")
 
+def get_fallback_academic_research(payload: AcademicResearchRequest, level_label: str) -> str:
+    target_lang = (payload.language or "ru").strip().lower()
+    is_uz = "uz" in target_lang
+    is_es = "es" in target_lang
+    is_en = "en" in target_lang
+    t = payload.topic
+
+    if is_uz:
+        if payload.mode == "outline":
+            return (
+                f"Kirish (Tadqiqotning ilmiy apparati)\n"
+                f"1-bob. Nazariy-uslubiy va konseptual asoslar: {t}\n"
+                f"1.1. O'rganilayotgan ilmiy yondashuvlar va fundamental nazariyalarning evolyutsiyasi\n"
+                f"1.2. Tushunchalar va kategoriyalar tizimining nazariy tavsifi\n"
+                f"1.3. Zamonaviy ilmiy adabiyotlar va doktrinal manbalarni tizimlashtirish\n"
+                f"2-bob. Amaliy holat va jarayonlarni tadqiq etish mexanizmlari\n"
+                f"2.1. Amaldagi me'yoriy va empirik ma'lumotlar tahlili\n"
+                f"2.2. Sohaviy institutlar va boshqaruv tuzilmalarining funksional holati\n"
+                f"2.3. Tizim ishtirokchilarining o'zaro hamkorligi va amaliy tajriba ko'rsatkichlari\n"
+                f"3-bob. Takomillashtirish istiqbollari va innovatsion amaliy yechimlar\n"
+                f"3.1. Uslubiy yondashuvlar va me'yorlarni uyg'unlashtirishning asosiy yo'nalishlari\n"
+                f"3.2. Innovatsion raqamli texnologiyalar va ilg'or usullarni joriy etish\n"
+                f"3.3. Tizim samaradorligini oshirish bo'yicha ilmiy-amaliy tavsiyalar\n"
+                f"Xulosa va ilmiy natijalar\n"
+                f"Foydalanilgan adabiyotlar ro'yxati\n"
+                f"Ilovalar"
+            )
+        elif payload.mode in ["article", "article_vak"]:
+            title = payload.chapter_title or f"Dolzarb masalalar tadqiqoti: {t}"
+            return (
+                f"## {title.upper()}\n\n"
+                f"**Annotatsiya:** Maqolada '{t}' mavzusi bo'yicha tizimli ilmiy tahlil amalga oshirilgan. "
+                f"Sohaviy me'yorlar va mexanizmlarni uyg'unlashtirish hamda barqaror ijtimoiy-iqtisodiy "
+                f"va texnologik taraqqiyot uchun mustahkam omillarni shakllantirish masalalariga alohida e'tibor qaratilgan.\n\n"
+                f"**Kalit so'zlar:** {t}, metodologiya, nazariy asoslar, institutsional boshqaruv, "
+                f"innovatsiyalar, samaradorlik.\n\n"
+                f"### Kirish\n"
+                f"Zamonaviy ijtimoiy-iqtisodiy va ilmiy voqelikda tadqiq etilayotgan masala "
+                f"muhim nazariy va amaliy ahamiyat kasb etmoqda [1, 14-b.].\n\n"
+                f"### Asosiy qism\n"
+                f"Nazariy manbalar va empirik amaliyot tahlili kompleks yondashuvlarning yuqori samarasini ko'rsatmoqda. "
+                f"Strategik rejalashtirish va tizimli boshqaruv mexanizmlarining uyg'unligi barqaror natijalarga zamin yaratadi [2, 35-b.].\n\n"
+                f"### Xulosa va takliflar\n"
+                f"Olingan natijalar asosida o'rganilayotgan tizimni modernizatsiya qilish va uning amaliy "
+                f"vositalarini rivojlantirish bo'yicha ilmiy asoslangan takliflar ishlab chiqildi."
+            )
+        elif payload.mode == "chapter":
+            title = payload.chapter_title or t
+            return (
+                f"## {title}\n\n"
+                f"Zamonaviy ilmiy doirada '{t}' mavzusidagi tadqiqotlar eng ustuvor va istiqbolli yo'nalishlardan biri sanaladi [1, 14-b.]. "
+                f"Mavjud nazariy konsepsiyalar va amaliy ma'lumotlar tahlili zamonaviy talablarni inobatga olgan holda tizimli uyg'unlashtirishni taqozo etadi.\n\n"
+                f"Ta'kidlash joizki, tadqiq etilayotgan sohadagi samarali tartib muvozanatli yondashuvlarga asoslanadi. "
+                f"Yetakchi olimlarning ilmiy ishlarida qayd etilganidek, jarayonlar deklarativ tavsif bilan cheklanib qolmasdan, "
+                f"aniq mexanizmlar, amaliy rag'batlar va ta'sirchan kafolatlarga tayanishi shart [2, 48-b.].\n\n"
+                f"Amalga oshirilgan tahlil asosida quyidagi asosiy jihatlarni ajratib ko'rsatish maqsadga muvofiq:\n"
+                f"1. Tushunchalar va kategoriyalar tizimini bosqichma-bosqich mustahkamlash zarurati;\n"
+                f"2. Boshqaruv darajalari va sohaviy tuzilmalar o'rtasidagi funksiyalarni aniq taqsimlash;\n"
+                f"3. Jarayon ishtirokchilari uchun amaliy rag'batlar va kafolatlarni joriy etish.\n\n"
+                f"Shunday qilib, nazariy va qiyosiy tahlil tadqiq etilayotgan tuzilmani izchil modernizatsiya qilish barqaror taraqqiyotning ob'ektiv omili ekanligini isbotlaydi [3, 92-b.]."
+            )
+        elif payload.mode == "defense_speech":
+            return (
+                f"Hurmatli Davlat attestatsiya komissiyasi raisi va a'zolari!\n\n"
+                f"E'tiboringizga '{t}' mavzusidagi ilmiy tadqiqot ishi taqdim etilmoqda.\n\n"
+                f"TADQIQOTNING DOLZARBLIGI zamonaviy strategik maqsadlar va ilmiy-amaliy talablarni inobatga olgan holda, "
+                f"mazkur sohadagi mexanizmlarni tizimli ravishda takomillashtirish zarurati bilan belgilanadi.\n\n"
+                f"TADQIQOT OBYEKTI sifatida mazkur sohadagi jarayonlarni tartibga solish va rivojlantirish tizimi olindi.\n"
+                f"TADQIQOT PREDMETI — nazariy manbalar, me'yoriy qoidalar va ilg'or amaliyot ko'rsatkichlari.\n\n"
+                f"HIMOYAGA OLIB CHIQILAYOTGAN ASOSIY QOIDALAR:\n"
+                f"1. Tadqiq etilayotgan tizimga nisbatan kompleks ilmiy yondashuvning konseptual asoslanishi.\n"
+                f"2. Sohaviy qoidalar va metodologiyani tizimlashtirishning boshqaruvdagi o'rni.\n"
+                f"3. Monitoring jarayonlarini raqamlashtirish va amaliy samaradorlikni oshirish bo'yicha takliflar.\n\n"
+                f"E'tiboringiz uchun minnatdorchilik bildiraman va savollaringizga javob berishga tayyorman!"
+            )
+        else: # apparatus
+            return (
+                f"## TADQIQOTNING ILMIY APPARATI\n\n"
+                f"**Mavzu:** {t}\n"
+                f"**Daraja:** {level_label}\n"
+                f"**Fan yo'nalishi:** {payload.discipline}\n\n"
+                f"### 1. Tadqiqot mavzusining dolzarbligi\n"
+                f"Zamonaviy ijtimoiy-iqtisodiy o'zgarishlar va global taraqqiyot bosqichida '{t}' masalasini chuqur o'rganish "
+                f"ustuvor ilmiy-amaliy ahamiyatga ega. Mavjud metodologik yondashuvlar zamonaviy talablar asosida qayta ko'rib chiqishni talab etadi.\n\n"
+                f"### 2. Tadqiqot obyekti va predmeti\n"
+                f"- **Tadqiqot obyekti:** '{t}' mavzusi bo'yicha jarayonlarni boshqarish va amalga oshirish tizimi.\n"
+                f"- **Tadqiqot predmeti:** sohaviy nazariy konsepsiyalar, me'yorlar va empirik amaliyot qonuniyatlari.\n\n"
+                f"### 3. Tadqiqot maqsadi va vazifalari\n"
+                f"**Tadqiqot maqsadi:** o'rganilayotgan muammoni nazariy jihatdan asoslash va uning kompleks amaliy modelini ishlab chiqish.\n"
+                f"Belgilangan maqsadga erishish uchun quyidagi **vazifalar** hal etiladi:\n"
+                f"1. Masalaning tarixiy-evolyutsion rivojlanishi va nazariy asoslarini tahlil qilish.\n"
+                f"2. Mavjud me'yoriy va empirik bazani sinchiklab o'rganish.\n"
+                f"3. Boshqaruv mexanizmlarining amaliy faoliyatidagi muammolar va bo'shliqlarni aniqlash.\n"
+                f"4. Tizimni modernizatsiya qilish bo'yicha ilmiy asoslangan tavsiyalar majmuini shakllantirish.\n\n"
+                f"### 4. Tadqiqotning ilmiy yangiligi\n"
+                f"Ilmiy yangilik shundan iboratki, muammoni hal etishga qaratilgan kompleks konseptual model ishlab chiqildi, "
+                f"bu esa boshqaruv mexanizmlarini uyg'unlashtirish va samaradorlikni oshirish imkonini beradi."
+            )
+    elif is_en:
+        if payload.mode == "outline":
+            return (
+                f"Introduction (Scientific Apparatus & Research Design)\n"
+                f"Chapter 1. Theoretical and Methodological Foundations: {t}\n"
+                f"1.1. Genesis and evolution of scientific approaches to the research domain\n"
+                f"1.2. Conceptual taxonomy and categorical boundary formulation\n"
+                f"1.3. Systematization of contemporary literature and foundational research paradigms\n"
+                f"Chapter 2. Empirical Analysis and Operational Implementation Frameworks\n"
+                f"2.1. Analysis of current empirical data, regulatory benchmarks, and industry practice\n"
+                f"2.2. Competencies, governance structures, and organizational ecosystem dynamics\n"
+                f"2.3. Quantitative modeling, inter-stakeholder interaction, and systemic indicators\n"
+                f"Chapter 3. Strategic Optimization and Innovative Implementation Pathways\n"
+                f"3.1. Core vectors for methodological harmonization and procedural standards\n"
+                f"3.2. Digital transformation, algorithmic monitoring, and resource optimization\n"
+                f"3.3. Evidence-based policy and practical recommendations for systemic efficiency\n"
+                f"Conclusion and Synthesized Findings\n"
+                f"Scholarly References and Bibliography\n"
+                f"Appendices"
+            )
+        elif payload.mode in ["article", "article_vak"]:
+            title = payload.chapter_title or f"Empirical and Theoretical Investigation: {t}"
+            return (
+                f"## {title.upper()}\n\n"
+                f"**Abstract:** This paper presents a comprehensive scholarly examination of structural mechanisms "
+                f"governing '{t}'. Particular emphasis is placed on methodological harmonization, "
+                f"institutional capacity building, and verifiable drivers of sustainable technological and socioeconomic development.\n\n"
+                f"**Keywords:** {t}, scientific methodology, theoretical foundations, institutional governance, "
+                f"innovation, operational efficiency.\n\n"
+                f"### Introduction\n"
+                f"Within contemporary socioeconomic and scientific environments, the investigated problem domain "
+                f"assumes paramount theoretical and practical importance [1, p. 14].\n\n"
+                f"### Main Body\n"
+                f"Rigorous synthesis of foundational literature and empirical data reveals substantial benefits "
+                f"from integrated governance frameworks. The calibrated interplay between strategic planning and decentralized "
+                f"implementation structures achieves an optimal balance between institutional and community priorities [2, p. 35].\n\n"
+                f"### Conclusions and Recommendations\n"
+                f"Based on our findings, we formulate actionable, peer-reviewed proposals to enhance "
+                f"systemic governance and upgrade implementation mechanisms across operational tiers."
+            )
+        elif payload.mode == "chapter":
+            title = payload.chapter_title or t
+            return (
+                f"## {title}\n\n"
+                f"In contemporary scholarship, rigorous investigation into '{t}' constitutes an indispensable priority for advanced research [1, p. 14]. "
+                f"A systematic critique of theoretical frameworks and empirical data underscores that existing mechanisms require structured harmonization in response to contemporary demands.\n\n"
+                f"Crucially, optimized regimes in this domain depend on the equilibrium between institutional governance and agile implementation. "
+                f"As substantiated across recent literature, governance cannot remain confined to declarative principles; it must be grounded in actionable operational pathways, quantifiable metrics, and unambiguous accountability structures [2, p. 48].\n\n"
+                f"On the basis of our deductive and comparative analysis, the following core pillars emerge:\n"
+                f"1. Continuous standardization of the underlying conceptual apparatus;\n"
+                f"2. Explicit demarcation of functional mandates across centralized and specialized entities;\n"
+                f"3. Institution of verifiable performance incentives and procedural safeguards.\n\n"
+                f"Consequently, comparative and empirical analysis confirms that progressive institutional modernization represents an objective prerequisite for sustained stability and growth [3, p. 92]."
+            )
+        elif payload.mode == "defense_speech":
+            return (
+                f"Distinguished Chair and Members of the Examination Committee!\n\n"
+                f"I have the honor of presenting our scholarly research thesis on: '{t}'.\n\n"
+                f"RESEARCH RELEVANCE stems from the pressing necessity to systematically modernize institutional and practical mechanisms "
+                f"within the investigated sphere, responding to strategic development imperatives and complex empirical challenges.\n\n"
+                f"THE OBJECT OF STUDY encompasses the systemic socio-technical relationships governing the target domain.\n"
+                f"THE SUBJECT OF STUDY covers foundational literature, regulatory norms, and comparative empirical practices.\n\n"
+                f"PRINCIPAL THESES SUBMITTED FOR DEFENSE:\n"
+                f"1. Theoretical grounding of an integrated systemic approach to the investigated institution.\n"
+                f"2. Demonstration of methodological harmonization as the catalytic core of institutional development.\n"
+                f"3. Concrete evidence-based proposals for automated monitoring and systemic efficiency enhancement.\n\n"
+                f"Thank you for your consideration, and I welcome your scholarly questions."
+            )
+        else: # apparatus
+            return (
+                f"## SCIENTIFIC RESEARCH APPARATUS\n\n"
+                f"**Topic:** {t}\n"
+                f"**Academic Level:** {level_label}\n"
+                f"**Discipline:** {payload.discipline}\n\n"
+                f"### 1. Research Relevance and Rationale\n"
+                f"In the context of contemporary socioeconomic transformation and scientific progression, examining '{t}' "
+                f"assumes critical theoretical and practical significance. Existing methodologies require systematic reappraisal to align with contemporary empirical benchmarks.\n\n"
+                f"### 2. Object and Subject of Investigation\n"
+                f"- **Object of Study:** Complex institutional, technical, and social relationships governing '{t}'.\n"
+                f"- **Subject of Study:** Normative frameworks, conceptual models, and empirical regularities emerging in practice.\n\n"
+                f"### 3. Research Aim and Sequential Tasks\n"
+                f"**Core Objective:** Theoretical substantiation and methodical formulation of a comprehensive operational model addressing the focal domain.\n"
+                f"To realize this objective, the following sequential **tasks** are resolved:\n"
+                f"1. Conduct a genealogical and conceptual review of theoretical foundations.\n"
+                f"2. Carry out an in-depth empirical assessment of the current operational environment.\n"
+                f"3. Identify systemic bottlenecks, governance discrepancies, and practical constraints.\n"
+                f"4. Formulate evidence-based recommendations to optimize systemic performance.\n\n"
+                f"### 4. Scientific Novelty\n"
+                f"The novelty of this study lies in authoring a multi-tiered conceptual framework that harmonizes theoretical norms with verified operational feedback loops, driving measurable improvements in efficiency."
+            )
+    elif is_es:
+        if payload.mode == "outline":
+            return (
+                f"Introducción (Aparato Científico de la Investigación)\n"
+                f"Capítulo 1. Fundamentos Teórico-Metodológicos y Conceptuales: {t}\n"
+                f"1.1. Génesis y evolución de los enfoques científicos en el área de estudio\n"
+                f"1.2. Delimitación conceptual y caracterización de categorías clave\n"
+                f"1.3. Sistematización de la literatura contemporánea y paradigmas doctrinarios\n"
+                f"Capítulo 2. Diagnóstico Empírico y Mecanismos de Implementación Operativa\n"
+                f"2.1. Análisis del marco normativo vigente y evidencia empírica contrastada\n"
+                f"2.2. Competencias, gobernanza y dinámica de los organismos especializados\n"
+                f"2.3. Modelos de interacción entre actores y factores estructurales\n"
+                f"Capítulo 3. Directrices Estratégicas y Vías de Optimización Innovadora\n"
+                f"3.1. Ejes fundamentales para la armonización metodológica e institucional\n"
+                f"3.2. Integración de tecnologías digitales y optimización de recursos\n"
+                f"3.3. Recomendaciones académico-prácticas para elevar la eficiencia sistémica\n"
+                f"Conclusiones y Prospectiva Científica\n"
+                f"Bibliografía Académica\n"
+                f"Anexos"
+            )
+        elif payload.mode in ["article", "article_vak"]:
+            title = payload.chapter_title or f"Investigación Científica: {t}"
+            return (
+                f"## {title.upper()}\n\n"
+                f"**Resumen:** En el presente artículo se desarrolla un análisis científico riguroso sobre '{t}'. "
+                f"Se examina el papel de la armonización de normas y la generación de incentivos efectivos "
+                f"para el desarrollo socioeconómico y tecnológico sostenible.\n\n"
+                f"**Palabras clave:** {t}, metodología, fundamentos teóricos, gobernanza institucional, "
+                f"innovación, eficiencia.\n\n"
+                f"### Introducción\n"
+                f"En el contexto socioeconómico actual, la temática analizada adquiere una importancia "
+                f"primordial tanto teórica como empírica [1, p. 14].\n\n"
+                f"### Desarrollo\n"
+                f"La revisión de fuentes doctrinales y la práctica empírica evidencian el alto potencial de los "
+                f"enfoques integrados. La articulación armónica entre planificación estratégica y mecanismos de ejecución "
+                f"garantiza el equilibrio entre prioridades públicas y privadas [2, p. 35].\n\n"
+                f"### Conclusiones y Propuestas\n"
+                f"A partir de los resultados obtenidos se formulan propuestas científicamente fundamentadas "
+                f"para optimizar la gobernanza y perfeccionar los instrumentos operativos del modelo."
+            )
+        elif payload.mode == "chapter":
+            title = payload.chapter_title or t
+            return (
+                f"## {title}\n\n"
+                f"En la doctrina científica contemporánea, el estudio de '{t}' constituye una línea de investigación prioritaria [1, p. 14]. "
+                f"El análisis de los marcos teóricos y normativos demuestra que los mecanismos institucionales existentes precisan una armonización sistemática frente a los desafíos actuales.\n\n"
+                f"Cabe destacar que el régimen analizado se fundamenta en el equilibrio entre gobernanza y flexibilidad operativa. "
+                f"Como se señala en la literatura especializada, la regulación no debe limitarse a declaraciones de principios, sino apoyarse en instrumentos eficaces de implementación y sistemas claros de responsabilidad [2, p. 48].\n\n"
+                f"Con base en el análisis comparativo, se destacan los siguientes aspectos clave:\n"
+                f"1. Consolidación progresiva del aparato conceptual y categorial;\n"
+                f"2. Delimitación precisa de competencias entre entidades centrales y especializadas;\n"
+                f"3. Incorporación de incentivos y garantías prácticas para los participantes.\n\n"
+                f"De este modo, se demuestra que la modernización institucional constituye una condición indispensable para el desarrollo sostenible y la estabilidad [3, p. 92]."
+            )
+        elif payload.mode == "defense_speech":
+            return (
+                f"Estimado/a Presidente/a y miembros del Tribunal Evaluador:\n\n"
+                f"Tengo el honor de someter a su consideración la investigación científica titulada: '{t}'.\n\n"
+                f"LA RELEVANCIA DEL ESTUDIO radica en la necesidad de modernizar sistemáticamente los mecanismos institucionales "
+                f"y prácticos en el sector, respondiendo a los objetivos estratégicos de desarrollo y a los desafíos científicos contemporáneos.\n\n"
+                f"EL OBJETO DE ESTUDIO comprende las relaciones sistémicas que configuran el ámbito investigado.\n"
+                f"EL CAMPO DE ACCIÓN abarca la doctrina científica, las disposiciones normativas y la práctica empírica.\n\n"
+                f"PROPOSICIONES PRINCIPALES PARA LA DEFENSA:\n"
+                f"1. Fundamentación teórica de un enfoque sistémico e integrador aplicado a la institución examinada.\n"
+                f"2. Demostración de la armonización metodológica como núcleo del perfeccionamiento institucional.\n"
+                f"3. Propuestas concretas para la digitalización del seguimiento y la elevación de la eficiencia práctica.\n\n"
+                f"Agradezco su atención y quedo a su entera disposición para responder a sus preguntas."
+            )
+        else: # apparatus
+            return (
+                f"## APARATO CIENTÍFICO DE LA INVESTIGACIÓN\n\n"
+                f"**Tema:** {t}\n"
+                f"**Nivel Académico:** {level_label}\n"
+                f"**Disciplina:** {payload.discipline}\n\n"
+                f"### 1. Relevancia y Justificación del Tema\n"
+                f"En las condiciones actuales de transformaciones socioeconómicas, el estudio de '{t}' "
+                f"adquiere una relevancia científica y práctica de primer orden. Los enfoques metodológicos tradicionales requieren una revisión profunda orientada a estándares modernos.\n\n"
+                f"### 2. Objeto y Campo de la Investigación\n"
+                f"- **Objeto de Estudio:** Relaciones y mecanismos vinculados al desarrollo de '{t}'.\n"
+                f"- **Campo de Acción:** Normas técnicas, conceptos teóricos y regularidades empíricas observadas.\n\n"
+                f"### 3. Objetivo General y Tareas Específicas\n"
+                f"**Objetivo General:** Fundamentación teórica y elaboración metodológica de un modelo integral para el ámbito de estudio.\n"
+                f"Para alcanzar dicho objetivo se plantean las siguientes **tareas**:\n"
+                f"1. Analizar la génesis histórico-doctrinal y los fundamentos teóricos del tema.\n"
+                f"2. Examinar el estado actual de la normativa y la práctica empírica.\n"
+                f"3. Identificar limitaciones y brechas en el funcionamiento de los mecanismos operativos.\n"
+                f"4. Formular recomendaciones fundamentadas para perfeccionar el sistema.\n\n"
+                f"### 4. Novedad Científica\n"
+                f"La novedad científica radica en el diseño de un modelo conceptual integrador que articula la solidez metodológica con herramientas prácticas de optimización continua."
+            )
+    else: # Russian
+        if payload.mode == "outline":
+            return (
+                f"Введение (Научный аппарат исследования)\n"
+                f"Глава 1. Теоретико-методологические и концептуальные основы: {t}\n"
+                f"1.1. Генезис и эволюция исследуемых научных подходов к теме\n"
+                f"1.2. Теоретическая характеристика понятийного аппарата и категориальных рамок\n"
+                f"1.3. Систематизация современной исследовательской литературы и доктринальных источников\n"
+                f"Глава 2. Современное состояние и прикладные механизмы реализации исследуемых процессов\n"
+                f"2.1. Анализ действующей нормативной/эмпирической базы и практических данных\n"
+                f"2.2. Компетенция и статус институтов управления и профильных структур\n"
+                f"2.3. Модели взаимодействия участников и системные факторы развития\n"
+                f"Глава 3. Перспективы совершенствования и инновационные прикладные механизмы\n"
+                f"3.1. Ключевые направления гармонизации норм и методологических подходов\n"
+                f"3.2. Внедрение инновационных цифровых технологий и оптимизация ресурсов\n"
+                f"3.3. Научно-практические рекомендации по повышению эффективности исследуемой системы\n"
+                f"Заключение и выводы\n"
+                f"Список использованных источников\n"
+                f"Приложения"
+            )
+        elif payload.mode in ["article", "article_vak"]:
+            title = payload.chapter_title or f"Исследование актуальных вопросов: {t}"
+            return (
+                f"## {title.upper()}\n\n"
+                f"**Аннотация:** В статье проведен всесторонний научный анализ институциональных механизмов "
+                f"по теме '{t}'. Особое внимание уделено роли систематизации отраслевых норм "
+                f"и формированию действенных стимулов для устойчивого научно-технологического и социально-экономического развития.\n\n"
+                f"**Ключевые слова:** {t}, методология, теоретические основы, "
+                f"институциональное регулирование, государственное управление, инновации.\n\n"
+                f"### Введение\n"
+                f"В современных социально-экономических и технологических реалиях исследуемая проблематика "
+                f"приобретает первостепенное прикладное и теоретическое значение [1, c. 14].\n\n"
+                f"### Основная часть\n"
+                f"Исследование доктринальных источников и эмпирической практики демонстрирует высокий потенциал "
+                f"комплексных подходов. Гармоничное сочетание стратегического планирования и практических механизмов обеспечивает "
+                f"необходимый баланс публичных и частных интересов [2, c. 35].\n\n"
+                f"### Выводы и предложения\n"
+                f"На основе полученных результатов выработаны научно обоснованные предложения по модернизации "
+                f"регулирования и практических инструментов реализации исследуемой модели."
+            )
+        elif payload.mode == "chapter":
+            title = payload.chapter_title or t
+            return (
+                f"## {title}\n\n"
+                f"В современной научной доктрине исследование вопросов по теме '{t}' "
+                f"представляет собой одно из приоритетных направлений развития науки [1, c. 14]. "
+                f"Анализ нормативных актов и доктринальных источников свидетельствует о том, что существующие "
+                f"институциональные механизмы требуют системной гармонизации с учетом современных вызовов.\n\n"
+                f"Следует подчеркнуть, что специальный режим в исследуемой области базируется на балансе интересов "
+                f"и устойчивых принципах управления. Как справедливо отмечается в трудах ведущих ученых, регулирование "
+                f"не должно ограничиваться исключительно декларативными предписаниями, а обязано опираться на действенные "
+                f"имплементационные механизмы, стимулы и четкую систему ответственности [2, c. 48].\n\n"
+                f"На основе проведенного анализа представляется целесообразным выделить следующие ключевые аспекты:\n"
+                f"1. Необходимость последовательного закрепления понятийно-категориального аппарата;\n"
+                f"2. Четкое разграничение полномочий между центральными, отраслевыми и региональными субъектами;\n"
+                f"3. Внедрение гарантий и экономических стимулов для добросовестных участников правоотношений.\n\n"
+                f"Таким образом, на основе теоретического и сравнительного анализа доказано, что последовательная модернизация "
+                f"исследуемого института выступает объективной предпосылкой устойчивого развития и стабильности [3, c. 92]."
+            )
+        elif payload.mode == "defense_speech":
+            return (
+                f"Уважаемый председатель и члены Государственной экзаменационной комиссии!\n\n"
+                f"Вашему вниманию представляется научное исследование на тему: '{t}'.\n\n"
+                f"АКТУАЛЬНОСТЬ ИССЛЕДОВАНИЯ обусловлена необходимостью системной модернизации механизмов регулирования "
+                f"в рассматриваемой сфере с учетом стратегических задач развития и современных научно-практических вызовов.\n\n"
+                f"ОБЪЕКТОМ ИССЛЕДОВАНИЯ выступили общественные отношения, складывающиеся в процессе регулирования рассматриваемой сферы.\n"
+                f"ПРЕДМЕТОМ — нормы законодательства, доктринальные источники и правоприменительная практика.\n\n"
+                f"ОСНОВНЫЕ ПОЛОЖЕНИЯ, ВЫНОСИМЫЕ НА ЗАЩИТУ:\n"
+                f"1. Доктринальное обоснование комплексного системного подхода к исследуемому институту.\n"
+                f"2. Роль систематизации нормативной базы как ядра правовой регламентации.\n"
+                f"3. Предложения по закреплению правового статуса субъектов и цифровизации мониторинга.\n\n"
+                f"Благодарю за внимание и готова ответить на ваши вопросы!"
+            )
+        else: # apparatus
+            return (
+                f"## НАУЧНЫЙ АППАРАТ ИССЛЕДОВАНИЯ\n\n"
+                f"**Тема:** {t}\n"
+                f"**Уровень:** {level_label}\n"
+                f"**Дисциплина:** {payload.discipline}\n\n"
+                f"### 1. Актуальность темы исследования\n"
+                f"В современных условиях масштабных социально-экономических трансформаций исследование проблемы '{t}' приобретает первостепенное научно-практическое значение. Существующие методологические подходы требуют углубленного переосмысления с учетом современных требований.\n\n"
+                f"### 2. Объект и предмет исследования\n"
+                f"- **Объект исследования:** общественные отношения и процессы, возникающие в процессе реализации механизмов по теме '{t}'.\n"
+                f"- **Предмет исследования:** теоретические концепции, нормативные основы и практические закономерности.\n\n"
+                f"### 3. Цель и задачи исследования\n"
+                f"**Цель работы:** теоретическое обоснование и научно-методическая разработка комплексной модели регулирования исследуемой проблемы.\n"
+                f"Для достижения поставленной цели решаются следующие **задачи**:\n"
+                f"1. Исследовать генезис и теоретические основы института.\n"
+                f"2. Осуществить детальный анализ действующей нормативной и эмпирической базы.\n"
+                f"3. Выявить проблемы функционирования прикладных механизмов реализации.\n"
+                f"4. Сформировать научно обоснованные рекомендации по совершенствованию системы.\n\n"
+                f"### 4. Научная новизна исследования\n"
+                f"Научная новизна заключается в авторской разработке комплексного системного подхода, обеспечивающего гармонизацию методологических норм и повышение эффективности прикладных механизмов."
+            )
+
 @app.post("/api/v1/academic/research-compose", tags=["Academic Tools"])
 async def compose_academic_research(payload: AcademicResearchRequest, request: Request):
     """
@@ -4369,6 +4990,15 @@ async def compose_academic_research(payload: AcademicResearchRequest, request: R
     }
     level_label = level_names.get(payload.level, "Академическая работа")
 
+    target_lang = (payload.language or "ru").strip().lower()
+    lang_names = {
+        "uz": "Uzbek (O'zbek tili)",
+        "en": "English",
+        "es": "Spanish (Español)",
+        "ru": "Russian (Русский)"
+    }
+    lang_label = lang_names.get(target_lang, "Russian (Русский)")
+
     system_prompt = (
         "You are the Chief Academic Research Director and Senior Reviewer for higher attestation commissions (ВАК) "
         "and editorial boards of Q1 peer-reviewed international scientific journals (Elsevier, Springer Nature, IEEE, Oxford University Press).\n"
@@ -4378,8 +5008,13 @@ async def compose_academic_research(payload: AcademicResearchRequest, request: R
         "2. SCIENTIFIC PRECISION: Use formal, impersonal academic voice. In Russian: строгий безличный академический стиль (например: 'на основе дедуктивного анализа доказано', 'представляется целесообразным классифицировать', 'исследование базируется на фундаментальных положениях'). In English: objective, nuanced academic prose with rigorous hedged assertions ('empirical indicators suggest', 'synthesizing the variance across cohorts').\n"
         "3. EPISTEMOLOGICAL RIGOR: Formulate verifiable scientific novelties, precise categorical frameworks, clear object-subject boundaries, and substantiated hypotheses.\n"
         "4. CITATIONS & GROUNDING: Adhere to standard academic citation logic (ГОСТ 7.0.5-2008 / APA 7th). Embed simulated in-text citations [1, c. 45] or (Author, 2024).\n"
-        "5. Output must be in formatted Markdown with clear academic headings, LaTeX formulas where relevant, and structural bullet points."
+        "5. Output must be in formatted Markdown with clear academic headings, LaTeX formulas where relevant, and structural bullet points.\n\n"
+        f"CRITICAL MULTILINGUAL MANDATE:\n"
+        f"You MUST generate the entire scholarly output strictly in {lang_label}.\n"
+        f"All headings, methodology terms, and scholarly explanations must be authored natively in {lang_label}."
     )
+    if "uz" in target_lang:
+        system_prompt += "\nSTRICT RESTRICTION: Do NOT use the words 'asbob' or 'instrument' anywhere in Uzbek."
 
     mode_instructions = {
         "apparatus": (
@@ -4461,7 +5096,7 @@ async def compose_academic_research(payload: AcademicResearchRequest, request: R
         )
     }
 
-    user_prompt = mode_instructions.get(payload.mode, mode_instructions["apparatus"])
+    user_prompt = f"Target Output Language: {lang_label}\n\n" + mode_instructions.get(payload.mode, mode_instructions["apparatus"])
 
     result_text = None
     if client is not None:
@@ -4495,100 +5130,10 @@ async def compose_academic_research(payload: AcademicResearchRequest, request: R
             result_text = None
 
     if not result_text:
-        t = payload.topic
-        if payload.mode == "outline":
-            result_text = (
-                f"Введение (Научный аппарат исследования)\n"
-                f"Глава 1. Теоретико-методологические и концептуальные основы: {t}\n"
-                f"1.1. Генезис и эволюция исследуемых научных подходов и правоотношений\n"
-                f"1.2. Теоретическая характеристика понятийного аппарата и категориальных рамок\n"
-                f"1.3. Систематизация законодательства и доктринальных источников как фактор гармонизации норм\n"
-                f"Глава 2. Современное состояние и прикладные механизмы реализации исследуемых процессов\n"
-                f"2.1. Анализ действующей нормативно-правовой базы и эмпирической практики\n"
-                f"2.2. Компетенция и статус уполномоченных органов управления, надзора и профильных институтов\n"
-                f"2.3. Договорные конструкции и взаимодействие участников исследуемых отношений\n"
-                f"Глава 3. Перспективы совершенствования и инновационные прикладные механизмы\n"
-                f"3.1. Ключевые направления гармонизации норм и методологических подходов\n"
-                f"3.2. Стимулы внедрения инновационных технологий, цифрового мониторинга и ресурсосбережения\n"
-                f"3.3. Научно-практические рекомендации по повышению эффективности исследуемой системы\n"
-                f"Заключение и выводы\n"
-                f"Список использованных источников\n"
-                f"Приложения"
-            )
-        elif payload.mode in ["article", "article_vak"]:
-            title = payload.chapter_title or f"Исследование актуальных вопросов: {payload.topic}"
-            result_text = (
-                f"## {title.upper()}\n\n"
-                f"**Аннотация:** В статье проведен всесторонний научный анализ институциональных механизмов "
-                f"по теме '{payload.topic}'. Особое внимание уделено роли систематизации отраслевых норм "
-                f"и формированию действенных стимулов для устойчивого научно-технологического и социально-экономического развития.\n\n"
-                f"**Ключевые слова:** {payload.topic}, методология, теоретические основы, "
-                f"институциональное регулирование, государственное управление, инновации.\n\n"
-                f"### Введение\n"
-                f"В современных социально-экономических и технологических реалиях исследуемая проблематика "
-                f"приобретает первостепенное прикладное и теоретическое значение [1, c. 14].\n\n"
-                f"### Основная часть\n"
-                f"Исследование доктринальных источников и эмпирической практики демонстрирует высокий потенциал "
-                f"комплексных подходов. Гармоничное сочетание стратегического планирования и договорных механизмов обеспечивает "
-                f"необходимый баланс публичных и частных интересов [2, c. 35].\n\n"
-                f"### Выводы и предложения\n"
-                f"На основе полученных результатов выработаны научно обоснованные предложения по модернизации "
-                f"нормативного регулирования и практических инструментов реализации исследуемой модели."
-            )
-        elif payload.mode == "chapter":
-            title = payload.chapter_title or payload.topic
-            result_text = (
-                f"## {title}\n\n"
-                f"В современной научной доктрине исследование вопросов по теме '{payload.topic}' "
-                f"представляет собой одно из приоритетных направлений развития науки [1, c. 14]. "
-                f"Анализ нормативно-правовых актов и доктринальных источников свидетельствует о том, что существующие "
-                f"институциональные механизмы требуют системной гармонизации с учетом современных вызовов.\n\n"
-                f"Следует подчеркнуть, что специальный режим в исследуемой области базируется на балансе публичных "
-                f"и частных интересов. Как справедливо отмечается в трудах ведущих ученых, регулирование "
-                f"не должно ограничиваться исключительно декларативными предписаниями, а обязано опираться на действенные "
-                f"имплементационные механизмы, стимулы и четкую систему ответственности [2, c. 48].\n\n"
-                f"На основе проведенного анализа представляется целесообразным выделить следующие ключевые аспекты:\n"
-                f"1. Необходимость последовательного закрепления понятийно-категориального аппарата;\n"
-                f"2. Четкое разграничение полномочий между центральными, отраслевыми и региональными субъектами;\n"
-                f"3. Внедрение гарантий и экономических стимулов для добросовестных участников правоотношений.\n\n"
-                f"Таким образом, на основе теоретического и сравнительного анализа доказано, что последовательная модернизация "
-                f"исследуемого института выступает объективной предпосылкой устойчивого развития и стабильности [3, c. 92]."
-            )
-        elif payload.mode == "defense_speech":
-            result_text = (
-                f"Уважаемый председатель и члены Государственной экзаменационной комиссии!\n\n"
-                f"Вашему вниманию представляется научное исследование на тему: '{payload.topic}'.\n\n"
-                f"АКТУАЛЬНОСТЬ ИССЛЕДОВАНИЯ обусловлена необходимостью системной модернизации механизмов регулирования "
-                f"в рассматриваемой сфере с учетом стратегических задач развития и современных научно-практических вызовов.\n\n"
-                f"ОБЪЕКТОМ ИССЛЕДОВАНИЯ выступили общественные отношения, складывающиеся в процессе регулирования рассматриваемой сферы.\n"
-                f"ПРЕДМЕТОМ — нормы законодательства, доктринальные источники и правоприменительная практика.\n\n"
-                f"ОСНОВНЫЕ ПОЛОЖЕНИЯ, ВЫНОСИМЫЕ НА ЗАЩИТУ:\n"
-                f"1. Доктринальное обоснование комплексного эколого-правового подхода к исследуемому институту.\n"
-                f"2. Роль кодификации законодательства как системного ядра правовой регламентации.\n"
-                f"3. Предложения по закреплению правового статуса субъектов и цифровизации мониторинга.\n\n"
-                f"Благодарю за внимание и готова ответить на ваши вопросы!"
-            )
-        else: # apparatus
-            result_text = (
-                f"## НАУЧНЫЙ АППАРАТ ИССЛЕДОВАНИЯ\n\n"
-                f"**Тема:** {payload.topic}\n"
-                f"**Уровень:** {level_label}\n"
-                f"**Дисциплина:** {payload.discipline}\n\n"
-                f"### 1. Актуальность темы исследования\n"
-                f"В современных условиях масштабных социально-экономических трансформаций и климатических вызовов исследование проблемы '{payload.topic}' приобретает первостепенное научно-практическое значение. Существующие методологические и правовые подходы требуют углубленного переосмысления с учетом кодификации законодательства.\n\n"
-                f"### 2. Объект и предмет исследования\n"
-                f"- **Объект исследования:** общественные отношения, возникающие в процессе регулирования и реализации механизмов по теме '{payload.topic}'.\n"
-                f"- **Предмет исследования:** нормы отраслевого законодательства, теоретические концепции и правоприменительная практика.\n\n"
-                f"### 3. Цель и задачи исследования\n"
-                f"**Цель работы:** теоретическое обоснование и научно-методическая разработка комплексной модели правового регулирования исследуемой проблемы.\n"
-                f"Для достижения поставленной цели решаются следующие **задачи**:\n"
-                f"1. Исследовать историко-правовой генезис и теоретические основы института.\n"
-                f"2. Осуществить детальный юридический анализ действующей нормативно-правовой базы.\n"
-                f"3. Выявить проблемы функционирования институциональных механизмов правоприменения.\n"
-                f"4. Сформировать научно обоснованные рекомендации по совершенствованию законодательства.\n\n"
-                f"### 4. Научная новизна исследования\n"
-                f"Научная новизна заключается в авторской разработке комплексного эколого-правового подхода, обеспечивающего гармонизацию кодифицированных норм и стимулирование ресурсосберегающих механизмов."
-            )
+        result_text = get_fallback_academic_research(payload, level_label)
+
+    if "uz" in target_lang:
+        result_text = sanitize_uzbek_content(result_text)
 
     return {
         "status": "success",
@@ -4612,87 +5157,322 @@ class CareerOrientateRequest(BaseModel):
     dream_lifestyle: str = Field(default="remote")
     income_priority: str = Field(default="high_wealth")
     favourite_subjects: Optional[str] = Field(default="")
-    language: Optional[str] = Field(default="ru")
+    language: Optional[str] = Field(default="uz")
 
 def get_fallback_career_profile(payload: CareerOrientateRequest) -> dict:
-    matrix = {
-        "logic": {
-            "archetype": "Архитектор Цифровых Систем",
-            "superpower": "Умение видеть скрытые закономерности в сложных массивах данных",
-            "personality_summary": "Ваш ум аналитичен и структурирован. Вы чувствуете себя уверенно там, где есть логика, правила и возможность автоматизировать рутину.",
-            "top_careers": [
-                {"title": "Product Analyst / AI Solutions Architect", "match_percentage": 98, "why_fits": "Идеальный баланс математики, технологий и создания новых продуктов", "salary_local": "18 000 000 - 40 000 000 сум", "salary_usd": "$2,200 - $4,500/мес", "difficulty": "Средний"},
-                {"title": "Инженер по кибербезопасности & Cloud", "match_percentage": 93, "why_fits": "Высочайший международный спрос и полная защита от кризисов", "salary_local": "15 000 000 - 35 000 000 сум", "salary_usd": "$2,000 - $4,000/мес", "difficulty": "Высокий"},
-                {"title": "Full-Stack разработчик систем", "match_percentage": 90, "why_fits": "Свобода удаленной работы на весь мир из дома", "salary_local": "12 000 000 - 30 000 000 сум", "salary_usd": "$1,800 - $3,500/мес", "difficulty": "Средний"}
-            ],
-            "recommended_faculties_and_universities": ["WIUT (Вестминстер) — Computer Science / BIS", "INHA Ташкент — Software Engineering", "ТУИТ — Кибербезопасность", "Гранты в Германии и Корее (KAIST)"],
-            "immediate_next_steps": ["Подтянуть академический английский до IELTS 6.5–7.0", "Пройти базовый курс по архитектуре данных и SQL", "Собрать первый проект в портфолио на GitHub"],
-            "next_eduhub_tool": {"name": "IELTS Exam Grader", "url": "/tools/essay-grader", "reason": "Для выхода на $2,500+ критически необходим сертификат IELTS 7.0+"}
-        },
-        "people": {
-            "archetype": "Стратег Международных Переговоров",
-            "superpower": "Природная эмпатия и способность объединять разных людей вокруг общей цели",
-            "personality_summary": "Вы черпаете силы в живом взаимодействии. Люди интуитивно доверяют вам, а ваши идеи находят быстрый отклик в коллективе.",
-            "top_careers": [
-                {"title": "Международный бренд-директор & PR-стратег", "match_percentage": 97, "why_fits": "Управление репутацией глобальных брендов и масштабные медиа-проекты", "salary_local": "14 000 000 - 32 000 000 сум", "salary_usd": "$1,800 - $3,200/мес", "difficulty": "Средний"},
-                {"title": "HR-директор & Headhunter талантов", "match_percentage": 94, "why_fits": "Построение сильных международных команд в технологических компаниях", "salary_local": "12 000 000 - 28 000 000 сум", "salary_usd": "$1,500 - $3,000/мес", "difficulty": "Доступный"},
-                {"title": "Продюсер EdTech & Образовательных программ", "match_percentage": 91, "why_fits": "Создание современных обучающих экосистем и академий", "salary_local": "10 000 000 - 25 000 000 сум", "salary_usd": "$1,400 - $2,800/мес", "difficulty": "Доступный"}
-            ],
-            "recommended_faculties_and_universities": ["УМЭД (Дипломатический университет)", "MDIST — Международный бизнес и маркетинг", "Филиал МГУ / СПбГУ", "Программы обмена Erasmus+"],
-            "immediate_next_steps": ["Освоить техники ораторского мастерства и публичных выступлений", "Сдать IELTS на Band 7.5 для международных стажировок", "Начать вести свой экспертный Telegram-канал"],
-            "next_eduhub_tool": {"name": "AI Language & Roleplay Tutor", "url": "/tools/language-tutor", "reason": "Отработайте переговоры и интервью с живым ИИ-собеседником"}
-        },
-        "creativity": {
-            "archetype": "Визионер Цифровых Миров",
-            "superpower": "Способность превращать хаотичные смыслы в элегантный, вовлекающий визуал",
-            "personality_summary": "Вы чувствуете гармонию форм, цветов и пользовательских сценариев. Вам тесно в строгих регламентах, ваша сила — инновационный дизайн.",
-            "top_careers": [
-                {"title": "Lead UI/UX & Product Designer", "match_percentage": 99, "why_fits": "Создание интерфейсов, которыми ежедневно пользуются миллионы людей", "salary_local": "15 000 000 - 35 000 000 сум", "salary_usd": "$2,000 - $4,200/мес", "difficulty": "Средний"},
-                {"title": "3D & Concept Artist в GameDev", "match_percentage": 95, "why_fits": "Проектирование персонажей и игровых локаций для мировых студий", "salary_local": "12 000 000 - 30 000 000 сум", "salary_usd": "$1,800 - $3,800/мес", "difficulty": "Высокий"},
-                {"title": "Креативный директор цифровых агентств", "match_percentage": 92, "why_fits": "Руководство визуальной эстетикой стартапов и брендов", "salary_local": "14 000 000 - 32 000 000 сум", "salary_usd": "$1,700 - $3,500/мес", "difficulty": "Средний"}
-            ],
-            "recommended_faculties_and_universities": ["Институт искусств и дизайна", "WIUT — Interactive Media Design", "Онлайн-академии школы дизайна (Bang Bang / British Higher School)", "Европейские гранты в Италии и Чехии"],
-            "immediate_next_steps": ["Собрать портфолио из 3 сильных кейсов в Figma / Behance", "Изучить основы дизайн-систем и психологии пользователей", "Оформить визитку для международных клиентов"],
-            "next_eduhub_tool": {"name": "AI Anti-Plagiarism & Humanizer", "url": "/tools/anti-plagiarism", "reason": "Для идеального описания своих дизайн-концепций и эссе"}
-        },
-        "business": {
-            "archetype": "Архитектор Капитала & Стартапов",
-            "superpower": "Интуитивное видение прибыли и умение масштабировать процессы",
-            "personality_summary": "Вы ориентированы на измеримый результат. Вас вдохновляют растущие графики, стратегические сделки и запуск масштабных проектов.",
-            "top_careers": [
-                {"title": "FinTech Product Manager / Предприниматель", "match_percentage": 98, "why_fits": "Запуск цифровых сервисов, платежных шлюзов и онлайн-банков", "salary_local": "20 000 000 - 50 000 000 сум", "salary_usd": "$2,500 - $5,000/мес", "difficulty": "Средний"},
-                {"title": "Инвестиционный аналитик & VC Scout", "match_percentage": 94, "why_fits": "Оценка перспективных стартапов и управление венчурными фондами", "salary_local": "16 000 000 - 38 000 000 сум", "salary_usd": "$2,200 - $4,200/мес", "difficulty": "Высокий"},
-                {"title": "E-Commerce & Digital Commerce Director", "match_percentage": 91, "why_fits": "Управление продажами на глобальных маркетплейсах (Amazon, Uzum, Wildberries)", "salary_local": "15 000 000 - 35 000 000 сум", "salary_usd": "$2,000 - $3,800/мес", "difficulty": "Доступный"}
-            ],
-            "recommended_faculties_and_universities": ["WIUT — Business Administration / Finance", "ТГЭУ (Нархоз) — Международная экономика", "Сингапурский институт (MDIST)", "Бизнес-школы Европы и Сингапура (INSEAD, NUS)"],
-            "immediate_next_steps": ["Изучить основы unit-экономики и анализа P&L отчётов", "Запустить первый микро-бизнес проект или продажу софта", "Освоить финансовое моделирование в Excel"],
-            "next_eduhub_tool": {"name": "Citation & Bibliography Formatter", "url": "/tools/citation-generator", "reason": "Для безупречного оформления инвестиционных отчетов и бизнес-планов"}
-        },
-        "science": {
-            "archetype": "Исследователь Будущего & Био-Технологий",
-            "superpower": "Неутолимая тяга к открытиям и фундаментальному пониманию природы вещей",
-            "personality_summary": "Вы скрупулезны, методичны и стремитесь делать мир здоровее и совершеннее через призму доказательной науки.",
-            "top_careers": [
-                {"title": "Биоинформатик & Аналитик геномных данных", "match_percentage": 99, "why_fits": "Стык биологии, IT и медицины — самая быстрорастущая область десятилетия", "salary_local": "16 000 000 - 36 000 000 сум", "salary_usd": "$2,200 - $4,500/мес", "difficulty": "Высокий"},
-                {"title": "Клинический фармаколог & Исследователь биотеха", "match_percentage": 94, "why_fits": "Разработка новых лекарственных препаратов и генной терапии", "salary_local": "14 000 000 - 30 000 000 сум", "salary_usd": "$1,900 - $3,800/мес", "difficulty": "Высокий"},
-                {"title": "Data Scientist в сфере экологии и зеленой энергетики", "match_percentage": 90, "why_fits": "Моделирование климата, оптимизация возобновляемых источников энергии", "salary_local": "12 000 000 - 28 000 000 сум", "salary_usd": "$1,700 - $3,400/мес", "difficulty": "Средний"}
-            ],
-            "recommended_faculties_and_universities": ["Ташкентская медицинская академия (ТМА)", "Национальный университет Узбекистана (НУУз) — Биология/Химия", "Филиал РХТУ им. Менделеева", "Гранты в Японии (MEXT) и Германии (DAAD)"],
-            "immediate_next_steps": ["Подтянуть английский язык для чтения научных статей в Nature и PubMed", "Освоить базовый Python для статистической обработки данных", "Подготовить научную статью для студенческой конференции"],
-            "next_eduhub_tool": {"name": "PDF & Research Summarizer", "url": "/tools/pdf-summarizer", "reason": "Для моментального анализа 100-страничных научных монографий"}
+    target_lang = (payload.language or "uz").lower()
+    is_uz = "uz" in target_lang
+    is_es = "es" in target_lang
+    is_en = "en" in target_lang
+
+    if is_uz:
+        matrix = {
+            "logic": {
+                "archetype": "Raqamli Tizimlar Me'mori",
+                "superpower": "Murakkab ma'lumotlar oqimidan yashirin qonuniyatlarni topish va tizimlashtirish iqtidori",
+                "personality_summary": "Sizning tafakkuringiz analitik va tartibli. Qat'iy mantiq, aniq qoidalar va jarayonlarni avtomatlashtirish imkoniyati bor sohada o'zingizni eng qulay his qilasiz.",
+                "top_careers": [
+                    {"title": "Product Analyst / AI Solutions Architect", "match_percentage": 98, "why_fits": "Matematika, zamonaviy texnologiyalar va yangi mahsulotlar yaratishning mukammal uyg'unligi", "salary_local": "18 000 000 - 40 000 000 so'm", "salary_usd": "$2,200 - $4,500/oy", "difficulty": "O'rta"},
+                    {"title": "Kiberxavfsizlik va Cloud muhandisi", "match_percentage": 93, "why_fits": "Global bozorda yuqori talab va har qanday iqtisodiy inqirozga to'liq chidamlilik", "salary_local": "15 000 000 - 35 000 000 so'm", "salary_usd": "$2,000 - $4,000/oy", "difficulty": "Yuqori"},
+                    {"title": "Full-Stack tizimlar dasturchisi", "match_percentage": 90, "why_fits": "Uyda turib xalqaro kompaniyalar bilan masofaviy ishlash erkinligi", "salary_local": "12 000 000 - 30 000 000 so'm", "salary_usd": "$1,800 - $3,500/oy", "difficulty": "O'rta"}
+                ],
+                "recommended_faculties_and_universities": ["WIUT (Vestminster) — Computer Science / BIS", "INHA Toshkent — Software Engineering", "TATU — Kiberxavfsizlik", "Germaniya va Janubiy Koreya (KAIST) grantlari"],
+                "immediate_next_steps": ["Akademik ingliz tilini IELTS 6.5–7.0 darajasiga ko'tarish", "Ma'lumotlar arxitekturasi va SQL bo'yicha amaliyot boshlash", "GitHub tarmog'ida ilk dasturlash loyihasini joylash"],
+                "next_eduhub_tool": {"name": "IELTS Exam Grader", "url": "/tools/essay-grader", "reason": "$2,500+ daromadga chiqish uchun xalqaro IELTS 7.0+ sertifikati muhim ahamiyatga ega"}
+            },
+            "people": {
+                "archetype": "Xalqaro Muzokaralar Strategi",
+                "superpower": "Tug'ma empatiya va turli insonlarni umumiy maqsad atrofida jipslashtirish qobiliyati",
+                "personality_summary": "Siz tirik muloqot va hamkorlikdan ilhom olasiz. Insonlar sizga ishonadi, g'oyalaringiz esa jamoada tez qo'llab-quvvatlanadi.",
+                "top_careers": [
+                    {"title": "Xalqaro brend-direktor va PR-strateg", "match_percentage": 97, "why_fits": "Global brendlar obro'sini boshqarish va yirik media loyihalarni yuritish", "salary_local": "14 000 000 - 32 000 000 so'm", "salary_usd": "$1,800 - $3,200/oy", "difficulty": "O'rta"},
+                    {"title": "HR-direktor va Iqtidorlar ovchisi", "match_percentage": 94, "why_fits": "Texnologik kompaniyalarda kuchli xalqaro jamoalarni shakllantirish", "salary_local": "12 000 000 - 28 000 000 so'm", "salary_usd": "$1,500 - $3,000/oy", "difficulty": "Qulay"},
+                    {"title": "EdTech va Ta'lim dasturlari prodyuseri", "match_percentage": 91, "why_fits": "Zamonaviy o'quv ekotizimlari va akademiyalarni tashkil etish", "salary_local": "10 000 000 - 25 000 000 so'm", "salary_usd": "$1,400 - $2,800/oy", "difficulty": "Qulay"}
+                ],
+                "recommended_faculties_and_universities": ["JIDU (Diplomatiya universiteti)", "MDIST — Xalqaro biznes va marketing", "Moskva davlat universiteti Toshkent filiali", "Erasmus+ almashinuv dasturlari"],
+                "immediate_next_steps": ["Notiqlik san'ati va jamoat oldida so'zlash texnikasini egallash", "Xalqaro amaliyotlar uchun IELTS imtihonidan 7.5 ball olish", "O'z ekspertlik Telegram-kanalini yuritishni boshlash"],
+                "next_eduhub_tool": {"name": "AI Til va Suhbat Repetitori", "url": "/tools/language-tutor", "reason": "Jonli sun'iy intellekt suhbatdoshi bilan muzokaralar va intervyularni mashq qiling"}
+            },
+            "creativity": {
+                "archetype": "Raqamli Olamlar Vizioneri",
+                "superpower": "Murakkab ma'nolarni nafis va jozibador vizual timsolga aylantirish mahorati",
+                "personality_summary": "Siz shakllar, ranglar va foydalanuvchi qulayligi uyg'unligini nozik his qilasiz. Sizga qat'iy cheklovlar torlik qiladi, kuchingiz innovatsion dizaynda.",
+                "top_careers": [
+                    {"title": "Yetakchi UI/UX va Mahsulot dizayneri", "match_percentage": 99, "why_fits": "Har kuni millionlab odamlar foydalanadigan interfeyslarni loyihalash", "salary_local": "15 000 000 - 35 000 000 so'm", "salary_usd": "$2,000 - $4,200/oy", "difficulty": "O'rta"},
+                    {"title": "GameDev sohasida 3D va Konsept rassomi", "match_percentage": 95, "why_fits": "Dunyo miqyosidagi studiyalar uchun personajlar va o'yin olamlarini yaratish", "salary_local": "12 000 000 - 30 000 000 so'm", "salary_usd": "$1,800 - $3,800/oy", "difficulty": "Yuqori"},
+                    {"title": "Raqamli agentliklar ijodiy direktori", "match_percentage": 92, "why_fits": "Startaplar va brendlarning vizual estetikasiga rahbarlik qilish", "salary_local": "14 000 000 - 32 000 000 so'm", "salary_usd": "$1,700 - $3,500/oy", "difficulty": "O'rta"}
+                ],
+                "recommended_faculties_and_universities": ["Kamoliddin Behzod nomidagi Milliy rassomlik va dizayn instituti", "WIUT — Interactive Media Design", "Italiya va Chexiyaning yetakchi dizayn akademiyalari grantlari"],
+                "immediate_next_steps": ["Figma va Behance platformalarida 3 ta kuchli keysdan iborat portfolio yig'ish", "Dizayn-tizimlar va foydalanuvchi psixologiyasi asoslarini chuqur o'rganish", "Xalqaro mijozlar uchun portfolio tashrif qog'ozini tayyorlash"],
+                "next_eduhub_tool": {"name": "AI Anti-Plagiat va Qayta Ishlash", "url": "/tools/anti-plagiarism", "reason": "O'z dizayn-konsepsiyalari va insholarini akademik jihatdan benuqson taqdim etish uchun"}
+            },
+            "business": {
+                "archetype": "Kapital va Startaplar Me'mori",
+                "superpower": "Daromad imkoniyatlarini oldindan ko'rish va jarayonlarni keng miqyosda kengaytirish",
+                "personality_summary": "Siz o'lchanadigan natijalarga intilasiz. O'sayotgan grafiklar, strategik bitimlar va yirik loyihalarni ishga tushirish sizga cheksiz kuch beradi.",
+                "top_careers": [
+                    {"title": "FinTech Mahsulot menejeri / Tadbirkor", "match_percentage": 98, "why_fits": "Raqamli xizmatlar, to'lov shlyuzlari va onlayn banking loyihalarini yo'lga qo'yish", "salary_local": "20 000 000 - 50 000 000 so'm", "salary_usd": "$2,500 - $5,000/oy", "difficulty": "O'rta"},
+                    {"title": "Investitsiya tahlilchisi va Venchur skaut", "match_percentage": 94, "why_fits": "Istiqbolli startaplarni baholash va venchur fondlarini boshqarish", "salary_local": "16 000 000 - 38 000 000 so'm", "salary_usd": "$2,200 - $4,200/oy", "difficulty": "Yuqori"},
+                    {"title": "E-Commerce va Raqamli savdo direktori", "match_percentage": 91, "why_fits": "Global va mahalliy marketpleyslarda savdoni tizimli boshqarish (Uzum, Amazon, WB)", "salary_local": "15 000 000 - 35 000 000 so'm", "salary_usd": "$2,000 - $3,800/oy", "difficulty": "Qulay"}
+                ],
+                "recommended_faculties_and_universities": ["WIUT — Business Administration / Finance", "TDIU (Narxoz) — Xalqaro iqtisodiyot", "Singapur menejmentni rivojlantirish instituti (MDIST)", "Yevropa va Singapur biznes maktablari (INSEAD, NUS)"],
+                "immediate_next_steps": ["Unit-iqtisodiyot va P&L moliyaviy hisobotlarni tahlil qilish asoslarini o'zlashtirish", "Ilk mikro-biznes yoki dasturiy yechim savdosini sinovdan o'tkazish", "Excel dasturida professional moliyaviy modellashtirishni o'rganish"],
+                "next_eduhub_tool": {"name": "Iqtibos va Bibliografiya Generator", "url": "/tools/citation-generator", "reason": "Investitsiya hisobotlari va biznes-rejalarni xalqaro standartda rasmiylashtirish uchun"}
+            },
+            "science": {
+                "archetype": "Kelajak va Biotexnologiyalar Tadqiqotchisi",
+                "superpower": "Yangi kashfiyotlarga bo'lgan kuchli intilish va hodisalarning tub mohiyatini anglash",
+                "personality_summary": "Siz sinchkov, metodik va dunyoni isbotlangan ilm-fan orqali yanada mukammal va sog'lom qilishga intilasiz.",
+                "top_careers": [
+                    {"title": "Bioinformatik va Genom ma'lumotlari tahlilchisi", "match_percentage": 99, "why_fits": "Biologiya, IT va tibbiyot tutashuvi — o'n yillikning eng tez rivojlanayotgan yo'nalishi", "salary_local": "16 000 000 - 36 000 000 so'm", "salary_usd": "$2,200 - $4,500/oy", "difficulty": "Yuqori"},
+                    {"title": "Klinik farmakolog va Biotexnologik tadqiqotchi", "match_percentage": 94, "why_fits": "Yangi dori vositalari va gen terapiyasini ishlab chiqish", "salary_local": "14 000 000 - 30 000 000 so'm", "salary_usd": "$1,900 - $3,800/oy", "difficulty": "Yuqori"},
+                    {"title": "Ekologiya va yashil energetika bo'yicha Data Scientist", "match_percentage": 90, "why_fits": "Iqlim modellashtirish va qayta tiklanuvchi energiya manbalarini optimallashtirish", "salary_local": "12 000 000 - 28 000 000 so'm", "salary_usd": "$1,700 - $3,400/oy", "difficulty": "O'rta"}
+                ],
+                "recommended_faculties_and_universities": ["Toshkent tibbiyot akademiyasi (TMA)", "O'zbekiston Milliy universiteti (O'zMU) — Biologiya/Kimyo", "Mendeleyev nomidagi RKTU Toshkent filiali", "Yaponiya (MEXT) va Germaniya (DAAD) ilmiy grantlari"],
+                "immediate_next_steps": ["Nature va PubMed ilmiy maqolalarini o'qish uchun akademik ingliz tilini kuchaytirish", "Ma'lumotlarni statistik tahlil qilish uchun boshlang'ich Python tilini o'rganish", "Talabalar ilmiy anjumani uchun ilk tezis yoki maqolani tayyorlash"],
+                "next_eduhub_tool": {"name": "PDF va Ilmiy Tahlilchi", "url": "/tools/pdf-summarizer", "reason": "Katta hajmdagi ilmiy monografiya va maqolalarni bir necha soniyada tahlil qilish uchun"}
+            }
         }
-    }
+    elif is_en:
+        matrix = {
+            "logic": {
+                "archetype": "Digital Systems Architect",
+                "superpower": "Discerning hidden structural patterns within vast, complex data streams",
+                "personality_summary": "Your intellect is analytical and highly structured. You excel where rigorous logic, invariant rules, and systems automation converge.",
+                "top_careers": [
+                    {"title": "Product Analyst / AI Solutions Architect", "match_percentage": 98, "why_fits": "Perfect intersection of mathematics, systems engineering, and scalable product creation", "salary_local": "$2,500 - $5,000/mo", "salary_usd": "$110,000 - $185,000/yr", "difficulty": "Intermediate"},
+                    {"title": "Cybersecurity & Cloud Systems Engineer", "match_percentage": 93, "why_fits": "Surging global demand and robust resilience to economic fluctuations", "salary_local": "$2,200 - $4,500/mo", "salary_usd": "$100,000 - $170,000/yr", "difficulty": "Advanced"},
+                    {"title": "Full-Stack Distributed Systems Engineer", "match_percentage": 90, "why_fits": "Ultimate geographic freedom with borderless remote work capability", "salary_local": "$2,000 - $4,000/mo", "salary_usd": "$90,000 - $160,000/yr", "difficulty": "Intermediate"}
+                ],
+                "recommended_faculties_and_universities": ["WIUT / Westminster — Computer Science", "Inha University — Software Engineering", "TUIT — Cybersecurity", "International Scholarships (KAIST, DAAD, Fulbright)"],
+                "immediate_next_steps": ["Target IELTS Band 7.5+ for international scholarship placement", "Complete hands-on database architecture and SQL projects", "Publish your first open-source repository on GitHub"],
+                "next_eduhub_tool": {"name": "IELTS Exam Grader", "url": "/tools/essay-grader", "reason": "Band 7.5+ is required for premier global fellowships and high-compensation remote roles"}
+            },
+            "people": {
+                "archetype": "Strategic Negotiations Director",
+                "superpower": "Natural empathy and high-leverage alignment of multidisciplinary teams",
+                "personality_summary": "You thrive through authentic human dialogue. People instinctively trust your guidance, and your proposals win swift consensus.",
+                "top_careers": [
+                    {"title": "Global Brand Director & PR Strategist", "match_percentage": 97, "why_fits": "Leading international media initiatives and institutional reputation management", "salary_local": "$2,000 - $4,200/mo", "salary_usd": "$95,000 - $165,000/yr", "difficulty": "Intermediate"},
+                    {"title": "Chief People Officer & Executive Headhunter", "match_percentage": 94, "why_fits": "Building high-performance technical teams in cross-border tech enterprises", "salary_local": "$1,800 - $3,800/mo", "salary_usd": "$85,000 - $150,000/yr", "difficulty": "Accessible"},
+                    {"title": "EdTech & Learning Programs Producer", "match_percentage": 91, "why_fits": "Architecting modern educational ecosystems and global academies", "salary_local": "$1,600 - $3,200/mo", "salary_usd": "$75,000 - $135,000/yr", "difficulty": "Accessible"}
+                ],
+                "recommended_faculties_and_universities": ["UWED (Diplomacy University)", "MDIST — International Business & Marketing", "Erasmus+ Fellowship Consortium"],
+                "immediate_next_steps": ["Master public speaking and persuasive executive pitching", "Attain IELTS Band 7.5+ for international diplomatic fellowships", "Launch a focused technical or professional content channel"],
+                "next_eduhub_tool": {"name": "AI Language & Roleplay Tutor", "url": "/tools/language-tutor", "reason": "Simulate high-stakes executive interviews and negotiations with an empathetic AI tutor"}
+            },
+            "creativity": {
+                "archetype": "Digital Worlds Visionary",
+                "superpower": "Translating intricate concepts into compelling, intuitive visual experiences",
+                "personality_summary": "You have an innate sensitivity to proportion, color palettes, and frictionless user flows. Your strength lies in boundary-pushing innovation.",
+                "top_careers": [
+                    {"title": "Lead UI/UX & Digital Product Designer", "match_percentage": 99, "why_fits": "Crafting polished digital interfaces accessed by millions daily", "salary_local": "$2,200 - $4,500/mo", "salary_usd": "$100,000 - $175,000/yr", "difficulty": "Intermediate"},
+                    {"title": "3D Environment & Concept Artist in GameDev", "match_percentage": 95, "why_fits": "Visualizing complex character models and game worlds for global studios", "salary_local": "$1,900 - $4,000/mo", "salary_usd": "$90,000 - $155,000/yr", "difficulty": "Advanced"},
+                    {"title": "Creative Director for Digital Agencies", "match_percentage": 92, "why_fits": "Directing overall brand identity and design ethos for top startups", "salary_local": "$2,000 - $4,200/mo", "salary_usd": "$95,000 - $160,000/yr", "difficulty": "Intermediate"}
+                ],
+                "recommended_faculties_and_universities": ["National Institute of Arts and Design", "WIUT — Interactive Media Design", "European Arts Fellowships in Italy and Czechia"],
+                "immediate_next_steps": ["Curate a 3-case study portfolio on Figma and Behance", "Study user psychology heuristics and design system tokens", "Build an international client pitch deck"],
+                "next_eduhub_tool": {"name": "AI Anti-Plagiarism & Humanizer", "url": "/tools/anti-plagiarism", "reason": "Refine design rationales and portfolio case descriptions to academic polish"}
+            },
+            "business": {
+                "archetype": "Venture & Capital Architect",
+                "superpower": "Intuitive clarity on commercial viability and scalable unit economics",
+                "personality_summary": "You are relentlessly outcome-oriented. Growth trajectories, strategic transactions, and large-scale operational rollouts energize you.",
+                "top_careers": [
+                    {"title": "FinTech Product Director / Founder", "match_percentage": 98, "why_fits": "Deploying modern payment rails, digital banking solutions, and venture initiatives", "salary_local": "$3,000 - $6,500/mo", "salary_usd": "$125,000 - $220,000/yr", "difficulty": "Intermediate"},
+                    {"title": "Venture Capital Scout & Investment Analyst", "match_percentage": 94, "why_fits": "Vetting high-growth tech startups and managing venture allocations", "salary_local": "$2,500 - $5,200/mo", "salary_usd": "$110,000 - $190,000/yr", "difficulty": "Advanced"},
+                    {"title": "Global E-Commerce Operations Director", "match_percentage": 91, "why_fits": "Scaling storefronts and cross-border logistics across Amazon and regional hubs", "salary_local": "$2,200 - $4,500/mo", "salary_usd": "$95,000 - $170,000/yr", "difficulty": "Accessible"}
+                ],
+                "recommended_faculties_and_universities": ["WIUT — Business Administration / Finance", "Tashkent State University of Economics", "MDIST — Banking & Finance", "INSEAD / NUS Business Programs"],
+                "immediate_next_steps": ["Master unit-economics modeling and financial statement breakdown", "Launch a live micro-SaaS or e-commerce pilot", "Build advanced financial models in Excel"],
+                "next_eduhub_tool": {"name": "Citation & Bibliography Formatter", "url": "/tools/citation-generator", "reason": "Ensure institutional compliance when presenting investment reports and grant proposals"}
+            },
+            "science": {
+                "archetype": "Future Horizons & Biotech Pioneer",
+                "superpower": "Insatiable dedication to fundamental inquiry and empirical truth",
+                "personality_summary": "You are meticulous, methodical, and committed to advancing human well-being through verifiable, peer-reviewed science.",
+                "top_careers": [
+                    {"title": "Bioinformatics & Genomic Data Scientist", "match_percentage": 99, "why_fits": "Intersection of computational biology, data science, and next-gen medicine", "salary_local": "$2,400 - $4,800/mo", "salary_usd": "$105,000 - $180,000/yr", "difficulty": "Advanced"},
+                    {"title": "Clinical Pharmacologist & Biotech Researcher", "match_percentage": 94, "why_fits": "Developing novel therapeutic interventions and gene therapies", "salary_local": "$2,000 - $4,200/mo", "salary_usd": "$95,000 - $165,000/yr", "difficulty": "Advanced"},
+                    {"title": "Climate Modeling & Renewable Energy Data Scientist", "match_percentage": 90, "why_fits": "Optimizing renewable energy distribution and climate resilience frameworks", "salary_local": "$1,800 - $3,800/mo", "salary_usd": "$85,000 - $150,000/yr", "difficulty": "Intermediate"}
+                ],
+                "recommended_faculties_and_universities": ["TMA — Tashkent Medical Academy", "National University of Uzbekistan — Biology/Chemistry", "Mendeleev University Tashkent", "MEXT (Japan) / DAAD (Germany) Research Grants"],
+                "immediate_next_steps": ["Target scientific English proficiency for peer-reviewed journals (Nature/PubMed)", "Master Python and R for biostatistical data processing", "Draft your first abstract for a student research symposium"],
+                "next_eduhub_tool": {"name": "PDF & Research Summarizer", "url": "/tools/pdf-summarizer", "reason": "Synthesize 100-page academic monographs and clinical trials in seconds"}
+            }
+        }
+    elif is_es:
+        matrix = {
+            "logic": {
+                "archetype": "Arquitecto de Sistemas Digitales",
+                "superpower": "Capacidad analítica para descubrir patrones ocultos en grandes volúmenes de datos",
+                "personality_summary": "Su mente es rigurosa y estructurada. Destaca en entornos donde priman la lógica, los modelos formales y la automatización.",
+                "top_careers": [
+                    {"title": "Analista de Producto / Arquitecto de Soluciones IA", "match_percentage": 98, "why_fits": "Equilibrio óptimo entre modelado matemático, tecnología y desarrollo de producto", "salary_local": "$2,200 - $4,500/mes", "salary_usd": "$100,000 - $175,000/año", "difficulty": "Intermedio"},
+                    {"title": "Ingeniero de Ciberseguridad & Cloud", "match_percentage": 93, "why_fits": "Alta demanda internacional y máxima estabilidad laboral", "salary_local": "$2,000 - $4,000/mes", "salary_usd": "$90,000 - $160,000/año", "difficulty": "Avanzado"},
+                    {"title": "Desarrollador Full-Stack de Sistemas", "match_percentage": 90, "why_fits": "Libertad total de trabajo remoto para empresas internacionales", "salary_local": "$1,800 - $3,500/mes", "salary_usd": "$80,000 - $145,000/año", "difficulty": "Intermedio"}
+                ],
+                "recommended_faculties_and_universities": ["WIUT — Ciencias de la Computación", "INHA — Ingeniería de Software", "Becas internacionales de posgrado"],
+                "immediate_next_steps": ["Perfeccionar el inglés académico con meta IELTS 7.0+", "Realizar proyectos prácticos de modelado en SQL y bases de datos", "Publicar su primer repositorio técnico en GitHub"],
+                "next_eduhub_tool": {"name": "IELTS Exam Grader", "url": "/tools/essay-grader", "reason": "Un nivel certificado C1/IELTS 7.0+ es imprescindible para convocatorias internacionales"}
+            },
+            "people": {
+                "archetype": "Estratega de Negociaciones Internacionales",
+                "superpower": "Empatía natural y habilidad para alinear equipos diversos hacia un objetivo común",
+                "personality_summary": "Encuentra su mayor potencial en la interacción directa. Inspira confianza y genera acuerdos sólidos con rapidez.",
+                "top_careers": [
+                    {"title": "Director de Marca Global y Estrategia de PR", "match_percentage": 97, "why_fits": "Gestión de la reputación institucional y proyectos mediáticos de alto impacto", "salary_local": "$1,800 - $3,500/mes", "salary_usd": "$85,000 - $150,000/año", "difficulty": "Intermedio"},
+                    {"title": "Director de Recursos Humanos & Headhunter", "match_percentage": 94, "why_fits": "Desarrollo de talento en compañías tecnológicas internacionales", "salary_local": "$1,500 - $3,000/mes", "salary_usd": "$75,000 - $135,000/año", "difficulty": "Accesible"},
+                    {"title": "Productor de Programas EdTech", "match_percentage": 91, "why_fits": "Creación de academias modernas y plataformas de aprendizaje continuo", "salary_local": "$1,400 - $2,800/mes", "salary_usd": "$70,000 - $125,000/año", "difficulty": "Accesible"}
+                ],
+                "recommended_faculties_and_universities": ["Relaciones Internacionales y Diplomacia", "Comercio Internacional y Marketing", "Programas Erasmus+"],
+                "immediate_next_steps": ["Dominar técnicas avanzadas de oratoria y negociación persuasiva", "Obtener certificación internacional en idiomas", "Crear un canal de divulgación profesional especializado"],
+                "next_eduhub_tool": {"name": "AI Language & Roleplay Tutor", "url": "/tools/language-tutor", "reason": "Entrene simulaciones de entrevistas ejecutivas con retroalimentación inmediata"}
+            },
+            "creativity": {
+                "archetype": "Visionario de Entornos Digitales",
+                "superpower": "Capacidad para transformar conceptos complejos en experiencias visuales memorables",
+                "personality_summary": "Posee gran sensibilidad para la estética, la paleta cromática y la usabilidad. Su mayor fortaleza es el diseño innovador.",
+                "top_careers": [
+                    {"title": "Lead UI/UX & Diseñador de Producto", "match_percentage": 99, "why_fits": "Diseño de interfaces digitales utilizadas por millones de usuarios", "salary_local": "$2,000 - $4,200/mes", "salary_usd": "$90,000 - $160,000/año", "difficulty": "Intermedio"},
+                    {"title": "Artista Conceptual y 3D en GameDev", "match_percentage": 95, "why_fits": "Creación de mundos inmersivos y personajes para estudios internacionales", "salary_local": "$1,800 - $3,800/mes", "salary_usd": "$80,000 - $145,000/año", "difficulty": "Avanzado"},
+                    {"title": "Director Creativo de Agencias Digitales", "match_percentage": 92, "why_fits": "Dirección visual y conceptual de marcas y empresas emergentes", "salary_local": "$1,700 - $3,500/mes", "salary_usd": "$80,000 - $140,000/año", "difficulty": "Intermedio"}
+                ],
+                "recommended_faculties_and_universities": ["Facultades de Bellas Artes y Diseño", "Diseño de Medios Interactivos", "Becas de posgrado en Europa"],
+                "immediate_next_steps": ["Diseñar un portafolio de 3 casos reales en Figma y Behance", "Estudiar heurísticas de usabilidad y sistemas de diseño", "Crear una presentación profesional para captación de clientes"],
+                "next_eduhub_tool": {"name": "AI Anti-Plagiarism & Humanizer", "url": "/tools/anti-plagiarism", "reason": "Redacte memorias descriptivas de proyectos de diseño con máximo rigor profesional"}
+            },
+            "business": {
+                "archetype": "Arquitecto de Capital y Startups",
+                "superpower": "Visión estratégica para detectar rentabilidad y escalar modelos de negocio",
+                "personality_summary": "Se orienta firmemente hacia resultados cuantificables. Las métricas de crecimiento y los nuevos lanzamientos potencian su motivación.",
+                "top_careers": [
+                    {"title": "Director de Producto FinTech / Emprendedor", "match_percentage": 98, "why_fits": "Lanzamiento de servicios financieros digitales y plataformas transaccionales", "salary_local": "$2,500 - $5,000/mes", "salary_usd": "$110,000 - $190,000/año", "difficulty": "Intermedio"},
+                    {"title": "Analista de Inversiones & VC Scout", "match_percentage": 94, "why_fits": "Evaluación de startups de alto crecimiento y fondos de capital riesgo", "salary_local": "$2,200 - $4,200/mes", "salary_usd": "$95,000 - $170,000/año", "difficulty": "Avanzado"},
+                    {"title": "Director de Operaciones E-Commerce", "match_percentage": 91, "why_fits": "Escalabilidad en ventas en marketplaces globales", "salary_local": "$2,000 - $3,800/mes", "salary_usd": "$85,000 - $155,000/año", "difficulty": "Accesible"}
+                ],
+                "recommended_faculties_and_universities": ["Administración de Empresas y Finanzas", "Economía Internacional", "Escuelas de Negocios Internacionales"],
+                "immediate_next_steps": ["Dominar el cálculo de unit economics y estados de resultados (P&L)", "Lanzar un prototipo comercial o proyecto piloto", "Desarrollar modelos financieros avanzados en Excel"],
+                "next_eduhub_tool": {"name": "Citation & Bibliography Formatter", "url": "/tools/citation-generator", "reason": "Garantice un formato intachable al redactar planes de negocio y solicitudes de inversión"}
+            },
+            "science": {
+                "archetype": "Pionero Científico y Biotecnológico",
+                "superpower": "Compromiso constante con la investigación empírica y la resolución de problemas globales",
+                "personality_summary": "Es metódico, riguroso y busca aportar soluciones concretas mediante la evidencia científica contrastada.",
+                "top_careers": [
+                    {"title": "Científico de Datos Genómicos & Bioinformático", "match_percentage": 99, "why_fits": "Convergencia de biología molecular, analítica avanzada y medicina de precisión", "salary_local": "$2,200 - $4,500/mes", "salary_usd": "$95,000 - $165,000/año", "difficulty": "Avanzado"},
+                    {"title": "Farmacólogo Clínico e Investigador Biotecnológico", "match_percentage": 94, "why_fits": "Diseño de nuevas terapias y ensayos farmacológicos", "salary_local": "$1,900 - $3,800/mes", "salary_usd": "$85,000 - $150,000/año", "difficulty": "Avanzado"},
+                    {"title": "Científico de Datos en Energías Renovables", "match_percentage": 90, "why_fits": "Optimización de modelos climáticos y eficiencia energética", "salary_local": "$1,700 - $3,400/mes", "salary_usd": "$75,000 - $135,000/año", "difficulty": "Intermedio"}
+                ],
+                "recommended_faculties_and_universities": ["Facultades de Ciencias Médicas y Biológicas", "Química e Ingeniería Bioquímica", "Becas de investigación DAAD / MEXT"],
+                "immediate_next_steps": ["Potenciar el inglés científico para la redacción de artículos indexados", "Aprender Python y R para análisis bioestadístico", "Presentar un trabajo de investigación en congresos académicos"],
+                "next_eduhub_tool": {"name": "PDF & Research Summarizer", "url": "/tools/pdf-summarizer", "reason": "Sintetice monografías y literatura especializada en minutos"}
+            }
+        }
+    else:
+        matrix = {
+            "logic": {
+                "archetype": "Архитектор Цифровых Систем",
+                "superpower": "Умение видеть скрытые закономерности в сложных массивах данных",
+                "personality_summary": "Ваш ум аналитичен и структурирован. Вы чувствуете себя уверенно там, где есть логика, правила и возможность автоматизировать рутину.",
+                "top_careers": [
+                    {"title": "Product Analyst / AI Solutions Architect", "match_percentage": 98, "why_fits": "Идеальный баланс математики, технологий и создания новых продуктов", "salary_local": "18 000 000 - 40 000 000 сум", "salary_usd": "$2,200 - $4,500/мес", "difficulty": "Средний"},
+                    {"title": "Инженер по кибербезопасности & Cloud", "match_percentage": 93, "why_fits": "Высочайший международный спрос и полная защита от кризисов", "salary_local": "15 000 000 - 35 000 000 сум", "salary_usd": "$2,000 - $4,000/мес", "difficulty": "Высокий"},
+                    {"title": "Full-Stack разработчик систем", "match_percentage": 90, "why_fits": "Свобода удаленной работы на весь мир из дома", "salary_local": "12 000 000 - 30 000 000 сум", "salary_usd": "$1,800 - $3,500/мес", "difficulty": "Средний"}
+                ],
+                "recommended_faculties_and_universities": ["WIUT (Вестминстер) — Computer Science / BIS", "INHA Ташкент — Software Engineering", "ТУИТ — Кибербезопасность", "Гранты в Германии и Корее (KAIST)"],
+                "immediate_next_steps": ["Подтянуть академический английский до IELTS 6.5–7.0", "Пройти базовый курс по архитектуре данных и SQL", "Собрать первый проект в портфолио на GitHub"],
+                "next_eduhub_tool": {"name": "IELTS Exam Grader", "url": "/tools/essay-grader", "reason": "Для выхода на $2,500+ критически необходим сертификат IELTS 7.0+"}
+            },
+            "people": {
+                "archetype": "Стратег Международных Переговоров",
+                "superpower": "Природная эмпатия и способность объединять разных людей вокруг общей цели",
+                "personality_summary": "Вы черпаете силы в живом взаимодействии. Люди интуитивно доверяют вам, а ваши идеи находят быстрый отклик в коллективе.",
+                "top_careers": [
+                    {"title": "Международный бренд-директор & PR-стратег", "match_percentage": 97, "why_fits": "Управление репутацией глобальных брендов и масштабные медиа-проекты", "salary_local": "14 000 000 - 32 000 000 сум", "salary_usd": "$1,800 - $3,200/мес", "difficulty": "Средний"},
+                    {"title": "HR-директор & Headhunter талантов", "match_percentage": 94, "why_fits": "Построение сильных международных команд в технологических компаниях", "salary_local": "12 000 000 - 28 000 000 сум", "salary_usd": "$1,500 - $3,000/мес", "difficulty": "Доступный"},
+                    {"title": "Продюсер EdTech & Образовательных программ", "match_percentage": 91, "why_fits": "Создание современных обучающих экосистем и академий", "salary_local": "10 000 000 - 25 000 000 сум", "salary_usd": "$1,400 - $2,800/мес", "difficulty": "Доступный"}
+                ],
+                "recommended_faculties_and_universities": ["УМЭД (Дипломатический университет)", "MDIST — Международный бизнес и маркетинг", "Филиал МГУ / СПбГУ", "Программы обмена Erasmus+"],
+                "immediate_next_steps": ["Освоить техники ораторского мастерства и публичных выступлений", "Сдать IELTS на Band 7.5 для международных стажировок", "Начать вести свой экспертный Telegram-канал"],
+                "next_eduhub_tool": {"name": "AI Language & Roleplay Tutor", "url": "/tools/language-tutor", "reason": "Отработайте переговоры и интервью с живым ИИ-собеседником"}
+            },
+            "creativity": {
+                "archetype": "Визионер Цифровых Миров",
+                "superpower": "Способность превращать хаотичные смыслы в элегантный, вовлекающий визуал",
+                "personality_summary": "Вы чувствуете гармонию форм, цветов и пользовательских сценариев. Вам тесно в строгих регламентах, ваша сила — инновационный дизайн.",
+                "top_careers": [
+                    {"title": "Lead UI/UX & Product Designer", "match_percentage": 99, "why_fits": "Создание интерфейсов, которыми ежедневно пользуются миллионы людей", "salary_local": "15 000 000 - 35 000 000 сум", "salary_usd": "$2,000 - $4,200/мес", "difficulty": "Средний"},
+                    {"title": "3D & Concept Artist в GameDev", "match_percentage": 95, "why_fits": "Проектирование персонажей и игровых локаций для мировых студий", "salary_local": "12 000 000 - 30 000 000 сум", "salary_usd": "$1,800 - $3,800/мес", "difficulty": "Высокий"},
+                    {"title": "Креативный директор цифровых агентств", "match_percentage": 92, "why_fits": "Руководство визуальной эстетикой стартапов и брендов", "salary_local": "14 000 000 - 32 000 000 сум", "salary_usd": "$1,700 - $3,500/мес", "difficulty": "Средний"}
+                ],
+                "recommended_faculties_and_universities": ["Институт искусств и дизайна", "WIUT — Interactive Media Design", "Онлайн-академии школы дизайна (Bang Bang / British Higher School)", "Европейские гранты в Италии и Чехии"],
+                "immediate_next_steps": ["Собрать портфолио из 3 сильных кейсов в Figma / Behance", "Изучить основы дизайн-систем и психологии пользователей", "Оформить визитку для международных клиентов"],
+                "next_eduhub_tool": {"name": "AI Anti-Plagiarism & Humanizer", "url": "/tools/anti-plagiarism", "reason": "Для идеального описания своих дизайн-концепций и эссе"}
+            },
+            "business": {
+                "archetype": "Архитектор Капитала & Стартапов",
+                "superpower": "Интуитивное видение прибыли и умение масштабировать процессы",
+                "personality_summary": "Вы ориентированы на измеримый результат. Вас вдохновляют растущие графики, стратегические сделки и запуск масштабных проектов.",
+                "top_careers": [
+                    {"title": "FinTech Product Manager / Предприниматель", "match_percentage": 98, "why_fits": "Запуск цифровых сервисов, платежных шлюзов и онлайн-банков", "salary_local": "20 000 000 - 50 000 000 сум", "salary_usd": "$2,500 - $5,000/мес", "difficulty": "Средний"},
+                    {"title": "Инвестиционный аналитик & VC Scout", "match_percentage": 94, "why_fits": "Оценка перспективных стартапов и управление венчурными фондами", "salary_local": "16 000 000 - 38 000 000 сум", "salary_usd": "$2,200 - $4,200/мес", "difficulty": "Высокий"},
+                    {"title": "E-Commerce & Digital Commerce Director", "match_percentage": 91, "why_fits": "Управление продажами на глобальных маркетплейсах (Amazon, Uzum, Wildberries)", "salary_local": "15 000 000 - 35 000 000 сум", "salary_usd": "$2,000 - $3,800/мес", "difficulty": "Доступный"}
+                ],
+                "recommended_faculties_and_universities": ["WIUT — Business Administration / Finance", "ТГЭУ (Нархоз) — Международная экономика", "Сингапурский институт (MDIST)", "Бизнес-школы Европы и Сингапура (INSEAD, NUS)"],
+                "immediate_next_steps": ["Изучить основы unit-экономики и анализа P&L отчётов", "Запустить первый микро-бизнес проект или продажу софта", "Освоить финансовое моделирование в Excel"],
+                "next_eduhub_tool": {"name": "Citation & Bibliography Formatter", "url": "/tools/citation-generator", "reason": "Для безупречного оформления инвестиционных отчетов и бизнес-планов"}
+            },
+            "science": {
+                "archetype": "Исследователь Будущего & Био-Технологий",
+                "superpower": "Неутолимая тяга к открытиям и фундаментальному пониманию природы вещей",
+                "personality_summary": "Вы скрупулезны, методичны и стремитесь делать мир здоровее и совершеннее через призму доказательной науки.",
+                "top_careers": [
+                    {"title": "Биоинформатик & Аналитик геномных данных", "match_percentage": 99, "why_fits": "Стык биологии, IT и медицины — самая быстрорастущая область десятилетия", "salary_local": "16 000 000 - 36 000 000 сум", "salary_usd": "$2,200 - $4,500/мес", "difficulty": "Высокий"},
+                    {"title": "Клинический фармаколог & Исследователь биотеха", "match_percentage": 94, "why_fits": "Разработка новых лекарственных препаратов и генной терапии", "salary_local": "14 000 000 - 30 000 000 сум", "salary_usd": "$1,900 - $3,800/мес", "difficulty": "Высокий"},
+                    {"title": "Data Scientist в сфере экологии и зеленой энергетики", "match_percentage": 90, "why_fits": "Моделирование климата, оптимизация возобновляемых источников энергии", "salary_local": "12 000 000 - 28 000 000 сум", "salary_usd": "$1,700 - $3,400/мес", "difficulty": "Средний"}
+                ],
+                "recommended_faculties_and_universities": ["Ташкентская медицинская академия (ТМА)", "Национальный университет Узбекистана (НУУз) — Биология/Химия", "Филиал РХТУ им. Менделеева", "Гранты в Японии (MEXT) и Германии (DAAD)"],
+                "immediate_next_steps": ["Подтянуть английский язык для чтения научных статей в Nature и PubMed", "Освоить базовый Python для статистической обработки данных", "Подготовить научную статью для студенческой конференции"],
+                "next_eduhub_tool": {"name": "PDF & Research Summarizer", "url": "/tools/pdf-summarizer", "reason": "Для моментального анализа 100-страничных научных монографий"}
+            }
+        }
     profile = matrix.get(payload.energy_type, matrix["logic"])
-    return {
+    top_careers = profile["top_careers"]
+    res_dict = {
         "status": "success",
         "archetype": profile["archetype"],
         "superpower": profile["superpower"],
         "personality_summary": profile["personality_summary"],
-        "top_careers": profile["top_careers"],
+        "top_careers": top_careers,
+        "top_professions": [
+            {
+                "title": c.get("title", "Specialist"),
+                "match_percent": c.get("match_percentage", 95),
+                "match_percentage": c.get("match_percentage", 95),
+                "why_fit": c.get("why_fits", ""),
+                "why_fits": c.get("why_fits", ""),
+                "salary_range_usd": c.get("salary_usd", "$2,000 - $4,000/mo"),
+                "salary_usd": c.get("salary_usd", "$2,000 - $4,000/mo"),
+                "salary_local": c.get("salary_local", ""),
+                "difficulty": c.get("difficulty", "Intermediate"),
+                "key_skills": ["Critical Thinking", "Architecture", "Strategic Execution"]
+            } for c in top_careers
+        ],
         "recommended_faculties_and_universities": profile["recommended_faculties_and_universities"],
+        "recommended_universities": [
+            {
+                "name": u if isinstance(u, str) else u.get("name", "International University"),
+                "faculty": "Faculty of Advanced Studies",
+                "grant_type": "Merit / International Grant"
+            } for u in profile["recommended_faculties_and_universities"]
+        ],
         "immediate_next_steps": profile["immediate_next_steps"],
+        "next_steps": profile["immediate_next_steps"],
         "next_eduhub_tool": profile["next_eduhub_tool"]
     }
+    res_dict["result"] = dict(res_dict)
+    return res_dict
 
 @app.post("/api/v1/career/orientate", tags=["Career Guidance"])
 async def orientate_career(payload: CareerOrientateRequest, request: Request):
@@ -4761,9 +5541,37 @@ async def orientate_career(payload: CareerOrientateRequest, request: Request):
         )
         data = json.loads(response.text.strip())
         data["status"] = "success"
+        if "top_professions" not in data and "top_careers" in data:
+            data["top_professions"] = [
+                {
+                    "title": c.get("title", ""),
+                    "match_percent": c.get("match_percentage", 95),
+                    "match_percentage": c.get("match_percentage", 95),
+                    "why_fit": c.get("why_fits", ""),
+                    "why_fits": c.get("why_fits", ""),
+                    "salary_range_usd": c.get("salary_usd", "$2,000 - $4,000/mo"),
+                    "salary_usd": c.get("salary_usd", "$2,000 - $4,000/mo"),
+                    "salary_local": c.get("salary_local", ""),
+                    "difficulty": c.get("difficulty", "Intermediate"),
+                    "key_skills": ["Problem Solving", "Strategy", "Execution"]
+                } for c in data["top_careers"]
+            ]
+        if "next_steps" not in data and "immediate_next_steps" in data:
+            data["next_steps"] = data["immediate_next_steps"]
+        if "recommended_universities" not in data and "recommended_faculties_and_universities" in data:
+            data["recommended_universities"] = [
+                {"name": u, "faculty": "Faculty of Advanced Studies", "grant_type": "Merit / International Grant"} if isinstance(u, str) else u
+                for u in data["recommended_faculties_and_universities"]
+            ]
+        data["result"] = dict(data)
+        if "uz" in (payload.language or "uz").lower():
+            data = sanitize_uzbek_content(data)
         return data
     except Exception as e:
-        return get_fallback_career_profile(payload)
+        fallback = get_fallback_career_profile(payload)
+        if "uz" in (payload.language or "uz").lower():
+            fallback = sanitize_uzbek_content(fallback)
+        return fallback
 
 
 # --------------------------------------------------------------------------
@@ -4802,8 +5610,10 @@ def get_fallback_ats_analysis(payload: ATSResumeRequest) -> Dict[str, Any]:
         verdict = "Хорошее соответствие" if score >= 70 else "Требуется оптимизация ключевых слов"
     elif payload.language == "uz":
         verdict = "Yaxshi moslik" if score >= 70 else "Kalit so'zlarni optimallashtirish zarur"
+    elif payload.language == "es":
+        verdict = "Buena coincidencia" if score >= 70 else "Se requiere optimización de palabras clave"
 
-    return {
+    res_data = {
         "status": "success",
         "ats_score": score,
         "match_verdict": verdict,
@@ -4831,6 +5641,8 @@ def get_fallback_ats_analysis(payload: ATSResumeRequest) -> Dict[str, Any]:
             "Incorporate exact terminology from the job description naturally into bullet points."
         ]
     }
+    res_data["result"] = dict(res_data)
+    return res_data
 
 
 @app.post("/api/v1/career/ats-tailor", tags=["Career & ATS Resume"])
@@ -4842,7 +5654,13 @@ async def tailor_ats_resume(payload: ATSResumeRequest, request: Request):
     и генерирует адаптированное резюме под ATS фильтры (Workday, Taleo, Greenhouse).
     """
     check_content_safety(payload.resume_text + " " + payload.job_description)
+    target_lang = (payload.language or "en").lower()
     client = get_genai_client()
+    if not client:
+        fallback = get_fallback_ats_analysis(payload)
+        if "uz" in target_lang:
+            fallback = sanitize_uzbek_content(fallback)
+        return fallback
     
     system_prompt = (
         "You are an Elite Senior Recruiter and Lead ATS Architect specializing in Workday, Taleo, and Greenhouse algorithms.\n"
@@ -4889,9 +5707,16 @@ async def tailor_ats_resume(payload: ATSResumeRequest, request: Request):
         )
         data = json.loads(response.text.strip())
         data["status"] = "success"
+        if "result" not in data:
+            data["result"] = dict(data)
+        if "uz" in target_lang:
+            data = sanitize_uzbek_content(data)
         return data
     except Exception as e:
-        return get_fallback_ats_analysis(payload)
+        fallback = get_fallback_ats_analysis(payload)
+        if "uz" in target_lang:
+            fallback = sanitize_uzbek_content(fallback)
+        return fallback
 
 
 # --------------------------------------------------------------------------
@@ -5087,6 +5912,7 @@ class MarketplaceLabRequest(BaseModel):
     cost_price: Optional[float] = Field(10.0, description="Себестоимость закупки ($)")
     selling_price: Optional[float] = Field(25.0, description="Планируемая розничная цена ($)")
     key_features: Optional[str] = Field("", description="Ключевые свойства или отличия")
+    language: Optional[str] = Field("uz", description="Целевой язык: uz, ru, en, es")
 
 
 class SOPBuilderRequest(BaseModel):
@@ -5097,12 +5923,13 @@ class SOPBuilderRequest(BaseModel):
     grant_program: Optional[str] = Field("El-Yurt Umidi / Full Scholarship", description="Стипендиальная программа")
     background_experience: str = Field(..., description="Текущий бэкграунд, опыт или оценки")
     career_vision: str = Field(..., description="Карьерные цели после выпуска")
+    language: Optional[str] = Field("en", description="Target language: en, uz, ru, es")
 
 
 class ExcelWizardRequest(BaseModel):
     query: str = Field(..., description="Описание задачи обычным языком")
     app_type: Optional[str] = Field("Excel", description="Excel или Google Sheets")
-    language: Optional[str] = Field("Russian", description="Язык интерфейса формул")
+    language: Optional[str] = Field("uz", description="Язык интерфейса формул и пояснений: uz, ru, en, es")
 
 
 def get_fallback_marketplace_lab(p: MarketplaceLabRequest) -> dict:
@@ -5114,30 +5941,124 @@ def get_fallback_marketplace_lab(p: MarketplaceLabRequest) -> dict:
     net_profit = round(s_price - c_price - comm_val - logistics, 2)
     margin_pct = round((net_profit / s_price) * 100, 1) if s_price > 0 else 0.0
 
-    return {
-        "status": "success",
-        "product_name": p.product_name,
-        "marketplace": p.marketplace,
-        "seo_title": f"{p.product_name} премиум качество, оригинальный стильный дизайн, хит продаж, быстрая доставка 1 день",
-        "selling_bullets": [
+    target_lang = (getattr(p, "language", None) or "uz").lower()
+    is_uz = "uz" in target_lang
+    is_es = "es" in target_lang
+    is_en = "en" in target_lang
+
+    if is_uz:
+        seo_title = f"{p.product_name} yuqori sifat, original zamonaviy dizayn, eng xaridorgir tovar, 1 kunda tezkor yetkazish"
+        selling_bullets = [
+            f"💎 [YUQORI STANDART] A+ toifadagi chidamli materiallardan tayyorlangan — uzoq yillar xizmat qiladi va sifatini yo'qotmaydi.",
+            f"⚡ [QULAYLIK VA ERGONOMIKA] O'ylangan ergonomik tuzilishi tufayli {p.product_name} dastlabki soniyalardanoq maksimal qulaylik yaratadi.",
+            f"🎁 [AJOYIB SOVG'A] Zamonaviy taqdimot qadoqlanishi — yaqinlar va do'stlar uchun tayyor ajoyib tuhfa.",
+            f"🛡️ [UCH BOSQICHLI NAZORAT] Har bir tovar omborga yuborilishidan oldin qo'lda sinchkovlik bilan tekshiruvdan o'tkaziladi.",
+            f"🚀 [TEZKOR YETKAZISH] Buyurtmangizni ertagayoq yaqin atrofdagi tarqatish punktidan bepul ko'rib qabul qiling!"
+        ]
+        lsi_keywords = [
+            f"{p.product_name} sotib olish", "yangi to'plam 2026", "uzum chegirma", "tezkor yetkazib berish",
+            "original kafolat", "xaridorlar fikrlari"
+        ]
+        description = (
+            f"Nafis ko'rinish, yuqori chidamlilik va amaliy qulaylikni birlashtirgan mukammal {p.product_name} qidiryapsizmi? "
+            f"Ushbu mahsulot murosasiz sifat va go'zallikni qadrlaydiganlar uchun maxsus loyihalashtirilgan. "
+            f"Zamonaviy ekologik toza va chidamli materiallardan foydalanilgani sababli uzoq vaqt yangidek saqlanadi. "
+            f"To'plamda to'liq kerakli jihozlar va qo'llanma mavjud. "
+            f"Hoziroq buyurtma bering va yangi qulaylik darajasini ertagayoq his eting!"
+        )
+        objection_faq = [
+            {
+                "question": "Sifati yoki o'lchami mos kelmasa-chi?",
+                "answer": "Siz mahsulotni tarqatish punktining o'zidayoq ochib ko'rishingiz va yoqmasa hech qanday to'lovsiz qaytarishingiz mumkin."
+            },
+            {
+                "question": "Rasmiy kafolat taqdim etiladimi?",
+                "answer": "Ha, ushbu tovar uchun ishlab chiqaruvchi tomonidan 6 oylik rasmiy kafolat beriladi."
+            }
+        ]
+        recommendation = f"Foyda marjasi {margin_pct}% — ajoyib ko'rsatkich. O'rtacha xarid chekini oshirish uchun to'plamga mos aksessuar qo'shishni tavsiya qilamiz."
+    elif is_en:
+        seo_title = f"{p.product_name} Premium Quality, Modern Ergonomic Design, Bestseller, 1-Day Fast Delivery"
+        selling_bullets = [
+            f"💎 [PREMIUM STANDARD] Crafted from A+ grade wear-resistant materials ensuring durability and superior feel.",
+            f"⚡ [ERGONOMIC COMFORT] Thoughtful design ensures intuitive, frictionless ease of use from day one.",
+            f"🎁 [PERFECT GIFT] Delivered in premium branded gift-ready packaging with zero extra hassle.",
+            f"🛡️ [TRIPLE INSPECTION] Every single unit undergoes rigorous manual pre-dispatch quality verification.",
+            f"🚀 [EXPRESS FULFILLMENT] Pick up tomorrow at your nearest distribution point with hassle-free inspection!"
+        ]
+        lsi_keywords = [
+            f"buy {p.product_name}", "new release 2026", "marketplace discount", "fast delivery",
+            "genuine warranty", "customer reviews"
+        ]
+        description = (
+            f"Looking for the perfect {p.product_name} combining refined aesthetics, ultimate reliability, and everyday utility? "
+            f"This model was engineered specifically for those who demand uncompromising quality. "
+            f"Premium eco-resilient materials ensure long-lasting elegance under daily use. "
+            f"Comes with full documentation and necessary components. "
+            f"Order right now to experience a new standard of comfort tomorrow!"
+        )
+        objection_faq = [
+            {
+                "question": "What if the color or size isn't right?",
+                "answer": "Inspect the item at the pickup point; you can decline instantly with an automatic 100% refund."
+            },
+            {
+                "question": "Is there an official warranty included?",
+                "answer": "Yes, covered by a 6-month manufacturer warranty."
+            }
+        ]
+        recommendation = f"Net margin of {margin_pct}% is strong. Bundle complementary accessories to boost Average Order Value (AOV)."
+    elif is_es:
+        seo_title = f"{p.product_name} Calidad Premium, Diseño Ergonómico Moderno, Bestseller, Entrega Rápida 24h"
+        selling_bullets = [
+            f"💎 [ESTÁNDAR SUPERIOR] Fabricado con materiales resistentes de categoría A+ para una durabilidad insuperable.",
+            f"⚡ [CONFORT ERGONÓMICO] Estructura optimizada para un uso intuitivo y cómodo desde el primer momento.",
+            f"🎁 [REGALO IDEAL] Presentación elegante en empaque de regalo listo para sorprender.",
+            f"🛡️ [TRIPLE CONTROL] Cada unidad pasa una minuciosa inspección de calidad antes de su envío.",
+            f"🚀 [ENTREGA URGENTE] Recíbalo mañana en su punto de recogida más cercano con devolución garantizada!"
+        ]
+        lsi_keywords = [
+            f"comprar {p.product_name}", "novedad 2026", "descuento marketplace", "envío rápido",
+            "garantía original", "opiniones de clientes"
+        ]
+        description = (
+            f"¿Busca el {p.product_name} perfecto que combine estética refinada, máxima durabilidad y conveniencia diaria? "
+            f"Este modelo ha sido diseñado para quienes exigen calidad sin concesiones. "
+            f"Materiales ecológicos y resistentes aseguran un aspecto impecable incluso con uso intensivo continuo. "
+            f"Incluye todos los accesorios e instrucciones. ¡Ordene hoy y disfrute mañana de un confort de primer nivel!"
+        )
+        objection_faq = [
+            {
+                "question": "¿Qué ocurre si no coincide el color o tamaño?",
+                "answer": "Puede verificar el producto al recibirlo y devolverlo sin coste alguno."
+            },
+            {
+                "question": "¿Cuenta con garantía oficial?",
+                "answer": "Sí, incluye 6 meses de garantía oficial directa del fabricante."
+            }
+        ]
+        recommendation = f"Margen neto del {margin_pct}% es excelente. Añada un accesorio en paquete para incrementar el ticket medio."
+    else:
+        seo_title = f"{p.product_name} премиум качество, оригинальный стильный дизайн, хит продаж, быстрая доставка 1 день"
+        selling_bullets = [
             f"💎 [ВЫСШИЙ СТАНДАРТ] Изготовлено из износостойких компонентов категории А+ — гарантирует долговечность.",
             f"⚡ [ЭРГОНОМИКА И УДОБСТВО] Продуманная конструкция делает использование {p.product_name} интуитивным с первых секунд.",
             f"🎁 [ИДЕАЛЬНЫЙ ПОДАРОК] Фирменная презентабельная упаковка — готовый подарок без лишних трат.",
             f"🛡️ [ТРОЙНОЙ КОНТРОЛЬ] Каждый экземпляр проходит ручную предпродажную проверку перед отправкой на склад.",
             f"🚀 [ЭКСПРЕСС-ДОСТАВКА] Заберите заказ уже завтра в ближайшем пункте выдачи с возможностью бесплатной примерки!"
-        ],
-        "lsi_keywords": [
+        ]
+        lsi_keywords = [
             f"{p.product_name} купить", "новинка 2026", "скидка на маркетплейсе", "быстрая доставка Ташкент",
             "оригинал гарантия", "отзывы покупателей"
-        ],
-        "description": (
+        ]
+        description = (
             f"Ищете идеальный {p.product_name}, который сочетает в себе эстетику, максимальную надежность и практичность? "
             f"Данная модель разработана специально для тех, кто ценит бескомпромиссное качество. "
             f"Благодаря использованию современных эко-материалов, изделие сохраняет первозданный вид даже при интенсивном ежедневном использовании. "
             f"В комплекте предусмотрена вся необходимая комплектация и инструкция. "
             f"Заказывайте прямо сейчас и оцените новый уровень комфорта уже завтра!"
-        ),
-        "objection_faq": [
+        )
+        objection_faq = [
             {
                 "question": "Сомневаетесь в качестве или цвете?",
                 "answer": "Вы можете вскрыть и проверить товар прямо в пункте выдачи и отказаться без списания средств."
@@ -5146,7 +6067,18 @@ def get_fallback_marketplace_lab(p: MarketplaceLabRequest) -> dict:
                 "question": "Предоставляется ли официальная гарантия?",
                 "answer": "Да, на данный товар действует расширенная гарантия 6 месяцев от производителя."
             }
-        ],
+        ]
+        recommendation = f"Маржинальность {margin_pct}% — отличный показатель. Для роста среднего чека добавьте комплектный аксессуар."
+
+    return {
+        "status": "success",
+        "product_name": p.product_name,
+        "marketplace": p.marketplace,
+        "seo_title": seo_title,
+        "selling_bullets": selling_bullets,
+        "lsi_keywords": lsi_keywords,
+        "description": description,
+        "objection_faq": objection_faq,
         "unit_economics": {
             "cost_price": c_price,
             "selling_price": s_price,
@@ -5155,12 +6087,46 @@ def get_fallback_marketplace_lab(p: MarketplaceLabRequest) -> dict:
             "net_profit": net_profit,
             "margin_percentage": margin_pct,
             "roi_percentage": round((net_profit / c_price) * 100, 1) if c_price > 0 else 0.0,
-            "recommendation": f"Маржинальность {margin_pct}% — отличный показатель. Для роста среднего чека добавьте комплектный аксессуар."
+            "recommendation": recommendation
         }
     }
 
 
 def get_fallback_sop_builder(p: SOPBuilderRequest) -> dict:
+    target_lang = (getattr(p, "language", None) or "en").lower()
+    is_uz = "uz" in target_lang
+    is_es = "es" in target_lang
+    is_ru = "ru" in target_lang
+
+    if is_uz:
+        mentor_tips = [
+            "Ikkinchi paragrafda maqsadli universitetdagi taniqli professor yoki laboratoriya nomini aniq keltiring.",
+            "El-yurt umidi jamg'armasi uchun mamlakatga qaytish va milliy iqtisodiyotni rivojlantirishga urg'u bering.",
+            "Inshoda ketma-ket 2 tadan ortiq gapni 'Men' olmoshi bilan boshlamaslikka e'tibor qarating."
+        ]
+        competitiveness = "Nomzodlarning eng yuqori 3% qatlami"
+    elif is_es:
+        mentor_tips = [
+            "Destaque el nombre de un docente o grupo de investigación relevante en el segundo párrafo.",
+            "Enfatice el impacto que su investigación generará tras su regreso al país de origen.",
+            "Evite iniciar más de dos frases consecutivas con el pronombre en primera persona."
+        ]
+        competitiveness = "Top 3% de Candidatos"
+    elif is_ru:
+        mentor_tips = [
+            "Подчеркните конкретное имя профессора или лаборатории целевого вуза во втором абзаце.",
+            "Для гранта El-Yurt Umidi сделайте акцент на возвращении в страну и развитии индустрии.",
+            "Проверьте эссе на отсутствие местоимения 'I' в начале более чем 2 предложений подряд."
+        ]
+        competitiveness = "Топ-3% всех заявителей"
+    else:
+        mentor_tips = [
+            "Name-drop a specific faculty member or research lab at the target institution in paragraph two.",
+            "Highlight post-graduation impact and how you will reinvest your knowledge into your home country/industry.",
+            "Avoid starting more than two consecutive sentences with 'I' to preserve academic variety."
+        ]
+        competitiveness = "Top 3% of Applicants"
+
     return {
         "status": "success",
         "title": f"Statement of Purpose — {p.target_major} ({p.target_university})",
@@ -5197,52 +6163,197 @@ def get_fallback_sop_builder(p: SOPBuilderRequest) -> dict:
             "academic_voice": "9.5 / 10 (Ivy League Caliber)",
             "narrative_cohesion": "9.0 / 10",
             "institutional_alignment": "9.5 / 10",
-            "overall_competitiveness": "Top 3% of Applicants"
+            "overall_competitiveness": competitiveness
         },
-        "mentor_tips": [
-            "Подчеркните конкретное имя профессора или лаборатории целевого вуза во втором абзаце.",
-            "Для гранта El-Yurt Umidi сделайте акцент на возвращении в страну и развитии индустрии.",
-            "Проверьте эссе на отсутствие местоимения 'I' в начале более чем 2 предложений подряд."
-        ]
+        "mentor_tips": mentor_tips
     }
 
 
 def get_fallback_excel_wizard(p: ExcelWizardRequest) -> dict:
     q_lower = p.query.lower()
-    if "впр" in q_lower or "vlookup" in q_lower or "поиск" in q_lower:
+    target_lang = (getattr(p, "language", None) or "uz").lower()
+    is_uz = "uz" in target_lang
+    is_es = "es" in target_lang
+    is_en = "en" in target_lang
+
+    if "впр" in q_lower or "vlookup" in q_lower or "поиск" in q_lower or "qidir" in q_lower:
         formula = '=XLOOKUP(A2, Table2[ID], Table2[Name], "Не найдено", 0)'
-        explanation = [
-            "A2 — искомое значение (например, артикул или ID сотрудника).",
-            "Table2[ID] — диапазон, в котором мы ищем совпадение.",
-            "Table2[Name] — диапазон, из которого нужно вернуть результат.",
-            '"Не найдено" — значение по умолчанию, если совпадение отсутствует (заменяет ошибку #Н/Д).',
-            "0 — точное совпадение."
-        ]
         macro = """Sub FastLookup()
   Range("B2:B100").Formula2 = "=XLOOKUP(A2, Table2[ID], Table2[Name], ""Not Found"", 0)"
 End Sub"""
-    elif "сум" in q_lower or "услови" in q_lower or "счет" in q_lower:
+        if is_uz:
+            formula = '=XLOOKUP(A2, Table2[ID], Table2[Name], "Topilmadi", 0)'
+            explanation = [
+                "A2 — qidirilayotgan qiymat (masalan, xodim IDsi yoki tovar kodi).",
+                "Table2[ID] — moslik qidiriladigan ustun yoki diapazon.",
+                "Table2[Name] — mos kelgan holda natija qaytariladigan ustun.",
+                '"Topilmadi" — moslik topilmaganda qaytariladigan standart matn (#N/A xatosi o\'rniga).',
+                "0 — to'liq aniq moslik rejimi."
+            ]
+            common_pitfalls = [
+                "Diapazonlar uzunligi teng bo'lishini tekshiring (masalan, A2:A100 va C2:C100).",
+                "Excel mintaqaviy sozlamasiga ko'ra ajratuvchi nuqtali vergul (;) yoki vergul (,) bo'lishi mumkin.",
+                "Raqamlar va sanalar matn (text) ko'rinishida saqlanmaganiga ishonch hosil qiling."
+            ]
+            shortcut = "Enter (Excel 365 / Google Sheets) yoki Ctrl + Shift + Enter"
+        elif is_en:
+            formula = '=XLOOKUP(A2, Table2[ID], Table2[Name], "Not Found", 0)'
+            explanation = [
+                "A2 — lookup value (e.g. employee ID or SKU).",
+                "Table2[ID] — array to search for matching value.",
+                "Table2[Name] — return array from which to retrieve result.",
+                '"Not Found" — fallback value if no match is found (avoids #N/A).',
+                "0 — exact match mode."
+            ]
+            common_pitfalls = [
+                "Ensure search and return ranges have identical dimensions (e.g., A2:A100 and C2:C100).",
+                "Verify regional formula delimiters: comma (,) vs semicolon (;).",
+                "Ensure numeric lookup values are not formatted as text strings."
+            ]
+            shortcut = "Enter (Excel 365) or Ctrl + Shift + Enter (Legacy)"
+        elif is_es:
+            formula = '=BUSCARX(A2, Table2[ID], Table2[Name], "No encontrado", 0)'
+            explanation = [
+                "A2 — valor buscado (ej. código o ID de empleado).",
+                "Table2[ID] — matriz donde se realiza la búsqueda.",
+                "Table2[Name] — matriz devuelta con el resultado deseado.",
+                '"No encontrado" — valor por defecto si no hay coincidencia.',
+                "0 — modo de coincidencia exacta."
+            ]
+            common_pitfalls = [
+                "Compruebe que los rangos tengan la misma longitud (ej. A2:A100 y C2:C100).",
+                "En versiones en español el separador suele ser punto y coma (;).",
+                "Compruebe que los números no estén almacenados como texto."
+            ]
+            shortcut = "Enter (Excel 365) o Ctrl + Mayús + Enter"
+        else:
+            explanation = [
+                "A2 — искомое значение (например, артикул или ID сотрудника).",
+                "Table2[ID] — диапазон, в котором мы ищем совпадение.",
+                "Table2[Name] — диапазон, из которого нужно вернуть результат.",
+                '"Не найдено" — значение по умолчанию, если совпадение отсутствует (заменяет ошибку #Н/Д).',
+                "0 — точное совпадение."
+            ]
+            common_pitfalls = [
+                "Убедитесь, что диапазоны имеют одинаковую длину (например, A2:A100 и C2:C100, а не C2:C50).",
+                "В русской версии Excel разделителем аргументов является точка с запятой (;), а в английской — запятая (,).",
+                "Форматы чисел и дат не должны храниться как текст."
+            ]
+            shortcut = "Ctrl + Shift + Enter (для старых версий) или Enter (Excel 365)"
+    elif "сум" in q_lower or "услови" in q_lower or "счет" in q_lower or "sum" in q_lower or "hisob" in q_lower:
         formula = '=SUMIFS(C:C, A:A, "Оплачено", B:B, ">="&DATE(2026,1,1))'
-        explanation = [
-            "C:C — диапазон суммирования (столбец с суммами).",
-            "A:A, 'Оплачено' — условие 1: статус заказа должен быть равен 'Оплачено'.",
-            "B:B, '>=2026-01-01' — условие 2: дата заказа должна быть не ранее 1 января 2026 года."
-        ]
         macro = """Sub AutoSum()
   Dim total As Double
-  total = Application.WorksheetFunction.SumIfs(Range("C:C"), Range("A:A"), "Оплачено")
-  MsgBox "Итого: " & total
+  total = Application.WorksheetFunction.SumIfs(Range("C:C"), Range("A:A"), "Paid")
+  MsgBox "Total: " & total
 End Sub"""
+        if is_uz:
+            formula = '=SUMIFS(C:C, A:A, "To\'langan", B:B, ">="&DATE(2026,1,1))'
+            explanation = [
+                "C:C — yig'indi hisoblanadigan ustun (summalar diapazoni).",
+                "A:A, 'To\'langan' — 1-shart: buyurtma holati 'To\'langan' bo'lishi kerak.",
+                "B:B, '>=2026-01-01' — 2-shart: sana 2026-yil 1-yanvardan kam bo'lmasligi lozim."
+            ]
+            common_pitfalls = [
+                "Barcha shart ustunlari va yig'indi ustuni bir xil qatorlar oralig'iga ega bo'lishi zarur.",
+                "Sanalarni taqqoslashda DATE(yil, oy, kun) formulasidan foydalanish tavsiya etiladi.",
+                "Matnli shartlar qo'shtirnoq ichiga olinishi shart."
+            ]
+            shortcut = "Enter (Excel 365 / Google Sheets)"
+        elif is_en:
+            formula = '=SUMIFS(C:C, A:A, "Paid", B:B, ">="&DATE(2026,1,1))'
+            explanation = [
+                "C:C — sum range containing numbers to aggregate.",
+                "A:A, 'Paid' — criteria 1: status column must match 'Paid'.",
+                "B:B, '>=2026-01-01' — criteria 2: date must be on or after Jan 1, 2026."
+            ]
+            common_pitfalls = [
+                "All criteria ranges must be identically sized to the sum range.",
+                "Wrap date comparisons with the DATE(year, month, day) construct for safety.",
+                "Text criteria must always be enclosed in double quotes."
+            ]
+            shortcut = "Enter (Excel 365 / Google Sheets)"
+        elif is_es:
+            formula = '=SUMAR.SI.CONJUNTO(C:C, A:A, "Pagado", B:B, ">="&FECHA(2026,1,1))'
+            explanation = [
+                "C:C — rango de suma con valores numéricos.",
+                "A:A, 'Pagado' — criterio 1: el estado debe coincidir con 'Pagado'.",
+                "B:B, '>=2026-01-01' — criterio 2: fecha posterior al 1 de enero de 2026."
+            ]
+            common_pitfalls = [
+                "Todos los rangos deben tener las mismas dimensiones exactas.",
+                "Utilice la función FECHA(año, mes, día) para evitar inconsistencias de formato.",
+                "Los criterios de texto deben ir entre comillas dobles."
+            ]
+            shortcut = "Enter (Excel 365 / Google Sheets)"
+        else:
+            explanation = [
+                "C:C — диапазон суммирования (столбец с суммами).",
+                "A:A, 'Оплачено' — условие 1: статус заказа должен быть равен 'Оплачено'.",
+                "B:B, '>=2026-01-01' — условие 2: дата заказа должна быть не ранее 1 января 2026 года."
+            ]
+            common_pitfalls = [
+                "Убедитесь, что диапазоны имеют одинаковую длину (например, A2:A100 и C2:C100, а не C2:C50).",
+                "В русской версии Excel разделителем аргументов является точка с запятой (;), а в английской — запятая (,).",
+                "Форматы чисел и дат не должны храниться как текст."
+            ]
+            shortcut = "Enter (Excel 365 / Google Sheets)"
     else:
         formula = '=INDEX(B:B, MATCH(1, (A:A="Клиент")*(D:D>1000), 0))'
-        explanation = [
-            "B:B — результирующий столбец, откуда берется значение.",
-            "MATCH(1, ..., 0) — поиск первой строки, удовлетворяющей всем условиям одновременно.",
-            "(A:A='Клиент')*(D:D>1000) — логическое умножение условий (И/AND)."
-        ]
         macro = """Sub DynamicIndex()
-  Range("E2").Formula2 = "=INDEX(B:B, MATCH(1, (A:A=""Клиент"")*(D:D>1000), 0))"
+  Range("E2").Formula2 = "=INDEX(B:B, MATCH(1, (A:A=""Client"")*(D:D>1000), 0))"
 End Sub"""
+        if is_uz:
+            formula = '=INDEX(B:B, MATCH(1, (A:A="Mijoz")*(D:D>1000), 0))'
+            explanation = [
+                "B:B — natijaviy ustun, natija olinadigan joy.",
+                "MATCH(1, ..., 0) — barcha shartlarga bir vaqtda mos keluvchi dastlabki qatorni topadi.",
+                "(A:A='Mijoz')*(D:D>1000) — shartlarni mantiqiy ko'paytirish (VA / AND)."
+            ]
+            common_pitfalls = [
+                "Ko'p shartli massiv formulalarida shartlarni qavslar ichiga olish shart.",
+                "Bo'sh kataklar yoki noto'g'ri turlar #N/A yoki #VALUE! xatosini keltirib chiqarishi mumkin.",
+                "Katta jadvallarda INDEX/MATCH VLOOKUP'ga qaraganda sezilarli darajada tezroq ishlaydi."
+            ]
+            shortcut = "Enter (Excel 365) yoki Ctrl + Shift + Enter"
+        elif is_en:
+            formula = '=INDEX(B:B, MATCH(1, (A:A="Client")*(D:D>1000), 0))'
+            explanation = [
+                "B:B — result column containing target return data.",
+                "MATCH(1, ..., 0) — identifies the first row where all conditions evaluate to TRUE.",
+                "(A:A='Client')*(D:D>1000) — boolean array multiplication (AND logic)."
+            ]
+            common_pitfalls = [
+                "Enclose each logical condition inside individual parentheses.",
+                "Ensure array ranges do not contain inconsistent blank row partitions.",
+                "INDEX/MATCH is substantially more resilient to column insertions than legacy VLOOKUP."
+            ]
+            shortcut = "Enter (Excel 365) or Ctrl + Shift + Enter"
+        elif is_es:
+            formula = '=INDICE(B:B, COINCIDIR(1, (A:A="Cliente")*(D:D>1000), 0))'
+            explanation = [
+                "B:B — columna de resultado.",
+                "COINCIDIR(1, ..., 0) — localiza la primera fila que cumple todas las condiciones.",
+                "(A:A='Cliente')*(D:D>1000) — multiplicación booleana (lógica Y/AND)."
+            ]
+            common_pitfalls = [
+                "Encierre cada condición lógica entre paréntesis individuales.",
+                "Evite rangos dispares en fórmulas matriciales.",
+                "INDEX/MATCH ofrece mayor velocidad y estabilidad que BUSCARV tradicional."
+            ]
+            shortcut = "Enter (Excel 365) o Ctrl + Mayús + Enter"
+        else:
+            explanation = [
+                "B:B — результирующий столбец, откуда берется значение.",
+                "MATCH(1, ..., 0) — поиск первой строки, удовлетворяющей всем условиям одновременно.",
+                "(A:A='Клиент')*(D:D>1000) — логическое умножение условий (И/AND)."
+            ]
+            common_pitfalls = [
+                "Убедитесь, что диапазоны имеют одинаковую длину (например, A2:A100 и C2:C100, а не C2:C50).",
+                "В русской версии Excel разделителем аргументов является точка с запятой (;), а в английской — запятая (,).",
+                "Форматы чисел и дат не должны храниться как текст."
+            ]
+            shortcut = "Ctrl + Shift + Enter (для старых версий) или Enter (Excel 365)"
 
     return {
         "status": "success",
@@ -5250,13 +6361,9 @@ End Sub"""
         "app_type": p.app_type,
         "formula": formula,
         "explanation": explanation,
-        "common_pitfalls": [
-            "Убедитесь, что диапазоны имеют одинаковую длину (например, A2:A100 и C2:C100, а не C2:C50).",
-            "В русской версии Excel разделителем аргументов является точка с запятой (;), а в английской — запятая (,).",
-            "Форматы чисел и дат не должны храниться как текст."
-        ],
+        "common_pitfalls": common_pitfalls,
         "vba_or_script": macro,
-        "keyboard_shortcut": "Ctrl + Shift + Enter (для старых версий) или Enter (Excel 365)"
+        "keyboard_shortcut": shortcut
     }
 
 
@@ -5265,25 +6372,36 @@ async def generate_marketplace_listing(payload: MarketplaceLabRequest):
     """
     Интерактивная Web-генерация SEO-карточек и расчет Unit-экономики для Uzum, WB и Ozon.
     """
+    target_lang = (payload.language or "uz").lower()
     client = get_genai_client()
     if not client:
-        return get_fallback_marketplace_lab(payload)
+        fallback = get_fallback_marketplace_lab(payload)
+        if "uz" in target_lang:
+            fallback = sanitize_uzbek_content(fallback)
+        return fallback
+
+    lang_names = {"uz": "Uzbek", "en": "English", "ru": "Russian", "es": "Spanish"}
+    lang_str = lang_names.get(target_lang, "Uzbek" if "uz" in target_lang else "Russian")
 
     system_prompt = (
         "You are an elite E-commerce Marketplace Algorithm Director specializing in Uzum Market, Wildberries and Ozon. "
-        "Generate a high-converting listing and unit-economics analysis. Return STRICT JSON with keys: "
+        f"Generate a high-converting listing and unit-economics analysis STRICTLY in {lang_str}. "
+        f"All generated titles, bullet points, descriptions, and FAQs MUST be written in natural, fluent {lang_str}. "
+        "Return STRICT JSON with keys: "
         "status, product_name, marketplace, seo_title, selling_bullets (array of 5 strings), "
         "lsi_keywords (array of 6 strings), description, objection_faq (array of objects with question, answer), "
         "unit_economics (object with cost_price, selling_price, commission_fee, logistics_fee, net_profit, margin_percentage, roi_percentage, recommendation)."
     )
 
     user_prompt = (
+        f"Target Language: {lang_str}\n"
         f"Product: {payload.product_name}\n"
         f"Category: {payload.category}\n"
         f"Marketplace: {payload.marketplace}\n"
         f"Cost Price: ${payload.cost_price}\n"
         f"Selling Price: ${payload.selling_price}\n"
-        f"Features: {payload.key_features or 'Top quality, fast delivery'}"
+        f"Features: {payload.key_features or 'Top quality, fast delivery'}\n"
+        f"CRITICAL REQUIREMENT: Output must strictly be in {lang_str}."
     )
 
     try:
@@ -5300,9 +6418,14 @@ async def generate_marketplace_listing(payload: MarketplaceLabRequest):
         )
         data = json.loads(resp.text.strip())
         data["status"] = "success"
+        if "uz" in target_lang:
+            data = sanitize_uzbek_content(data)
         return data
     except Exception:
-        return get_fallback_marketplace_lab(payload)
+        fallback = get_fallback_marketplace_lab(payload)
+        if "uz" in target_lang:
+            fallback = sanitize_uzbek_content(fallback)
+        return fallback
 
 
 @app.post("/api/v1/tools/sop-builder", tags=["Trend AI Engines"])
@@ -5310,19 +6433,29 @@ async def generate_sop(payload: SOPBuilderRequest):
     """
     Генерация академических мотивационных писем и Statement of Purpose для международных грантов.
     """
+    target_lang = (payload.language or "en").lower()
     client = get_genai_client()
     if not client:
-        return get_fallback_sop_builder(payload)
+        fallback = get_fallback_sop_builder(payload)
+        if "uz" in target_lang:
+            fallback = sanitize_uzbek_content(fallback)
+        return fallback
+
+    lang_names = {"uz": "Uzbek", "en": "English", "ru": "Russian", "es": "Spanish"}
+    lang_str = lang_names.get(target_lang, "English")
 
     system_prompt = (
         "You are an Ivy League Admissions Dean & Academic Writing Mentor. "
-        "Generate a compelling, authentic Statement of Purpose. Return STRICT JSON with keys: "
+        "Generate a compelling, authentic Statement of Purpose. "
+        f"Ensure mentor tips and evaluations are provided in {lang_str}. "
+        "Return STRICT JSON with keys: "
         "status, title, statement_of_purpose, academic_collocations (array of 6 strings), "
         "admissions_rating (object with academic_voice, narrative_cohesion, institutional_alignment, overall_competitiveness), "
         "mentor_tips (array of 3 strings)."
     )
 
     user_prompt = (
+        f"Language for tips and notes: {lang_str}\n"
         f"Degree: {payload.degree_level}\n"
         f"Major: {payload.target_major}\n"
         f"Country: {payload.target_country}\n"
@@ -5346,9 +6479,14 @@ async def generate_sop(payload: SOPBuilderRequest):
         )
         data = json.loads(resp.text.strip())
         data["status"] = "success"
+        if "uz" in target_lang:
+            data = sanitize_uzbek_content(data)
         return data
     except Exception:
-        return get_fallback_sop_builder(payload)
+        fallback = get_fallback_sop_builder(payload)
+        if "uz" in target_lang:
+            fallback = sanitize_uzbek_content(fallback)
+        return fallback
 
 
 @app.post("/api/v1/tools/excel-wizard", tags=["Trend AI Engines"])
@@ -5356,18 +6494,27 @@ async def generate_excel_formula(payload: ExcelWizardRequest):
     """
     Преобразование текстового запроса на русском/узбекском/английском в рабочую формулу Excel/Google Sheets.
     """
+    target_lang = (payload.language or "uz").lower()
     client = get_genai_client()
     if not client:
-        return get_fallback_excel_wizard(payload)
+        fallback = get_fallback_excel_wizard(payload)
+        if "uz" in target_lang:
+            fallback = sanitize_uzbek_content(fallback)
+        return fallback
+
+    lang_names = {"uz": "Uzbek", "en": "English", "ru": "Russian", "es": "Spanish"}
+    lang_str = lang_names.get(target_lang, "Uzbek" if "uz" in target_lang else "Russian")
 
     system_prompt = (
         "You are a Senior Excel & Spreadsheet Automation Architect. "
-        "Convert the user's natural language request into a robust, high-performance formula. Return STRICT JSON with keys: "
+        f"Convert the user's natural language request into a robust, high-performance formula. "
+        f"Explain the formula and list common pitfalls STRICTLY in {lang_str}. "
+        "Return STRICT JSON with keys: "
         "status, query, app_type, formula, explanation (array of strings), common_pitfalls (array of strings), "
         "vba_or_script, keyboard_shortcut."
     )
 
-    user_prompt = f"App: {payload.app_type}\nTask: {payload.query}\nLanguage: {payload.language}"
+    user_prompt = f"App: {payload.app_type}\nTask: {payload.query}\nLanguage: {lang_str}\nCRITICAL: Explanations and pitfalls must be written in {lang_str}."
 
     try:
         config = types.GenerateContentConfig(
@@ -5383,9 +6530,14 @@ async def generate_excel_formula(payload: ExcelWizardRequest):
         )
         data = json.loads(resp.text.strip())
         data["status"] = "success"
+        if "uz" in target_lang:
+            data = sanitize_uzbek_content(data)
         return data
     except Exception:
-        return get_fallback_excel_wizard(payload)
+        fallback = get_fallback_excel_wizard(payload)
+        if "uz" in target_lang:
+            fallback = sanitize_uzbek_content(fallback)
+        return fallback
 
 
 @app.get("/report", tags=["Research & Authority Reports"])
@@ -5402,25 +6554,155 @@ class TeacherLabRequest(BaseModel):
     subject: str = Field(..., description="Учебный предмет (например: Английский язык, Алгебра, Физика)")
     grade_level: str = Field("7-9 классы", description="Класс или уровень подготовки")
     topic: str = Field(..., description="Тема урока (например: Present Perfect, Квадратные уравнения)")
-    language: str = Field("ru", description="Язык контента (ru, uz, en, es)")
+    language: str = Field("uz", description="Язык контента (uz, ru, en, es)")
 
 
 def get_fallback_teacher_lab(payload: TeacherLabRequest) -> dict:
-    return {
-        "status": "success",
-        "subject": payload.subject,
-        "grade_level": payload.grade_level,
-        "topic": payload.topic,
-        "lesson_objectives": [
+    target_lang = (getattr(payload, "language", None) or "uz").lower()
+    is_uz = "uz" in target_lang
+    is_es = "es" in target_lang
+    is_en = "en" in target_lang
+
+    if is_uz:
+        objectives = [
+            f"«{payload.topic}» mavzusining asosiy tushunchalari va amaliy tamoyillarini to'liq o'zlashtirish",
+            "Namunaviy topshiriqlarni mustaqil va xatosiz yechish amaliy ko'nikmasini shakllantirish",
+            "Tezkor diagnostika va test savollari orqali o'quvchilar bilimini mustahkamlash"
+        ]
+        warmup = {
+            "title": "Interaktiv 5 daqiqalik qizdirish mashqi",
+            "activity": f"Doska oldida qisqa savol-javob: «{payload.topic} haqida nimalarni bilamiz?». O'quvchilar diqqatini jalb qilish uchun 3 ta qiziqarli savol."
+        }
+        preview_tests = [
+            {
+                "num": 1,
+                "question": f"Quyidagi fikrlardan qaysi biri «{payload.topic}» asosiy mohiyatini eng aniq ifodalaydi?",
+                "options": ["A) Variant A (asosiy)", "B) Variant B (to'g'ri javob)", "V) Variant V (chalg'ituvchi)", "G) Variant G (noto'g'ri)"],
+                "answer": "B) Variant B",
+                "explanation": "Ushbu javob davlat o'quv dasturi standarti va ilmiy tushunchaga to'liq mos keladi."
+            },
+            {
+                "num": 2,
+                "question": f"Qaysi amaliy holatda «{payload.topic}» qoidasini qo'llash eng muhim hisoblanadi?",
+                "options": ["A) Dastlabki ma'lumotlarni tahlil qilishda", "B) Yakuniy tekshiruv bosqichida", "V) Har ikkala holatda ham", "G) Hech birida"],
+                "answer": "V) Har ikkala holatda ham",
+                "explanation": "Ushbu algoritm universal bo'lib, xatolik ehtimolini 85% ga kamaytiradi."
+            },
+            {
+                "num": 3,
+                "question": f"O'quvchilar «{payload.topic}» mavzusida eng ko'p qanday xatoga yo'l qo'yishadi?",
+                "options": ["A) Oraliq hisob-kitoblarni o'tkazib yuborish", "B) Belgilar yoki qoidalar ketma-ketligida adashish", "V) Noto'g'ri terminologiya qo'llash", "G) Yuqoridagilarning barchasi"],
+                "answer": "G) Yuqoridagilarning barchasi",
+                "explanation": "Barcha omillarni to'liq nazorat qilish eng yuqori bahoga erishishni kafolatlaydi."
+            }
+        ]
+        teaser = {
+            "total_questions": 15,
+            "included_features": [
+                "Murakkablashtirilgan yana 12 ta olimpiada darajasidagi test savoli",
+                "O'qituvchi uchun batafsil asoslangan javoblar kaliti",
+                "Darsning asosiy qismi uchun 25 daqiqalik bosqichma-bosqich metodik ssenariy",
+                "Uch darajali differensial uy vazifasi (A, B, C darajalar)",
+                "Chop etish uchun tayyor PDF/Word hujjati va o'quvchilar uchun Anki kartochkalari"
+            ]
+        }
+    elif is_en:
+        objectives = [
+            f"Master core principles and key mechanisms of '{payload.topic}'",
+            "Develop independent problem-solving skills with practical case exercises",
+            "Consolidate learning via diagnostic assessment and structured review tests"
+        ]
+        warmup = {
+            "title": "Interactive 5-Minute Warmup",
+            "activity": f"Rapid board warmup: 'What do we already know about {payload.topic}?'. 3 engaging prompts to activate student curiosity."
+        }
+        preview_tests = [
+            {
+                "num": 1,
+                "question": f"Which of the following statements best describes the core foundation of '{payload.topic}'?",
+                "options": ["A) Option A (baseline)", "B) Option B (correct)", "C) Option C (distractor)", "D) Option D (false)"],
+                "answer": "B) Option B",
+                "explanation": "This option reflects standard curriculum criteria and verified academic definitions."
+            },
+            {
+                "num": 2,
+                "question": f"In which real-world scenario is the principle of '{payload.topic}' most vital?",
+                "options": ["A) During initial data evaluation", "B) During final verification", "C) In both scenarios", "D) In neither"],
+                "answer": "C) In both scenarios",
+                "explanation": "The algorithmic model is universal and eliminates up to 85% of standard slips."
+            },
+            {
+                "num": 3,
+                "question": f"What is the most frequent conceptual misconception students encounter in '{payload.topic}'?",
+                "options": ["A) Skipping intermediate steps", "B) Sign or syntax inversion", "C) Ambiguous terminology", "D) All of the above"],
+                "answer": "D) All of the above",
+                "explanation": "Rigorous attention to all three aspects secures high mastery."
+            }
+        ]
+        teaser = {
+            "total_questions": 15,
+            "included_features": [
+                "12 advanced difficulty questions (Foundational + Olympiad tier)",
+                "Complete teacher answer key with pedagogical justifications",
+                "25-minute step-by-step instructional script for the core lecture",
+                "Differentiated homework assignments (Tiers A, B, C)",
+                "Print-ready PDF / DOCX worksheets and student Anki flashcard deck"
+            ]
+        }
+    elif is_es:
+        objectives = [
+            f"Dominar los conceptos fundamentales y fórmulas clave de «{payload.topic}»",
+            "Desarrollar habilidades prácticas para la resolución autónoma de problemas",
+            "Afianzar el aprendizaje mediante evaluación diagnóstica formativa"
+        ]
+        warmup = {
+            "title": "Calentamiento Interactivo (5 minutos)",
+            "activity": f"Pregunta rápida en pizarra: «¿Qué conocemos sobre {payload.topic}?». 3 disparadores reflexivos para captar la atención."
+        }
+        preview_tests = [
+            {
+                "num": 1,
+                "question": f"¿Cuál de las siguientes afirmaciones describe con mayor precisión el principio de «{payload.topic}»?",
+                "options": ["A) Opción A", "B) Opción B (correcta)", "C) Opción C (distractor)", "D) Opción D (falsa)"],
+                "answer": "B) Opción B",
+                "explanation": "Representa fielmente el estándar curricular oficial."
+            },
+            {
+                "num": 2,
+                "question": f"¿En qué situación práctica es indispensable aplicar «{payload.topic}»?",
+                "options": ["A) Análisis preliminar", "B) Verificación de resultados", "C) En ambas situaciones", "D) En ninguna"],
+                "answer": "C) En ambas situaciones",
+                "explanation": "Es un modelo metodológico transversal que reduce el margen de error en un 85%."
+            },
+            {
+                "num": 3,
+                "question": f"¿Cuál es el error más recurrente entre los estudiantes al abordar «{payload.topic}»?",
+                "options": ["A) Omitir etapas intermedias", "B) Inversión de signos/sintaxis", "C) Confusión léxica", "D) Todas las anteriores"],
+                "answer": "D) Todas las anteriores",
+                "explanation": "El control simultáneo de estos factores garantiza la máxima calificación."
+            }
+        ]
+        teaser = {
+            "total_questions": 15,
+            "included_features": [
+                "12 preguntas adicionales de nivel avanzado (olimpiada escolar)",
+                "Pautas de corrección detalladas y fundamentadas para el docente",
+                "Guion pedagógico para los 25 minutos centrales de la clase",
+                "Tareas diferenciadas para el hogar (Niveles A, B y C)",
+                "Documento imprimible en PDF/Word y tarjetas de repaso Anki"
+            ]
+        }
+    else:
+        objectives = [
             f"Освоить ключевые концепции и формулы темы «{payload.topic}»",
             "Сформировать навык практического решения типовых задач без подсказок",
             "Закрепить материал через экспресс-диагностику и тестовые кейсы"
-        ],
-        "warmup_5min": {
+        ]
+        warmup = {
             "title": "Интерактивная разминка (5 минут)",
             "activity": f"Блиц-опрос у доски: «Что мы уже знаем о {payload.topic}?». 3 провокационных вопроса для включения внимания учащихся."
-        },
-        "preview_tests": [
+        }
+        preview_tests = [
             {
                 "num": 1,
                 "question": f"Какое из следующих утверждений наиболее точно описывает базовый принцип «{payload.topic}»?",
@@ -5442,8 +6724,8 @@ def get_fallback_teacher_lab(payload: TeacherLabRequest) -> dict:
                 "answer": "Г) Все перечисленные",
                 "explanation": "Комплексный контроль всех трех факторов гарантирует наивысший балл."
             }
-        ],
-        "locked_preview_teaser": {
+        ]
+        teaser = {
             "total_questions": 15,
             "included_features": [
                 "12 дополнительных тестов повышенной сложности (базовый + олимпиадный уровень)",
@@ -5453,6 +6735,16 @@ def get_fallback_teacher_lab(payload: TeacherLabRequest) -> dict:
                 "Готовый файл для распечатки (PDF / Word) и карточки Anki для учеников"
             ]
         }
+
+    return {
+        "status": "success",
+        "subject": payload.subject,
+        "grade_level": payload.grade_level,
+        "topic": payload.topic,
+        "lesson_objectives": objectives,
+        "warmup_5min": warmup,
+        "preview_tests": preview_tests,
+        "locked_preview_teaser": teaser
     }
 
 
@@ -5461,13 +6753,21 @@ async def generate_teacher_lesson(payload: TeacherLabRequest):
     """
     Генератор поурочных планов и тестовых наборов для учителей с Blur-пейволлом.
     """
+    target_lang = (payload.language or "uz").lower()
     client = get_genai_client()
     if not client:
-        return get_fallback_teacher_lab(payload)
+        fallback = get_fallback_teacher_lab(payload)
+        if "uz" in target_lang:
+            fallback = sanitize_uzbek_content(fallback)
+        return fallback
+
+    lang_names = {"uz": "Uzbek", "en": "English", "ru": "Russian", "es": "Spanish"}
+    lang_str = lang_names.get(target_lang, "Uzbek" if "uz" in target_lang else "Russian")
 
     system_prompt = (
         "You are an Elite Pedagogical Curriculum Designer and Methodologist. "
-        "Create an actionable 45-minute lesson plan and 15-question test with full answer keys. "
+        f"Create an actionable 45-minute lesson plan and 15-question test with full answer keys STRICTLY in {lang_str}. "
+        f"All lesson objectives, warmup activities, questions, options, and explanations MUST be written in natural, fluent {lang_str}. "
         "Return STRICT JSON with keys: "
         "status, subject, grade_level, topic, lesson_objectives (array of strings), "
         "warmup_5min (dict with title, activity), preview_tests (array of 3 dicts with num, question, options, answer, explanation), "
@@ -5478,7 +6778,8 @@ async def generate_teacher_lesson(payload: TeacherLabRequest):
         f"Subject: {payload.subject}\n"
         f"Grade/Level: {payload.grade_level}\n"
         f"Topic: {payload.topic}\n"
-        f"Language: {payload.language}"
+        f"Language: {lang_str}\n"
+        f"CRITICAL REQUIREMENT: Output must strictly be in {lang_str}."
     )
 
     try:
@@ -5495,9 +6796,14 @@ async def generate_teacher_lesson(payload: TeacherLabRequest):
         )
         data = json.loads(resp.text.strip())
         data["status"] = "success"
+        if "uz" in target_lang:
+            data = sanitize_uzbek_content(data)
         return data
     except Exception:
-        return get_fallback_teacher_lab(payload)
+        fallback = get_fallback_teacher_lab(payload)
+        if "uz" in target_lang:
+            fallback = sanitize_uzbek_content(fallback)
+        return fallback
 
 
 

@@ -472,7 +472,7 @@
 
         async function submitQuiz() {
             formData.favourite_subjects = document.getElementById('favourite-subjects').value;
-            formData.language = (typeof window.getCurrentLocale === 'function' ? window.getCurrentLocale() : 'en') || 'en';
+            formData.language = (typeof window.getActiveLocale === 'function' ? window.getActiveLocale() : (typeof window.getCurrentLocale === 'function' ? window.getCurrentLocale() : (localStorage.getItem('eduhub_locale') || 'uz')));
             
             const loader = document.getElementById('quiz-loader');
             loader.classList.remove('hidden');
@@ -500,8 +500,9 @@
                 clearInterval(interval);
                 loader.classList.add('hidden');
 
-                if (data.status === 'success' && data.result) {
-                    renderResults(data.result);
+                const profileData = data.result || data;
+                if (data.status === 'success' && profileData && (profileData.archetype || profileData.top_careers || profileData.top_professions)) {
+                    renderResults(profileData);
                 } else {
                     alert("Analysis error: " + (data.detail || "Please try again."));
                 }
@@ -522,38 +523,46 @@
             document.getElementById('res-personality').innerText = res.personality_summary || "";
 
             const careersList = document.getElementById('careers-list');
-            careersList.innerHTML = (res.top_professions || []).map(c => `
+            const professions = res.top_professions || res.top_careers || [];
+            careersList.innerHTML = professions.map(c => `
                 <div class="bg-slate-900 border border-slate-800 hover:border-amber-500/60 p-5 rounded-2xl transition space-y-3 flex flex-col justify-between">
                     <div>
                         <div class="flex justify-between items-center mb-2">
-                            <span class="text-[10px] font-bold uppercase tracking-wider text-amber-400 bg-amber-950 px-2 py-0.5 rounded border border-amber-800">Match ${c.match_percent || 95}%</span>
-                            <span class="text-xs font-mono text-emerald-400 font-bold">${c.salary_range_usd || '$2,500 - $6,000/mo'}</span>
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-amber-400 bg-amber-950 px-2 py-0.5 rounded border border-amber-800">Match ${c.match_percent || c.match_percentage || 95}%</span>
+                            <span class="text-xs font-mono text-emerald-400 font-bold">${c.salary_range_usd || c.salary_usd || '$2,500 - $6,000/mo'}</span>
                         </div>
                         <h4 class="text-base font-bold text-white">${c.title}</h4>
-                        <p class="text-xs text-slate-400 mt-1">${c.why_fit}</p>
+                        <p class="text-xs text-slate-400 mt-1">${c.why_fit || c.why_fits || ''}</p>
                     </div>
                     <div class="pt-3 border-t border-slate-800 text-[11px] text-slate-400">
                         <span class="text-slate-300 font-semibold block mb-1">Key Competencies:</span>
                         <div class="flex flex-wrap gap-1">
-                            ${(c.key_skills || []).map(s => `<span class="bg-slate-950 px-2 py-0.5 rounded text-[10px] text-slate-300 border border-slate-850">${s}</span>`).join('')}
+                            ${(c.key_skills || ['Critical Thinking', 'Problem Solving', 'Communication']).map(s => `<span class="bg-slate-950 px-2 py-0.5 rounded text-[10px] text-slate-300 border border-slate-850">${s}</span>`).join('')}
                         </div>
                     </div>
                 </div>
             `).join('');
 
             const uniList = document.getElementById('universities-list');
-            uniList.innerHTML = (res.recommended_universities || []).map(u => `
+            const uniRaw = res.recommended_universities || res.recommended_faculties_and_universities || [];
+            uniList.innerHTML = uniRaw.map(u => {
+                const uName = typeof u === 'string' ? u : (u.name || '');
+                const uFaculty = typeof u === 'string' ? 'Faculty of Advanced Studies' : (u.faculty || 'Faculty of Advanced Studies');
+                const uGrant = typeof u === 'string' ? 'Merit / International Grant' : (u.grant_type || 'Merit Grant');
+                return `
                 <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-between gap-3">
                     <div>
-                        <h5 class="font-bold text-white">${u.name}</h5>
-                        <span class="text-[11px] text-slate-400">${u.faculty || 'Faculty of Computing & Technology'}</span>
+                        <h5 class="font-bold text-white">${uName}</h5>
+                        <span class="text-[11px] text-slate-400">${uFaculty}</span>
                     </div>
-                    <span class="text-[10px] font-mono bg-indigo-950 text-indigo-300 border border-indigo-800 px-2 py-1 rounded shrink-0">${u.grant_type || 'Merit Grant'}</span>
+                    <span class="text-[10px] font-mono bg-indigo-950 text-indigo-300 border border-indigo-800 px-2 py-1 rounded shrink-0">${uGrant}</span>
                 </div>
-            `).join('');
+                `;
+            }).join('');
 
             const stepsList = document.getElementById('steps-list');
-            stepsList.innerHTML = (res.next_steps || []).map((s, idx) => `
+            const stepsRaw = res.next_steps || res.immediate_next_steps || [];
+            stepsList.innerHTML = stepsRaw.map((s, idx) => `
                 <div class="p-3 rounded-xl bg-slate-950/70 border border-slate-850 flex items-start gap-3">
                     <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-xs shrink-0">${idx + 1}</span>
                     <p class="text-slate-300">${s}</p>

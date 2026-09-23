@@ -304,7 +304,8 @@ Using advanced eco-friendly composite materials, this unit preserves its pristin
                 marketplace: document.getElementById('mp-select').value,
                 cost_price: parseFloat(document.getElementById('mp-cost').value) || 10.0,
                 selling_price: parseFloat(document.getElementById('mp-price').value) || 25.0,
-                key_features: document.getElementById('mp-features').value.trim()
+                key_features: document.getElementById('mp-features').value.trim(),
+                language: (typeof window.getActiveLocale === 'function' ? window.getActiveLocale() : (localStorage.getItem('eduhub_locale') || 'uz'))
             };
 
             try {

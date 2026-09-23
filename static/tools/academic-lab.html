@@ -1411,7 +1411,8 @@
                         topic: proj.topic + (customFocus ? ` (Фокус: ${customFocus})` : ""),
                         level: proj.level,
                         discipline: proj.discipline,
-                        mode: "apparatus"
+                        mode: "apparatus",
+                        language: (typeof window.getActiveLocale === 'function' ? window.getActiveLocale() : (localStorage.getItem('eduhub_locale') || 'ru'))
                     })
                 });
 
@@ -1583,7 +1584,8 @@ ${app.novelty || 'Заключается в авторском подходе к
                         topic: proj.topic,
                         level: proj.level,
                         discipline: proj.discipline,
-                        mode: "outline"
+                        mode: "outline",
+                        language: (typeof window.getActiveLocale === 'function' ? window.getActiveLocale() : (localStorage.getItem('eduhub_locale') || 'ru'))
                     })
                 });
                 if (response.ok) {
@@ -1835,7 +1837,8 @@ ${app.novelty || 'Заключается в авторском подходе к
                         discipline: proj.discipline,
                         mode: mode,
                         apparatus_context: apparatusContext,
-                        sources_context: sourcesContext
+                        sources_context: sourcesContext,
+                        language: (typeof window.getActiveLocale === 'function' ? window.getActiveLocale() : (localStorage.getItem('eduhub_locale') || 'ru'))
                     })
                 });
 
@@ -2049,7 +2052,8 @@ ${app.novelty || 'Заключается в авторском подходе к
                         level: proj.level,
                         discipline: proj.discipline,
                         mode: "literature_review",
-                        sources_context: sourcesContext
+                        sources_context: sourcesContext,
+                        language: (typeof window.getActiveLocale === 'function' ? window.getActiveLocale() : (localStorage.getItem('eduhub_locale') || 'ru'))
                     })
                 });
                 const data = await response.json();
@@ -2166,7 +2170,8 @@ ${app.novelty || 'Заключается в авторском подходе к
                         topic: proj.topic,
                         level: proj.level,
                         discipline: proj.discipline,
-                        mode: "defense_speech"
+                        mode: "defense_speech",
+                        language: (typeof window.getActiveLocale === 'function' ? window.getActiveLocale() : (localStorage.getItem('eduhub_locale') || 'ru'))
                     })
                 });
                 if (response.ok) {
@@ -2294,7 +2299,8 @@ ${app.novelty || 'Заключается в авторском подходе к
                         chapter_title: art.title,
                         level: "article_vak",
                         discipline: proj.discipline,
-                        mode: "article_vak"
+                        mode: "article_vak",
+                        language: (typeof window.getActiveLocale === 'function' ? window.getActiveLocale() : (localStorage.getItem('eduhub_locale') || 'ru'))
                     })
                 });
                 if (response.ok) {

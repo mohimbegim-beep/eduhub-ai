@@ -214,7 +214,8 @@
                 target_university: document.getElementById('sop-uni').value,
                 grant_program: document.getElementById('sop-grant').value,
                 background_experience: document.getElementById('sop-bg').value.trim() || 'Strong background in computer science with distinction',
-                career_vision: document.getElementById('sop-vision').value.trim() || 'Establish high-impact tech infrastructure'
+                career_vision: document.getElementById('sop-vision').value.trim() || 'Establish high-impact tech infrastructure',
+                language: (typeof window.getActiveLocale === 'function' ? window.getActiveLocale() : (localStorage.getItem('eduhub_locale') || 'uz'))
             };
 
             try {

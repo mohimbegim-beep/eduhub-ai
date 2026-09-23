@@ -385,7 +385,8 @@
                     assignment: assignment,
                     student_solution: draft || null,
                     subject: subject,
-                    grade_level: grade
+                    grade_level: grade,
+                    language: (typeof window.getActiveLocale === 'function' ? window.getActiveLocale() : (localStorage.getItem('eduhub_locale') || 'uz'))
                 };
                 if (imageBase64) {
                     payload.image_base64 = imageBase64;

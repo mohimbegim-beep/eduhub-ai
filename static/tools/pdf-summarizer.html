@@ -322,7 +322,13 @@
                     body: JSON.stringify({
                         text: text,
                         format: format,
-                        language: currentLocale === 'ru' ? 'Russian' : (currentLocale === 'uz' ? 'Uzbek' : (currentLocale === 'es' ? 'Spanish' : 'English'))
+                        language: (() => {
+                            const loc = (typeof window.getActiveLocale === 'function' ? window.getActiveLocale() : (typeof window.getCurrentLocale === 'function' ? window.getCurrentLocale() : (localStorage.getItem('eduhub_locale') || 'en')));
+                            if (loc === 'ru') return 'Russian';
+                            if (loc === 'uz') return 'Uzbek';
+                            if (loc === 'es') return 'Spanish';
+                            return 'English';
+                        })()
                     })
                 });
                 const data = await res.json();

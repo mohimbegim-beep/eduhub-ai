@@ -369,7 +369,7 @@ Projects:
             results.classList.add("hidden");
 
             try {
-                const currentLang = localStorage.getItem("eduhub_locale") || "en";
+                const currentLang = (typeof window.getActiveLocale === 'function' ? window.getActiveLocale() : (typeof window.getCurrentLocale === 'function' ? window.getCurrentLocale() : (localStorage.getItem("eduhub_locale") || "en")));
                 const response = await fetch("/api/v1/career/ats-tailor", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },

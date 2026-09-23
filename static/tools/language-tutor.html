@@ -502,7 +502,7 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            const currentLang = (window.currentLocale || localStorage.getItem('eduhub_locale') || 'en');
+            const currentLang = (typeof window.getActiveLocale === 'function' ? window.getActiveLocale() : (typeof window.getCurrentLocale === 'function' ? window.getCurrentLocale() : (localStorage.getItem('eduhub_locale') || 'en')));
             const select = document.getElementById('native-lang-select');
             if (currentLang === 'ru') select.value = 'Russian';
             else if (currentLang === 'uz') select.value = 'Uzbek';

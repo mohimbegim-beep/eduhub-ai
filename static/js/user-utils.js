@@ -538,8 +538,21 @@ const EduHubUtils = (function () {
     initCameraTrigger,
     removeAttachedPhoto,
     getAttachedPhoto,
-    openTelegramBotWithAuth
+    openTelegramBotWithAuth,
+    getActiveLocale
   };
+
+  function getActiveLocale() {
+    try {
+      if (typeof window.getCurrentLocale === 'function') {
+        const loc = window.getCurrentLocale();
+        if (loc) return String(loc).toLowerCase();
+      }
+      const stored = localStorage.getItem('eduhub_locale');
+      if (stored) return String(stored).toLowerCase();
+    } catch (e) {}
+    return 'uz';
+  }
 
   function openTelegramBotWithAuth(e, botUsername) {
     if (e && e.preventDefault) e.preventDefault();
@@ -554,6 +567,10 @@ const EduHubUtils = (function () {
     window.open(url, '_blank', 'noopener,noreferrer');
   }
 })();
+
+if (typeof window !== 'undefined' && typeof EduHubUtils !== 'undefined') {
+  window.getActiveLocale = EduHubUtils.getActiveLocale;
+}
 
 // Privacy-Preserving Lightweight Telemetry Beacon
 (function () {

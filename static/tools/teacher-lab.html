@@ -332,7 +332,7 @@
             btn.disabled = true;
             btn.innerHTML = '<span>⏳ Generating lesson &amp; 15 questions...</span>';
 
-            const userLang = (typeof window.getCurrentLocale === 'function' ? window.getCurrentLocale() : 'en') || 'en';
+            const userLang = (typeof window.getActiveLocale === 'function' ? window.getActiveLocale() : (typeof window.getCurrentLocale === 'function' ? window.getCurrentLocale() : (localStorage.getItem('eduhub_locale') || 'uz')));
 
             try {
                 const res = await fetch('/api/v1/tools/teacher-lab', {

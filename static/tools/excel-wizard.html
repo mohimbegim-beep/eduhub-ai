@@ -212,7 +212,8 @@
 
             const payload = {
                 query: document.getElementById('excel-query').value.trim() || 'Look up item price by SKU',
-                app_type: currentApp
+                app_type: currentApp,
+                language: (typeof window.getActiveLocale === 'function' ? window.getActiveLocale() : (localStorage.getItem('eduhub_locale') || 'uz'))
             };
 
             try {
