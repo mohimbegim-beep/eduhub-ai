@@ -12,6 +12,7 @@ venv/
 cloudflared.exe
 secrets/
 *.png
+!static/img/*.png
 logs/
 scratch/
 scratch_frames/

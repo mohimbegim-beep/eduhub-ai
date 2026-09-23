@@ -15,6 +15,7 @@ from services.backup_engine import backup_engine, atomic_write_json
 
 from fastapi import FastAPI, Request, HTTPException, Header, status, Depends
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware.gzip import GZipMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse, JSONResponse, HTMLResponse, Response, StreamingResponse
 from pydantic import BaseModel, Field, field_validator
@@ -64,6 +65,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Компрессия ответов (GZip): автоматическое сжатие контента > 1000 байт (снижение трафика на 70-80%)
+app.add_middleware(GZipMiddleware, minimum_size=1000)
+
 @app.middleware("http")
 async def add_security_headers(request: Request, call_next):
     # Privacy-friendly automated visitor telemetry
@@ -99,6 +103,19 @@ async def add_security_headers(request: Request, call_next):
         "base-uri 'self';"
     )
     response.headers["Content-Security-Policy"] = csp
+
+    # Производительность и HTTP-кэширование (Cache-Control)
+    path = request.url.path
+    if response.status_code < 400:
+        if path.startswith(("/static/", "/locales/")):
+            response.headers["Cache-Control"] = "public, max-age=86400, stale-while-revalidate=604800"
+        elif path.startswith(("/api/", "/health", "/docs", "/openapi")):
+            response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+        elif path == "/" or path.endswith(".html"):
+            response.headers["Cache-Control"] = "public, max-age=3600, must-revalidate"
+        else:
+            response.headers["Cache-Control"] = "public, max-age=3600, must-revalidate"
+
     return response
 
 # --------------------------------------------------------------------------

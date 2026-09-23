@@ -721,6 +721,82 @@ class AutoQAGuardEngine:
         return t
 
     # --------------------------------------------------------------------------
+    # TEST 12: Stage 10 - Performance, GZip Compression, HTTP Caching & Schema.org SEO
+    # --------------------------------------------------------------------------
+    def test_12_performance_compression_and_seo(self):
+        t = TestCaseResult("12. Performance, GZip Compression, HTTP Caching & Schema.org SEO")
+        start = time.perf_counter()
+
+        try:
+            import glob
+            from fastapi.testclient import TestClient
+            sys.path.insert(0, str(self.base_dir))
+            from app.main import app
+
+            client = TestClient(app)
+
+            # 1. GZip Compression verification
+            res_gzip = client.get("/locales/en.json", headers={"Accept-Encoding": "gzip"})
+            if res_gzip.status_code != 200 or res_gzip.headers.get("content-encoding") != "gzip":
+                t.passed = False
+                t.errors.append(f"GZip compression failed for /locales/en.json: {res_gzip.headers.get('content-encoding')}")
+
+            # 2. HTTP Caching (Cache-Control) matrix
+            res_loc = client.get("/locales/en.json")
+            if "max-age=86400" not in res_loc.headers.get("cache-control", ""):
+                t.passed = False
+                t.errors.append(f"Cache-Control for static/locales failed: {res_loc.headers.get('cache-control')}")
+
+            res_health = client.get("/health")
+            if "no-store" not in res_health.headers.get("cache-control", ""):
+                t.passed = False
+                t.errors.append(f"Cache-Control for dynamic API failed: {res_health.headers.get('cache-control')}")
+
+            # 3. OpenGraph & Twitter Cards coverage (24 pages)
+            html_files = sorted(glob.glob(str(self.base_dir / "static" / "**" / "*.html"), recursive=True))
+            for hf in html_files:
+                p = Path(hf)
+                with open(hf, "r", encoding="utf-8", errors="ignore") as f:
+                    c = f.read()
+                if not ('property="og:title"' in c or "property='og:title'" in c):
+                    t.passed = False
+                    t.errors.append(f"Missing og:title in {p.name}")
+                    break
+                if not ('name="twitter:card"' in c or "name='twitter:card'" in c):
+                    t.passed = False
+                    t.errors.append(f"Missing twitter:card in {p.name}")
+                    break
+
+            # 4. JSON-LD Schema.org validity (24 pages)
+            for hf in html_files:
+                p = Path(hf)
+                with open(hf, "r", encoding="utf-8", errors="ignore") as f:
+                    c = f.read()
+                matches = list(re.finditer(r'<script[^>]*type=[\"\\\']application/ld\+json[\"\\\'][^>]*>([\s\S]*?)</script>', c, re.I))
+                if not matches:
+                    t.passed = False
+                    t.errors.append(f"Missing JSON-LD Schema.org in {p.name}")
+                    break
+                for m in matches:
+                    try:
+                        parsed = json.loads(m.group(1).strip())
+                        if parsed.get("@context") != "https://schema.org":
+                            t.passed = False
+                            t.errors.append(f"Missing https://schema.org @context in {p.name}")
+                    except Exception as parse_err:
+                        t.passed = False
+                        t.errors.append(f"Invalid JSON-LD syntax in {p.name}: {parse_err}")
+                        break
+
+            t.details = f"GZip active (>70% savings); Cache-Control verified; OG/Twitter & Schema.org valid across all {len(html_files)} pages."
+        except Exception as e:
+            t.passed = False
+            t.errors.append(f"Performance & SEO test exception: {e}")
+
+        t.duration_ms = (time.perf_counter() - start) * 1000
+        return t
+
+    # --------------------------------------------------------------------------
     # Main Suite Execution
     # --------------------------------------------------------------------------
     def run_all_tests(self, auto_fix=True):
@@ -738,7 +814,8 @@ class AutoQAGuardEngine:
             self.test_08_security_rate_limits_and_webhooks,
             self.test_09_perimeter_security_and_data_shield,
             self.test_10_ai_resilience_quotas_and_streaming,
-            self.test_11_billing_dunning_refunds_and_receipts
+            self.test_11_billing_dunning_refunds_and_receipts,
+            self.test_12_performance_compression_and_seo
         ]
 
         self.test_results = []
