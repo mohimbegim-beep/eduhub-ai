@@ -87,8 +87,19 @@
     <!-- Essential User Utilities (Export, History Drawer, Stepper, Camera) -->
     <script src="/static/js/user-utils.js" defer></script>
 
-    <!-- Client-side i18n Engine -->
-    <script src="/static/js/i18n.js" defer></script>
+    <script>
+    // Immediate legacy cache invalidation guard
+    if ('caches' in window) {
+      caches.keys().then(function(keys) {
+        keys.forEach(function(k) {
+          if (k === 'eduhub-cache-v1') caches.delete(k);
+        });
+      });
+    }
+    </script>
+
+    <!-- Client-side i18n Engine (Cache-Busted) -->
+    <script src="/static/js/i18n.js?v=20260923_02" defer></script>
     <!-- Conversion & CRO Engine (Exit-Intent, Paywall, Social Ticker) -->
     <script src="/static/js/conversion-engine.js" defer></script>
     <!-- PWA Manifest & App Capability -->
@@ -99,10 +110,10 @@
     <meta name="apple-mobile-web-app-title" content="EduHub AI">
 
     <!-- PWA & Omni-Channel Viral Share Scripts -->
-    <script src="/static/js/pwa-install.js" defer></script>
+    <script src="/static/js/pwa-install.js?v=20260923_02" defer></script>
     <script src="/static/js/viral-share.js" defer></script>
     <!-- Legal Micro-Consent Layer -->
-    <script src="/static/js/legal-consent.js" defer></script>
+    <script src="/static/js/legal-consent.js?v=20260923_02" defer></script>
 
     <!-- Structured Data (JSON-LD): SoftwareApplication, Course, FAQPage -->
     <script type="application/ld+json">

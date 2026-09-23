@@ -6,11 +6,19 @@
 (function () {
   let deferredPrompt = null;
 
+  // Purge any stale legacy cache immediately
+  if ('caches' in window) {
+    caches.delete('eduhub-cache-v1').catch(() => {});
+  }
+
   // Register Service Worker
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       navigator.serviceWorker.register('/static/sw.js')
-        .then((reg) => console.log('[PWA] ServiceWorker registered:', reg.scope))
+        .then((reg) => {
+          reg.update();
+          console.log('[PWA] ServiceWorker registered and checked for updates:', reg.scope);
+        })
         .catch((err) => console.warn('[PWA] ServiceWorker registration warning:', err));
     });
   }

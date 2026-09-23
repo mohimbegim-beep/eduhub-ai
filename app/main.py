@@ -197,12 +197,14 @@ async def add_security_headers(request: Request, call_next):
     # Производительность и HTTP-кэширование (Cache-Control)
     path = request.url.path
     if response.status_code < 400:
-        if path.startswith(("/static/", "/locales/")):
+        if path == "/static/sw.js":
+            response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+        elif path.startswith(("/static/", "/locales/")):
             response.headers["Cache-Control"] = "public, max-age=86400, stale-while-revalidate=604800"
         elif path.startswith(("/api/", "/health", "/docs", "/openapi")):
             response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
         elif path == "/" or path.endswith(".html"):
-            response.headers["Cache-Control"] = "public, max-age=3600, must-revalidate"
+            response.headers["Cache-Control"] = "no-cache, must-revalidate"
         else:
             response.headers["Cache-Control"] = "public, max-age=3600, must-revalidate"
 

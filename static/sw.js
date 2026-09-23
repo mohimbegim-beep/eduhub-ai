@@ -1,20 +1,22 @@
 /**
- * EduHub AI — High-Performance Service Worker (PWA)
+ * EduHub AI — High-Performance Service Worker (PWA) v2
  * Caches static core assets for instant load and offline resilience.
+ * Uses Network-First for static assets to ensure zero stale cache issues.
  * API routes always bypass cache (network-only).
  */
 
-const CACHE_NAME = 'eduhub-cache-v1';
+const CACHE_NAME = 'eduhub-cache-v2';
 const CORE_ASSETS = [
   '/',
   '/static/manifest.json',
-  '/static/js/i18n.js',
+  '/static/js/i18n.js?v=20260923_02',
   '/static/js/user-utils.js',
   '/static/js/doc-renderer.js',
   '/static/js/conversion-engine.js'
 ];
 
 self.addEventListener('install', (event) => {
+  self.skipWaiting();
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       return cache.addAll(CORE_ASSETS).catch((err) => {
@@ -22,7 +24,6 @@ self.addEventListener('install', (event) => {
       });
     })
   );
-  self.skipWaiting();
 });
 
 self.addEventListener('activate', (event) => {
@@ -31,37 +32,34 @@ self.addEventListener('activate', (event) => {
       return Promise.all(
         keys.map((key) => {
           if (key !== CACHE_NAME) {
+            console.log('[SW] Purging old cache:', key);
             return caches.delete(key);
           }
         })
       );
-    })
+    }).then(() => self.clients.claim())
   );
-  self.clients.claim();
 });
 
 self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
 
   // Network-only for API requests and checkouts
-  if (url.pathname.startsWith('/api/')) {
+  if (url.pathname.startsWith('/api/') || url.pathname.startsWith('/health')) {
     return;
   }
 
-  // Cache-first, fallback to network for static files
-  if (url.pathname.startsWith('/static/')) {
+  // Network-first, fallback to cache for static and locale files
+  if (url.pathname.startsWith('/static/') || url.pathname.startsWith('/locales/')) {
     event.respondWith(
-      caches.match(event.request).then((cachedResponse) => {
-        if (cachedResponse) {
-          return cachedResponse;
+      fetch(event.request).then((networkResponse) => {
+        if (networkResponse && networkResponse.status === 200) {
+          const clone = networkResponse.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
         }
-        return fetch(event.request).then((networkResponse) => {
-          if (networkResponse && networkResponse.status === 200) {
-            const clone = networkResponse.clone();
-            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
-          }
-          return networkResponse;
-        });
+        return networkResponse;
+      }).catch(() => {
+        return caches.match(event.request);
       })
     );
     return;
@@ -76,3 +74,4 @@ self.addEventListener('fetch', (event) => {
     );
   }
 });
+
