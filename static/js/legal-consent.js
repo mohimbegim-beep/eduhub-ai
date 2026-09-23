@@ -23,6 +23,7 @@ const EduHubLegal = (function() {
             modal_b1: "<strong>14-Day 100% Guarantee:</strong> Full refund if requested within 14 days via 1-click AI portal at /support or mohim.mohimbegim@gmail.com.",
             modal_b2: "<strong>Fee-Protected Transparency:</strong> Voluntary card refunds returned net of non-recoverable payment gateway fees (~5%), or receive +120% instant wallet credit bonus.",
             modal_b3: "<strong>Subscription Management:</strong> Cancel recurring billing anytime in 1 click from your dashboard with zero penalty.",
+            modal_b4: "<strong>Merchant of Record:</strong> Payments are securely processed by Dodo Payments Inc., ensuring bank-grade encryption and full consumer protection.",
             modal_chk: "I have read and agree to the <a href='/terms' target='_blank' class='underline text-blue-400 font-semibold'>Terms of Service</a>, <a href='/privacy' target='_blank' class='underline text-blue-400 font-semibold'>Privacy Policy</a>, and <a href='/refund' target='_blank' class='underline text-blue-400 font-semibold'>Refund Policy</a>.",
             modal_confirm: "Confirm & Proceed to Secure Checkout →",
             modal_cancel: "Cancel & Return to Site",
@@ -37,6 +38,7 @@ const EduHubLegal = (function() {
             modal_b1: "<strong>14-дневная 100% гарантия возврата:</strong> Полный возврат при обращении в течение 14 дней в 1 клик на /support или через mohim.mohimbegim@gmail.com.",
             modal_b2: "<strong>Прозрачные условия:</strong> При добровольном возврате на карту возвращается сумма за вычетом комиссии эквайринга (~5%), либо начисляется 120% на баланс.",
             modal_b3: "<strong>Управление подпиской:</strong> Автопродление можно отключить в любое время в 1 клик в личном кабинете без каких-либо комиссий.",
+            modal_b4: "<strong>Merchant of Record:</strong> Обработка платежей и биллинг осуществляются Dodo Payments Inc. с банковским шифрованием и защитой прав покупателей.",
             modal_chk: "Я прочитал и безоговорочно принимаю <a href='/terms' target='_blank' class='underline text-blue-400 font-semibold'>Условия обслуживания</a>, <a href='/privacy' target='_blank' class='underline text-blue-400 font-semibold'>Политику конфиденциальности</a> и <a href='/refund' target='_blank' class='underline text-blue-400 font-semibold'>Политику возвратов</a>.",
             modal_confirm: "Подтверждаю и перейти к безопасной оплате →",
             modal_cancel: "Отмена и вернуться на сайт",
@@ -51,6 +53,7 @@ const EduHubLegal = (function() {
             modal_b1: "<strong>14 kunlik 100% kafolat:</strong> 14 kun ichida murojaat qilinganda /support portalida 1 bosishda to\'liq qaytariladi.",
             modal_b2: "<strong>Shaffof hisob-kitob:</strong> Kartaga ixtiyoriy qaytarishda bank ekvayring xarajatlari (~5%) chegiriladi yoki balansga 120% bonus beriladi.",
             modal_b3: "<strong>Obunani boshqarish:</strong> Obunani istalgan vaqtda shaxsiy kabinetda jarimalarsiz 1 bosishda bekor qilish mumkin.",
+            modal_b4: "<strong>Merchant of Record:</strong> Barcha to'lovlar Dodo Payments Inc. tomonidan bank darajasidagi shifrlash va xaridor himoyasi bilan xavfsiz amalga oshiriladi.",
             modal_chk: "Men <a href='/terms' target='_blank' class='underline text-blue-400 font-semibold'>Xizmat ko\'rsatish shartlari</a>, <a href='/privacy' target='_blank' class='underline text-blue-400 font-semibold'>Maxfiylik siyosati</a> va <a href='/refund' target='_blank' class='underline text-blue-400 font-semibold'>Qaytarish siyosati</a> bilan tanishdim va roziman.",
             modal_confirm: "Tasdiqlayman va xavfsiz to\'lovga o\'tish →",
             modal_cancel: "Bekor qilish va saytga qaytish",
@@ -65,6 +68,7 @@ const EduHubLegal = (function() {
             modal_b1: "<strong>Garantía de 14 Días 100%:</strong> Reembolso íntegro solicitándolo en los primeros 14 días mediante el portal /support o en mohim.mohimbegim@gmail.com.",
             modal_b2: "<strong>Transparencia de Costos:</strong> Reversión voluntaria a tarjeta deduciendo gastos no recuperables de pasarela (~5%), o +120% en saldo monedero.",
             modal_b3: "<strong>Gestión de Suscripción:</strong> Cancela la renovación automática en cualquier momento con 1 clic desde tu panel sin penalizaciones.",
+            modal_b4: "<strong>Merchant of Record:</strong> Los pagos y la facturación son procesados de forma segura por Dodo Payments Inc., con cifrado bancario y total protección.",
             modal_chk: "He leído y acepto expresamente los <a href='/terms' target='_blank' class='underline text-blue-400 font-semibold'>Términos de servicio</a>, <a href='/privacy' target='_blank' class='underline text-blue-400 font-semibold'>Política de privacidad</a> y <a href='/refund' target='_blank' class='underline text-blue-400 font-semibold'>Política de reembolsos</a>.",
             modal_confirm: "Confirmar y Proceder al Pago Seguro →",
             modal_cancel: "Cancelar y Volver al Sitio",
@@ -159,6 +163,10 @@ const EduHubLegal = (function() {
                         <span class="text-indigo-400 font-bold shrink-0">⚖️</span>
                         <div id="pcm-b3"></div>
                     </div>
+                    <div class="flex items-start gap-2.5">
+                        <span class="text-amber-400 font-bold shrink-0">🏛️</span>
+                        <div id="pcm-b4"></div>
+                    </div>
                 </div>
 
                 <!-- Mandatory Interactive Checkbox -->
@@ -192,6 +200,7 @@ const EduHubLegal = (function() {
         const b1 = document.getElementById('pcm-b1');
         const b2 = document.getElementById('pcm-b2');
         const b3 = document.getElementById('pcm-b3');
+        const b4 = document.getElementById('pcm-b4');
         const chkText = document.getElementById('pcm-chk-text');
         const confirmBtn = document.getElementById('pcm-confirm-btn');
         const cancelBtn = document.getElementById('pcm-cancel-btn');
@@ -202,6 +211,7 @@ const EduHubLegal = (function() {
         if (b1) b1.innerHTML = dict.modal_b1;
         if (b2) b2.innerHTML = dict.modal_b2;
         if (b3) b3.innerHTML = dict.modal_b3;
+        if (b4) b4.innerHTML = dict.modal_b4;
         if (chkText) chkText.innerHTML = dict.modal_chk;
         if (confirmBtn) confirmBtn.textContent = dict.modal_confirm;
         if (cancelBtn) cancelBtn.textContent = dict.modal_cancel;

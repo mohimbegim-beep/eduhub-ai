@@ -192,7 +192,7 @@ def run_moderation_audit():
     report(
         "Мониторинг: Healthcheck и статус ИИ-модели",
         res_health.status_code == 200 and health_data.get("model") == "gemini-2.5-flash",
-        f"Модель: {health_data.get('model')}, Lemon API Ready: {health_data.get('dodo_payments_api_ready')}"
+        f"Модель: {health_data.get('model')}, Dodo API Ready: {health_data.get('dodo_payments_api_ready')}"
     )
 
     report(

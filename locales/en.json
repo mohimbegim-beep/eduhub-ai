@@ -183,7 +183,7 @@
   "mode_tutor": "24/7 Socrates AI Tutor",
   "mode_exam": "AI Exam Prep Generator",
   "footer_copyright": "© 2026 EduHub AI. Autonomous SaaS Platform. All rights reserved.",
-  "footer_disclaimer": "Payment processing, order fulfillment, and tax invoicing are securely managed by our certified PCI-DSS Level 1 payment partner. All transactions are protected with 256-bit bank-grade encryption.",
+  "footer_disclaimer": "Payments are securely processed by Dodo Payments Inc., acting as the authorized Merchant of Record. Order fulfillment and tax invoicing are managed in full compliance with international standards.",
   "brand_subtitle": "Autonomous Academic Copilot",
   "explore_all_tools": "Explore all EduHub tools →",
   "nav_pillars": "Pillars",
@@ -500,7 +500,7 @@
   "support_title": "AI Billing, Dispute & Refund Resolution Portal",
   "support_subtitle": "Instant legal analysis according to official Terms of Service & 14-Day Guarantee. Automated fee-aware refund processing with zero human wait time.",
   "label_email": "Billing Account Email:",
-  "label_order_id": "Certified Payment Processor (PCI-DSS L1) Order # or Card Last 4:",
+  "label_order_id": "Dodo Payments Inc. Order # or Card Last 4:",
   "label_plan": "Purchased Product / Plan:",
   "label_date": "Approximate Transaction Date:",
   "label_issue": "Dispute Category / Inquiry Reason:",
@@ -513,7 +513,7 @@
   "tag_recommended": "Recommended",
   "pref_bonus_desc": "Instant balance credit with +20% extra bonus + 30 days Pro Max free. Zero waiting for bank clearance!",
   "pref_card_title": "🏦 Original Card Refund (Net Gateway Fee)",
-  "pref_card_desc": "Standard reversal to original card via Certified Payment Processor (PCI-DSS L1) (3-7 bank days; payment processor acquirer fee retained).",
+  "pref_card_desc": "Standard reversal to original card via Dodo Payments Inc. (3-7 bank days; payment processor acquirer fee retained).",
   "label_desc": "Provide context or reason for this dispute:",
   "legal_safe": "Encrypted 256-bit Legal Arbitration Protocol",
   "btn_analyze": "⚖️ Analyze Dispute with AI Arbitrator",
@@ -1257,5 +1257,6 @@
   "acad_footer_standard": "Strict scientific standard of VAK, GOST 7.0.5-2008 and Scopus IMRAD",
   "acad_footer_all_tools": "All tools →",
   "acad_btn_sample_study": "🎓 Sample Research Template",
-  "acad_btn_sample_title": "Open sample academic research project"
+  "acad_btn_sample_title": "Open sample academic research project",
+  "footer_mor_disclosure": "Payments are securely processed by Dodo Payments Inc., acting as the authorized Merchant of Record."
 }

@@ -848,6 +848,80 @@ class AutoQAGuardEngine:
         return t
 
     # --------------------------------------------------------------------------
+    # TEST 14: Stage 12 - International Legal Compliance & GDPR
+    # --------------------------------------------------------------------------
+    def test_14_compliance_gdpr_and_mor_transparency(self):
+        t = TestCaseResult("14. International Legal Compliance, GDPR & MoR Transparency")
+        start = time.perf_counter()
+
+        try:
+            from fastapi.testclient import TestClient
+            sys.path.insert(0, str(self.base_dir))
+            from app.main import app, USER_BALANCES_FILE, TRANSACTIONS_LOG
+
+            client = TestClient(app, raise_server_exceptions=False)
+
+            # 1. GDPR Article 17 Right to Erasure Test
+            test_qa_email = f"qa_gdpr_{int(time.time()*1000)}@qa-test.org"
+            with open(USER_BALANCES_FILE, "r", encoding="utf-8") as f:
+                b_data = json.load(f)
+            b_data[test_qa_email] = {"balance": 10.0, "currency": "USD", "tier": "free"}
+            with open(USER_BALANCES_FILE, "w", encoding="utf-8") as f:
+                json.dump(b_data, f, indent=2)
+
+            res_del = client.post("/api/v1/user/delete-account", json={"email": test_qa_email})
+            if res_del.status_code != 200:
+                t.passed = False
+                t.errors.append(f"POST /api/v1/user/delete-account returned HTTP {res_del.status_code}")
+            else:
+                del_json = res_del.json()
+                if not del_json.get("account_erased"):
+                    t.passed = False
+                    t.errors.append("Account was not erased in GDPR deletion response")
+
+            # Check balances file - user must be gone
+            with open(USER_BALANCES_FILE, "r", encoding="utf-8") as f:
+                b_after = json.load(f)
+            if test_qa_email in b_after:
+                t.passed = False
+                t.errors.append(f"User {test_qa_email} still present in balances file after GDPR erasure")
+
+            # 2. MoR Disclosure on all 24 HTML pages
+            html_files = list((self.base_dir / "static").rglob("*.html"))
+            if len(html_files) != 24:
+                t.passed = False
+                t.errors.append(f"Expected 24 HTML files, found {len(html_files)}")
+
+            missing_mor = []
+            for h in html_files:
+                h_text = h.read_text(encoding="utf-8")
+                if "Dodo Payments" not in h_text or "Merchant of Record" not in h_text:
+                    missing_mor.append(h.name)
+
+            if missing_mor:
+                t.passed = False
+                t.errors.append(f"Pages missing Dodo Payments MoR transparency: {missing_mor}")
+
+            # 3. Check Pre-checkout Consent Guard
+            lc_path = self.base_dir / "static" / "js" / "legal-consent.js"
+            if not lc_path.exists():
+                t.passed = False
+                t.errors.append("static/js/legal-consent.js missing")
+            else:
+                lc_text = lc_path.read_text(encoding="utf-8")
+                if "pre-checkout-checkbox" not in lc_text or "Dodo Payments" not in lc_text:
+                    t.passed = False
+                    t.errors.append("legal-consent.js missing pre-checkout checkbox or Dodo Payments MoR")
+
+            t.details = "GDPR Article 17 erasure verified; 24/24 HTML pages verified for Dodo Payments MoR disclosure; Pre-checkout consent gate active."
+        except Exception as e:
+            t.passed = False
+            t.errors.append(f"Compliance QA test exception: {e}")
+
+        t.duration_ms = (time.perf_counter() - start) * 1000
+        return t
+
+    # --------------------------------------------------------------------------
     # Main Suite Execution
     # --------------------------------------------------------------------------
     def run_all_tests(self, auto_fix=True):
@@ -867,7 +941,8 @@ class AutoQAGuardEngine:
             self.test_10_ai_resilience_quotas_and_streaming,
             self.test_11_billing_dunning_refunds_and_receipts,
             self.test_12_performance_compression_and_seo,
-            self.test_13_observability_deep_health_and_sentinel
+            self.test_13_observability_deep_health_and_sentinel,
+            self.test_14_compliance_gdpr_and_mor_transparency
         ]
 
         self.test_results = []

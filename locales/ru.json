@@ -183,7 +183,7 @@
   "mode_tutor": "24/7 Сократ-тьютор",
   "mode_exam": "ИИ-генератор экзаменов",
   "footer_copyright": "© 2026 EduHub AI. Автономная SaaS-платформа. Все права защищены.",
-  "footer_disclaimer": "Payment processing, order fulfillment, and tax invoicing are securely managed by our certified PCI-DSS Level 1 payment partner. All transactions are protected with 256-bit bank-grade encryption.",
+  "footer_disclaimer": "Платежи безопасно обрабатываются компанией Dodo Payments Inc., выступающей в качестве уполномоченного продавца (Merchant of Record). Исполнение заказов и налоговые счета соответствуют международным стандартам.",
   "brand_subtitle": "Автономный академический копайлот",
   "explore_all_tools": "Все инструменты EduHub →",
   "nav_pillars": "Возможности",
@@ -500,7 +500,7 @@
   "support_title": "ИИ-Центр разрешения финансовых споров и возвратов",
   "support_subtitle": "Мгновенный правовой анализ по условиям оферты и 14-дневной гарантии. Безубыточное урегулирование и автоматический возврат без ожидания службы поддержки.",
   "label_email": "Email аккаунта плательщика:",
-  "label_order_id": "Номер заказа Certified Payment Processor (PCI-DSS L1) или последние 4 цифры карты:",
+  "label_order_id": "Номер заказа Dodo Payments Inc. или последние 4 цифры карты:",
   "label_plan": "Оплаченный тариф / услуга:",
   "label_date": "Примерная дата списания:",
   "label_issue": "Категория обращения / Причина спора:",
@@ -513,7 +513,7 @@
   "tag_recommended": "Рекомендуется",
   "pref_bonus_desc": "Мгновенное зачисление на баланс с бонусом +20% и 30 дней Pro Max бесплатно. Без банковских задержек!",
   "pref_card_title": "🏦 Возврат на карту (за вычетом эквайринга)",
-  "pref_card_desc": "Стандартный возврат через Certified Payment Processor (PCI-DSS L1) на карту (3–7 банковских дней; удерживается банковская комиссия эквайринга).",
+  "pref_card_desc": "Стандартный возврат через Dodo Payments Inc. на карту (3–7 банковских дней; удерживается банковская комиссия эквайринга).",
   "label_desc": "Подробности или описание ситуации:",
   "legal_safe": "Защищенный 256-битный протокол правового арбитража",
   "btn_analyze": "⚖️ Запустить правовой анализ ИИ-Арбитром",
@@ -1257,5 +1257,6 @@
   "acad_footer_standard": "Строгий научный стандарт ВАК, ГОСТ 7.0.5-2008 и Scopus IMRAD",
   "acad_footer_all_tools": "Все инструменты →",
   "acad_btn_sample_study": "🎓 Пример: Диссертация",
-  "acad_btn_sample_title": "Открыть готовый пример академического исследования"
+  "acad_btn_sample_title": "Открыть готовый пример академического исследования",
+  "footer_mor_disclosure": "Платежи безопасно обрабатываются компанией Dodo Payments Inc., выступающей в качестве уполномоченного продавца (Merchant of Record)."
 }

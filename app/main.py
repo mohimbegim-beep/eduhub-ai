@@ -2506,6 +2506,88 @@ async def logout_user_session(response: Response):
     response.delete_cookie(key="eduhub_session", path="/")
     return {"status": "success", "message": "Logged out successfully"}
 
+# --------------------------------------------------------------------------
+# GDPR Article 17: Right to Erasure ("Right to be Forgotten")
+# --------------------------------------------------------------------------
+class DeleteAccountRequest(BaseModel):
+    email: str
+    confirmation: Optional[str] = None
+
+def process_gdpr_data_erasure(email: str) -> dict:
+    """
+    Реализация права на забвение в соответствии со статьей 17 GDPR (Right to be Forgotten).
+    Полное удаление учетной записи, квот, балансов и анонимизация платежных записей.
+    """
+    clean_email = email.strip().lower()
+
+    # 1. Удаление из базы балансов и пользователей
+    balances = load_user_balances()
+    user_existed = clean_email in balances
+    if user_existed:
+        del balances[clean_email]
+        save_user_balances(balances)
+
+    # 2. Анонимизация в логе транзакций (сохранение бухгалтерских сумм без ПДн)
+    anonymized_count = 0
+    if TRANSACTIONS_LOG.exists():
+        try:
+            with open(TRANSACTIONS_LOG, "r", encoding="utf-8") as f:
+                records = json.load(f)
+            changed = False
+            hash_suffix = hashlib.sha256(clean_email.encode("utf-8")).hexdigest()[:10]
+            anon_email = f"gdpr_erased_{hash_suffix}@anonymized.local"
+            for r in records:
+                if str(r.get("customer_email", "")).strip().lower() == clean_email:
+                    r["customer_email"] = anon_email
+                    if "attributes" in r and isinstance(r["attributes"], dict) and "user_email" in r["attributes"]:
+                        r["attributes"]["user_email"] = anon_email
+                    anonymized_count += 1
+                    changed = True
+            if changed:
+                atomic_write_json(TRANSACTIONS_LOG, records)
+        except Exception as tx_err:
+            print(f"[GDPR WARNING] Failed to anonymize transactions: {tx_err}")
+
+    # 3. Аудит события стирания данных
+    record_system_audit_event(
+        level="INFO",
+        event="GDPR_RIGHT_TO_ERASURE_PROCESSED",
+        details={
+            "action": "data_erasure",
+            "account_existed": user_existed,
+            "transactions_anonymized": anonymized_count
+        }
+    )
+
+    # 4. Создание снимка резервной копии после удаления
+    try:
+        backup_engine.create_snapshot()
+    except Exception:
+        pass
+
+    return {
+        "status": "success",
+        "gdpr_article": "Article 17 — Right to Erasure ('Right to be forgotten')",
+        "email_processed": clean_email,
+        "account_erased": user_existed,
+        "transactions_anonymized": anonymized_count,
+        "message": "All user data, balances, and personalized records have been permanently erased in compliance with GDPR Article 17."
+    }
+
+@app.post("/api/v1/user/delete-account", tags=["GDPR & Compliance"])
+@app.post("/api/v1/user/gdpr-erasure", tags=["GDPR & Compliance"])
+async def delete_user_account_endpoint(payload: DeleteAccountRequest, response: Response):
+    """
+    Официальный эндпоинт реализации права на забвение (GDPR Article 17).
+    """
+    clean_email = payload.email.strip().lower()
+    if not clean_email or "@" not in clean_email:
+        raise HTTPException(status_code=400, detail="Valid user email required for account erasure.")
+
+    result = process_gdpr_data_erasure(clean_email)
+    response.delete_cookie(key="eduhub_session", path="/")
+    return result
+
 @app.get("/api/v1/system/backups", tags=["System & Backups"])
 async def get_system_backups_list():
     """

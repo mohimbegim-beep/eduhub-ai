@@ -183,7 +183,7 @@
   "mode_tutor": "24/7 Suqrot repetitor",
   "mode_exam": "AI imtihon generatori",
   "footer_copyright": "© 2026 EduHub AI. Avtonom SaaS platformasi. Barcha huquqlar himoyalangan.",
-  "footer_disclaimer": "Payment processing, order fulfillment, and tax invoicing are securely managed by our certified PCI-DSS Level 1 payment partner. All transactions are protected with 256-bit bank-grade encryption.",
+  "footer_disclaimer": "To'lovlar vakolatli savdo hamkori (Merchant of Record) Dodo Payments Inc. tomonidan xavfsiz amalga oshiriladi. Buyurtmalarni yetkazish va soliq invoyslari xalqaro standartlarga mos.",
   "brand_subtitle": "Avtonom akademik yordamchi",
   "explore_all_tools": "Barcha EduHub vositalari →",
   "nav_pillars": "Imkoniyatlar",
@@ -500,7 +500,7 @@
   "support_title": "Hisob-kitoblar va To'lovlarni Qaytarish Sun'iy Intellekt Markazi",
   "support_subtitle": "Foydalanish shartlari va 14 kunlik kafolat asosida tezkor yuridik tahlil. Komissiyalardan himoyalangan avtomatik to'lovni qaytarish.",
   "label_email": "To'lovchi hisobining elektron pochtasi:",
-  "label_order_id": "Certified Payment Processor (PCI-DSS L1) buyurtma raqami yoki karta oxirgi 4 raqami:",
+  "label_order_id": "Dodo Payments Inc. buyurtma raqami yoki karta oxirgi 4 raqami:",
   "label_plan": "To'langan tarif / xizmat:",
   "label_date": "To'lov amalga oshirilgan sana:",
   "label_issue": "Murojaat toifasi / Sababi:",
@@ -513,7 +513,7 @@
   "tag_recommended": "Tavsiya etiladi",
   "pref_bonus_desc": "+120% bonus bilan platforma hisobiga bir zumda tushirish va 30 kun Pro Max bepul. Bankda kutishlarsiz!",
   "pref_card_title": "🏦 Bank kartasiga qaytarish (Ekvayring xarajatlari chegirilgan)",
-  "pref_card_desc": "Certified Payment Processor (PCI-DSS L1) orqali kartaga qaytarish (3-7 bank ish kuni; bank ekvayring komissiyasi ushlab qolinadi).",
+  "pref_card_desc": "Dodo Payments Inc. orqali kartaga qaytarish (3-7 bank ish kuni; bank ekvayring komissiyasi ushlab qolinadi).",
   "label_desc": "Holat yuzasidan batafsil ma'lumot:",
   "legal_safe": "256-bitli himoyalangan huquqiy arbitraj protokoli",
   "btn_analyze": "⚖️ Sun'iy Intellekt Arbitraj Tahlilini Boshlash",
@@ -1257,5 +1257,6 @@
   "acad_footer_standard": "OAK, GOST 7.0.5-2008 va Scopus IMRAD qat'iy ilmiy standarti",
   "acad_footer_all_tools": "Barcha panellar →",
   "acad_btn_sample_study": "🎓 Namuna: Dissertatsiya",
-  "acad_btn_sample_title": "Tayyor akademik tadqiqot namunasini ochish"
+  "acad_btn_sample_title": "Tayyor akademik tadqiqot namunasini ochish",
+  "footer_mor_disclosure": "To'lovlar vakolatli savdo hamkori (Merchant of Record) sifatida ish yurituvchi Dodo Payments Inc. tomonidan xavfsiz amalga oshiriladi."
 }

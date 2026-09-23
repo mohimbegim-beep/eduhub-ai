@@ -183,7 +183,7 @@
   "mode_tutor": "Tutor Socrático 24/7",
   "mode_exam": "Generador de Exámenes IA",
   "footer_copyright": "© 2026 EduHub AI. Plataforma SaaS Autónoma. Todos los derechos reservados.",
-  "footer_disclaimer": "Payment processing, order fulfillment, and tax invoicing are securely managed by our certified PCI-DSS Level 1 payment partner. All transactions are protected with 256-bit bank-grade encryption.",
+  "footer_disclaimer": "Los pagos son procesados de forma segura por Dodo Payments Inc., actuando como comerciante de registro (Merchant of Record) autorizado. Facturación conforme a estándares internacionales.",
   "brand_subtitle": "Copiloto Académico Autónomo",
   "explore_all_tools": "Explorar todas las herramientas →",
   "nav_pillars": "Pilares",
@@ -500,7 +500,7 @@
   "support_title": "Centro de Arbitraje de Facturación y Reembolsos IA",
   "support_subtitle": "Análisis legal inmediato conforme a los Términos y Garantía de 14 días. Reembolso automatizado sin pérdidas y sin esperas humanas.",
   "label_email": "Correo Electrónico de Facturación:",
-  "label_order_id": "Nº de Pedido Certified Payment Processor (PCI-DSS L1) o últimos 4 dígitos:",
+  "label_order_id": "Nº de Pedido Dodo Payments Inc. o últimos 4 dígitos:",
   "label_plan": "Producto / Plan Contratado:",
   "label_date": "Fecha Aproximada de Transacción:",
   "label_issue": "Categoría del Reclamo / Motivo:",
@@ -513,7 +513,7 @@
   "tag_recommended": "Recomendado",
   "pref_bonus_desc": "Crédito inmediato con +20% adicional de saldo y 30 días Pro Max gratis. ¡Sin esperas bancarias!",
   "pref_card_title": "🏦 Reembolso a Tarjeta (Gastos de Pasarela Deducidos)",
-  "pref_card_desc": "Devolución estándar a tarjeta mediante Certified Payment Processor (PCI-DSS L1) (3-7 días hábiles; comisión no recuperable deducida).",
+  "pref_card_desc": "Devolución estándar a tarjeta mediante Dodo Payments Inc. (3-7 días hábiles; comisión no recuperable deducida).",
   "label_desc": "Detalle o explicación de la incidencia:",
   "legal_safe": "Protocolo de Arbitraje Legal Cifrado de 256 bits",
   "btn_analyze": "⚖️ Analizar Disputa con Árbitro IA",
@@ -1257,5 +1257,6 @@
   "acad_footer_standard": "Estricto estándar científico de VAK, GOST 7.0.5-2008 y Scopus IMRAD",
   "acad_footer_all_tools": "Todas las herramientas →",
   "acad_btn_sample_study": "🎓 Ejemplo: Disertación",
-  "acad_btn_sample_title": "Abrir proyecto de investigación académica de muestra"
+  "acad_btn_sample_title": "Abrir proyecto de investigación académica de muestra",
+  "footer_mor_disclosure": "Los pagos son procesados de forma segura por Dodo Payments Inc., actuando como comerciante de registro (Merchant of Record) autorizado."
 }
