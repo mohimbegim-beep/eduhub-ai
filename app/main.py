@@ -6411,10 +6411,14 @@ async def generate_marketplace_listing(payload: MarketplaceLabRequest):
             response_mime_type="application/json",
             safety_settings=get_safety_settings()
         )
-        resp = client.models.generate_content(
-            model=GEMINI_MODEL,
-            contents=user_prompt,
-            config=config
+        loop = asyncio.get_running_loop()
+        resp = await asyncio.wait_for(
+            loop.run_in_executor(None, lambda: client.models.generate_content(
+                model=GEMINI_MODEL,
+                contents=user_prompt,
+                config=config
+            )),
+            timeout=7.0
         )
         data = json.loads(resp.text.strip())
         data["status"] = "success"
@@ -6472,10 +6476,14 @@ async def generate_sop(payload: SOPBuilderRequest):
             response_mime_type="application/json",
             safety_settings=get_safety_settings()
         )
-        resp = client.models.generate_content(
-            model=GEMINI_MODEL,
-            contents=user_prompt,
-            config=config
+        loop = asyncio.get_running_loop()
+        resp = await asyncio.wait_for(
+            loop.run_in_executor(None, lambda: client.models.generate_content(
+                model=GEMINI_MODEL,
+                contents=user_prompt,
+                config=config
+            )),
+            timeout=7.0
         )
         data = json.loads(resp.text.strip())
         data["status"] = "success"
@@ -6523,10 +6531,14 @@ async def generate_excel_formula(payload: ExcelWizardRequest):
             response_mime_type="application/json",
             safety_settings=get_safety_settings()
         )
-        resp = client.models.generate_content(
-            model=GEMINI_MODEL,
-            contents=user_prompt,
-            config=config
+        loop = asyncio.get_running_loop()
+        resp = await asyncio.wait_for(
+            loop.run_in_executor(None, lambda: client.models.generate_content(
+                model=GEMINI_MODEL,
+                contents=user_prompt,
+                config=config
+            )),
+            timeout=7.0
         )
         data = json.loads(resp.text.strip())
         data["status"] = "success"
@@ -6789,10 +6801,14 @@ async def generate_teacher_lesson(payload: TeacherLabRequest):
             response_mime_type="application/json",
             safety_settings=get_safety_settings()
         )
-        resp = client.models.generate_content(
-            model=GEMINI_MODEL,
-            contents=user_prompt,
-            config=config
+        loop = asyncio.get_running_loop()
+        resp = await asyncio.wait_for(
+            loop.run_in_executor(None, lambda: client.models.generate_content(
+                model=GEMINI_MODEL,
+                contents=user_prompt,
+                config=config
+            )),
+            timeout=7.0
         )
         data = json.loads(resp.text.strip())
         data["status"] = "success"
