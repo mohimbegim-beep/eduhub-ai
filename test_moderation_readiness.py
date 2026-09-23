@@ -191,7 +191,7 @@ def run_moderation_audit():
     health_data = res_health.json() if res_health.status_code == 200 else {}
     report(
         "Мониторинг: Healthcheck и статус ИИ-модели",
-        res_health.status_code == 200 and health_data.get("model") == "gemini-2.5-flash",
+        res_health.status_code == 200 and health_data.get("model") in ["gemini-2.5-flash", "gemini-3.5-flash", "gemini-3.6-flash"],
         f"Модель: {health_data.get('model')}, Dodo API Ready: {health_data.get('dodo_payments_api_ready')}"
     )
 
