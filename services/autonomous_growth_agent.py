@@ -1,0 +1,190 @@
+#!/usr/bin/env python3
+"""
+EduHub AI — Autonomous AI Growth & Marketing Engine
+Role: Autonomous growth agent responsible for:
+1. Generating viral short-form video scripts (TikTok/Reels/Shorts) based on student pain points.
+2. Generating high-converting Telegram channel posts in 4 languages (UZ, RU, EN, ES).
+3. Producing Campus Ambassador outreach templates for student leaders.
+4. Generating B2B pitch copy for tutors ($39 Tutor Kit).
+5. Saving marketing assets to data/latest_marketing_pack.json and cataloging them.
+"""
+
+import sys
+import os
+import json
+import time
+from pathlib import Path
+from datetime import datetime, timezone
+
+# Ensure app is importable
+_base_dir = Path(__file__).resolve().parent.parent
+if str(_base_dir) not in sys.path:
+    sys.path.insert(0, str(_base_dir))
+
+DATA_DIR = _base_dir / "data"
+LATEST_PACK_FILE = DATA_DIR / "latest_marketing_pack.json"
+CATALOG_FILE = DATA_DIR / "growth_content_catalog.json"
+
+def generate_growth_pack(topic_focus: str = "exam_session_and_career") -> dict:
+    now_iso = datetime.now(timezone.utc).isoformat()
+    pack_id = f"mkt_{int(time.time())}"
+
+    pack_data = {
+        "pack_id": pack_id,
+        "created_at": now_iso,
+        "theme": topic_focus,
+        "tripwire_offers": {
+            "ats_resume": {"price": "$1", "url": "https://eduhub-ai.onrender.com/tools/ats-resume"},
+            "promax_trial": {"price": "$1", "url": "https://eduhub-ai.onrender.com/#pricing"},
+            "blueprints": {"price": "$1", "url": "https://eduhub-ai.onrender.com/blueprints"}
+        },
+        "viral_video_scripts": [
+            {
+                "id": "vid_ats_01",
+                "target_platform": "TikTok / Instagram Reels / YouTube Shorts",
+                "target_audience": "Graduating Students & Job Seekers",
+                "tool_featured": "ATS Resume & Job Matcher ($1)",
+                "duration_seconds": 30,
+                "hook_first_3_sec": "HR-робот удалил твое резюме еще до того, как его открыл человек. Вот почему.",
+                "visual_cues": "Показать экран с надписью 'Application Rejected' и затем открыть сканер резюме на EduHub AI.",
+                "body_content": "78% резюме отсеиваются алгоритмами Workday и Taleo из-за отсутствия точных ключевых слов. Загрузи текст вакансии и свое резюме в EduHub ATS Scanner за $1 — робот перепишет формулировки по стандарту Google XYZ и покажет точный % совпадения.",
+                "cta_caption": "Ссылка на сканер в шапке профиля. Проверь свой скор за 1 минуту 🚀"
+            },
+            {
+                "id": "vid_acad_02",
+                "target_platform": "TikTok / Instagram Reels",
+                "target_audience": "Дипломники, магистранты, аспиранты",
+                "tool_featured": "Academic & Research Lab",
+                "duration_seconds": 35,
+                "hook_first_3_sec": "Научрук вернул диплом и написал: 'Где научная новизна и гипотеза?'",
+                "visual_cues": "Паника студента в 2 часа ночи -> открытие Academic Lab на ноутбуке.",
+                "body_content": "Не трать три недели на оформление оглавления и введения. Academic Lab выстраивает структуру исследования строго по мировому канону IMRAD и ВАК: гипотеза, объект, предмет, положения на защиту и список литературы по ГОСТ 7.0.5.",
+                "cta_caption": "Запусти своего персонального научного ассистента в EduHub AI 🎓"
+            },
+            {
+                "id": "vid_ielts_03",
+                "target_platform": "TikTok / Instagram Reels",
+                "target_audience": "IELTS / CEFR Candidates",
+                "tool_featured": "Essay Grader & Rewriter (Band 8.5–9.0)",
+                "duration_seconds": 28,
+                "hook_first_3_sec": "Ты застрял на 6.0 по IELTS Writing? Вот ошибка, о которой молчат репетиторы.",
+                "visual_cues": "Красные пометки на эссе -> моментальный разбор по 4 критериям Cambridge.",
+                "body_content": "Ты используешь слабые связки вместо академических оборотов. Загрузи эссе в EduHub Essay Grader: он оценит работу по официальным критериям Task Response, Cohesion, Lexical Resource и покажет версию Band 9.0.",
+                "cta_caption": "Проверь свое эссе бесплатно на eduhub-ai.onrender.com ✨"
+            }
+        ],
+        "telegram_posts": {
+            "ru": {
+                "title": "🔥 3 инструмента EduHub AI, которые спасут твою сессию за 1 вечер",
+                "body": (
+                    "Сессия близко, а дедлайны уже вчера? Мы собрали арсенал автономных академических модулей, "
+                    "которые решают 90% рутины:\n\n"
+                    "1️⃣ Academic Lab — поглавный план, научная новизна и введение по стандартам ВАК и IMRAD.\n"
+                    "2️⃣ ATS Resume Scanner — подготовь идеальное резюме для стажировки за $1.\n"
+                    "3️⃣ Anti-Plagiarism Humanizer — академический рерайтер с сохранением научного смысла.\n\n"
+                    "💳 Доступ ко всем модулям Pro Max всего за $1 на 3 дня!\n"
+                    "🛡️ Платежи защищены Dodo Payments Inc. (Merchant of Record). 14 дней гарантии возврата."
+                ),
+                "button_text": "Попробовать Pro Max за $1 →",
+                "button_url": "https://eduhub-ai.onrender.com/#pricing"
+            },
+            "uz": {
+                "title": "🎓 Sessiyada vaqtni 5 barobar tejash siri: EduHub AI",
+                "body": (
+                    "Diplom ishi, kurs ishi yoki xalqaro til sertifikatiga tayyorgarlik ko'ryapsizmi? "
+                    "Talabalar uchun eng kuchli 3 ta modul:\n\n"
+                    "1️⃣ Academic Lab — ilmiy tadqiqot strukturasi va IMRAD standarti.\n"
+                    "2️⃣ ATS Resume Scanner — nufuzli kompaniyalarga ishga kirish uchun rezyumeni 1$ ga optimallashtirish.\n"
+                    "3️⃣ Essay Grader — insho va maqolalarni Cambridge 8.5-9.0 darajasiga ko'tarish.\n\n"
+                    "⚡ 3 kunlik to'liq Pro Max sinov muddati bor-yo'g'i 1$!\n"
+                    "🛡️ Dodo Payments Inc. orqali 100% xavfsiz to'lov va 14 kunlik qaytarish kafolati."
+                ),
+                "button_text": "Pro Max 1$ ga boshlash →",
+                "button_url": "https://eduhub-ai.onrender.com/#pricing"
+            },
+            "en": {
+                "title": "⚡ Crush Your Academic Deadlines with EduHub AI Copilot",
+                "body": (
+                    "Facing tight paper deadlines and internship applications? EduHub AI is your 24/7 academic engine:\n\n"
+                    "• Academic Lab: Complete IMRAD dissertation and thesis scaffolding in seconds.\n"
+                    "• ATS Resume Matcher: Pass Workday & Taleo screening algorithms with a 90%+ match score for just $1.\n"
+                    "• Essay Grader: Instant Cambridge examiner rubric evaluation (Band 8.5–9.0 rewrites).\n\n"
+                    "🚀 Claim 3 days of Pro Max for just $1.\n"
+                    "🛡️ Payments securely processed by Dodo Payments Inc. with a 14-day 100% money-back guarantee."
+                ),
+                "button_text": "Claim 3-Day Pass for $1 →",
+                "button_url": "https://eduhub-ai.onrender.com/#pricing"
+            },
+            "es": {
+                "title": "📚 Domina tus Entregas Académicas con EduHub AI",
+                "body": (
+                    "¿Tesis, ensayos o aplicaciones de trabajo pendientes? Tu copiloto académico autónomo:\n\n"
+                    "• Laboratorio de Investigación: Estructura IMRAD rigurosa con citas bibliográficas.\n"
+                    "• Escáner ATS de Currículum: Supera los filtros automáticos por solo $1.\n"
+                    "• Corrector de Ensayos: Puntuación y correcciones de nivel nativo C1/C2.\n\n"
+                    "✨ Acceso Pro Max durante 3 días por solo $1.\n"
+                    "🛡️ Pagos procesados de forma segura por Dodo Payments Inc. Garantía de devolución de 14 días."
+                ),
+                "button_text": "Obtener Pro Max por $1 →",
+                "button_url": "https://eduhub-ai.onrender.com/#pricing"
+            }
+        },
+        "campus_ambassador_pitch": {
+            "headline": "Партнерская программа для старост и студенческих лидеров",
+            "commission_rate": "25% рекуррентной комиссии ежемесячно со всех оплат группы",
+            "sample_pitch_message": (
+                "Ребята, всем привет! Чтобы закрыть курсачи и сессию без бессонных ночей, "
+                "я подключил для нашей группы промо-доступ к академическому ИИ EduHub AI: "
+                "https://eduhub-ai.onrender.com. По нашей ссылке 3-дневный Pro Max со всеми генерациями стоит всего $1. "
+                "Там есть сканер резюме, оформление ГОСТ-списков и дипломный ассистент."
+            )
+        },
+        "b2b_tutor_outreach": {
+            "subject": "Автоматизация проверки домашних заданий и поурочных планов для репетиторов",
+            "body": (
+                "Здравствуйте! Вы тратите по 2–3 часа каждый вечер на рутинную проверку эссе учеников и составление тестов? "
+                "Мы разработали специализированный модуль Teacher Lab & Essay Grader (https://eduhub-ai.onrender.com/tools/teacher-lab). "
+                "Он генерирует поурочный план на 45 минут с тестами и проверяет студенческие работы за 15 секунд с развернутым отчетом для родителей. "
+                "В тариф Tutor Kit ($39/мес) включены безлимитные проверки и генерация брендированных заданий."
+            )
+        }
+    }
+
+    # Save to data directory
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
+    with open(LATEST_PACK_FILE, "w", encoding="utf-8") as f:
+        json.dump(pack_data, f, indent=2, ensure_ascii=False)
+
+    # Append to catalog
+    catalog = []
+    if CATALOG_FILE.exists():
+        try:
+            with open(CATALOG_FILE, "r", encoding="utf-8") as f:
+                catalog = json.load(f)
+        except Exception:
+            catalog = []
+    
+    catalog.append({
+        "pack_id": pack_id,
+        "created_at": now_iso,
+        "theme": topic_focus,
+        "video_count": len(pack_data["viral_video_scripts"]),
+        "languages": list(pack_data["telegram_posts"].keys())
+    })
+
+    with open(CATALOG_FILE, "w", encoding="utf-8") as f:
+        json.dump(catalog[-50:], f, indent=2, ensure_ascii=False)
+
+    print(f"[GROWTH AGENT] Generated growth pack '{pack_id}' with {len(pack_data['viral_video_scripts'])} video scripts and 4-language Telegram posts.")
+    return pack_data
+
+if __name__ == "__main__":
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8")
+    
+    print("=" * 60)
+    print("🚀 EDUHUB AI — AUTONOMOUS GROWTH & MARKETING AGENT")
+    print("=" * 60)
+    res = generate_growth_pack()
+    print(f"Generated Pack ID: {res['pack_id']}")
+    print(f"Assets created: {len(res['viral_video_scripts'])} video scripts, {len(res['telegram_posts'])} Telegram posts.")

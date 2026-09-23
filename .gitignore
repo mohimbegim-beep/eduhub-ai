@@ -19,3 +19,4 @@ scratch_frames/
 data/backups/
 data/*.tmp
 data/sentinel_status.json
+data/sweeper_state.json

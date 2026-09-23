@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-EduHub AI — 24/7 Keep-Alive Sentinel Daemon
-Pings the Render production endpoint every 9 minutes (540 seconds)
-to prevent the free-tier container from falling into a 15-minute sleep.
+EduHub AI — 24/7 Keep-Alive Sentinel Daemon & Autonomous Sweeper
+1. Pings the Render production endpoint every 9 minutes (540 seconds)
+   to prevent the free-tier container from falling into a 15-minute sleep.
+2. Coordinates the Autonomous Sweeper Agent (Dunning expiry, ephemeral P2P rooms, periodic snapshots).
+3. Telemetry tracking into data/sentinel_status.json.
 """
 import time
 import urllib.request
@@ -13,13 +15,24 @@ from pathlib import Path
 from datetime import datetime, timezone
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+if str(BASE_DIR) not in sys.path:
+    sys.path.insert(0, str(BASE_DIR))
+
 TARGET_URL = "https://eduhub-ai.onrender.com/health"
 PING_INTERVAL_SECONDS = 540  # 9 minutes (Render sleeps after 15 minutes)
 
 if hasattr(sys.stdout, 'reconfigure'):
     sys.stdout.reconfigure(encoding='utf-8', errors='replace')
 
-def save_sentinel_telemetry(success: bool, status_code: int = 0, latency_ms: float = 0.0, error: str = None):
+def run_background_sweeps():
+    """Runs autonomous maintenance tasks alongside the keepalive ping."""
+    try:
+        from services.autonomous_sweeper import run_autonomous_sweep
+        return run_autonomous_sweep()
+    except Exception as ex:
+        return {"status": "error", "error": str(ex)}
+
+def save_sentinel_telemetry(success: bool, status_code: int = 0, latency_ms: float = 0.0, error: str = None, sweep_info: dict = None):
     try:
         data_file = BASE_DIR / "data" / "sentinel_status.json"
         data_file.parent.mkdir(parents=True, exist_ok=True)
@@ -33,7 +46,8 @@ def save_sentinel_telemetry(success: bool, status_code: int = 0, latency_ms: flo
             "last_status_code": status_code,
             "latency_ms": round(latency_ms, 1),
             "success": success,
-            "error": error
+            "error": error,
+            "sweeper": sweep_info or {"status": "idle"}
         }
         with open(data_file, "w", encoding="utf-8") as f:
             json.dump(payload, f, indent=2)
@@ -42,6 +56,11 @@ def save_sentinel_telemetry(success: bool, status_code: int = 0, latency_ms: flo
 
 def ping():
     now_str = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
+    
+    # 1. Execute autonomous sweeps
+    sweep_results = run_background_sweeps()
+    
+    # 2. Execute network ping
     try:
         req = urllib.request.Request(
             TARGET_URL,
@@ -51,10 +70,10 @@ def ping():
         with urllib.request.urlopen(req, timeout=45) as res:
             latency = (time.time() - t0) * 1000
             print(f"[{now_str}] 🟢 KEEP-ALIVE OK: HTTP {res.status} ({latency:.1f}ms) -> {TARGET_URL}")
-            save_sentinel_telemetry(True, status_code=res.status, latency_ms=latency)
+            save_sentinel_telemetry(True, status_code=res.status, latency_ms=latency, sweep_info=sweep_results)
     except Exception as e:
         print(f"[{now_str}] ⚠️ PING WARNING: {e}")
-        save_sentinel_telemetry(False, status_code=0, error=str(e))
+        save_sentinel_telemetry(False, status_code=0, error=str(e), sweep_info=sweep_results)
 
 if __name__ == "__main__":
     print(f"[*] EduHub Keep-Alive Sentinel started. Target: {TARGET_URL}")

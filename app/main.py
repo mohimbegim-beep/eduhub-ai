@@ -646,6 +646,54 @@ def apply_dunning_grace_period(email: str, order_id: str = None, grace_days: int
     print(f"[DUNNING GRACE PERIOD] Granted {grace_days}-day grace access to {email} until {time.strftime('%Y-%m-%d %H:%M:%S', time.gmtime(grace_until))}")
     return user
 
+def sweep_expired_dunning_grace_periods() -> dict:
+    """
+    Автономный агент проверки истекших Dunning Grace Periods:
+    находит всех пользователей, чей льготный период истек без оплаты,
+    и автоматически отзывает Pro Max, переводя в free_tier.
+    """
+    balances = load_user_balances()
+    now = time.time()
+    expired_count = 0
+    changed = False
+
+    for email, user in balances.items():
+        sub = user.get("subscription", {})
+        status = sub.get("status")
+        dunning = sub.get("dunning", {})
+        if status == "grace_period" and dunning.get("active"):
+            grace_until = dunning.get("grace_period_until", 0)
+            if now >= grace_until:
+                sub["status"] = "expired"
+                sub["role"] = "free_tier"
+                dunning["active"] = False
+                dunning["expired_at"] = now
+                user["role"] = "free_tier"
+                user["tier"] = "free_tier"
+                user["is_subscribed"] = False
+                user["last_updated"] = now
+                expired_count += 1
+                changed = True
+                print(f"[DUNNING SWEEPER] Grace period expired for {email}. Reverted to free_tier.")
+                record_system_audit_event(
+                    level="INFO",
+                    event="DUNNING_GRACE_PERIOD_EXPIRED",
+                    details={"email": email, "grace_until": grace_until, "action": "reverted_to_free_tier"}
+                )
+
+    if changed:
+        save_user_balances(balances)
+        try:
+            backup_engine.create_snapshot()
+        except Exception:
+            pass
+
+    return {
+        "status": "success",
+        "timestamp": now,
+        "swept_count": expired_count
+    }
+
 def apply_refund_or_dispute(email: str, order_id: str = None, reason: str = "refund") -> dict:
     """
     Обработка возвратов (refund) и чарджбэков (dispute): немедленный отзыв подписки,
@@ -2600,6 +2648,16 @@ async def get_system_backups_list():
         "snapshots": snapshots
     }
 
+@app.post("/api/v1/system/dunning/sweep", tags=["Billing & Dunning"])
+@app.get("/api/v1/system/dunning/sweep", tags=["Billing & Dunning"])
+async def trigger_dunning_sweep():
+    """
+    Эндпоинт автономного клиринга истекших льготных периодов (Dunning Grace Period).
+    Отзывает неоплаченные Pro Max подписки и возвращает статистику зачистки.
+    """
+    result = sweep_expired_dunning_grace_periods()
+    return result
+
 @app.post("/api/v1/system/backup", tags=["System & Backups"])
 async def trigger_system_backup_snapshot():
     """
@@ -3290,6 +3348,94 @@ async def analyze_billing_dispute(payload: DisputeAnalyzeRequest):
         "legal_basis": legal_basis,
         "resolution_text": resolution_text
     }
+
+    # Автоматическое исполнение решения арбитража в кошельке и финансовом журнале
+    clean_cust_email = (payload.customer_email or "").strip().lower()
+    if clean_cust_email and "@" in clean_cust_email:
+        if verdict == "APPROVED_BONUS":
+            try:
+                b_map = load_user_balances()
+                u_obj = get_or_create_user(clean_cust_email)
+                u_obj["flash_credits"] = u_obj.get("flash_credits", 0) + bonus_flash_credits
+                u_obj["role"] = "pro_max"
+                u_obj["tier"] = "pro_max"
+                u_obj["is_subscribed"] = True
+                if "subscription" not in u_obj or not isinstance(u_obj["subscription"], dict):
+                    u_obj["subscription"] = {}
+                u_obj["subscription"]["status"] = "active"
+                u_obj["subscription"]["role"] = "pro_max"
+                u_obj["subscription"]["tier"] = "pro_max"
+                u_obj["subscription"]["order_id"] = payload.order_id or dispute_id
+                u_obj["subscription"]["dispute_settlement"] = {
+                    "dispute_id": dispute_id,
+                    "bonus_value": bonus_credit_value,
+                    "credits_awarded": bonus_flash_credits,
+                    "timestamp": time.time()
+                }
+                u_obj["last_updated"] = time.time()
+                b_map[clean_cust_email] = u_obj
+                save_user_balances(b_map)
+
+                if TRANSACTIONS_LOG.exists():
+                    try:
+                        with open(TRANSACTIONS_LOG, "r", encoding="utf-8") as f:
+                            tx_list = json.load(f)
+                        tx_list.append({
+                            "event_id": f"tx_bonus_{dispute_id}",
+                            "event_type": "dispute.bonus_granted",
+                            "customer_email": clean_cust_email,
+                            "amount": int(bonus_credit_value * 100),
+                            "currency": "USD",
+                            "attributes": {
+                                "dispute_id": dispute_id,
+                                "credits_awarded": bonus_flash_credits,
+                                "order_id": payload.order_id
+                            }
+                        })
+                        atomic_write_json(TRANSACTIONS_LOG, tx_list)
+                    except Exception:
+                        pass
+
+                record_system_audit_event("INFO", "DISPUTE_BONUS_AUTO_CREDITED", {
+                    "dispute_id": dispute_id,
+                    "email": clean_cust_email,
+                    "credits": bonus_flash_credits,
+                    "bonus_value": bonus_credit_value
+                })
+            except Exception as b_err:
+                print(f"[DISPUTE AUTO-CREDIT ERROR] {b_err}")
+
+        elif verdict in ["APPROVED", "APPROVED_NET_REFUND"]:
+            try:
+                apply_refund_or_dispute(clean_cust_email, order_id=payload.order_id, reason="dispute_refund")
+                if TRANSACTIONS_LOG.exists():
+                    try:
+                        with open(TRANSACTIONS_LOG, "r", encoding="utf-8") as f:
+                            tx_list = json.load(f)
+                        tx_list.append({
+                            "event_id": f"tx_refund_{dispute_id}",
+                            "event_type": "dispute.refund_settled",
+                            "customer_email": clean_cust_email,
+                            "amount": int(refund_payout * 100),
+                            "currency": "USD",
+                            "attributes": {
+                                "dispute_id": dispute_id,
+                                "net_refund": refund_payout,
+                                "gateway_fee": gateway_fee,
+                                "order_id": payload.order_id
+                            }
+                        })
+                        atomic_write_json(TRANSACTIONS_LOG, tx_list)
+                    except Exception:
+                        pass
+
+                record_system_audit_event("INFO", "DISPUTE_REFUND_AUTO_SETTLED", {
+                    "dispute_id": dispute_id,
+                    "email": clean_cust_email,
+                    "net_refund": refund_payout
+                })
+            except Exception as r_err:
+                print(f"[DISPUTE AUTO-REFUND ERROR] {r_err}")
 
     save_dispute(record)
 
@@ -5454,6 +5600,33 @@ async def autonomous_keepalive_daemon():
         except Exception:
             pass
         await asyncio.sleep(600)
+
+# --------------------------------------------------------------------------
+# Autonomous Growth & Marketing Agent Endpoints
+# --------------------------------------------------------------------------
+@app.get("/api/v1/growth/latest-pack", tags=["Autonomous Growth Engine"])
+async def get_latest_growth_pack():
+    """
+    Возвращает последний сгенерированный маркетинговый пакет (TikTok скрипты, Telegram посты, AEO сниппеты).
+    """
+    pack_file = DATA_DIR / "latest_marketing_pack.json"
+    if pack_file.exists():
+        try:
+            with open(pack_file, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception:
+            pass
+    from services.autonomous_growth_agent import generate_growth_pack
+    return generate_growth_pack()
+
+@app.post("/api/v1/growth/generate-pack", tags=["Autonomous Growth Engine"])
+async def trigger_growth_pack_generation(theme: Optional[str] = "exam_session_and_career"):
+    """
+    Генерирует свежий мультиязычный маркетинговый пакет через автономный ИИ-агент.
+    """
+    from services.autonomous_growth_agent import generate_growth_pack
+    res = generate_growth_pack(topic_focus=theme or "exam_session_and_career")
+    return res
 
 async def autonomous_autoposter_daemon():
     """

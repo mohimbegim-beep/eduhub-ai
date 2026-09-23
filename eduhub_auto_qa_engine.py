@@ -922,6 +922,56 @@ class AutoQAGuardEngine:
         return t
 
     # --------------------------------------------------------------------------
+    # TEST 15: Autonomous Agent Fleet, Sweepers & Growth Engine
+    # --------------------------------------------------------------------------
+    def test_15_autonomous_agent_fleet_and_sweepers(self):
+        t = TestCaseResult("15. Autonomous Agent Fleet, Dunning Sweeper & Growth Engine")
+        start = time.perf_counter()
+
+        try:
+            from fastapi.testclient import TestClient
+            sys.path.insert(0, str(self.base_dir))
+            from app.main import app
+
+            client = TestClient(app, raise_server_exceptions=False)
+
+            # 1. Dunning Sweeper Endpoint
+            res_sweep = client.post("/api/v1/system/dunning/sweep")
+            if res_sweep.status_code != 200 or res_sweep.json().get("status") != "success":
+                t.passed = False
+                t.errors.append(f"Dunning sweep endpoint returned {res_sweep.status_code}")
+
+            # 2. Autonomous Growth Engine
+            res_growth = client.get("/api/v1/growth/latest-pack")
+            if res_growth.status_code != 200:
+                t.passed = False
+                t.errors.append(f"Growth latest-pack endpoint returned {res_growth.status_code}")
+            else:
+                g_data = res_growth.json()
+                if "viral_video_scripts" not in g_data or "telegram_posts" not in g_data:
+                    t.passed = False
+                    t.errors.append("Growth pack missing required viral assets")
+
+            # 3. Sentinel Telemetry with Sweeper integration
+            res_sent = client.get("/api/v1/system/sentinel/status")
+            if res_sent.status_code != 200:
+                t.passed = False
+                t.errors.append("Sentinel status failed")
+            else:
+                s_json = res_sent.json().get("sentinel", {})
+                if not s_json.get("is_daemon_alive") or "sweeper" not in s_json:
+                    t.passed = False
+                    t.errors.append(f"Sentinel telemetry missing sweeper block: {s_json}")
+
+            t.details = "Dunning sweeper operational; Omnichannel Growth Engine active; Sentinel daemon telemetrying 24/7."
+        except Exception as e:
+            t.passed = False
+            t.errors.append(f"Autonomous agent QA exception: {e}")
+
+        t.duration_ms = (time.perf_counter() - start) * 1000
+        return t
+
+    # --------------------------------------------------------------------------
     # Main Suite Execution
     # --------------------------------------------------------------------------
     def run_all_tests(self, auto_fix=True):
@@ -942,7 +992,8 @@ class AutoQAGuardEngine:
             self.test_11_billing_dunning_refunds_and_receipts,
             self.test_12_performance_compression_and_seo,
             self.test_13_observability_deep_health_and_sentinel,
-            self.test_14_compliance_gdpr_and_mor_transparency
+            self.test_14_compliance_gdpr_and_mor_transparency,
+            self.test_15_autonomous_agent_fleet_and_sweepers
         ]
 
         self.test_results = []
