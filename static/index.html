@@ -81,6 +81,8 @@
     <!-- EduHub AI Premium Design System (Linear & Stripe Aesthetics) -->
     <link rel="stylesheet" href="/static/css/eduhub_premium_core.css">
     <link rel="stylesheet" href="/static/css/premium_theme.css">
+    <link rel="stylesheet" href="/static/css/theme-system.css">
+    <script src="/static/js/theme-engine.js"></script>
 
     <!-- Essential User Utilities (Export, History Drawer, Stepper, Camera) -->
     <script src="/static/js/user-utils.js" defer></script>
@@ -217,24 +219,19 @@
 </head>
 <body class="bg-[#030712] text-slate-300 font-sans min-h-screen flex flex-col justify-between selection:bg-indigo-600 selection:text-white">
     <!-- Top Trending EdTech Discovery Banner (Autonomous Trend Scout) -->
-    <div id="trending-banner" class="bg-gradient-to-r from-indigo-900/90 via-blue-900/90 to-purple-900/90 border-b border-indigo-700/50 py-2 px-4 text-center text-xs text-white flex items-center justify-center gap-2 relative z-50">
-        <span class="bg-indigo-500 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full shadow">Trending #1</span>
+    <div id="trending-banner" class="bg-gradient-to-r from-indigo-950/90 via-blue-950/90 to-purple-950/90 border-b border-indigo-700/40 py-1.5 px-4 text-center text-xs text-white flex items-center justify-center gap-2 relative z-50">
+        <span class="bg-indigo-600/80 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full shadow-sm">Trending #1</span>
         <span id="trending-topic" class="font-semibold text-blue-100" data-i18n="banner_trending_topic">IELTS & TOEFL AI Speaking & Writing Diagnostic Coach (+340% YoY)</span>
         <span class="hidden md:inline text-indigo-300">— Live on EduHub Socratic Copilot</span>
-        <a href="#demo" class="underline font-semibold hover:text-white ml-2 text-blue-200">Explore Interactive Demo &rarr;</a>
+        <a href="/tools/essay-grader" class="underline font-semibold hover:text-white ml-2 text-blue-200" data-i18n="update_cta">Start Free &rarr;</a>
+        <button onclick="closeAnnouncementBanner()" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white p-1 rounded-md transition focus:outline-none" aria-label="Dismiss banner">&times;</button>
     </div>
 
-
-    <!-- Top Announcement Bar -->
-    <div class="bg-gradient-to-r from-blue-900/60 via-indigo-900/60 to-purple-900/60 border-b border-white/[0.08] text-xs py-2 px-4 text-center text-slate-300 flex items-center justify-center gap-2">
-        <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-        <span><strong data-i18n="update_label">🎁 Early Beta Access:</strong> <span data-i18n="update_text">All AI tools and premium features are currently 100% free for students and teachers.</span></span>
-        <a href="#rooms" class="underline hover:text-white font-medium ml-1" data-i18n="update_cta">Start Free &rarr;</a>
-    </div>
-
-    <!-- Navigation Header (Streamlined, Zero Overlap) -->
-    <header class="border-b border-white/[0.08] bg-slate-950/90 backdrop-blur-md sticky top-0 z-40" style="-webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);">
+    <!-- Navigation Header (Streamlined, Luxury De-Cluttered 2026 Layout) -->
+    <header class="border-b border-white/[0.08] bg-slate-950/90 backdrop-blur-md sticky top-0 z-40 transition-colors duration-200" style="-webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex justify-between items-center">
+            
+            <!-- Left Zone: Brand Identity -->
             <div class="flex items-center space-x-3">
                 <a href="/" class="flex items-center space-x-2">
                     <span class="w-8 h-8 rounded-lg bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center font-black text-white text-lg shadow-md shadow-blue-500/30">E</span>
@@ -243,33 +240,112 @@
                 <span class="hidden md:inline-block text-[11px] bg-blue-950 text-blue-300 px-2.5 py-0.5 rounded-full border border-blue-800 font-medium">Autonomous Copilot</span>
             </div>
             
-            <!-- Clear 3-Pillar Navigation Links -->
-            <nav class="hidden lg:flex items-center space-x-5 text-xs font-semibold">
-                <a href="#rooms" onclick="switchRoom(1)" class="text-slate-300 hover:text-white transition flex items-center gap-1">
-                    <span data-i18n="tab_hub">Academic Hub</span>
-                </a>
-                <a href="/academic-lab" class="text-indigo-300 hover:text-white transition flex items-center gap-1 bg-indigo-950/40 border border-indigo-800/60 px-2.5 py-1 rounded-lg">
-                    <span data-i18n="nav_academic_lab">🏛️ Academic Lab</span>
-                </a>
-                <a href="/tools/essay-grader" class="text-amber-400 hover:text-amber-300 transition flex items-center gap-1 bg-amber-950/40 border border-amber-800/60 px-2.5 py-1 rounded-lg">
-                    <span data-i18n="nav_ielts">IELTS $1 (3 Days)</span>
-                </a>
-                <a href="/tools/ats-resume" class="text-emerald-300 hover:text-white transition flex items-center gap-1">
-                    <span data-i18n="tab_resume">ATS Resume ($1)</span>
-                </a>
-                <a href="/tools/marketplace-lab" class="text-amber-400 hover:text-amber-300 transition flex items-center gap-1">
-                    <span data-i18n="nav_uzum">Uzum/WB Lab ($1)</span>
-                </a>
-                <a href="/blueprints" class="text-purple-300 hover:text-white transition flex items-center gap-1">
-                    <span data-i18n="tab_factory">AI Factories ($1)</span>
-                </a>
-                <a href="/report" class="text-blue-300 hover:text-white transition flex items-center gap-1">
-                    <span data-i18n="nav_reports">Report 2026</span>
-                </a>
-                <a href="#pricing" class="text-slate-400 hover:text-white transition" data-i18n="nav_pricing">Pricing</a>
+            <!-- Center Zone: De-Cluttered Navigation with Interactive Mega-Menu -->
+            <nav class="hidden lg:flex items-center space-x-6 text-xs font-semibold">
+                
+                <!-- Mega-Menu Dropdown Trigger -->
+                <div class="mega-menu-trigger relative">
+                    <button type="button" class="text-slate-300 hover:text-white transition flex items-center gap-1.5 py-1 px-1 focus:outline-none cursor-pointer">
+                        <span data-i18n="nav_tools">Tools ▾</span>
+                    </button>
+                    
+                    <!-- Glass Mega-Menu Panel -->
+                    <div class="mega-menu-dropdown absolute top-full left-0 mt-2 w-[540px] rounded-2xl p-4 grid grid-cols-2 gap-3 shadow-2xl z-50 border border-white/10">
+                        
+                        <!-- Column 1: Academic & Research -->
+                        <div class="space-y-2">
+                            <div class="text-[10px] font-bold uppercase tracking-wider text-slate-400 px-2 flex items-center gap-1.5">
+                                <span>🎓</span> <span data-i18n="nav_cat_academic">Academic & Research</span>
+                            </div>
+                            <div class="space-y-1">
+                                <a href="/academic-lab" class="mega-menu-item flex items-start gap-2.5 p-2 rounded-xl text-slate-300 hover:text-white">
+                                    <div class="w-7 h-7 rounded-lg bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-sm shrink-0 mt-0.5">🏛️</div>
+                                    <div>
+                                        <div class="text-xs font-semibold text-slate-200" data-i18n="nav_academic_lab">🏛️ Academic Lab</div>
+                                        <div class="text-[10px] text-slate-400" data-i18n="menu_desc_acad">Deep citations & peer-review audit</div>
+                                    </div>
+                                </a>
+                                <a href="#rooms" onclick="switchRoom(1)" class="mega-menu-item flex items-start gap-2.5 p-2 rounded-xl text-slate-300 hover:text-white">
+                                    <div class="w-7 h-7 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center text-sm shrink-0 mt-0.5">💡</div>
+                                    <div>
+                                        <div class="text-xs font-semibold text-slate-200" data-i18n="tab_hub">Academic Hub</div>
+                                        <div class="text-[10px] text-slate-400" data-i18n="menu_desc_hub">Socratic tutoring & homework helper</div>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="pt-2 border-t border-white/[0.06]">
+                                <div class="text-[10px] font-bold uppercase tracking-wider text-slate-400 px-2 mb-1 flex items-center gap-1.5">
+                                    <span>✍️</span> <span data-i18n="nav_cat_languages">IELTS & Languages</span>
+                                </div>
+                                <a href="/tools/essay-grader" class="mega-menu-item flex items-start gap-2.5 p-2 rounded-xl text-slate-300 hover:text-white">
+                                    <div class="w-7 h-7 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center text-sm shrink-0 mt-0.5">⭐</div>
+                                    <div>
+                                        <div class="text-xs font-semibold text-amber-300" data-i18n="nav_ielts">IELTS $1 (3 Days)</div>
+                                        <div class="text-[10px] text-slate-400" data-i18n="menu_desc_ielts">Cambridge Band 8.5+ essay evaluator</div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Column 2: Career, Analytics & Blueprints -->
+                        <div class="space-y-2">
+                            <div class="text-[10px] font-bold uppercase tracking-wider text-slate-400 px-2 flex items-center gap-1.5">
+                                <span>💼</span> <span data-i18n="nav_cat_career">Career & Analytics</span>
+                            </div>
+                            <div class="space-y-1">
+                                <a href="/tools/ats-resume" class="mega-menu-item flex items-start gap-2.5 p-2 rounded-xl text-slate-300 hover:text-white">
+                                    <div class="w-7 h-7 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-sm shrink-0 mt-0.5">📄</div>
+                                    <div>
+                                        <div class="text-xs font-semibold text-slate-200" data-i18n="tab_resume">ATS Resume Expert</div>
+                                        <div class="text-[10px] text-slate-400" data-i18n="menu_desc_resume">Keyword scanner & bullet rewrite</div>
+                                    </div>
+                                </a>
+                                <a href="/tools/marketplace-lab" class="mega-menu-item flex items-start gap-2.5 p-2 rounded-xl text-slate-300 hover:text-white">
+                                    <div class="w-7 h-7 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center text-sm shrink-0 mt-0.5">🛒</div>
+                                    <div>
+                                        <div class="text-xs font-semibold text-slate-200" data-i18n="nav_uzum">Uzum/WB Lab ($1)</div>
+                                        <div class="text-[10px] text-slate-400" data-i18n="menu_desc_uzum">SEO cards & unit economics</div>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="pt-2 border-t border-white/[0.06]">
+                                <div class="text-[10px] font-bold uppercase tracking-wider text-slate-400 px-2 mb-1 flex items-center gap-1.5">
+                                    <span>🏭</span> <span data-i18n="nav_cat_showcase">Blueprints & Labs</span>
+                                </div>
+                                <a href="/blueprints" class="mega-menu-item flex items-start gap-2.5 p-2 rounded-xl text-slate-300 hover:text-white">
+                                    <div class="w-7 h-7 rounded-lg bg-purple-500/20 text-purple-400 flex items-center justify-center text-sm shrink-0 mt-0.5">⚡</div>
+                                    <div>
+                                        <div class="text-xs font-semibold text-purple-300" data-i18n="tab_factory">AI Factories</div>
+                                        <div class="text-[10px] text-slate-400" data-i18n="menu_desc_blueprints">Turnkey production templates</div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Mega Menu Footer Link -->
+                        <div class="col-span-2 pt-2 border-t border-white/[0.08] flex justify-between items-center px-1">
+                            <span class="text-[10px] text-slate-500 font-medium">15 Autonomous AI Engines</span>
+                            <a href="#rooms" class="text-[11px] font-semibold text-indigo-400 hover:text-indigo-300 flex items-center gap-1" data-i18n="nav_all_tools">View all 15 tools &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Primary Direct Links -->
+                <a href="#pricing" class="text-slate-300 hover:text-white transition" data-i18n="nav_pricing">Pricing & Tiers</a>
+                <a href="/report" class="text-slate-300 hover:text-white transition" data-i18n="nav_reports">Report 2026</a>
+                <a href="#faq" class="text-slate-400 hover:text-white transition" data-i18n="nav_faq">FAQ</a>
             </nav>
 
+            <!-- Right Zone: Controls, Theme, Locales & Tactile CTA -->
             <div class="flex items-center space-x-2 sm:space-x-3">
+                
+                <!-- Theme Toggle Button (☀️ Day / 🌙 Night) -->
+                <button onclick="toggleTheme()" class="theme-toggle-btn w-8 h-8 rounded-xl text-sm transition focus:outline-none" title="Toggle Day/Night Mode (Alt+T)" aria-label="Toggle Theme">
+                    <span class="theme-icon">☀️</span>
+                </button>
+
                 <!-- Multi-Language Switcher (EN | RU | UZ | ES) -->
                 <div class="inline-flex bg-slate-900 border border-white/[0.08] rounded-xl p-0.5">
                     <button onclick="setLocale('en')" data-lang-btn="en" class="lang-btn px-2 py-1 rounded-lg text-xs font-bold transition bg-blue-600 text-white shadow-sm shadow-blue-500/20">EN</button>
@@ -284,9 +360,9 @@
                     <span class="hidden sm:inline" data-i18n="nav_history">History</span>
                 </button>
 
-                <!-- Hero Action Button -->
-                <a href="#checkout" class="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-black text-xs px-3.5 py-2 rounded-xl shadow-lg shadow-amber-500/20 transition transform active:scale-95 whitespace-nowrap">
-                    <span data-i18n="cta_trial">Start 3-Day IELTS Access for $1 →</span>
+                <!-- Tactile Shimmer CTA Button -->
+                <a href="#checkout" class="btn-shimmer bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-black text-xs px-3.5 py-2 rounded-xl shadow-lg shadow-amber-500/20 transition transform active:scale-95 whitespace-nowrap">
+                    <span data-i18n="cta_promax_compact">Pro Max for $1 &rarr;</span>
                 </a>
             </div>
         </div>

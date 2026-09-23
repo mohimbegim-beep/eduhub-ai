@@ -1,0 +1,253 @@
+/* ==========================================================================
+   EDUHUB AI — ADAPTIVE THEME SYSTEM & LUXURY DESIGN TOKENS (2026)
+   File: static/css/theme-system.css
+   Standards: Linear, Stripe, Raycast & Apple Human Interface Guidelines
+   ========================================================================== */
+
+/* 1. THEME DESIGN TOKENS (CSS VARIABLES) */
+:root, html.dark {
+    --bg-primary: #030712;
+    --bg-secondary: #0B0F19;
+    --bg-card: rgba(15, 23, 42, 0.7);
+    --bg-card-hover: rgba(23, 33, 56, 0.85);
+    --bg-glass: rgba(3, 7, 18, 0.85);
+    --bg-input: #0B0F19;
+    --text-primary: #F8FAFC;
+    --text-secondary: #94A3B8;
+    --text-muted: #64748B;
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --border-hover: rgba(99, 102, 241, 0.4);
+    --accent-primary: #4F46E5;
+    --accent-gradient: linear-gradient(135deg, #2563EB 0%, #4F46E5 50%, #7C3AED 100%);
+    --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    --shadow-glow: 0 0 25px rgba(99, 102, 241, 0.35);
+    --scrollbar-thumb: rgba(255, 255, 255, 0.15);
+    --scrollbar-track: rgba(0, 0, 0, 0.2);
+    --mega-menu-bg: rgba(11, 15, 25, 0.95);
+    --theme-toggle-bg: rgba(255, 255, 255, 0.06);
+    --theme-toggle-border: rgba(255, 255, 255, 0.1);
+}
+
+html.light {
+    --bg-primary: #F8FAFC;
+    --bg-secondary: #F1F5F9;
+    --bg-card: #FFFFFF;
+    --bg-card-hover: #F8FAFC;
+    --bg-glass: rgba(255, 255, 255, 0.9);
+    --bg-input: #FFFFFF;
+    --text-primary: #0F172A;
+    --text-secondary: #475569;
+    --text-muted: #64748B;
+    --border-subtle: rgba(15, 23, 42, 0.08);
+    --border-hover: rgba(79, 70, 229, 0.4);
+    --accent-primary: #4338CA;
+    --accent-gradient: linear-gradient(135deg, #1D4ED8 0%, #4338CA 50%, #6D28D9 100%);
+    --shadow-card: 0 10px 25px -5px rgba(15, 23, 42, 0.05), 0 8px 10px -6px rgba(15, 23, 42, 0.03);
+    --shadow-glow: 0 0 20px rgba(79, 70, 229, 0.25);
+    --scrollbar-thumb: rgba(15, 23, 42, 0.2);
+    --scrollbar-track: rgba(0, 0, 0, 0.05);
+    --mega-menu-bg: rgba(255, 255, 255, 0.98);
+    --theme-toggle-bg: rgba(15, 23, 42, 0.05);
+    --theme-toggle-border: rgba(15, 23, 42, 0.1);
+}
+
+/* 2. BASE RESETS & SMOOTH CINEMATIC TRANSITIONS */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-primary) !important;
+    color: var(--text-secondary);
+    transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* Custom Text Selection */
+::selection {
+    background: rgba(99, 102, 241, 0.28);
+    color: inherit;
+}
+
+/* 3. LIGHT THEME AUTOMATIC ADAPTIVE OVERRIDES */
+html.light body {
+    background-color: #F8FAFC !important;
+    color: #475569 !important;
+}
+
+html.light header {
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    border-bottom-color: rgba(15, 23, 42, 0.08) !important;
+    box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.03);
+}
+
+html.light .bg-slate-950,
+html.light .bg-slate-900 {
+    background-color: #FFFFFF !important;
+}
+
+html.light .bg-slate-900\/90,
+html.light .bg-slate-950\/90,
+html.light .bg-slate-900\/80 {
+    background-color: rgba(255, 255, 255, 0.92) !important;
+}
+
+html.light .text-white,
+html.light .text-slate-100,
+html.light .text-slate-200 {
+    color: #0F172A !important;
+}
+
+html.light .text-slate-300,
+html.light .text-slate-400 {
+    color: #475569 !important;
+}
+
+html.light .text-slate-500,
+html.light .text-slate-600 {
+    color: #64748B !important;
+}
+
+html.light .border-slate-800,
+html.light .border-slate-700,
+html.light .border-white\/\[0\.08\],
+html.light .border-white\/10,
+html.light .border-white\/5 {
+    border-color: rgba(15, 23, 42, 0.08) !important;
+}
+
+html.light .premium-card {
+    background: #FFFFFF !important;
+    border-color: rgba(15, 23, 42, 0.08) !important;
+    box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.06), 0 4px 6px -4px rgba(15, 23, 42, 0.02) !important;
+}
+
+html.light .premium-card:hover {
+    border-color: rgba(79, 70, 229, 0.5) !important;
+    box-shadow: 0 15px 35px -5px rgba(79, 70, 229, 0.15) !important;
+}
+
+html.light textarea,
+html.light input[type="text"],
+html.light input[type="email"],
+html.light select {
+    background-color: #FFFFFF !important;
+    color: #0F172A !important;
+    border-color: rgba(15, 23, 42, 0.15) !important;
+}
+
+html.light textarea::placeholder,
+html.light input::placeholder {
+    color: #94A3B8 !important;
+}
+
+/* 4. LUXURY BUTTONS WITH SHIMMER */
+.btn-shimmer {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-shimmer::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        60deg,
+        transparent 30%,
+        rgba(255, 255, 255, 0.22) 50%,
+        transparent 70%
+    );
+    transform: rotate(25deg) translateY(-100%);
+    transition: transform 0.6s ease;
+    pointer-events: none;
+}
+
+.btn-shimmer:hover::after {
+    transform: rotate(25deg) translateY(100%);
+}
+
+.btn-shimmer:active {
+    transform: scale(0.98);
+}
+
+/* 5. INTERACTIVE MEGA-MENU (TOOLS DROPDOWN) */
+.mega-menu-trigger {
+    position: relative;
+}
+
+.mega-menu-dropdown {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(6px);
+    transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.2s;
+    pointer-events: none;
+    background-color: var(--mega-menu-bg);
+    border: 1px solid var(--border-subtle);
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+}
+
+.mega-menu-trigger:hover .mega-menu-dropdown,
+.mega-menu-trigger:focus-within .mega-menu-dropdown,
+.mega-menu-dropdown.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.mega-menu-item {
+    transition: all 0.15s ease-in-out;
+    border-radius: 10px;
+}
+
+.mega-menu-item:hover {
+    background-color: rgba(99, 102, 241, 0.08);
+    transform: translateX(2px);
+}
+
+html.light .mega-menu-item:hover {
+    background-color: rgba(79, 70, 229, 0.06);
+}
+
+/* 6. THEME TOGGLE BUTTON STYLING */
+.theme-toggle-btn {
+    background-color: var(--theme-toggle-bg);
+    border: 1px solid var(--theme-toggle-border);
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.theme-toggle-btn:hover {
+    border-color: var(--border-hover);
+    transform: scale(1.05);
+}
+
+.theme-toggle-btn:active {
+    transform: scale(0.95);
+}
+
+/* 7. GLASS SCROLLBAR */
+::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--border-hover);
+}

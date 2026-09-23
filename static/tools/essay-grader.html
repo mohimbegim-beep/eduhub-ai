@@ -95,6 +95,8 @@
     <script src="/static/js/conversion-engine.js" defer></script>
     <script src="/static/js/i18n.js" defer></script>
     <link rel="stylesheet" href="/static/css/safari_compat.css">
+    <link rel="stylesheet" href="/static/css/theme-system.css">
+    <script src="/static/js/theme-engine.js"></script>
     <!-- OpenGraph Social Cards -->
     <meta property="og:image" content="https://eduhub-ai.onrender.com/static/img/og_banner.png">
     <meta property="og:image:width" content="1200">
@@ -106,7 +108,7 @@
 <body data-page-tool="essay-grader" class="bg-slate-950 text-slate-100 font-sans min-h-screen flex flex-col justify-between selection:bg-indigo-600 selection:text-white">
 
     <!-- Minimal Header (Logo + Language Switcher + Back to Platform) -->
-    <header class="border-b border-slate-800/80 bg-slate-950/90 backdrop-blur-md sticky top-0 z-40">
+    <header class="border-b border-slate-800/80 bg-slate-950/90 backdrop-blur-md sticky top-0 z-40 transition-colors duration-200">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex justify-between items-center">
             <div class="flex items-center space-x-3">
                 <a href="/" class="flex items-center space-x-2">
@@ -116,7 +118,12 @@
                 <span class="hidden sm:inline-block text-[11px] bg-indigo-950 text-indigo-300 px-2.5 py-0.5 rounded-full border border-indigo-800 font-medium" data-i18n="essay_title">Essay Grader</span>
             </div>
             
-            <div class="flex items-center space-x-3">
+            <div class="flex items-center space-x-2 sm:space-x-3">
+                <!-- Theme Toggle Button (☀️ Day / 🌙 Night) -->
+                <button onclick="toggleTheme()" class="theme-toggle-btn w-8 h-8 rounded-xl text-sm transition focus:outline-none" title="Toggle Day/Night Mode (Alt+T)" aria-label="Toggle Theme">
+                    <span class="theme-icon">☀️</span>
+                </button>
+
                 <!-- Sleek Language Switcher -->
                 <div class="inline-flex bg-slate-900 border border-slate-800 rounded-xl p-0.5">
                     <button onclick="setLocale('en')" data-lang-btn="en" class="lang-btn px-2.5 py-1 rounded-lg text-xs font-bold transition bg-indigo-600 text-white shadow-sm shadow-indigo-500/20">EN</button>
