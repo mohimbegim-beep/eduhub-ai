@@ -192,7 +192,7 @@
                     <div class="flex flex-wrap items-center gap-2 mb-2">
                         <span id="badge-level" class="text-[11px] font-bold px-2.5 py-0.5 rounded-md bg-indigo-950 text-indigo-300 border border-indigo-800">Курсовая работа</span>
                         <span id="badge-discipline" class="text-[11px] font-medium px-2.5 py-0.5 rounded-md bg-slate-800 text-slate-300 border border-slate-700">Экономика и управление</span>
-                        <span id="badge-chars" class="text-[11px] font-mono text-slate-400">Объем: <b class="text-white" id="stat-total-chars">0</b> знаков (~<span id="stat-total-pages">0</span> стр.)</span>
+                        <span id="badge-chars" class="text-[11px] font-mono text-slate-400"><span data-i18n="acad_stat_volume">Объем:</span> <b class="text-white" id="stat-total-chars">0</b> <span data-i18n="acad_stat_chars_label">знаков (~</span><span id="stat-total-pages">0</span> <span data-i18n="acad_stat_pages_label">стр.)</span></span>
                     </div>
                     <h1 id="view-project-title" class="text-xl sm:text-2xl font-bold text-white tracking-tight leading-snug">
                         Тема исследования загружается...
@@ -255,26 +255,26 @@
                         <div class="flex items-center justify-between">
                             <h3 class="font-bold text-sm text-white flex items-center gap-2">
                                 <span>⚡</span>
-                                <span>AI-Генератор аппарата</span>
+                                <span data-i18n="acad_app_gen_title">AI-Генератор аппарата</span>
                             </h3>
                             <span class="text-[10px] bg-amber-950 text-amber-300 border border-amber-800/80 px-2 py-0.5 rounded-full font-bold">1-Click</span>
                         </div>
                         <p class="text-xs text-slate-400 leading-relaxed">
-                            ИИ смоделирует строгий научный аппарат мирового уровня: актуальность с проблематизацией, объект, предмет, цель, 4–5 задач, рабочую гипотезу и научную новизну.
+                            <span data-i18n="acad_app_desc">ИИ смоделирует строгий научный аппарат мирового уровня: актуальность с проблематизацией, объект, предмет, цель, 4–5 задач, рабочую гипотезу и научную новизну.</span>
                         </p>
                         
                         <div class="flex flex-col gap-2">
-                            <label class="text-[11px] font-semibold text-slate-300">Фокус или специфика (опционально):</label>
-                            <input id="apparatus-custom-focus" type="text" placeholder="Напр.: на материалах компаний финтех-сектора за 2023-2026 гг." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 placeholder-slate-600 focus:outline-none focus:border-indigo-500">
+                            <label class="text-[11px] font-semibold text-slate-300" data-i18n="acad_app_focus_label">Фокус или специфика (опционально):</label>
+                            <input id="apparatus-custom-focus" type="text" placeholder="Напр.: на материалах компаний финтех-сектора за 2023-2026 гг." data-i18n-placeholder="acad_app_focus_ph" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 placeholder-slate-600 focus:outline-none focus:border-indigo-500">
                         </div>
 
                         <button id="btn-generate-apparatus" onclick="generateApparatusAI()" class="w-full bg-gradient-to-r from-indigo-600 via-blue-600 to-indigo-700 hover:from-indigo-500 hover:to-indigo-600 text-white font-bold text-xs py-3 px-4 rounded-xl shadow-lg shadow-indigo-600/30 transition flex items-center justify-center gap-2">
                             <span id="apparatus-spinner" class="hidden animate-spin">🔄</span>
-                            <span>🏛️ Сформировать научный аппарат</span>
+                            <span data-i18n="acad_gen_apparatus_btn">🏛️ Сформировать научный аппарат</span>
                         </button>
 
                         <div class="p-3 bg-slate-950/60 rounded-xl border border-slate-800 text-[11px] text-slate-400 leading-relaxed">
-                            💡 <strong class="text-slate-200">Требование ВАК и диссоветов:</strong> Цель работы должна быть одна, а задачи должны строго зеркалировать главы будущей работы.
+                            💡 <strong class="text-slate-200" data-i18n="acad_app_vak_hint_label">Требование ВАК и диссоветов:</strong> <span data-i18n="acad_app_vak_hint">Цель работы должна быть одна, а задачи должны строго зеркалировать главы будущей работы.</span>
                         </div>
                     </div>
 
@@ -282,13 +282,13 @@
                     <div class="bg-slate-900/60 border border-slate-800/80 rounded-2xl p-4 flex flex-col gap-2">
                         <h4 class="text-xs font-bold text-slate-200 flex items-center gap-1.5">
                             <span>📄</span>
-                            <span>Введение работы под ключ</span>
+                            <span data-i18n="acad_intro_title">Введение работы под ключ</span>
                         </h4>
                         <p class="text-[11px] text-slate-400 leading-relaxed">
-                            Собрать все поля научного аппарата в единый связный текст Введения с академическими переходами.
+                            <span data-i18n="acad_intro_desc">Собрать все поля научного аппарата в единый связный текст Введения с академическими переходами.</span>
                         </p>
                         <button onclick="assembleIntroductionToChapter()" class="text-xs bg-slate-800 hover:bg-slate-700 text-indigo-300 font-semibold py-2 px-3 rounded-xl border border-slate-700 transition flex items-center justify-center gap-1.5">
-                            <span>➡️ Перенести во Введение</span>
+                            <span data-i18n="acad_intro_btn">➡️ Перенести во Введение</span>
                         </button>
                     </div>
                 </div>
@@ -298,9 +298,9 @@
                     <div class="flex items-center justify-between border-b border-slate-800 pb-3">
                         <h2 class="text-base font-bold text-white flex items-center gap-2">
                             <span>🔬</span>
-                            <span>Научный аппарат исследования (ГОСТ / Мировой стандарт)</span>
+                            <span data-i18n="acad_app_form_title">Научный аппарат исследования (ГОСТ / Мировой стандарт)</span>
                         </h2>
-                        <button onclick="saveApparatusManual()" class="text-xs bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-3 py-1.5 rounded-xl transition">
+                        <button onclick="saveApparatusManual()" class="text-xs bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-3 py-1.5 rounded-xl transition" data-i18n="acad_app_save_btn">
                             💾 Сохранить поля
                         </button>
                     </div>
@@ -308,8 +308,8 @@
                     <!-- 1. Актуальность -->
                     <div class="flex flex-col gap-1.5">
                         <label class="text-xs font-bold text-slate-300 flex items-center justify-between">
-                            <span>1. Актуальность темы исследования:</span>
-                            <span class="text-[10px] text-slate-500 font-normal">Обоснование проблемы</span>
+                            <span data-i18n="acad_app_relevance_label">1. Актуальность темы исследования:</span>
+                            <span class="text-[10px] text-slate-500 font-normal" data-i18n="acad_app_relevance_sub">Обоснование проблемы</span>
                         </label>
                         <textarea id="app-field-relevance" rows="3" oninput="triggerAutoSave()" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-slate-200 focus:outline-none focus:border-indigo-500 font-academic-serif leading-relaxed"></textarea>
                     </div>
@@ -317,25 +317,25 @@
                     <!-- 2. Объект и Предмет -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div class="flex flex-col gap-1.5">
-                            <label class="text-xs font-bold text-slate-300">2. Объект исследования:</label>
+                            <label class="text-xs font-bold text-slate-300" data-i18n="acad_app_object_label">2. Объект исследования:</label>
                             <textarea id="app-field-object" rows="2" oninput="triggerAutoSave()" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-slate-200 focus:outline-none focus:border-indigo-500 font-academic-serif leading-relaxed"></textarea>
                         </div>
                         <div class="flex flex-col gap-1.5">
-                            <label class="text-xs font-bold text-slate-300">3. Предмет исследования:</label>
+                            <label class="text-xs font-bold text-slate-300" data-i18n="acad_app_subject_label">3. Предмет исследования:</label>
                             <textarea id="app-field-subject" rows="2" oninput="triggerAutoSave()" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-slate-200 focus:outline-none focus:border-indigo-500 font-academic-serif leading-relaxed"></textarea>
                         </div>
                     </div>
 
                     <!-- 3. Цель и Задачи -->
                     <div class="flex flex-col gap-1.5">
-                        <label class="text-xs font-bold text-slate-300">4. Цель исследования:</label>
+                        <label class="text-xs font-bold text-slate-300" data-i18n="acad_app_goal_label">4. Цель исследования:</label>
                         <input id="app-field-goal" type="text" oninput="triggerAutoSave()" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-indigo-500 font-academic-serif font-medium">
                     </div>
 
                     <div class="flex flex-col gap-1.5">
                         <label class="text-xs font-bold text-slate-300 flex items-center justify-between">
-                            <span>5. Задачи исследования (соответствуют главам работы):</span>
-                            <span class="text-[10px] text-slate-500">По одной на строку</span>
+                            <span data-i18n="acad_app_tasks_label">5. Задачи исследования (соответствуют главам работы):</span>
+                            <span class="text-[10px] text-slate-500" data-i18n="acad_app_tasks_sub">По одной на строку</span>
                         </label>
                         <textarea id="app-field-tasks" rows="4" oninput="triggerAutoSave()" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-slate-200 focus:outline-none focus:border-indigo-500 font-academic-serif leading-relaxed"></textarea>
                     </div>
@@ -343,11 +343,11 @@
                     <!-- 4. Гипотеза и Новизна -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div class="flex flex-col gap-1.5">
-                            <label class="text-xs font-bold text-slate-300">6. Рабочая научная гипотеза:</label>
+                            <label class="text-xs font-bold text-slate-300" data-i18n="acad_app_hypo_label">6. Рабочая научная гипотеза:</label>
                             <textarea id="app-field-hypothesis" rows="3" oninput="triggerAutoSave()" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-slate-200 focus:outline-none focus:border-indigo-500 font-academic-serif leading-relaxed"></textarea>
                         </div>
                         <div class="flex flex-col gap-1.5">
-                            <label class="text-xs font-bold text-slate-300">7. Научная новизна:</label>
+                            <label class="text-xs font-bold text-slate-300" data-i18n="acad_app_novelty_label">7. Научная новизна:</label>
                             <textarea id="app-field-novelty" rows="3" oninput="triggerAutoSave()" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-slate-200 focus:outline-none focus:border-indigo-500 font-academic-serif leading-relaxed"></textarea>
                         </div>
                     </div>
@@ -355,8 +355,8 @@
                     <!-- 5. Положения на защиту -->
                     <div class="flex flex-col gap-1.5">
                         <label class="text-xs font-bold text-slate-300 flex items-center justify-between">
-                            <span>8. Положения, выносимые на защиту (для ВКР и Диссертаций):</span>
-                            <span class="text-[10px] text-indigo-400">Ключевой пункт комиссии</span>
+                            <span data-i18n="acad_app_provisions_label">8. Положения, выносимые на защиту (для ВКР и Диссертаций):</span>
+                            <span class="text-[10px] text-indigo-400" data-i18n="acad_app_provisions_sub">Ключевой пункт комиссии</span>
                         </label>
                         <textarea id="app-field-provisions" rows="3" oninput="triggerAutoSave()" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-slate-200 focus:outline-none focus:border-indigo-500 font-academic-serif leading-relaxed"></textarea>
                     </div>
@@ -371,16 +371,16 @@
                     <div>
                         <h2 class="text-base font-bold text-white flex items-center gap-2">
                             <span>🌳</span>
-                            <span>Структура исследования и оглавление</span>
+                            <span data-i18n="acad_outline_title">Структура исследования и оглавление</span>
                         </h2>
-                        <p class="text-xs text-slate-400 mt-1">Поглавный план с параграфами. Каждая глава привязана к текстовому редактору.</p>
+                        <p class="text-xs text-slate-400 mt-1" data-i18n="acad_outline_desc">Поглавный план с параграфами. Каждая глава привязана к текстовому редактору.</p>
                     </div>
                     <div class="flex items-center gap-2.5">
                         <button onclick="generateOutlineAI()" class="text-xs bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-semibold px-3.5 py-2 rounded-xl shadow-md transition flex items-center gap-1.5">
                             <span id="outline-spinner" class="hidden animate-spin">🔄</span>
-                            <span>🤖 Сгенерировать план по стандарту</span>
+                            <span data-i18n="acad_gen_outline_btn">🤖 Сгенерировать план по стандарту</span>
                         </button>
-                        <button onclick="addNewChapterModal()" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-medium px-3 py-2 rounded-xl transition">
+                        <button onclick="addNewChapterModal()" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-medium px-3 py-2 rounded-xl transition" data-i18n="acad_outline_add_chapter">
                             + Добавить главу
                         </button>
                     </div>
@@ -398,14 +398,14 @@
                 <div class="lg:col-span-3 flex flex-col gap-4">
                     <div class="bg-slate-900/90 border border-slate-800 rounded-3xl p-4 shadow-xl flex flex-col gap-3">
                         <div class="flex items-center justify-between">
-                            <span class="text-xs font-bold text-white">Разделы работы</span>
+                            <span class="text-xs font-bold text-white" data-i18n="acad_composer_sections">Разделы работы</span>
                             <span id="composer-chapter-count" class="text-[10px] text-slate-400">6 глав</span>
                         </div>
                         
                         <div id="composer-chapter-nav" class="flex flex-col gap-1.5 max-h-[500px] overflow-y-auto pr-1">
                         </div>
 
-                        <button onclick="addNewChapterModal()" class="text-xs text-center py-2 px-3 rounded-xl border border-dashed border-slate-700 text-slate-400 hover:text-white hover:border-slate-500 transition">
+                        <button onclick="addNewChapterModal()" class="text-xs text-center py-2 px-3 rounded-xl border border-dashed border-slate-700 text-slate-400 hover:text-white hover:border-slate-500 transition" data-i18n="acad_composer_add_section">
                             + Добавить раздел
                         </button>
                     </div>
@@ -413,23 +413,23 @@
                     <div class="bg-gradient-to-br from-slate-900 to-indigo-950/40 border border-indigo-900/40 rounded-3xl p-4 shadow-xl flex flex-col gap-3">
                         <div class="flex items-center gap-2">
                             <span class="text-base">🎓</span>
-                            <span class="text-xs font-bold text-white">Академический фильтр</span>
+                            <span class="text-xs font-bold text-white" data-i18n="acad_composer_filter_title">Академический фильтр</span>
                         </div>
                         <p class="text-[11px] text-slate-400 leading-relaxed">
-                            ИИ строго соблюдает безличный тон: <i>«в исследовании доказано»</i>, исключает вводные штампы и применяет точный терминологический аппарат.
+                            <span data-i18n="acad_composer_filter_desc">ИИ строго соблюдает безличный тон: <i>«в исследовании доказано»</i>, исключает вводные штампы и применяет точный терминологический аппарат.</span>
                         </p>
                         <div class="flex flex-col gap-1.5 text-[11px] text-slate-300">
                             <div class="flex items-center gap-2">
                                 <span class="text-emerald-400">✓</span>
-                                <span>Цитирование источников [1, c. 45]</span>
+                                <span data-i18n="acad_composer_filter_cite">Цитирование источников [1, c. 45]</span>
                             </div>
                             <div class="flex items-center gap-2">
                                 <span class="text-emerald-400">✓</span>
-                                <span>Методологическая строгость</span>
+                                <span data-i18n="acad_composer_filter_rigor">Методологическая строгость</span>
                             </div>
                             <div class="flex items-center gap-2">
                                 <span class="text-emerald-400">✓</span>
-                                <span>Соответствие ГОСТ 7.0.11 / IMRAD</span>
+                                <span data-i18n="acad_composer_filter_gost">Соответствие ГОСТ 7.0.11 / IMRAD</span>
                             </div>
                         </div>
                     </div>
@@ -443,7 +443,7 @@
                                 <span id="editor-active-tag" class="text-[10px] font-bold uppercase tracking-wider bg-indigo-950 text-indigo-300 px-2 py-0.5 rounded-md border border-indigo-800">Глава 1</span>
                                 <span id="editor-char-counter" class="text-xs font-mono text-slate-400">0 знаков / ~0 слов</span>
                             </div>
-                            <input id="editor-chapter-title" type="text" oninput="updateActiveChapterTitle(this.value)" class="w-full bg-transparent font-bold text-lg text-white focus:outline-none focus:border-b focus:border-indigo-500" placeholder="Название раздела...">
+                            <input id="editor-chapter-title" type="text" oninput="updateActiveChapterTitle(this.value)" class="w-full bg-transparent font-bold text-lg text-white focus:outline-none focus:border-b focus:border-indigo-500" placeholder="Название раздела..." data-i18n-placeholder="acad_composer_title_ph">
                         </div>
 
                         <div class="flex items-center gap-2">
@@ -510,7 +510,7 @@
                         </div>
 
                         <div class="flex flex-col gap-2">
-                            <label class="text-[11px] font-semibold text-slate-300">Тип источника:</label>
+                            <label class="text-[11px] font-semibold text-slate-300" data-i18n="acad_lit_type_label">Тип источника:</label>
                             <select id="lit-new-type" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none">
                                 <option value="article">Научная статья в журнале (ВАК / Scopus)</option>
                                 <option value="book">Монография или учебник</option>
@@ -521,39 +521,39 @@
                         </div>
 
                         <div class="flex flex-col gap-2">
-                            <label class="text-[11px] font-semibold text-slate-300">Автор(ы):</label>
+                            <label class="text-[11px] font-semibold text-slate-300" data-i18n="acad_lit_author_label">Автор(ы):</label>
                             <input id="lit-new-author" type="text" placeholder="Напр.: Иванов А.В., Петрова С.Н." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 placeholder-slate-600 focus:outline-none">
                         </div>
 
                         <div class="flex flex-col gap-2">
-                            <label class="text-[11px] font-semibold text-slate-300">Название публикации / книги:</label>
+                            <label class="text-[11px] font-semibold text-slate-300" data-i18n="acad_lit_title_label">Название публикации / книги:</label>
                             <input id="lit-new-title" type="text" placeholder="Напр.: Методология оценки системных финансовых рисков..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 placeholder-slate-600 focus:outline-none">
                         </div>
 
                         <div class="grid grid-cols-2 gap-3">
                             <div class="flex flex-col gap-1.5">
-                                <label class="text-[11px] font-semibold text-slate-300">Год издания:</label>
+                                <label class="text-[11px] font-semibold text-slate-300" data-i18n="acad_lit_year_label">Год издания:</label>
                                 <input id="lit-new-year" type="text" placeholder="2024" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 placeholder-slate-600 focus:outline-none font-mono">
                             </div>
                             <div class="flex flex-col gap-1.5">
-                                <label class="text-[11px] font-semibold text-slate-300">Журнал / Издательство:</label>
+                                <label class="text-[11px] font-semibold text-slate-300" data-i18n="acad_lit_pub_label">Журнал / Издательство:</label>
                                 <input id="lit-new-publisher" type="text" placeholder="Вопросы экономики" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 placeholder-slate-600 focus:outline-none">
                             </div>
                         </div>
 
                         <div class="grid grid-cols-2 gap-3">
                             <div class="flex flex-col gap-1.5">
-                                <label class="text-[11px] font-semibold text-slate-300">Том / Номер / Стр.:</label>
+                                <label class="text-[11px] font-semibold text-slate-300" data-i18n="acad_lit_pages_label">Том / Номер / Стр.:</label>
                                 <input id="lit-new-pages" type="text" placeholder="№ 4. — С. 45–62." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 placeholder-slate-600 focus:outline-none font-mono">
                             </div>
                             <div class="flex flex-col gap-1.5">
-                                <label class="text-[11px] font-semibold text-slate-300">DOI / URL:</label>
+                                <label class="text-[11px] font-semibold text-slate-300" data-i18n="acad_lit_doi_label">DOI / URL:</label>
                                 <input id="lit-new-doi" type="text" placeholder="https://doi.org/..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 placeholder-slate-600 focus:outline-none font-mono">
                             </div>
                         </div>
 
                         <button onclick="addLiteratureSource()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs py-2.5 px-4 rounded-xl shadow-md transition">
-                            + Занести источник в список
+                            <span data-i18n="acad_lit_add_btn">+ Занести источник в список</span>
                         </button>
                     </div>
 
@@ -561,15 +561,15 @@
                         <div class="flex items-center justify-between">
                             <h4 class="font-bold text-xs text-white flex items-center gap-1.5">
                                 <span>🤖</span>
-                                <span>Синтез обзора литературы (State-of-the-Art)</span>
+                                <span data-i18n="acad_lit_synth_title">Синтез обзора литературы (State-of-the-Art)</span>
                             </h4>
                         </div>
                         <p class="text-[11px] text-slate-400 leading-relaxed">
-                            ИИ проанализирует все добавленные источники, выделит ключевые исследовательские школы и сформулирует исследовательский пробел (Research Gap) для 1-й главы.
+                            <span data-i18n="acad_lit_synth_desc">ИИ проанализирует все добавленные источники, выделит ключевые исследовательские школы и сформулирует исследовательский пробел (Research Gap) для 1-й главы.</span>
                         </p>
                         <button onclick="synthesizeLiteratureReviewAI()" class="text-xs bg-indigo-600/30 hover:bg-indigo-600/40 text-indigo-300 border border-indigo-500/40 font-semibold py-2 px-3 rounded-xl transition flex items-center justify-center gap-2">
                             <span id="lit-review-spinner" class="hidden animate-spin">🔄</span>
-                            <span>✨ Сформировать аналитический обзор</span>
+                            <span data-i18n="acad_lit_synth_btn">✨ Сформировать аналитический обзор</span>
                         </button>
                     </div>
                 </div>
@@ -579,13 +579,13 @@
                         <div>
                             <h2 class="text-base font-bold text-white flex items-center gap-2">
                                 <span>📚</span>
-                                <span>Библиографический список исследования</span>
+                                <span data-i18n="acad_lit_vault_title">Библиографический список исследования</span>
                             </h2>
-                            <span class="text-xs text-slate-400">Всего источников: <b id="lit-total-count" class="text-indigo-400">0</b></span>
+                            <span class="text-xs text-slate-400"><span data-i18n="acad_lit_total_sources">Всего источников:</span> <b id="lit-total-count" class="text-indigo-400">0</b></span>
                         </div>
 
                         <div class="flex items-center gap-2">
-                            <span class="text-xs text-slate-400">Формат:</span>
+                            <span class="text-xs text-slate-400" data-i18n="acad_lit_format_label">Формат:</span>
                             <div class="inline-flex bg-slate-950 border border-slate-800 rounded-xl p-0.5">
                                 <button onclick="setCitationStyle('gost')" id="cit-btn-gost" class="px-2.5 py-1 rounded-lg text-xs font-bold transition bg-indigo-600 text-white">ГОСТ 7.0.5</button>
                                 <button onclick="setCitationStyle('apa')" id="cit-btn-apa" class="px-2.5 py-1 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition">APA 7th</button>
@@ -598,10 +598,10 @@
                     </div>
 
                     <div class="flex items-center justify-between pt-3 border-t border-slate-800">
-                        <span class="text-[11px] text-slate-500">Автоматическая нумерация в алфавитном порядке</span>
+                        <span class="text-[11px] text-slate-500" data-i18n="acad_lit_auto_num">Автоматическая нумерация в алфавитном порядке</span>
                         <button onclick="copyBibliography()" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-3 py-1.5 rounded-xl transition flex items-center gap-1.5">
                             <span>📋</span>
-                            <span>Скопировать весь список</span>
+                            <span data-i18n="acad_lit_copy_all">Скопировать весь список</span>
                         </button>
                     </div>
                 </div>
@@ -615,21 +615,21 @@
                     <div class="bg-slate-900/90 border border-slate-800 rounded-3xl p-5 shadow-xl flex flex-col gap-4">
                         <h3 class="font-bold text-sm text-white flex items-center gap-2">
                             <span>💡</span>
-                            <span>Новая заметка / Замечание</span>
+                            <span data-i18n="acad_notes_new_title">Новая заметка / Замечание</span>
                         </h3>
                         <p class="text-xs text-slate-400 leading-relaxed">
-                            Записывайте идеи, ссылки на найденные архивы, а также правки вашего научного руководителя.
+                            <span data-i18n="acad_notes_new_desc">Записывайте идеи, ссылки на найденные архивы, а также правки вашего научного руководителя.</span>
                         </p>
-                        <textarea id="note-input-text" rows="4" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-slate-200 placeholder-slate-600 focus:outline-none focus:border-indigo-500" placeholder="Напр.: Научрук велел добавить формулу расчета волатильности в параграф 2.2 и убрать устаревшие данные..."></textarea>
+                        <textarea id="note-input-text" rows="4" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-slate-200 placeholder-slate-600 focus:outline-none focus:border-indigo-500" placeholder="Напр.: Научрук велел добавить формулу расчета волатильности в параграф 2.2 и убрать устаревшие данные..." data-i18n-placeholder="acad_notes_text_ph"></textarea>
                         
                         <div class="flex items-center gap-2">
                             <select id="note-input-tag" class="bg-slate-950 border border-slate-800 text-xs text-slate-300 rounded-xl px-3 py-2 flex-1 focus:outline-none">
-                                <option value="supervisor">👨‍🏫 Замечание научрука</option>
-                                <option value="idea">💡 Идея / Гипотеза</option>
-                                <option value="todo">✅ Сделать (To-Do)</option>
-                                <option value="source">🔗 Ссылка на источник</option>
+                                <option value="supervisor" data-i18n="acad_notes_tag_supervisor">👨‍🏫 Замечание научрука</option>
+                                <option value="idea" data-i18n="acad_notes_tag_idea">💡 Идея / Гипотеза</option>
+                                <option value="todo" data-i18n="acad_notes_tag_todo">✅ Сделать (To-Do)</option>
+                                <option value="source" data-i18n="acad_notes_tag_source">🔗 Ссылка на источник</option>
                             </select>
-                            <button onclick="addResearchNote()" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs px-4 py-2 rounded-xl transition">
+                            <button onclick="addResearchNote()" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs px-4 py-2 rounded-xl transition" data-i18n="acad_notes_add_btn">
                                 Добавить
                             </button>
                         </div>
@@ -640,7 +640,7 @@
                     <div class="flex items-center justify-between border-b border-slate-800 pb-3">
                         <h2 class="text-base font-bold text-white flex items-center gap-2">
                             <span>📝</span>
-                            <span>Журнал исследователя</span>
+                            <span data-i18n="acad_notes_journal_title">Журнал исследователя</span>
                         </h2>
                         <span id="notes-total-count" class="text-xs text-slate-400">0 записей</span>
                     </div>
@@ -751,7 +751,7 @@
                 <!-- Meta Fields -->
                 <div class="grid grid-cols-1 md:grid-cols-12 gap-4 text-xs">
                     <div class="md:col-span-8 flex flex-col gap-1.5">
-                        <label class="font-bold text-slate-300">Название научной статьи (Заглавие ВАК):</label>
+                        <label class="font-bold text-slate-300" data-i18n="acad_art_title_label">Название научной статьи (Заглавие ВАК):</label>
                         <input id="art-field-title" type="text" oninput="updateCurrentArticleMeta('title', this.value)" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-indigo-500 font-medium">
                     </div>
                     <div class="md:col-span-4 flex flex-col gap-1.5">
@@ -764,14 +764,14 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
                     <div class="flex flex-col gap-1.5">
                         <label class="font-bold text-slate-300 flex items-center justify-between">
-                            <span>Аннотация (RU):</span>
+                            <span data-i18n="acad_art_abstract_ru_label">Аннотация (RU):</span>
                             <span class="text-[10px] text-slate-500 font-normal">150–250 слов</span>
                         </label>
                         <textarea id="art-field-abstract-ru" rows="4" oninput="updateCurrentArticleMeta('abstractRu', this.value)" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-slate-200 focus:outline-none focus:border-indigo-500 leading-relaxed"></textarea>
                     </div>
                     <div class="flex flex-col gap-1.5">
                         <label class="font-bold text-slate-300 flex items-center justify-between">
-                            <span>Abstract (EN):</span>
+                            <span data-i18n="acad_art_abstract_en_label">Abstract (EN):</span>
                             <span class="text-[10px] text-slate-500 font-normal">International indexing</span>
                         </label>
                         <textarea id="art-field-abstract-en" rows="4" oninput="updateCurrentArticleMeta('abstractEn', this.value)" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-slate-200 focus:outline-none focus:border-indigo-500 leading-relaxed font-sans"></textarea>
@@ -780,7 +780,7 @@
 
                 <!-- Keywords -->
                 <div class="flex flex-col gap-1.5 text-xs">
-                    <label class="font-bold text-slate-300">Ключевые слова / Keywords (RU / EN через запятую):</label>
+                    <label class="font-bold text-slate-300" data-i18n="acad_art_keywords_label">Ключевые слова / Keywords (RU / EN через запятую):</label>
                     <input id="art-field-keywords" type="text" oninput="updateCurrentArticleMeta('keywords', this.value)" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2 text-xs text-slate-200 focus:outline-none focus:border-indigo-500">
                 </div>
 
@@ -806,41 +806,41 @@
             <div class="flex items-center justify-between border-b border-slate-800 pb-3">
                 <h3 class="font-bold text-base text-white flex items-center gap-2">
                     <span>🏛️</span>
-                    <span>Новое научное исследование</span>
+                    <span data-i18n="acad_modal_new_title">Новое научное исследование</span>
                 </h3>
                 <button onclick="closeModal('modal-new-project')" class="text-slate-400 hover:text-white text-lg font-bold">&times;</button>
             </div>
 
             <div class="flex flex-col gap-3 text-xs">
                 <div class="flex flex-col gap-1.5">
-                    <label class="font-bold text-slate-200">Тема работы:</label>
-                    <input id="new-proj-topic" type="text" placeholder="Напр.: Трансформация банковского надзора в эпоху DeFi и цифрового рубля" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-slate-200 focus:outline-none focus:border-indigo-500 text-xs">
+                    <label class="font-bold text-slate-200" data-i18n="acad_modal_new_topic_label">Тема работы:</label>
+                    <input id="new-proj-topic" type="text" placeholder="Напр.: Трансформация банковского надзора в эпоху DeFi и цифрового рубля" data-i18n-placeholder="acad_modal_new_topic_ph" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-slate-200 focus:outline-none focus:border-indigo-500 text-xs">
                 </div>
 
                 <div class="flex flex-col gap-1.5">
-                    <label class="font-bold text-slate-200">Академический уровень:</label>
+                    <label class="font-bold text-slate-200" data-i18n="acad_modal_new_level_label">Академический уровень:</label>
                     <select id="new-proj-level" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-slate-200 focus:outline-none text-xs">
-                        <option value="coursework">Курсовая работа (25–35 стр.)</option>
-                        <option value="thesis_bachelor">Выпускная квалификационная работа (ВКР / Диплом)</option>
-                        <option value="article_vak">Научная статья ВАК / РИНЦ</option>
-                        <option value="article_scopus">Международная статья Scopus / WoS (IMRAD)</option>
-                        <option value="masters_dissertation">Магистерская диссертация</option>
-                        <option value="phd_dissertation">Кандидатская / PhD диссертация</option>
-                        <option value="essay">Академический реферат / Научный эссе</option>
+                        <option value="coursework" data-i18n="acad_level_coursework">Курсовая работа (25–35 стр.)</option>
+                        <option value="thesis_bachelor" data-i18n="acad_level_thesis_bachelor">Выпускная квалификационная работа (ВКР / Диплом)</option>
+                        <option value="article_vak" data-i18n="acad_level_article_vak">Научная статья ВАК / РИНЦ</option>
+                        <option value="article_scopus" data-i18n="acad_level_article_scopus">Международная статья Scopus / WoS (IMRAD)</option>
+                        <option value="masters_dissertation" data-i18n="acad_level_masters_dissertation">Магистерская диссертация</option>
+                        <option value="phd_dissertation" data-i18n="acad_level_phd_dissertation">Кандидатская / PhD диссертация</option>
+                        <option value="essay" data-i18n="acad_level_essay">Академический реферат / Научный эссе</option>
                     </select>
                 </div>
 
                 <div class="flex flex-col gap-1.5">
-                    <label class="font-bold text-slate-200">Дисциплина / Направление подготовки:</label>
-                    <input id="new-proj-discipline" type="text" placeholder="Напр.: Экономика, Юриспруденция, Педагогика, IT" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-slate-200 focus:outline-none text-xs">
+                    <label class="font-bold text-slate-200" data-i18n="acad_modal_new_disc_label">Дисциплина / Направление подготовки:</label>
+                    <input id="new-proj-discipline" type="text" placeholder="Напр.: Экономика, Юриспруденция, Педагогика, IT" data-i18n-placeholder="acad_modal_new_disc_ph" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-slate-200 focus:outline-none text-xs">
                 </div>
             </div>
 
             <div class="flex items-center justify-end gap-3 pt-3 border-t border-slate-800">
-                <button onclick="closeModal('modal-new-project')" class="text-xs text-slate-400 hover:text-white px-3 py-2">
+                <button onclick="closeModal('modal-new-project')" class="text-xs text-slate-400 hover:text-white px-3 py-2" data-i18n="acad_modal_cancel">
                     Отмена
                 </button>
-                <button onclick="createNewProjectSubmit()" class="text-xs bg-indigo-600 hover:bg-indigo-500 text-white font-bold px-4 py-2 rounded-xl transition">
+                <button onclick="createNewProjectSubmit()" class="text-xs bg-indigo-600 hover:bg-indigo-500 text-white font-bold px-4 py-2 rounded-xl transition" data-i18n="acad_modal_create">
                     Создать исследование
                 </button>
             </div>
@@ -851,28 +851,28 @@
     <div id="modal-edit-project" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 max-w-lg w-full shadow-2xl flex flex-col gap-4">
             <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-                <h3 class="font-bold text-base text-white">Редактировать параметры темы</h3>
+                <h3 class="font-bold text-base text-white" data-i18n="acad_modal_edit_title">Редактировать параметры темы</h3>
                 <button onclick="closeModal('modal-edit-project')" class="text-slate-400 hover:text-white text-lg font-bold">&times;</button>
             </div>
             <div class="flex flex-col gap-3 text-xs">
                 <div class="flex flex-col gap-1.5">
-                    <label class="font-bold text-slate-200">Тема работы:</label>
+                    <label class="font-bold text-slate-200" data-i18n="acad_modal_new_topic_label">Тема работы:</label>
                     <input id="edit-proj-topic" type="text" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-slate-200 text-xs">
                 </div>
                 <div class="flex flex-col gap-1.5">
-                    <label class="font-bold text-slate-200">Академический уровень:</label>
+                    <label class="font-bold text-slate-200" data-i18n="acad_modal_new_level_label">Академический уровень:</label>
                     <select id="edit-proj-level" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-slate-200 focus:outline-none text-xs">
-                        <option value="masters_dissertation">🎓 Магистерская диссертация (70–100 стр.)</option>
-                        <option value="coursework">Курсовая работа (25–35 стр.)</option>
-                        <option value="thesis_bachelor">Выпускная квалификационная работа (ВКР / Диплом)</option>
-                        <option value="article_vak">Научная статья ВАК / РИНЦ</option>
-                        <option value="article_scopus">Международная статья Scopus / WoS (IMRAD)</option>
-                        <option value="phd_dissertation">Кандидатская / PhD диссертация</option>
-                        <option value="essay">Академический реферат / Научный эссе</option>
+                        <option value="masters_dissertation" data-i18n="acad_level_masters_dissertation">🎓 Магистерская диссертация (70–100 стр.)</option>
+                        <option value="coursework" data-i18n="acad_level_coursework">Курсовая работа (25–35 стр.)</option>
+                        <option value="thesis_bachelor" data-i18n="acad_level_thesis_bachelor">Выпускная квалификационная работа (ВКР / Диплом)</option>
+                        <option value="article_vak" data-i18n="acad_level_article_vak">Научная статья ВАК / РИНЦ</option>
+                        <option value="article_scopus" data-i18n="acad_level_article_scopus">Международная статья Scopus / WoS (IMRAD)</option>
+                        <option value="phd_dissertation" data-i18n="acad_level_phd_dissertation">Кандидатская / PhD диссертация</option>
+                        <option value="essay" data-i18n="acad_level_essay">Академический реферат / Научный эссе</option>
                     </select>
                 </div>
                 <div class="flex flex-col gap-1.5">
-                    <label class="font-bold text-slate-200">Дисциплина:</label>
+                    <label class="font-bold text-slate-200" data-i18n="acad_modal_new_disc_label">Дисциплина:</label>
                     <input id="edit-proj-discipline" type="text" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-slate-200 text-xs">
                 </div>
             </div>
@@ -881,10 +881,10 @@
                     Удалить это исследование
                 </button>
                 <div class="flex items-center gap-2">
-                    <button onclick="closeModal('modal-edit-project')" class="text-xs text-slate-400 hover:text-white px-3 py-2">
+                    <button onclick="closeModal('modal-edit-project')" class="text-xs text-slate-400 hover:text-white px-3 py-2" data-i18n="acad_modal_cancel">
                         Отмена
                     </button>
-                    <button onclick="saveEditProjectSubmit()" class="text-xs bg-indigo-600 hover:bg-indigo-500 text-white font-bold px-4 py-2 rounded-xl">
+                    <button onclick="saveEditProjectSubmit()" class="text-xs bg-indigo-600 hover:bg-indigo-500 text-white font-bold px-4 py-2 rounded-xl" data-i18n="acad_modal_save">
                         Сохранить
                     </button>
                 </div>
@@ -903,9 +903,9 @@
                 <span class="text-slate-400">Строгий научный стандарт ВАК, ГОСТ 7.0.5-2008 и Scopus IMRAD</span>
             </div>
             <div class="flex items-center space-x-4 text-[11px]">
-                <a href="/terms" class="hover:text-slate-300">Условия</a>
-                <a href="/privacy" class="hover:text-slate-300">Конфиденциальность</a>
-                <a href="/refund" class="hover:text-slate-300">Возврат средств</a>
+                <a href="/terms" class="hover:text-slate-300" data-i18n="footer_terms">Условия</a>
+                <a href="/privacy" class="hover:text-slate-300" data-i18n="footer_privacy">Конфиденциальность</a>
+                <a href="/refund" class="hover:text-slate-300" data-i18n="footer_refund">Возврат средств</a>
                 <a href="/" class="text-indigo-400 hover:text-indigo-300">Все инструменты &rarr;</a>
             </div>
         </div>
@@ -945,6 +945,21 @@
 
             loadAcademicState();
             renderActiveProject();
+
+            // Re-render project & apply translations when language changes
+            window.addEventListener('eduhub:locale-changed', function(e) {
+                renderActiveProject();
+                if (window.I18N_ENGINE && typeof window.I18N_ENGINE.apply === 'function') {
+                    window.I18N_ENGINE.apply();
+                }
+            });
+
+            // Ensure full DOM translations applied after initial project render
+            setTimeout(() => {
+                if (window.I18N_ENGINE && typeof window.I18N_ENGINE.apply === 'function') {
+                    window.I18N_ENGINE.apply();
+                }
+            }, 50);
         });
 
         function getStorageKey() {
@@ -1263,6 +1278,8 @@
             document.getElementById("view-project-title").innerText = proj.topic;
             document.getElementById("badge-discipline").innerText = proj.discipline || "Научная дисциплина";
             
+                        const levelKey = "acad_level_" + proj.level;
+            const translatedLevel = (typeof t === 'function' && t(levelKey) !== levelKey) ? t(levelKey) : null;
             const levelLabels = {
                 "coursework": "Курсовая работа",
                 "thesis_bachelor": "ВКР / Диплом",
@@ -1272,7 +1289,7 @@
                 "phd_dissertation": "Диссертация PhD / Кандидатская",
                 "essay": "Научный реферат"
             };
-            document.getElementById("badge-level").innerText = levelLabels[proj.level] || "Научное исследование";
+            document.getElementById("badge-level").innerText = translatedLevel || levelLabels[proj.level] || "Научное исследование";
 
             const app = proj.apparatus || {};
             document.getElementById("app-field-relevance").value = app.relevance || "";
