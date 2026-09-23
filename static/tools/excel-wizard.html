@@ -125,9 +125,9 @@
                 <div class="flex flex-wrap items-center justify-between gap-3">
                     <div class="flex items-center gap-1.5 text-[11px] text-slate-400">
                         <span data-i18n="excel_popular_lbl">Popular tasks:</span>
-                        <button onclick="setQuery('Look up item price by SKU from another sheet (XLOOKUP equivalent)')" class="underline text-emerald-400 hover:text-white" data-i18n="excel_pop_1">Price lookup (XLOOKUP)</button>
-                        <button onclick="setQuery('Sum sales if region is Tashkent and status is Paid')" class="underline text-emerald-400 hover:text-white" data-i18n="excel_pop_2">Conditional sum (SUMIFS)</button>
-                        <button onclick="setQuery('Count number of unique customer IDs in list')" class="underline text-emerald-400 hover:text-white" data-i18n="excel_pop_3">Unique count (UNIQUE)</button>
+                        <button type="button" onclick="applyPresetQuery(0)" class="underline text-emerald-400 hover:text-white" data-i18n="excel_pop_1">Price lookup (XLOOKUP)</button>
+                        <button type="button" onclick="applyPresetQuery(1)" class="underline text-emerald-400 hover:text-white" data-i18n="excel_pop_2">Conditional sum (SUMIFS)</button>
+                        <button type="button" onclick="applyPresetQuery(2)" class="underline text-emerald-400 hover:text-white" data-i18n="excel_pop_3">Unique count (UNIQUE)</button>
                     </div>
 
                     <button onclick="generateFormula()" id="excel-btn" class="w-full sm:w-auto bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-black text-xs sm:text-sm py-2.5 px-6 rounded-xl shadow-lg shadow-emerald-500/25 transition transform active:scale-95 flex items-center justify-center gap-2">
@@ -141,7 +141,7 @@
                 <div>
                     <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1" data-i18n="excel_out_formula_lbl">Ready formula to paste:</span>
                     <div class="flex items-center gap-3 bg-slate-950 border border-slate-800 p-3.5 rounded-2xl">
-                        <code id="res-formula" class="font-mono text-sm sm:text-base font-bold text-emerald-400 flex-grow select-all break-all">=XLOOKUP(A2, Table2[ID], Table2[Name], "Not found", 0)</code>
+                        <code id="res-formula" class="font-mono text-sm sm:text-base font-bold text-emerald-400 flex-grow select-all break-all"></code>
                         <button onclick="copyFormula()" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 px-3.5 py-1.5 rounded-xl border border-slate-700 transition whitespace-nowrap" data-i18n="excel_btn_copy">
                             📋 Copy
                         </button>
@@ -152,17 +152,12 @@
                     <div class="bg-slate-950/70 border border-slate-850 p-4 rounded-2xl">
                         <span class="text-xs font-bold text-slate-300 block mb-2" data-i18n="excel_expl_title">🔍 Step-by-Step Argument Breakdown:</span>
                         <ul id="res-expl" class="text-xs text-slate-400 space-y-1.5 list-disc pl-4">
-                            <li>A2 — lookup value (item code or name).</li>
-                            <li>Table2[ID] — lookup array to search in.</li>
-                            <li>Table2[Name] — return array with desired output.</li>
                         </ul>
                     </div>
 
                     <div class="bg-slate-950/70 border border-slate-850 p-4 rounded-2xl">
                         <span class="text-xs font-bold text-slate-300 block mb-2" data-i18n="excel_pitfalls_title">⚠️ Common Pitfalls to Avoid:</span>
                         <ul id="res-pitfalls" class="text-xs text-slate-400 space-y-1.5 list-disc pl-4">
-                            <li>In non-English locales, argument separators may be semicolons (;) rather than commas (,).</li>
-                            <li>Lookup and return ranges must have identical dimensions.</li>
                         </ul>
                     </div>
                 </div>
@@ -200,12 +195,126 @@
             btn.className = 'px-3 py-1 rounded-lg text-xs font-bold bg-emerald-600 text-white transition';
         }
 
+        let hasUserGenerated = false;
+
+        const EXCEL_PRESETS_BY_LOCALE = {
+            ru: [
+                "Найти цену товара по артикулу из другого листа через XLOOKUP",
+                "Посчитать сумму продаж, если регион Ташкент и статус Оплачено (СУММЕСЛИМН)",
+                "Посчитать количество уникальных клиентов в списке (УНИК)"
+            ],
+            uz: [
+                "Boshqa varaqdan tovar narxini artikul bo'yicha XLOOKUP orqali topish",
+                "Agar hudud Toshkent va holati To'langan bo'lsa, savdo summasini hisoblash (SUMIFS)",
+                "Ro'yxatdagi takrorlanmas noyob mijozlar sonini hisoblash (UNIQUE)"
+            ],
+            en: [
+                "Look up item price by SKU from another sheet (XLOOKUP equivalent)",
+                "Sum sales if region is Tashkent and status is Paid (SUMIFS)",
+                "Count number of unique customer IDs in list (UNIQUE)"
+            ],
+            es: [
+                "Buscar el precio del producto por SKU en otra hoja con BUSCARX",
+                "Sumar ventas si la región es Madrid y el estado es Pagado (SUMAR.SI.CONJUNTO)",
+                "Contar el número de clientes únicos en la lista (UNICOS)"
+            ]
+        };
+
+        const EXCEL_SAMPLE_OUTPUT_BY_LOCALE = {
+            ru: {
+                formula: "=XLOOKUP(A2; Table2[ID]; Table2[Name]; \"Не найдено\"; 0)",
+                explanation: [
+                    "A2 — искомое значение (артикул или наименование товара).",
+                    "Table2[ID] — столбец, в котором выполняется поиск.",
+                    "Table2[Name] — возвращаемый столбец с желаемым результатом."
+                ],
+                pitfalls: [
+                    "В русской локали Excel разделителем аргументов является точка с запятой (;), а не запятая (,).",
+                    "Диапазон поиска и возвращаемый диапазон должны иметь одинаковую высоту."
+                ]
+            },
+            uz: {
+                formula: "=XLOOKUP(A2, Table2[ID], Table2[Name], \"Topilmadi\", 0)",
+                explanation: [
+                    "A2 — qidirilayotgan qiymat (tovar kodi yoki nomi).",
+                    "Table2[ID] — qidiruv amalga oshiriladigan massiv.",
+                    "Table2[Name] — kerakli natija olinadigan massiv."
+                ],
+                pitfalls: [
+                    "Hududiy sozlamalarga ko'ra formula argumentlari vergul (,) o'rniga nuqtali vergul (;) bilan ajratilishi mumkin.",
+                    "Qidiruv va natija diapazonlarining o'lchamlari bir xil bo'lishi shart."
+                ]
+            },
+            en: {
+                formula: "=XLOOKUP(A2, Table2[ID], Table2[Name], \"Not found\", 0)",
+                explanation: [
+                    "A2 — lookup value (item code or name).",
+                    "Table2[ID] — lookup array to search in.",
+                    "Table2[Name] — return array with desired output."
+                ],
+                pitfalls: [
+                    "In non-English locales, argument separators may be semicolons (;) rather than commas (,).",
+                    "Lookup and return ranges must have identical dimensions."
+                ]
+            },
+            es: {
+                formula: "=BUSCARX(A2; Tabla2[ID]; Tabla2[Nombre]; \"No encontrado\"; 0)",
+                explanation: [
+                    "A2 — valor buscado (código o nombre del artículo).",
+                    "Tabla2[ID] — matriz de búsqueda donde se localiza el dato.",
+                    "Tabla2[Nombre] — matriz devuelta con el resultado deseado."
+                ],
+                pitfalls: [
+                    "En configuraciones regionales en español, el separador de argumentos suele ser punto y coma (;).",
+                    "Las matrices de búsqueda y de devolución deben tener dimensiones idénticas."
+                ]
+            }
+        };
+
+        function getActiveLocale() {
+            if (typeof window.getActiveLocale === 'function') {
+                return window.getActiveLocale();
+            }
+            if (typeof window.getCurrentLocale === 'function') {
+                return window.getCurrentLocale();
+            }
+            return localStorage.getItem('eduhub_locale') || 'uz';
+        }
+
+        function syncExcelLocale(locale) {
+            const loc = (locale || getActiveLocale()).toLowerCase();
+            const lang = EXCEL_SAMPLE_OUTPUT_BY_LOCALE[loc] ? loc : (loc.startsWith('ru') ? 'ru' : (loc.startsWith('uz') ? 'uz' : (loc.startsWith('es') ? 'es' : 'en')));
+
+            if (!hasUserGenerated) {
+                const sampleOut = EXCEL_SAMPLE_OUTPUT_BY_LOCALE[lang] || EXCEL_SAMPLE_OUTPUT_BY_LOCALE['uz'];
+                if (sampleOut) {
+                    const formulaEl = document.getElementById('res-formula');
+                    const explEl = document.getElementById('res-expl');
+                    const pitfallsEl = document.getElementById('res-pitfalls');
+
+                    if (formulaEl) formulaEl.textContent = sampleOut.formula;
+                    if (explEl) explEl.innerHTML = sampleOut.explanation.map(e => `<li>${e}</li>`).join('');
+                    if (pitfallsEl) pitfallsEl.innerHTML = sampleOut.pitfalls.map(p => `<li>${p}</li>`).join('');
+                }
+            }
+        }
+
+        function applyPresetQuery(idx) {
+            const loc = getActiveLocale();
+            const lang = EXCEL_PRESETS_BY_LOCALE[loc] ? loc : (loc.startsWith('ru') ? 'ru' : (loc.startsWith('uz') ? 'uz' : (loc.startsWith('es') ? 'es' : 'en')));
+            const list = EXCEL_PRESETS_BY_LOCALE[lang] || EXCEL_PRESETS_BY_LOCALE['uz'];
+            const q = list[idx] || list[0];
+            document.getElementById('excel-query').value = q;
+            generateFormula();
+        }
+
         function setQuery(q) {
             document.getElementById('excel-query').value = q;
             generateFormula();
         }
 
         async function generateFormula() {
+            hasUserGenerated = true;
             const btn = document.getElementById('excel-btn');
             btn.innerHTML = '<span>⏳ Generating...</span>';
             btn.disabled = true;
@@ -213,7 +322,7 @@
             const payload = {
                 query: document.getElementById('excel-query').value.trim() || 'Look up item price by SKU',
                 app_type: currentApp,
-                language: (typeof window.getActiveLocale === 'function' ? window.getActiveLocale() : (localStorage.getItem('eduhub_locale') || 'uz'))
+                language: getActiveLocale()
             };
 
             try {
@@ -242,6 +351,18 @@
             navigator.clipboard.writeText(document.getElementById('res-formula').textContent);
             const notice = (typeof window.t === 'function' ? window.t('copied_notice') : '') || 'Formula copied to clipboard!';
             alert(notice);
+        }
+
+        syncExcelLocale();
+
+        window.addEventListener('eduhub:locale-changed', (e) => {
+            if (e && e.detail && e.detail.locale) {
+                syncExcelLocale(e.detail.locale);
+            }
+        });
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => syncExcelLocale());
         }
     </script>
 </body>

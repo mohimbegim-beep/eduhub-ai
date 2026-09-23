@@ -202,7 +202,85 @@
     </footer>
 
     <script>
+        let hasUserGenerated = false;
+
+        const SOP_DEFAULTS_BY_LOCALE = {
+            ru: {
+                country: "Германия / США",
+                major: "Компьютерные науки и искусственный интеллект",
+                uni: "Мюнхенский технический университет (TUM)",
+                grant: "Академическая стипендия DAAD / Full Tuition",
+                collocations: "эмпирическая методология, интеллектуальная зрелость, передовые исследования, академическая строгость"
+            },
+            uz: {
+                country: "Germaniya / AQSH",
+                major: "Kompyuter fanlari va sun'iy intellekt",
+                uni: "Myunxen texnika universiteti (TUM)",
+                grant: "DAAD / El-yurt umidi stipendiyasi",
+                collocations: "empirik metodologiya, intellektual salohiyat, ilg'or tadqiqotlar, ilmiy yangilik"
+            },
+            en: {
+                country: "USA",
+                major: "Computer Science & Artificial Intelligence",
+                uni: "Stanford University / TU Munich",
+                grant: "Full Tuition Academic Merit Scholarship",
+                collocations: "empirical discipline, intellectual maturation, spearhead impactful research, technological sovereignty"
+            },
+            es: {
+                country: "Alemania / EE.UU.",
+                major: "Ciencias de la Computación e Inteligencia Artificial",
+                uni: "Universidad Técnica de Múnich (TUM)",
+                grant: "Beca de Mérito Académico DAAD",
+                collocations: "metodología empírica, madurez intelectual, investigación pionera, rigor académico"
+            }
+        };
+
+        function getActiveLocale() {
+            if (typeof window.getActiveLocale === 'function') {
+                return window.getActiveLocale();
+            }
+            if (typeof window.getCurrentLocale === 'function') {
+                return window.getCurrentLocale();
+            }
+            return localStorage.getItem('eduhub_locale') || 'uz';
+        }
+
+        function syncSOPLocale(locale) {
+            const loc = (locale || getActiveLocale()).toLowerCase();
+            const lang = SOP_DEFAULTS_BY_LOCALE[loc] ? loc : (loc.startsWith('ru') ? 'ru' : (loc.startsWith('uz') ? 'uz' : (loc.startsWith('es') ? 'es' : 'en')));
+            const defs = SOP_DEFAULTS_BY_LOCALE[lang] || SOP_DEFAULTS_BY_LOCALE['uz'];
+
+            if (!hasUserGenerated && defs) {
+                const countryEl = document.getElementById('sop-country');
+                const majorEl = document.getElementById('sop-major');
+                const uniEl = document.getElementById('sop-uni');
+                const grantEl = document.getElementById('sop-grant');
+                const collocEl = document.getElementById('sop-collocations');
+
+                const allCountries = Object.values(SOP_DEFAULTS_BY_LOCALE).map(d => d.country);
+                if (countryEl && (!countryEl.value || allCountries.includes(countryEl.value.trim()))) {
+                    countryEl.value = defs.country;
+                }
+                const allMajors = Object.values(SOP_DEFAULTS_BY_LOCALE).map(d => d.major);
+                if (majorEl && (!majorEl.value || allMajors.includes(majorEl.value.trim()))) {
+                    majorEl.value = defs.major;
+                }
+                const allUnis = Object.values(SOP_DEFAULTS_BY_LOCALE).map(d => d.uni);
+                if (uniEl && (!uniEl.value || allUnis.includes(uniEl.value.trim()))) {
+                    uniEl.value = defs.uni;
+                }
+                const allGrants = Object.values(SOP_DEFAULTS_BY_LOCALE).map(d => d.grant);
+                if (grantEl && (!grantEl.value || allGrants.includes(grantEl.value.trim()))) {
+                    grantEl.value = defs.grant;
+                }
+                if (collocEl) {
+                    collocEl.textContent = defs.collocations;
+                }
+            }
+        }
+
         async function generateSOP() {
+            hasUserGenerated = true;
             const btn = document.getElementById('sop-btn');
             btn.innerHTML = '<span>⏳ Composing Academic Essay...</span>';
             btn.disabled = true;
@@ -215,7 +293,7 @@
                 grant_program: document.getElementById('sop-grant').value,
                 background_experience: document.getElementById('sop-bg').value.trim() || 'Strong background in computer science with distinction',
                 career_vision: document.getElementById('sop-vision').value.trim() || 'Establish high-impact tech infrastructure',
-                language: (typeof window.getActiveLocale === 'function' ? window.getActiveLocale() : (localStorage.getItem('eduhub_locale') || 'uz'))
+                language: getActiveLocale()
             };
 
             try {
@@ -243,6 +321,18 @@
             navigator.clipboard.writeText(document.getElementById('sop-output').innerText);
             const notice = (typeof window.t === 'function' ? window.t('copied_notice') : '') || 'Statement of Purpose copied to clipboard!';
             alert(notice);
+        }
+
+        syncSOPLocale();
+
+        window.addEventListener('eduhub:locale-changed', (e) => {
+            if (e && e.detail && e.detail.locale) {
+                syncSOPLocale(e.detail.locale);
+            }
+        });
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => syncSOPLocale());
         }
     </script>
 </body>

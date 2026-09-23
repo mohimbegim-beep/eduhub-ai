@@ -5335,6 +5335,7 @@
   window.setLocale = setLocale;
   window.detectLocale = detectLocale;
   window.getCurrentLocale = function () { return currentLocale; };
+  window.getActiveLocale = function () { return currentLocale; };
   window.I18N_ENGINE = {
     supportedLocales: SUPPORTED_LOCALES,
     cache: I18N_CACHE,
@@ -5348,6 +5349,11 @@
     currentLocale = detectLocale();
     applyTranslations();
     updateSwitcherButtons();
+    try {
+      window.dispatchEvent(new CustomEvent('eduhub:locale-changed', {
+        detail: { locale: currentLocale }
+      }));
+    } catch (e) {}
     syncServerLocale(currentLocale);
   }
 

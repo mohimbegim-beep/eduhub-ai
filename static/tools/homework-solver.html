@@ -303,32 +303,100 @@
 
     <!-- Interactive Script for Homework Solver -->
     <script>
-        const SAMPLES = {
-            1: {
-                task: "Solve the quadratic equation with radicals: 3x^2 - 12x + 6 = 0. Find the exact roots in simplified radical form.",
-                draft: "I calculated the discriminant: D = (-12)^2 - 4*3*6 = 144 - 72 = 72. How do I simplify sqrt(72) and find the final roots?",
-                subject: "Mathematics"
+        const SAMPLES_BY_LOCALE = {
+            ru: {
+                1: {
+                    task: "Решите квадратное уравнение с радикалами: 3x^2 - 12x + 6 = 0. Найдите точные корни в упрощенном виде.",
+                    draft: "Я нашел дискриминант: D = (-12)^2 - 4*3*6 = 144 - 72 = 72. Как упростить sqrt(72) и записать итоговые корни?",
+                    subject: "Mathematics"
+                },
+                2: {
+                    task: "Тележка массой 2.0 кг, движущаяся со скоростью 3.0 м/с на восток, абсолютно упруго сталкивается с тележкой массой 1.0 кг, движущейся со скоростью 2.0 м/с на запад. Каковы скорости обеих тележек после соударения?",
+                    draft: "Записал закон сохранения импульса: 2*(3) + 1*(-2) = 4 кг*м/с. Как правильно учесть закон сохранения энергии?",
+                    subject: "Physics"
+                },
+                3: {
+                    task: "Объясните механизм реакции этерификации Фишера между уксусной кислотой (CH3COOH) и этанолом (CH3CH2OH) в присутствии кислотного катализатора H2SO4.",
+                    draft: "Первая стадия: протонирование карбонильного кислорода. Что происходит дальше?",
+                    subject: "Chemistry"
+                }
             },
-            2: {
-                task: "A 2.0 kg cart moving at 3.0 m/s east collides elastically with a 1.0 kg cart moving at 2.0 m/s west. What are the final velocities of both carts after the collision?",
-                draft: "I set up momentum conservation: m1*v1 + m2*v2 = m1*v1' + m2*v2'. 2*(3) + 1*(-2) = 4 kg*m/s. But I have two unknowns for kinetic energy.",
-                subject: "Physics"
+            uz: {
+                1: {
+                    task: "Radikalli kvadrat tenglamani yeching: 3x^2 - 12x + 6 = 0. Ildizlarni soddalashtirilgan aniq ko'rinishda toping.",
+                    draft: "Diskriminantni hisobladim: D = (-12)^2 - 4*3*6 = 144 - 72 = 72. Qanday qilib sqrt(72) ni soddalashtirib yakuniy ildizlarni yozsam bo'ladi?",
+                    subject: "Mathematics"
+                },
+                2: {
+                    task: "Sharqqa tomon 3.0 m/s tezlikda harakatlanayotgan 2.0 kg massali aravacha g'arbga tomon 2.0 m/s tezlikda harakatlanayotgan 1.0 kg massali aravacha bilan elastik to'qnashadi. To'qnashuvdan so'ng ikkala aravachaning tezliklari qanday bo'ladi?",
+                    draft: "Impulsning saqlanish qonunini yozdim: 2*(3) + 1*(-2) = 4 kg*m/s. Energiya saqlanishini qanday qo'llayman?",
+                    subject: "Physics"
+                },
+                3: {
+                    task: "Sirka kislotasi (CH3COOH) va etanol (CH3CH2OH) o'rtasidagi Fisher eterifikatsiya reaksiyasi mexanizmini kislotali katalizator (H2SO4) ishtirokida tushuntiring.",
+                    draft: "Birinchi bosqich: karbonil kislorodining protonlanishi. Keyingi bosqichda nima hujum qiladi?",
+                    subject: "Chemistry"
+                }
             },
-            3: {
-                task: "Explain the mechanism of Fischer esterification between acetic acid (CH3COOH) and ethanol (CH3CH2OH) in the presence of an acid catalyst (H2SO4).",
-                draft: "First step: protonation of the carbonyl oxygen. What attacks next?",
-                subject: "Chemistry"
+            en: {
+                1: {
+                    task: "Solve the quadratic equation with radicals: 3x^2 - 12x + 6 = 0. Find the exact roots in simplified radical form.",
+                    draft: "I calculated the discriminant: D = (-12)^2 - 4*3*6 = 144 - 72 = 72. How do I simplify sqrt(72) and find the final roots?",
+                    subject: "Mathematics"
+                },
+                2: {
+                    task: "A 2.0 kg cart moving at 3.0 m/s east collides elastically with a 1.0 kg cart moving at 2.0 m/s west. What are the final velocities of both carts after the collision?",
+                    draft: "I set up momentum conservation: m1*v1 + m2*v2 = m1*v1' + m2*v2'. 2*(3) + 1*(-2) = 4 kg*m/s. But I have two unknowns for kinetic energy.",
+                    subject: "Physics"
+                },
+                3: {
+                    task: "Explain the mechanism of Fischer esterification between acetic acid (CH3COOH) and ethanol (CH3CH2OH) in the presence of an acid catalyst (H2SO4).",
+                    draft: "First step: protonation of the carbonyl oxygen. What attacks next?",
+                    subject: "Chemistry"
+                }
+            },
+            es: {
+                1: {
+                    task: "Resuelva la ecuación cuadrática con radicales: 3x^2 - 12x + 6 = 0. Halle las raíces exactas en forma radical simplificada.",
+                    draft: "Calculé el discriminante: D = (-12)^2 - 4*3*6 = 144 - 72 = 72. ¿Cómo simplifico sqrt(72) para obtener las raíces finales?",
+                    subject: "Mathematics"
+                },
+                2: {
+                    task: "Un carro de 2.0 kg hacia el este a 3.0 m/s choca elásticamente con otro de 1.0 kg hacia el oeste a 2.0 m/s. ¿Cuáles son las velocidades finales?",
+                    draft: "Planteé la conservación del momento: 2*(3) + 1*(-2) = 4 kg*m/s. ¿Cómo relaciono la conservación de energía cinética?",
+                    subject: "Physics"
+                },
+                3: {
+                    task: "Explique el mecanismo de esterificación de Fischer entre ácido acético (CH3COOH) y etanol (CH3CH2OH) con catalizador ácido (H2SO4).",
+                    draft: "Primer paso: protonación del oxígeno carbonílico. ¿Qué ataca a continuación?",
+                    subject: "Chemistry"
+                }
             }
         };
 
+        function getActiveLocale() {
+            if (typeof window.getActiveLocale === 'function') {
+                return window.getActiveLocale();
+            }
+            if (typeof window.getCurrentLocale === 'function') {
+                return window.getCurrentLocale();
+            }
+            return localStorage.getItem('eduhub_locale') || 'uz';
+        }
+
         function loadSample(id) {
+            const loc = getActiveLocale();
+            const lang = SAMPLES_BY_LOCALE[loc] ? loc : (loc.startsWith('ru') ? 'ru' : (loc.startsWith('uz') ? 'uz' : (loc.startsWith('es') ? 'es' : 'en')));
+            const dict = SAMPLES_BY_LOCALE[lang] || SAMPLES_BY_LOCALE['uz'];
+            const sample = dict[id] || dict[1];
+
             const taskInput = document.getElementById('assignment-input');
             const draftInput = document.getElementById('draft-input');
             const subjectSelect = document.getElementById('subject-select');
-            if (SAMPLES[id]) {
-                taskInput.value = SAMPLES[id].task;
-                draftInput.value = SAMPLES[id].draft;
-                subjectSelect.value = SAMPLES[id].subject;
+            if (sample) {
+                taskInput.value = sample.task;
+                draftInput.value = sample.draft;
+                subjectSelect.value = sample.subject;
                 taskInput.focus();
             }
         }

@@ -132,12 +132,12 @@
 
                 <div>
                     <label class="block text-xs font-bold text-slate-300 mb-1" data-i18n="mp_lbl_prodname">Product Name or SKU:</label>
-                    <input id="mp-name" type="text" value="Wireless ANC Pro Noise-Cancelling Headphones" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-slate-200 focus:outline-none focus:border-amber-500 placeholder-slate-600" placeholder="e.g. Travel Vacuum Mug 500ml, Nike Running Sneakers..." data-i18n-placeholder="mp_ph_prodname">
+                    <input id="mp-name" type="text" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-slate-200 focus:outline-none focus:border-amber-500 placeholder-slate-600" placeholder="e.g. Travel Vacuum Mug 500ml, Nike Running Sneakers..." data-i18n-placeholder="mp_ph_prodname">
                 </div>
 
                 <div>
                     <label class="block text-xs font-bold text-slate-300 mb-1" data-i18n="mp_lbl_category">Product Category:</label>
-                    <input id="mp-cat" type="text" value="Consumer Electronics & Audio" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-slate-200 focus:outline-none focus:border-amber-500 placeholder-slate-600" placeholder="e.g. Consumer Electronics & Audio" data-i18n-placeholder="mp_ph_category">
+                    <input id="mp-cat" type="text" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-slate-200 focus:outline-none focus:border-amber-500 placeholder-slate-600" placeholder="e.g. Consumer Electronics & Audio" data-i18n-placeholder="mp_ph_category">
                 </div>
 
                 <div class="grid grid-cols-2 gap-3">
@@ -163,9 +163,9 @@
                 <!-- Preset Pills -->
                 <div class="flex items-center gap-1.5 pt-2 text-[10px] text-slate-400">
                     <span data-i18n="mp_presets_lbl">Presets:</span>
-                    <button onclick="setSample('Thermal Smart Mug with LED Temp Display', 'Kitchen & Dining', 4.5, 14.0)" class="underline hover:text-amber-400" data-i18n="mp_preset_1">Smart Mug</button>
-                    <button onclick="setSample('Ergonomic Memory Foam Pillow', 'Home & Living', 8.0, 22.0)" class="underline hover:text-amber-400" data-i18n="mp_preset_2">Foam Pillow</button>
-                    <button onclick="setSample('Precision Tool Kit 108 Pieces', 'Auto & Hardware', 25.0, 58.0)" class="underline hover:text-amber-400" data-i18n="mp_preset_3">Tool Kit</button>
+                    <button type="button" onclick="applyPreset(0)" class="underline hover:text-amber-400" data-i18n="mp_preset_1">Smart Mug</button>
+                    <button type="button" onclick="applyPreset(1)" class="underline hover:text-amber-400" data-i18n="mp_preset_2">Foam Pillow</button>
+                    <button type="button" onclick="applyPreset(2)" class="underline hover:text-amber-400" data-i18n="mp_preset_3">Tool Kit</button>
                 </div>
             </div>
 
@@ -206,18 +206,12 @@
                     <div>
                         <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1" data-i18n="mp_out_title_lbl">🔥 SEO Title (Rank #1 Algorithm):</span>
                         <div id="res-title" class="bg-slate-950 p-2.5 rounded-xl border border-slate-800 text-slate-100 font-semibold select-all">
-                            Wireless ANC Pro Noise-Cancelling Headphones Premium Quality, Original Ergonomic Design, Bestseller, 1-Day Express Delivery
                         </div>
                     </div>
 
                     <div>
                         <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1" data-i18n="mp_out_bullets_lbl">💎 5 High-Converting Benefit Bullets:</span>
                         <div id="res-bullets" class="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-2 text-slate-200 select-all">
-                            <p>💎 [PREMIUM STANDARD] Crafted from Grade A+ durable components ensuring years of reliable performance.</p>
-                            <p>⚡ [ERGONOMIC COMFORT] Lightweight contour design makes everyday usage effortless from the very first minute.</p>
-                            <p>🎁 [PERFECT GIFT] Packaged in luxury retail gift box — ready to gift without extra wrapping expenses.</p>
-                            <p>🛡️ [TRIPLE QC INSPECTION] Every single unit passes rigorous manual quality check prior to warehouse dispatch.</p>
-                            <p>🚀 [EXPRESS DISPATCH] Receive your package tomorrow at your nearest pickup point with zero-risk inspection!</p>
                         </div>
                     </div>
                 </div>
@@ -225,17 +219,13 @@
                 <!-- Tab 2: LSI Description -->
                 <div id="tab-desc" class="hidden space-y-2 flex-grow overflow-y-auto max-h-96 pr-1 text-xs">
                     <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block" data-i18n="mp_out_desc_lbl">LSI-Optimized Description for Search Indexing:</span>
-                    <div id="res-desc" class="bg-slate-950 p-3 rounded-xl border border-slate-800 text-slate-300 leading-relaxed whitespace-pre-wrap select-all">Looking for the ideal product that blends premium aesthetics, maximum durability, and everyday practicality? This model was engineered specifically for discerning customers who demand uncompromising quality.
-
-Using advanced eco-friendly composite materials, this unit preserves its pristine finish even under heavy daily use. Includes full accessory bundle and comprehensive user manual. Order today and experience a whole new level of comfort tomorrow!</div>
+                    <div id="res-desc" class="bg-slate-950 p-3 rounded-xl border border-slate-800 text-slate-300 leading-relaxed whitespace-pre-wrap select-all"></div>
                 </div>
 
                 <!-- Tab 3: FAQ -->
                 <div id="tab-faq" class="hidden space-y-2 flex-grow overflow-y-auto max-h-96 pr-1 text-xs">
                     <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block" data-i18n="mp_out_faq_lbl">Objection Killer FAQ (+24% fulfillment rate):</span>
                     <div id="res-faq" class="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-2 text-slate-300 select-all">
-                        <p><strong>Q: Unsure about the exact fit or build quality?</strong><br>A: You can unbox and inspect the item directly at the delivery pickup point, with 100% free returns on the spot.</p>
-                        <p><strong>Q: Is there an official manufacturer warranty included?</strong><br>A: Yes, every purchase is backed by our comprehensive 6-month replacement warranty.</p>
                     </div>
                 </div>
 
@@ -275,6 +265,204 @@ Using advanced eco-friendly composite materials, this unit preserves its pristin
 
     <!-- Client Script -->
     <script>
+        let hasUserGenerated = false;
+
+        const DEFAULT_INPUTS_BY_LOCALE = {
+            ru: {
+                name: "Беспроводные наушники TWS с шумоподавлением ANC",
+                cat: "Электроника и аудио",
+                cost: 10.0,
+                price: 25.0,
+                features: "Активное шумоподавление ANC, 36 часов автономности, быстрая зарядка Type-C"
+            },
+            uz: {
+                name: "ANC shovqinni bosuvchi simsiz TWS quloqchinlari",
+                cat: "Elektronika va audio",
+                cost: 10.0,
+                price: 25.0,
+                features: "Faol ANC shovqinni bostirish, 36 soat ishlash, tezkor Type-C zaryadlash"
+            },
+            en: {
+                name: "Wireless ANC Pro Noise-Cancelling Headphones",
+                cat: "Consumer Electronics & Audio",
+                cost: 10.0,
+                price: 25.0,
+                features: "Active noise cancellation (ANC), 36-hour battery, Type-C fast charging"
+            },
+            es: {
+                name: "Auriculares inalámbricos TWS con cancelación de ruido ANC",
+                cat: "Electrónica y audio",
+                cost: 10.0,
+                price: 25.0,
+                features: "Cancelación activa de ruido ANC, 36 horas de batería, carga rápida Type-C"
+            }
+        };
+
+        const PRESETS_BY_LOCALE = {
+            ru: [
+                { name: "Кроссовки мужские дышащие Nike Air", cat: "Обувь и кроссовки", cost: 18.0, price: 45.0, features: "Амортизация подошвы, дышащая сетка, легкий вес" },
+                { name: "Беспроводные наушники TWS с кейсом", cat: "Электроника и гаджеты", cost: 10.0, price: 25.0, features: "Активное шумоподавление ANC, 30 часов работы, Bluetooth 5.3" },
+                { name: "Кофемашина рожковая для эспрессо", cat: "Дом и бытовая техника", cost: 45.0, price: 110.0, features: "Давление 15 бар, капучинатор, автоматическое отключение" }
+            ],
+            uz: [
+                { name: "Erkaklar uchun nafas oluvchi krossovkalar", cat: "Poyabzal", cost: 18.0, price: 45.0, features: "Yumshoq taglik, havo o'tkazuvchi to'r, yengil vazn" },
+                { name: "Keysli simsiz TWS quloqchinlari", cat: "Elektronika", cost: 10.0, price: 25.0, features: "Shovqinni bosuvchi ANC, 30 soat ishlash, Bluetooth 5.3" },
+                { name: "Espresso uchun avtomat qahva mashinasi", cat: "Uy texnikasi", cost: 45.0, price: 110.0, features: "15 bar bosim, kapuchinator, avtomatik o'chish" }
+            ],
+            en: [
+                { name: "Thermal Smart Mug with LED Temp Display", cat: "Kitchen & Dining", cost: 4.5, price: 14.0, features: "Touch temperature display, 12h heat retention, stainless steel" },
+                { name: "Ergonomic Memory Foam Pillow", cat: "Home & Living", cost: 8.0, price: 22.0, features: "Orthopedic neck support, cooling gel layer, washable cover" },
+                { name: "Precision Tool Kit 108 Pieces", cat: "Auto & Hardware", cost: 25.0, price: 58.0, features: "Chrome vanadium steel, heavy-duty ratchet case, multi-bit" }
+            ],
+            es: [
+                { name: "Zapatillas deportivas transpirables para hombre", cat: "Calzado", cost: 18.0, price: 45.0, features: "Suela con amortiguación, malla transpirable, ultraligeras" },
+                { name: "Auriculares inalámbricos TWS con estuche", cat: "Electrónica de consumo", cost: 10.0, price: 25.0, features: "Cancelación de ruido activa ANC, batería de 30h, Bluetooth 5.3" },
+                { name: "Cafetera espresso automática", cat: "Electrodomésticos", cost: 45.0, price: 110.0, features: "Bomba de 15 bares, espumador de leche, apagado automático" }
+            ]
+        };
+
+        const SAMPLE_OUTPUT_BY_LOCALE = {
+            ru: {
+                title: "Беспроводные наушники TWS Pro ANC с активным шумоподавлением, Bluetooth 5.3, премиум звук, быстрая доставка",
+                bullets: [
+                    "💎 [ПРЕМИУМ КАЧЕСТВО] Прочный корпус и долговечные компоненты класса A+ для надежной службы годами.",
+                    "⚡ [АНАТОМИЧЕСКИЙ КОМФОРТ] Легкая эргономичная форма не вызывает усталости даже при многочасовом ношении.",
+                    "🎁 [ПОДАРОЧНАЯ УПАКОВКА] Фирменная коробка презентабельного вида — идеальный готовый подарок без лишних трат.",
+                    "🛡️ [КОНТРОЛЬ КАЧЕСТВА 3X] Каждый экземпляр проходит ручную предпродажную проверку перед отправкой на склад.",
+                    "🚀 [БЫСТРАЯ ДОСТАВКА] Получите товар уже на следующий день в ближайшем пункте выдачи с бесплатной примеркой!"
+                ],
+                desc: "Ищете идеальные наушники, объединяющие чистое звучание, глубокие басы и максимальный комфорт? Данная модель создана для ценителей безупречного звука.\n\nСистема активного шумоподавления ANC отсекает городской шум, а энергоемкий аккумулятор обеспечивает до 30 часов автономности. Закажите прямо сейчас и оцените новый уровень комфорта уже завтра!",
+                faq: [
+                    { q: "Подойдут ли наушники к моему смартфону?", a: "Да, устройство полностью совместимо с iOS, Android и любыми устройствами с поддержкой Bluetooth." },
+                    { q: "Предоставляется ли официальная гарантия?", a: "Да, на товар действует полноценная гарантия 6 месяцев с быстрой заменой при обнаружении брака." }
+                ],
+                profit: "$10.00",
+                margin: "40.0%",
+                roi: "100.0%"
+            },
+            uz: {
+                title: "Simsiz TWS Pro ANC quloqchinlari, shovqinni bosish tizimi, Bluetooth 5.3, premium ovoz, 1 kunda tezkor yetkazib berish",
+                bullets: [
+                    "💎 [PREMIUM SIFAT] Yuqori toifadagi A+ mustahkam materiallar uzoq yillik ishonchli xizmatni ta'minlaydi.",
+                    "⚡ [ERGONOMIK QULAYLIK] Yengil anatomik korpus bir necha soat taqib yurganda ham quloqni toliqtirmaydi.",
+                    "🎁 [SOVG'ABOP QADOQ] Hashamatli sovg'a qutisi — qo'shimcha xarajatlarsiz tayyor sovg'a ko'rinishida.",
+                    "🛡️ [UCH BOSQICHLI TEKSHIRUV] Har bir dona mahsulot omborga jo'natilishidan oldin to'liq sinovdan o'tadi.",
+                    "🚀 [TEZKOR YETKAZISH] Buyurtmangizni ertagayoq eng yaqin tarqatish punktida xavf-xatarsiz qabul qilib oling!"
+                ],
+                desc: "Kristalldek tiniq ovoz, chuqur bas va yuqori darajadagi qulaylikni o'zida jamlagan mahsulot izlayapsizmi? Ushbu model murosasiz sifatni qadrlovchilar uchun maxsus yaratilgan.\n\nIlg'or shovqinni bosish vositasi tashqi shovqinlarni bartaraf etadi, baquvvat batareya esa 30 soatgacha to'xtovsiz xizmat ko'rsatadi. Bugun buyurtma bering va yangi qulaylik darajasini his eting!",
+                faq: [
+                    { q: "Mening telefonimga to'g'ri keladimi?", a: "Ha, quloqchinlar iOS, Android va barcha Bluetooth qurilmalari bilan to'liq mos keladi." },
+                    { q: "Kafolat beriladimi?", a: "Albatta, har bir xaridga rasmiy 6 oylik almashtirish kafolati taqdim etiladi." }
+                ],
+                profit: "$10.00",
+                margin: "40.0%",
+                roi: "100.0%"
+            },
+            en: {
+                title: "Wireless ANC Pro Noise-Cancelling Headphones Premium Quality, Original Ergonomic Design, Bestseller, 1-Day Express Delivery",
+                bullets: [
+                    "💎 [PREMIUM STANDARD] Crafted from Grade A+ durable components ensuring years of reliable performance.",
+                    "⚡ [ERGONOMIC COMFORT] Lightweight contour design makes everyday usage effortless from the very first minute.",
+                    "🎁 [PERFECT GIFT] Packaged in luxury retail gift box — ready to gift without extra wrapping expenses.",
+                    "🛡️ [TRIPLE QC INSPECTION] Every single unit passes rigorous manual quality check prior to warehouse dispatch.",
+                    "🚀 [EXPRESS DISPATCH] Receive your package tomorrow at your nearest pickup point with zero-risk inspection!"
+                ],
+                desc: "Looking for the ideal product that blends premium aesthetics, maximum durability, and everyday practicality? This model was engineered specifically for discerning customers who demand uncompromising quality.\n\nUsing advanced eco-friendly composite materials, this unit preserves its pristine finish even under heavy daily use. Includes full accessory bundle and comprehensive user manual. Order today and experience a whole new level of comfort tomorrow!",
+                faq: [
+                    { q: "Unsure about the exact fit or build quality?", a: "You can unbox and inspect the item directly at the delivery pickup point, with 100% free returns on the spot." },
+                    { q: "Is there an official manufacturer warranty included?", a: "Yes, every purchase is backed by our comprehensive 6-month replacement warranty." }
+                ],
+                profit: "$10.00",
+                margin: "40.0%",
+                roi: "100.0%"
+            },
+            es: {
+                title: "Auriculares inalámbricos TWS Pro ANC con cancelación activa de ruido, Bluetooth 5.3, sonido premium, entrega rápida",
+                bullets: [
+                    "💎 [CALIDAD PREMIUM] Componentes duraderos de grado A+ que garantizan años de rendimiento fiable.",
+                    "⚡ [CONFORT ERGONÓMICO] Su diseño anatómico y ligero permite un uso cómodo durante todo el día sin fatiga.",
+                    "🎁 [EMPAQUE DE REGALO] Presentado en caja de lujo — listo para regalar sin costes adicionales.",
+                    "🛡️ [TRIPLE CONTROL DE CALIDAD] Cada unidad se somete a una rigurosa inspección previa al envío al almacén.",
+                    "🚀 [ENVÍO EXPRESS] ¡Reciba su paquete mañana mismo en su punto de recogida más cercano con inspección sin riesgo!"
+                ],
+                desc: "¿Busca el producto ideal que combine estética sofisticada, máxima durabilidad y practicidad diaria? Este modelo ha sido diseñado específicamente para quienes no aceptan compromisos en calidad.\n\nSu sistema de cancelación activa ANC aísla ruidos exteriores y su batería de larga duración ofrece hasta 30 horas de autonomía. ¡Ordene hoy y viva el máximo confort sonoro!",
+                faq: [
+                    { q: "¿Es compatible con cualquier teléfono móvil?", a: "Sí, es totalmente compatible con sistemas iOS, Android y cualquier dispositivo con conectividad Bluetooth." },
+                    { q: "¿Incluye garantía oficial del fabricante?", a: "Sí, su compra está protegida con garantía oficial de reemplazo de 6 meses." }
+                ],
+                profit: "$10.00",
+                margin: "40.0%",
+                roi: "100.0%"
+            }
+        };
+
+        function getActiveLocale() {
+            if (typeof window.getActiveLocale === 'function') {
+                return window.getActiveLocale();
+            }
+            if (typeof window.getCurrentLocale === 'function') {
+                return window.getCurrentLocale();
+            }
+            return localStorage.getItem('eduhub_locale') || 'uz';
+        }
+
+        function syncMarketplaceLocale(locale) {
+            const loc = (locale || getActiveLocale()).toLowerCase();
+            const lang = DEFAULT_INPUTS_BY_LOCALE[loc] ? loc : (loc.startsWith('ru') ? 'ru' : (loc.startsWith('uz') ? 'uz' : (loc.startsWith('es') ? 'es' : 'en')));
+
+            const defInput = DEFAULT_INPUTS_BY_LOCALE[lang];
+            const nameEl = document.getElementById('mp-name');
+            const catEl = document.getElementById('mp-cat');
+            const featEl = document.getElementById('mp-features');
+
+            // If user hasn't typed custom product name, switch default sample to active language
+            const knownNames = Object.values(DEFAULT_INPUTS_BY_LOCALE).map(d => d.name);
+            if (!hasUserGenerated && (!nameEl.value || knownNames.includes(nameEl.value.trim()))) {
+                if (defInput) {
+                    nameEl.value = defInput.name;
+                    catEl.value = defInput.cat;
+                    if (featEl && (!featEl.value || Object.values(DEFAULT_INPUTS_BY_LOCALE).map(d => d.features).includes(featEl.value.trim()))) {
+                        featEl.value = defInput.features;
+                    }
+                }
+            }
+
+            // Sync preview cards on right side if user hasn't generated custom output yet
+            if (!hasUserGenerated) {
+                const sampleOut = SAMPLE_OUTPUT_BY_LOCALE[lang] || SAMPLE_OUTPUT_BY_LOCALE['uz'];
+                if (sampleOut) {
+                    const titleEl = document.getElementById('res-title');
+                    const bulletsEl = document.getElementById('res-bullets');
+                    const descEl = document.getElementById('res-desc');
+                    const faqEl = document.getElementById('res-faq');
+
+                    if (titleEl) titleEl.textContent = sampleOut.title;
+                    if (bulletsEl) bulletsEl.innerHTML = sampleOut.bullets.map(b => `<p>${b}</p>`).join('');
+                    if (descEl) descEl.textContent = sampleOut.desc;
+                    if (faqEl) faqEl.innerHTML = sampleOut.faq.map(f => `<p><strong>Q: ${f.q}</strong><br>A: ${f.a}</p>`).join('');
+                    if (sampleOut.profit) document.getElementById('res-profit').textContent = sampleOut.profit;
+                    if (sampleOut.margin) document.getElementById('res-margin').textContent = sampleOut.margin;
+                    if (sampleOut.roi) document.getElementById('res-roi').textContent = sampleOut.roi;
+                }
+            }
+        }
+
+        function applyPreset(idx) {
+            const loc = getActiveLocale();
+            const lang = PRESETS_BY_LOCALE[loc] ? loc : (loc.startsWith('ru') ? 'ru' : (loc.startsWith('uz') ? 'uz' : (loc.startsWith('es') ? 'es' : 'en')));
+            const list = PRESETS_BY_LOCALE[lang] || PRESETS_BY_LOCALE['uz'];
+            const p = list[idx] || list[0];
+
+            document.getElementById('mp-name').value = p.name;
+            document.getElementById('mp-cat').value = p.cat;
+            document.getElementById('mp-cost').value = p.cost;
+            document.getElementById('mp-price').value = p.price;
+            if (p.features) {
+                document.getElementById('mp-features').value = p.features;
+            }
+            generateListing();
+        }
+
         function setSample(name, cat, cost, price) {
             document.getElementById('mp-name').value = name;
             document.getElementById('mp-cat').value = cat;
@@ -293,6 +481,7 @@ Using advanced eco-friendly composite materials, this unit preserves its pristin
         }
 
         async function generateListing() {
+            hasUserGenerated = true;
             const btn = document.getElementById('mp-btn');
             const originalText = btn.innerHTML;
             btn.innerHTML = '<span>⏳ Generating Rank #1 Listing...</span>';
@@ -305,7 +494,7 @@ Using advanced eco-friendly composite materials, this unit preserves its pristin
                 cost_price: parseFloat(document.getElementById('mp-cost').value) || 10.0,
                 selling_price: parseFloat(document.getElementById('mp-price').value) || 25.0,
                 key_features: document.getElementById('mp-features').value.trim(),
-                language: (typeof window.getActiveLocale === 'function' ? window.getActiveLocale() : (localStorage.getItem('eduhub_locale') || 'uz'))
+                language: getActiveLocale()
             };
 
             try {
@@ -325,9 +514,9 @@ Using advanced eco-friendly composite materials, this unit preserves its pristin
                     document.getElementById('res-faq').innerHTML = data.objection_faq.map(f => `<p><strong>Q: ${f.question}</strong><br>A: ${f.answer}</p>`).join('');
                 }
                 if (data.unit_economics) {
-                    document.getElementById('res-profit').textContent = '$' + data.unit_economics.net_profit.toFixed(2);
-                    document.getElementById('res-margin').textContent = data.unit_economics.margin_percentage.toFixed(1) + '%';
-                    document.getElementById('res-roi').textContent = data.unit_economics.roi_percentage.toFixed(1) + '%';
+                    document.getElementById('res-profit').textContent = '$' + Number(data.unit_economics.net_profit || 0).toFixed(2);
+                    document.getElementById('res-margin').textContent = Number(data.unit_economics.margin_percentage || 0).toFixed(1) + '%';
+                    document.getElementById('res-roi').textContent = Number(data.unit_economics.roi_percentage || 0).toFixed(1) + '%';
                 }
             } catch (err) {
                 console.error(err);
@@ -349,6 +538,19 @@ Using advanced eco-friendly composite materials, this unit preserves its pristin
             navigator.clipboard.writeText(activeText);
             const notice = (typeof window.t === 'function' ? window.t('copied_notice') : '') || 'Text copied to clipboard!';
             alert(notice);
+        }
+
+        // Locale change listener and immediate DOM bootstrap
+        syncMarketplaceLocale();
+
+        window.addEventListener('eduhub:locale-changed', (e) => {
+            if (e && e.detail && e.detail.locale) {
+                syncMarketplaceLocale(e.detail.locale);
+            }
+        });
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => syncMarketplaceLocale());
         }
     </script>
 </body>

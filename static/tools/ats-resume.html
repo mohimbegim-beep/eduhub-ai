@@ -318,33 +318,87 @@
             document.getElementById("results-card").classList.add("hidden");
         }
 
+        const ATS_SAMPLES_BY_LOCALE = {
+            ru: {
+                1: {
+                    role: "Senior Frontend разработчик",
+                    jd: "Требуется Senior Frontend разработчик с опытом от 4 лет в стеке React, TypeScript и Next.js. Задачи: миграция интерфейсов на микрофронтенды, оптимизация Core Web Vitals, настройка CI/CD в GitHub Actions и интеграция с бэкендом через REST API и GraphQL. Опыт с Tailwind CSS и Jest обязателен.",
+                    resume: "Иван Петров — Frontend разработчик\nОпыт работы:\n- Разработка веб-приложений на React, JavaScript и HTML/CSS.\n- Интеграция с бэкенд-сервисами через REST API.\n- Ведение версий в Git и GitHub.\n- Создание переиспользуемых компонентов UI.\nНавыки: React, JavaScript, TypeScript, CSS, Git, HTML, REST APIs."
+                },
+                2: {
+                    role: "Product Marketing Manager",
+                    jd: "Ищем Data-Driven Product Marketing менеджера для масштабирования B2B SaaS платформы. Обязанности: проектирование воронок привлечения, когортный анализ удержания, проведение custdev-интервью, координация с SEO-командой. Требования: от 3 лет опыта в SaaS, владение SQL и Google Analytics, подтвержденный рост метрик CAC и LTV.",
+                    resume: "Алексей Смирнов — Специалист по маркетингу\nОпыт:\n- Запуск и масштабирование digital-кампаний в B2B сегменте.\n- Ведение email-рассылок на базу более 15 000 подписчиков.\n- Анализ когорт и оптимизация конверсий посадочных страниц.\nНавыки: Product Marketing, SQL, Google Analytics, SEO, CRM."
+                },
+                3: {
+                    role: "Junior Data Analyst",
+                    jd: "Открыта позиция Junior Data Analyst. Требования: высшее образование (STEM, экономика, IT). Уверенное владение Python (Pandas, NumPy), навыки написания SQL запросов, визуализация данных в Power BI или Tableau, базовые знания математической статистики.",
+                    resume: "Выпускник направления Компьютерные науки с сильной базой в базах данных и Python.\nПроекты:\n- Исследование и визуализация успеваемости студентов с помощью Pandas и Matplotlib.\n- Проектирование реляционной схемы базы данных в MySQL.\nНавыки: Python, SQL, Pandas, NumPy, Power BI, Statistics."
+                }
+            },
+            uz: {
+                1: {
+                    role: "Senior Frontend dasturchi",
+                    jd: "React, TypeScript va Next.js bo'yicha 4+ yillik tajribaga ega Senior Frontend dasturchi qidirilmoqda. Vazifalar: mikrokontentlarni integratsiya qilish, Core Web Vitals ko'rsatkichlarini optimallashtirish, REST API va GraphQL bilan ishlash, CI/CD quvurlarida avtomatlashtirish.",
+                    resume: "Aziz Rahimov — Frontend dasturchi\nTajriba:\n- React, JavaScript va Tailwind CSS yordamida veb-ilovalarni yaratish.\n- Backend jamoasi bilan REST API integratsiyasi.\n- Git va GitHub orqali versiyalarni boshqarish.\n- Qayta ishlatiladigan UI komponentlarini ishlab chiqish.\nKo'nikmalar: React, JavaScript, TypeScript, CSS, Git, HTML, REST APIs."
+                },
+                2: {
+                    role: "Mahsulot Marketing Menejeri (PMM)",
+                    jd: "B2B SaaS platformasini rivojlantirish uchun Product Marketing Manager taklif etiladi. Majburiyatlar: mijozlarni jalb qilish voronkalarini loyihalash, kohort tahlillari, custdev intervyulari, CAC va LTV ko'rsatkichlarini oshirish. Talablar: SaaS sohasida 3+ yillik tajriba, SQL va analitika vositalarini bilish.",
+                    resume: "Javohir Aliyev — Marketing mutaxassisi\nTajriba:\n- 15 000 dan ortiq obunachilar uchun haftalik email xabarnomalarni yuritish.\n- Digital reklama kampaniyalarini boshqarish va konversiyani oshirish.\n- Dizayn va sotuvlar bo'limi bilan samarali hamkorlik.\nKo'nikmalar: Marketing, SQL, Google Analytics, Voronkalar, CRM."
+                },
+                3: {
+                    role: "Junior Ma'lumotlar Tahlilchisi (Data Analyst)",
+                    jd: "Junior Data Analyst qidirilmoqda. Talablar: STEM yoki IT yo'nalishidagi oliy ma'lumot, Python (Pandas, NumPy), murakkab SQL so'rovlarini yozish ko'nikmasi, Power BI yoki Tableau orqali vizualizatsiya.",
+                    resume: "Amaliy matematika va axborot tizimlari yo'nalishi bitiruvchisi.\nLoyihalar:\n- Pandas va Matplotlib yordamida ma'lumotlar to'plamini tahlil qilish va vizualizatsiya.\n- MySQL relatsion ma'lumotlar bazasi sxemasini loyihalash.\nKo'nikmalar: Python, SQL, Pandas, NumPy, Power BI, Ehtimollar nazariyasi."
+                }
+            },
+            en: {
+                1: {
+                    role: "Senior Frontend Engineer",
+                    jd: "We are seeking a Senior Frontend Engineer with 4+ years of hands-on experience in React, TypeScript, and Next.js. You will lead the migration of legacy views to modern micro-frontends, optimize Core Web Vitals, implement CI/CD with GitHub Actions, and collaborate with backend developers using REST APIs and GraphQL. Experience with Tailwind CSS and Jest testing is required.",
+                    resume: "John Doe — Frontend Developer\nExperience:\n- Built web applications using React, JavaScript, and HTML/CSS.\n- Worked with backend teams on REST API integration.\n- Managed version control with Git and GitHub.\n- Created reusable UI components and styled pages.\nSkills: React, JavaScript, TypeScript, CSS, Git, HTML, REST APIs."
+                },
+                2: {
+                    role: "Product Marketing Manager",
+                    jd: "Looking for a Data-Driven Product Marketing Manager to scale our B2B SaaS platform. Responsibilities: design multi-channel acquisition funnels, analyze user retention cohorts, conduct customer interviews, coordinate with SEO and content teams, and drive product launches. Requirements: 3+ years SaaS PMM experience, SQL / Google Analytics proficiency, and demonstrated ability to improve CAC and LTV.",
+                    resume: "Alex Smith — Marketing Specialist\nSummary: Dynamic marketer with 3 years experience creating digital marketing campaigns, social media marketing, and email newsletters.\nExperience:\n- Created weekly email newsletters for 15,000 subscribers.\n- Managed digital ads and wrote blog posts to increase brand awareness.\n- Collaborated with design and sales team."
+                },
+                3: {
+                    role: "Junior Data Analyst",
+                    jd: "Hiring an Entry-Level / Junior Data Analyst. Requirements: Bachelor's degree in STEM, Economics, or Computer Science. Proficiency in Python (Pandas, NumPy), SQL queries, data visualization (Power BI or Tableau), and fundamental statistical methods. Good communication skills and desire to learn.",
+                    resume: "Recent Computer Science Graduate with strong coursework in database systems, Python programming, and probability.\nProjects:\n- Analyzed student performance dataset using Python Pandas and Matplotlib.\n- Built relational database schema in MySQL for university course management."
+                }
+            },
+            es: {
+                1: {
+                    role: "Ingeniero Frontend Senior",
+                    jd: "Buscamos un Ingeniero Frontend Senior con más de 4 años de experiencia en React, TypeScript y Next.js. Liderará la migración a microfrontends, optimización de Core Web Vitals, CI/CD con GitHub Actions e integración con REST APIs y GraphQL.",
+                    resume: "Carlos Mendoza — Desarrollador Frontend\nExperiencia:\n- Creación de aplicaciones web con React, JavaScript y Tailwind CSS.\n- Integración con servicios backend mediante REST APIs.\n- Gestión de versiones con Git y GitHub.\n- Diseño de componentes de interfaz reutilizables.\nHabilidades: React, JavaScript, TypeScript, CSS, Git, HTML, REST APIs."
+                },
+                2: {
+                    role: "Product Marketing Manager",
+                    jd: "Se busca Product Marketing Manager analítico para plataforma B2B SaaS. Responsabilidades: diseño de embudos de adquisición, análisis de cohortes, entrevistas con usuarios y mejora de métricas CAC y LTV. Requisitos: 3+ años de experiencia, SQL y Google Analytics.",
+                    resume: "Sofía Gómez — Especialista en Marketing\nExperiencia:\n- Creación y optimización de campañas de marketing digital B2B.\n- Gestión de newsletters para 15.000 suscriptores.\n- Análisis de métricas de retención y optimización de conversión.\nHabilidades: Product Marketing, SQL, Google Analytics, SEO, CRM."
+                },
+                3: {
+                    role: "Analista de Datos Junior",
+                    jd: "Contratación de Analista de Datos Junior. Requisitos: Grado universitario en STEM, Economía o Informática. Dominio de Python (Pandas, NumPy), consultas SQL, visualización en Power BI o Tableau y métodos estadísticos básicos.",
+                    resume: "Graduado en Informática con sólida base en sistemas de bases de datos y Python.\nProyectos:\n- Análisis y visualización de datos con Pandas y Matplotlib.\n- Diseño de esquema relacional en MySQL para gestión de cursos.\nHabilidades: Python, SQL, Pandas, NumPy, Power BI, Estadística."
+                }
+            }
+        };
+
         function loadSample(idx) {
-            if (idx === 1) {
-                document.getElementById("target-role-input").value = "Senior Frontend Engineer";
-                document.getElementById("jd-input").value = "We are seeking a Senior Frontend Engineer with 4+ years of hands-on experience in React, TypeScript, and Next.js. You will lead the migration of legacy views to modern micro-frontends, optimize Core Web Vitals, implement CI/CD with GitHub Actions, and collaborate with backend developers using REST APIs and GraphQL. Experience with Tailwind CSS and Jest testing is required.";
-                document.getElementById("resume-input").value = "John Doe — Frontend Developer
-Experience:
-- Built web applications using React, JavaScript, and HTML/CSS.
-- Worked with backend teams on REST API integration.
-- Managed version control with Git and GitHub.
-- Created reusable UI components and styled pages.
-Skills: React, JavaScript, TypeScript, CSS, Git, HTML, REST APIs.";
-            } else if (idx === 2) {
-                document.getElementById("target-role-input").value = "Product Marketing Manager";
-                document.getElementById("jd-input").value = "Looking for a Data-Driven Product Marketing Manager to scale our B2B SaaS platform. Responsibilities: design multi-channel acquisition funnels, analyze user retention cohorts, conduct customer interviews, coordinate with SEO and content teams, and drive product launches. Requirements: 3+ years SaaS PMM experience, SQL / Google Analytics proficiency, and demonstrated ability to improve CAC and LTV.";
-                document.getElementById("resume-input").value = "Alex Smith — Marketing Specialist
-Summary: Dynamic marketer with 3 years experience creating digital marketing campaigns, social media marketing, and email newsletters.
-Experience:
-- Created weekly email newsletters for 15,000 subscribers.
-- Managed digital ads and wrote blog posts to increase brand awareness.
-- Collaborated with design and sales team.";
-            } else if (idx === 3) {
-                document.getElementById("target-role-input").value = "Junior Data Analyst";
-                document.getElementById("jd-input").value = "Hiring an Entry-Level / Junior Data Analyst. Requirements: Bachelor's degree in STEM, Economics, or Computer Science. Proficiency in Python (Pandas, NumPy), SQL queries, data visualization (Power BI or Tableau), and fundamental statistical methods. Good communication skills and desire to learn.";
-                document.getElementById("resume-input").value = "Recent Computer Science Graduate with strong coursework in database systems, Python programming, and probability.
-Projects:
-- Analyzed student performance dataset using Python Pandas and Matplotlib.
-- Built relational database schema in MySQL for university course management.";
+            const loc = (typeof window.getActiveLocale === 'function' ? window.getActiveLocale() : (localStorage.getItem('eduhub_locale') || 'en')).toLowerCase();
+            const lang = ATS_SAMPLES_BY_LOCALE[loc] ? loc : (loc.startsWith('ru') ? 'ru' : (loc.startsWith('uz') ? 'uz' : (loc.startsWith('es') ? 'es' : 'en')));
+            const dict = ATS_SAMPLES_BY_LOCALE[lang] || ATS_SAMPLES_BY_LOCALE['en'];
+            const sample = dict[idx] || dict[1];
+
+            if (sample) {
+                document.getElementById("target-role-input").value = sample.role;
+                document.getElementById("jd-input").value = sample.jd;
+                document.getElementById("resume-input").value = sample.resume;
             }
             updateCounts();
         }
