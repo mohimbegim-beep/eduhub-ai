@@ -33,10 +33,10 @@
     "email": "guest_testclient@eduhub.ai",
     "flash_credits": 0,
     "daily_usage": {
-      "date": "2026-09-17",
-      "count": 2
+      "date": "2026-09-23",
+      "count": 9
     },
-    "last_updated": 1789619182.0789387
+    "last_updated": 1790137740.3194559
   },
   "student_test_1789147251@eduhub.ai": {
     "email": "student_test_1789147251@eduhub.ai",
@@ -274,8 +274,8 @@
       "trial": true
     }
   },
-  "tester@lemonsqueezy.com": {
-    "email": "tester@lemonsqueezy.com",
+  "tester@dodopayments.com": {
+    "email": "tester@dodopayments.com",
     "flash_credits": 0,
     "daily_usage": {
       "date": "2026-09-17",
@@ -305,10 +305,10 @@
     "email": "student@eduhub.ai",
     "flash_credits": 120,
     "daily_usage": {
-      "date": "2026-09-22",
+      "date": "2026-09-23",
       "count": 0
     },
-    "last_updated": 1790076506.130385,
+    "last_updated": 1790137740.4019177,
     "role": "pro_max",
     "tier": "pro_max",
     "is_subscribed": true,
@@ -318,8 +318,8 @@
       "tier": "pro_max",
       "role": "pro_max",
       "variant_id": "ca17b5d8-9754-44f3-9a1f-f6d779eb8203",
-      "order_id": "evt_test_12345",
-      "activated_at": 1790076506.130385,
+      "order_id": "1790137740",
+      "activated_at": 1790137740.4019177,
       "trial": true
     }
   },
@@ -342,6 +342,28 @@
       "variant_id": "ca17b5d8-9754-44f3-9a1f-f6d779eb8203",
       "order_id": "msg_live_test_001",
       "activated_at": 1790076625.9638252,
+      "trial": true
+    }
+  },
+  "audit@dodo.com": {
+    "email": "audit@dodo.com",
+    "flash_credits": 120,
+    "daily_usage": {
+      "date": "2026-09-23",
+      "count": 0
+    },
+    "last_updated": 1790137787.6483994,
+    "role": "pro_max",
+    "tier": "pro_max",
+    "is_subscribed": true,
+    "user_id": "usr_419da2aa",
+    "subscription": {
+      "status": "active",
+      "tier": "pro_max",
+      "role": "pro_max",
+      "variant_id": "ca17b5d8-9754-44f3-9a1f-f6d779eb8203",
+      "order_id": "1790137787",
+      "activated_at": 1790137787.6483994,
       "trial": true
     }
   }

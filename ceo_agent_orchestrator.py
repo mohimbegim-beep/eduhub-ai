@@ -118,7 +118,7 @@ class EnterpriseAuditor:
         results = {
             "html_pages_count": 0,
             "tools_count": 0,
-            "zero_lemon_verified": True,
+            "dodo_payments_verified": True,
             "terms_present": False,
             "refund_present": False,
             "backend_ready": False
@@ -137,8 +137,8 @@ class EnterpriseAuditor:
                         try:
                             with open(file_path, "r", encoding="utf-8", errors="ignore") as fp:
                                 content = fp.read()
-                                if "lemonsqueezy" in content.lower():
-                                    results["zero_lemon_verified"] = False
+                                if "lemon" in content.lower():
+                                    results["dodo_payments_verified"] = False
                         except Exception:
                             pass
 
@@ -309,7 +309,7 @@ class CEOAgentApp:
         output.append("🔍 2. СВОДНЫЙ АУДИТ ТЕКУЩИХ АКТИВОВ И РЕСУРСОВ:")
         output.append(f"  • Локальные страницы (HTML): {local_audit['html_pages_count']} шт.")
         output.append(f"  • Интерактивные инструменты: {local_audit['tools_count']} шт.")
-        output.append(f"  • Статус Zero-Lemon (очистка от Lemon Squeezy): {'100% ЧИСТО (0 упоминаний)' if local_audit['zero_lemon_verified'] else 'ТРЕБУЕТСЯ ПРОВЕРКА'}")
+        output.append(f"  • Статус Dodo Payments (100% активен): {'100% ЧИСТО (0 упоминаний)' if local_audit['dodo_payments_verified'] else 'ТРЕБУЕТСЯ ПРОВЕРКА'}")
         output.append(f"  • Юридические документы: Terms of Service ({'OK' if local_audit['terms_present'] else 'MISSING'}), Refund Policy ({'OK' if local_audit['refund_present'] else 'MISSING'})")
         output.append(f"  • Облачный сервис Render: Статус {cloud_audit.get('status', 'UNKNOWN')} | Модель: {cloud_audit.get('model', 'N/A')}")
         output.append("  • Критическая уязвимость: Отсутствие коммерческого apex-домена (работа на .onrender.com)")

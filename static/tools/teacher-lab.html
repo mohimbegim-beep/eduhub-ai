@@ -18,11 +18,12 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👩‍🏫</text></svg>">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        .glass-card { background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
+        .glass-card { background: rgba(15, 23, 42, 0.75); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
         .blur-locked { filter: blur(6px); user-select: none; pointer-events: none; opacity: 0.6; }
     </style>
     <!-- Client-side i18n & Google Translate Bridge Engine -->
     <script src="/static/js/i18n.js" defer></script>
+    <link rel="stylesheet" href="/static/css/safari_compat.css">
 </head>
 <body data-page-tool="teacher-lab" class="bg-slate-950 text-slate-100 min-h-screen font-sans antialiased selection:bg-emerald-500 selection:text-slate-950">
 

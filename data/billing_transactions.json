@@ -1,15 +1,5 @@
 [
   {
-    "timestamp": 1789146349.7983446,
-    "event": "webhook_test",
-    "order_id": "test_001",
-    "customer_email": "tester@lemonsqueezy.com",
-    "status": "completed",
-    "attributes": {
-      "user_email": "tester@lemonsqueezy.com"
-    }
-  },
-  {
     "timestamp": 1789146349.8023465,
     "event": "order_created",
     "order_id": "ord_999",
@@ -42,16 +32,6 @@
   },
   {
     "timestamp": 1789146447.9946175,
-    "event": "webhook_test",
-    "order_id": "test_001",
-    "customer_email": "tester@lemonsqueezy.com",
-    "status": "completed",
-    "attributes": {
-      "user_email": "tester@lemonsqueezy.com"
-    }
-  },
-  {
-    "timestamp": 1789146447.9946175,
     "event": "order_created",
     "order_id": "ord_999",
     "customer_email": "customer@eduhub.ai",
@@ -69,16 +49,6 @@
     "status": "completed",
     "attributes": {
       "user_email": "subscriber@eduhub.ai"
-    }
-  },
-  {
-    "timestamp": 1789146746.823011,
-    "event": "webhook_test",
-    "order_id": "test_001",
-    "customer_email": "tester@lemonsqueezy.com",
-    "status": "completed",
-    "attributes": {
-      "user_email": "tester@lemonsqueezy.com"
     }
   },
   {
@@ -130,16 +100,6 @@
         "product_name": "Exam Crunch Pack (120 Credits)",
         "variant_name": "120 Credits"
       }
-    }
-  },
-  {
-    "timestamp": 1789146962.4045975,
-    "event": "webhook_test",
-    "order_id": "test_001",
-    "customer_email": "tester@lemonsqueezy.com",
-    "status": "completed",
-    "attributes": {
-      "user_email": "tester@lemonsqueezy.com"
     }
   },
   {
@@ -204,16 +164,6 @@
     }
   },
   {
-    "timestamp": 1789147273.869888,
-    "event": "webhook_test",
-    "order_id": "test_001",
-    "customer_email": "tester@lemonsqueezy.com",
-    "status": "completed",
-    "attributes": {
-      "user_email": "tester@lemonsqueezy.com"
-    }
-  },
-  {
     "timestamp": 1789147273.8771951,
     "event": "order_created",
     "order_id": "ord_999",
@@ -262,16 +212,6 @@
         "product_name": "Exam Crunch Pack (120 Credits)",
         "variant_name": "120 Credits"
       }
-    }
-  },
-  {
-    "timestamp": 1789147639.8254943,
-    "event": "webhook_test",
-    "order_id": "test_001",
-    "customer_email": "tester@lemonsqueezy.com",
-    "status": "completed",
-    "attributes": {
-      "user_email": "tester@lemonsqueezy.com"
     }
   },
   {
@@ -327,16 +267,6 @@
   },
   {
     "timestamp": 1789148092.4603693,
-    "event": "webhook_test",
-    "order_id": "test_001",
-    "customer_email": "tester@lemonsqueezy.com",
-    "status": "completed",
-    "attributes": {
-      "user_email": "tester@lemonsqueezy.com"
-    }
-  },
-  {
-    "timestamp": 1789148092.4603693,
     "event": "order_created",
     "order_id": "ord_999",
     "customer_email": "customer@eduhub.ai",
@@ -354,16 +284,6 @@
     "status": "completed",
     "attributes": {
       "user_email": "subscriber@eduhub.ai"
-    }
-  },
-  {
-    "timestamp": 1789148280.0897145,
-    "event": "webhook_test",
-    "order_id": "test_001",
-    "customer_email": "tester@lemonsqueezy.com",
-    "status": "completed",
-    "attributes": {
-      "user_email": "tester@lemonsqueezy.com"
     }
   },
   {
@@ -385,16 +305,6 @@
     "status": "completed",
     "attributes": {
       "user_email": "subscriber@eduhub.ai"
-    }
-  },
-  {
-    "timestamp": 1789148748.1159606,
-    "event": "webhook_test",
-    "order_id": "test_001",
-    "customer_email": "tester@lemonsqueezy.com",
-    "status": "completed",
-    "attributes": {
-      "user_email": "tester@lemonsqueezy.com"
     }
   },
   {
@@ -449,16 +359,6 @@
     }
   },
   {
-    "timestamp": 1789148810.486478,
-    "event": "webhook_test",
-    "order_id": "test_001",
-    "customer_email": "tester@lemonsqueezy.com",
-    "status": "completed",
-    "attributes": {
-      "user_email": "tester@lemonsqueezy.com"
-    }
-  },
-  {
     "timestamp": 1789148810.492486,
     "event": "order_created",
     "order_id": "ord_999",
@@ -477,16 +377,6 @@
     "status": "completed",
     "attributes": {
       "user_email": "subscriber@eduhub.ai"
-    }
-  },
-  {
-    "timestamp": 1789149437.8224113,
-    "event": "webhook_test",
-    "order_id": "test_001",
-    "customer_email": "tester@lemonsqueezy.com",
-    "status": "completed",
-    "attributes": {
-      "user_email": "tester@lemonsqueezy.com"
     }
   },
   {
@@ -541,16 +431,6 @@
     }
   },
   {
-    "timestamp": 1789150382.3371253,
-    "event": "webhook_test",
-    "order_id": "test_001",
-    "customer_email": "tester@lemonsqueezy.com",
-    "status": "completed",
-    "attributes": {
-      "user_email": "tester@lemonsqueezy.com"
-    }
-  },
-  {
     "timestamp": 1789150382.3401246,
     "event": "order_created",
     "order_id": "ord_999",
@@ -569,16 +449,6 @@
     "status": "completed",
     "attributes": {
       "user_email": "subscriber@eduhub.ai"
-    }
-  },
-  {
-    "timestamp": 1789186047.9757986,
-    "event": "webhook_test",
-    "order_id": "test_001",
-    "customer_email": "tester@lemonsqueezy.com",
-    "status": "completed",
-    "attributes": {
-      "user_email": "tester@lemonsqueezy.com"
     }
   },
   {
@@ -603,16 +473,6 @@
     }
   },
   {
-    "timestamp": 1789187215.9098647,
-    "event": "webhook_test",
-    "order_id": "test_001",
-    "customer_email": "tester@lemonsqueezy.com",
-    "status": "completed",
-    "attributes": {
-      "user_email": "tester@lemonsqueezy.com"
-    }
-  },
-  {
     "timestamp": 1789187215.9144793,
     "event": "order_created",
     "order_id": "ord_999",
@@ -631,16 +491,6 @@
     "status": "completed",
     "attributes": {
       "user_email": "subscriber@eduhub.ai"
-    }
-  },
-  {
-    "timestamp": 1789187788.3534436,
-    "event": "webhook_test",
-    "order_id": "test_001",
-    "customer_email": "tester@lemonsqueezy.com",
-    "status": "completed",
-    "attributes": {
-      "user_email": "tester@lemonsqueezy.com"
     }
   },
   {
@@ -665,16 +515,6 @@
     }
   },
   {
-    "timestamp": 1789188595.1235144,
-    "event": "webhook_test",
-    "order_id": "test_001",
-    "customer_email": "tester@lemonsqueezy.com",
-    "status": "completed",
-    "attributes": {
-      "user_email": "tester@lemonsqueezy.com"
-    }
-  },
-  {
     "timestamp": 1789188595.1285121,
     "event": "order_created",
     "order_id": "ord_999",
@@ -696,16 +536,6 @@
     }
   },
   {
-    "timestamp": 1789189388.2533534,
-    "event": "webhook_test",
-    "order_id": "test_001",
-    "customer_email": "tester@lemonsqueezy.com",
-    "status": "completed",
-    "attributes": {
-      "user_email": "tester@lemonsqueezy.com"
-    }
-  },
-  {
     "timestamp": 1789189388.2593672,
     "event": "order_created",
     "order_id": "ord_999",
@@ -724,16 +554,6 @@
     "status": "completed",
     "attributes": {
       "user_email": "subscriber@eduhub.ai"
-    }
-  },
-  {
-    "timestamp": 1789190254.5148318,
-    "event": "webhook_test",
-    "order_id": "test_001",
-    "customer_email": "tester@lemonsqueezy.com",
-    "status": "completed",
-    "attributes": {
-      "user_email": "tester@lemonsqueezy.com"
     }
   },
   {
@@ -856,206 +676,6 @@
     }
   },
   {
-    "timestamp": 1789619193.1307108,
-    "event": "order_created",
-    "order_id": null,
-    "customer_email": "audit@lemon.com",
-    "status": "completed",
-    "attributes": {
-      "user_email": "audit@lemon.com"
-    }
-  },
-  {
-    "timestamp": 1789619201.5899825,
-    "event": "order_created",
-    "order_id": null,
-    "customer_email": "audit@lemon.com",
-    "status": "completed",
-    "attributes": {
-      "user_email": "audit@lemon.com"
-    }
-  },
-  {
-    "timestamp": 1789719437.643499,
-    "event": "order_created",
-    "order_id": null,
-    "customer_email": "audit@lemon.com",
-    "status": "completed",
-    "attributes": {
-      "user_email": "audit@lemon.com"
-    }
-  },
-  {
-    "timestamp": 1789719437.7268426,
-    "event": "order_created",
-    "order_id": null,
-    "customer_email": "audit@lemon.com",
-    "status": "completed",
-    "attributes": {
-      "user_email": "audit@lemon.com"
-    }
-  },
-  {
-    "timestamp": 1789720148.4136064,
-    "event": "order_created",
-    "order_id": null,
-    "customer_email": "audit@lemon.com",
-    "status": "completed",
-    "attributes": {
-      "user_email": "audit@lemon.com"
-    }
-  },
-  {
-    "timestamp": 1789720148.655839,
-    "event": "order_created",
-    "order_id": null,
-    "customer_email": "audit@lemon.com",
-    "status": "completed",
-    "attributes": {
-      "user_email": "audit@lemon.com"
-    }
-  },
-  {
-    "timestamp": 1789720165.0855675,
-    "event": "order_created",
-    "order_id": null,
-    "customer_email": "audit@lemon.com",
-    "status": "completed",
-    "attributes": {
-      "user_email": "audit@lemon.com"
-    }
-  },
-  {
-    "timestamp": 1789720165.164022,
-    "event": "order_created",
-    "order_id": null,
-    "customer_email": "audit@lemon.com",
-    "status": "completed",
-    "attributes": {
-      "user_email": "audit@lemon.com"
-    }
-  },
-  {
-    "timestamp": 1789780130.679316,
-    "event": "order_created",
-    "order_id": null,
-    "customer_email": "audit@lemon.com",
-    "status": "completed",
-    "attributes": {
-      "user_email": "audit@lemon.com"
-    }
-  },
-  {
-    "timestamp": 1789780130.898961,
-    "event": "order_created",
-    "order_id": null,
-    "customer_email": "audit@lemon.com",
-    "status": "completed",
-    "attributes": {
-      "user_email": "audit@lemon.com"
-    }
-  },
-  {
-    "timestamp": 1789780134.5758655,
-    "event": "order_created",
-    "order_id": null,
-    "customer_email": "audit@lemon.com",
-    "status": "completed",
-    "attributes": {
-      "user_email": "audit@lemon.com"
-    }
-  },
-  {
-    "timestamp": 1789780134.6685252,
-    "event": "order_created",
-    "order_id": null,
-    "customer_email": "audit@lemon.com",
-    "status": "completed",
-    "attributes": {
-      "user_email": "audit@lemon.com"
-    }
-  },
-  {
-    "timestamp": 1789790176.379163,
-    "event": "order_created",
-    "order_id": null,
-    "customer_email": "audit@lemon.com",
-    "status": "completed",
-    "attributes": {
-      "user_email": "audit@lemon.com"
-    }
-  },
-  {
-    "timestamp": 1789790176.5896547,
-    "event": "order_created",
-    "order_id": null,
-    "customer_email": "audit@lemon.com",
-    "status": "completed",
-    "attributes": {
-      "user_email": "audit@lemon.com"
-    }
-  },
-  {
-    "timestamp": 1789790182.8068492,
-    "event": "order_created",
-    "order_id": null,
-    "customer_email": "audit@lemon.com",
-    "status": "completed",
-    "attributes": {
-      "user_email": "audit@lemon.com"
-    }
-  },
-  {
-    "timestamp": 1789790182.9298398,
-    "event": "order_created",
-    "order_id": null,
-    "customer_email": "audit@lemon.com",
-    "status": "completed",
-    "attributes": {
-      "user_email": "audit@lemon.com"
-    }
-  },
-  {
-    "timestamp": 1789793557.0246665,
-    "event": "order_created",
-    "order_id": null,
-    "customer_email": "audit@lemon.com",
-    "status": "completed",
-    "attributes": {
-      "user_email": "audit@lemon.com"
-    }
-  },
-  {
-    "timestamp": 1789793557.2943614,
-    "event": "order_created",
-    "order_id": null,
-    "customer_email": "audit@lemon.com",
-    "status": "completed",
-    "attributes": {
-      "user_email": "audit@lemon.com"
-    }
-  },
-  {
-    "timestamp": 1789793561.300973,
-    "event": "order_created",
-    "order_id": null,
-    "customer_email": "audit@lemon.com",
-    "status": "completed",
-    "attributes": {
-      "user_email": "audit@lemon.com"
-    }
-  },
-  {
-    "timestamp": 1789793561.4129634,
-    "event": "order_created",
-    "order_id": null,
-    "customer_email": "audit@lemon.com",
-    "status": "completed",
-    "attributes": {
-      "user_email": "audit@lemon.com"
-    }
-  },
-  {
     "timestamp": 1790076506.1273844,
     "event": "subscription.active",
     "order_id": null,
@@ -1066,6 +686,340 @@
   {
     "timestamp": 1790076625.9608269,
     "event": "subscription.active",
+    "order_id": null,
+    "customer_email": null,
+    "status": "completed",
+    "attributes": {}
+  },
+  {
+    "timestamp": 1790135225.4749084,
+    "event": "order_created",
+    "order_id": null,
+    "customer_email": "student@eduhub.ai",
+    "status": "completed",
+    "attributes": {
+      "user_email": "student@eduhub.ai"
+    }
+  },
+  {
+    "timestamp": 1790135484.1399786,
+    "event": "payment.succeeded",
+    "order_id": null,
+    "customer_email": null,
+    "status": "completed",
+    "attributes": {}
+  },
+  {
+    "timestamp": 1790135484.379882,
+    "event": "payment.succeeded",
+    "order_id": null,
+    "customer_email": null,
+    "status": "completed",
+    "attributes": {}
+  },
+  {
+    "timestamp": 1790135558.2232687,
+    "event": "payment.succeeded",
+    "order_id": null,
+    "customer_email": null,
+    "status": "completed",
+    "attributes": {}
+  },
+  {
+    "timestamp": 1790135558.4698367,
+    "event": "payment.succeeded",
+    "order_id": null,
+    "customer_email": null,
+    "status": "completed",
+    "attributes": {}
+  },
+  {
+    "timestamp": 1790135896.921567,
+    "event": "payment.succeeded",
+    "order_id": null,
+    "customer_email": null,
+    "status": "completed",
+    "attributes": {}
+  },
+  {
+    "timestamp": 1790135897.175378,
+    "event": "payment.succeeded",
+    "order_id": null,
+    "customer_email": null,
+    "status": "completed",
+    "attributes": {}
+  },
+  {
+    "timestamp": 1790136122.9100626,
+    "event": "payment.succeeded",
+    "order_id": null,
+    "customer_email": null,
+    "status": "completed",
+    "attributes": {}
+  },
+  {
+    "timestamp": 1790136154.4247274,
+    "event": "payment.succeeded",
+    "order_id": null,
+    "customer_email": null,
+    "status": "completed",
+    "attributes": {}
+  },
+  {
+    "timestamp": 1790136173.540001,
+    "event": "payment.succeeded",
+    "order_id": null,
+    "customer_email": null,
+    "status": "completed",
+    "attributes": {}
+  },
+  {
+    "timestamp": 1790136173.7898662,
+    "event": "payment.succeeded",
+    "order_id": null,
+    "customer_email": null,
+    "status": "completed",
+    "attributes": {}
+  },
+  {
+    "timestamp": 1790136865.0272484,
+    "event": "payment.succeeded",
+    "order_id": null,
+    "customer_email": null,
+    "status": "completed",
+    "attributes": {}
+  },
+  {
+    "timestamp": 1790136865.2997746,
+    "event": "payment.succeeded",
+    "order_id": null,
+    "customer_email": null,
+    "status": "completed",
+    "attributes": {}
+  },
+  {
+    "timestamp": 1790137268.633719,
+    "event": "payment.succeeded",
+    "order_id": null,
+    "customer_email": null,
+    "status": "completed",
+    "attributes": {}
+  },
+  {
+    "timestamp": 1790137268.9236662,
+    "event": "payment.succeeded",
+    "order_id": null,
+    "customer_email": null,
+    "status": "completed",
+    "attributes": {}
+  },
+  {
+    "timestamp": 1790137366.8183916,
+    "event": "dodo.event",
+    "order_id": null,
+    "customer_email": null,
+    "status": "completed",
+    "attributes": {}
+  },
+  {
+    "timestamp": 1790137366.8257847,
+    "event": "dodo.event",
+    "order_id": null,
+    "customer_email": "student@eduhub.ai",
+    "status": "completed",
+    "attributes": {
+      "user_email": "student@eduhub.ai"
+    }
+  },
+  {
+    "timestamp": 1790137589.5054584,
+    "event": "dodo.event",
+    "order_id": "test_001",
+    "customer_email": "tester@dodopayments.com",
+    "status": "completed",
+    "attributes": {
+      "user_email": "tester@dodopayments.com"
+    }
+  },
+  {
+    "timestamp": 1790137589.5129526,
+    "event": "dodo.event",
+    "order_id": "ord_999",
+    "customer_email": "customer@eduhub.ai",
+    "status": "paid",
+    "attributes": {
+      "user_email": "customer@eduhub.ai",
+      "status": "paid"
+    }
+  },
+  {
+    "timestamp": 1790137589.5205202,
+    "event": "dodo.event",
+    "order_id": "sub_777",
+    "customer_email": "subscriber@eduhub.ai",
+    "status": "completed",
+    "attributes": {
+      "user_email": "subscriber@eduhub.ai"
+    }
+  },
+  {
+    "timestamp": 1790137589.525746,
+    "event": "dodo.event",
+    "order_id": "ord_999",
+    "customer_email": "customer@eduhub.ai",
+    "status": "paid",
+    "attributes": {
+      "user_email": "customer@eduhub.ai",
+      "status": "paid"
+    }
+  },
+  {
+    "timestamp": 1790137589.5352867,
+    "event": "dodo.event",
+    "order_id": "ord_999",
+    "customer_email": "customer@eduhub.ai",
+    "status": "paid",
+    "attributes": {
+      "user_email": "customer@eduhub.ai",
+      "status": "paid"
+    }
+  },
+  {
+    "timestamp": 1790137688.7898526,
+    "event": "dodo.event",
+    "order_id": "test_001",
+    "customer_email": "tester@dodopayments.com",
+    "status": "completed",
+    "attributes": {
+      "user_email": "tester@dodopayments.com"
+    }
+  },
+  {
+    "timestamp": 1790137688.7982872,
+    "event": "dodo.event",
+    "order_id": "ord_999",
+    "customer_email": "customer@eduhub.ai",
+    "status": "paid",
+    "attributes": {
+      "user_email": "customer@eduhub.ai",
+      "status": "paid"
+    }
+  },
+  {
+    "timestamp": 1790137688.8049893,
+    "event": "dodo.event",
+    "order_id": "sub_777",
+    "customer_email": "subscriber@eduhub.ai",
+    "status": "completed",
+    "attributes": {
+      "user_email": "subscriber@eduhub.ai"
+    }
+  },
+  {
+    "timestamp": 1790137688.8130019,
+    "event": "dodo.event",
+    "order_id": "ord_999",
+    "customer_email": "customer@eduhub.ai",
+    "status": "paid",
+    "attributes": {
+      "user_email": "customer@eduhub.ai",
+      "status": "paid"
+    }
+  },
+  {
+    "timestamp": 1790137688.819064,
+    "event": "dodo.event",
+    "order_id": "ord_999",
+    "customer_email": "customer@eduhub.ai",
+    "status": "paid",
+    "attributes": {
+      "user_email": "customer@eduhub.ai",
+      "status": "paid"
+    }
+  },
+  {
+    "timestamp": 1790137697.008523,
+    "event": "dodo.event",
+    "order_id": null,
+    "customer_email": null,
+    "status": "completed",
+    "attributes": {}
+  },
+  {
+    "timestamp": 1790137697.0185165,
+    "event": "dodo.event",
+    "order_id": null,
+    "customer_email": "student@eduhub.ai",
+    "status": "completed",
+    "attributes": {
+      "user_email": "student@eduhub.ai"
+    }
+  },
+  {
+    "timestamp": 1790137740.3990674,
+    "event": "order_created",
+    "order_id": null,
+    "customer_email": "student@eduhub.ai",
+    "status": "completed",
+    "attributes": {
+      "user_email": "student@eduhub.ai"
+    }
+  },
+  {
+    "timestamp": 1790137749.5629513,
+    "event": "webhook_test",
+    "order_id": "test_001",
+    "customer_email": "tester@dodopayments.com",
+    "status": "completed",
+    "attributes": {
+      "user_email": "tester@dodopayments.com"
+    }
+  },
+  {
+    "timestamp": 1790137753.9250307,
+    "event": "payment.succeeded",
+    "order_id": null,
+    "customer_email": null,
+    "status": "completed",
+    "attributes": {}
+  },
+  {
+    "timestamp": 1790137754.2497873,
+    "event": "payment.succeeded",
+    "order_id": null,
+    "customer_email": null,
+    "status": "completed",
+    "attributes": {}
+  },
+  {
+    "timestamp": 1790137787.5201352,
+    "event": "payment.succeeded",
+    "order_id": null,
+    "customer_email": null,
+    "status": "completed",
+    "attributes": {}
+  },
+  {
+    "timestamp": 1790137787.645784,
+    "event": "order_created",
+    "order_id": null,
+    "customer_email": "audit@dodo.com",
+    "status": "completed",
+    "attributes": {
+      "user_email": "audit@dodo.com"
+    }
+  },
+  {
+    "timestamp": 1790137816.8047123,
+    "event": "payment.succeeded",
+    "order_id": null,
+    "customer_email": null,
+    "status": "completed",
+    "attributes": {}
+  },
+  {
+    "timestamp": 1790137817.1459694,
+    "event": "payment.succeeded",
     "order_id": null,
     "customer_email": null,
     "status": "completed",

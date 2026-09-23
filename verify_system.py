@@ -74,7 +74,7 @@ def run_checks():
     # 3. Проверка эндпоинта / (Landing page)
     res_index = client.get("/")
     check(
-        "Маршрут GET / (Лендинг для аудита Lemon Squeezy)",
+        "Маршрут GET / (Лендинг платформы)",
         res_index.status_code == 200 and "EduHub AI" in res_index.text,
         f"Статус: {res_index.status_code}, Заголовок обнаружен: {'EduHub AI' in res_index.text}"
     )
@@ -165,28 +165,28 @@ def run_checks():
         f"Защита сработала: HTTP 429 получен, Retry-After header: {'Retry-After' in r.headers}"
     )
 
-    # 9. Проверка Lemon Squeezy HMAC Webhook
-    secret = os.getenv("LEMON_WEBHOOK_SECRET", "default_secret_key_change_me")
-    body = b'{"meta":{"event_name":"order_created"},"data":{"attributes":{"user_email":"audit@lemon.com"}}}'
+    # 9. Проверка Dodo Payments Webhook Receiver
+    secret = os.getenv("DODO_WEBHOOK_SECRET", "default_secret_key_change_me")
+    body = b'{"meta":{"event_name":"order_created"},"data":{"attributes":{"user_email":"audit@dodo.com"}}}'
     valid_sig = hmac.new(secret.encode("utf-8"), body, hashlib.sha256).hexdigest()
 
     res_webhook_valid = client.post(
-        "/api/v1/billing/lemon-webhook",
+        "/api/v1/billing/dodo-webhook",
         content=body,
         headers={"x-signature": valid_sig, "Content-Type": "application/json"}
     )
     res_webhook_invalid = client.post(
-        "/api/v1/billing/lemon-webhook",
+        "/api/v1/billing/dodo-webhook",
         content=body,
         headers={"x-signature": "bad_sig", "Content-Type": "application/json"}
     )
     check(
-        "Lemon Squeezy Webhook HMAC-SHA256 (Прием валидной подписи)",
+        "Dodo Payments Webhook Receiver (Прием валидной подписи)",
         res_webhook_valid.status_code == 200 and res_webhook_valid.json().get("status") == "verified",
         f"Статус: {res_webhook_valid.status_code}"
     )
     check(
-        "Lemon Squeezy Webhook HMAC-SHA256 (Отклонение невалидной подписи -> 403)",
+        "Dodo Payments Webhook Receiver (Отклонение невалидной подписи -> 403)",
         res_webhook_invalid.status_code == 403,
         f"Статус: {res_webhook_invalid.status_code}"
     )

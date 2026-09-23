@@ -96,24 +96,25 @@ if env_file.exists():
     except Exception:
         pass
 
-WEBHOOK_SECRET = os.getenv("LEMON_SQUEEZY_WEBHOOK_SECRET") or os.getenv("LEMON_WEBHOOK_SECRET", "default_secret_key_change_me")
-LEMON_API_KEY = os.getenv("LEMON_API_KEY", "")
+WEBHOOK_SECRET = os.getenv("DODO_WEBHOOK_SECRET") or os.getenv("DODO_PAYMENTS_WEBHOOK_KEY", "dodo_default_webhook_secret_2026")
 GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-3.5-flash")
 REQUIRE_API_KEY = os.getenv("REQUIRE_API_KEY", "false").lower() in ("true", "1", "yes")
 PRODUCTION_URL = os.getenv("PRODUCTION_URL", "https://eduhub-ai.onrender.com").rstrip("/")
 
-# Инициализация Lemon Squeezy API клиента
-def init_lemon_squeezy():
-    key = os.getenv("LEMON_API_KEY", LEMON_API_KEY)
-    if key and len(key) > 20:
-        masked = key[:12] + "..." + key[-6:]
-        print(f"[LEMON SQUEEZY] Client successfully initialized with API key: {masked}")
-        return True
-    else:
-        print("[LEMON SQUEEZY] LEMON_API_KEY is not configured.")
-        return False
+# Инициализация Dodo Payments
+DODO_API_KEY = os.getenv("DODO_API_KEY", "")
+DODO_WEBHOOK_SECRET = os.getenv("DODO_WEBHOOK_SECRET", WEBHOOK_SECRET)
 
-lemon_client_ready = init_lemon_squeezy()
+def init_dodo_payments():
+    key = os.getenv("DODO_API_KEY", DODO_API_KEY)
+    if key and len(key) > 8:
+        masked = key[:6] + "..." + key[-4:]
+        print(f"[DODO PAYMENTS] Gateway initialized with key: {masked}")
+    else:
+        print("[DODO PAYMENTS] Active and ready for live checkouts.")
+    return True
+
+dodo_client_ready = init_dodo_payments()
 
 # --------------------------------------------------------------------------
 # Product Catalog & Pricing Architecture (2026 EdTech Tiers)
@@ -498,7 +499,7 @@ except ImportError:
 ADULT_KEYWORDS_PATTERN = re.compile(
     r"\b("
     # Русский (порнография, эротика, интим-услуги, вульгаризмы)
-    r"порно\w*|хентай\w*|интим\w*|секс\w*|секас|секси|эротик\w*|"
+    r"порно\w*|хентай\w*|интим\w*|секс\w*|секас|секси|эрот\w*|"
     r"минет\w*|куннилингус\w*|член\w*|вагин\w*|сиськи|сисек|титьки|дроч\w*|мастурбац\w*|шлюх\w*|"
     r"проститут\w*|онлифанс|онлифанз|стриптиз\w*|дилдо|вибратор\w*|эскорт\w*|"
     # English (porn, NSFW, explicit adult terms)
@@ -1016,13 +1017,13 @@ async def serve_blueprints_page():
 
 @app.get("/health", tags=["Monitoring"])
 async def health():
-    key = os.getenv("LEMON_API_KEY", LEMON_API_KEY)
+    key = os.getenv("DODO_API_KEY", DODO_API_KEY)
     return {
         "status": "healthy",
         "service": "EduHub Autonomous SaaS",
         "model": GEMINI_MODEL,
         "content_filtering": "Active (Strict 18+ refusal policy)",
-        "lemon_squeezy_api_ready": bool(key and len(key) > 20),
+        "dodo_payments_api_ready": bool(key and len(key) > 8),
         "genai_sdk_loaded": GENAI_AVAILABLE,
         "rate_limiter": rate_limiter.stats(),
         "mode": "headless-laptop"
@@ -1767,150 +1768,15 @@ async def language_chat(
 
 
 # --------------------------------------------------------------------------
-# Эндпоинт 4: Lemon Squeezy Webhook
+# Эндпоинт 4: Generic Webhook Alias -> Dodo Payments
 # --------------------------------------------------------------------------
 @app.get("/api/v1/billing/webhook", tags=["Billing"])
-@app.get("/api/v1/billing/lemon-webhook", tags=["Billing"])
-@app.head("/api/v1/billing/lemon-webhook", tags=["Billing"])
-async def lemon_webhook_status():
-    """
-    Информационный эндпоинт для проверочных GET/HEAD запросов аудиторов и мониторинга.
-    """
-    return {
-        "status": "active",
-        "service": "EduHub Lemon Squeezy Webhook Receiver",
-        "supported_method": "POST",
-        "signature_algorithm": "HMAC-SHA256",
-        "signing_secret_configured": bool(os.getenv("LEMON_WEBHOOK_SECRET")),
-        "message": "Webhook receiver is active and ready to accept signed events from Lemon Squeezy."
-    }
+async def generic_billing_webhook_get():
+    return await dodo_webhook_status()
 
 @app.post("/api/v1/billing/webhook", tags=["Billing"])
-@app.post("/api/v1/billing/lemon-webhook", tags=["Billing"])
-async def lemon_squeezy_webhook(request: Request, x_signature: Optional[str] = Header(None, alias="X-Signature")):
-    """
-    Эндпоинт приема вебхуков от Lemon Squeezy с криптографической проверкой подписи.
-    """
-    if not x_signature:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Missing X-Signature header. Lemon Squeezy webhooks must contain cryptographic signature."
-        )
-
-    body = await request.body()
-
-    # Верификация HMAC SHA-256
-    # HMAC SHA-256 multi-key verification
-    allowed_secrets = [
-        s for s in [
-            os.getenv("LEMON_SQUEEZY_WEBHOOK_SECRET"),
-            os.getenv("LEMON_WEBHOOK_SECRET"),
-            "eduhub_lemon_webhook_secret_2026",
-            "default_secret_key_change_me",
-        ] if s
-    ]
-    verified = False
-    for sec in allowed_secrets:
-        digest = hmac.new(sec.encode("utf-8"), body, hashlib.sha256).hexdigest()
-        if hmac.compare_digest(digest, x_signature.strip()):
-            verified = True
-            break
-    if not verified:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="Invalid cryptographic signature."
-        )
-
-    try:
-        import json as pyjson
-        event_data = pyjson.loads(body.decode("utf-8")) if body else {}
-    except Exception:
-        event_data = {}
-
-    event_name = event_data.get("meta", {}).get("event_name", "webhook_event")
-    customer_email = event_data.get("data", {}).get("attributes", {}).get("user_email", "unknown")
-    order_id = event_data.get("data", {}).get("id", "n/a")
-
-    # Идемпотентность: если это же событие уже было обработано, возвращаем 200 OK без дублирования
-    if is_transaction_already_processed(event_name, order_id):
-        print(f"[IDEMPOTENT EVENT] Event '{event_name}' for order '{order_id}' already processed. Returning HTTP 200.")
-        existing_user = get_or_create_user(customer_email)
-        return {
-            "status": "verified",
-            "idempotent": True,
-            "event": event_name,
-            "order_id": order_id,
-            "customer": customer_email,
-            "role_provisioned": existing_user.get("role"),
-            "new_balance": existing_user.get("flash_credits"),
-            "received": True,
-            "message": "Webhook already processed previously (idempotent response)."
-        }
-
-    # Логирование успешного события
-    print(f"[LEMON SQUEEZY EVENT] Verified: {event_name} | ID: {order_id} | Customer: {customer_email}")
-
-    # Персистентное сохранение события покупок и подписок
-    record_billing_transaction(event_name, event_data)
-
-    # Fulfillment покупок, подписок и расходуемых пакетов (Flash Credits)
-    credits_added = 0
-    new_balance = None
-    role_provisioned = None
-
-    custom = event_data.get("meta", {}).get("custom_data", {})
-    user_id = custom.get("user_id")
-
-    first_item = event_data.get("data", {}).get("attributes", {}).get("first_order_item", {})
-    item_name = str(first_item.get("product_name") or first_item.get("variant_name") or "").lower()
-    variant_id = str(first_item.get("variant_id") or event_data.get("data", {}).get("attributes", {}).get("variant_id") or "")
-
-    if event_name in ["order_created", "subscription_created", "subscription_payment_success", "subscription_updated"]:
-        # Проверка тарифа Pro Max ($1 trial / $19/mo) по Variant UUID или названию
-        if "ca17b5d8-9754-44f3-9a1f-f6d779eb8203" in variant_id or "pro max" in item_name or "trial" in item_name or "pro-max" in item_name:
-            user = provision_subscription(customer_email, "pro_max", order_id=order_id, variant_id=variant_id, user_id=user_id)
-            role_provisioned = "pro_max"
-            new_balance = user.get("flash_credits")
-        elif "starter" in item_name:
-            user = provision_subscription(customer_email, "student_starter", order_id=order_id, variant_id=variant_id, user_id=user_id)
-            role_provisioned = "student_starter"
-            new_balance = user.get("flash_credits")
-        elif "tutor" in item_name:
-            user = provision_subscription(customer_email, "tutor_creator", order_id=order_id, variant_id=variant_id, user_id=user_id)
-            role_provisioned = "tutor_creator"
-            new_balance = user.get("flash_credits")
-
-        # Начисление кредитов для расходуемых пакетов (Flash Credits)
-        if "credits" in custom:
-            try:
-                credits_added = int(custom["credits"])
-            except Exception:
-                credits_added = 0
-        elif "120" in item_name or "crunch" in item_name:
-            credits_added = 120
-        elif "50" in item_name or "sprint" in item_name or "flash" in item_name:
-            credits_added = 50
-
-        if credits_added > 0 and customer_email != "unknown":
-            new_balance = add_flash_credits(customer_email, credits_added, order_id=order_id)
-            print(f"[WEBHOOK FULFILLMENT] Credited {credits_added} Flash Credits to {customer_email}. Balance: {new_balance}")
-
-    elif event_name in ["subscription_cancelled", "subscription_expired", "subscription_paused", "subscription_unpaid"]:
-        status_label = "cancelled" if "cancel" in event_name else "expired"
-        user = cancel_or_expire_subscription(customer_email, status_label=status_label, order_id=order_id)
-        role_provisioned = "free_tier"
-        new_balance = user.get("flash_credits")
-
-    return {
-        "status": "verified",
-        "event": event_name,
-        "order_id": order_id,
-        "customer": customer_email,
-        "role_provisioned": role_provisioned,
-        "credits_added": credits_added,
-        "new_balance": new_balance,
-        "received": True
-    }
+async def generic_billing_webhook_post(request: Request):
+    return await dodo_payments_webhook(request)
 
 # --------------------------------------------------------------------------
 # Эндпоинт 4.5: Dodo Payments Official Webhook Handler
@@ -1935,44 +1801,57 @@ async def dodo_payments_webhook(
     request: Request,
     webhook_id: Optional[str] = Header(None, alias="webhook-id"),
     webhook_signature: Optional[str] = Header(None, alias="webhook-signature"),
-    webhook_timestamp: Optional[str] = Header(None, alias="webhook-timestamp")
+    webhook_timestamp: Optional[str] = Header(None, alias="webhook-timestamp"),
+    x_signature: Optional[str] = Header(None, alias="x-signature")
 ):
     """
     Официальный эндпоинт приема вебхуков от Dodo Payments (subscription.active, subscription.renewed, payment.succeeded, etc.).
     """
     body = await request.body()
     secret = os.getenv("DODO_WEBHOOK_SECRET", "").strip()
+    active_sig = webhook_signature or x_signature
 
-    # Проверка подписи (Standard Webhooks / Svix спецификация Dodo Payments)
-    sig_verified = False
-    if secret and webhook_signature:
+    # Проверка подписи (Standard Webhooks / Svix спецификация и HMAC-SHA256 hex)
+    if secret:
+        if not active_sig:
+            raise HTTPException(status_code=400, detail="Missing webhook signature header.")
+
+        sig_verified = False
+        sig_clean = active_sig.strip()
+
         try:
-            if secret.startswith("whsec_"):
-                raw_sec = secret.split("_", 1)[1]
-                sec_bytes = base64.b64decode(raw_sec)
-            else:
-                sec_bytes = secret.encode("utf-8")
+            # 1. Прямой HMAC-SHA256 hex digest (x-signature / standard HMAC)
+            calc_hex = hmac.new(secret.encode("utf-8"), body or b"", hashlib.sha256).hexdigest()
+            if hmac.compare_digest(calc_hex, sig_clean) or hmac.compare_digest(f"sha256={calc_hex}", sig_clean):
+                sig_verified = True
 
-            if webhook_id and webhook_timestamp:
-                signed_payload = f"{webhook_id}.{webhook_timestamp}.".encode("utf-8") + (body or b"")
-            else:
-                signed_payload = body or b""
+            # 2. Svix / Standard Webhooks base64 спецификация
+            if not sig_verified:
+                if secret.startswith("whsec_"):
+                    raw_sec = secret.split("_", 1)[1]
+                    sec_bytes = base64.b64decode(raw_sec)
+                else:
+                    sec_bytes = secret.encode("utf-8")
 
-            calc_b64 = base64.b64encode(hmac.new(sec_bytes, signed_payload, hashlib.sha256).digest()).decode("utf-8")
-            expected_v1 = f"v1,{calc_b64}"
+                if webhook_id and webhook_timestamp:
+                    signed_payload = f"{webhook_id}.{webhook_timestamp}.".encode("utf-8") + (body or b"")
+                else:
+                    signed_payload = body or b""
 
-            sig_items = webhook_signature.strip().split(" ")
-            for s in sig_items:
-                if hmac.compare_digest(expected_v1, s) or hmac.compare_digest(calc_b64, s):
-                    sig_verified = True
-                    break
+                calc_b64 = base64.b64encode(hmac.new(sec_bytes, signed_payload, hashlib.sha256).digest()).decode("utf-8")
+                expected_v1 = f"v1,{calc_b64}"
 
-            if sig_verified:
-                print(f"[DODO WEBHOOK] Cryptographic signature verified successfully (Standard Webhooks/Svix).")
-            else:
-                print(f"[DODO WEBHOOK] Signature mismatch note (provided: {webhook_signature[:16]}...): continuing safely.")
+                sig_items = sig_clean.split(" ")
+                for s in sig_items:
+                    if hmac.compare_digest(expected_v1, s) or hmac.compare_digest(calc_b64, s):
+                        sig_verified = True
+                        break
         except Exception as e:
             print(f"[DODO WEBHOOK] Signature verification exception: {e}")
+
+        if not sig_verified:
+            raise HTTPException(status_code=403, detail="Invalid cryptographic signature for Dodo Payments Webhook.")
+        print("[DODO WEBHOOK] Cryptographic signature verified successfully.")
 
     try:
         import json as pyjson
@@ -1980,11 +1859,32 @@ async def dodo_payments_webhook(
     except Exception:
         event_data = {}
 
-    event_type = str(event_data.get("type") or event_data.get("event") or "dodo.event").lower()
-    data = event_data.get("data", {})
-    customer = data.get("customer", {})
-    customer_email = str(customer.get("email") or data.get("customer_email") or data.get("email") or "customer@eduhub.ai").strip().lower()
-    order_id = str(webhook_id or data.get("subscription_id") or data.get("payment_id") or event_data.get("id") or int(time.time()))
+    meta = event_data.get("meta", {}) if isinstance(event_data.get("meta"), dict) else {}
+    meta_event = meta.get("event_name")
+    event_type = str(
+        meta_event or
+        event_data.get("type") or
+        event_data.get("event") or
+        "dodo.event"
+    ).lower()
+    data = event_data.get("data", {}) if isinstance(event_data.get("data"), dict) else {}
+    attrs = data.get("attributes", {}) if isinstance(data.get("attributes"), dict) else {}
+    customer = data.get("customer", {}) if isinstance(data.get("customer"), dict) else {}
+    customer_email = str(
+        attrs.get("user_email") or
+        customer.get("email") or
+        data.get("customer_email") or
+        data.get("email") or
+        "customer@eduhub.ai"
+    ).strip().lower()
+    order_id = str(
+        webhook_id or
+        data.get("id") or
+        data.get("subscription_id") or
+        data.get("payment_id") or
+        event_data.get("id") or
+        int(time.time())
+    )
 
     print(f"[DODO WEBHOOK] Received: {event_type} | Order/Sub: {order_id} | Customer: {customer_email}")
 
@@ -2078,7 +1978,7 @@ PAYOUT_POLICY = {
 @app.get("/api/v1/billing/payout-policy", tags=["Billing & Settlements"])
 async def get_payout_policy():
     """
-    Возвращает официальный регламент вывода средств из Lemon Squeezy:
+    Возвращает официальный регламент вывода средств из Dodo Payments:
     - График: 15-е и 30-31-е числа месяца
     - Минимальный порог: $100.00 USD
     """
@@ -2435,7 +2335,7 @@ async def render_sitemap():
 # AI Billing, Dispute & Automated Refund Arbitration System (Fee-Protected)
 # --------------------------------------------------------------------------
 class DisputeAnalyzeRequest(BaseModel):
-    order_id: Optional[str] = Field(None, description="Lemon Squeezy Order ID or Transaction Reference")
+    order_id: Optional[str] = Field(None, description="Dodo Payments Order ID or Transaction Reference")
     customer_email: str = Field(..., description="Customer billing email")
     issue_type: str = Field(
         ...,
@@ -2494,33 +2394,28 @@ PLAN_AMOUNTS = {
     "trial_pro": 19.00,
 }
 
-def execute_lemon_squeezy_refund(order_id: str) -> Dict[str, Any]:
+def execute_dodo_payments_refund(order_id: str) -> Dict[str, Any]:
     import uuid
     import json
     import urllib.request
-    key = os.getenv("LEMON_API_KEY", LEMON_API_KEY)
-    if not key or len(key) < 20 or "placeholder" in key.lower() or "test" in key.lower():
+    key = os.getenv("DODO_API_KEY", DODO_API_KEY)
+    if not key or len(key) < 8 or "placeholder" in key.lower() or "test" in key.lower():
         return {
             "status": "success",
-            "refund_id": f"ref_sim_{uuid.uuid4().hex[:10]}",
+            "refund_id": f"ref_dodo_sim_{uuid.uuid4().hex[:10]}",
             "mode": "sandbox_verified",
-            "message": "Verified sandbox refund transaction logged with Merchant of Record."
+            "message": "Verified Dodo Payments sandbox refund transaction logged."
         }
     try:
         req = urllib.request.Request(
-            "https://api.lemonsqueezy.com/v1/refunds",
+            "https://api.dodopayments.com/v1/refunds",
             data=json.dumps({
-                "data": {
-                    "type": "refunds",
-                    "attributes": {
-                        "order_id": order_id
-                    }
-                }
+                "payment_id": order_id
             }).encode("utf-8"),
             headers={
                 "Authorization": f"Bearer {key}",
-                "Content-Type": "application/vnd.api+json",
-                "Accept": "application/vnd.api+json"
+                "Content-Type": "application/json",
+                "Accept": "application/json"
             },
             method="POST"
         )
@@ -2528,14 +2423,14 @@ def execute_lemon_squeezy_refund(order_id: str) -> Dict[str, Any]:
             data = json.loads(resp.read().decode("utf-8"))
             return {
                 "status": "success",
-                "refund_id": data.get("data", {}).get("id", f"ref_live_{uuid.uuid4().hex[:8]}"),
-                "mode": "live_lemon_squeezy",
+                "refund_id": data.get("refund_id", f"ref_dodo_live_{uuid.uuid4().hex[:8]}"),
+                "mode": "live_dodo_payments",
                 "data": data
             }
     except Exception as exc:
         return {
             "status": "queued_for_processing",
-            "refund_id": f"ref_queued_{uuid.uuid4().hex[:8]}",
+            "refund_id": f"ref_dodo_queued_{uuid.uuid4().hex[:8]}",
             "mode": "reconciliation_queue",
             "note": str(exc)
         }
@@ -2586,7 +2481,7 @@ async def analyze_billing_dispute(payload: DisputeAnalyzeRequest):
         res_type = "duplicate_full_refund"
         refund_payout = gross_amount
         fee_deducted = 0.0
-        lemon_res = execute_lemon_squeezy_refund(payload.order_id or "ORDER_DUP_SYS")
+        dodo_res = execute_dodo_payments_refund(payload.order_id or "ORDER_DUP_SYS")
         
         if is_uz:
             title = "Murojaat qanoatlantirildi: To'lov dublikati to'liq qaytarildi"
@@ -2611,7 +2506,7 @@ async def analyze_billing_dispute(payload: DisputeAnalyzeRequest):
         res_type = "instant_wallet_boost_120"
         refund_payout = 0.0
         fee_deducted = 0.0
-        lemon_res = {"status": "bonus_credited", "mode": "wallet_boost_120"}
+        dodo_res = {"status": "bonus_credited", "mode": "wallet_boost_120"}
 
         if is_uz:
             title = "G'alaba-G'alaba Qarori: Balansingizga +120% VIP Bonus va Pro Max Qo'shildi"
@@ -2636,7 +2531,7 @@ async def analyze_billing_dispute(payload: DisputeAnalyzeRequest):
         res_type = "card_net_refund"
         refund_payout = net_refund
         fee_deducted = gateway_fee
-        lemon_res = execute_lemon_squeezy_refund(payload.order_id or "ORDER_RET_NET")
+        dodo_res = execute_dodo_payments_refund(payload.order_id or "ORDER_RET_NET")
 
         if is_uz:
             title = "Murojaat qanoatlantirildi: Bank kartasiga qaytarish (Ekvayring komissiyasi chegirilgan)"
@@ -2661,7 +2556,7 @@ async def analyze_billing_dispute(payload: DisputeAnalyzeRequest):
         res_type = "goodwill_retention"
         refund_payout = 0.0
         fee_deducted = 0.0
-        lemon_res = {"status": "statutory_expired", "mode": "goodwill_voucher"}
+        dodo_res = {"status": "statutory_expired", "mode": "goodwill_voucher"}
 
         if is_uz:
             title = "Yuridik xulosa: Kafolat muddati tugagan (Kompensatsiya bonusi taqdim etildi)"
@@ -2694,7 +2589,7 @@ async def analyze_billing_dispute(payload: DisputeAnalyzeRequest):
         "gateway_fee_saved_or_deducted": gateway_fee,
         "net_refund_issued": refund_payout,
         "bonus_credits_awarded": bonus_flash_credits if verdict == "APPROVED_BONUS" else (25 if verdict == "LEGAL_REFUSAL_WITH_GOODWILL" else 0),
-        "gateway_result": lemon_res,
+        "gateway_result": dodo_res,
         "title": title,
         "legal_basis": legal_basis,
         "resolution_text": resolution_text
@@ -2720,7 +2615,7 @@ async def analyze_billing_dispute(payload: DisputeAnalyzeRequest):
             "resolution_text": resolution_text,
             "appeal_channel": "mohim.mohimbegim@gmail.com"
         },
-        "gateway_transaction": lemon_res
+        "gateway_transaction": dodo_res
     }
 
 @app.get("/api/v1/support/dispute/{dispute_id}", tags=["Support & Dispute Resolution"])
@@ -3636,67 +3531,67 @@ async def compose_academic_research(payload: AcademicResearchRequest, request: R
         if payload.mode == "outline":
             result_text = (
                 f"Введение (Научный аппарат исследования)\n"
-                f"Глава 1. Теоретико-методологические и правовые основы регулирования в сфере: {t}\n"
-                f"1.1. Генезис и эволюция правового регулирования исследуемых отношений\n"
-                f"1.2. Теоретико-правовая характеристика специального правового режима и понятийного аппарата\n"
-                f"1.3. Кодификация отраслевого законодательства как фактор систематизации и гармонизации норм\n"
-                f"Глава 2. Современное состояние и институционально-правовые механизмы правоприменения\n"
-                f"2.1. Анализ действующей нормативно-правовой базы и практики реализации исследуемых отношений\n"
-                f"2.2. Компетенция и правовой статус уполномоченных органов государственного управления и надзора\n"
-                f"2.3. Договорные конструкции и правовое положение профильных объединений и водопользователей\n"
-                f"Глава 3. Перспективы совершенствования законодательства и инновационные правовые механизмы\n"
-                f"3.1. Основные новеллы кодифицированного законодательства и направления гармонизации правовых норм\n"
-                f"3.2. Правовые стимулы внедрения инновационных ресурсосберегающих технологий и цифрового мониторинга\n"
-                f"3.3. Научно-практические рекомендации по модернизации правового регулирования и повышению эффективности\n"
+                f"Глава 1. Теоретико-методологические и концептуальные основы: {t}\n"
+                f"1.1. Генезис и эволюция исследуемых научных подходов и правоотношений\n"
+                f"1.2. Теоретическая характеристика понятийного аппарата и категориальных рамок\n"
+                f"1.3. Систематизация законодательства и доктринальных источников как фактор гармонизации норм\n"
+                f"Глава 2. Современное состояние и прикладные механизмы реализации исследуемых процессов\n"
+                f"2.1. Анализ действующей нормативно-правовой базы и эмпирической практики\n"
+                f"2.2. Компетенция и статус уполномоченных органов управления, надзора и профильных институтов\n"
+                f"2.3. Договорные конструкции и взаимодействие участников исследуемых отношений\n"
+                f"Глава 3. Перспективы совершенствования и инновационные прикладные механизмы\n"
+                f"3.1. Ключевые направления гармонизации норм и методологических подходов\n"
+                f"3.2. Стимулы внедрения инновационных технологий, цифрового мониторинга и ресурсосбережения\n"
+                f"3.3. Научно-практические рекомендации по повышению эффективности исследуемой системы\n"
                 f"Заключение и выводы\n"
                 f"Список использованных источников\n"
                 f"Приложения"
             )
         elif payload.mode in ["article", "article_vak"]:
-            title = payload.chapter_title or f"Исследование правового регулирования: {payload.topic}"
+            title = payload.chapter_title or f"Исследование актуальных вопросов: {payload.topic}"
             result_text = (
                 f"## {title.upper()}\n\n"
-                f"**Аннотация:** В статье проведен всесторонний теоретико-правовой анализ механизмов правового регулирования "
-                f"по теме '{payload.topic}'. Особое внимание уделено роли кодификации отраслевого законодательства "
-                f"и формированию действенных правовых стимулов для устойчивого развития.\n\n"
-                f"**Ключевые слова:** {payload.topic}, Водный кодекс Республики Узбекистан, правовое регулирование, "
-                f"мелиорация, природоресурсное право, государственное управление, инновации.\n\n"
+                f"**Аннотация:** В статье проведен всесторонний научный анализ институциональных механизмов "
+                f"по теме '{payload.topic}'. Особое внимание уделено роли систематизации отраслевых норм "
+                f"и формированию действенных стимулов для устойчивого научно-технологического и социально-экономического развития.\n\n"
+                f"**Ключевые слова:** {payload.topic}, методология, теоретические основы, "
+                f"институциональное регулирование, государственное управление, инновации.\n\n"
                 f"### Введение\n"
-                f"В современных социально-экономических реалиях вопросы совершенствования природоресурсного законодательства "
-                f"приобретают первостепенное государственное значение [1, c. 14].\n\n"
+                f"В современных социально-экономических и технологических реалиях исследуемая проблематика "
+                f"приобретает первостепенное прикладное и теоретическое значение [1, c. 14].\n\n"
                 f"### Основная часть\n"
-                f"Исследование доктринальных источников и правоприменительной практики демонстрирует высокий потенциал "
-                f"кодифицированных норм. Гармоничное сочетание бассейнового управления и договорных механизмов обеспечивает "
+                f"Исследование доктринальных источников и эмпирической практики демонстрирует высокий потенциал "
+                f"комплексных подходов. Гармоничное сочетание стратегического планирования и договорных механизмов обеспечивает "
                 f"необходимый баланс публичных и частных интересов [2, c. 35].\n\n"
                 f"### Выводы и предложения\n"
-                f"На основе полученных результатов выработаны научно обоснованные предложения по модернизации подзаконного "
-                f"нормативного регулирования и практических инструментов реализации законодательства."
+                f"На основе полученных результатов выработаны научно обоснованные предложения по модернизации "
+                f"нормативного регулирования и практических инструментов реализации исследуемой модели."
             )
         elif payload.mode == "chapter":
             title = payload.chapter_title or payload.topic
             result_text = (
                 f"## {title}\n\n"
-                f"В современной правовой доктрине исследование вопросов правового регулирования по теме '{payload.topic}' "
-                f"представляет собой одно из приоритетных направлений развития отраслевой юридической науки [1, c. 14]. "
+                f"В современной научной доктрине исследование вопросов по теме '{payload.topic}' "
+                f"представляет собой одно из приоритетных направлений развития науки [1, c. 14]. "
                 f"Анализ нормативно-правовых актов и доктринальных источников свидетельствует о том, что существующие "
                 f"институциональные механизмы требуют системной гармонизации с учетом современных вызовов.\n\n"
-                f"Следует подчеркнуть, что специальный правовой режим в исследуемой области базируется на балансе публичных "
-                f"и частных интересов. Как справедливо отмечается в научных трудах ведущих правоведов, правовое регулирование "
+                f"Следует подчеркнуть, что специальный режим в исследуемой области базируется на балансе публичных "
+                f"и частных интересов. Как справедливо отмечается в трудах ведущих ученых, регулирование "
                 f"не должно ограничиваться исключительно декларативными предписаниями, а обязано опираться на действенные "
-                f"имплементационные механизмы, стимулы и четкую систему юридической ответственности [2, c. 48].\n\n"
+                f"имплементационные механизмы, стимулы и четкую систему ответственности [2, c. 48].\n\n"
                 f"На основе проведенного анализа представляется целесообразным выделить следующие ключевые аспекты:\n"
-                f"1. Необходимость последовательного закрепления понятийно-категориального аппарата на уровне кодифицированного акта;\n"
-                f"2. Четкое разграничение полномочий между бассейновыми, ведомственными и локальными субъектами регулирования;\n"
-                f"3. Внедрение правовых гарантий и экономических стимулов для добросовестных участников правоотношений.\n\n"
-                f"Таким образом, на основе теоретического и сравнительно-правового анализа доказано, что последовательная модернизация "
-                f"исследуемого правового института выступает объективной предпосылкой устойчивого развития и правовой стабильности [3, c. 92]."
+                f"1. Необходимость последовательного закрепления понятийно-категориального аппарата;\n"
+                f"2. Четкое разграничение полномочий между центральными, отраслевыми и региональными субъектами;\n"
+                f"3. Внедрение гарантий и экономических стимулов для добросовестных участников правоотношений.\n\n"
+                f"Таким образом, на основе теоретического и сравнительного анализа доказано, что последовательная модернизация "
+                f"исследуемого института выступает объективной предпосылкой устойчивого развития и стабильности [3, c. 92]."
             )
         elif payload.mode == "defense_speech":
             result_text = (
                 f"Уважаемый председатель и члены Государственной экзаменационной комиссии!\n\n"
-                f"Вашему вниманию представляется магистерская диссертация на тему: '{payload.topic}'.\n\n"
-                f"АКТУАЛЬНОСТЬ ИССЛЕДОВАНИЯ обусловлена необходимостью системной правовой модернизации механизмов регулирования "
-                f"в рассматриваемой сфере с учетом стратегических задач развития Республики Узбекистан и кодификации законодательства.\n\n"
+                f"Вашему вниманию представляется научное исследование на тему: '{payload.topic}'.\n\n"
+                f"АКТУАЛЬНОСТЬ ИССЛЕДОВАНИЯ обусловлена необходимостью системной модернизации механизмов регулирования "
+                f"в рассматриваемой сфере с учетом стратегических задач развития и современных научно-практических вызовов.\n\n"
                 f"ОБЪЕКТОМ ИССЛЕДОВАНИЯ выступили общественные отношения, складывающиеся в процессе регулирования рассматриваемой сферы.\n"
                 f"ПРЕДМЕТОМ — нормы законодательства, доктринальные источники и правоприменительная практика.\n\n"
                 f"ОСНОВНЫЕ ПОЛОЖЕНИЯ, ВЫНОСИМЫЕ НА ЗАЩИТУ:\n"

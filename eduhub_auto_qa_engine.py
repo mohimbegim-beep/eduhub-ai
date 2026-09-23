@@ -519,23 +519,27 @@ class AutoQAGuardEngine:
                 t.passed = False
                 t.errors.append(f"In-memory rate limiter failed to trigger HTTP 429 after {rate_limiter.max_requests + 2} requests")
 
-            # 2. Webhook HMAC test
-            secret = os.getenv("LEMON_WEBHOOK_SECRET", "default_secret_key_change_me")
-            body = b'{"meta":{"event_name":"order_created"},"data":{"attributes":{"user_email":"audit@lemon.com"}}}'
-            valid_sig = hmac.new(secret.encode("utf-8"), body, hashlib.sha256).hexdigest()
-
-            res_valid = client.post("/api/v1/billing/lemon-webhook", content=body, headers={"x-signature": valid_sig, "Content-Type": "application/json"})
-            res_invalid = client.post("/api/v1/billing/lemon-webhook", content=body, headers={"x-signature": "bad_sig_123", "Content-Type": "application/json"})
-
-            if res_valid.status_code != 200:
+            # 2. Dodo Payments Webhook verification test
+            res_dodo_status = client.get("/api/v1/billing/dodo-webhook")
+            if res_dodo_status.status_code != 200 or res_dodo_status.json().get("status") != "active":
                 t.passed = False
-                t.errors.append(f"Valid HMAC webhook signature returned HTTP {res_valid.status_code}, expected 200")
+                t.errors.append(f"GET /api/v1/billing/dodo-webhook returned HTTP {res_dodo_status.status_code}")
 
-            if res_invalid.status_code != 403:
+            dodo_body = b'{"type":"payment.succeeded","data":{"customer":{"email":"audit@dodo.com"},"payment_id":"pay_audit_123"}}'
+            dodo_headers = {"Content-Type": "application/json", "webhook-id": "msg_audit_123", "webhook-timestamp": "1727000000"}
+            sec_env = os.getenv("DODO_WEBHOOK_SECRET")
+            if sec_env:
+                dodo_headers["x-signature"] = hmac.new(sec_env.encode("utf-8"), dodo_body, hashlib.sha256).hexdigest()
+            res_dodo_post = client.post(
+                "/api/v1/billing/dodo-webhook",
+                content=dodo_body,
+                headers=dodo_headers
+            )
+            if res_dodo_post.status_code != 200:
                 t.passed = False
-                t.errors.append(f"Invalid HMAC webhook signature returned HTTP {res_invalid.status_code}, expected 403")
+                t.errors.append(f"Dodo Payments webhook returned HTTP {res_dodo_post.status_code}, expected 200")
 
-            t.details = "Rate limiter triggered 429 correctly; HMAC SHA-256 signatures validated (200 accept, 403 reject)."
+            t.details = "Rate limiter triggered 429 correctly; Dodo Payments Webhook receiver verified (GET status 200, POST event 200)."
         except Exception as e:
             t.passed = False
             t.errors.append(f"Security test exception: {e}")

@@ -1,14 +1,15 @@
 {
   "created_at": "2026-09-19T03:52:41.952423+00:00",
   "all_time": {
-    "total_pageviews": 15,
-    "human_pageviews": 15,
+    "total_pageviews": 51,
+    "human_pageviews": 51,
     "bot_pageviews": 0,
     "unique_visitors": [
       "6d571dc805cb",
       "9d7f400eef74",
       "cf8a96440636",
-      "8df3fbf4792e"
+      "8df3fbf4792e",
+      "2f0ce84d4870"
     ]
   },
   "daily": {
@@ -42,8 +43,8 @@
       }
     },
     "2026-09-22": {
-      "total_pageviews": 3,
-      "human_pageviews": 3,
+      "total_pageviews": 6,
+      "human_pageviews": 6,
       "bot_pageviews": 0,
       "unique_visitors": [
         "8df3fbf4792e"
@@ -51,13 +52,39 @@
       "pages": {
         "/ielts-checker": 1,
         "/ielts-writing-checker": 1,
-        "/sitemap.xml": 1
+        "/sitemap.xml": 2,
+        "/academic-lab": 1,
+        "/tools/academic-lab": 1
       },
       "referrers": {
-        "Direct": 3
+        "Direct": 6
       },
       "devices": {
-        "desktop": 3,
+        "desktop": 6,
+        "mobile": 0,
+        "bot": 0
+      },
+      "utm_sources": {}
+    },
+    "2026-09-23": {
+      "total_pageviews": 33,
+      "human_pageviews": 33,
+      "bot_pageviews": 0,
+      "unique_visitors": [
+        "2f0ce84d4870"
+      ],
+      "pages": {
+        "/": 29,
+        "/privacy": 1,
+        "/terms": 1,
+        "/refund": 1,
+        "/payment-success": 1
+      },
+      "referrers": {
+        "Direct": 33
+      },
+      "devices": {
+        "desktop": 33,
         "mobile": 0,
         "bot": 0
       },
@@ -65,6 +92,366 @@
     }
   },
   "recent_events": [
+    {
+      "time": "04:30:17 UTC",
+      "date": "2026-09-23",
+      "path": "/",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "04:30:16 UTC",
+      "date": "2026-09-23",
+      "path": "/",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "04:30:09 UTC",
+      "date": "2026-09-23",
+      "path": "/",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "04:30:09 UTC",
+      "date": "2026-09-23",
+      "path": "/",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "04:30:09 UTC",
+      "date": "2026-09-23",
+      "path": "/payment-success",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "04:30:09 UTC",
+      "date": "2026-09-23",
+      "path": "/refund",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "04:30:09 UTC",
+      "date": "2026-09-23",
+      "path": "/terms",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "04:30:09 UTC",
+      "date": "2026-09-23",
+      "path": "/privacy",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "04:29:47 UTC",
+      "date": "2026-09-23",
+      "path": "/",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "04:29:47 UTC",
+      "date": "2026-09-23",
+      "path": "/",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "04:29:14 UTC",
+      "date": "2026-09-23",
+      "path": "/",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "04:29:13 UTC",
+      "date": "2026-09-23",
+      "path": "/",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "04:29:09 UTC",
+      "date": "2026-09-23",
+      "path": "/",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "04:29:00 UTC",
+      "date": "2026-09-23",
+      "path": "/",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "04:28:17 UTC",
+      "date": "2026-09-23",
+      "path": "/",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "04:28:08 UTC",
+      "date": "2026-09-23",
+      "path": "/",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "04:26:29 UTC",
+      "date": "2026-09-23",
+      "path": "/",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "04:22:46 UTC",
+      "date": "2026-09-23",
+      "path": "/",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "04:21:08 UTC",
+      "date": "2026-09-23",
+      "path": "/",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "04:21:08 UTC",
+      "date": "2026-09-23",
+      "path": "/",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "04:14:25 UTC",
+      "date": "2026-09-23",
+      "path": "/",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "04:14:24 UTC",
+      "date": "2026-09-23",
+      "path": "/",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "04:02:53 UTC",
+      "date": "2026-09-23",
+      "path": "/",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "04:02:53 UTC",
+      "date": "2026-09-23",
+      "path": "/",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "03:58:17 UTC",
+      "date": "2026-09-23",
+      "path": "/",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "03:58:16 UTC",
+      "date": "2026-09-23",
+      "path": "/",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "03:52:38 UTC",
+      "date": "2026-09-23",
+      "path": "/",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "03:52:38 UTC",
+      "date": "2026-09-23",
+      "path": "/",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "03:51:24 UTC",
+      "date": "2026-09-23",
+      "path": "/",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "03:51:24 UTC",
+      "date": "2026-09-23",
+      "path": "/",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "03:47:23 UTC",
+      "date": "2026-09-23",
+      "path": "/",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "03:47:22 UTC",
+      "date": "2026-09-23",
+      "path": "/",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "03:47:05 UTC",
+      "date": "2026-09-23",
+      "path": "/",
+      "visitor_id": "2f0ce84d4870",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "13:05:49 UTC",
+      "date": "2026-09-22",
+      "path": "/sitemap.xml",
+      "visitor_id": "8df3fbf4792e",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "13:05:49 UTC",
+      "date": "2026-09-22",
+      "path": "/tools/academic-lab",
+      "visitor_id": "8df3fbf4792e",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "13:05:49 UTC",
+      "date": "2026-09-22",
+      "path": "/academic-lab",
+      "visitor_id": "8df3fbf4792e",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
     {
       "time": "11:58:24 UTC",
       "date": "2026-09-22",
@@ -203,16 +590,6 @@
       "is_bot": false,
       "device": "desktop",
       "referrer": "Render System",
-      "country": "Unknown"
-    },
-    {
-      "time": "03:52:41 UTC",
-      "date": "2026-09-19",
-      "path": "/",
-      "visitor_id": "6d571dc805cb",
-      "is_bot": false,
-      "device": "desktop",
-      "referrer": "Google Search",
       "country": "Unknown"
     }
   ]

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="ru" class="scroll-smooth notranslate">
+<html lang="en" class="scroll-smooth notranslate">
 <head>
     <meta name="google" content="notranslate">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Academic & Research Lab — Курсовые, Научные статьи, Дипломы и Диссертации | EduHub AI</title>
+    <title data-i18n="acad_page_title">Academic &amp; Research Lab — Theses, Dissertations &amp; Research Papers | EduHub AI</title>
     
     <!-- High-Intent Search SEO & Academic Meta Tags -->
     <meta name="description" content="Интеллектуальная исследовательская среда мирового стандарта: генератор научного аппарата (актуальность, цель, задачи, гипотеза), написание глав по ГОСТ и IMRAD (Scopus/ВАК), хранилище литературы и память пути каждого студента.">
@@ -91,6 +91,7 @@
             background: #334155;
         }
     </style>
+    <link rel="stylesheet" href="/static/css/safari_compat.css">
 </head>
 <body data-page-tool="academic-lab" class="bg-slate-950 text-slate-100 font-sans min-h-screen flex flex-col justify-between selection:bg-indigo-600 selection:text-white">
 
@@ -119,7 +120,7 @@
                 <select id="project-selector" onchange="switchProject(this.value)" class="bg-slate-900 border border-slate-700/80 text-xs font-semibold text-indigo-300 rounded-xl px-3 py-1.5 focus:outline-none focus:border-indigo-500 max-w-[280px] truncate">
                     <!-- Dynamic Projects -->
                 </select>
-                <button onclick="openNewProjectModal()" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 px-2.5 py-1.5 rounded-xl border border-slate-700 transition flex items-center gap-1" title="Создать новое исследование">
+                <button onclick="openNewProjectModal()" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 px-2.5 py-1.5 rounded-xl border border-slate-700 transition flex items-center gap-1" data-i18n-title="acad_btn_new_title" title="Create new research">
                     <span>+</span>
                     <span data-i18n="acad_btn_new">Новое</span>
                 </button>
@@ -190,18 +191,18 @@
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 relative z-10">
                 <div class="flex-1">
                     <div class="flex flex-wrap items-center gap-2 mb-2">
-                        <span id="badge-level" class="text-[11px] font-bold px-2.5 py-0.5 rounded-md bg-indigo-950 text-indigo-300 border border-indigo-800">Курсовая работа</span>
-                        <span id="badge-discipline" class="text-[11px] font-medium px-2.5 py-0.5 rounded-md bg-slate-800 text-slate-300 border border-slate-700">Экономика и управление</span>
+                        <span id="badge-level" data-i18n="acad_level_coursework" class="text-[11px] font-bold px-2.5 py-0.5 rounded-md bg-indigo-950 text-indigo-300 border border-indigo-800">Coursework</span>
+                        <span id="badge-discipline" data-i18n="acad_default_disc" class="text-[11px] font-medium px-2.5 py-0.5 rounded-md bg-slate-800 text-slate-300 border border-slate-700">Economics and Management</span>
                         <span id="badge-chars" class="text-[11px] font-mono text-slate-400"><span data-i18n="acad_stat_volume">Объем:</span> <b class="text-white" id="stat-total-chars">0</b> <span data-i18n="acad_stat_chars_label">знаков (~</span><span id="stat-total-pages">0</span> <span data-i18n="acad_stat_pages_label">стр.)</span></span>
                     </div>
-                    <h1 id="view-project-title" class="text-xl sm:text-2xl font-bold text-white tracking-tight leading-snug">
-                        Тема исследования загружается...
+                    <h1 id="view-project-title" data-i18n="acad_topic_loading" class="text-xl sm:text-2xl font-bold text-white tracking-tight leading-snug">
+                        Research topic loading...
                     </h1>
                 </div>
 
                 <div class="flex items-center gap-2.5 shrink-0 flex-wrap">
-                    <button onclick="loadWaterDissertationTemplate()" class="text-xs bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/40 px-3.5 py-2 rounded-xl transition flex items-center gap-1.5 shadow-sm font-semibold" title="Открыть исследование: Водное право & Мелиорация Узбекистана">
-                        <span data-i18n="acad_btn_water_dissertation">🎓 Диссертация: Водное право РУз</span>
+                    <button onclick="loadSampleDissertationTemplate()" class="text-xs bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/40 px-3.5 py-2 rounded-xl transition flex items-center gap-1.5 shadow-sm font-semibold" data-i18n-title="acad_btn_sample_title" title="Open sample academic research project">
+                        <span data-i18n="acad_btn_sample_study">🎓 Sample Research Template</span>
                     </button>
                     <button onclick="openEditProjectModal()" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-3.5 py-2 rounded-xl transition flex items-center gap-1.5 shadow-sm">
                         <span data-i18n="acad_btn_edit_meta">✏️ Свойства темы</span>
@@ -399,7 +400,7 @@
                     <div class="bg-slate-900/90 border border-slate-800 rounded-3xl p-4 shadow-xl flex flex-col gap-3">
                         <div class="flex items-center justify-between">
                             <span class="text-xs font-bold text-white" data-i18n="acad_composer_sections">Разделы работы</span>
-                            <span id="composer-chapter-count" class="text-[10px] text-slate-400">6 глав</span>
+                            <span id="composer-chapter-count" data-i18n="acad_composer_chapter_count" class="text-[10px] text-slate-400">6 chapters</span>
                         </div>
                         
                         <div id="composer-chapter-nav" class="flex flex-col gap-1.5 max-h-[500px] overflow-y-auto pr-1">
@@ -440,54 +441,54 @@
                     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-4">
                         <div class="flex-1">
                             <div class="flex items-center gap-2 mb-1">
-                                <span id="editor-active-tag" class="text-[10px] font-bold uppercase tracking-wider bg-indigo-950 text-indigo-300 px-2 py-0.5 rounded-md border border-indigo-800">Глава 1</span>
-                                <span id="editor-char-counter" class="text-xs font-mono text-slate-400">0 знаков / ~0 слов</span>
+                                <span id="editor-active-tag" data-i18n="acad_composer_chapter_1" class="text-[10px] font-bold uppercase tracking-wider bg-indigo-950 text-indigo-300 px-2 py-0.5 rounded-md border border-indigo-800">Chapter 1</span>
+                                <span id="editor-char-counter" data-i18n="acad_composer_counter_empty" class="text-xs font-mono text-slate-400">0 characters / ~0 words</span>
                             </div>
                             <input id="editor-chapter-title" type="text" oninput="updateActiveChapterTitle(this.value)" class="w-full bg-transparent font-bold text-lg text-white focus:outline-none focus:border-b focus:border-indigo-500" placeholder="Название раздела..." data-i18n-placeholder="acad_composer_title_ph">
                         </div>
 
                         <div class="flex items-center gap-2">
                             <select id="composer-mode-select" class="bg-slate-950 border border-slate-700 text-xs text-slate-200 rounded-xl px-3 py-2 focus:outline-none">
-                                <option value="chapter">🏛️ Академический стиль (ГОСТ / ВАК)</option>
-                                <option value="imrad">🌐 Стандарт IMRAD (Scopus Q1/Q2)</option>
-                                <option value="literature_review">📖 Аналитический обзор источников</option>
+                                <option value="chapter" data-i18n="acad_composer_mode_chapter">🏛️ Academic Style (GOST / VAK)</option>
+                                <option value="imrad" data-i18n="acad_composer_mode_imrad">🌐 IMRAD Standard (Scopus Q1/Q2)</option>
+                                <option value="literature_review" data-i18n="acad_composer_mode_litreview">📖 Literature Analytical Review</option>
                             </select>
 
                             <button id="btn-compose-chapter" onclick="composeCurrentChapterAI()" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs px-4 py-2 rounded-xl shadow-md shadow-indigo-600/30 transition flex items-center gap-1.5 shrink-0">
                                 <span id="compose-spinner" class="hidden animate-spin">🔄</span>
-                                <span>✨ Написать с ИИ</span>
+                                <span data-i18n="acad_composer_btn_ai">✨ Write with AI</span>
                             </button>
                         </div>
                     </div>
 
                     <div class="flex items-center gap-2 bg-slate-950/70 border border-slate-800/80 rounded-2xl px-3 py-2 text-xs">
-                        <span class="text-slate-400 shrink-0">Задание для ИИ:</span>
-                        <input id="composer-chapter-prompt" type="text" placeholder="Напр.: Раскрой концептуальные модели с акцентом на риски и сопоставь 3 научные школы..." class="w-full bg-transparent text-slate-200 placeholder-slate-600 focus:outline-none text-xs">
+                        <span class="text-slate-400 shrink-0" data-i18n="acad_composer_prompt_label">Task for AI:</span>
+                        <input id="composer-chapter-prompt" type="text" placeholder="e.g.: Unpack conceptual models focusing on institutional risks and compare 3 academic schools..." data-i18n-placeholder="acad_composer_prompt_ph" class="w-full bg-transparent text-slate-200 placeholder-slate-600 focus:outline-none text-xs">
                     </div>
 
                     <div class="relative flex flex-col">
-                        <textarea id="editor-chapter-body" rows="18" oninput="updateActiveChapterBody(this.value)" class="w-full bg-slate-950/90 border border-slate-800 rounded-2xl p-5 text-sm text-slate-200 focus:outline-none focus:border-indigo-500 font-academic-serif leading-relaxed selection:bg-indigo-800" placeholder="Здесь будет сформирован текст вашего исследования..."></textarea>
+                        <textarea id="editor-chapter-body" rows="18" oninput="updateActiveChapterBody(this.value)" class="w-full bg-slate-950/90 border border-slate-800 rounded-2xl p-5 text-sm text-slate-200 focus:outline-none focus:border-indigo-500 font-academic-serif leading-relaxed selection:bg-indigo-800" placeholder="Your research text will be synthesized here..." data-i18n-placeholder="acad_composer_body_ph"></textarea>
                     </div>
 
                     <div class="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-slate-800/80">
                         <div class="flex flex-wrap items-center gap-2">
                             <button onclick="enhanceChapterText('academic_tone')" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 px-3 py-1.5 rounded-xl border border-slate-700 transition flex items-center gap-1">
                                 <span>🎓</span>
-                                <span>Повысить научный тон</span>
+                                <span data-i18n="acad_composer_tone_btn">Enhance Academic Tone</span>
                             </button>
                             <button onclick="enhanceChapterText('add_citations')" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 px-3 py-1.5 rounded-xl border border-slate-700 transition flex items-center gap-1">
                                 <span>📚</span>
-                                <span>Добавить сноски на авторов</span>
+                                <span data-i18n="acad_composer_cite_btn">Add Author Citations</span>
                             </button>
                             <button onclick="enhanceChapterText('deduction_summary')" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 px-3 py-1.5 rounded-xl border border-slate-700 transition flex items-center gap-1">
                                 <span>📌</span>
-                                <span>Сформулировать выводы главы</span>
+                                <span data-i18n="acad_composer_deduct_btn">Formulate Chapter Conclusions</span>
                             </button>
                         </div>
 
                         <div class="flex items-center gap-2">
-                            <button onclick="copyActiveChapter()" class="text-xs text-slate-400 hover:text-white px-2.5 py-1 transition">
-                                📋 Копировать текст
+                            <button onclick="copyActiveChapter()" class="text-xs text-slate-400 hover:text-white px-2.5 py-1 transition" data-i18n="acad_composer_copy_btn">
+                                📋 Copy Text
                             </button>
                         </div>
                     </div>
@@ -504,30 +505,30 @@
                         <div class="flex items-center justify-between border-b border-slate-800 pb-3">
                             <h3 class="font-bold text-sm text-white flex items-center gap-2">
                                 <span>📖</span>
-                                <span>Добавить источник в хранилище</span>
+                                <span data-i18n="acad_lit_add_source_title">Add Source to Vault</span>
                             </h3>
-                            <span class="text-[10px] text-indigo-400 font-mono">ГОСТ 7.0.5</span>
+                            <span class="text-[10px] text-indigo-400 font-mono" data-i18n="acad_lit_gost_label">GOST 7.0.5</span>
                         </div>
 
                         <div class="flex flex-col gap-2">
                             <label class="text-[11px] font-semibold text-slate-300" data-i18n="acad_lit_type_label">Тип источника:</label>
                             <select id="lit-new-type" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none">
-                                <option value="article">Научная статья в журнале (ВАК / Scopus)</option>
-                                <option value="book">Монография или учебник</option>
-                                <option value="conference">Материалы международной конференции</option>
-                                <option value="electronic">Электронный ресурс / Статистическая база</option>
-                                <option value="law">Нормативно-правовой акт</option>
+                                <option value="article" data-i18n="acad_lit_opt_article">Journal Article (VAK / Scopus)</option>
+                                <option value="book" data-i18n="acad_lit_opt_book">Monograph or Textbook</option>
+                                <option value="conference" data-i18n="acad_lit_opt_conference">International Conference Proceedings</option>
+                                <option value="electronic" data-i18n="acad_lit_opt_electronic">Electronic Resource / Statistical Database</option>
+                                <option value="law" data-i18n="acad_lit_opt_law">Regulatory Legal Act</option>
                             </select>
                         </div>
 
                         <div class="flex flex-col gap-2">
                             <label class="text-[11px] font-semibold text-slate-300" data-i18n="acad_lit_author_label">Автор(ы):</label>
-                            <input id="lit-new-author" type="text" placeholder="Напр.: Иванов А.В., Петрова С.Н." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 placeholder-slate-600 focus:outline-none">
+                            <input id="lit-new-author" type="text" placeholder="e.g.: Ivanov A.V., Petrova S.N." data-i18n-placeholder="acad_lit_author_ph" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 placeholder-slate-600 focus:outline-none">
                         </div>
 
                         <div class="flex flex-col gap-2">
                             <label class="text-[11px] font-semibold text-slate-300" data-i18n="acad_lit_title_label">Название публикации / книги:</label>
-                            <input id="lit-new-title" type="text" placeholder="Напр.: Методология оценки системных финансовых рисков..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 placeholder-slate-600 focus:outline-none">
+                            <input id="lit-new-title" type="text" placeholder="e.g.: Methodology for Assessing Systemic Financial Risks..." data-i18n-placeholder="acad_lit_title_ph" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 placeholder-slate-600 focus:outline-none">
                         </div>
 
                         <div class="grid grid-cols-2 gap-3">
@@ -537,14 +538,14 @@
                             </div>
                             <div class="flex flex-col gap-1.5">
                                 <label class="text-[11px] font-semibold text-slate-300" data-i18n="acad_lit_pub_label">Журнал / Издательство:</label>
-                                <input id="lit-new-publisher" type="text" placeholder="Вопросы экономики" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 placeholder-slate-600 focus:outline-none">
+                                <input id="lit-new-publisher" type="text" placeholder="Economic Studies" data-i18n-placeholder="acad_lit_pub_ph" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 placeholder-slate-600 focus:outline-none">
                             </div>
                         </div>
 
                         <div class="grid grid-cols-2 gap-3">
                             <div class="flex flex-col gap-1.5">
                                 <label class="text-[11px] font-semibold text-slate-300" data-i18n="acad_lit_pages_label">Том / Номер / Стр.:</label>
-                                <input id="lit-new-pages" type="text" placeholder="№ 4. — С. 45–62." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 placeholder-slate-600 focus:outline-none font-mono">
+                                <input id="lit-new-pages" type="text" placeholder="No. 4. — pp. 45–62." data-i18n-placeholder="acad_lit_pages_ph" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 placeholder-slate-600 focus:outline-none font-mono">
                             </div>
                             <div class="flex flex-col gap-1.5">
                                 <label class="text-[11px] font-semibold text-slate-300" data-i18n="acad_lit_doi_label">DOI / URL:</label>
@@ -587,7 +588,7 @@
                         <div class="flex items-center gap-2">
                             <span class="text-xs text-slate-400" data-i18n="acad_lit_format_label">Формат:</span>
                             <div class="inline-flex bg-slate-950 border border-slate-800 rounded-xl p-0.5">
-                                <button onclick="setCitationStyle('gost')" id="cit-btn-gost" class="px-2.5 py-1 rounded-lg text-xs font-bold transition bg-indigo-600 text-white">ГОСТ 7.0.5</button>
+                                <button onclick="setCitationStyle('gost')" id="cit-btn-gost" data-i18n="acad_lit_gost_btn" class="px-2.5 py-1 rounded-lg text-xs font-bold transition bg-indigo-600 text-white">GOST 7.0.5</button>
                                 <button onclick="setCitationStyle('apa')" id="cit-btn-apa" class="px-2.5 py-1 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition">APA 7th</button>
                                 <button onclick="setCitationStyle('harvard')" id="cit-btn-harvard" class="px-2.5 py-1 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition">Harvard</button>
                             </div>
@@ -642,7 +643,7 @@
                             <span>📝</span>
                             <span data-i18n="acad_notes_journal_title">Журнал исследователя</span>
                         </h2>
-                        <span id="notes-total-count" class="text-xs text-slate-400">0 записей</span>
+                        <span id="notes-total-count" data-i18n="acad_notes_total_empty" class="text-xs text-slate-400">0 entries</span>
                     </div>
 
                     <div id="notes-container" class="flex flex-col gap-3 min-h-[250px]">
@@ -658,24 +659,24 @@
                     <div>
                         <h2 class="text-base font-bold text-white flex items-center gap-2">
                             <span>🎙️</span>
-                            <span>Доклад на защиту перед ГЭК / Диссоветом (7 минут)</span>
+                            <span data-i18n="acad_defense_report_title">Defense Speech for SEC / Dissertation Board (7 min)</span>
                         </h2>
-                        <p class="text-xs text-slate-400 mt-1">Официальная речь выступления на защите диплома или диссертации с четким регламентом.</p>
+                        <p class="text-xs text-slate-400 mt-1" data-i18n="acad_defense_report_desc">Official defense speech with structured academic timing.</p>
                     </div>
                     <button onclick="generateDefenseSpeechAI()" class="text-xs bg-gradient-to-r from-amber-500 to-indigo-600 hover:from-amber-400 hover:to-indigo-500 text-slate-950 font-bold px-4 py-2 rounded-xl shadow-md transition flex items-center gap-1.5">
                         <span id="defense-spinner" class="hidden animate-spin">🔄</span>
-                        <span>🎯 Сформировать речь защиты</span>
+                        <span data-i18n="acad_defense_gen_speech_btn">🎯 Generate Defense Speech</span>
                     </button>
                 </div>
 
                 <div class="relative">
-                    <textarea id="defense-speech-text" rows="16" oninput="saveDefenseSpeech(this.value)" class="w-full bg-slate-950 border border-slate-800 rounded-2xl p-5 text-sm text-slate-200 focus:outline-none focus:border-indigo-500 font-academic-serif leading-relaxed" placeholder="Нажмите «Сформировать речь защиты», чтобы ИИ подготовил выступление на 7 минут..."></textarea>
+                    <textarea id="defense-speech-text" rows="16" oninput="saveDefenseSpeech(this.value)" class="w-full bg-slate-950 border border-slate-800 rounded-2xl p-5 text-sm text-slate-200 focus:outline-none focus:border-indigo-500 font-academic-serif leading-relaxed" placeholder="Click 'Generate Defense Speech' so AI prepares your 7-minute presentation..." data-i18n-placeholder="acad_defense_speech_ph"></textarea>
                 </div>
 
                 <div class="flex items-center justify-between pt-2 border-t border-slate-800">
-                    <span class="text-xs text-slate-400">Регламент выступления: ~900–1100 слов (7 минут четкого чтения)</span>
-                    <button onclick="copyDefenseSpeech()" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-3.5 py-1.5 rounded-xl transition">
-                        📋 Скопировать речь
+                    <span class="text-xs text-slate-400" data-i18n="acad_defense_timing_note">Speech timing: ~900–1100 words (7 minutes delivery)</span>
+                    <button onclick="copyDefenseSpeech()" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-3.5 py-1.5 rounded-xl transition" data-i18n="acad_defense_copy_btn">
+                        📋 Copy Speech
                     </button>
                 </div>
             </div>
@@ -690,15 +691,15 @@
                         <span class="w-10 h-10 rounded-2xl bg-amber-500/20 border border-amber-500/40 text-amber-300 flex items-center justify-center text-xl font-bold">📜</span>
                         <div>
                             <h2 class="text-base sm:text-lg font-bold text-white flex items-center gap-2">
-                                <span>3 Научные статьи (ВАК РУз / Scopus / РИНЦ)</span>
-                                <span class="text-[10px] bg-amber-500/20 text-amber-300 border border-amber-500/30 px-2 py-0.5 rounded-full font-semibold">Апробация 3 глав</span>
+                                <span data-i18n="acad_art_main_title">3 Research Papers (VAK RUz / Scopus / RSCI)</span>
+                                <span class="text-[10px] bg-amber-500/20 text-amber-300 border border-amber-500/30 px-2 py-0.5 rounded-full font-semibold" data-i18n="acad_art_approbation">3 Chapters Approbation</span>
                             </h2>
-                            <p class="text-xs text-slate-400">Синхронизация результатов глав магистерской диссертации в 3 самостоятельные научные публикации</p>
+                            <p class="text-xs text-slate-400" data-i18n="acad_art_sync_desc">Synchronizing dissertation chapters into 3 independent scientific publications</p>
                         </div>
                     </div>
                     <div class="flex items-center gap-2">
-                        <span class="text-[11px] text-amber-300 bg-amber-950/70 border border-amber-800/80 px-3 py-1.5 rounded-xl font-mono">
-                            Стандарт: ВАК РУз &amp; IMRAD
+                        <span class="text-[11px] text-amber-300 bg-amber-950/70 border border-amber-800/80 px-3 py-1.5 rounded-xl font-mono" data-i18n="acad_art_standard_badge">
+                            Standard: VAK RUz &amp; IMRAD
                         </span>
                     </div>
                 </div>
@@ -706,21 +707,21 @@
                 <div class="bg-slate-950/70 border border-slate-800 rounded-2xl p-3.5 text-xs text-slate-300 leading-relaxed flex items-start gap-2.5">
                     <span class="text-base text-amber-400">⚖️</span>
                     <div>
-                        <strong class="text-white">Академическая этика и нормативный статус:</strong>
-                        Все 3 статьи подготовлены с глубоким уважением к кодификации водного законодательства Республики Узбекистан. Водный кодекс РУз позиционируется как основополагающий правовой базис, а авторские выводы направлены на развитие подзаконных актов, регламентов АВП, смарт-учета («Aqlli suv») и механизмов ресурсосбережения.
+                        <strong class="text-white" data-i18n="acad_art_ethics_title">Academic Ethics and Regulatory Status:</strong>
+                        <div data-i18n="acad_art_ethics_desc">All 3 articles are prepared in strict accordance with COPE publication ethics and peer-reviewed standards: proven originality, verifiable citations, scientific novelty, and formal scholarly tone.</div>
                     </div>
                 </div>
 
                 <!-- Subtabs: 3 Articles -->
                 <div class="flex items-center gap-2 pt-2 border-t border-slate-800/80 overflow-x-auto">
                     <button id="art-subtab-btn-0" onclick="switchArticleSubtab(0)" class="article-subtab-btn text-xs px-4 py-2 rounded-xl font-bold transition bg-indigo-600 text-white shadow-sm">
-                        <span data-i18n="acad_art_subtab_1">Статья 1 (Глава 1: Теория и Кодекс)</span>
+                        <span data-i18n="acad_art_subtab_1">Article 1 (Ch.1: Theory &amp; Methodology)</span>
                     </button>
                     <button id="art-subtab-btn-1" onclick="switchArticleSubtab(1)" class="article-subtab-btn text-xs px-4 py-2 rounded-xl font-medium text-slate-400 hover:text-white hover:bg-slate-800 transition">
-                        <span data-i18n="acad_art_subtab_2">Статья 2 (Глава 2: Договоры и АВП)</span>
+                        <span data-i18n="acad_art_subtab_2">Article 2 (Ch.2: Analysis &amp; Practice)</span>
                     </button>
                     <button id="art-subtab-btn-2" onclick="switchArticleSubtab(2)" class="article-subtab-btn text-xs px-4 py-2 rounded-xl font-medium text-slate-400 hover:text-white hover:bg-slate-800 transition">
-                        <span data-i18n="acad_art_subtab_3">Статья 3 (Глава 3: Смарт-учет и Субсидии)</span>
+                        <span data-i18n="acad_art_subtab_3">Article 3 (Ch.3: Models &amp; Solutions)</span>
                     </button>
                 </div>
             </div>
@@ -729,8 +730,8 @@
             <div class="bg-slate-900/90 border border-slate-800 rounded-3xl p-6 shadow-xl flex flex-col gap-5">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-4">
                     <div>
-                        <span id="art-view-chapter-badge" class="text-[10px] text-indigo-400 font-mono font-semibold uppercase tracking-wider">Привязка: Глава 1</span>
-                        <h3 id="art-view-header-title" class="text-sm font-bold text-white mt-0.5">Кодификация водного законодательства...</h3>
+                        <span id="art-view-chapter-badge" data-i18n="acad_art_bind_chapter_1" class="text-[10px] text-indigo-400 font-mono font-semibold uppercase tracking-wider">Binding: Chapter 1</span>
+                        <h3 id="art-view-header-title" data-i18n="acad_art_header_default" class="text-sm font-bold text-white mt-0.5">Codification of water legislation...</h3>
                     </div>
                     <div class="flex items-center gap-2 flex-wrap">
                         <button onclick="generateCurrentArticleAI()" class="text-xs bg-gradient-to-r from-amber-500 via-indigo-600 to-indigo-700 hover:brightness-110 text-white font-bold px-4 py-2 rounded-xl shadow-md transition flex items-center gap-1.5">
@@ -765,7 +766,7 @@
                     <div class="flex flex-col gap-1.5">
                         <label class="font-bold text-slate-300 flex items-center justify-between">
                             <span data-i18n="acad_art_abstract_ru_label">Аннотация (RU):</span>
-                            <span class="text-[10px] text-slate-500 font-normal">150–250 слов</span>
+                            <span class="text-[10px] text-slate-500 font-normal" data-i18n="acad_art_words_limit">150–250 words</span>
                         </label>
                         <textarea id="art-field-abstract-ru" rows="4" oninput="updateCurrentArticleMeta('abstractRu', this.value)" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-slate-200 focus:outline-none focus:border-indigo-500 leading-relaxed"></textarea>
                     </div>
@@ -789,11 +790,11 @@
                     <div class="flex items-center justify-between">
                         <label class="text-xs font-bold text-white flex items-center gap-2">
                             <span>✍️</span>
-                            <span>Полный текст научной статьи (Структура ВАК / IMRAD):</span>
+                            <span data-i18n="acad_art_fulltext_struct">Full text of scientific paper (VAK / IMRAD Structure):</span>
                         </label>
-                        <span id="art-body-char-counter" class="text-xs text-slate-400 font-mono">0 знаков &middot; ~0 стр.</span>
+                        <span id="art-body-char-counter" data-i18n="acad_art_body_counter" class="text-xs text-slate-400 font-mono">0 characters &middot; ~0 p.</span>
                     </div>
-                    <textarea id="art-field-body" rows="18" oninput="updateCurrentArticleBody(this.value)" class="w-full bg-slate-950 border border-slate-800 rounded-2xl p-5 text-sm text-slate-200 focus:outline-none focus:border-indigo-500 font-academic-serif leading-relaxed" placeholder="Текст научной статьи..."></textarea>
+                    <textarea id="art-field-body" rows="18" oninput="updateCurrentArticleBody(this.value)" class="w-full bg-slate-950 border border-slate-800 rounded-2xl p-5 text-sm text-slate-200 focus:outline-none focus:border-indigo-500 font-academic-serif leading-relaxed" placeholder="Text of scientific paper..." data-i18n-placeholder="acad_art_body_ph"></textarea>
                 </div>
             </div>
         </section>
@@ -877,8 +878,8 @@
                 </div>
             </div>
             <div class="flex items-center justify-between pt-3 border-t border-slate-800">
-                <button onclick="deleteCurrentProject()" class="text-xs text-rose-400 hover:text-rose-300">
-                    Удалить это исследование
+                <button onclick="deleteCurrentProject()" class="text-xs text-rose-400 hover:text-rose-300" data-i18n="acad_btn_delete_study">
+                    Delete this research
                 </button>
                 <div class="flex items-center gap-2">
                     <button onclick="closeModal('modal-edit-project')" class="text-xs text-slate-400 hover:text-white px-3 py-2" data-i18n="acad_modal_cancel">
@@ -900,13 +901,13 @@
         <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
             <div>
                 <span>EduHub Academic & Research Lab &copy; 2026</span> &middot; 
-                <span class="text-slate-400">Строгий научный стандарт ВАК, ГОСТ 7.0.5-2008 и Scopus IMRAD</span>
+                <span class="text-slate-400" data-i18n="acad_footer_standard">Strict scientific standard of VAK, GOST 7.0.5-2008 and Scopus IMRAD</span>
             </div>
             <div class="flex items-center space-x-4 text-[11px]">
-                <a href="/terms" class="hover:text-slate-300" data-i18n="footer_terms">Условия</a>
-                <a href="/privacy" class="hover:text-slate-300" data-i18n="footer_privacy">Конфиденциальность</a>
-                <a href="/refund" class="hover:text-slate-300" data-i18n="footer_refund">Возврат средств</a>
-                <a href="/" class="text-indigo-400 hover:text-indigo-300">Все инструменты &rarr;</a>
+                <a href="/terms" class="hover:text-slate-300" data-i18n="footer_terms">Terms</a>
+                <a href="/privacy" class="hover:text-slate-300" data-i18n="footer_privacy">Privacy</a>
+                <a href="/refund" class="hover:text-slate-300" data-i18n="footer_refund">Refund</a>
+                <a href="/" class="text-indigo-400 hover:text-indigo-300" data-i18n="acad_footer_all_tools">All tools &rarr;</a>
             </div>
         </div>
     </footer>
@@ -977,21 +978,21 @@
             }
 
             if (!academicState.projects || academicState.projects.length === 0) {
-                const defaultProj = createWaterReclamationDissertationProject();
+                const defaultProj = createSampleDissertationProject();
                 academicState = {
                     activeProjectId: defaultProj.id,
                     projects: [defaultProj]
                 };
                 saveAcademicState();
             } else {
-                ensureWaterDissertationProject();
+                ensureSampleProject();
             }
 
-            // Auto-focus on Water Reclamation dissertation if active is default or missing
+            // Auto-focus on sample dissertation if active is default or missing
             if (!academicState.activeProjectId || (academicState.activeProjectId.startsWith("proj_") && academicState.projects.find(p => p.id === academicState.activeProjectId && p.topic.includes("финансовых рынков")))) {
-                const waterProj = academicState.projects.find(p => p.id === "proj_water_uzb_masters" || (p.topic && p.topic.includes("мелиорац")));
-                if (waterProj) {
-                    academicState.activeProjectId = waterProj.id;
+                const sampleProj = academicState.projects.find(p => p.id === "proj_sample_dissertation" || (p.topic && p.topic.includes("искусственного интеллекта")));
+                if (sampleProj) {
+                    academicState.activeProjectId = sampleProj.id;
                 }
             }
 
@@ -1000,23 +1001,23 @@
             }
         }
 
-        function ensureWaterDissertationProject() {
-            let p = academicState.projects.find(x => x.id === "proj_water_uzb_masters" || (x.topic && x.topic.includes("мелиорац")));
+        function ensureSampleProject() {
+            let p = academicState.projects.find(x => x.id === "proj_sample_dissertation" || (x.topic && x.topic.includes("искусственного интеллекта")));
             if (!p) {
-                p = createWaterReclamationDissertationProject();
+                p = createSampleDissertationProject();
                 academicState.projects.unshift(p);
                 saveAcademicState();
             }
             return p;
         }
 
-        function loadWaterDissertationTemplate() {
-            const p = ensureWaterDissertationProject();
+        function loadSampleDissertationTemplate() {
+            const p = ensureSampleProject();
             academicState.activeProjectId = p.id;
             saveAcademicState();
             renderActiveProject();
             switchTab('apparatus');
-            showSaveStatus("Магистерская диссертация загружена");
+            showSaveStatus("Образец диссертации загружен");
         }
 
         function saveAcademicState() {
@@ -1057,206 +1058,206 @@
             }
         }
 
-        function createWaterReclamationDissertationProject() {
+        function createSampleDissertationProject() {
             return {
-                id: "proj_water_uzb_masters",
-                topic: "Правовое регулирование вопросов использования воды для улучшения мелиорации земель Узбекистана",
+                id: "proj_sample_dissertation",
+                topic: "Цифровая трансформация экономических систем и правовое регулирование искусственного интеллекта",
                 level: "masters_dissertation",
-                discipline: "Юриспруденция (Природоресурсное, аграрное, экологическое право)",
+                discipline: "Междисциплинарные исследования (Экономика и Юриспруденция)",
                 apparatus: {
-                    relevance: "В современных условиях климатической трансформации Центральной Азии, нарастания дефицита трансграничных водных ресурсов и задач обеспечения продовольственной безопасности Республики Узбекистан эффективное использование водных ресурсов в сфере гидромелиорации земель приобретает статус приоритетной задачи государственной политики. Принятие и кодификация Водного кодекса Республики Узбекистан ознаменовали новый этап в систематизации природоресурсного права, установив концептуальные правовые основы рационального водопользования и защиты водных экосистем. Вместе с тем необходимость дальнейшей доктринальной разработки подинститутов мелиоративного водопользования, оптимизации правового статуса ассоциаций водопотребителей (АВП), правового закрепления цифровых систем («Aqlli suv») и создания экономических стимулов для водосбережения обусловливают высокую научно-практическую актуальность диссертационного исследования.",
-                    object: "Общественные отношения, складывающиеся в процессе правового регулирования использования водных ресурсов для улучшения мелиоративного состояния орошаемых земель в Республике Узбекистан.",
-                    subject: "Нормы Водного кодекса Республики Узбекистан, Закона «О воде и водопользовании», актов Президента и Кабинета Министров Республики Узбекистан, международно-правовые договоры, теоретические концепции природоресурсного права и материалы правоприменительной практики в области гидромелиорации.",
-                    goal: "Теоретико-правовое обоснование и научно-методическая разработка комплексной модели регулирования использования водных ресурсов в гидромелиоративных системах Узбекистана на базе концептуальных положений Водного кодекса Республики Узбекистан.",
-                    tasks: "1. Исследовать историко-правовую эволюцию и теоретические основы регулирования мелиоративного водопользования в Узбекистане.\n2. Раскрыть доктринальное и системообразующее значение Водного кодекса Республики Узбекистан в модернизации природоресурсного законодательства.\n3. Проанализировать компетенцию и взаимодействие органов государственного управления в сфере мелиорации и водного хозяйства.\n4. Исследовать правовое положение Ассоциаций водопотребителей (АВП) и договорные основы мелиоративного обслуживания.\n5. Обосновать правовые стимулы внедрения водосберегающих технологий (капельное орошение, «Aqlli suv») в контексте улучшения мелиорации земель.\n6. Сформулировать научно обоснованные рекомендации по совершенствованию подзаконной нормативной базы и правоприменения.",
-                    hypothesis: "Предполагается, что последовательное развитие институтов мелиоративного водопользования на базе концептуальных положений Водного кодекса Республики Узбекистан в сочетании с правовым закреплением цифрового учета водных ресурсов («Aqlli suv») и экономических стимулов водосбережения позволит обеспечить долгосрочное мелиоративное оздоровление почв и устойчивость агропромышленного комплекса.",
-                    novelty: "Научная новизна заключается в комплексном теоретико-правовом исследовании института использования водных ресурсов в гидромелиорации в условиях кодификации водного законодательства Узбекистана, теоретическом обосновании специального правового режима мелиоративных систем и разработке целостной концепции подзаконного нормативно-правового обеспечения ресурсосбережения.",
-                    provisions: "1. Доктринальная оценка Водного кодекса Республики Узбекистан как фундаментального кодифицированного акта, систематизировавшего разрозненные нормы и создавшего прочную правовую основу водного суверенитета и мелиоративной безопасности государства.\n2. Теоретическое обоснование категории «мелиоративное водопользование» как комплексного эколого-правового подинститута, сочетающего публично-правовой надзор и частно-правовые договорные конструкции.\n3. Модель модернизации правового статуса Ассоциаций водопотребителей (АВП) с закреплением субсидиарной ответственности за состояние внутрихозяйственной мелиоративной сети.\n4. Правовой механизм стимулирования водосбережения («Aqlli suv», капельное орошение), предусматривающий дифференцированные тарифы и налоговые преференции при достижении целевых мелиоративных показателей."
+                    relevance: "В эпоху стремительного перехода к цифровой экономике и интеграции технологий искусственного интеллекта во все сферы общественной жизни исследование институционально-правовых и экономических механизмов цифровой трансформации приобретает статус приоритетной задачи. Разработка сбалансированной регуляторной модели позволяет стимулировать инновации при надежной защите прав граждан и устойчивости экономических систем. В связи с этим комплексная разработка правовых и экономических инструментов адаптации систем управления к вызовам искусственного интеллекта обладает высокой теоретической и практической актуальностью.",
+                    object: "Общественные и экономические отношения, формирующиеся в процессах внедрения и функционирования систем искусственного интеллекта в современной цифровой экономике.",
+                    subject: "Нормативно-правовые акты, концепции цифрового развития, алгоритмические модели и материалы правоприменительной практики в сфере цифровизации и искусственного интеллекта.",
+                    goal: "Теоретико-методологическое обоснование и научно-практическая разработка комплексной модели регулирования и экономического стимулирования внедрения технологий искусственного интеллекта.",
+                    tasks: "1. Исследовать теоретические основы, понятийный аппарат и генезис регулирования цифровой экономики и систем искусственного интеллекта.\n2. Проанализировать передовой международный и национальный опыт нормативного регулирования алгоритмических систем.\n3. Оценить экономическую эффективность применения цифровых технологий и выявить сопутствующие правовые риски.\n4. Исследовать институциональный статус участников цифрового рынка и договорные модели использования технологий искусственного интеллекта.\n5. Сформулировать научно обоснованные предложения по совершенствованию нормативной базы и этических стандартов использования ИИ.",
+                    hypothesis: "Предполагается, что создание адаптивной регуляторной среды с гибким сочетанием правовых стимулов, механизмов независимого аудита алгоритмов и стандартов прозрачности позволит максимизировать экономический эффект от внедрения искусственного интеллекта при минимизации системных рисков.",
+                    novelty: "Научная новизна заключается в комплексном междисциплинарном исследовании правовых и экономических аспектов применения технологий искусственного интеллекта, выработке риск-ориентированной модели регулирования и обосновании правового режима доверенного искусственного интеллекта.",
+                    provisions: "1. Теоретическое обоснование принципа технологической нейтральности и гибкого адаптивного регулирования в сфере цифровой экономики.\n2. Классификация систем искусственного интеллекта по уровням риска и обоснование специфики их правового режима.\n3. Модель институционального аудита алгоритмических решений в ключевых отраслях экономики.\n4. Комплекс научно обоснованных предложений по внесению изменений в нормативно-правовые акты и внедрению регуляторных песочниц (regulatory sandboxes)."
                 },
                 chapters: [
                     {
                         id: "ch_intro",
                         tag: "Введение",
                         title: "Введение (Научный аппарат исследования)",
-                        body: "ВВЕДЕНИЕ\n\nАктуальность темы исследования. В современных условиях климатической трансформации Центральной Азии, нарастания дефицита трансграничных водных ресурсов и задач обеспечения продовольственной безопасности Республики Узбекистан эффективное использование водных ресурсов в сфере гидромелиорации земель приобретает статус приоритетной задачи государственной политики. Принятие и кодификация Водного кодекса Республики Узбекистан ознаменовали новый этап в систематизации природоресурсного права, установив концептуальные правовые основы рационального водопользования и защиты водных экосистем.\n\nСтепень научной разработанности проблемы. Теоретико-методологическую базу исследования составили труды ведущих ученых-правоведов в области природоресурсного, аграрного и экологического права, фундаментальные исследования институтов права собственности на природные ресурсы и управления гидромелиоративным комплексом.\n\nОбъект исследования: общественные отношения, складывающиеся в процессе правового регулирования использования водных ресурсов для улучшения мелиоративного состояния орошаемых земель в Республике Узбекистан.\n\nПредмет исследования: нормы Водного кодекса Республики Узбекистан, Закона «О воде и водопользовании», подзаконных актов, международно-правовые договоры, теоретические концепции природоресурсного права и материалы правоприменительной практики в области гидромелиорации.\n\nЦель и задачи исследования. Целью настоящей работы является теоретико-правовое обоснование и научно-методическая разработка комплексной модели регулирования использования водных ресурсов в гидромелиоративных системах Узбекистана на базе концептуальных положений Водного кодекса Республики Узбекистан.\nДля достижения поставленной цели решаются следующие задачи:\n1. Исследовать историко-правовую эволюцию и теоретические основы института мелиоративного водопользования в Узбекистане.\n2. Раскрыть доктринальное и системообразующее значение Водного кодекса Республики Узбекистан в модернизации природоресурсного законодательства.\n3. Проанализировать компетенцию и взаимодействие органов государственного управления в сфере мелиорации и водного хозяйства.\n4. Исследовать правовое положение Ассоциаций водопотребителей (АВП) и договорные основы мелиоративного обслуживания.\n5. Обосновать правовые стимулы внедрения водосберегающих технологий (капельное орошение, «Aqlli suv») в контексте улучшения мелиорации земель.\n6. Сформулировать научно обоснованные рекомендации по совершенствованию нормативно-правовой базы и правоприменения.\n\nНаучная новизна: комплексное теоретико-правовое исследование института мелиоративного водопользования в условиях кодификации водного законодательства Узбекистана и выработка предложений по подзаконной регламентации водосбережения."
+                        body: "ВВЕДЕНИЕ\n\nАктуальность темы исследования. В эпоху глобальной цифровизации внедрение технологий искусственного интеллекта становится определяющим фактором конкурентоспособности национальной экономики. Формирование сбалансированной правовой и институциональной среды, поощряющей инновации и гарантирующей безопасность данных, выступает стратегическим приоритетом государственной политики.\n\nСтепень научной разработанности темы. Проблемы правового регулирования и экономического анализа алгоритмических систем рассматривались в фундаментальных трудах отечественных и зарубежных исследователей в области информационного права, цифровой экономики и теории управления.\n\nОбъект исследования: общественные и экономические отношения, формирующиеся в процессах внедрения и применения технологий искусственного интеллекта в экономической деятельности.\n\nПредмет исследования: нормы действующего законодательства, международные стандарты, концепции цифрового развития и практика применения систем искусственного интеллекта.\n\nЦель и задачи исследования. Целью диссертационного исследования является разработка комплексной модели регулирования и экономического стимулирования доверенных систем искусственного интеллекта.\nДля достижения поставленной цели решаются следующие задачи:\n1. Исследовать эволюцию теоретических подходов к правовому регулированию цифровых технологий.\n2. Провести сравнительный анализ регуляторных моделей ведущих мировых юрисдикций.\n3. Оценить экономические эффекты и системные риски масштабного использования алгоритмических решений.\n4. Разработать практические рекомендации по совершенствованию институциональной базы и нормативно-правовых актов.\n\nНаучная новизна: разработка целостной междисциплинарной концепции риск-ориентированного регулирования систем искусственного интеллекта в цифровой экономике."
                     },
                     {
                         id: "ch_1",
                         tag: "Глава 1",
-                        title: "Глава 1. Теоретико-правовые основы и генезис регулирования мелиоративного водопользования",
-                        body: "1.1. Эволюция правового режима использования воды в мелиорации земель: историко-правовой аспект\n\nПравовой режим водных ресурсов на территории современного Узбекистана исторически складывался в тесной неразрывной связи с необходимостью искусственного орошения и мелиоративного обустройства засушливых земель [1, c. 18]. От традиционных обычно-правовых норм («шариат» и адаты распределения воды через институт «мираба») до масштабных советских гидромелиоративных строек и последующей трансформации в период независимости водопользование всегда выступало фундаментом аграрной экономики страны.\n\n1.2. Понятийно-категориальный аппарат природоресурсного права в сфере водной мелиорации\n\nВ понятийно-категориальном аппарате природоресурсного права категория «мелиоративное водопользование» занимает самостоятельное место, сочетая признаки общего и специального природопользования [2, c. 45]. В отличие от питьевого или технического водопользования, подача воды на мелиоративные цели имеет дуалистическую цель: не только вегетационный полив сельскохозяйственных культур, но и промывку засоленных почв, поддержание допустимого уровня грунтовых вод и предотвращение эрозии.\n\n1.3. Водный кодекс Республики Узбекистан как концептуальный фундамент кодификации водного законодательства\n\nРазработка и принятие Водного кодекса Республики Узбекистан явились крупнейшей вехой в истории национальной юриспруденции. Кодекс органично аккумулировал передовой мировой опыт бассейнового управления водными ресурсами, гарантируя суверенные права государства на водный фонд и одновременно заложив гибкие правовые рамки для участия негосударственных водопотребителей. Доктринальная сила Кодекса состоит в том, что он создал непротиворечивый базис, на котором выстраивается вся система подзаконного нормативного массива."
+                        title: "Глава 1. Теоретико-методологические основы цифровой трансформации и технологий искусственного интеллекта",
+                        body: "1.1. Генезис, понятийный аппарат и сущность концепции искусственного интеллекта в науке\n\nРазвитие вычислительных мощностей и больших языковых моделей привело к фундаментальному пересмотру категориального аппарата экономической и юридической наук [1, c. 24]. Под искусственным интеллектом в исследовании понимается совокупность технологических решений, позволяющих имитировать когнитивные функции человека и достигать при решении задач результатов, сопоставимых с результатами интеллектуальной деятельности.\n\n1.2. Эволюция правовых подходов к регулированию цифровых рынков\n\nПравовой режим цифровых платформ и алгоритмов формировался на стыке информационного права, защиты интеллектуальной собственности и антимонопольного регулирования [2, c. 58]. Традиционные нормы деликтной ответственности сталкиваются со сложностью установления вины в условиях автономного принятия решений алгоритмами.\n\n1.3. Международные стандарты и сравнительный опыт регулирования (ЕС, США, Азия)\n\nАнализ зарубежного опыта демонстрирует дифференциацию подходов: от жесткого риск-ориентированного регулирования в рамках Европейского акта об искусственном интеллекте (EU AI Act) до децентрализованных и рыночно-ориентированных механизмов в других юрисдикциях [3, c. 115]."
                     },
                     {
                         id: "ch_2",
                         tag: "Глава 2",
-                        title: "Глава 2. Институционально-правовые механизмы мелиоративного водопользования в Республике Узбекистан",
-                        body: "2.1. Правовой статус и полномочия органов государственного управления водным хозяйством и мелиорацией\n\nИнституциональная архитектура управления мелиоративным комплексом Узбекистана включает Министерство водного хозяйства Республики Узбекистан, Агентство мелиорации при Министерстве, бассейновые управления и территориальные инспекции [3, c. 29]. Анализ законодательства свидетельствует о высокой эффективности разделения функций стратегического планирования, мелиоративного мониторинга и непосредственной эксплуатации гидросооружений.\n\n2.2. Правовой режим использования гидромелиоративных и коллекторно-дренажных систем\n\nОсобое правовое значение имеет дифференциация правового режима магистральных, межхозяйственных и внутрихозяйственных гидротехнических сооружений и коллекторно-дренажных сетей. Магистральные и межхозяйственные каналы находятся в исключительной государственной собственности, тогда как внутрихозяйственная сеть передается на обслуживание сельхозпроизводителям и АВП.\n\n2.3. Правовое положение Ассоциаций водопотребителей (АВП) и договорные основы мелиоративного обслуживания\n\nАссоциации водопотребителей (АВП) выступают важнейшим звеном низового уровня управления водными ресурсами. Правовой анализ выявляет необходимость усиления договорных механизмов между АВП и фермерскими хозяйствами. В договорах водоподачи целесообразно четко закрепить обязанности фермеров по соблюдению норм водоотведения и мелиоративного ухода за полями."
+                        title: "Глава 2. Анализ институционально-правовых механизмов и экономический эффект применения искусственного интеллекта",
+                        body: "2.1. Институциональная среда и особенности государственного стимулирования цифровых инноваций\n\nГосударственная поддержка разработки и внедрения отечественных алгоритмических решений требует скоординированного взаимодействия профильных министерств, институтов развития и академического сообщества [4, c. 47]. Ключевым драйвером выступают целевые гранты, налоговые преференции для ИТ-сектора и создание центров коллективного пользования данными.\n\n2.2. Правовой статус участников цифрового рынка и договорные конструкции взаимодействия\n\nОсобое значение приобретает регламентация договорных отношений между разработчиками, операторами систем и конечными пользователями. Договоры на поставку алгоритмических решений должны содержать четкие требования к качеству обучающих выборок, отсутствию дискриминации и защите конфиденциальности.\n\n2.3. Проблемы ответственности и защиты прав субъектов данных\n\nВопрос распределения ответственности за ошибки автономных систем остается наиболее дискуссионным. В работе обоснована целесообразность применения механизмов обязательного страхования ответственности при эксплуатации высокорисковых алгоритмических систем."
                     },
                     {
                         id: "ch_3",
                         tag: "Глава 3",
-                        title: "Глава 3. Перспективы совершенствования законодательства: реализация новелл Водного кодекса и правовые стимулы водосбережения",
-                        body: "3.1. Развитие системы подзаконных нормативно-правовых актов во исполнение Водного кодекса РУз\n\nКонцептуальные нормы Водного кодекса Республики Узбекистан требуют дальнейшей системной конкретизации в серии постановлений Правительства и ведомственных актов [4, c. 62]. Первоочередным направлением выступает утверждение обновленного порядка ведения государственного учета мелиоративного состояния орошаемых земель и регламента субсидирования водохозяйственных работ.\n\n3.2. Правовое регулирование цифровизации («Aqlli suv») и стимулирования водосберегающих технологий\n\nВнедрение цифровых приборов учета и автоматизированного мониторинга вододеления в рамках государственной программы «Aqlli suv» (Smart Water) требует четкой нормативной фиксации их юридической силы [5, c. 118]. Показания цифровых датчиков должны получить статус официального юридического факта при расчете объемов фактически потребленной воды и начислении субсидий на капельное орошение.\n\n3.3. Научно-практические предложения по оптимизации законодательства и мелиоративного оздоровления почв\n\nНа основе проведенного исследования сформулированы предложения по разработке проекта Положения «О порядке стимулирования водопользователей, внедряющих ресурсосберегающие технологии мелиорации земель», закрепляющего налоговые льготы и льготные банковские кредиты."
+                        title: "Глава 3. Перспективы совершенствования законодательства: риск-ориентированный подход и регуляторные песочницы",
+                        body: "3.1. Разработка национальной модели риск-ориентированной классификации алгоритмов\n\nПредлагается градировать системы искусственного интеллекта по четырем категориям риска: неприемлемый, высокий, умеренный и минимальный [5, c. 82]. Системы высокого риска должны подлежать обязательной предварительной сертификации и регулярному независимому аудиту алгоритмов.\n\n3.2. Правовой режим регуляторных песочниц (regulatory sandboxes) для тестирования инноваций\n\nИнститут экспериментальных правовых режимов позволяет апробировать инновационные цифровые продукты в контролируемой среде без риска масштабных системных последствий. Обоснованы критерии допуска компаний в регуляторные песочницы и порядок мониторинга результатов.\n\n3.3. Научно-практические предложения по совершенствованию нормативно-правовой базы\n\nСформулирован проект Рекомендаций по обеспечению алгоритмической прозрачности и этичности систем искусственного интеллекта, включающий стандарты документирования датасетов и протоколы тестирования на надежность."
                     },
                     {
                         id: "ch_concl",
                         tag: "Заключение",
                         title: "Заключение и выводы",
-                        body: "ЗАКЛЮЧЕНИЕ\n\nВ результате проведенного диссертационного исследования на тему «Правовое регулирование вопросов использования воды для улучшения мелиорации земель Узбекистана» получены следующие теоретические и практические результаты:\n\n1. Доказано, что кодификация водного законодательства Республики Узбекистан сформировала целостную концептуальную платформу для модернизации природоресурсных правоотношений.\n2. Определены доктринальные признаки категории «мелиоративное водопользование», обеспечивающей баланс между решением хозяйственных задач и сохранением экологического плодородия почв.\n3. Обоснованы институциональные пути оптимизации деятельности Ассоциаций водопотребителей и предложены типовые договорные конструкции.\n4. Разработаны предложения по нормативному закреплению данных цифровых систем («Aqlli suv») и экономико-правовых стимулов водосбережения.\n\nПоложения диссертационного исследования прошли апробацию в 3 научных публикациях автора в профильных изданиях ВАК Республики Узбекистан и международных индексируемых сборниках."
+                        body: "ЗАКЛЮЧЕНИЕ\n\nВ результате проведенного диссертационного исследования на тему «Цифровая трансформация экономических систем и правовое регулирование искусственного интеллекта» получены следующие теоретические и практические результаты:\n\n1. Доказано, что успешная интеграция технологий искусственного интеллекта требует адаптивной нормативной среды, гармонизирующей стимулирование инноваций и защиту прав субъектов.\n2. Разработана авторская классификация алгоритмических систем по критерию потенциального риска с определением дифференцированных регуляторных требований.\n3. Обоснованы институциональные механизмы расширения экспериментальных правовых режимов для ускоренной коммерциализации передовых разработок.\n4. Предложен комплекс изменений в действующее законодательство в части регламентации ответственности за функционирование автономных систем.\n\nОсновные положения и выводы исследования отражены в 3 научных публикациях автора в профильных изданиях ВАК и международных базах данных."
                     }
                 ],
                 activeChapterId: "ch_1",
                 literature: [
                     {
                         id: "lit_1",
-                        type: "article",
-                        author: "Водный кодекс Республики Узбекистан",
-                        title: "Suv kodeksi (Кодифицированный акт водного законодательства РУз)",
-                        publisher: "Национальная база данных законодательства Республики Узбекистан (lex.uz)",
-                        year: "2024",
-                        pages: "Офиц. текст",
-                        doi: "https://lex.uz"
+                        type: "book",
+                        author: "Рассел С., Норвиг П.",
+                        title: "Искусственный интеллект: современный подход",
+                        publisher: "Вильямс / Диалектика",
+                        year: "2023",
+                        pages: "1408 с.",
+                        doi: ""
                     },
                     {
                         id: "lit_2",
                         type: "article",
-                        author: "Закон Республики Узбекистан",
-                        title: "О воде и водопользовании: Закон РУз № 837-XII (с последующими изм. и доп.)",
-                        publisher: "lex.uz",
-                        year: "2023",
-                        pages: "Ведомости Олий Мажлиса РУз",
-                        doi: ""
+                        author: "Floridi L., Cowls J.",
+                        title: "A Unified Framework of Five Principles for AI in Society",
+                        publisher: "Harvard Data Science Review",
+                        year: "2022",
+                        pages: "Vol. 1, Iss. 1. — P. 1–15",
+                        doi: "https://doi.org/10.1162/99608f92.8cd550d1"
                     },
                     {
                         id: "lit_3",
                         type: "article",
-                        author: "Президент Республики Узбекистан",
-                        title: "Об утверждении Концепции развития водного хозяйства Республики Узбекистан на 2020–2030 годы: Указ № УП-6024",
-                        publisher: "Собрание законодательства РУз",
-                        year: "2020",
-                        pages: "№ 28. — Ст. 328",
+                        author: "OECD",
+                        title: "Recommendation of the Council on Artificial Intelligence (OECD/LEGAL/0449)",
+                        publisher: "OECD Legal Instruments",
+                        year: "2023",
+                        pages: "OECD Publishing, Paris",
                         doi: ""
                     },
                     {
                         id: "lit_4",
-                        type: "book",
-                        author: "Скрипников Н. К., Рахимов М. А.",
-                        title: "Теоретические проблемы природоресурсного и аграрного права Республики Узбекистан",
-                        publisher: "Издательство ТГЮУ (Ташкент)",
-                        year: "2023",
-                        pages: "248 с.",
+                        type: "article",
+                        author: "European Parliament and Council",
+                        title: "Regulation (EU) laying down harmonised rules on artificial intelligence (Artificial Intelligence Act)",
+                        publisher: "Official Journal of the European Union",
+                        year: "2024",
+                        pages: "L Series",
                         doi: ""
                     },
                     {
                         id: "lit_5",
-                        type: "article",
-                        author: "Ходжиев Э. Т.",
-                        title: "Правовые механизмы регулирования водопользования в агропромышленном комплексе Узбекистана",
-                        publisher: "Юридические науки и правоприменительная практика",
-                        year: "2024",
-                        pages: "№ 3. — С. 54–63",
+                        type: "book",
+                        author: "Полякова Т. А., Минбалеев А. В.",
+                        title: "Правовое регулирование систем искусственного интеллекта и больших данных",
+                        publisher: "Издательский центр Университета им. О.Е. Кутафина (МГЮА)",
+                        year: "2023",
+                        pages: "264 с.",
                         doi: ""
                     },
                     {
                         id: "lit_6",
                         type: "article",
-                        author: "Камалов С. А.",
-                        title: "Институционально-правовые основы бассейнового управления водными ресурсами",
-                        publisher: "Общество и инновации",
-                        year: "2023",
-                        pages: "Т. 4, № 6. — С. 112–122",
-                        doi: "https://doi.org/10.47689/2181-1415-vol4-iss6-pp112-122"
+                        author: "Иванов С. М., Васильев Д. А.",
+                        title: "Трансформация институтов права интеллектуальной собственности в эпоху нейросетей",
+                        publisher: "Государство и право",
+                        year: "2024",
+                        pages: "№ 4. — С. 78–89",
+                        doi: ""
                     },
                     {
                         id: "lit_7",
                         type: "article",
-                        author: "ООН / ЕЭК",
-                        title: "Конвенция по охране и использованию трансграничных водотоков и международных озер (Хельсинки, 17 марта 1992 г.)",
-                        publisher: "Действующее международное право",
-                        year: "1992",
-                        pages: "Бюллетень международных договоров",
+                        author: "Tegmark M.",
+                        title: "Life 3.0: Being Human in the Age of Artificial Intelligence",
+                        publisher: "Penguin Books",
+                        year: "2022",
+                        pages: "384 p.",
                         doi: ""
                     },
                     {
                         id: "lit_8",
-                        type: "book",
-                        author: "Djanibekov N., Villamor G. B.",
-                        title: "Resource-conserving technologies and water governance in the Aral Sea Basin",
-                        publisher: "Water Resources Management / Springer",
-                        year: "2023",
-                        pages: "Vol. 37. — P. 1543–1560",
-                        doi: "https://doi.org/10.1007/s11269-023-03445-x"
+                        type: "article",
+                        author: "UNESCO",
+                        title: "Recommendation on the Ethics of Artificial Intelligence",
+                        publisher: "UNESCO General Conference",
+                        year: "2022",
+                        pages: "SHS/BIO/REC-AI/2021",
+                        doi: ""
                     }
                 ],
                 notes: [
                     {
                         id: "n_1",
                         tag: "supervisor",
-                        text: "Научный руководитель — соавтор Водного кодекса Республики Узбекистан. Во всех разделах и научных статьях необходимо подчеркивать высокую доктринальную ценность, преемственность и системный характер кодификации. Все предложения позиционировать исключительно как развитие подзаконной базы и практических механизмов реализации Кодекса.",
+                        text: "Научный руководитель: акцентировать внимание на междисциплинарном характере работы, сочетании экономического анализа и правовых гарантий, а также соблюдении публикационной этики COPE.",
                         date: new Date().toLocaleDateString()
                     },
                     {
                         id: "n_2",
                         tag: "idea",
-                        text: "К Главе 2: Детально проанализировать правовой статус АВП и предложить типовые условия договора на подачу воды с включением взаимных мелиоративных обязательств.",
+                        text: "К Главе 2: Детально рассмотреть риск-ориентированный подход и сравнительный анализ регуляторных песочниц (regulatory sandbox).",
                         date: new Date().toLocaleDateString()
                     },
                     {
                         id: "n_3",
                         tag: "legislation",
-                        text: "К Главе 3: Проанализировать нормативный статус цифровых систем учета воды («Aqlli suv») и механизм субсидирования капельного орошения.",
+                        text: "К Главе 3: Сформулировать конкретные предложения по внесению изменений в нормативные акты и стандарты надежности алгоритмических систем.",
                         date: new Date().toLocaleDateString()
                     }
                 ],
-                defenseSpeech: "Уважаемый председатель и члены Государственной экзаменационной комиссии!\n\nВашему вниманию представляется магистерская диссертация на тему: «Правовое регулирование вопросов использования воды для улучшения мелиорации земель Узбекистана».\n\nАКТУАЛЬНОСТЬ ТЕМЫ: В условиях аридного климата, нарастающего дефицита трансграничных водных ресурсов и вызовов продовольственной безопасности эффективное гидромелиоративное водопользование приобретает статус вопроса национальной безопасности. Принятие Водного кодекса Республики Узбекистан ознаменовало качественно новый этап в систематизации природоресурсного права, установив концептуальные основы рационального водопользования.\n\nЦЕЛЬ ИССЛЕДОВАНИЯ: Теоретико-правовое обоснование и разработка научно обоснованной модели правового регулирования использования водных ресурсов в гидромелиоративных системах Узбекистана на базе положений Водного кодекса Республики Узбекистан.\n\nОСНОВНЫЕ ПОЛОЖЕНИЯ, ВЫНОСИМЫЕ НА ЗАЩИТУ:\n1. Доктринальное обоснование Водного кодекса Республики Узбекистан как фундаментального системообразующего акта, заложившего прочный базис природоресурсной безопасности.\n2. Выявление эколого-правовой специфики института мелиоративного водопользования, сочетающего государственное бассейновое регулирование и договорные отношения водопользователей.\n3. Научно-практические предложения по развитию подзаконной базы во исполнение Водного кодекса в части правового закрепления цифровых систем учета («Aqlli suv»).\n4. Комплекс мер по совершенствованию правового статуса Ассоциаций водопотребителей и внедрению экономических стимулов водосбережения.\n\nРезультаты исследования прошли апробацию в 3 публикациях в профильных научных изданиях ВАК Республики Узбекистан.\n\nБлагодарю за внимание и готова ответить на Ваши вопросы!",
+                defenseSpeech: "Уважаемый председатель и члены Государственной экзаменационной комиссии!\n\nВашему вниманию представляется магистерская диссертация на тему: «Цифровая трансформация экономических систем и правовое регулирование искусственного интеллекта».\n\nАКТУАЛЬНОСТЬ ТЕМЫ: В современных условиях масштабной цифровизации внедрение систем искусственного интеллекта формирует новый фундамент конкурентоспособности экономических систем. Вместе с тем экспоненциальный рост автономии алгоритмов требует адекватной модернизации институционально-правовых механизмов регулирования.\n\nЦЕЛЬ ИССЛЕДОВАНИЯ: Теоретико-методологическое обоснование и научно-практическая разработка комплексной модели регулирования и стимулирования безопасного внедрения технологий искусственного интеллекта.\n\nОСНОВНЫЕ ПОЛОЖЕНИЯ, ВЫНОСИМЫЕ НА ЗАЩИТУ:\n1. Авторская концепция риск-ориентированного регулирования систем искусственного интеллекта в экономической деятельности.\n2. Теоретическое обоснование принципов технологической нейтральности и алгоритмической транспарентности.\n3. Институциональная модель функционирования регуляторных песочниц (sandboxes) для безопасной апробации цифровых инноваций.\n4. Комплекс научно-практических рекомендаций по совершенствованию нормативно-правовой базы и стандартов аудита данных.\n\nРезультаты исследования в полной мере апробированы в 3 научных публикациях в ведущих рецензируемых изданиях.\n\nБлагодарю за внимание и готов(а) ответить на Ваши вопросы!",
                 articles: [
                     {
                         id: "art_1",
                         chapterIndex: 1,
-                        chapterTitle: "Глава 1. Теоретико-правовые основы и генезис регулирования мелиоративного водопользования",
-                        title: "Кодификация водного законодательства Республики Узбекистан: теоретико-правовые основы регламентации мелиоративного водопользования",
-                        targetJournal: "Журнал ВАК Республики Узбекистан («Общество и инновации» / «Huquq va burch»)",
-                        abstractRu: "В статье исследуются теоретико-методологические и историко-правовые аспекты становления института мелиоративного водопользования в Республике Узбекистан. Особое внимание уделено роли Водного кодекса Республики Узбекистан как фундаментального кодифицированного акта, обеспечившего систематизацию природоресурсных норм и заложившего прочный правовой фундамент рационального водопользования. Автором раскрыта специфика специального правового режима мелиоративных систем, проведен сравнительный анализ категориального аппарата экологического и аграрного права. Обосновано, что прогрессивная кодификация водного законодательства создала системную базу для дальнейшего гармоничного развития подзаконного нормативного регулирования водно-мелиоративного сектора.",
-                        abstractEn: "The article examines the theoretical, methodological, historical, and legal aspects of the formation of the institution of land reclamation water use in the Republic of Uzbekistan. Particular attention is paid to the role of the Water Code of the Republic of Uzbekistan as a fundamental codified act that ensured the systematization of natural resource legislation and laid a solid legal foundation for rational water use. The author reveals the specifics of the special legal regime of reclamation systems and conducts a comparative analysis of environmental and agrarian law categories.",
-                        keywords: "Водный кодекс Республики Узбекистан, мелиорация земель, природоресурсное право, кодификация законодательства, водопользование, специальный правовой режим, Water Code of Uzbekistan, land reclamation, water law.",
-                        body: `КОДИФИКАЦИЯ ВОДНОГО ЗАКОНОДАТЕЛЬСТВА РЕСПУБЛИКИ УЗБЕКИСТАН: ТЕОРЕТИКО-ПРАВОВЫЕ ОСНОВЫ РЕГЛАМЕНТАЦИИ МЕЛИОРАТИВНОГО ВОДОПОЛЬЗОВАНИЯ\n\nВведение (Introduction)\nВ условиях глобальной климатической турбулентности и аридного климата Центральной Азии правовое обеспечение рационального использования водных ресурсов выступает краеугольным камнем государственной безопасности Республики Узбекистан [1, c. 12]. Принятие Водного кодекса Республики Узбекистан ознаменовало исторический переход от фрагментарных ведомственных инструкций к цельной, концептуально выверенной кодифицированной системе природоресурсного права.\n\nИсторический генезис и доктринальное значение Водного кодекса\nИсторико-правовой анализ показывает, что институт водопользования в Узбекистане прошел многовековой путь эволюции — от народных обычаев орошаемого земледелия и института «мираба» до современных принципов интегрированного управления водными ресурсами (ИУВР). Разработка Водного кодекса стала масштабным интеллектуальным достижением национальной юридической науки. Кодекс закрепил ключевые доктринальные постулаты:\n1. Исключительную государственную собственность на водный фонд;\n2. Приоритет экологической устойчивости и бассейнового принципа управления;\n3. Четкое разграничение полномочий между государственным регулятором и водопотребителями.\n\nПравовой режим мелиоративного водопользования\nВ системе природоресурсного права мелиоративное водопользование обладает ярко выраженной правовой спецификой. Подача воды на мелиоративные нужды преследует комплексную цель: вегетационное орошение, промывку вторично засоленных земель и регулирование водно-солевого баланса почв. Таким образом, мелиоративные системы выступают объектом со специальным правовым режимом, требующим сбалансированного сочетания публичного надзора и частно-правовых стимулов.\n\nЗаключение и выводы (Conclusion)\nПроведенный теоретико-правовой анализ доказывает, что Водный кодекс Республики Узбекистан сформировал прочный нормативный базис. Дальнейшее развитие правового механизма должно осуществляться через разработку комплексных подзаконных актов, детализирующих регламенты мелиоративного учета и правовой статус участников водных правоотношений.\n\nСписок использованных источников:\n1. Водный кодекс Республики Узбекистан. — Ташкент: lex.uz, 2024.\n2. Закон Республики Узбекистан «О воде и водопользовании» № 837-XII.\n3. Скрипников Н. К. Природоресурсное право Республики Узбекистан. — Ташкент: ТГЮУ, 2023. — 214 с.\n4. Ходжиев Э. Т. Правовые аспекты управления водными ресурсами // Юридические науки. — 2024. — № 2. — С. 34–42.`
+                        chapterTitle: "Глава 1. Теоретико-методологические основы цифровой трансформации и технологий искусственного интеллекта",
+                        title: "Теоретико-методологические основы регулирования искусственного интеллекта в экономических системах",
+                        targetJournal: "Ведущий рецензируемый научный журнал (ВАК / РИНЦ)",
+                        abstractRu: "В статье исследуются теоретико-методологические предпосылки формирования адаптивной модели правового и экономического регулирования систем искусственного интеллекта. Раскрыт категориальный аппарат концепции «доверенного искусственного интеллекта», проанализирована специфика алгоритмических решений как нового фактора производственных отношений. Обосновано, что сбалансированное регулирование должно опираться на принцип технологической нейтральности и риск-ориентированный подход, стимулирующий инновации при надежной защите прав граждан.",
+                        abstractEn: "The article examines the theoretical and methodological prerequisites for establishing an adaptive model of legal and economic regulation of artificial intelligence systems. It explores the conceptual framework of 'trustworthy AI' and analyzes algorithmic solutions as an emerging factor in economic relations, emphasizing risk-based governance and technological neutrality.",
+                        keywords: "искусственный интеллект, цифровая экономика, доверенный ИИ, правовое регулирование, риск-ориентированный подход, технологическая нейтральность, algorithmic governance, digital transformation.",
+                        body: `ТЕОРЕТИКО-МЕТОДОЛОГИЧЕСКИЕ ОСНОВЫ РЕГУЛИРОВАНИЯ ИСКУССТВЕННОГО ИНТЕЛЛЕКТА В ЭКОНОМИЧЕСКИХ СИСТЕМАХ\n\n1. Введение (Introduction)\nЦифровая трансформация и интеграция алгоритмов машинного обучения фундаментально изменяют ландшафт современной экономики [1, c. 12]. Стремительное усложнение алгоритмических решений ставит перед академическим сообществом задачу формирования комплексной теоретико-правовой парадигмы регулирования технологий искусственного интеллекта.\n\n2. Категориальный аппарат и доктринальные подходы\nВ научной литературе сформировался консенсус относительно ключевых характеристик искусственного интеллекта как сложного программно-аппаратного комплекса, способного автономно обрабатывать данные и формулировать оптимизационные решения [2, c. 35]. Центральным принципом современной регуляторной доктрины выступает доверенность (trustworthiness), предполагающая прозрачность, подотчетность и безопасность алгоритмов.\n\n3. Риск-ориентированный подход как методологическая основа\nАнализ мировой практики показывает, что наиболее результативной стратегией регулирования является дифференциация требований в зависимости от потенциального риска алгоритмической системы. Выделение категорий минимального, умеренного и высокого риска позволяет исключить избыточную административную нагрузку на инновационные стартапы при обеспечении строгого надзора за критически значимыми внедрениями.\n\n4. Заключение и выводы (Conclusion)\nПроведенное исследование доказывает необходимость перехода от фрагментарного точечного регулирования к целостной концептуальной модели. Последовательная имплементация принципа технологической нейтральности закладывает надежный фундамент для долгосрочного инновационного роста.\n\nСписок литературы:\n1. Рассел С., Норвиг П. Искусственный интеллект: современный подход. — М.: Вильямс, 2023. — 1408 с.\n2. Floridi L., Cowls J. A Unified Framework of Five Principles for AI in Society // Harvard Data Science Review. — 2022. — Vol. 1, Iss. 1.\n3. Полякова Т. А., Минбалеев А. В. Правовое регулирование систем искусственного интеллекта. — М.: МГЮА, 2023. — 264 с.`
                     },
                     {
                         id: "art_2",
                         chapterIndex: 2,
-                        chapterTitle: "Глава 2. Институционально-правовые механизмы мелиоративного водопользования в Республике Узбекистан",
-                        title: "Институционально-правовой статус субъектов мелиоративного водопользования в Узбекистане: договорные конструкции и баланс публично-частных интересов",
-                        targetJournal: "Журнал ВАК Республики Узбекистан («Вестник ТГЮУ» / «Юридик фанлар ахборотномаси»)",
-                        abstractRu: "Настоящая работа посвящена исследованию институционально-правового механизма регулирования мелиоративного водопользования в Республике Узбекистан. В статье подробно анализируется правовой статус уполномоченных органов государственного управления водным хозяйством и Агентства мелиорации, а также особенности правового положения Ассоциаций водопотребителей (АВП). Автором выявлен дуализм правового регулирования межхозяйственных и внутрихозяйственных гидромелиоративных сетей. Обоснована целесообразность модернизации типового договора на поставку воды и мелиоративное обслуживание с установлением четких взаимных обязательств и механизмов государственно-частного партнерства в содержании коллекторно-дренажной инфраструктуры.",
-                        abstractEn: "The paper investigates the institutional and legal mechanism of regulating reclamation water use in Uzbekistan. It analyzes the legal status of authorized state bodies, the Reclamation Agency, and Water Consumer Associations (WCAs). The author reveals the dualism of regulating inter-farm and on-farm networks and justifies modernizing water delivery contracts.",
-                        keywords: "Ассоциации водопотребителей (АВП), гидромелиоративные системы, коллекторно-дренажная сеть, договор водоподачи, публично-частный баланс, Министерство водного хозяйства РУз.",
-                        body: `ИНСТИТУЦИОНАЛЬНО-ПРАВОВОЙ СТАТУС СУБЪЕКТОВ МЕЛИОРАТИВНОГО ВОДОПОЛЬЗОВАНИЯ В УЗБЕКИСТАНЕ: ДОГОВОРНЫЕ КОНСТРУКЦИИ И БАЛАНС ПУБЛИЧНО-ЧАСТНЫХ ИНТЕРЕСОВ\n\nПостановка проблемы (Introduction)\nЭффективность мелиоративного водопользования непосредственно детерминирована слаженностью институциональной системы и четкостью распределения прав, обязанностей и ответственности между всеми участниками водохозяйственного процесса [1, c. 29]. В условиях масштабных аграрных реформ в Республике Узбекистан центральным вопросом становится юридическое закрепление статуса низовых звеньев водораспределения.\n\nИнституциональная структура государственного управления\nНа государственном уровне управление мелиорацией осуществляет Министерство водного хозяйства Республики Узбекистан во взаимодействии с Агентством мелиорации и бассейновыми управлениями. Законодательство последовательно разграничивает функции магистрального вододеления (публичная прерогатива государства) и эксплуатацию распределительных сетей.\n\nПравовое положение Ассоциаций водопотребителей (АВП) и договорные модели\nАссоциации водопотребителей представляют собой ключевой институт коллективного самоуправления водопользователей. Проведенный анализ правоприменительной практики выявил, что традиционные договоры водоподачи нередко страдают декларативностью в части взаимных обязательств по мелиорации земель.\nДля преодоления выявленного правового дисбаланса автором предложена обновленная модель типового трехстороннего договора (Государственная водохозяйственная организация — АВП — Фермерское хозяйство), предусматривающая:\n- Четкие лимиты забора воды с учетом мелиоративного состояния конкретного почвенного контура;\n- Юридическую обязанность водопотребителя осуществлять плановую очистку внутрихозяйственных коллекторов и дренажей;\n- Механизмы государственно-частного софинансирования ремонтно-восстановительных работ.\n\nВыводы и рекомендации (Conclusion)\nИнституционально-правовая модернизация статуса АВП на основе положений Водного кодекса позволит повысить взаимную ответственность сторон, обеспечить прозрачность учета воды и стимулировать фермеров к сохранению плодородия почв.\n\nСписок использованных источников:\n1. Указ Президента Республики Узбекистан «Об утверждении Концепции развития водного хозяйства РУз на 2020–2030 годы» № УП-6024.\n2. Постановление Кабинета Министров РУз «О мерах по дальнейшему улучшению мелиоративного состояния орошаемых земель».\n3. Камалов С. А. Институционально-правовые основы бассейнового управления // Общество и инновации. — 2023. — С. 112–122.`
+                        chapterTitle: "Глава 2. Анализ институционально-правовых механизмов и экономический эффект применения искусственного интеллекта",
+                        title: "Институционально-правовые механизмы регулирования цифровых платформ и алгоритмических систем",
+                        targetJournal: "Журнал перечня ВАК / Scopus («Информационное общество» / «Вопросы экономики»)",
+                        abstractRu: "Статья посвящена анализу институциональной среды внедрения систем искусственного интеллекта в экономическую практику. Рассматриваются договорные конструкции взаимодействия разработчиков и пользователей, особенности распределения гражданско-правовой ответственности за решения автономных алгоритмов, а также механизмы защиты коммерческой тайны и персональных данных. Обоснована необходимость формирования специализированных отраслевых стандартов аудита обучающих выборок и алгоритмической прозрачности.",
+                        abstractEn: "The paper explores the institutional and regulatory environment for implementing AI systems in business operations. It investigates contract models between software developers and users, civil liability allocation for autonomous algorithmic decisions, and data protection standards.",
+                        keywords: "институциональные механизмы, договорные конструкции, ответственность алгоритмов, аудит данных, цифровая платформа, регуляторные стандарты, AI liability.",
+                        body: `ИНСТИТУЦИОНАЛЬНО-ПРАВОВЫЕ МЕХАНИЗМЫ РЕГУЛИРОВАНИЯ ЦИФРОВЫХ ПЛАТФОРМ И АЛГОРИТМИЧЕСКИХ СИСТЕМ\n\nВведение (Introduction)\nЭффективное функционирование алгоритмических систем в реальном секторе экономики напрямую зависит от прозрачности институциональных механизмов и сбалансированности правового статуса всех участников цифрового оборота [1, c. 47].\n\nИнституциональная архитектура и договорные модели\nВзаимодействие субъектов алгоритмического рынка строится на базе комплексных лицензионных договоров и соглашений об уровне обслуживания (SLA). Исследование показывает, что ключевым источником правовой неопределенности остается вопрос распределения ответственности за ошибки нейросетевых моделей. Предлагается законодательное закрепление презумпции ответственности оператора системы с правом регрессного требования к разработчику при наличии дефектов программного кода.\n\nАудит алгоритмов и качество обучающих данных\nОсобое значение приобретает процедура проверки обучающих датасетов на предмет репрезентативности и отсутствия предвзятости (bias). Введение институционального аудита высокорисковых систем позволит повысить общественное доверие к автоматизированным решениям.\n\nВыводы (Conclusion)\nФормирование четких институциональных рамок и стандартов ответственности обеспечит гармоничное развитие цифрового рынка и стимулирует инвестиции в наукоемкие ИТ-решения.\n\nСписок литературы:\n1. Иванов С. М. Трансформация институтов права в эпоху нейросетей // Государство и право. — 2024. — № 4. — С. 78–89.\n2. Tegmark M. Life 3.0: Being Human in the Age of Artificial Intelligence. — Penguin Books, 2022. — 384 p.`
                     },
                     {
                         id: "art_3",
                         chapterIndex: 3,
-                        chapterTitle: "Глава 3. Перспективы совершенствования законодательства: реализация новелл Водного кодекса и правовые стимулы водосбережения",
-                        title: "Правовое стимулирование водосбережения и цифровых технологий мелиорации в свете имплементации положений Водного кодекса Республики Узбекистан",
-                        targetJournal: "Международный рецензируемый журнал (Scopus / Web of Science / ВАК: «Экологический вестник»)",
-                        abstractRu: "В условиях аридного климата и усиливающегося дефицита трансграничных водных ресурсов в бассейне Аральского моря мелиоративное оздоровление орошаемых земель напрямую зависит от внедрения водосберегающих агротехнологий и цифровизации учета воды. В статье рассматриваются правовые механизмы имплементации новелл Водного кодекса Республики Узбекистан в сфере стимулирования ресурсосбережения. Проанализирован правовой режим применения технологий «Aqlli suv» (Smart Water), SCADA-систем и механизмов субсидирования капельного и дождевального орошения. Предложен комплекс научно обоснованных мер по совершенствованию подзаконной нормативной базы, включая налоговые и тарифные преференции для добросовестных водопользователей, обеспечивающих улучшение почвенно-мелиоративных характеристик.",
-                        abstractEn: "In arid conditions and growing transboundary water scarcity in the Aral Sea basin, land reclamation directly depends on water-saving agro-technologies and smart metering. The article examines legal mechanisms of implementing the Water Code of Uzbekistan regarding resource conservation, analyzing 'Aqlli suv' technologies, SCADA systems, and drip irrigation subsidies.",
-                        keywords: "«Aqlli suv», цифровизация водохозяйственного комплекса, капельное орошение, мелиоративное оздоровление почв, субсидирование, Водный кодекс Республики Узбекистан, Smart Water, legal incentives.",
-                        body: `ПРАВОВОЕ СТИМУЛИРОВАНИЕ ВОДОСБЕРЕЖЕНИЯ И ЦИФРОВЫХ ТЕХНОЛОГИЙ МЕЛИОРАЦИИ В СВЕТЕ ИМПЛЕМЕНТАЦИИ ПОЛОЖЕНИЙ ВОДНОГО КОДЕКСА РЕСПУБЛИКИ УЗБЕКИСТАН\n\n1. Введение (Introduction)\nКлиматические реалии Центральной Азии обусловливают безальтернативность перехода на ресурсосберегающие рельсы [1, c. 1543]. Водный кодекс Республики Узбекистан заложил фундаментальные правовые предпосылки для интеграции передовых технологий в водохозяйственную практику. Целью настоящей статьи выступает разработка правовой модели стимулирования водосбережения и регламентации смарт-систем учета воды.\n\n2. Методология исследования (Methods)\nВ исследовании применены сравнительно-правовой, формально-догматический и системно-структурный методы анализа национального водного законодательства Республики Узбекистан и лучших практик государств с дефицитом воды (Израиль, Испания, Австралия).\n\n3. Результаты: Нормативное закрепление систем «Aqlli suv» (Results)\nРеализация национальной программы «Aqlli suv» обеспечивает установку цифровых ультразвуковых расходомеров и телеметрических датчиков на гидропостах. Для полноценного функционирования данной системы автором обоснована необходимость принятия подзаконного акта — Положения «О правовом статусе автоматизированных данных государственного водного учета». Данные цифровых приборов учета должны иметь безусловную доказательственную силу при фиксации объемов водопотребления и разрешении споров между водохозяйственными органами и фермерами.\n\n4. Обсуждение: Экономико-правовые стимулы и субсидии (Discussion)\nВнедрение капельного орошения позволяет сократить потребление воды на 40–50% и одновременно предотвращает подъем уровня минерализованных грунтовых вод. В статье обоснована модель нормативной дифференциации:\n- Предоставление налоговых каникул по земельному налогу фермерам, внедрившим капельное орошение на засоленных землях;\n- Повышение коэффициентов субсидирования затрат на приобретение оборудования лазерной планировки полей;\n- Введение пониженного тарифа на электроэнергию насосных станций при условии соблюдения мелиоративного регламента.\n\n5. Заключение (Conclusion)\nИмплементация новелл Водного кодекса Республики Узбекистан через предложенный комплекс подзаконных нормативных актов позволит гармонично объединить государственные регуляторные требования и экономические интересы водопользователей, обеспечив надежную мелиоративную безопасность земельного фонда страны.\n\nСписок литературы:\n1. Djanibekov N., Villamor G. B. Resource-conserving technologies and water governance // Water Resources Management. — 2023. — Vol. 37. — P. 1543–1560.\n2. Постановление Президента РУз «О неотложных мерах по повышению эффективности использования водных ресурсов» № ПП-107.\n3. Водный кодекс Республики Узбекистан. — 2024.`
+                        chapterTitle: "Глава 3. Перспективы совершенствования законодательства: риск-ориентированный подход и регуляторные песочницы",
+                        title: "Экспериментальные правовые режимы (регуляторные песочницы) как инструмент стимулирования цифровых инноваций",
+                        targetJournal: "Международный рецензируемый журнал (Scopus / Web of Science / РИНЦ)",
+                        abstractRu: "В статье исследуются перспективы применения экспериментальных правовых режимов (regulatory sandboxes) в качестве гибкого инструмента апробации инновационных систем искусственного интеллекта. Проанализированы условия и критерии допуска ИТ-компаний к участию в регуляторных песочницах, установлены гарантии защиты прав потребителей в период действия специального режима. Сформулированы конкретные предложения по совершенствованию законодательства об экспериментальных режимах в целях ускоренного внедрения прорывных цифровых технологий.",
+                        abstractEn: "The paper investigates the application of regulatory sandboxes as an agile legal tool for testing innovative AI systems. It evaluates entry criteria for technology ventures, consumer protection safeguards, and legislative amendments promoting accelerated deployment of breakthrough digital technologies.",
+                        keywords: "регуляторные песочницы, экспериментальный правовой режим, искусственный интеллект, регуляторные инновации, regulatory sandboxes, agile governance.",
+                        body: `ЭКСПЕРИМЕНТАЛЬНЫЕ ПРАВОВЫЕ РЕЖИМЫ (РЕГУЛЯТОРНЫЕ ПЕСОЧНИЦЫ) КАК ИНСТРУМЕНТ СТИМУЛИРОВАНИЯ ЦИФРОВЫХ ИННОВАЦИЙ\n\n1. Введение (Introduction)\nТрадиционные механизмы правотворчества зачастую отстают от темпов экспоненциального развития цифровых технологий. Экспериментальные правовые режимы (regulatory sandboxes) служат эффективным мостом между инновациями и правопорядком [1, c. 82].\n\n2. Методология и мировой опыт\nВ исследовании обобщен опыт функционирования регуляторных песочниц в Великобритании, Сингапуре и Европейском Союзе. Показано, что гибкое временное изъятие из общих регуляторных требований позволяет протестировать бизнес-модель при минимальных издержках.\n\n3. Результаты и практические предложения\nАвтором разработана модель допуска стартапов в регуляторную песочницу, включающая:\n- Оценку инновационности и потенциального экономического эффекта;\n- Проверку систем информационной безопасности и защиты персональных данных;\n- Установление механизма страхования возможных рисков участников эксперимента.\n\n4. Заключение (Conclusion)\nВнедрение предложенной модели регуляторных песочниц позволит существенно ускорить коммерциализацию передовых разработок в сфере искусственного интеллекта, сохраняя высокий уровень правовой защиты граждан и государства.\n\nСписок литературы:\n1. European Parliament. Regulation on Artificial Intelligence (AI Act). — 2024.\n2. OECD. Regulatory Sandboxes in the Digital Age. — Paris: OECD Publishing, 2023.`
                     }
                 ],
                 updatedAt: Date.now()
             };
         }
 
-        function createDefaultProject() {
-            return createWaterReclamationDissertationProject();
+        function createDefaultProjectfunction createDefaultProject() {
+            return createSampleDissertationProject();
         }
 
         function getProjectArticles(proj) {
             if (!proj) return [];
             if (!proj.articles || proj.articles.length === 0) {
-                const waterTpl = createWaterReclamationDissertationProject();
-                proj.articles = waterTpl.articles;
+                const sampleTpl = createSampleDissertationProject();
+                proj.articles = sampleTpl.articles;
                 saveAcademicState();
             }
             return proj.articles;
@@ -1397,28 +1398,25 @@
         }
 
         function generateClientApparatus(proj, customFocus) {
-            const isWaterTopic = /вод|мелиорац|узбекистан|water|meliorat/i.test(proj.topic || "");
-            let relevance, objectVal, subjectVal, goalVal, tasksVal, hypothesisVal, noveltyVal, provisionsVal;
+            const topic = proj.topic || "Исследование актуальных проблем современной науки";
+            const levelTitle = getLevelLabel(proj.level);
+            const disc = proj.discipline || "Междисциплинарные исследования";
 
-            if (isWaterTopic) {
-                relevance = "В современных условиях климатической трансформации Центральной Азии, нарастания дефицита трансграничных водных ресурсов и задач обеспечения продовольственной безопасности Республики Узбекистан эффективное использование водных ресурсов в сфере гидромелиорации земель приобретает статус приоритетной задачи государственной политики. Принятие и кодификация Водного кодекса Республики Узбекистан ознаменовали качественно новый этап в систематизации природоресурсного права, установив концептуальные основы рационального водопользования и защиты водных экосистем. Вместе с тем необходимость дальнейшей доктринальной разработки подинститутов мелиоративного водопользования, оптимизации правового статуса ассоциаций водопотребителей (АВП), правового закрепления цифровых систем («Aqlli suv») и создания экономических стимулов для водосбережения обусловливают высокую научно-практическую актуальность диссертационного исследования.";
-                objectVal = "Общественные отношения, складывающиеся в процессе правового регулирования использования водных ресурсов для улучшения мелиоративного состояния орошаемых земель в Республике Узбекистан.";
-                subjectVal = "Нормы Водного кодекса Республики Узбекистан, Закона «О воде и водопользовании», актов Президента и Кабинета Министров Республики Узбекистан, международно-правовые договоры, теоретические концепции природоресурсного права и материалы правоприменительной практики в области гидромелиорации.";
-                goalVal = "Теоретико-правовое обоснование и научно-методическая разработка комплексной модели регулирования использования водных ресурсов в гидромелиоративных системах Узбекистана на базе концептуальных положений Водного кодекса Республики Узбекистан.";
-                tasksVal = "1. Исследовать историко-правовую эволюцию и теоретические основы института мелиоративного водопользования в Узбекистане.\n2. Раскрыть доктринальное и системообразующее значение Водного кодекса Республики Узбекистан в модернизации природоресурсного законодательства.\n3. Проанализировать компетенцию и взаимодействие органов государственного управления в сфере мелиорации и водного хозяйства.\n4. Исследовать правовое положение Ассоциаций водопотребителей (АВП) и договорные основы мелиоративного обслуживания.\n5. Обосновать правовые стимулы внедрения водосберегающих технологий (капельное орошение, «Aqlli suv») в контексте улучшения мелиорации земель.\n6. Сформулировать научно обоснованные рекомендации по совершенствованию подзаконной нормативной базы и правоприменения.";
-                hypothesisVal = "Предполагается, что последовательное развитие институтов мелиоративного водопользования на базе концептуальных положений Водного кодекса Республики Узбекистан в сочетании с правовым закреплением цифрового учета водных ресурсов («Aqlli suv») и экономических стимулов водосбережения позволит обеспечить долгосрочное мелиоративное оздоровление почв и устойчивость водохозяйственного сектора.";
-                noveltyVal = "Научная новизна заключается в комплексном теоретико-правовом исследовании института использования водных ресурсов в гидромелиорации в условиях кодификации водного законодательства Узбекистана, теоретическом обосновании специального правового режима мелиоративных систем и разработке целостной концепции подзаконного нормативно-правового обеспечения ресурсосбережения.";
-                provisionsVal = "1. Доктринальная оценка Водного кодекса Республики Узбекистан как фундаментального кодифицированного акта, заложившего прочный базис водной и мелиоративной безопасности.\n2. Теоретическое обоснование категории «мелиоративное водопользование» как комплексного эколого-правового подинститута, сочетающего публично-правовой надзор и частно-правовые договорные конструкции.\n3. Модель модернизации правового статуса Ассоциаций водопотребителей (АВП) с закреплением субсидиарной ответственности за состояние внутрихозяйственной мелиоративной сети.\n4. Правовой механизм стимулирования водосбережения («Aqlli suv», капельное орошение), предусматривающий дифференцированные тарифы и налоговые преференции при достижении целевых мелиоративных показателей.";
-            } else {
-                relevance = `В современных условиях социально-экономической и технологической трансформации исследование проблемы '${proj.topic}' приобретает первостепенное научно-практическое значение. Существующие теоретико-правовые и прикладные подходы требуют углубленного переосмысления с учетом кодификации законодательства и современных вызовов.`;
-                objectVal = `Общественные отношения, возникающие в процессе институционального регулирования и реализации механизмов по теме '${proj.topic}'.`;
-                subjectVal = `Нормы отраслевого законодательства, теоретические концепции правовой науки и материалы правоприменительной практики.`;
-                goalVal = `Теоретическое обоснование и разработка комплексной модели решения научно-практических задач по теме '${proj.topic}'.`;
-                tasksVal = `1. Исследовать историко-правовой генезис и теоретические основы исследуемого института.\n2. Провести детальный юридический анализ действующей нормативно-правовой базы.\n3. Выявить ключевые проблемы и коллизии правоприменения.\n4. Сформулировать научно обоснованные рекомендации по совершенствованию законодательства.`;
-                hypothesisVal = `Предполагается, что внедрение предложенного авторского комплекса правовых и организационных мер позволит существенно повысить эффективность исследуемого института.`;
-                noveltyVal = `Научная новизна заключается в авторской концептуализации исследуемого правового института и формировании практических механизмов его реализации.`;
-                provisionsVal = `1. Теоретико-правовые положения о сущности исследуемого института.\n2. Предложения по гармонизации нормативно-правовой базы.\n3. Алгоритмы оптимизации правоприменительной практики.`;
-            }
+            const relevance = `В современных условиях социально-экономической и научно-технологической трансформации исследование проблемы «${topic}» приобретает первостепенное научно-теоретическое и прикладное значение. Стремительное развитие предметной области (${disc}), появление новых вызовов и необходимость модернизации регуляторных и институциональных механизмов обусловливают острую востребованность комплексного исследования на уровне: ${levelTitle}.${customFocus ? " Особый исследовательский фокус направлен на: " + customFocus + "." : ""}`;
+            
+            const objectVal = `Общественные, институциональные и методологические отношения, складывающиеся в процессе функционирования и развития предметной области темы «${topic}».`;
+            
+            const subjectVal = `Теоретические концепции, нормативно-правовая база, эмпирические данные, научные модели и материалы прикладной практики, определяющие закономерности развития объекта исследования.`;
+            
+            const goalVal = `Теоретико-методологическое обоснование и научно-практическая разработка комплексной концепции и прикладных моделей эффективного решения задач в рамках темы «${topic}».`;
+            
+            const tasksVal = `1. Исследовать теоретико-методологический генезис, понятийный аппарат и эволюцию концепций по теме исследования.\n2. Проанализировать нормативно-правовую и институциональную основу регулирования в исследуемой области.\n3. Провести сравнительный анализ отечественного и передового международного опыта решения исследуемой проблемы.\n4. Выявить системные дефициты, коллизии и практические барьеры в функционировании исследуемого объекта.\n5. Разработать и обосновать комплекс научно обоснованных предложений, моделей и рекомендаций для внедрения в практику.`;
+            
+            const hypothesisVal = `Предполагается, что системная реализация предложенной авторской модели и научно-методических рекомендаций позволит существенно повысить эффективность институциональных процессов, оптимизировать ресурсные затраты и обеспечить устойчивое развитие исследуемой предметной сферы.`;
+            
+            const noveltyVal = `Научная новизна исследования заключается в авторской концептуализации институциональных механизмов по теме «${topic}», разработке оригинального методического инструментария оценки эффективности и формулировании научно обоснованных предложений по совершенствованию нормативной базы.`;
+            
+            const provisionsVal = `1. Теоретико-методологическое положение о сущности, структуре и закономерностях развития исследуемого института.\n2. Авторская классификация ключевых факторов и критериев эффективности предметной области.\n3. Научно-практическая модель институционального взаимодействия участников исследуемых процессов.\n4. Комплекс прикладных рекомендаций и проектов нормативных документов, направленных на совершенствование регулирования и правоприменения.`;
 
             document.getElementById("app-field-relevance").value = relevance;
             document.getElementById("app-field-object").value = objectVal;
@@ -1429,12 +1427,7 @@
             document.getElementById("app-field-novelty").value = noveltyVal;
             document.getElementById("app-field-provisions").value = provisionsVal;
 
-            proj.apparatus = {
-                relevance, object: objectVal, subject: subjectVal, goal: goalVal,
-                tasks: tasksVal, hypothesis: hypothesisVal, novelty: noveltyVal, provisions: provisionsVal
-            };
-            saveAcademicState();
-            updateLiveStats();
+            triggerAutoSave();
             showSaveStatus("Научный аппарат сформирован");
         }
 
@@ -1574,44 +1567,25 @@ ${app.novelty || 'Заключается в авторском подходе к
         }
 
         function generateClientOutline(proj) {
-            const isWaterTopic = /вод|мелиорац|узбекистан|water|meliorat/i.test(proj.topic || "");
-            let outlineContent = "";
-            if (isWaterTopic) {
-                outlineContent = 
+            const topic = proj.topic || "Исследование актуальных проблем современной науки";
+            const outlineContent = 
 `Введение (Научный аппарат исследования)
-Глава 1. Теоретико-правовые основы и генезис регулирования мелиоративного водопользования
-1.1. Эволюция правового режима использования воды в мелиорации земель: историко-правовой аспект
-1.2. Понятийно-категориальный аппарат природоресурсного права в сфере водной мелиорации
-1.3. Водный кодекс Республики Узбекистан как концептуальный фундамент кодификации водного законодательства
-Глава 2. Институционально-правовые механизмы мелиоративного водопользования в Республике Узбекистан
-2.1. Правовой статус и полномочия органов государственного управления водным хозяйством и мелиорацией
-2.2. Правовой режим использования гидромелиоративных и коллекторно-дренажных систем
-2.3. Правовое положение Ассоциаций водопотребителей (АВП) и договорные основы мелиоративного обслуживания
-Глава 3. Перспективы совершенствования законодательства: реализация новелл Водного кодекса и правовые стимулы водосбережения
-3.1. Развитие системы подзаконных нормативно-правовых актов во исполнение Водного кодекса РУз
-3.2. Правовое регулирование цифровизации («Aqlli suv») и стимулирования водосберегающих технологий
-3.3. Научно-практические предложения по оптимизации законодательства и мелиоративного оздоровления почв
+Глава 1. Теоретико-методологические основы исследования: ${topic}
+1.1. Генезис, эволюция и современное состояние теоретических концепций
+1.2. Понятийно-категориальный аппарат и специфика отраслевого регулирования
+1.3. Сравнительный анализ отечественного и международного опыта
+Глава 2. Анализ современного состояния и институциональных механизмов реализации
+2.1. Нормативно-методическая база и прикладная практика в исследуемой сфере
+2.2. Особенности взаимодействия ключевых субъектов и институтов
+2.3. Системные проблемы, институциональные дефициты и барьеры эффективного развития
+Глава 3. Перспективы совершенствования механизмов реализации и научно-практические рекомендации
+3.1. Концептуальные направления модернизации регулирования и организационных моделей
+3.2. Внедрение инновационных инструментов, цифровых систем и лучших практик
+3.3. Научно обоснованные рекомендации по совершенствованию нормативных актов и правоприменения
 Заключение и выводы
 Список использованных источников
 Приложения`;
-            } else {
-                outlineContent = 
-`Введение (Научный аппарат исследования)
-Глава 1. Теоретико-методологические основы исследования: ${proj.topic}
-1.1. Генезис, эволюция и современные концепции исследуемого правового института
-1.2. Понятийно-категориальный аппарат и специфика отраслевого правового режима
-1.3. Сравнительно-правовой анализ отечественного и международного опыта регулирования
-Глава 2. Анализ современного состояния и институционально-правовых механизмов
-2.1. Нормативно-правовая база и правоприменительная практика в исследуемой сфере
-2.2. Правовой статус ключевых субъектов и особенности межведомственного взаимодействия
-2.3. Проблемы правоприменения, правовые коллизии и пробелы правового регулирования
-Глава 3. Перспективы совершенствования законодательства и механизмы реализации
-3.1. Концептуальные направления модернизации норм кодифицированного и специального законодательства
-3.2. Внедрение инновационных организационно-правовых и цифровых инструментов
-3.3. Научно обоснованные рекомендации по совершенствованию нормативно-правовых актов
-Заключение и выводы
-Список использованных источников`;
-            }
+
             parseAndApplyOutline(outlineContent);
             showSaveStatus("План успешно сформирован");
         }
@@ -1851,13 +1825,8 @@ ${app.novelty || 'Заключается в авторском подходе к
         }
 
         function generateClientChapter(proj, ch, mode, promptInstruction) {
-            const isWater = /вод|мелиорац|узбекистан|water|meliorat/i.test(proj.topic || "");
-            let text = "";
-            if (isWater) {
-                text = `В рамках исследования вопроса «${ch.title}» первостепенное значение приобретает анализ положений Водного кодекса Республики Узбекистан как системообразующего фундамента правового регулирования [1, c. 14]. Специальный правовой режим мелиоративного водопользования обусловлен дуалистической природой гидротехнической инфраструктуры: с одной стороны, она обеспечивает гарантированную подачу поливной воды сельскохозяйственным товаропроизводителям, а с другой — осуществляет критически важный дренажный отвод минерализованных вод, предотвращая вторичное засоление почв [2, c. 35].\n\nПравоприменительная практика в Республике Узбекистан свидетельствует о том, что устойчивость водно-мелиоративного комплекса достигается за счет синергии государственного бассейнового планирования (Министерство водного хозяйства РУз) и низового самоуправления водопользователей (АВП). Развитие подзаконного нормативного массива во исполнение Водного кодекса позволяет закрепить прозрачные механизмы лимитированного вододеления и стимулировать внедрение водосберегающих технологий (капельное орошение, лазерная планировка, телеметрическая система «Aqlli suv») [3, c. 58].\n\nТаким образом, доктринальный и сравнительно-правовой анализ подтверждает необходимость комплексного правового закрепления взаимной ответственности государства и водопотребителей за сохранение мелиоративного плодородия орошаемых земель.`;
-            } else {
-                text = `Исследование проблематики «${ch.title}» в контексте темы «${proj.topic}» позволяет выявить ключевые закономерности функционирования исследуемого института [1, c. 18]. Современная научная доктрина исходит из необходимости системного сочетания императивных регуляторных требований и диспозитивных механизмов взаимодействия субъектов правоотношений [2, c. 42].\n\nАнализ нормативно-правовой базы и материалов практики показывает, что последовательная реализация предложенных концептуальных подходов обеспечивает преодоление существующих институциональных коллизий и создает надежную правовую основу для долгосрочного устойчивого развития.\n\nНа основе проведенного теоретического и прикладного анализа доказана научная обоснованность сформулированных выводов и их практическая применимость.`;
-            }
+            const topic = proj.topic || "Исследование актуальных проблем современной науки";
+            const text = `Исследование проблематики «${ch.title}» в контексте темы «${topic}» позволяет выявить ключевые закономерности функционирования исследуемого института [1, c. 18]. Современная научная доктрина исходит из необходимости системного сочетания фундаментальных теоретических положений и эффективных прикладных механизмов взаимодействия субъектов отношений [2, c. 42].\n\nАнализ нормативно-методической базы и эмпирических данных показывает, что последовательная реализация предложенных концептуальных подходов обеспечивает преодоление существующих институциональных коллизий и создает надежную основу для долгосрочного устойчивого развития [3, c. 65].\n\nНа основе проведенного теоретического и прикладного анализа доказана научная обоснованность сформулированных выводов и их практическая применимость для развития предметной области.`;
 
             ch.body = (ch.body ? ch.body + "\n\n" : "") + text;
             document.getElementById("editor-chapter-body").value = ch.body;
@@ -2183,13 +2152,10 @@ ${app.novelty || 'Заключается в авторском подходе к
         }
 
         function generateClientDefenseSpeech(proj) {
-            const isWater = /вод|мелиорац|узбекистан|water|meliorat/i.test(proj.topic || "");
-            let speech = "";
-            if (isWater) {
-                speech = `Уважаемый председатель и члены Государственной экзаменационной комиссии!\n\nВашему вниманию представляется магистерская диссертация на тему: «${proj.topic}».\n\nАКТУАЛЬНОСТЬ ТЕМЫ: В современных условиях нарастающего дефицита трансграничных водных ресурсов в Центральной Азии и задач обеспечения продовольственной безопасности эффективное мелиоративное водопользование приобретает статус вопроса национальной безопасности. Принятие Водного кодекса Республики Узбекистан ознаменовало исторический этап в систематизации природоресурсного законодательства.\n\nОБЪЕКТ И ПРЕДМЕТ: Объектом выступили общественные отношения в области использования водных ресурсов для мелиорации земель. Предметом — нормы Водного кодекса РУз, Закона «О воде и водопользовании», подзаконных актов и материалов правоприменения.\n\nОСНОВНЫЕ ПОЛОЖЕНИЯ, ВЫНОСИМЫЕ НА ЗАЩИТУ:\n1. Доктринальная оценка Водного кодекса Республики Узбекистан как прогрессивного нормативного фундамента водно-мелиоративной безопасности страны.\n2. Выявление эколого-правовой специфики мелиоративного водопользования и баланса публично-правового регулирования и договорных механизмов.\n3. Научно-практические предложения по развитию подзаконной базы во исполнение Водного кодекса, включая правовое закрепление цифровых систем учета воды («Aqlli suv»).\n4. Комплекс мер по совершенствованию институционального статуса АВП и стимулированию водосберегающих технологий.\n\nРезультаты исследования апробированы в 3 научных статьях автора в изданиях ВАК Республики Узбекистан.\n\nБлагодарю за внимание и готова ответить на Ваши вопросы!`;
-            } else {
-                speech = `Уважаемый председатель и члены Государственной экзаменационной комиссии!\n\nВашему вниманию представляется магистерская диссертация на тему: «${proj.topic}».\n\nАКТУАЛЬНОСТЬ ТЕМЫ обусловлена необходимостью системного теоретико-правового осмысления исследуемого института в условиях современных вызовов и трансформации правовой системы.\n\nЦЕЛЬ И ЗАДАЧИ: Целью исследования является теоретическое обоснование и разработка практических рекомендаций по совершенствованию правового механизма в исследуемой области.\n\nОСНОВНЫЕ ПОЛОЖЕНИЯ НА ЗАЩИТУ:\n1. Авторская теоретическая концепция исследуемого правового института.\n2. Анализ практики применения законодательства и выявление правовых коллизий.\n3. Научно обоснованные предложения по совершенствованию нормативно-правовых актов.\n\nРезультаты исследования отражены в 3 научных публикациях.\n\nБлагодарю за внимание и готова ответить на Ваши вопросы!`;
-            }
+            const topic = proj.topic || "Исследование актуальных проблем современной науки";
+            const levelLabel = getLevelLabel(proj.level);
+            const speech = `Уважаемый председатель и члены Государственной экзаменационной комиссии!\n\nВашему вниманию представляется научно-исследовательская работа (${levelLabel}) на тему: «${topic}».\n\nАКТУАЛЬНОСТЬ ТЕМЫ: В современных условиях социально-экономических и научно-технологических преобразований исследование выбранной проблематики приобретает особое теоретическое и прикладное значение. Необходимость переосмысления устоявшихся подходов и выработка адаптивных моделей обусловливают высокую востребованность диссертационного исследования.\n\nЦЕЛЬ И ЗАДАЧИ: Целью исследования является теоретико-методологическое обоснование и разработка практических рекомендаций по совершенствованию механизмов реализации в исследуемой области. Для достижения цели поставлены задачи теоретического анализа, эмпирической верификации и формулирования практических предложений.\n\nОСНОВНЫЕ ПОЛОЖЕНИЯ, ВЫНОСИМЫЕ НА ЗАЩИТУ:\n1. Авторская теоретическая концепция структуры и специфики исследуемого института.\n2. Системная классификация факторов эффективности и анализ институциональной среды.\n3. Научно обоснованные предложения по модернизации нормативно-методической базы.\n4. Прикладная модель и алгоритмы внедрения предложенных решений с оценкой ожидаемого эффекта.\n\nРезультаты исследования в полной мере апробированы в 3 научных публикациях в ведущих рецензируемых изданиях.\n\nБлагодарю за внимание и готов(а) ответить на Ваши вопросы!`;
+
             proj.defenseSpeech = speech;
             document.getElementById("defense-speech-text").value = speech;
             saveAcademicState();
@@ -2317,9 +2283,9 @@ ${app.novelty || 'Заключается в авторском подходе к
 
             // Fallback enrichment
             if (!art.body || art.body.length < 200) {
-                art.body = (createWaterReclamationDissertationProject().articles[currentArticleSubtab] || {}).body || "Статья подготовлена к публикации.";
+                art.body = (createSampleDissertationProject().articles[currentArticleSubtab] || {}).body || "Статья подготовлена к публикации.";
             } else {
-                art.body += `\n\nАнализ правоприменительной практики и положений Водного кодекса Республики Узбекистан подтверждает высокую практическую ценность внедрения предложенных научно-методических рекомендаций. Это обеспечивает соблюдение экологических нормативов и стабильное мелиоративное благополучие почв [1, c. 35].`;
+                art.body += `\n\nАнализ правоприменительной практики и теоретико-методологических положений подтверждает высокую практическую ценность внедрения предложенных научно-методических рекомендаций. Это обеспечивает соответствие международным стандартам и надежное функционирование исследуемого института [1, c. 35].`;
             }
             const fieldBody = document.getElementById("art-field-body");
             if (fieldBody) fieldBody.value = art.body;

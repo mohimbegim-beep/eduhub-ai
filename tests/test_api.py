@@ -7,7 +7,7 @@ import unittest
 from unittest.mock import MagicMock, patch
 
 # Устанавливаем тестовые переменные окружения
-os.environ["LEMON_WEBHOOK_SECRET"] = "test_secret_key"
+os.environ["DODO_WEBHOOK_SECRET"] = "test_secret_key"
 os.environ["RATE_LIMIT_MAX_REQUESTS"] = "5"
 os.environ["RATE_LIMIT_WINDOW_SECONDS"] = "2"
 os.environ["GEMINI_API_KEY"] = "fake_test_key_123"
@@ -225,15 +225,15 @@ class TestEduHubAPI(unittest.TestCase):
         self.assertIn("Diagnostic", data["guidance"])
 
     # ----------------------------------------------------------------------
-    # Тесты Lemon Squeezy Webhook
+    # Тесты Dodo Payments Webhook
     # ----------------------------------------------------------------------
-    def test_lemon_squeezy_webhook_signature_valid(self):
+    def test_dodo_payments_webhook_signature_valid(self):
         secret = "test_secret_key"
         payload_body = b'{"meta":{"event_name":"order_created"},"data":{"attributes":{"user_email":"student@eduhub.ai"}}}'
         signature = hmac.new(secret.encode("utf-8"), payload_body, hashlib.sha256).hexdigest()
 
         response = client.post(
-            "/api/v1/billing/lemon-webhook",
+            "/api/v1/billing/dodo-webhook",
             content=payload_body,
             headers={"x-signature": signature, "Content-Type": "application/json"}
         )
@@ -241,9 +241,9 @@ class TestEduHubAPI(unittest.TestCase):
         self.assertEqual(response.json()["status"], "verified")
         self.assertEqual(response.json()["event"], "order_created")
 
-    def test_lemon_squeezy_webhook_signature_invalid(self):
+    def test_dodo_payments_webhook_signature_invalid(self):
         response = client.post(
-            "/api/v1/billing/lemon-webhook",
+            "/api/v1/billing/dodo-webhook",
             content=b'{"meta":{"event_name":"order_created"}}',
             headers={"x-signature": "wrong_signature_12345", "Content-Type": "application/json"}
         )

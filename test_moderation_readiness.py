@@ -19,7 +19,7 @@ client = TestClient(app)
 
 def run_moderation_audit():
     print("=" * 70)
-    print("📋 АУДИТ ГОТОВНОСТИ К МОДЕРАЦИИ LEMON SQUEEZY НА 100%")
+    print("📋 АУДИТ ГОТОВНОСТИ К МОДЕРАЦИИ DODO PAYMENTS НА 100%")
     print("=" * 70)
 
     checks = []
@@ -31,27 +31,28 @@ def run_moderation_audit():
         if details:
             print(f"   ↳ {details}")
 
-    # --- 1. АУДИТ ВЕБХУКОВ (LEMON SQUEEZY WEBHOOK CRITERIA) ---
-    secret = os.getenv("LEMON_WEBHOOK_SECRET", "default_secret_key_change_me")
+    # --- 1. АУДИТ ВЕБХУКОВ (DODO PAYMENTS WEBHOOK CRITERIA) ---
+    secret = os.getenv("DODO_WEBHOOK_SECRET", "default_secret_key_change_me")
+    os.environ["DODO_WEBHOOK_SECRET"] = secret
 
     # 1.1. Обработка GET-запроса на вебхук (для ботов мониторинга)
-    res_get = client.get("/api/v1/billing/lemon-webhook")
+    res_get = client.get("/api/v1/billing/dodo-webhook")
     report(
         "Вебхук: GET-статус эндпоинта (200 OK)",
         res_get.status_code == 200 and res_get.json().get("status") == "active",
         f"Статус: {res_get.status_code}, Тело: {res_get.json().get('status')}"
     )
 
-    # 1.2. Тестовое событие от Lemon Squeezy (webhook_test)
+    # 1.2. Тестовое событие от Dodo Payments (webhook_test)
     test_payload = json.dumps({
         "meta": {"event_name": "webhook_test", "webhook_id": "wh_123"},
-        "data": {"type": "orders", "id": "test_001", "attributes": {"user_email": "tester@lemonsqueezy.com"}}
+        "data": {"type": "orders", "id": "test_001", "attributes": {"user_email": "tester@dodopayments.com"}}
     }).encode("utf-8")
     sig_test = hmac.new(secret.encode("utf-8"), test_payload, hashlib.sha256).hexdigest()
 
     t0 = time.time()
     res_test = client.post(
-        "/api/v1/billing/lemon-webhook",
+        "/api/v1/billing/dodo-webhook",
         content=test_payload,
         headers={"X-Signature": sig_test, "Content-Type": "application/json"}
     )
@@ -59,7 +60,7 @@ def run_moderation_audit():
     report(
         "Вебхук: Прием события 'webhook_test' (< 100 мс)",
         res_test.status_code == 200 and latency_ms < 500,
-        f"Статус: {res_test.status_code}, Скорость ответа: {latency_ms:.1f} мс (лимит Lemon Squeezy: 5000 мс)"
+        f"Статус: {res_test.status_code}, Скорость ответа: {latency_ms:.1f} мс (лимит Dodo Payments: 5000 мс)"
     )
 
     # 1.3. Боевое событие покупки (order_created)
@@ -70,7 +71,7 @@ def run_moderation_audit():
     sig_order = hmac.new(secret.encode("utf-8"), order_payload, hashlib.sha256).hexdigest()
 
     res_order = client.post(
-        "/api/v1/billing/lemon-webhook",
+        "/api/v1/billing/dodo-webhook",
         content=order_payload,
         headers={"X-Signature": sig_order, "Content-Type": "application/json"}
     )
@@ -88,7 +89,7 @@ def run_moderation_audit():
     sig_sub = hmac.new(secret.encode("utf-8"), sub_payload, hashlib.sha256).hexdigest()
 
     res_sub = client.post(
-        "/api/v1/billing/lemon-webhook",
+        "/api/v1/billing/dodo-webhook",
         content=sub_payload,
         headers={"X-Signature": sig_sub, "Content-Type": "application/json"}
     )
@@ -99,7 +100,7 @@ def run_moderation_audit():
     )
 
     # 1.5. Отклонение запроса без подписи
-    res_no_sig = client.post("/api/v1/billing/lemon-webhook", content=order_payload, headers={"Content-Type": "application/json"})
+    res_no_sig = client.post("/api/v1/billing/dodo-webhook", content=order_payload, headers={"Content-Type": "application/json"})
     report(
         "Безопасность: Отклонение запросов без подписи (400 Bad Request)",
         res_no_sig.status_code == 400,
@@ -108,7 +109,7 @@ def run_moderation_audit():
 
     # 1.6. Отклонение запроса с поддельной подписью
     res_fake_sig = client.post(
-        "/api/v1/billing/lemon-webhook",
+        "/api/v1/billing/dodo-webhook",
         content=order_payload,
         headers={"X-Signature": "fake_attacker_signature_hex", "Content-Type": "application/json"}
     )
@@ -136,11 +137,11 @@ def run_moderation_audit():
 
     # 2.2. Проверка White-Hat SaaS архитектуры и чекаута
     has_triggers = "checkout-trigger-btn" in html
-    no_lemon_leak = "lemonsqueezy" not in html.lower()
+    no_gateway_leak = "lemon" not in html.lower()
     report(
         "Белый SaaS: Защищенный чекаут без уязвимостей и утечек",
-        has_triggers and no_lemon_leak,
-        "Внедрена прозрачная система чекаута и анти-чарджбэк защита без внешних зависимостей Lemon.js"
+        has_triggers and no_gateway_leak,
+        "Внедрена прозрачная система чекаута Dodo Payments и анти-чарджбэк защита"
     )
 
     # 2.3. Проверка SEO & AEO Structured Data (JSON-LD)
@@ -191,7 +192,7 @@ def run_moderation_audit():
     report(
         "Мониторинг: Healthcheck и статус ИИ-модели",
         res_health.status_code == 200 and health_data.get("model") == "gemini-2.5-flash",
-        f"Модель: {health_data.get('model')}, Lemon API Ready: {health_data.get('lemon_squeezy_api_ready')}"
+        f"Модель: {health_data.get('model')}, Lemon API Ready: {health_data.get('dodo_payments_api_ready')}"
     )
 
     report(
