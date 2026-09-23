@@ -18,3 +18,4 @@ scratch/
 scratch_frames/
 data/backups/
 data/*.tmp
+data/sentinel_status.json

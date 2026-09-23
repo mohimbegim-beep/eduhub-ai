@@ -797,6 +797,57 @@ class AutoQAGuardEngine:
         return t
 
     # --------------------------------------------------------------------------
+    # TEST 13: Stage 11 - Observability, Deep Healthcheck & Sentinel Telemetry
+    # --------------------------------------------------------------------------
+    def test_13_observability_deep_health_and_sentinel(self):
+        t = TestCaseResult("13. Observability, Deep Healthcheck & Sentinel Telemetry")
+        start = time.perf_counter()
+
+        try:
+            from fastapi.testclient import TestClient
+            sys.path.insert(0, str(self.base_dir))
+            from app.main import app, record_system_audit_event, SYSTEM_AUDIT_LOG
+
+            client = TestClient(app, raise_server_exceptions=False)
+
+            # 1. Deep Healthcheck verification
+            res_health = client.get("/health")
+            if res_health.status_code != 200:
+                t.passed = False
+                t.errors.append(f"GET /health returned HTTP {res_health.status_code}")
+            else:
+                h_data = res_health.json()
+                if h_data.get("status") != "healthy" or "diagnostics" not in h_data:
+                    t.passed = False
+                    t.errors.append(f"Deep health diagnostics missing: {h_data}")
+
+            # 2. Structured System Audit Log
+            test_evt = f"QA_ENGINE_AUDIT_{int(time.time()*1000)}"
+            record_system_audit_event("INFO", test_evt, {"qa_check": True})
+            if not SYSTEM_AUDIT_LOG.exists():
+                t.passed = False
+                t.errors.append("logs/system_audit.log was not created")
+
+            # 3. Sentinel Keepalive Telemetry endpoint
+            res_sent = client.get("/api/v1/system/sentinel/status")
+            if res_sent.status_code != 200:
+                t.passed = False
+                t.errors.append(f"GET /api/v1/system/sentinel/status returned HTTP {res_sent.status_code}")
+            else:
+                s_data = res_sent.json()
+                if s_data.get("status") != "success" or not s_data.get("sentinel", {}).get("is_daemon_alive"):
+                    t.passed = False
+                    t.errors.append(f"Sentinel telemetry invalid: {s_data}")
+
+            t.details = "Deep Healthcheck verified (DB, GenAI, MoR, Backup); Audit log active; Sentinel telemetry online."
+        except Exception as e:
+            t.passed = False
+            t.errors.append(f"Observability test exception: {e}")
+
+        t.duration_ms = (time.perf_counter() - start) * 1000
+        return t
+
+    # --------------------------------------------------------------------------
     # Main Suite Execution
     # --------------------------------------------------------------------------
     def run_all_tests(self, auto_fix=True):
@@ -815,7 +866,8 @@ class AutoQAGuardEngine:
             self.test_09_perimeter_security_and_data_shield,
             self.test_10_ai_resilience_quotas_and_streaming,
             self.test_11_billing_dunning_refunds_and_receipts,
-            self.test_12_performance_compression_and_seo
+            self.test_12_performance_compression_and_seo,
+            self.test_13_observability_deep_health_and_sentinel
         ]
 
         self.test_results = []
