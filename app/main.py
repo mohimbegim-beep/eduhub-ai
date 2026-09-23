@@ -2492,6 +2492,34 @@ def verify_session_token(token: Optional[str]) -> Optional[str]:
         return None
     return None
 
+# --------------------------------------------------------------------------
+# Telegram Bot Webhook Integration (@eduhub_ielts_bot)
+# --------------------------------------------------------------------------
+@app.get("/api/v1/telegram/webhook", tags=["Telegram Bot"])
+async def telegram_webhook_info():
+    """Returns Telegram Webhook info and configuration."""
+    from services.telegram_bot_service import send_telegram_request
+    return send_telegram_request("getWebhookInfo", {})
+
+@app.post("/api/v1/telegram/webhook", tags=["Telegram Bot"])
+async def telegram_webhook_receiver(request: Request):
+    """Processes incoming updates from Telegram for @eduhub_ielts_bot."""
+    try:
+        data = await request.json()
+        from services.telegram_bot_service import process_telegram_update
+        process_telegram_update(data)
+        return {"ok": True}
+    except Exception as e:
+        print(f"[TELEGRAM WEBHOOK ERROR] {e}")
+        return {"ok": False, "error": str(e)}
+
+@app.post("/api/v1/telegram/set-webhook", tags=["Telegram Bot"])
+async def setup_telegram_webhook_route():
+    """Configures official Telegram Webhook to point to this production server."""
+    from services.telegram_bot_service import setup_telegram_webhook
+    res = setup_telegram_webhook(PRODUCTION_URL)
+    return {"status": "success", "result": res}
+
 class AuthLoginRequest(BaseModel):
     email: str
 
