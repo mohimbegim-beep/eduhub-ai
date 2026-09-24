@@ -83,11 +83,75 @@ except ImportError:
     types = None
     GENAI_AVAILABLE = False
 
+# --------------------------------------------------------------------------
+# Sentry Full-Stack Performance & Error Monitoring
+# --------------------------------------------------------------------------
+try:
+    import sentry_sdk
+    SENTRY_DSN = os.getenv(
+        "SENTRY_DSN",
+        "https://aac76a42dab411c73b794f3783d9174b@o4512142102298624.ingest.de.sentry.io/4512142114226256"
+    )
+    if SENTRY_DSN:
+        sentry_sdk.init(
+            dsn=SENTRY_DSN,
+            send_default_pii=True,
+            traces_sample_rate=1.0,
+            environment=os.getenv("ENVIRONMENT", "production"),
+        )
+except Exception as _sentry_err:
+    print(f"[Sentry Warning] Init failed: {_sentry_err}")
+
 app = FastAPI(
     title="EduHub Core API",
     description="Autonomous production API with Google GenAI (gemini-2.5-flash), 18+ Safe Content Filtering, PCI-DSS multi-gateway billing, and in-memory rate limiting.",
     version="1.2.0"
 )
+
+@app.get("/sentry-debug", tags=["Monitoring"])
+async def trigger_sentry_debug_error():
+    """Тестовый эндпоинт верификации Sentry — генерирует исключение деления на ноль."""
+    division_by_zero = 1 / 0
+    return {"result": division_by_zero}
+
+
+# --------------------------------------------------------------------------
+# Background Keep-Alive Self-Ping Cron (Anti-Cold Start for Render Free Tier)
+# --------------------------------------------------------------------------
+@app.on_event("startup")
+async def start_keepalive_cron():
+    """
+    Периодический фоновый самопинг каждые 10 минут.
+    Предотвращает переход инстанса Render в спящий режим (Cold Start).
+    """
+    async def self_ping_task():
+        import urllib.request
+        # Пауза перед первым пингом после запуска контейнера
+        await asyncio.sleep(15)
+        ping_url = os.getenv("SELF_PING_URL", "https://eduhub-ai.onrender.com/").rstrip("/") + "/"
+
+        while True:
+            try:
+                def do_request():
+                    req = urllib.request.Request(
+                        ping_url,
+                        headers={"User-Agent": "EduHub-SelfPing-Cron/1.0"}
+                    )
+                    with urllib.request.urlopen(req, timeout=12) as response:
+                        return response.getcode()
+
+                status_code = await asyncio.to_thread(do_request)
+                if status_code < 400:
+                    print("Self-ping successful")
+            except Exception as err:
+                # Полная изоляция: ошибки сети логируются, но никогда не роняют сервис
+                print(f"[KeepAlive] Self-ping warning (handled): {err}")
+
+            # Интервал 10 минут (600 секунд)
+            await asyncio.sleep(600)
+
+    asyncio.create_task(self_ping_task())
+
 
 @app.exception_handler(Exception)
 async def global_exception_handler(request: Request, exc: Exception):
@@ -138,6 +202,52 @@ app.add_middleware(
 
 # Компрессия ответов (GZip): автоматическое сжатие контента > 1000 байт (снижение трафика на 70-80%)
 app.add_middleware(GZipMiddleware, minimum_size=1000)
+
+# --------------------------------------------------------------------------
+# AI Route Timeout & Panic-Free Error Protection (20s Abort Guard)
+# --------------------------------------------------------------------------
+@app.middleware("http")
+async def ai_safety_guard_middleware(request: Request, call_next):
+    """
+    Защита всех ИИ-маршрутов (/api/) от зависаний и падений сервера:
+    1. Жесткий лимит таймаута: 20 секунд (asyncio.wait_for). При превышении прерывает выполнение.
+    2. Защита от падений (Try/Catch): перехватывает любые непредвиденные сбои Gemini API / сети.
+    3. Возвращает унифицированный JSON-ответ для фронтенда со статусом 504 или 503.
+    """
+    path = request.url.path
+    if path.startswith("/api/") and request.method in ("POST", "PUT"):
+        try:
+            return await asyncio.wait_for(call_next(request), timeout=20.0)
+        except asyncio.TimeoutError:
+            record_system_audit_event(
+                level="WARN",
+                event="AI_REQUEST_TIMEOUT_ABORTED",
+                details={"path": path, "timeout_sec": 20},
+                request=request
+            )
+            return JSONResponse(
+                status_code=status.HTTP_504_GATEWAY_TIMEOUT,
+                content={
+                    "status": "error",
+                    "message": "ИИ-модель временно перегружена. Пожалуйста, попробуйте еще раз через минуту."
+                }
+            )
+        except Exception as exc:
+            record_system_audit_event(
+                level="ERROR",
+                event="AI_ROUTE_EXCEPTION_CAUGHT",
+                details={"path": path, "error": str(exc)},
+                request=request
+            )
+            return JSONResponse(
+                status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+                content={
+                    "status": "error",
+                    "message": "ИИ-модель временно перегружена. Пожалуйста, попробуйте еще раз через минуту."
+                }
+            )
+
+    return await call_next(request)
 
 @app.middleware("http")
 async def add_security_headers(request: Request, call_next):
@@ -1075,6 +1185,44 @@ def call_genai_with_retry(client, model: str, contents, config, max_retries: int
     raise last_exception
 
 # --------------------------------------------------------------------------
+# Динамическая привязка языка интерфейса к генерациям Gemini AI
+# --------------------------------------------------------------------------
+def build_language_directive(lang: Optional[str]) -> str:
+    """
+    Формирует приоритетное системное правило для Gemini, синхронизируя ответ
+    модели с выбранным языком интерфейса (UZ, RU, EN, ES).
+    """
+    clean = (lang or "en").strip().lower()
+
+    if clean in ("uz", "uzbek", "o'zbek", "o'zbek tili"):
+        return (
+            "🚨 CRITICAL LANGUAGE DIRECTIVE (O'ZBEK TILI / LOTIN ALIFBOSI):\n"
+            "Siz barcha tushuntirishlar, hisob-kitoblar, qadamlar va xulosalarni QAT'IY RAVISHDA "
+            "o'zbek tilida (lotin yozuvi / O'zbek tili) yozishingiz SHART! "
+            "Foydalanuvchi alohida boshqa tilni so'ramaguncha hech qachon rus yoki ingliz tilidan foydalanmang."
+        )
+    elif clean in ("es", "spanish", "español"):
+        return (
+            "🚨 DIRECTIVA CRÍTICA DE IDIOMA (ESPAÑOL):\n"
+            "Debes responder EXCLUSIVAMENTE en español. "
+            "Todas las explicaciones, pasos, términos y formato deben redactarse estrictamente en español. "
+            "No utilices inglés ni ruso a menos que el usuario lo solicite expresamente."
+        )
+    elif clean in ("ru", "russian", "русский"):
+        return (
+            "🚨 КРИТИЧЕСКОЕ ПРАВИЛО ЯЗЫКА (РУССКИЙ ЯЗЫК):\n"
+            "Отвечай СТРОГО на русском языке. Все пояснения, формулы, шаги решения "
+            "и форматирование должны быть составлены на грамотном русском языке. "
+            "Не используй английский язык, если пользователь прямо об этом не попросил."
+        )
+    else:
+        return (
+            "🚨 CRITICAL LANGUAGE DIRECTIVE (ENGLISH):\n"
+            "Respond EXCLUSIVELY in English. All explanations, pedagogical steps, definitions, "
+            "and formatting must be strictly in English."
+        )
+
+# --------------------------------------------------------------------------
 # Схемы валидации входных данных (Pydantic Models)
 # --------------------------------------------------------------------------
 class AskQuestionRequest(BaseModel):
@@ -1093,6 +1241,12 @@ class AskQuestionRequest(BaseModel):
         None,
         max_length=40,
         description="Желаемый язык ответа (например, 'Russian', 'English')"
+    )
+    current_lang: Optional[str] = Field(
+        None,
+        alias="currentLang",
+        max_length=40,
+        description="Синхронизированный язык интерфейса пользователя (uz, ru, en, es)"
     )
     detail_level: Optional[str] = Field(
         "standard",
@@ -1608,7 +1762,11 @@ async def ask_question(
 
     client = get_genai_client()
 
+    target_lang = payload.current_lang or payload.language or "en"
+    lang_directive = build_language_directive(target_lang)
+
     system_prompt = (
+        f"{lang_directive}\n\n"
         "You are EduHub Universal AI Assistant — an omni-competent, wise, and helpful educational academic copilot. "
         "You answer ANY and ALL questions from users across science, mathematics, literature, history, "
         "engineering, programming, languages, logic, and general knowledge with utmost pedagogical clarity.\n\n"
@@ -1619,8 +1777,7 @@ async def ask_question(
         "   'EduHub является образовательной платформой с фильтрацией контента (Safe Content Policy). "
         "Я не отвечаю на вопросы тематики 18+.'\n\n"
         "MULTILINGUAL FLUENCY & CROSS-SELL DIRECTIVE:\n"
-        "1. LANGUAGE MATCHING: Automatically detect and match the response language strictly to the user's input/document language "
-        "   (English, Russian, Uzbek [Latin script: O'zbek tili], or Spanish [Español]).\n"
+        "1. LANGUAGE MATCHING: Strictly enforce the CRITICAL LANGUAGE DIRECTIVE specified above.\n"
         "2. CORE RULE: Always provide a comprehensive, brilliant, structured academic answer to the user's primary prompt first.\n"
         "3. CONTEXTUAL FEATURE RECOMMENDATION (SMART CROSS-SELL): At the very end of your response, after a blank line, "
         "   provide a natural, friendly 1-2 sentence recommendation in the SAME matching language suggesting a complementary EduHub tool:\n"
@@ -1631,7 +1788,7 @@ async def ask_question(
 
     user_parts = [
         f"Detail Level: {payload.detail_level}",
-        f"Target Language: {payload.language or 'Auto-detect (prefer user question language)'}",
+        f"Enforced Response Language: {target_lang}",
     ]
     if payload.context:
         user_parts.append(f"\n--- RELEVANT CONTEXT ---\n{payload.context}")
@@ -1737,7 +1894,10 @@ async def ask_question_stream(
         
         try:
             client = get_genai_client()
+            target_lang = payload.current_lang or payload.language or "en"
+            lang_directive = build_language_directive(target_lang)
             system_prompt = (
+                f"{lang_directive}\n\n"
                 "You are EduHub Universal AI Assistant — an omni-competent educational academic copilot. "
                 "Provide comprehensive, structured academic explanations with utmost clarity."
             )
@@ -1748,7 +1908,7 @@ async def ask_question_stream(
             )
             user_parts = [
                 f"Detail Level: {payload.detail_level}",
-                f"Target Language: {payload.language or 'Auto-detect'}",
+                f"Enforced Response Language: {target_lang}",
             ]
             if clean_context:
                 user_parts.append(f"\n--- CONTEXT ---\n{clean_context}")

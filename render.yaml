@@ -13,3 +13,5 @@ services:
         sync: false
       - key: LEMON_SQUEEZY_API_KEY
         sync: false
+      - key: SENTRY_DSN
+        value: https://aac76a42dab411c73b794f3783d9174b@o4512142102298624.ingest.de.sentry.io/4512142114226256

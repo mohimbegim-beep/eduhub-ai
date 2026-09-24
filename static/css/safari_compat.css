@@ -1,6 +1,6 @@
 /* ==============================================================================
-   EDUHUB AI — SAFARI & WEBKIT CROSS-BROWSER COMPATIBILITY
-   Ensures glassmorphism backdrop-blur, smooth touch scrolling & font smoothing
+   EDUHUB AI — SAFARI, WEBKIT & MOBILE CROSS-BROWSER COMPATIBILITY
+   Ensures glassmorphism backdrop-blur, smooth touch scrolling & mobile UX
    ============================================================================== */
 header,
 nav,
@@ -14,8 +14,10 @@ nav,
 .glass-card,
 .premium-card,
 .paywall-floating-overlay,
-.paywall-glass-card {
-    -webkit-backdrop-filter: blur(12px) !important;
+.paywall-glass-card,
+.mobile-bottom-dock {
+    -webkit-backdrop-filter: blur(14px) !important;
+    backdrop-filter: blur(14px) !important;
 }
 
 *, ::before, ::after {
@@ -24,14 +26,45 @@ nav,
 
 html {
     -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
 }
 
 body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 
 .overflow-x-auto,
 .overflow-y-auto {
     -webkit-overflow-scrolling: touch;
+}
+
+/* Prevent iOS Safari aggressive auto-zoom on input focus */
+@media screen and (max-width: 768px) {
+    input, select, textarea {
+        font-size: 16px !important;
+    }
+}
+
+/* Sleek horizontal scrollbar hiding for mobile chips */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+    width: 0 !important;
+    height: 0 !important;
+}
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* Tactile mobile tap feedback */
+.tap-active:active {
+    transform: scale(0.97);
+    transition: transform 0.1s ease;
+}
+
+/* Floating Mobile Bottom Dock Safe Spacing */
+.mobile-bottom-dock {
+    padding-bottom: max(10px, env(safe-area-inset-bottom, 10px));
 }

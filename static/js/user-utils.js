@@ -539,8 +539,66 @@ const EduHubUtils = (function () {
     removeAttachedPhoto,
     getAttachedPhoto,
     openTelegramBotWithAuth,
-    getActiveLocale
+    getActiveLocale,
+    showErrorToast,
+    fetchAIWithTimeout
   };
+
+  // --------------------------------------------------------------------------
+  // AI Request AbortController & Error Toast Notifications
+  // --------------------------------------------------------------------------
+  function showErrorToast(message, durationMs) {
+    const text = message || "ИИ-модель временно перегружена. Пожалуйста, попробуйте еще раз через минуту.";
+    let toast = document.getElementById("eduhub-error-toast");
+    if (!toast) {
+      toast = document.createElement("div");
+      toast.id = "eduhub-error-toast";
+      toast.className = "fixed top-6 right-4 sm:right-6 z-50 max-w-md bg-slate-900/95 border border-rose-500/40 text-slate-100 px-4 py-3 rounded-2xl shadow-2xl backdrop-blur-md flex items-start gap-3 transition-all duration-300 transform translate-y-0 opacity-100";
+      document.body.appendChild(toast);
+    }
+
+    toast.innerHTML = `
+      <div class="w-6 h-6 rounded-lg bg-rose-500/20 text-rose-400 flex items-center justify-center shrink-0 mt-0.5 text-xs font-black">✕</div>
+      <div class="flex-grow">
+        <div class="text-xs font-bold text-rose-300">Внимание</div>
+        <div class="text-[11px] text-slate-300 mt-0.5 leading-snug">${text}</div>
+      </div>
+      <button onclick="this.parentElement.classList.add('hidden')" class="text-slate-400 hover:text-white text-xs px-1">✕</button>
+    `;
+    toast.classList.remove("hidden");
+
+    if (toast._timer) clearTimeout(toast._timer);
+    toast._timer = setTimeout(() => {
+      toast.classList.add("hidden");
+    }, durationMs || 5000);
+  }
+
+  async function fetchAIWithTimeout(url, fetchOptions, timeoutMs) {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), timeoutMs || 20000);
+
+    try {
+      const response = await fetch(url, {
+        ...(fetchOptions || {}),
+        signal: controller.signal
+      });
+      clearTimeout(timeoutId);
+
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok || data.status === "error") {
+        const errorMsg = data.message || "ИИ-модель временно перегружена. Пожалуйста, попробуйте еще раз через минуту.";
+        return { success: false, status: "error", message: errorMsg, data };
+      }
+      return { success: true, status: "success", data };
+    } catch (err) {
+      clearTimeout(timeoutId);
+      let errorMsg = "ИИ-модель временно перегружена. Пожалуйста, попробуйте еще раз через минуту.";
+      if (err.name === "AbortError") {
+        errorMsg = "Превышено время ожидания ответа ИИ (20 секунд). Попробуйте еще раз.";
+      }
+      return { success: false, status: "error", message: errorMsg, originalError: err };
+    }
+  }
 
   function getActiveLocale() {
     try {

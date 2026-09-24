@@ -22,3 +22,8 @@ data/sentinel_status.json
 data/sweeper_state.json
 data/*.db-wal
 data/*.db-shm
+node_modules/
+test-results/
+playwright-report/
+kling_*.mp4
+data/*_backup.json

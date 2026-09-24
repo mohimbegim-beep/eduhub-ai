@@ -5445,20 +5445,34 @@
   const BANNED_EMAIL = ['mohim', 'mohimbegim@gmail.com'].join('.');
   const OFFICIAL_EMAIL = 'mahallamade.uz@gmail.com';
 
+  const FALLBACK_LOCALE = 'en';
+
   function t(key, fallback = '') {
     if (!key) return '';
-    let val = '';
-    const dict = I18N_CACHE[currentLocale] || I18N_CACHE['en'];
-    if (dict && typeof dict[key] !== 'undefined') {
+    let val = undefined;
+
+    // 1. Попытка взять перевод из активной локали (ru, uz, es, en)
+    const dict = I18N_CACHE[currentLocale];
+    if (dict && typeof dict[key] === 'string' && dict[key].trim() !== '') {
       val = dict[key];
-    } else if (I18N_CACHE['en'] && typeof I18N_CACHE['en'][key] !== 'undefined') {
-      val = I18N_CACHE['en'][key];
-    } else if (I18N_CACHE['ru'] && typeof I18N_CACHE['ru'][key] !== 'undefined') {
+    }
+
+    // 2. Автоматический безопасный Fallback на дефолтный en.json (если ключ пропущен в uz/ru/es)
+    if (val === undefined && currentLocale !== FALLBACK_LOCALE) {
+      const enDict = I18N_CACHE[FALLBACK_LOCALE];
+      if (enDict && typeof enDict[key] === 'string' && enDict[key].trim() !== '') {
+        val = enDict[key];
+      }
+    }
+
+    // 3. Резервный Fallback на русский язык
+    if (val === undefined && I18N_CACHE['ru'] && typeof I18N_CACHE['ru'][key] === 'string' && I18N_CACHE['ru'][key].trim() !== '') {
       val = I18N_CACHE['ru'][key];
-    } else if (I18N_CACHE['uz'] && typeof I18N_CACHE['uz'][key] !== 'undefined') {
-      val = I18N_CACHE['uz'][key];
-    } else {
-      val = fallback || '';
+    }
+
+    // 4. Гарантированный возврат без падения приложения
+    if (val === undefined) {
+      val = fallback || key;
     }
     if (typeof val === 'string' && val.includes(BANNED_EMAIL)) {
       val = val.replaceAll(BANNED_EMAIL, OFFICIAL_EMAIL);

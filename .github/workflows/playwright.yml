@@ -1,0 +1,51 @@
+name: Playwright E2E Production Tests
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+# Avoid concurrent redundant runs on the same branch
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  production-check:
+    name: Run E2E Production Smoke Checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js Environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Node Dependencies
+        run: npm ci || npm install
+
+      - name: Install Playwright Chromium with System Dependencies
+        run: npx playwright install --with-deps chromium
+
+      - name: Execute E2E Production Tests
+        env:
+          BASE_URL: https://eduhub-ai.onrender.com
+          CI: 'true'
+        run: npx playwright test
+
+      - name: Upload Test Failure Artifacts (Screenshots & Traces)
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-failure-artifacts
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 14
