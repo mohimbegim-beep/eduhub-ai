@@ -1338,5 +1338,6 @@
   "nav_home_short": "Inicio",
   "nav_ielts_short": "IELTS ",
   "nav_tutor_short": "Tutor IA",
-  "nav_pricing_short": "Precios"
+  "nav_pricing_short": "Precios",
+  "footer_academic_disclaimer": "Descargo de responsabilidad de integridad académica: EduHub AI es una herramienta pedagógica auxiliar diseñada exclusivamente para el estudio, tutoría y autoevaluación. Las explicaciones generadas son material de referencia y no deben presentarse como trabajos originales de los estudiantes. Los usuarios son responsables de cumplir las políticas académicas de sus instituciones."
 }
