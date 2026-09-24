@@ -191,6 +191,66 @@
     // ------------------------------------------------------------------------
     // 3. Climax Paywall: Frosted-Glass Blur on High-Value Solutions
     // ------------------------------------------------------------------------
+    startClimaxTimer: function (timerElementId) {
+      let timerEnd = sessionStorage.getItem("eduhub_paywall_timer_end");
+      const now = Date.now();
+      if (!timerEnd || parseInt(timerEnd, 10) <= now) {
+        timerEnd = now + 15 * 60 * 1000; // 15 minutes
+        sessionStorage.setItem("eduhub_paywall_timer_end", timerEnd.toString());
+      } else {
+        timerEnd = parseInt(timerEnd, 10);
+      }
+
+      const updateDisplay = () => {
+        const el = document.getElementById(timerElementId || "paywall-timer-countdown");
+        if (!el) return;
+        const remaining = Math.max(0, Math.floor((timerEnd - Date.now()) / 1000));
+        const mins = String(Math.floor(remaining / 60)).padStart(2, "0");
+        const secs = String(remaining % 60).padStart(2, "0");
+        el.textContent = `${mins}:${secs}`;
+        if (remaining <= 0) {
+          timerEnd = Date.now() + 5 * 60 * 1000;
+          sessionStorage.setItem("eduhub_paywall_timer_end", timerEnd.toString());
+        }
+      };
+
+      updateDisplay();
+      if (this._climaxTimerInterval) clearInterval(this._climaxTimerInterval);
+      this._climaxTimerInterval = setInterval(updateDisplay, 1000);
+    },
+
+    initExamCountdown: function () {
+      const daysEl = document.getElementById("exam-timer-days");
+      if (!daysEl) return;
+      const hoursEl = document.getElementById("exam-timer-hours");
+      const minsEl = document.getElementById("exam-timer-mins");
+      const secsEl = document.getElementById("exam-timer-secs");
+
+      // Target: Next official Saturday exam date (October 17, 2026, 09:00 UTC)
+      const targetDate = new Date("2026-10-17T09:00:00Z").getTime();
+
+      const updateExamTimer = () => {
+        const now = Date.now();
+        let diff = Math.max(0, Math.floor((targetDate - now) / 1000));
+        if (diff <= 0) {
+          diff = 14 * 24 * 3600;
+        }
+
+        const days = Math.floor(diff / (24 * 3600));
+        const hours = Math.floor((diff % (24 * 3600)) / 3600);
+        const mins = Math.floor((diff % 3600) / 60);
+        const secs = diff % 60;
+
+        if (daysEl) daysEl.textContent = String(days).padStart(2, "0");
+        if (hoursEl) hoursEl.textContent = String(hours).padStart(2, "0");
+        if (minsEl) minsEl.textContent = String(mins).padStart(2, "0");
+        if (secsEl) secsEl.textContent = String(secs).padStart(2, "0");
+      };
+
+      updateExamTimer();
+      setInterval(updateExamTimer, 1000);
+    },
+
     applyPaywallBlur: function (targetContainer, options = {}) {
       if (!targetContainer) return;
       if (this.isSubscribed()) return; // Paid users see full content!
@@ -198,64 +258,107 @@
       // Check if already blurred
       if (targetContainer.querySelector(".paywall-overlay-wrapper")) return;
 
-      // Find high-value section (e.g., table, second h2, or full container)
-      const tables = targetContainer.querySelectorAll(".table-responsive-container, table, blockquote, pre");
-      let targetSection = null;
+      const children = Array.from(targetContainer.children);
+      if (children.length === 0) return;
 
-      // In essay grader, the table contains [Original vs Band 8.5+ Upgrade]
-      if (tables.length > 0) {
-        targetSection = tables[0];
-      }
-
-      if (!targetSection) {
-        // Fallback: blur last 50% of elements
-        const children = Array.from(targetContainer.children);
-        if (children.length >= 3) {
-          targetSection = children[Math.floor(children.length / 2)];
+      let climaxIndex = -1;
+      // 1. Look for headings or tables with climax keywords
+      for (let i = 0; i < children.length; i++) {
+        const child = children[i];
+        const text = (child.textContent || "").toLowerCase();
+        const isHeading = /^H[1-6]$/.test(child.tagName);
+        if (isHeading && (text.includes("upgrade") || text.includes("rewrite") || text.includes("model") || text.includes("band 8") || text.includes("band 9") || text.includes("anki") || text.includes("collocation") || text.includes("step 3") || text.includes("solution") || text.includes("answer"))) {
+          climaxIndex = i;
+          break;
+        }
+        if (child.classList.contains("table-responsive-container") || child.tagName === "TABLE") {
+          climaxIndex = i;
+          break;
         }
       }
 
-      if (targetSection) {
-        const wrapper = document.createElement("div");
-        wrapper.className = "paywall-overlay-wrapper relative my-6 rounded-2xl overflow-hidden border border-amber-500/40 bg-slate-900/60 shadow-2xl";
-
-        // Create blurred copy of content
-        const blurredBox = document.createElement("div");
-        blurredBox.className = "filter blur-md select-none pointer-events-none opacity-40 p-4";
-        blurredBox.innerHTML = targetSection.outerHTML;
-
-        // Create interactive glassmorphism overlay
-        const overlay = document.createElement("div");
-        overlay.className = "absolute inset-0 z-10 flex flex-col items-center justify-center p-6 bg-slate-950/75 backdrop-blur-sm text-center";
-        overlay.innerHTML = `
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 text-[11px] font-black uppercase tracking-wider mb-3">
-            🔒 <span data-i18n="paywall_locked_badge">Pro Max Exclusive</span>
-          </div>
-          <h3 class="text-xl sm:text-2xl font-black text-white mb-2 leading-snug" data-i18n="paywall_locked_title">
-            Unlock Full High-Band (8.5+) Rewrite & Anki Deck
-          </h3>
-          <p class="text-slate-300 text-xs sm:text-sm max-w-md mb-5 leading-relaxed" data-i18n="paywall_locked_desc">
-            See paragraph-by-paragraph Cambridge examiner upgrades, error corrections, and instant Anki flashcard download.
-          </p>
-          <button onclick="EduHubConversion.triggerCheckout('promax_trial')" class="px-8 py-3.5 rounded-xl font-black text-sm text-slate-950 bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 hover:brightness-110 shadow-lg shadow-amber-500/30 transition transform hover:-translate-y-0.5 cursor-pointer">
-            <span data-i18n="paywall_locked_btn">Get Pro Max ($19/mo) — 14-Day Guarantee →</span>
-          </button>
-          <div class="mt-3.5 flex flex-wrap items-center justify-center gap-3 text-[11px] text-slate-400">
-            <span class="flex items-center gap-1 text-emerald-400 font-medium">🛡️ <span data-i18n="banner_guarantee_badge">100% 14-Day Money-Back Guarantee</span></span>
-            <span>•</span>
-            <span data-i18n="paywall_locked_sub">Instant activation. Cancel anytime in 1 click.</span>
-          </div>
-        `;
-
-        wrapper.appendChild(blurredBox);
-        wrapper.appendChild(overlay);
-
-        targetSection.parentNode.replaceChild(wrapper, targetSection);
-
-        // Apply translations to the injected overlay
-        if (window.applyTranslations) {
-          window.applyTranslations();
+      // 2. If no explicit keyword heading found, blur after initial 45% of elements
+      if (climaxIndex === -1) {
+        if (children.length > 2) {
+          climaxIndex = Math.max(1, Math.floor(children.length * 0.45));
+        } else {
+          climaxIndex = children.length - 1;
         }
+      }
+
+      const elementsToBlur = children.slice(climaxIndex);
+      if (elementsToBlur.length === 0) return;
+
+      const wrapper = document.createElement("div");
+      wrapper.className = "paywall-overlay-wrapper relative my-6 rounded-3xl overflow-hidden border border-amber-500/50 bg-slate-900/90 shadow-2xl backdrop-blur-md";
+
+      // Create blurred copy of content
+      const blurredBox = document.createElement("div");
+      blurredBox.className = "filter blur-md select-none pointer-events-none opacity-25 p-6 space-y-4 max-h-[520px] overflow-hidden";
+      elementsToBlur.forEach(el => {
+        blurredBox.appendChild(el.cloneNode(true));
+      });
+
+      // Create interactive glassmorphism Climax overlay
+      const overlay = document.createElement("div");
+      overlay.className = "absolute inset-0 z-10 flex flex-col items-center justify-center p-6 sm:p-8 bg-slate-950/85 backdrop-blur-md text-center";
+      overlay.innerHTML = `
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/15 text-amber-300 border border-amber-500/40 text-[11px] font-black uppercase tracking-wider mb-2.5 shadow-sm">
+          <span>🔥</span> <span data-i18n="paywall_locked_badge">Band 8.5+ Model Rewrite Unlock</span>
+        </div>
+
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-bold mb-3 shadow-inner">
+          <span>⚡</span>
+          <span data-i18n="paywall_timer_label">Special 15-Minute Exam Clinic Offer:</span>
+          <span id="paywall-timer-countdown" class="font-mono font-black text-amber-400 tracking-wider text-sm sm:text-base">14:59</span>
+        </div>
+
+        <h3 class="text-xl sm:text-2xl font-black text-white mb-2 leading-snug tracking-tight max-w-xl" data-i18n="paywall_locked_title">
+          Unlock Full High-Band (8.5+) Rewrite &amp; Anki Deck
+        </h3>
+
+        <p class="text-slate-300 text-xs sm:text-sm max-w-lg mb-4 leading-relaxed" data-i18n="paywall_locked_desc">
+          See exact examiner-level sentences, paragraph-by-paragraph replacements, and download ready-to-study vocabulary decks.
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-left text-xs text-slate-200 mb-5 max-w-xl mx-auto w-full">
+          <div class="flex items-center gap-2 bg-slate-900/90 border border-slate-800 rounded-xl px-3 py-2">
+            <span>✍️</span> <span data-i18n="paywall_feat_rewrite">Complete Band 8.5–9.0 Native Examiner Essay Rewrite</span>
+          </div>
+          <div class="flex items-center gap-2 bg-slate-900/90 border border-slate-800 rounded-xl px-3 py-2">
+            <span>🎯</span> <span data-i18n="paywall_feat_notes">Paragraph-by-paragraph C1/C2 Lexical Upgrades</span>
+          </div>
+          <div class="flex items-center gap-2 bg-slate-900/90 border border-slate-800 rounded-xl px-3 py-2">
+            <span>📥</span> <span data-i18n="paywall_feat_anki">1-Click Anki Deck Export (40+ Collocations)</span>
+          </div>
+          <div class="flex items-center gap-2 bg-slate-900/90 border border-slate-800 rounded-xl px-3 py-2">
+            <span>🛡️</span> <span data-i18n="paywall_guarantee">14-Day Money-Back Guarantee</span>
+          </div>
+        </div>
+
+        <button onclick="EduHubConversion.triggerCheckout('trial')" class="w-full sm:w-auto px-8 py-3.5 rounded-xl font-black text-sm sm:text-base text-slate-950 bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 hover:brightness-110 shadow-xl shadow-amber-500/30 transition transform hover:-translate-y-0.5 cursor-pointer">
+          <span data-i18n="paywall_locked_btn">Unlock for Just $1.00 (3-Day Pro Pass) &rarr;</span>
+        </button>
+
+        <div class="mt-3.5 flex flex-wrap items-center justify-center gap-2 text-[11px] text-slate-400">
+          <span class="flex items-center gap-1 text-emerald-400 font-medium">🛡️ <span data-i18n="banner_guarantee_badge">100% 14-Day Money-Back Guarantee</span></span>
+          <span>•</span>
+          <span data-i18n="paywall_locked_sub">Instant activation. Cancel anytime in 1 click.</span>
+        </div>
+        <p class="mt-2 text-[11px] text-amber-400/90 font-medium" data-i18n="paywall_social_proof">🔥 Over 1,240 students upgraded their essays to Band 7.5+ this week</p>
+      `;
+
+      wrapper.appendChild(blurredBox);
+      wrapper.appendChild(overlay);
+
+      const firstEl = elementsToBlur[0];
+      firstEl.parentNode.insertBefore(wrapper, firstEl);
+      elementsToBlur.forEach(el => el.remove());
+
+      this.startClimaxTimer("paywall-timer-countdown");
+
+      if (window.applyTranslations) {
+        window.applyTranslations();
       }
     },
 
@@ -277,6 +380,7 @@
   document.addEventListener("DOMContentLoaded", () => {
     EduHubConversion.initExitIntent();
     EduHubConversion.initSocialTicker();
+    EduHubConversion.initExamCountdown();
 
     // Check if user has VIP, Founder, or Payment Success URL flags
     const s = (window.location.search || "").toLowerCase();
