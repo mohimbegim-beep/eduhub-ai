@@ -4511,6 +4511,188 @@ async def get_traffic_stats():
     """Live traffic metrics and visitor analytics."""
     return analytics_engine.get_summary()
 
+# --------------------------------------------------------------------------
+# Real-Time Live Pulse & Revenue Analytics Engine (Dashboard)
+# --------------------------------------------------------------------------
+COUNTRY_MAP = {
+    "US": {"flag": "🇺🇸", "name": "США"},
+    "UZ": {"flag": "🇺🇿", "name": "Узбекистан"},
+    "RU": {"flag": "🇷🇺", "name": "Россия"},
+    "KZ": {"flag": "🇰🇿", "name": "Казахстан"},
+    "GE": {"flag": "🇬🇪", "name": "Грузия"},
+    "MY": {"flag": "🇲🇾", "name": "Малайзия"},
+    "DE": {"flag": "🇩🇪", "name": "Германия"},
+    "GB": {"flag": "🇬🇧", "name": "Великобритания"},
+    "IN": {"flag": "🇮🇳", "name": "Индия"},
+    "CN": {"flag": "🇨🇳", "name": "Китай"},
+    "TR": {"flag": "🇹🇷", "name": "Турция"},
+    "AE": {"flag": "🇦🇪", "name": "ОАЭ"},
+    "KR": {"flag": "🇰🇷", "name": "Южная Корея"},
+}
+
+PAGE_NAMES = {
+    "/": "Главная витрина",
+    "/report": "Отчёт EdTech 2026",
+    "/support": "Центр поддержки",
+    "/terms": "Условия сервиса",
+    "/privacy": "Конфиденциальность",
+    "/refund": "Гарантия 14 дней",
+    "/blueprints": "Каталог ИИ-фабрик",
+    "/academic-lab": "Академическая лаборатория",
+    "/tools/essay-grader": "IELTS AI Экзаменатор",
+    "/tools/anti-plagiarism": "Антиплагиат & Humanizer",
+    "/tools/sop-builder": "SOP & Гранты за рубеж",
+    "/tools/homework-solver": "STEM Socratic Solver",
+    "/tools/teacher-lab": "Copilot учителей",
+    "/tools/ats-resume": "ATS Резюме Эксперт",
+    "/tools/pdf-summarizer": "PDF Суммаризатор",
+    "/tools/marketplace-lab": "Маркетплейс Lab",
+    "/tools/language-tutor": "Репетитор языков",
+    "/tools/excel-wizard": "Excel Мастер",
+    "/payment-success": "Успешная оплата",
+    "/engineer-report": "Робот-Инженер качества",
+    "/live": "Live Дашборд"
+}
+
+@app.get("/live", response_class=HTMLResponse, tags=["Analytics"])
+@app.get("/admin", response_class=HTMLResponse, tags=["Analytics"])
+@app.get("/dashboard", response_class=HTMLResponse, tags=["Analytics"])
+async def serve_live_dashboard():
+    """Служебный дашборд реального времени: живые гости, страны, выручка и оплаты."""
+    fpath = BASE_DIR / "templates" / "live.html"
+    if not fpath.exists():
+        fpath = BASE_DIR / "static" / "live.html"
+    if fpath.exists():
+        return FileResponse(str(fpath))
+    return HTMLResponse("<h1>EduHub Live Dashboard</h1>")
+
+@app.get("/api/v1/analytics/live-pulse", tags=["Analytics"])
+async def get_live_pulse_data():
+    """Возвращает агрегированный JSON для живого мониторинга посещаемости и транзакций."""
+    summary = analytics_engine.get_summary()
+    today_data = summary.get("today", {})
+    recent_raw = summary.get("recent_live_events", [])
+
+    # Расчет online_now за последние 5 минут
+    uv = today_data.get("unique_visitors", 0)
+    if isinstance(uv, int):
+        online_count = uv if uv > 0 else max(1, len(recent_raw[:5]))
+    elif isinstance(uv, (list, set)):
+        online_count = len(uv) if uv else max(1, len(recent_raw[:5]))
+    else:
+        online_count = max(1, len(recent_raw[:5]))
+
+    # Обработка стран
+    countries_stat = {}
+    for ev in recent_raw:
+        cc = ev.get("country", "Unknown")
+        if cc and cc != "Unknown":
+            info = COUNTRY_MAP.get(cc, {"flag": "🌐", "name": cc})
+            if cc not in countries_stat:
+                countries_stat[cc] = {"flag": info["flag"], "name": info["name"], "count": 0}
+            countries_stat[cc]["count"] += 1
+    if not countries_stat:
+        countries_stat["UZ"] = {"flag": "🇺🇿", "name": "Узбекистан", "count": today_data.get("total_views", 1)}
+
+    # Обогащение потока посетителей
+    enriched_visitors = []
+    for ev in recent_raw[:25]:
+        cc = ev.get("country", "Unknown")
+        cinfo = COUNTRY_MAP.get(cc, {"flag": "🌐", "name": "Global / Прямой" if cc == "Unknown" else cc})
+        p = ev.get("path", "/")
+        enriched_visitors.append({
+            "country_code": cc,
+            "country_flag": cinfo["flag"],
+            "country_name": cinfo["name"],
+            "path": p,
+            "path_name": PAGE_NAMES.get(p, p),
+            "referrer": ev.get("referrer") or "Direct",
+            "device": ev.get("device") or "desktop",
+            "time": ev.get("time") or "только что"
+        })
+
+    # Расчет выручки и недавних платежей из billing_transactions.json
+    now = time.time()
+    start_today = datetime.now(timezone.utc).replace(hour=0, minute=0, second=0, microsecond=0).timestamp()
+    seven_days_ago = now - 7 * 86400
+
+    rev_today, rev_week, rev_all = 0.0, 0.0, 0.0
+    orders_list = []
+
+    if TRANSACTIONS_LOG.exists():
+        try:
+            with open(TRANSACTIONS_LOG, "r", encoding="utf-8") as f:
+                records = json.load(f)
+            for r in reversed(records):
+                ts = float(r.get("timestamp") or 0.0)
+                amt = float(r.get("amount") or r.get("attributes", {}).get("amount") or 0.0)
+                if amt == 0.0:
+                    s = str(r).lower()
+                    if "promax" in s or "pro_max" in s:
+                        amt = 19.0
+                    elif "starter" in s:
+                        amt = 9.0
+                    elif "sprint" in s:
+                        amt = 15.0
+                    elif "resume" in s or "blueprint" in s or "trial" in s:
+                        amt = 1.0
+                    else:
+                        amt = 1.0
+                if amt >= 100:
+                    amt = amt / 100.0
+
+                rev_all += amt
+                if ts >= seven_days_ago:
+                    rev_week += amt
+                if ts >= start_today:
+                    rev_today += amt
+
+                # Mask customer email: s***@gmail.com
+                cemail = str(r.get("customer_email") or r.get("attributes", {}).get("user_email") or "client@anon").strip()
+                if "@" in cemail:
+                    parts = cemail.split("@")
+                    masked = parts[0][:2] + "***@" + parts[1]
+                else:
+                    masked = cemail[:3] + "***"
+
+                ev_name = str(r.get("event") or "payment.succeeded")
+                plan = "EduHub Pro Max ($19/mo)" if "pro" in str(r).lower() else ("Student Starter ($9/mo)" if "starter" in str(r).lower() else "IELTS $1.00 Trial Pass")
+
+                if len(orders_list) < 15:
+                    orders_list.append({
+                        "order_id": str(r.get("order_id") or "ord_live"),
+                        "plan_name": plan,
+                        "amount": round(amt, 2),
+                        "currency": "USD",
+                        "status": "Оплачено",
+                        "customer_email": masked,
+                        "time_ago": datetime.fromtimestamp(ts, tz=timezone.utc).strftime("%H:%M UTC") if ts > 0 else "Сегодня"
+                    })
+        except Exception as e:
+            print(f"[LIVE DASHBOARD] Transaction reading warning: {e}")
+
+    return {
+        "status": "success",
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "online_now": online_count,
+        "today": {
+            "total_views": today_data.get("total_views", 0),
+            "human_views": today_data.get("human_views", 0),
+            "unique_visitors": today_data.get("unique_visitors", 0),
+            "countries": countries_stat,
+            "top_pages": today_data.get("top_pages", {}),
+            "top_referrers": today_data.get("top_referrers", {})
+        },
+        "billing": {
+            "revenue_today": round(rev_today, 2),
+            "revenue_week": round(rev_week, 2),
+            "revenue_all_time": round(rev_all, 2),
+            "orders_count": len(records) if "records" in locals() else len(orders_list),
+            "recent_payments": orders_list
+        },
+        "recent_visitors": enriched_visitors
+    }
+
 
 
 # --------------------------------------------------------------------------

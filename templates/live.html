@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="ru" class="notranslate scroll-smooth">
+<head>
+    <meta name="google" content="notranslate">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduHub AI — Real-Time Live Pulse &amp; Revenue Dashboard</title>
+    <meta name="description" content="Official real-time visitor telemetry, live revenue analytics, and transaction feed for EduHub AI.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/static/css/safari_compat.css">
+    <link rel="stylesheet" href="/static/css/theme-system.css">
+    
+    <!-- OpenGraph Social Cards -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="EduHub AI — Real-Time Live Pulse &amp; Revenue Dashboard">
+    <meta property="og:description" content="Real-time visitor analytics and transactions stream for EduHub AI.">
+    <meta property="og:url" content="https://eduhub-ai.onrender.com/live">
+    <meta property="og:image" content="https://eduhub-ai.onrender.com/static/img/og_banner.png">
+    
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="EduHub AI — Real-Time Live Pulse &amp; Revenue Dashboard">
+    <meta name="twitter:description" content="Real-time visitor analytics and transactions stream for EduHub AI.">
+    <meta name="twitter:image" content="https://eduhub-ai.onrender.com/static/img/og_banner.png">
+    
+    <!-- JSON-LD Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "EduHub AI — Real-Time Live Pulse & Revenue Dashboard",
+        "url": "https://eduhub-ai.onrender.com/live",
+        "description": "Real-time visitor analytics and transactions stream for EduHub AI.",
+        "publisher": {
+            "@type": "Organization",
+            "name": "EduHub AI",
+            "url": "https://eduhub-ai.onrender.com"
+        }
+    }
+    </script>
+
+    <style>
+        @keyframes radar-pulse {
+            0% { transform: scale(0.95); opacity: 0.9; }
+            50% { transform: scale(1.3); opacity: 0.3; }
+            100% { transform: scale(0.95); opacity: 0.9; }
+        }
+        .radar-pulse { animation: radar-pulse 2s infinite ease-in-out; }
+        .glass-card {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-card:hover {
+            border-color: rgba(255, 255, 255, 0.16);
+        }
+    </style>
+</head>
+<body class="bg-[#030712] text-slate-200 font-sans min-h-screen flex flex-col justify-between selection:bg-blue-600 selection:text-white">
+
+    <!-- Top Navigation -->
+    <header class="border-b border-white/[0.08] bg-slate-950/80 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex justify-between items-center">
+            
+            <!-- Brand & Pulse Badge -->
+            <div class="flex items-center space-x-3">
+                <a href="/" class="flex items-center space-x-2">
+                    <span class="w-8 h-8 rounded-lg bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center font-black text-white text-lg shadow-md shadow-blue-500/30">E</span>
+                    <span class="text-xl font-bold bg-gradient-to-r from-blue-400 via-indigo-300 to-white bg-clip-text text-transparent">EduHub AI</span>
+                </a>
+                <div class="inline-flex items-center gap-2 bg-emerald-950/80 border border-emerald-600/50 px-3 py-1 rounded-full text-xs font-semibold text-emerald-300">
+                    <span class="relative flex h-2 w-2">
+                        <span class="radar-pulse absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                    </span>
+                    <span>LIVE PULSE</span>
+                </div>
+            </div>
+
+            <!-- Controls & Links -->
+            <div class="flex items-center space-x-2 sm:space-x-3 text-xs">
+                
+                <!-- Countdown Ticker -->
+                <div class="hidden sm:flex items-center gap-1.5 bg-slate-900 border border-white/[0.08] px-3 py-1.5 rounded-xl font-mono text-slate-300">
+                    <span class="text-slate-400">Обновление:</span>
+                    <span id="countdown" class="text-blue-400 font-bold">3с</span>
+                </div>
+
+                <!-- Sound Toggle -->
+                <button id="sound-btn" onclick="toggleSound()" class="flex items-center gap-1.5 bg-slate-900 hover:bg-slate-800 border border-white/[0.08] px-3 py-1.5 rounded-xl text-slate-300 hover:text-white transition" title="Звук при новой оплате">
+                    <span id="sound-icon">🔔</span>
+                    <span class="hidden md:inline" id="sound-label">Звук вкл</span>
+                </button>
+
+                <!-- Dodo Portal Link -->
+                <a href="https://app.dodopayments.com" target="_blank" rel="noopener noreferrer" class="hidden md:inline-flex items-center gap-1.5 bg-indigo-950 hover:bg-indigo-900 border border-indigo-700/60 px-3 py-1.5 rounded-xl text-indigo-300 hover:text-white transition">
+                    <span>💳 Dodo Portal ↗</span>
+                </a>
+
+                <!-- Back to Site -->
+                <a href="/" class="bg-blue-600 hover:bg-blue-500 text-white font-semibold px-3.5 py-1.5 rounded-xl transition shadow-md shadow-blue-500/20">
+                    На сайт &rarr;
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex-grow space-y-8">
+        
+        <!-- Header Banner -->
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-white/[0.06] pb-6">
+            <div>
+                <h1 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight flex items-center gap-2.5">
+                    <span>Центр управления в реальном времени</span>
+                </h1>
+                <p class="text-xs sm:text-sm text-slate-400 mt-1">
+                    Мониторинг гостей, географии, переходов и входящих платежей Dodo Payments Inc. MoR с авто-обновлением каждые 3 секунды.
+                </p>
+            </div>
+            <div class="flex items-center gap-2">
+                <button onclick="fetchLivePulse(true)" class="bg-slate-900 hover:bg-slate-800 border border-white/[0.08] text-xs font-semibold px-3.5 py-2 rounded-xl text-slate-300 hover:text-white transition flex items-center gap-1.5">
+                    <span id="refresh-spinner">🔄</span>
+                    <span>Обновить сейчас</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- ROW 1: 4 KEY KPI WIDGETS -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            
+            <!-- KPI 1: Active Online Now -->
+            <div class="glass-card rounded-2xl p-5 relative overflow-hidden">
+                <div class="flex justify-between items-start">
+                    <span class="text-xs font-bold uppercase tracking-wider text-emerald-400">Онлайн прямо сейчас</span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 radar-pulse"></span>
+                </div>
+                <div class="mt-3 flex items-baseline gap-2">
+                    <span id="kpi-online" class="text-4xl font-black text-white">0</span>
+                    <span class="text-xs text-slate-400">гостей на сайте</span>
+                </div>
+                <p class="text-[11px] text-slate-400 mt-2 flex items-center gap-1">
+                    <span>🕒 Активность за 5 минут</span>
+                </p>
+            </div>
+
+            <!-- KPI 2: Today Visitors -->
+            <div class="glass-card rounded-2xl p-5">
+                <div class="flex justify-between items-start">
+                    <span class="text-xs font-bold uppercase tracking-wider text-blue-400">Посетители за сегодня</span>
+                    <span class="text-lg">👥</span>
+                </div>
+                <div class="mt-3 flex items-baseline gap-2">
+                    <span id="kpi-today-views" class="text-4xl font-black text-white">0</span>
+                    <span class="text-xs text-slate-400">просмотров</span>
+                </div>
+                <p class="text-[11px] text-slate-400 mt-2">
+                    <span id="kpi-unique-count" class="text-blue-300 font-bold">0</span> уникальных гостей
+                </p>
+            </div>
+
+            <!-- KPI 3: Revenue Scoreboard -->
+            <div class="glass-card rounded-2xl p-5 bg-gradient-to-br from-emerald-950/30 to-slate-900 border-emerald-500/30">
+                <div class="flex justify-between items-start">
+                    <span class="text-xs font-bold uppercase tracking-wider text-emerald-400">Выручка за сегодня</span>
+                    <span class="text-lg">💰</span>
+                </div>
+                <div class="mt-3 flex items-baseline gap-1.5">
+                    <span class="text-2xl font-bold text-emerald-400">$</span>
+                    <span id="kpi-rev-today" class="text-4xl font-black text-white">0.00</span>
+                    <span class="text-xs text-slate-400">USD</span>
+                </div>
+                <p class="text-[11px] text-slate-400 mt-2 flex items-center justify-between">
+                    <span>7 дней: <strong id="kpi-rev-week" class="text-emerald-300">$0.00</strong></span>
+                    <span>Всего: <strong id="kpi-rev-all" class="text-slate-200">$0.00</strong></span>
+                </p>
+            </div>
+
+            <!-- KPI 4: Geography & Top Countries -->
+            <div class="glass-card rounded-2xl p-5">
+                <div class="flex justify-between items-start">
+                    <span class="text-xs font-bold uppercase tracking-wider text-purple-400">География гостей</span>
+                    <span class="text-lg">🌍</span>
+                </div>
+                <div class="mt-3 flex items-baseline gap-2">
+                    <span id="kpi-countries-count" class="text-3xl font-black text-white">0</span>
+                    <span class="text-xs text-slate-400">стран</span>
+                </div>
+                <div id="kpi-flags-strip" class="text-base mt-2 flex items-center gap-1.5 flex-wrap">
+                    <span class="text-xs text-slate-500">Загрузка...</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ROW 2: SIDE-BY-SIDE LIVE STREAMS (PAYMENTS & VISITORS) -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            
+            <!-- LEFT COLUMN: LIVE PAYMENTS & ORDERS FEED -->
+            <div class="glass-card rounded-3xl p-6 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between mb-4 pb-3 border-b border-white/[0.08]">
+                        <div class="flex items-center gap-2">
+                            <span class="text-lg">🧾</span>
+                            <h2 class="text-base font-bold text-white">Живая лента покупок (Dodo Payments)</h2>
+                        </div>
+                        <span id="orders-badge" class="bg-emerald-950 text-emerald-300 border border-emerald-700/80 px-2.5 py-0.5 rounded-full text-xs font-bold">
+                            0 заказов
+                        </span>
+                    </div>
+
+                    <div id="payments-feed" class="space-y-3 max-h-[460px] overflow-y-auto pr-1">
+                        <div class="text-center py-10 text-slate-500 text-xs">
+                            Ожидание транзакций...
+                        </div>
+                    </div>
+                </div>
+                <div class="pt-4 border-t border-white/[0.06] mt-4 flex justify-between items-center text-xs text-slate-400">
+                    <span>Шлюз: Dodo Payments Inc. MoR</span>
+                    <a href="https://app.dodopayments.com" target="_blank" class="text-blue-400 hover:underline">Подробный реестр счетов &rarr;</a>
+                </div>
+            </div>
+
+            <!-- RIGHT COLUMN: LIVE VISITOR TELEMETRY STREAM -->
+            <div class="glass-card rounded-3xl p-6 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between mb-4 pb-3 border-b border-white/[0.08]">
+                        <div class="flex items-center gap-2">
+                            <span class="text-lg">⚡</span>
+                            <h2 class="text-base font-bold text-white">Поток посетителей в реальном времени</h2>
+                        </div>
+                        <span class="text-xs text-slate-400 font-mono" id="last-ping-time">
+                            Online
+                        </span>
+                    </div>
+
+                    <div id="visitors-feed" class="space-y-2.5 max-h-[460px] overflow-y-auto pr-1">
+                        <div class="text-center py-10 text-slate-500 text-xs">
+                            Ожидание посетителей...
+                        </div>
+                    </div>
+                </div>
+                <div class="pt-4 border-t border-white/[0.06] mt-4 flex justify-between items-center text-xs text-slate-400">
+                    <span>Конфиденциальность: IP анонимизированы (GDPR)</span>
+                    <span class="text-emerald-400 font-medium">● 0ms задержки</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ROW 3: TOP PAGES & TRAFFIC CHANNELS -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            <!-- Most Popular Pages Today -->
+            <div class="glass-card rounded-3xl p-6">
+                <div class="flex items-center justify-between mb-4 pb-3 border-b border-white/[0.08]">
+                    <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                        <span>🔥</span>
+                        <span>Популярные страницы сегодня</span>
+                    </h3>
+                    <span class="text-xs text-slate-500">По просмотрам</span>
+                </div>
+                <div id="top-pages-list" class="space-y-3">
+                    <div class="text-center py-6 text-slate-500 text-xs">Загрузка...</div>
+                </div>
+            </div>
+
+            <!-- Traffic Sources / Referrers -->
+            <div class="glass-card rounded-3xl p-6">
+                <div class="flex items-center justify-between mb-4 pb-3 border-b border-white/[0.08]">
+                    <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                        <span>🚀</span>
+                        <span>Каналы переходов (Источники трафика)</span>
+                    </h3>
+                    <span class="text-xs text-slate-500">Referrers</span>
+                </div>
+                <div id="top-referrers-list" class="space-y-3">
+                    <div class="text-center py-6 text-slate-500 text-xs">Загрузка...</div>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/[0.08] bg-slate-950 py-6 text-center text-xs text-slate-500">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-2">
+            <span>&copy; 2026 EduHub AI. Real-Time Telemetry &amp; Revenue Operations.</span>
+            <span>Официальная поддержка: <strong class="text-slate-300">mahallamade.uz@gmail.com</strong> &bull; Telegram: <strong class="text-blue-400">@mahallamade_m</strong></span>
+        </div>
+    </footer>
+
+    <!-- Real-Time Auto-Refresh Client Script -->
+    <script>
+        let countdownSeconds = 3;
+        let isSoundEnabled = true;
+        let knownOrderIds = new Set();
+        let isFirstLoad = true;
+
+        // Audio notification using Web Audio API (gentle high-pitch chime)
+        function playChime() {
+            if (!isSoundEnabled) return;
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = "sine";
+                osc.frequency.setValueAtTime(587.33, ctx.currentTime); // D5
+                osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.15); // A5
+                gain.gain.setValueAtTime(0.15, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.4);
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start();
+                osc.stop(ctx.currentTime + 0.4);
+            } catch (e) {}
+        }
+
+        function toggleSound() {
+            isSoundEnabled = !isSoundEnabled;
+            document.getElementById("sound-icon").textContent = isSoundEnabled ? "🔔" : "🔕";
+            document.getElementById("sound-label").textContent = isSoundEnabled ? "Звук вкл" : "Звук выкл";
+        }
+
+        async function fetchLivePulse(isManual = false) {
+            const spinner = document.getElementById("refresh-spinner");
+            if (isManual && spinner) spinner.classList.add("animate-spin");
+
+            try {
+                const res = await fetch("/api/v1/analytics/live-pulse?t=" + Date.now());
+                if (!res.ok) throw new Error("HTTP " + res.status);
+                const data = await res.json();
+                renderDashboard(data);
+            } catch (err) {
+                console.warn("[LIVE PULSE] Fetch error:", err);
+            } finally {
+                if (isManual && spinner) spinner.classList.remove("animate-spin");
+            }
+        }
+
+        function renderDashboard(data) {
+            // 1. KPIs
+            const kpiOnline = document.getElementById("kpi-online");
+            if (kpiOnline) kpiOnline.textContent = data.online_now || 0;
+
+            const kpiTodayViews = document.getElementById("kpi-today-views");
+            if (kpiTodayViews) kpiTodayViews.textContent = (data.today && data.today.total_views) || 0;
+
+            const kpiUnique = document.getElementById("kpi-unique-count");
+            if (kpiUnique) kpiUnique.textContent = (data.today && data.today.unique_visitors) || 0;
+
+            const b = data.billing || {};
+            const revToday = document.getElementById("kpi-rev-today");
+            if (revToday) revToday.textContent = (b.revenue_today || 0).toFixed(2);
+
+            const revWeek = document.getElementById("kpi-rev-week");
+            if (revWeek) revWeek.textContent = "$" + (b.revenue_week || 0).toFixed(2);
+
+            const revAll = document.getElementById("kpi-rev-all");
+            if (revAll) revAll.textContent = "$" + (b.revenue_all_time || 0).toFixed(2);
+
+            // Countries & flags
+            const countries = data.today && data.today.countries ? data.today.countries : {};
+            const countEntries = Object.entries(countries);
+            const kpiCountries = document.getElementById("kpi-countries-count");
+            if (kpiCountries) kpiCountries.textContent = countEntries.length;
+
+            const flagsStrip = document.getElementById("kpi-flags-strip");
+            if (flagsStrip) {
+                if (countEntries.length === 0) {
+                    flagsStrip.innerHTML = '<span class="text-xs text-slate-500">Данные за сегодня</span>';
+                } else {
+                    flagsStrip.innerHTML = countEntries.map(([cc, info]) => {
+                        return `<span class="inline-flex items-center gap-1 bg-slate-900 border border-white/[0.08] px-2 py-0.5 rounded-lg text-xs" title="${info.name || cc}: ${info.count} визитов">
+                            <span>${info.flag || '🌐'}</span>
+                            <span class="text-slate-300 font-bold">${info.count}</span>
+                        </span>`;
+                    }).join('');
+                }
+            }
+
+            // 2. Payments Feed
+            const payments = b.recent_payments || [];
+            const ordersBadge = document.getElementById("orders-badge");
+            if (ordersBadge) ordersBadge.textContent = `${b.orders_count || payments.length} заказов`;
+
+            const paymentsFeed = document.getElementById("payments-feed");
+            if (paymentsFeed) {
+                if (payments.length === 0) {
+                    paymentsFeed.innerHTML = '<div class="text-center py-10 text-slate-500 text-xs">Нет новых оплат. Ожидание первого клиента...</div>';
+                } else {
+                    // Check for new order to chime
+                    if (!isFirstLoad) {
+                        for (let p of payments) {
+                            if (p.order_id && !knownOrderIds.has(p.order_id)) {
+                                playChime();
+                                break;
+                            }
+                        }
+                    }
+                    payments.forEach(p => { if (p.order_id) knownOrderIds.add(p.order_id); });
+
+                    paymentsFeed.innerHTML = payments.map(p => {
+                        return `
+                        <div class="bg-slate-900/90 border border-emerald-500/20 hover:border-emerald-500/40 rounded-2xl p-4 flex items-center justify-between transition">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 font-black text-sm shrink-0">
+                                    +$
+                                </div>
+                                <div>
+                                    <div class="flex items-center gap-2">
+                                        <span class="text-xs font-bold text-white">${p.plan_name || 'EduHub Access Pass'}</span>
+                                        <span class="text-[10px] bg-emerald-950 text-emerald-300 border border-emerald-700/60 px-1.5 py-0.2 rounded-md font-mono font-bold">Оплачено</span>
+                                    </div>
+                                    <div class="text-[11px] text-slate-400 mt-0.5 flex items-center gap-2">
+                                        <span>${p.customer_email || 'client@anon'}</span>
+                                        <span>&bull;</span>
+                                        <span class="font-mono text-[10px] text-slate-500">${p.order_id}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-right shrink-0">
+                                <div class="text-sm font-extrabold text-emerald-400 font-mono">+$${(p.amount || 0).toFixed(2)}</div>
+                                <div class="text-[10px] text-slate-500 mt-0.5">${p.time_ago || 'Сегодня'}</div>
+                            </div>
+                        </div>`;
+                    }).join('');
+                }
+            }
+
+            // 3. Visitors Feed
+            const visitors = data.recent_visitors || [];
+            const visitorsFeed = document.getElementById("visitors-feed");
+            if (visitorsFeed) {
+                if (visitors.length === 0) {
+                    visitorsFeed.innerHTML = '<div class="text-center py-10 text-slate-500 text-xs">Ожидание трафика...</div>';
+                } else {
+                    visitorsFeed.innerHTML = visitors.map(v => {
+                        const deviceIcon = v.device === 'mobile' ? '📱' : '💻';
+                        return `
+                        <div class="bg-slate-900/70 border border-white/[0.06] hover:border-white/[0.12] rounded-xl px-3.5 py-2.5 flex items-center justify-between text-xs transition">
+                            <div class="flex items-center gap-2.5 min-w-0">
+                                <span class="text-base shrink-0">${v.country_flag || '🌐'}</span>
+                                <div class="min-w-0">
+                                    <div class="text-slate-200 font-medium truncate flex items-center gap-1.5">
+                                        <span class="truncate">${v.path_name || v.path}</span>
+                                        <span class="text-[10px] text-slate-500 font-mono truncate">(${v.path})</span>
+                                    </div>
+                                    <div class="text-[10px] text-slate-400 flex items-center gap-2 mt-0.5">
+                                        <span>${v.country_name || v.country_code}</span>
+                                        <span>&bull;</span>
+                                        <span class="text-blue-400 font-medium">${v.referrer}</span>
+                                        <span>&bull;</span>
+                                        <span>${deviceIcon} ${v.device}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-[10px] font-mono text-slate-400 shrink-0 ml-2">
+                                ${v.time}
+                            </div>
+                        </div>`;
+                    }).join('');
+                }
+            }
+
+            // 4. Top Pages
+            const topPages = (data.today && data.today.top_pages) || {};
+            const pagesList = document.getElementById("top-pages-list");
+            if (pagesList) {
+                const entries = Object.entries(topPages);
+                if (entries.length === 0) {
+                    pagesList.innerHTML = '<div class="text-center py-4 text-slate-500 text-xs">Нет данных</div>';
+                } else {
+                    const maxViews = Math.max(...entries.map(e => e[1])) || 1;
+                    pagesList.innerHTML = entries.slice(0, 5).map(([path, count]) => {
+                        const pct = Math.round((count / maxViews) * 100);
+                        return `
+                        <div>
+                            <div class="flex justify-between text-xs mb-1">
+                                <span class="font-medium text-slate-300 font-mono text-[11px] truncate">${path}</span>
+                                <span class="font-bold text-blue-400">${count} визитов</span>
+                            </div>
+                            <div class="w-full bg-slate-950 rounded-full h-1.5 overflow-hidden">
+                                <div class="bg-blue-500 h-1.5 rounded-full" style="width: ${pct}%"></div>
+                            </div>
+                        </div>`;
+                    }).join('');
+                }
+            }
+
+            // 5. Top Referrers
+            const topRefs = (data.today && data.today.top_referrers) || {};
+            const refList = document.getElementById("top-referrers-list");
+            if (refList) {
+                const entries = Object.entries(topRefs);
+                if (entries.length === 0) {
+                    refList.innerHTML = '<div class="text-center py-4 text-slate-500 text-xs">Нет данных</div>';
+                } else {
+                    const maxViews = Math.max(...entries.map(e => e[1])) || 1;
+                    refList.innerHTML = entries.slice(0, 5).map(([ref, count]) => {
+                        const pct = Math.round((count / maxViews) * 100);
+                        return `
+                        <div>
+                            <div class="flex justify-between text-xs mb-1">
+                                <span class="font-medium text-slate-300 truncate">${ref}</span>
+                                <span class="font-bold text-emerald-400">${count} переходов</span>
+                            </div>
+                            <div class="w-full bg-slate-950 rounded-full h-1.5 overflow-hidden">
+                                <div class="bg-emerald-500 h-1.5 rounded-full" style="width: ${pct}%"></div>
+                            </div>
+                        </div>`;
+                    }).join('');
+                }
+            }
+
+            isFirstLoad = false;
+        }
+
+        // Timer tick
+        setInterval(() => {
+            countdownSeconds--;
+            const cd = document.getElementById("countdown");
+            if (cd) cd.textContent = countdownSeconds + "с";
+            if (countdownSeconds <= 0) {
+                countdownSeconds = 3;
+                fetchLivePulse(false);
+            }
+        }, 1000);
+
+        // Initial fetch
+        fetchLivePulse(false);
+    </script>
+</body>
+</html>
