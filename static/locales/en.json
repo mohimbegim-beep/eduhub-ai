@@ -1323,5 +1323,16 @@
     "exam_timer_mins": "Mins",
     "exam_timer_secs": "Secs",
     "exam_timer_cta": "Sprint to Band 8.0+ ($1.00 Trial Pass) →",
-    "essay_hero_desc": "Full Cambridge examiner assessment across all 4 rubrics (TR, CC, LR, GRA), handwritten essay photo OCR, Band 8.5+ model rewrites, and 1-click Anki export."
+    "essay_hero_desc": "Full Cambridge examiner assessment across all 4 rubrics (TR, CC, LR, GRA), handwritten essay photo OCR, Band 8.5+ model rewrites, and 1-click Anki export.",
+    "paywall_watch_ad_btn": "🎬 Watch 20s Sponsor Message to Preview Free",
+    "sponsor_modal_title": "Official Education Partner Spotlight",
+    "sponsor_modal_desc": "Support EduHub AI free access by exploring our verified academic partner below.",
+    "sponsor_partner_title": "Cambridge & IELTS Official Preparation Partner",
+    "sponsor_partner_desc": "Book 1-on-1 intensive speaking & mock test sessions with certified native British & American examiners. 70% off your first diagnostic trial.",
+    "sponsor_partner_cta": "Visit Partner & Claim 70% Discount →",
+    "sponsor_timer_prefix": "Reward unlock ready in:",
+    "sponsor_claim_btn": "Claim Free Preview Paragraph ✓",
+    "sponsor_card_label": "Sponsored Resource",
+    "partner_verified_badge": "Verified Academic Partner",
+    "preview_unlocked_label": "Free Preview Unlocked (1 Section)"
 }

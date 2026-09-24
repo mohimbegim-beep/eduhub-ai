@@ -340,7 +340,11 @@
           <span data-i18n="paywall_locked_btn">Unlock for Just $1.00 (3-Day Pro Pass) &rarr;</span>
         </button>
 
-        <div class="mt-3.5 flex flex-wrap items-center justify-center gap-2 text-[11px] text-slate-400">
+        <button type="button" onclick="EduHubConversion.openRewardedAdModal()" class="mt-2.5 text-xs text-amber-300 hover:text-amber-200 underline font-medium cursor-pointer transition flex items-center justify-center gap-1.5 mx-auto">
+          <span data-i18n="paywall_watch_ad_btn">🎬 Watch 20s Sponsor Message to Preview Free</span>
+        </button>
+
+        <div class="mt-3 flex flex-wrap items-center justify-center gap-2 text-[11px] text-slate-400">
           <span class="flex items-center gap-1 text-emerald-400 font-medium">🛡️ <span data-i18n="banner_guarantee_badge">100% 14-Day Money-Back Guarantee</span></span>
           <span>•</span>
           <span data-i18n="paywall_locked_sub">Instant activation. Cancel anytime in 1 click.</span>
@@ -360,6 +364,116 @@
       if (window.applyTranslations) {
         window.applyTranslations();
       }
+    },
+
+    openRewardedAdModal: function () {
+      let modal = document.getElementById("rewarded-ad-modal");
+      if (!modal) {
+        modal = document.createElement("div");
+        modal.id = "rewarded-ad-modal";
+        modal.className = "fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/85 backdrop-blur-md hidden";
+        modal.innerHTML = `
+          <div class="bg-slate-900 border border-amber-500/40 rounded-3xl max-w-lg w-full p-6 sm:p-7 shadow-2xl relative text-center">
+            <button onclick="EduHubConversion.closeRewardedAdModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg font-bold p-1">✕</button>
+            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 text-amber-300 border border-amber-500/30 text-[11px] font-black uppercase tracking-wider mb-3">
+              <span>📢</span> <span data-i18n="sponsor_modal_title">Official Education Partner Spotlight</span>
+            </div>
+            <h3 class="text-lg sm:text-xl font-black text-white mb-2" data-i18n="sponsor_partner_title">
+              Cambridge &amp; IELTS Official Preparation Partner
+            </h3>
+            <p class="text-xs text-slate-300 mb-4 leading-relaxed" data-i18n="sponsor_partner_desc">
+              Book 1-on-1 intensive speaking &amp; mock test sessions with certified native British &amp; American examiners. 70% off your first diagnostic trial.
+            </p>
+            
+            <div class="bg-slate-950/80 border border-slate-800 rounded-2xl p-4 mb-4 text-left flex items-center gap-3.5">
+              <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-indigo-600 to-amber-500 flex items-center justify-center text-2xl shrink-0">
+                🇬🇧
+              </div>
+              <div class="flex-grow">
+                <span class="text-[10px] text-amber-400 font-bold uppercase tracking-wider block" data-i18n="sponsor_card_label">Sponsored Resource</span>
+                <p class="text-xs font-bold text-white">Preply &middot; Certified IELTS Examiners</p>
+                <p class="text-[11px] text-slate-400" data-i18n="partner_verified_badge">Verified Academic Partner</p>
+              </div>
+              <a href="https://preply.com" target="_blank" rel="noopener noreferrer" class="shrink-0 text-xs font-bold bg-amber-500 hover:bg-amber-400 text-slate-950 px-3.5 py-2 rounded-xl transition" data-i18n="sponsor_partner_cta">
+                Visit Partner &amp; Claim 70% Discount &rarr;
+              </a>
+            </div>
+
+            <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 mb-4 flex items-center justify-between text-xs">
+              <div class="flex items-center gap-2 text-slate-300">
+                <span>⏳</span> <span data-i18n="sponsor_timer_prefix">Reward unlock ready in:</span>
+              </div>
+              <span id="rewarded-ad-countdown" class="font-mono font-black text-amber-400 text-sm">20s</span>
+            </div>
+
+            <button id="rewarded-claim-btn" onclick="EduHubConversion.claimFreePreview()" disabled class="w-full py-3 rounded-xl font-bold text-xs sm:text-sm bg-slate-800 text-slate-500 cursor-not-allowed transition">
+              <span data-i18n="sponsor_claim_btn">Claim Free Preview Paragraph ✓</span>
+            </button>
+          </div>
+        `;
+        document.body.appendChild(modal);
+      }
+
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+
+      if (window.applyTranslations) {
+        window.applyTranslations();
+      }
+
+      let timeLeft = 20;
+      const countEl = document.getElementById("rewarded-ad-countdown");
+      const claimBtn = document.getElementById("rewarded-claim-btn");
+      if (claimBtn) {
+        claimBtn.disabled = true;
+        claimBtn.className = "w-full py-3 rounded-xl font-bold text-xs sm:text-sm bg-slate-800 text-slate-500 cursor-not-allowed transition";
+      }
+
+      if (this._rewardedTimer) clearInterval(this._rewardedTimer);
+      this._rewardedTimer = setInterval(() => {
+        timeLeft--;
+        if (countEl) countEl.textContent = timeLeft + "s";
+        if (timeLeft <= 0) {
+          clearInterval(this._rewardedTimer);
+          if (countEl) countEl.textContent = "Ready! ✓";
+          if (claimBtn) {
+            claimBtn.disabled = false;
+            claimBtn.className = "w-full py-3 rounded-xl font-black text-xs sm:text-sm bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow-lg shadow-emerald-500/30 hover:brightness-110 cursor-pointer transition transform hover:-translate-y-0.5";
+          }
+        }
+      }, 1000);
+    },
+
+    closeRewardedAdModal: function () {
+      const modal = document.getElementById("rewarded-ad-modal");
+      if (modal) {
+        modal.classList.add("hidden");
+        modal.classList.remove("flex");
+      }
+      if (this._rewardedTimer) clearInterval(this._rewardedTimer);
+    },
+
+    claimFreePreview: function () {
+      this.closeRewardedAdModal();
+      const blurredBox = document.querySelector(".paywall-overlay-wrapper .filter.blur-md");
+      if (blurredBox && blurredBox.children.length > 0) {
+        const first = blurredBox.children[0];
+        const previewBlock = document.createElement("div");
+        previewBlock.className = "p-4 mb-4 rounded-2xl bg-slate-800/90 border border-emerald-500/50 text-left text-xs text-slate-200 shadow-xl";
+        previewBlock.innerHTML = `
+          <div class="flex items-center gap-1.5 text-emerald-400 font-bold mb-2 text-[11px] uppercase tracking-wider">
+            <span>✓</span> <span data-i18n="preview_unlocked_label">Free Preview Unlocked (1 Section)</span>
+          </div>
+          <div>${first.innerHTML}</div>
+        `;
+        const wrapper = document.querySelector(".paywall-overlay-wrapper");
+        if (wrapper && wrapper.parentNode) {
+          wrapper.parentNode.insertBefore(previewBlock, wrapper);
+        }
+      }
+      try {
+        localStorage.setItem("eduhub_rewarded_preview_claimed", "true");
+      } catch (e) {}
     },
 
     grantFreeAccess: function (role) {

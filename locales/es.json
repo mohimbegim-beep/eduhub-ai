@@ -1323,5 +1323,16 @@
     "exam_timer_mins": "Mins",
     "exam_timer_secs": "Segs",
     "exam_timer_cta": "Prepárate para Band 8.0+ (Prueba $1.00) →",
-    "essay_hero_desc": "Diagnóstico completo según 4 criterios de Cambridge (TR, CC, LR, GRA), OCR de ensayos manuscritos, reescritura Band 8.5+ y exportación a Anki."
+    "essay_hero_desc": "Diagnóstico completo según 4 criterios de Cambridge (TR, CC, LR, GRA), OCR de ensayos manuscritos, reescritura Band 8.5+ y exportación a Anki.",
+    "paywall_watch_ad_btn": "🎬 Ver anuncio de 20s del patrocinador para vista previa gratis",
+    "sponsor_modal_title": "Socio educativo oficial destacado",
+    "sponsor_modal_desc": "Apoya el acceso gratuito de EduHub AI explorando nuestro socio académico a continuación.",
+    "sponsor_partner_title": "Socio oficial de preparación para IELTS y Cambridge",
+    "sponsor_partner_desc": "Reserva sesiones 1 a 1 con examinadores nativos certificados. 70% de descuento en tu primera clase de prueba.",
+    "sponsor_partner_cta": "Visitar socio y reclamar 70% de descuento →",
+    "sponsor_timer_prefix": "Desbloqueo de recompensa en:",
+    "sponsor_claim_btn": "Obtener párrafo de vista previa gratis ✓",
+    "sponsor_card_label": "Recurso patrocinado",
+    "partner_verified_badge": "Socio académico verificado",
+    "preview_unlocked_label": "Vista previa gratuita desbloqueada (1 sección)"
 }

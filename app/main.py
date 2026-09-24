@@ -3414,6 +3414,19 @@ async def render_robots():
     return Response(content=robots_text, media_type="text/plain")
 
 
+@app.get("/ads.txt", response_class=Response, tags=["Monetization & Ads"])
+async def render_ads_txt():
+    """
+    IAB Standard ads.txt verification file for Google AdSense and programmatic ad networks.
+    """
+    ads_txt_content = (
+        "# EduHub AI Programmatic Ad Monetization\n"
+        "# Google AdSense Publisher verification\n"
+        "google.com, pub-9128381928471923, DIRECT, f08c47fec0942fa0\n"
+    )
+    return Response(content=ads_txt_content, media_type="text/plain")
+
+
 @app.get("/sitemap.xml", response_class=Response, tags=["SEO & Sitemaps"])
 async def render_sitemap():
     """

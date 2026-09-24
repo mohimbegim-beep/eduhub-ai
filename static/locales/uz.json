@@ -1323,5 +1323,16 @@
     "exam_timer_mins": "Daq",
     "exam_timer_secs": "Soniya",
     "exam_timer_cta": "Band 8.0+ ga tayyorgarlik ($1.00 sinov) →",
-    "essay_hero_desc": "4 ta rasmiy Cambridge mezoni (TR, CC, LR, GRA) bo'yicha tahlil, qo'lyozma insho OCR, Band 8.5+ qayta yozuv va Anki eksporti."
+    "essay_hero_desc": "4 ta rasmiy Cambridge mezoni (TR, CC, LR, GRA) bo'yicha tahlil, qo'lyozma insho OCR, Band 8.5+ qayta yozuv va Anki eksporti.",
+    "paywall_watch_ad_btn": "🎬 Bepul ko'rish uchun homiy videosini tomosha qiling",
+    "sponsor_modal_title": "Rasmiy ta'lim hamkori",
+    "sponsor_modal_desc": "Quyidagi rasmiy hamkor bilan tanishib, EduHub AI bepul kirishini qo'llab-quvvatlang.",
+    "sponsor_partner_title": "IELTS va Cambridge tayyorgarligi bo'yicha rasmiy hamkor",
+    "sponsor_partner_desc": "Buyuk Britaniya va AQShlik sertifikatlangan imtihon oluvchilar bilan 1-ga-1 darslar. Birinchi dars uchun 70% chegirma.",
+    "sponsor_partner_cta": "Hamkorga o'tish va 70% chegirmaga ega bo'lish →",
+    "sponsor_timer_prefix": "Mukofot ochilishiga qoldi:",
+    "sponsor_claim_btn": "Bepul ko'rish huquqini olish ✓",
+    "sponsor_card_label": "Homiylik resursi",
+    "partner_verified_badge": "Tasdiqlangan akademik hamkor",
+    "preview_unlocked_label": "Bepul ko'rish ochildi (1 bo'lim)"
 }

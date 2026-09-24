@@ -1323,5 +1323,16 @@
     "exam_timer_mins": "Мин",
     "exam_timer_secs": "Сек",
     "exam_timer_cta": "Подготовка к Band 8.0+ (Триал $1.00) →",
-    "essay_hero_desc": "Полная диагностика по 4 критериям Cambridge (TR, CC, LR, GRA), OCR рукописных эссе, рерайт Band 8.5+ и экспорт в Anki."
+    "essay_hero_desc": "Полная диагностика по 4 критериям Cambridge (TR, CC, LR, GRA), OCR рукописных эссе, рерайт Band 8.5+ и экспорт в Anki.",
+    "paywall_watch_ad_btn": "🎬 Посмотреть 20 сек рекламу спонсора для демо",
+    "sponsor_modal_title": "Официальный образовательный партнер",
+    "sponsor_modal_desc": "Поддержите бесплатный доступ к EduHub AI, ознакомившись с проверенным партнером.",
+    "sponsor_partner_title": "Официальный партнер по подготовке к IELTS и Cambridge",
+    "sponsor_partner_desc": "Индивидуальные занятия с сертифицированными экзаменаторами из Великобритании и США. Скидка 70% на первый пробный урок.",
+    "sponsor_partner_cta": "Перейти к партнеру и забрать 70% скидку →",
+    "sponsor_timer_prefix": "Награда будет доступна через:",
+    "sponsor_claim_btn": "Получить бесплатный просмотр абзаца ✓",
+    "sponsor_card_label": "Ресурс от спонсора",
+    "partner_verified_badge": "Проверенный академический партнер",
+    "preview_unlocked_label": "Бесплатный просмотр разблокирован (1 раздел)"
 }

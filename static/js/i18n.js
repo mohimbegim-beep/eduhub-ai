@@ -1345,7 +1345,18 @@
           "exam_timer_mins": "Mins",
           "exam_timer_secs": "Secs",
           "exam_timer_cta": "Sprint to Band 8.0+ ($1.00 Trial Pass) →",
-          "essay_hero_desc": "Full Cambridge examiner assessment across all 4 rubrics (TR, CC, LR, GRA), handwritten essay photo OCR, Band 8.5+ model rewrites, and 1-click Anki export."
+          "essay_hero_desc": "Full Cambridge examiner assessment across all 4 rubrics (TR, CC, LR, GRA), handwritten essay photo OCR, Band 8.5+ model rewrites, and 1-click Anki export.",
+          "paywall_watch_ad_btn": "🎬 Watch 20s Sponsor Message to Preview Free",
+          "sponsor_modal_title": "Official Education Partner Spotlight",
+          "sponsor_modal_desc": "Support EduHub AI free access by exploring our verified academic partner below.",
+          "sponsor_partner_title": "Cambridge & IELTS Official Preparation Partner",
+          "sponsor_partner_desc": "Book 1-on-1 intensive speaking & mock test sessions with certified native British & American examiners. 70% off your first diagnostic trial.",
+          "sponsor_partner_cta": "Visit Partner & Claim 70% Discount →",
+          "sponsor_timer_prefix": "Reward unlock ready in:",
+          "sponsor_claim_btn": "Claim Free Preview Paragraph ✓",
+          "sponsor_card_label": "Sponsored Resource",
+          "partner_verified_badge": "Verified Academic Partner",
+          "preview_unlocked_label": "Free Preview Unlocked (1 Section)"
       },
       "ru": {
           "hero_badge_socratic": "Сократовский Интеллект • 100% Академическая Безопасность (Отказ 18+)",
@@ -2672,7 +2683,18 @@
           "exam_timer_mins": "Мин",
           "exam_timer_secs": "Сек",
           "exam_timer_cta": "Подготовка к Band 8.0+ (Триал $1.00) →",
-          "essay_hero_desc": "Полная диагностика по 4 критериям Cambridge (TR, CC, LR, GRA), OCR рукописных эссе, рерайт Band 8.5+ и экспорт в Anki."
+          "essay_hero_desc": "Полная диагностика по 4 критериям Cambridge (TR, CC, LR, GRA), OCR рукописных эссе, рерайт Band 8.5+ и экспорт в Anki.",
+          "paywall_watch_ad_btn": "🎬 Посмотреть 20 сек рекламу спонсора для демо",
+          "sponsor_modal_title": "Официальный образовательный партнер",
+          "sponsor_modal_desc": "Поддержите бесплатный доступ к EduHub AI, ознакомившись с проверенным партнером.",
+          "sponsor_partner_title": "Официальный партнер по подготовке к IELTS и Cambridge",
+          "sponsor_partner_desc": "Индивидуальные занятия с сертифицированными экзаменаторами из Великобритании и США. Скидка 70% на первый пробный урок.",
+          "sponsor_partner_cta": "Перейти к партнеру и забрать 70% скидку →",
+          "sponsor_timer_prefix": "Награда будет доступна через:",
+          "sponsor_claim_btn": "Получить бесплатный просмотр абзаца ✓",
+          "sponsor_card_label": "Ресурс от спонсора",
+          "partner_verified_badge": "Проверенный академический партнер",
+          "preview_unlocked_label": "Бесплатный просмотр разблокирован (1 раздел)"
       },
       "uz": {
           "hero_badge_socratic": "Suqrot Intellekti • 100% Xavfsiz Muhit (18+ Rad Etish)",
@@ -3999,7 +4021,18 @@
           "exam_timer_mins": "Daq",
           "exam_timer_secs": "Soniya",
           "exam_timer_cta": "Band 8.0+ ga tayyorgarlik ($1.00 sinov) →",
-          "essay_hero_desc": "4 ta rasmiy Cambridge mezoni (TR, CC, LR, GRA) bo'yicha tahlil, qo'lyozma insho OCR, Band 8.5+ qayta yozuv va Anki eksporti."
+          "essay_hero_desc": "4 ta rasmiy Cambridge mezoni (TR, CC, LR, GRA) bo'yicha tahlil, qo'lyozma insho OCR, Band 8.5+ qayta yozuv va Anki eksporti.",
+          "paywall_watch_ad_btn": "🎬 Bepul ko'rish uchun homiy videosini tomosha qiling",
+          "sponsor_modal_title": "Rasmiy ta'lim hamkori",
+          "sponsor_modal_desc": "Quyidagi rasmiy hamkor bilan tanishib, EduHub AI bepul kirishini qo'llab-quvvatlang.",
+          "sponsor_partner_title": "IELTS va Cambridge tayyorgarligi bo'yicha rasmiy hamkor",
+          "sponsor_partner_desc": "Buyuk Britaniya va AQShlik sertifikatlangan imtihon oluvchilar bilan 1-ga-1 darslar. Birinchi dars uchun 70% chegirma.",
+          "sponsor_partner_cta": "Hamkorga o'tish va 70% chegirmaga ega bo'lish →",
+          "sponsor_timer_prefix": "Mukofot ochilishiga qoldi:",
+          "sponsor_claim_btn": "Bepul ko'rish huquqini olish ✓",
+          "sponsor_card_label": "Homiylik resursi",
+          "partner_verified_badge": "Tasdiqlangan akademik hamkor",
+          "preview_unlocked_label": "Bepul ko'rish ochildi (1 bo'lim)"
       },
       "es": {
           "hero_badge_socratic": "Inteligencia Socrática • Filtro de Seguridad 18+ Estricto",
@@ -5326,7 +5359,18 @@
           "exam_timer_mins": "Mins",
           "exam_timer_secs": "Segs",
           "exam_timer_cta": "Prepárate para Band 8.0+ (Prueba $1.00) →",
-          "essay_hero_desc": "Diagnóstico completo según 4 criterios de Cambridge (TR, CC, LR, GRA), OCR de ensayos manuscritos, reescritura Band 8.5+ y exportación a Anki."
+          "essay_hero_desc": "Diagnóstico completo según 4 criterios de Cambridge (TR, CC, LR, GRA), OCR de ensayos manuscritos, reescritura Band 8.5+ y exportación a Anki.",
+          "paywall_watch_ad_btn": "🎬 Ver anuncio de 20s del patrocinador para vista previa gratis",
+          "sponsor_modal_title": "Socio educativo oficial destacado",
+          "sponsor_modal_desc": "Apoya el acceso gratuito de EduHub AI explorando nuestro socio académico a continuación.",
+          "sponsor_partner_title": "Socio oficial de preparación para IELTS y Cambridge",
+          "sponsor_partner_desc": "Reserva sesiones 1 a 1 con examinadores nativos certificados. 70% de descuento en tu primera clase de prueba.",
+          "sponsor_partner_cta": "Visitar socio y reclamar 70% de descuento →",
+          "sponsor_timer_prefix": "Desbloqueo de recompensa en:",
+          "sponsor_claim_btn": "Obtener párrafo de vista previa gratis ✓",
+          "sponsor_card_label": "Recurso patrocinado",
+          "partner_verified_badge": "Socio académico verificado",
+          "preview_unlocked_label": "Vista previa gratuita desbloqueada (1 sección)"
       }
   };
 
