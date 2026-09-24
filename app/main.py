@@ -965,7 +965,7 @@ class InMemoryRateLimiter:
             }
 
 rate_limiter = InMemoryRateLimiter(
-    max_requests=int(os.getenv("RATE_LIMIT_MAX_REQUESTS", "20")),
+    max_requests=int(os.getenv("RATE_LIMIT_MAX_REQUESTS", "60")),
     window_seconds=int(os.getenv("RATE_LIMIT_WINDOW_SECONDS", "60"))
 )
 
@@ -975,9 +975,15 @@ async def apply_rate_limit(
 ):
     """
     FastAPI dependency для проверки лимитов скорости.
-    Идентифицирует клиента по API-ключу или IP-адресу.
+    Идентифицирует клиента по API-ключу или реальному IP-адресу (с поддержкой X-Forwarded-For).
     """
-    client_ip = request.client.host if request.client else "127.0.0.1"
+    client_ip = "127.0.0.1"
+    forwarded = request.headers.get("x-forwarded-for")
+    if forwarded:
+        client_ip = forwarded.split(",")[0].strip()
+    elif request.client and request.client.host:
+        client_ip = request.client.host
+
     key = f"key:{x_api_key}" if x_api_key else f"ip:{client_ip}"
 
     allowed, remaining, retry_after = rate_limiter.check_and_record(key)

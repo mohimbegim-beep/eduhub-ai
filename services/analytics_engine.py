@@ -38,6 +38,7 @@ class VisitorAnalyticsEngine:
     def __init__(self, filepath: str = ANALYTICS_FILE):
         self.filepath = filepath
         self.lock = Lock()
+        self._last_save_time = 0.0
         self._cache: Dict[str, Any] = self._load_data()
 
     def _load_data(self) -> Dict[str, Any]:
@@ -210,7 +211,14 @@ class VisitorAnalyticsEngine:
             self._cache["recent_events"].insert(0, event_entry)
             if len(self._cache["recent_events"]) > 50:
                 self._cache["recent_events"] = self._cache["recent_events"][:50]
+            now_ts = time.time()
+            if (now_ts - self._last_save_time) >= 5.0:
+                self._last_save_time = now_ts
+                self._save_data()
 
+    def flush(self):
+        """Принудительно сбрасывает кэш на диск при необходимости."""
+        with self.lock:
             self._save_data()
 
     def get_summary(self) -> Dict[str, Any]:
