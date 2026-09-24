@@ -4624,6 +4624,12 @@ async def get_live_pulse_data():
             with open(TRANSACTIONS_LOG, "r", encoding="utf-8") as f:
                 records = json.load(f)
             for r in reversed(records):
+                # Ignore internal QA test fixtures in live dashboard
+                raw_email = str(r.get("customer_email") or r.get("attributes", {}).get("user_email") or "").lower()
+                order_id = str(r.get("order_id") or "")
+                if any(x in raw_email for x in ["@eduhub.ai", "audit@dodo.com", "tester@dodopayments.com", "qa_"]) or "test_001" in order_id:
+                    continue
+
                 ts = float(r.get("timestamp") or 0.0)
                 amt = float(r.get("amount") or r.get("attributes", {}).get("amount") or 0.0)
                 if amt == 0.0:
@@ -4687,7 +4693,7 @@ async def get_live_pulse_data():
             "revenue_today": round(rev_today, 2),
             "revenue_week": round(rev_week, 2),
             "revenue_all_time": round(rev_all, 2),
-            "orders_count": len(records) if "records" in locals() else len(orders_list),
+            "orders_count": len(orders_list),
             "recent_payments": orders_list
         },
         "recent_visitors": enriched_visitors
