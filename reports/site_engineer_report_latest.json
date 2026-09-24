@@ -1,0 +1,234 @@
+{
+  "timestamp_utc": "2026-09-24 04:40:09 UTC",
+  "next_run_utc": "2026-09-24 10:40:09 UTC",
+  "health_score": 100.0,
+  "status": "healthy",
+  "healed_actions_count": 0,
+  "healed_actions": [],
+  "linguistic": {
+    "duration_ms": 52.81,
+    "total_html_files_scanned": 24,
+    "total_locale_keys": 1276,
+    "symmetric_locales_count": 4,
+    "missing_keys_per_lang": {},
+    "empty_values_per_lang": {},
+    "orphan_html_keys_count": 0,
+    "banned_uz_terms_detected": 0,
+    "personal_email_hits": 0,
+    "privacy_gate_hits": 0,
+    "passed": true
+  },
+  "functional": {
+    "duration_ms": 21940.19,
+    "total_routes": 24,
+    "passed_routes": 24,
+    "failed_routes": 0,
+    "routes": {
+      "/": {
+        "status": 200,
+        "latency_ms": 1181.9,
+        "bytes": 175043,
+        "corporate_email_ok": true
+      },
+      "/health": {
+        "status": 200,
+        "latency_ms": 417.0,
+        "bytes": 893,
+        "corporate_email_ok": null
+      },
+      "/terms": {
+        "status": 200,
+        "latency_ms": 514.8,
+        "bytes": 21091,
+        "corporate_email_ok": true
+      },
+      "/privacy": {
+        "status": 200,
+        "latency_ms": 1647.4,
+        "bytes": 10164,
+        "corporate_email_ok": true
+      },
+      "/refund": {
+        "status": 200,
+        "latency_ms": 545.9,
+        "bytes": 14902,
+        "corporate_email_ok": true
+      },
+      "/support": {
+        "status": 200,
+        "latency_ms": 434.5,
+        "bytes": 35365,
+        "corporate_email_ok": null
+      },
+      "/blueprints": {
+        "status": 200,
+        "latency_ms": 448.9,
+        "bytes": 73291,
+        "corporate_email_ok": null
+      },
+      "/report": {
+        "status": 200,
+        "latency_ms": 439.6,
+        "bytes": 12017,
+        "corporate_email_ok": null
+      },
+      "/tools/teacher-lab": {
+        "status": 200,
+        "latency_ms": 444.1,
+        "bytes": 36809,
+        "corporate_email_ok": null
+      },
+      "/tools/ats-resume": {
+        "status": 200,
+        "latency_ms": 457.8,
+        "bytes": 36606,
+        "corporate_email_ok": null
+      },
+      "/tools/peer-exchange": {
+        "status": 200,
+        "latency_ms": 437.2,
+        "bytes": 57161,
+        "corporate_email_ok": null
+      },
+      "/tools/essay-grader": {
+        "status": 200,
+        "latency_ms": 420.1,
+        "bytes": 47856,
+        "corporate_email_ok": null
+      },
+      "/tools/homework-solver": {
+        "status": 200,
+        "latency_ms": 484.7,
+        "bytes": 41451,
+        "corporate_email_ok": null
+      },
+      "/tools/gpa-calculator": {
+        "status": 200,
+        "latency_ms": 434.6,
+        "bytes": 31875,
+        "corporate_email_ok": null
+      },
+      "/tools/citation-generator": {
+        "status": 200,
+        "latency_ms": 414.6,
+        "bytes": 33334,
+        "corporate_email_ok": null
+      },
+      "/tools/academic-lab": {
+        "status": 200,
+        "latency_ms": 442.3,
+        "bytes": 176442,
+        "corporate_email_ok": null
+      },
+      "/tools/anti-plagiarism": {
+        "status": 200,
+        "latency_ms": 463.9,
+        "bytes": 28587,
+        "corporate_email_ok": null
+      },
+      "/tools/career-navigator": {
+        "status": 200,
+        "latency_ms": 452.6,
+        "bytes": 41398,
+        "corporate_email_ok": null
+      },
+      "/tools/excel-wizard": {
+        "status": 200,
+        "latency_ms": 470.3,
+        "bytes": 22194,
+        "corporate_email_ok": null
+      },
+      "/tools/language-tutor": {
+        "status": 200,
+        "latency_ms": 477.4,
+        "bytes": 42379,
+        "corporate_email_ok": null
+      },
+      "/tools/marketplace-lab": {
+        "status": 200,
+        "latency_ms": 432.7,
+        "bytes": 38336,
+        "corporate_email_ok": null
+      },
+      "/tools/pdf-summarizer": {
+        "status": 200,
+        "latency_ms": 781.3,
+        "bytes": 33573,
+        "corporate_email_ok": null
+      },
+      "/tools/sop-builder": {
+        "status": 200,
+        "latency_ms": 450.8,
+        "bytes": 21262,
+        "corporate_email_ok": null
+      },
+      "/payment-success": {
+        "status": 200,
+        "latency_ms": 421.7,
+        "bytes": 11091,
+        "corporate_email_ok": null
+      }
+    },
+    "deep_health": {
+      "status": "healthy",
+      "service": "EduHub Autonomous SaaS",
+      "version": "1.2.0",
+      "uptime_seconds": 1868,
+      "diagnostics": {
+        "latency_ms": 0.69,
+        "database": {
+          "status": "healthy",
+          "users_registered": 33,
+          "transactions_recorded": 110,
+          "storage_directory": "/opt/render/project/src/data"
+        },
+        "genai": {
+          "configured": true,
+          "model": "gemini-3.6-flash",
+          "sdk_loaded": true,
+          "safety_filter": "Active (Strict 18+ refusal policy)"
+        },
+        "billing": {
+          "provider": "Dodo Payments Inc.",
+          "role": "Authorized Merchant of Record (MoR)",
+          "api_ready": false,
+          "webhook_secret_configured": true
+        },
+        "backup": {
+          "total_snapshots": 0,
+          "latest_snapshot": "none",
+          "rotation_limit": 14
+        }
+      },
+      "model": "gemini-3.6-flash",
+      "content_filtering": "Active (Strict 18+ refusal policy)",
+      "dodo_payments_api_ready": false,
+      "genai_sdk_loaded": true,
+      "rate_limiter": {
+        "total_tracked_identities": 2,
+        "active_in_current_window": 0,
+        "max_requests_per_window": 20,
+        "window_seconds": 60
+      },
+      "mode": "headless-laptop"
+    },
+    "socratic_ai_operational": true,
+    "ai_response_preview": "### 🎓 EduHub AI Academic Response\n\nRegarding your inquiry **\"What is photosynthesis in one sentence?\"**:\n\nThis inquiry d",
+    "safe_content_filter_18_plus": true,
+    "dodo_webhook_ready": true,
+    "dodo_checkout_gateway_ready": true,
+    "passed": true
+  },
+  "modernization": {
+    "duration_ms": 8.46,
+    "total_pages": 24,
+    "pages_with_cache_buster": 6,
+    "pages_with_notranslate": 24,
+    "pages_with_viewport": 24,
+    "pages_with_open_graph": 24,
+    "pages_with_schema_org": 24,
+    "passed": true
+  },
+  "warnings": [],
+  "errors": []
+}

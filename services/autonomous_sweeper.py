@@ -80,12 +80,40 @@ def run_periodic_snapshot_sweep(max_interval_seconds: int = 21600) -> dict:
         print(f"[SWEEPER ERROR] Snapshot sweep failed: {e}")
         return {"status": "error", "error": str(e)}
 
+def run_site_engineer_sweep(max_interval_seconds: int = 21600) -> dict:
+    """Invokes Autonomous Site Engineer to audit and heal platform every 6 hours."""
+    try:
+        from services.autonomous_site_engineer import AutonomousSiteEngineer, STATE_FILE
+        need_run = False
+        now = time.time()
+        
+        if not STATE_FILE.exists():
+            need_run = True
+        else:
+            try:
+                mtime = STATE_FILE.stat().st_mtime
+                if (now - mtime) > max_interval_seconds:
+                    need_run = True
+            except Exception:
+                need_run = True
+                
+        if need_run:
+            engineer = AutonomousSiteEngineer()
+            report_summary = engineer.run_full_inspection_cycle()
+            return {"status": "success", "executed": True, "details": report_summary}
+        else:
+            return {"status": "success", "executed": False, "reason": "recent_inspection_fresh"}
+    except Exception as e:
+        print(f"[SWEEPER ERROR] Site Engineer sweep failed: {e}")
+        return {"status": "error", "error": str(e)}
+
 def run_autonomous_sweep() -> dict:
     """Master sweep coordinator running all lifecycle maintenance jobs."""
     start = time.time()
     dunning_res = run_dunning_sweep()
     peer_res = run_ephemeral_peer_sweep()
     snapshot_res = run_periodic_snapshot_sweep()
+    engineer_res = run_site_engineer_sweep()
 
     summary = {
         "status": "success",
@@ -93,7 +121,8 @@ def run_autonomous_sweep() -> dict:
         "duration_ms": round((time.time() - start) * 1000, 2),
         "dunning": dunning_res,
         "peer_rooms": peer_res,
-        "snapshot": snapshot_res
+        "snapshot": snapshot_res,
+        "site_engineer": engineer_res
     }
 
     try:
