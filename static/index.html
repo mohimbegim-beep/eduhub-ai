@@ -84,6 +84,9 @@
     <link rel="stylesheet" href="/static/css/theme-system.css">
     <script src="/static/js/theme-engine.js"></script>
 
+    <!-- EduHub Single Source of Truth Configuration -->
+    <script src="/static/js/eduhub-config.js"></script>
+
     <!-- Essential User Utilities (Export, History Drawer, Stepper, Camera) -->
     <script src="/static/js/user-utils.js" defer></script>
 
@@ -502,6 +505,140 @@
                     <div class="flex items-center justify-center gap-2">
                         <svg class="w-4 h-4 text-purple-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
                         <span data-i18n="hero_trust_4">256-Bit SSL Encrypted</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================================================================ -->
+        <!-- GLOBAL EDTECH BESTSELLERS (US, CHINA, INDIA KILLER SUITE)       -->
+        <!-- ================================================================ -->
+        <section id="bestsellers" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="text-center max-w-3xl mx-auto mb-10">
+                <span class="text-xs font-extrabold uppercase tracking-widest text-emerald-400 bg-emerald-950/80 border border-emerald-700/80 px-3.5 py-1 rounded-full shadow-inner" data-i18n="bestsellers_badge">
+                    Global EdTech Bestsellers
+                </span>
+                <h2 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight mt-3 mb-2" data-i18n="bestsellers_title">
+                    World-Class Academic AI — Up to 70% Cheaper Than Market
+                </h2>
+                <p class="text-xs sm:text-sm text-slate-400 max-w-2xl mx-auto leading-relaxed" data-i18n="bestsellers_subtitle">
+                    Why pay $14–$30/month? EduHub AI unites the top EdTech products of the US, China, and India into an ultra-accessible suite starting at just $1.00.
+                </p>
+            </div>
+
+            <!-- 5 Bestseller Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                
+                <!-- Bestseller 1: Cambridge IELTS/TOEFL AI Examiner -->
+                <div class="bg-gradient-to-b from-amber-950/40 via-slate-900 to-slate-900 border border-amber-500/40 hover:border-amber-400 rounded-3xl p-6 flex flex-col justify-between transition-all shadow-xl group relative">
+                    <span class="absolute top-4 right-4 text-[10px] font-extrabold uppercase tracking-wider bg-amber-950 text-amber-300 border border-amber-700 px-2.5 py-0.5 rounded-full" data-i18n="bs_card1_tag">Cambridge Band 1–9 Rubric</span>
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-2xl mb-4 shadow-lg shadow-amber-500/10">
+                            🎓
+                        </div>
+                        <h3 class="text-base font-bold text-white group-hover:text-amber-300 transition mb-1" data-i18n="bs_card1_title">Cambridge IELTS &amp; TOEFL AI Examiner</h3>
+                        <p class="text-xs text-slate-400 leading-relaxed mb-4" data-i18n="bs_card1_desc">Instant senior examiner evaluation across all 4 criteria (TR, CC, LR, GRA), handwritten essay OCR, and Band 8.5+ model rewrites.</p>
+                        
+                        <!-- Price Comparison Box -->
+                        <div class="p-3 bg-slate-950/80 border border-white/[0.06] rounded-xl mb-4 flex items-center justify-between text-xs">
+                            <span class="text-slate-400 line-through text-[11px]" data-i18n="bs_card1_market">Tutors: $25–$40/hr</span>
+                            <span class="font-extrabold text-amber-400 font-mono" data-i18n="bs_card1_price">$1.00 3-Day Pass</span>
+                        </div>
+                    </div>
+                    <div class="pt-3 border-t border-white/[0.08] flex items-center justify-between">
+                        <span class="text-[11px] text-emerald-400 font-mono font-semibold">⚡ Instant AI Diagnostic</span>
+                        <a href="/tools/essay-grader" class="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-black text-xs px-4 py-2 rounded-xl transition shadow-md shadow-amber-500/20" data-i18n="bs_card1_btn">Test Examiner Free &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Bestseller 2: Academic Paraphraser & Anti-AI Humanizer -->
+                <div class="bg-gradient-to-b from-blue-950/40 via-slate-900 to-slate-900 border border-blue-500/40 hover:border-blue-400 rounded-3xl p-6 flex flex-col justify-between transition-all shadow-xl group relative">
+                    <span class="absolute top-4 right-4 text-[10px] font-extrabold uppercase tracking-wider bg-blue-950 text-blue-300 border border-blue-700 px-2.5 py-0.5 rounded-full" data-i18n="bs_card2_tag">QuillBot Rival</span>
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-blue-500/20 border border-blue-500/30 flex items-center justify-center text-2xl mb-4 shadow-lg shadow-blue-500/10">
+                            🛡️
+                        </div>
+                        <h3 class="text-base font-bold text-white group-hover:text-blue-300 transition mb-1" data-i18n="bs_card2_title">Academic Paraphraser &amp; Anti-AI Humanizer</h3>
+                        <p class="text-xs text-slate-400 leading-relaxed mb-4" data-i18n="bs_card2_desc">Eliminate robotic AI patterns, protect against false-positive Turnitin detections, and format scientific citations in APA, MLA, and Harvard.</p>
+                        
+                        <!-- Price Comparison Box -->
+                        <div class="p-3 bg-slate-950/80 border border-white/[0.06] rounded-xl mb-4 flex items-center justify-between text-xs">
+                            <span class="text-slate-400 line-through text-[11px]" data-i18n="bs_card2_market">QuillBot: $13.95/mo</span>
+                            <span class="font-extrabold text-blue-400 font-mono" data-i18n="bs_card2_price">$1.00 / Included in Pro</span>
+                        </div>
+                    </div>
+                    <div class="pt-3 border-t border-white/[0.08] flex items-center justify-between">
+                        <span class="text-[11px] text-blue-400 font-mono font-semibold">98% Human Academic Rigor</span>
+                        <a href="/tools/anti-plagiarism" class="bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs px-4 py-2 rounded-xl transition shadow-md shadow-blue-500/20" data-i18n="bs_card2_btn">Humanize Text &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Bestseller 3: Study Abroad & Scholarship SOP Architect -->
+                <div class="bg-gradient-to-b from-purple-950/40 via-slate-900 to-slate-900 border border-purple-500/40 hover:border-purple-400 rounded-3xl p-6 flex flex-col justify-between transition-all shadow-xl group relative">
+                    <span class="absolute top-4 right-4 text-[10px] font-extrabold uppercase tracking-wider bg-purple-950 text-purple-300 border border-purple-700 px-2.5 py-0.5 rounded-full" data-i18n="bs_card3_tag">Erasmus+, DAAD, Ivy League</span>
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-purple-500/20 border border-purple-500/30 flex items-center justify-center text-2xl mb-4 shadow-lg shadow-purple-500/10">
+                            🏛️
+                        </div>
+                        <h3 class="text-base font-bold text-white group-hover:text-purple-300 transition mb-1" data-i18n="bs_card3_title">Study Abroad &amp; Scholarship SOP Architect</h3>
+                        <p class="text-xs text-slate-400 leading-relaxed mb-4" data-i18n="bs_card3_desc">Tailor Statements of Purpose and motivation letters for top global universities and prestigious government scholarship grants.</p>
+                        
+                        <!-- Price Comparison Box -->
+                        <div class="p-3 bg-slate-950/80 border border-white/[0.06] rounded-xl mb-4 flex items-center justify-between text-xs">
+                            <span class="text-slate-400 line-through text-[11px]" data-i18n="bs_card3_market">Agencies: $300–$1,000</span>
+                            <span class="font-extrabold text-purple-400 font-mono" data-i18n="bs_card3_price">$1.00 Export / Pro Pass</span>
+                        </div>
+                    </div>
+                    <div class="pt-3 border-t border-white/[0.08] flex items-center justify-between">
+                        <span class="text-[11px] text-purple-400 font-mono font-semibold">Ivy League Review Protocol</span>
+                        <a href="/tools/sop-builder" class="bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs px-4 py-2 rounded-xl transition shadow-md shadow-purple-500/20" data-i18n="bs_card3_btn">Build SOP Now &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Bestseller 4: Snap & Solve: Socratic STEM Math Solver -->
+                <div class="bg-gradient-to-b from-indigo-950/40 via-slate-900 to-slate-900 border border-indigo-500/40 hover:border-indigo-400 rounded-3xl p-6 flex flex-col justify-between transition-all shadow-xl group relative">
+                    <span class="absolute top-4 right-4 text-[10px] font-extrabold uppercase tracking-wider bg-indigo-950 text-indigo-300 border border-indigo-800 px-2.5 py-0.5 rounded-full" data-i18n="bs_card4_tag">Chegg &amp; Photomath Rival</span>
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-indigo-500/20 border border-indigo-500/30 flex items-center justify-center text-2xl mb-4 shadow-lg shadow-indigo-500/10">
+                            🧮
+                        </div>
+                        <h3 class="text-base font-bold text-white group-hover:text-indigo-300 transition mb-1" data-i18n="bs_card4_title">Snap &amp; Solve: Socratic STEM Math Solver</h3>
+                        <p class="text-xs text-slate-400 leading-relaxed mb-4" data-i18n="bs_card4_desc">Upload photos of handwritten math, calculus, or physics formulas. Step-by-step guided hints so you truly master concepts.</p>
+                        
+                        <!-- Price Comparison Box -->
+                        <div class="p-3 bg-slate-950/80 border border-white/[0.06] rounded-xl mb-4 flex items-center justify-between text-xs">
+                            <span class="text-slate-400 line-through text-[11px]" data-i18n="bs_card4_market">Chegg: $19.95/mo</span>
+                            <span class="font-extrabold text-indigo-400 font-mono" data-i18n="bs_card4_price">$1.00 / Included in Pro</span>
+                        </div>
+                    </div>
+                    <div class="pt-3 border-t border-white/[0.08] flex items-center justify-between">
+                        <span class="text-[11px] text-indigo-400 font-mono font-semibold">LaTeX &amp; Formula Proofs</span>
+                        <a href="/tools/homework-solver" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs px-4 py-2 rounded-xl transition shadow-md shadow-indigo-500/20" data-i18n="bs_card4_btn">Solve STEM Problem &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Bestseller 5: AI Teacher & Tutoring Copilot -->
+                <div class="bg-gradient-to-b from-emerald-950/40 via-slate-900 to-slate-900 border border-emerald-500/40 hover:border-emerald-400 rounded-3xl p-6 flex flex-col justify-between transition-all shadow-xl group relative md:col-span-2 lg:col-span-2">
+                    <span class="absolute top-4 right-4 text-[10px] font-extrabold uppercase tracking-wider bg-emerald-950 text-emerald-300 border border-emerald-800 px-2.5 py-0.5 rounded-full" data-i18n="bs_card5_tag">MagicSchool Alternative</span>
+                    <div class="flex flex-col sm:flex-row gap-5 items-start">
+                        <div class="w-12 h-12 rounded-2xl bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-2xl shrink-0 shadow-lg shadow-emerald-500/10">
+                            👨‍🏫
+                        </div>
+                        <div class="flex-grow">
+                            <h3 class="text-base font-bold text-white group-hover:text-emerald-300 transition mb-1" data-i18n="bs_card5_title">AI Teacher &amp; Tutoring Copilot</h3>
+                            <p class="text-xs text-slate-400 leading-relaxed mb-4" data-i18n="bs_card5_desc">Autonomous generator for curriculum-aligned lesson plans, differentiated worksheets, and mock quizzes with grading keys.</p>
+                            
+                            <!-- Price Comparison Box -->
+                            <div class="p-3 bg-slate-950/80 border border-white/[0.06] rounded-xl flex items-center justify-between text-xs max-w-md">
+                                <span class="text-slate-400 line-through text-[11px]" data-i18n="bs_card5_market">MagicSchool: $15.00/mo</span>
+                                <span class="font-extrabold text-emerald-400 font-mono" data-i18n="bs_card5_price">Included in Tutor Suite</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pt-3 border-t border-white/[0.08] flex items-center justify-between mt-4">
+                        <span class="text-[11px] text-emerald-400 font-mono font-semibold">1-Click PDF/DOCX Export</span>
+                        <a href="/tools/teacher-lab" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs px-4 py-2 rounded-xl transition shadow-md shadow-emerald-500/20" data-i18n="bs_card5_btn">Generate Lesson Plan &rarr;</a>
                     </div>
                 </div>
 
