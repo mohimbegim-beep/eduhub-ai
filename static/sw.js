@@ -5,14 +5,14 @@
  * API routes always bypass cache (network-only).
  */
 
-const CACHE_NAME = 'eduhub-cache-v4';
+const CACHE_NAME = 'eduhub-cache-v5';
 const CORE_ASSETS = [
   '/',
   '/static/manifest.json',
-  '/static/js/i18n.js?v=20260924_04',
-  '/static/js/user-utils.js?v=20260924_04',
-  '/static/js/doc-renderer.js?v=20260924_04',
-  '/static/js/conversion-engine.js?v=20260924_04'
+  '/static/js/i18n.js?v=20260924_06',
+  '/static/js/user-utils.js?v=20260924_06',
+  '/static/js/doc-renderer.js?v=20260924_06',
+  '/static/js/conversion-engine.js?v=20260924_06'
 ];
 
 self.addEventListener('install', (event) => {
