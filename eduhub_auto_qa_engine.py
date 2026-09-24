@@ -913,7 +913,25 @@ class AutoQAGuardEngine:
                     t.passed = False
                     t.errors.append("legal-consent.js missing pre-checkout checkbox or Dodo Payments MoR")
 
-            t.details = "GDPR Article 17 erasure verified; 24/24 HTML pages verified for Dodo Payments MoR disclosure; Pre-checkout consent gate active."
+            # 4. Strict Ban on Personal Email & Official Corporate Email Guard
+            banned_personal = "mohim.mohimbegim@gmail.com"
+            for h in html_files:
+                h_text = h.read_text(encoding="utf-8")
+                if banned_personal.lower() in h_text.lower():
+                    t.passed = False
+                    t.errors.append(f"Forbidden personal email found in {h.name}")
+
+            for loc_f in (self.base_dir / "locales").glob("*.json"):
+                if banned_personal.lower() in loc_f.read_text(encoding="utf-8").lower():
+                    t.passed = False
+                    t.errors.append(f"Forbidden personal email found in {loc_f.name}")
+
+            i18n_p = self.base_dir / "static" / "js" / "i18n.js"
+            if i18n_p.exists() and banned_personal.lower() in i18n_p.read_text(encoding="utf-8").lower():
+                t.passed = False
+                t.errors.append("Forbidden personal email found in static/js/i18n.js")
+
+            t.details = "GDPR Article 17 erasure verified; 24/24 HTML pages verified for Dodo Payments MoR; Personal email strictly banned."
         except Exception as e:
             t.passed = False
             t.errors.append(f"Compliance QA test exception: {e}")
