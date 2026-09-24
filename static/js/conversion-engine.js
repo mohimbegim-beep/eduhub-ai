@@ -11,8 +11,11 @@
 (function () {
   const EduHubConversion = {
     // Configuration
-    CHECKOUT_URL_TRIAL: "https://checkout.dodopayments.com/buy/pdt_0No9KRSRGMZyhypjqIEfu?quantity=1&redirect_url=https://eduhub-ai.onrender.com%2Fstatic%2Fpayment-success.html",
-    CHECKOUT_URL_STARTER: "https://checkout.dodopayments.com/buy/pdt_0No9KRSRGMZyhypjqIEfu?quantity=1&redirect_url=https://eduhub-ai.onrender.com%2Fstatic%2Fpayment-success.html",
+    CHECKOUT_URL_TRIAL: "https://test.checkout.dodopayments.com/buy/pdt_0NoI6L8G7azwANaxwZU4K?quantity=1&redirect_url=https://eduhub-ai.onrender.com%2Fstatic%2Fpayment-success.html",
+    CHECKOUT_URL_STARTER: "https://test.checkout.dodopayments.com/buy/pdt_0NoI5o1C5b1146SfNmJ0G?quantity=1&redirect_url=https://eduhub-ai.onrender.com%2Fstatic%2Fpayment-success.html",
+    CHECKOUT_URL_PROMAX: "https://test.checkout.dodopayments.com/buy/pdt_0NndXfFExcWaOMFk1ATxT?quantity=1&redirect_url=https://eduhub-ai.onrender.com%2Fstatic%2Fpayment-success.html",
+    CHECKOUT_URL_SPRINT: "https://test.checkout.dodopayments.com/buy/pdt_0NoI607WU6ofbWIn6oUQQ?quantity=1&redirect_url=https://eduhub-ai.onrender.com%2Fstatic%2Fpayment-success.html",
+    CHECKOUT_URL_TUTOR: "https://test.checkout.dodopayments.com/buy/pdt_0NoI6BT0oduXyGTfKHOZC?quantity=1&redirect_url=https://eduhub-ai.onrender.com%2Fstatic%2Fpayment-success.html",
     TICKER_INTERVAL_MS: 16000,
     TICKER_DISPLAY_MS: 6000,
 
@@ -72,6 +75,12 @@
       let url = this.CHECKOUT_URL_TRIAL;
       if (tier === "starter") {
         url = this.CHECKOUT_URL_STARTER;
+      } else if (tier === "promax" || tier === "promax_trial" || tier === "pro") {
+        url = this.CHECKOUT_URL_PROMAX;
+      } else if (tier === "sprint" || tier === "exam_sprint") {
+        url = this.CHECKOUT_URL_SPRINT;
+      } else if (tier === "tutor" || tier === "tutor_creator") {
+        url = this.CHECKOUT_URL_TUTOR;
       }
 
       const finalUrl = this.buildCheckoutUrl(url);

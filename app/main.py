@@ -184,11 +184,11 @@ async def add_security_headers(request: Request, call_next):
 
     csp = (
         "default-src 'self'; "
-        "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://checkout.dodopayments.com; "
+        "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://checkout.dodopayments.com https://test.checkout.dodopayments.com; "
         "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; "
         "font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; "
         "img-src 'self' data: blob: https:; "
-        "frame-src 'self' https://checkout.dodopayments.com; "
+        "frame-src 'self' https://checkout.dodopayments.com https://test.checkout.dodopayments.com; "
         "connect-src 'self' https: http:; "
         "object-src 'none'; "
         "base-uri 'self';"
@@ -282,7 +282,7 @@ PRODUCT_CATALOG = {
             "Export to DOCX, Markdown, PDF",
             "Safe Content Filtering (No toxic/18+ content)"
         ],
-        "checkout_url": os.getenv("CHECKOUT_URL", "/#pricing")
+        "checkout_url": os.getenv("DODO_CHECKOUT_STUDENT", "https://test.checkout.dodopayments.com/buy/pdt_0NoI5o1C5b1146SfNmJ0G?quantity=1&redirect_url=https://eduhub-ai.onrender.com%2Fstatic%2Fpayment-success.html")
     },
     "pro_max": {
         "id": "pro_max",
@@ -308,7 +308,7 @@ PRODUCT_CATALOG = {
             "Unlimited homework grading & exam prep generator",
             "Cancel anytime in 1 click"
         ],
-        "checkout_url": os.getenv("DODO_CHECKOUT_PRO_MAX", "https://checkout.dodopayments.com/buy/pdt_0No9KRSRGMZyhypjqIEfu?quantity=1&redirect_url=https://eduhub-ai.onrender.com%2Fstatic%2Fpayment-success.html")
+        "checkout_url": os.getenv("DODO_CHECKOUT_PRO_MAX", "https://test.checkout.dodopayments.com/buy/pdt_0NndXfFExcWaOMFk1ATxT?quantity=1&redirect_url=https://eduhub-ai.onrender.com%2Fstatic%2Fpayment-success.html")
     },
     "tutor_creator": {
         "id": "tutor_creator",
@@ -326,7 +326,7 @@ PRODUCT_CATALOG = {
             "Classroom sharing & multi-seat license (up to 5)",
             "Dedicated onboarding & API webhook access"
         ],
-        "checkout_url": os.getenv("CHECKOUT_URL", "/#pricing")
+        "checkout_url": os.getenv("DODO_CHECKOUT_TUTOR", "https://test.checkout.dodopayments.com/buy/pdt_0NoI6BT0oduXyGTfKHOZC?quantity=1&redirect_url=https://eduhub-ai.onrender.com%2Fstatic%2Fpayment-success.html")
     },
     "b2b_center": {
         "id": "b2b_center",
@@ -365,7 +365,7 @@ PRODUCT_CATALOG = {
             "Comprehensive crash-course flashcard decks",
             "Instant activation upon payment"
         ],
-        "checkout_url": os.getenv("CHECKOUT_URL", "/#pricing")
+        "checkout_url": os.getenv("DODO_CHECKOUT_EXAM", "https://test.checkout.dodopayments.com/buy/pdt_0NoI607WU6ofbWIn6oUQQ?quantity=1&redirect_url=https://eduhub-ai.onrender.com%2Fstatic%2Fpayment-success.html")
     },
     "flash_sprint_50": {
         "id": "flash_sprint_50",
@@ -417,7 +417,7 @@ PRODUCT_CATALOG = {
             "Instant Markdown & Clean Text Export",
             "Formatting recommendations for older ATS parsers"
         ],
-        "checkout_url": os.getenv("DODO_CHECKOUT_ATS", "https://test.dodopayments.com/buy/pdt_0NYV3EevfB7hC3hRkF2kG?quantity=1")
+        "checkout_url": os.getenv("DODO_CHECKOUT_ATS", "https://test.checkout.dodopayments.com/buy/pdt_0NoI6L8G7azwANaxwZU4K?quantity=1&redirect_url=https://eduhub-ai.onrender.com%2Fstatic%2Fpayment-success.html")
     },
     "blueprint_download_pass": {
         "id": "blueprint_download_pass",
@@ -434,7 +434,7 @@ PRODUCT_CATALOG = {
             "Step-by-step 2-minute setup documentation",
             "100% money-back guarantee if not satisfied"
         ],
-        "checkout_url": os.getenv("DODO_CHECKOUT_BLUEPRINT", "https://test.dodopayments.com/buy/pdt_0NYV3EevfB7hC3hRkF2kG?quantity=1")
+        "checkout_url": os.getenv("DODO_CHECKOUT_BLUEPRINT", "https://test.checkout.dodopayments.com/buy/pdt_0NoI6L8G7azwANaxwZU4K?quantity=1&redirect_url=https://eduhub-ai.onrender.com%2Fstatic%2Fpayment-success.html")
     }
 }
 
