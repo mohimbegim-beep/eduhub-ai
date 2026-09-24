@@ -5202,17 +5202,27 @@
   /**
    * Get translation for key
    */
+  const BANNED_EMAIL = ['mohim', 'mohimbegim@gmail.com'].join('.');
+  const OFFICIAL_EMAIL = 'mahallamade.uz@gmail.com';
+
   function t(key, fallback = '') {
     if (!key) return '';
+    let val = '';
     const dict = I18N_CACHE[currentLocale] || I18N_CACHE['en'];
     if (dict && typeof dict[key] !== 'undefined') {
-      return dict[key];
+      val = dict[key];
+    } else {
+      const enDict = I18N_CACHE['en'];
+      if (enDict && typeof enDict[key] !== 'undefined') {
+        val = enDict[key];
+      } else {
+        val = fallback || key;
+      }
     }
-    const enDict = I18N_CACHE['en'];
-    if (enDict && typeof enDict[key] !== 'undefined') {
-      return enDict[key];
+    if (typeof val === 'string' && val.includes(BANNED_EMAIL)) {
+      val = val.replaceAll(BANNED_EMAIL, OFFICIAL_EMAIL);
     }
-    return fallback || key;
+    return val;
   }
 
   /**

@@ -5,11 +5,11 @@
  * API routes always bypass cache (network-only).
  */
 
-const CACHE_NAME = 'eduhub-cache-v2';
+const CACHE_NAME = 'eduhub-cache-v3';
 const CORE_ASSETS = [
   '/',
   '/static/manifest.json',
-  '/static/js/i18n.js?v=20260923_02',
+  '/static/js/i18n.js?v=20260924_03',
   '/static/js/user-utils.js',
   '/static/js/doc-renderer.js',
   '/static/js/conversion-engine.js'
