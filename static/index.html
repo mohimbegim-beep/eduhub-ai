@@ -1375,10 +1375,10 @@
                         </div>
 
                         <div class="flex items-baseline mb-1">
-                            <span class="text-4xl font-extrabold text-white">$19</span>
-                            <span class="text-slate-400 text-xs ml-1.5" data-i18n="tier_promax_trial_price">/ month</span>
+                            <span class="text-4xl font-extrabold text-white" id="promax-price-display">$19</span>
+                            <span class="text-slate-400 text-xs ml-1.5" id="promax-period-display" data-i18n="tier_promax_trial_price">/ month</span>
                         </div>
-                        <p class="text-[11px] text-slate-400 mb-5" data-i18n="tier_promax_trial_note">Billed monthly. Renews automatically until cancelled.</p>
+                        <p class="text-[11px] text-slate-400 mb-5" id="promax-note-display" data-i18n="tier_promax_trial_note">Billed monthly. Renews automatically until cancelled.</p>
 
                         <ul class="space-y-2.5 text-xs text-slate-200 mb-8">
                             <li class="flex items-start gap-2"><span class="text-blue-400 font-bold">✓</span> <span><strong data-i18n="tier_promax_f1">Everything in Starter</strong></span></li>
@@ -1391,8 +1391,19 @@
                         </ul>
                     </div>
                     <div>
-                        <a href="https://checkout.dodopayments.com/buy/pdt_0No9KRSRGMZyhypjqIEfu?quantity=1&redirect_url=https://eduhub-ai.onrender.com%2Fstatic%2Fpayment-success.html" onclick="if(window.EduHubLegal) EduHubLegal.openCheckoutModal(this); else window.location.href=this.href;" class="checkout-trigger-btn block text-center w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-semibold py-3.5 rounded-xl text-xs transition shadow-lg shadow-blue-600/30 transform hover:-translate-y-0.5">
-                            <span data-i18n="tier_promax_btn">Get Pro Max ($19/mo)</span>
+                        <!-- Optional Auto-Renewal Checkbox for Pro Max -->
+                        <div class="mb-3 p-2.5 rounded-xl bg-blue-950/80 border border-blue-600/40 hover:border-blue-400/60 transition">
+                            <label class="flex items-start gap-2.5 cursor-pointer select-none">
+                                <input type="checkbox" id="promax-autorenew-card-toggle" checked onchange="window.toggleProMaxCardPlan && window.toggleProMaxCardPlan(this.checked)" class="w-4 h-4 mt-0.5 rounded text-blue-600 focus:ring-blue-500 border-slate-700 bg-slate-900 cursor-pointer shrink-0">
+                                <div class="text-left">
+                                    <span class="text-xs font-bold text-white block" id="promax-card-chk-title">Автопродление подписки ($19/мес)</span>
+                                    <span class="text-[10px] text-blue-300 block mt-0.5 leading-snug" id="promax-card-chk-hint">Снимите галочку, если нужен только разовый 3-дневный доступ за $1.00</span>
+                                </div>
+                            </label>
+                        </div>
+
+                        <a id="promax-checkout-main-btn" href="https://checkout.dodopayments.com/buy/pdt_0No9KRSRGMZyhypjqIEfu?quantity=1&redirect_url=https://eduhub-ai.onrender.com%2Fstatic%2Fpayment-success.html" onclick="if(window.EduHubLegal) EduHubLegal.openCheckoutModal(this); else window.location.href=this.href;" class="checkout-trigger-btn block text-center w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-semibold py-3.5 rounded-xl text-xs transition shadow-lg shadow-blue-600/30 transform hover:-translate-y-0.5">
+                            <span id="promax-btn-text" data-i18n="tier_promax_btn">Get Pro Max ($19/mo)</span>
                         </a>
                         <p class="checkout-micro-consent mt-2 text-[10px] text-slate-400 text-center leading-relaxed" data-i18n="checkout_micro_consent">By clicking, you agree to the <a href="/terms" target="_blank" class="underline text-slate-300 hover:text-white">Terms of Service</a> and our <a href="/refund" target="_blank" class="underline text-slate-300 hover:text-white">14-day money-back guarantee</a>. Cancel anytime in 1 click.</p>
                     </div>
@@ -1824,6 +1835,47 @@
                 if (btnInd) btnInd.className = 'px-6 py-2.5 rounded-xl text-xs font-bold transition bg-blue-600 text-white shadow-md shadow-blue-500/20';
             }
         }
+
+        // Pro Max Optional Subscription Toggle (Auto-Renewal vs One-Time $1)
+        window.toggleProMaxCardPlan = function(isSubscribed, syncModal) {
+            if (syncModal === undefined) syncModal = true;
+            const btn = document.getElementById('promax-checkout-main-btn');
+            const btnText = document.getElementById('promax-btn-text');
+            const priceDisplay = document.getElementById('promax-price-display');
+            const periodDisplay = document.getElementById('promax-period-display');
+            const noteDisplay = document.getElementById('promax-note-display');
+            if (syncModal) {
+                const modalChk = document.getElementById('pre-checkout-autorenew-checkbox');
+                if (modalChk) {
+                    modalChk.checked = isSubscribed;
+                    const confirmBtn = document.getElementById('pcm-confirm-btn');
+                    if (confirmBtn && window.EduHubLegal) {
+                        // Triggers dynamic confirm button label in modal
+                        modalChk.dispatchEvent(new Event('change'));
+                    }
+                }
+            }
+
+            const lang = (localStorage.getItem('eduhub_locale') || localStorage.getItem('eduhub_lang') || document.documentElement.lang || 'ru').toLowerCase();
+
+            if (isSubscribed) {
+                if (btn) btn.href = "https://checkout.dodopayments.com/buy/pdt_0No9KRSRGMZyhypjqIEfu?quantity=1&redirect_url=https://eduhub-ai.onrender.com%2Fstatic%2Fpayment-success.html";
+                if (priceDisplay) priceDisplay.textContent = "$19";
+                if (periodDisplay) periodDisplay.textContent = lang === 'ru' ? '/ месяц' : (lang === 'uz' ? '/ oy' : (lang === 'es' ? '/ mes' : '/ month'));
+                if (noteDisplay) noteDisplay.textContent = lang === 'ru' ? '3-дневный триал за $1, затем $19/мес автоматически. Отмена в 1 клик.' : (lang === 'uz' ? '3 kunlik sinov $1, so\'ng $19/oy. 1 bosishda bekor qilish.' : '3-day trial for $1, then $19/mo. Cancel anytime in 1 click.');
+                if (btnText) {
+                    btnText.textContent = lang === 'ru' ? 'Оформить Pro Max ($1 триал) →' : (lang === 'uz' ? 'Pro Max olish ($1 sinov) →' : (lang === 'es' ? 'Obtener Pro Max ($1 prueba) →' : 'Get Pro Max ($1 Trial) →'));
+                }
+            } else {
+                if (btn) btn.href = "https://checkout.dodopayments.com/buy/pdt_0NoLUjhcuEzS9BBgujRcS?quantity=1&redirect_url=https://eduhub-ai.onrender.com%2Fstatic%2Fpayment-success.html";
+                if (priceDisplay) priceDisplay.textContent = "$1.00";
+                if (periodDisplay) periodDisplay.textContent = lang === 'ru' ? 'разово (3 дня)' : (lang === 'uz' ? 'bir martalik (3 kun)' : (lang === 'es' ? 'pago único (3 días)' : 'one-time (3 days)'));
+                if (noteDisplay) noteDisplay.textContent = lang === 'ru' ? 'Без подписки и без автопродления. С карты спишется только $1.00.' : (lang === 'uz' ? 'Obunasiz va avto-uzaytirishsiz. Kartadan faqat $1.00 yechiladi.' : 'Zero subscription, zero renewals. Single $1.00 charge.');
+                if (btnText) {
+                    btnText.textContent = lang === 'ru' ? 'Оплатить разовый пропуск ($1.00) →' : (lang === 'uz' ? 'Bir martalik to\'lov ($1.00) →' : (lang === 'es' ? 'Pagar Pase Único ($1.00) →' : 'Pay One-Time Pass ($1.00) →'));
+                }
+            }
+        };
 
         // Modal handlers
         function openModal(id) {

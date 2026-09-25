@@ -26,6 +26,10 @@ const EduHubLegal = (function() {
             modal_b4: "<strong>Merchant of Record:</strong> Payments are securely processed by Dodo Payments Inc., ensuring bank-grade encryption and full consumer protection.",
             modal_chk: "I have read and agree to the <a href='/terms' target='_blank' class='underline text-blue-400 font-semibold'>Terms of Service</a>, <a href='/privacy' target='_blank' class='underline text-blue-400 font-semibold'>Privacy Policy</a>, and <a href='/refund' target='_blank' class='underline text-blue-400 font-semibold'>Refund Policy</a>.",
             modal_confirm: "Confirm & Proceed to Secure Checkout →",
+            modal_confirm_renew: "Start 3-Day Trial ($1.00) with Subscription →",
+            modal_confirm_onetime: "Pay One-Time Pass ($1.00 without Renewal) →",
+            autorenew_title: "Enable subscription renewal ($19/mo after 3-day trial)",
+            autorenew_desc: "Uncheck if you want only 3-day full access for $1.00 with zero recurring charges.",
             modal_cancel: "Cancel & Return to Site",
             modal_warn: "⚠️ Please check the box to confirm you accept the refund terms before proceeding."
         },
@@ -41,6 +45,10 @@ const EduHubLegal = (function() {
             modal_b4: "<strong>Merchant of Record:</strong> Обработка платежей и биллинг осуществляются Dodo Payments Inc. с банковским шифрованием и защитой прав покупателей.",
             modal_chk: "Я прочитал и безоговорочно принимаю <a href='/terms' target='_blank' class='underline text-blue-400 font-semibold'>Условия обслуживания</a>, <a href='/privacy' target='_blank' class='underline text-blue-400 font-semibold'>Политику конфиденциальности</a> и <a href='/refund' target='_blank' class='underline text-blue-400 font-semibold'>Политику возвратов</a>.",
             modal_confirm: "Подтверждаю и перейти к безопасной оплате →",
+            modal_confirm_renew: "Оформить 3-дневный триал ($1.00) с подпиской →",
+            modal_confirm_onetime: "Оплатить разовый пропуск ($1.00 без подписки) →",
+            autorenew_title: "Включить автопродление ($19/мес после 3-дневного триала)",
+            autorenew_desc: "Снимите галочку, если вам нужен только 3-дневный доступ за $1.00 без подписки.",
             modal_cancel: "Отмена и вернуться на сайт",
             modal_warn: "⚠️ Пожалуйста, отметьте галочку согласия с условиями возврата для продолжения."
         },
@@ -56,6 +64,10 @@ const EduHubLegal = (function() {
             modal_b4: "<strong>Merchant of Record:</strong> Barcha to'lovlar Dodo Payments Inc. tomonidan bank darajasidagi shifrlash va xaridor himoyasi bilan xavfsiz amalga oshiriladi.",
             modal_chk: "Men <a href='/terms' target='_blank' class='underline text-blue-400 font-semibold'>Xizmat ko\'rsatish shartlari</a>, <a href='/privacy' target='_blank' class='underline text-blue-400 font-semibold'>Maxfiylik siyosati</a> va <a href='/refund' target='_blank' class='underline text-blue-400 font-semibold'>Qaytarish siyosati</a> bilan tanishdim va roziman.",
             modal_confirm: "Tasdiqlayman va xavfsiz to\'lovga o\'tish →",
+            modal_confirm_renew: "3 kunlik sinov ($1.00) obuna bilan boshlash →",
+            modal_confirm_onetime: "Bir martalik to'lov ($1.00 obunasiz) →",
+            autorenew_title: "Avtomatik uzaytirishni yoqish (3 kundan so'ng $19/oy)",
+            autorenew_desc: "Agar obunasiz faqat $1.00 ga bir martalik 3 kunlik kirishni xohlasangiz, belgini olib tashlang.",
             modal_cancel: "Bekor qilish va saytga qaytish",
             modal_warn: "⚠️ Davom etish uchun to\'lovni qaytarish shartlariga rozilik bildirish katakchasini belgilang."
         },
@@ -71,6 +83,10 @@ const EduHubLegal = (function() {
             modal_b4: "<strong>Merchant of Record:</strong> Los pagos y la facturación son procesados de forma segura por Dodo Payments Inc., con cifrado bancario y total protección.",
             modal_chk: "He leído y acepto expresamente los <a href='/terms' target='_blank' class='underline text-blue-400 font-semibold'>Términos de servicio</a>, <a href='/privacy' target='_blank' class='underline text-blue-400 font-semibold'>Política de privacidad</a> y <a href='/refund' target='_blank' class='underline text-blue-400 font-semibold'>Política de reembolsos</a>.",
             modal_confirm: "Confirmar y Proceder al Pago Seguro →",
+            modal_confirm_renew: "Iniciar Prueba de 3 Días ($1.00) con Suscripción →",
+            modal_confirm_onetime: "Pagar Pase Único ($1.00 sin Renovación) →",
+            autorenew_title: "Activar renovación automática ($19/mes tras prueba de 3 días)",
+            autorenew_desc: "Desmarca la casilla si prefieres solo 3 días por $1.00 sin pagos recurrentes.",
             modal_cancel: "Cancelar y Volver al Sitio",
             modal_warn: "⚠️ Por favor, marca la casilla de aceptación de las condiciones de reembolso para continuar."
         }
@@ -169,6 +185,17 @@ const EduHubLegal = (function() {
                     </div>
                 </div>
 
+                <!-- Optional Auto-Renewal Toggle (For Pro Max / Trial) -->
+                <div id="pcm-autorenew-container" class="hidden mb-4 p-3.5 rounded-2xl bg-gradient-to-r from-blue-950/80 to-indigo-950/80 border border-blue-500/50 shadow-inner transition">
+                    <label class="flex items-start gap-3 cursor-pointer select-none">
+                        <input type="checkbox" id="pre-checkout-autorenew-checkbox" checked class="w-4 h-4 mt-0.5 rounded text-blue-600 focus:ring-blue-500 border-slate-700 bg-slate-900 cursor-pointer shrink-0">
+                        <div class="text-left">
+                            <span class="text-xs font-bold text-white block" id="pcm-autorenew-title"></span>
+                            <span class="text-[11px] text-blue-200/80 block mt-0.5 leading-snug" id="pcm-autorenew-desc"></span>
+                        </div>
+                    </label>
+                </div>
+
                 <!-- Mandatory Interactive Checkbox -->
                 <div class="mb-4">
                     <label id="pcm-checkbox-container" class="flex items-start gap-3 p-3.5 bg-slate-950/60 border border-slate-700 hover:border-slate-500 rounded-xl cursor-pointer transition">
@@ -191,6 +218,26 @@ const EduHubLegal = (function() {
         document.body.appendChild(modal);
     }
 
+    function updateConfirmButtonText() {
+        const lang = getLocale();
+        const dict = DICTIONARY[lang] || DICTIONARY.en;
+        const confirmBtn = document.getElementById('pcm-confirm-btn');
+        const autoRenewContainer = document.getElementById('pcm-autorenew-container');
+        const autoRenewChk = document.getElementById('pre-checkout-autorenew-checkbox');
+
+        if (!confirmBtn) return;
+
+        if (autoRenewContainer && !autoRenewContainer.classList.contains('hidden') && autoRenewChk) {
+            if (autoRenewChk.checked) {
+                confirmBtn.textContent = dict.modal_confirm_renew || dict.modal_confirm;
+            } else {
+                confirmBtn.textContent = dict.modal_confirm_onetime || dict.modal_confirm;
+            }
+        } else {
+            confirmBtn.textContent = dict.modal_confirm;
+        }
+    }
+
     function renderCheckoutModalContent() {
         const lang = getLocale();
         const dict = DICTIONARY[lang] || DICTIONARY.en;
@@ -205,6 +252,9 @@ const EduHubLegal = (function() {
         const confirmBtn = document.getElementById('pcm-confirm-btn');
         const cancelBtn = document.getElementById('pcm-cancel-btn');
         const warning = document.getElementById('pcm-warning');
+        const arTitle = document.getElementById('pcm-autorenew-title');
+        const arDesc = document.getElementById('pcm-autorenew-desc');
+        const autoRenewChk = document.getElementById('pre-checkout-autorenew-checkbox');
 
         if (badge) badge.textContent = `🛡️ ${dict.modal_badge}`;
         if (title) title.textContent = dict.modal_title;
@@ -213,9 +263,26 @@ const EduHubLegal = (function() {
         if (b3) b3.innerHTML = dict.modal_b3;
         if (b4) b4.innerHTML = dict.modal_b4;
         if (chkText) chkText.innerHTML = dict.modal_chk;
-        if (confirmBtn) confirmBtn.textContent = dict.modal_confirm;
         if (cancelBtn) cancelBtn.textContent = dict.modal_cancel;
         if (warning) warning.textContent = dict.modal_warn;
+        if (arTitle) arTitle.textContent = dict.autorenew_title || "Автопродление подписки ($19/мес)";
+        if (arDesc) arDesc.textContent = dict.autorenew_desc || "Снимите галочку, если вам нужен только 3-дневный доступ за $1.00 без подписки.";
+
+        if (autoRenewChk) {
+            autoRenewChk.onchange = function() {
+                updateConfirmButtonText();
+                // Sync card toggle if present
+                const cardToggle = document.getElementById('promax-autorenew-card-toggle');
+                if (cardToggle) {
+                    cardToggle.checked = autoRenewChk.checked;
+                    if (window.toggleProMaxCardPlan) {
+                        window.toggleProMaxCardPlan(autoRenewChk.checked, false);
+                    }
+                }
+            };
+        }
+
+        updateConfirmButtonText();
     }
 
     function openCheckoutModal(targetEl) {
@@ -227,6 +294,28 @@ const EduHubLegal = (function() {
         const chk = document.getElementById('pre-checkout-checkbox');
         const warning = document.getElementById('pcm-warning');
         const chkBox = document.getElementById('pcm-checkbox-container');
+        const autoRenewContainer = document.getElementById('pcm-autorenew-container');
+        const autoRenewChk = document.getElementById('pre-checkout-autorenew-checkbox');
+
+        const href = (targetEl && targetEl.getAttribute) ? (targetEl.getAttribute('href') || '') : '';
+        const isProMaxOrTrial = href.includes('pdt_0No9KRSRGMZyhypjqIEfu') ||
+                               href.includes('pdt_0NoLUjhcuEzS9BBgujRcS') ||
+                               href.includes('promax') ||
+                               (targetEl && targetEl.dataset && (targetEl.dataset.plan === 'pro_max' || targetEl.dataset.plan === 'trial'));
+
+        if (autoRenewContainer) {
+            if (isProMaxOrTrial) {
+                autoRenewContainer.classList.remove('hidden');
+                const cardToggle = document.getElementById('promax-autorenew-card-toggle');
+                if (autoRenewChk) {
+                    autoRenewChk.checked = cardToggle ? cardToggle.checked : true;
+                }
+            } else {
+                autoRenewContainer.classList.add('hidden');
+            }
+        }
+
+        updateConfirmButtonText();
 
         if (chk) chk.checked = false;
         if (warning) warning.classList.add('hidden');
@@ -274,7 +363,21 @@ const EduHubLegal = (function() {
         // Proceed with original checkout action
         if (pendingCheckoutElement) {
             const el = pendingCheckoutElement;
-            const href = el.getAttribute('href');
+            let href = el.getAttribute('href') || '';
+
+            // Check if Auto-Renewal Checkbox is applied (Pro Max / Trial)
+            const autoRenewContainer = document.getElementById('pcm-autorenew-container');
+            const autoRenewChk = document.getElementById('pre-checkout-autorenew-checkbox');
+            if (autoRenewContainer && !autoRenewContainer.classList.contains('hidden') && autoRenewChk) {
+                if (autoRenewChk.checked) {
+                    // Subscription trial ($1 intro -> $19/mo auto-renewal)
+                    href = "https://checkout.dodopayments.com/buy/pdt_0No9KRSRGMZyhypjqIEfu?quantity=1&redirect_url=https://eduhub-ai.onrender.com%2Fstatic%2Fpayment-success.html";
+                } else {
+                    // Pure one-time pass ($1.00 once, zero subscription)
+                    href = "https://checkout.dodopayments.com/buy/pdt_0NoLUjhcuEzS9BBgujRcS?quantity=1&redirect_url=https://eduhub-ai.onrender.com%2Fstatic%2Fpayment-success.html";
+                }
+            }
+
             if (href && href.startsWith('http')) {
                 let targetUrl = href;
                 try {
