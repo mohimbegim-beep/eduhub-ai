@@ -23,9 +23,9 @@ DODO_CHECKOUT_PRO_MAX = os.getenv(
 )
 DODO_CHECKOUT_ATS = os.getenv(
     "DODO_CHECKOUT_ATS",
-    "https://test.dodopayments.com/buy/pdt_0NYV3EevfB7hC3hRkF2kG?quantity=1"
+    "https://checkout.dodopayments.com/buy/pdt_0NoLUjhcuEzS9BBgujRcS?quantity=1&redirect_url=https://eduhub-ai.onrender.com%2Fstatic%2Fpayment-success.html"
 )
 DODO_CHECKOUT_BLUEPRINT = os.getenv(
     "DODO_CHECKOUT_BLUEPRINT",
-    "https://test.dodopayments.com/buy/pdt_0NYV3EevfB7hC3hRkF2kG?quantity=1"
+    "https://checkout.dodopayments.com/buy/pdt_0NoLUjhcuEzS9BBgujRcS?quantity=1&redirect_url=https://eduhub-ai.onrender.com%2Fstatic%2Fpayment-success.html"
 )
