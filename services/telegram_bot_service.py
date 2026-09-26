@@ -25,7 +25,21 @@ if hasattr(sys.stdout, "reconfigure"):
     except Exception:
         pass
 
-TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "8821505674:AAFNpDNcDnpPqCn3_u-Qcaj-O2dBB3jrCSc")
+env_file = BASE_DIR / ".env"
+if env_file.exists():
+    try:
+        with open(env_file, "r", encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if line and not line.startswith("#") and "=" in line:
+                    k, v = line.split("=", 1)
+                    k, v = k.strip(), v.strip().strip('"\'')
+                    if k not in os.environ:
+                        os.environ[k] = v
+    except Exception:
+        pass
+
+TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "")
 TELEGRAM_API_URL = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}"
 PRODUCTION_URL = os.getenv("PRODUCTION_URL", "https://eduhub-ai.onrender.com").rstrip("/")
 IELTS_WEBAPP_URL = f"{PRODUCTION_URL}/ielts/checker"
@@ -225,6 +239,32 @@ def process_telegram_update(update: dict) -> bool:
     caption = message.get("caption", "")
     full_text = (text or caption).strip()
 
+    # ---------------------------------------------------------
+    # 🛡️ ACTIVE ANTI-SPAM & HONEYPOT DEFENSE (SHIELD)
+    # ---------------------------------------------------------
+    lower_text = full_text.lower()
+    BANNED_SPAM_PATTERNS = [
+        "пробив", "enigma", "void", "глаз бога", "слив", "казино", "casino",
+        "crypto", "крипта", "toncoin", "airdrop", "подработка", "ставки",
+        "1win", "1xbet", "порно", "intim", "заработок от", "доход в день",
+        "бот для пробива"
+    ]
+    if any(pat in lower_text for pat in BANNED_SPAM_PATTERNS):
+        print(f"[SECURITY SHIELD] Blocked malicious spam from chat_id {chat_id}: {full_text[:50]}")
+        msg_id = message.get("message_id")
+        if msg_id:
+            send_telegram_request("deleteMessage", {"chat_id": chat_id, "message_id": msg_id})
+        
+        roast = (
+            "🚨 *СИСТЕМА БЕЗОПАСНОСТИ EDUHUB SHIELD*\n\n"
+            "⚠️ *Обнаружена несанкционированная реклама или вредоносный спам.*\n"
+            "Ваш контент удалён, а попытка спам-атаки зафиксирована в журнале безопасности.\n\n"
+            "❌ *Статус:* Доступ заблокирован. Платформа EduHub AI обучает академическому английскому, "
+            "а не сомнительным схемам. Не тратьте наше и своё время."
+        )
+        send_message(chat_id, roast)
+        return True
+
     if full_text.startswith("/start"):
         parts = full_text.split()
         if len(parts) > 1 and parts[1].startswith("auth_"):
@@ -312,10 +352,23 @@ def setup_telegram_webhook(webhook_url: str) -> dict:
     endpoint = f"{webhook_url.rstrip('/')}/api/v1/telegram/webhook"
     res = send_telegram_request("setWebhook", {
         "url": endpoint,
-        "allowed_updates": ["message", "callback_query"]
+        "allowed_updates": ["message", "callback_query"],
+        "drop_pending_updates": True
     })
     print(f"[TELEGRAM WEBHOOK SETUP] URL: {endpoint} | Result: {res}")
     return res
+
+def verify_and_heal_webhook() -> bool:
+    """Verifies that the bot webhook is strictly bound to the official EduHub production server."""
+    expected_url = f"{PRODUCTION_URL}/api/v1/telegram/webhook"
+    res = send_telegram_request("getWebhookInfo", {})
+    current_url = res.get("result", {}).get("url", "")
+    if current_url != expected_url:
+        print(f"[WATCHDOG ALERT] Webhook mismatch detected! Current: '{current_url}', Expected: '{expected_url}'. Healing...")
+        setup_telegram_webhook(PRODUCTION_URL)
+        return False
+    print(f"[WATCHDOG OK] Webhook properly bound to {expected_url}")
+    return True
 
 if __name__ == "__main__":
     print("=" * 60)
