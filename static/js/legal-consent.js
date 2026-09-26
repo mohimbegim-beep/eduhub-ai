@@ -31,7 +31,13 @@ const EduHubLegal = (function() {
             autorenew_title: "Enable subscription renewal ($19/mo after 3-day trial)",
             autorenew_desc: "Uncheck if you want only 3-day full access for $1.00 with zero recurring charges.",
             modal_cancel: "Cancel & Return to Site",
-            modal_warn: "⚠️ Please check the box to confirm you accept the refund terms before proceeding."
+            modal_warn: "⚠️ Please check the box to confirm you accept the refund terms before proceeding.",
+            card_period_sub: "/ month",
+            card_note_sub: "3-day trial for $1, then $19/mo. Cancel anytime in 1 click.",
+            card_btn_sub: "Get Pro Max ($1 Trial) →",
+            card_period_once: "one-time (3 days)",
+            card_note_once: "Zero subscription, zero renewals. Single $1.00 charge.",
+            card_btn_once: "Pay One-Time Pass ($1.00) →"
         },
         ru: {
             cookie_msg: "Мы используем cookies для безопасности и персонализации. Продолжая использовать EduHub AI, вы соглашаетесь с <a href='/terms' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Условиями обслуживания</a>, <a href='/privacy' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Политикой конфиденциальности</a> и <a href='/refund' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Политикой возвратов</a>.",
@@ -50,7 +56,13 @@ const EduHubLegal = (function() {
             autorenew_title: "Включить автопродление ($19/мес после 3-дневного триала)",
             autorenew_desc: "Снимите галочку, если вам нужен только 3-дневный доступ за $1.00 без подписки.",
             modal_cancel: "Отмена и вернуться на сайт",
-            modal_warn: "⚠️ Пожалуйста, отметьте галочку согласия с условиями возврата для продолжения."
+            modal_warn: "⚠️ Пожалуйста, отметьте галочку согласия с условиями возврата для продолжения.",
+            card_period_sub: "/ месяц",
+            card_note_sub: "3-дневный триал за $1, затем $19/мес автоматически. Отмена в 1 клик.",
+            card_btn_sub: "Оформить Pro Max ($1 триал) →",
+            card_period_once: "разово (3 дня)",
+            card_note_once: "Без подписки и без автопродления. С карты спишется только $1.00.",
+            card_btn_once: "Оплатить разовый пропуск ($1.00) →"
         },
         uz: {
             cookie_msg: "Xavfsizlik va shaxsiylashtirish uchun cookies fayllaridan foydalanamiz. EduHub AI dan foydalanishni davom ettirish orqali siz <a href='/terms' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Xizmat ko\'rsatish shartlari</a>, <a href='/privacy' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Maxfiylik siyosati</a> va <a href='/refund' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Qaytarish siyosati</a>ga rozilik bildirasiz.",
@@ -69,7 +81,13 @@ const EduHubLegal = (function() {
             autorenew_title: "Avtomatik uzaytirishni yoqish (3 kundan so'ng $19/oy)",
             autorenew_desc: "Agar obunasiz faqat $1.00 ga bir martalik 3 kunlik kirishni xohlasangiz, belgini olib tashlang.",
             modal_cancel: "Bekor qilish va saytga qaytish",
-            modal_warn: "⚠️ Davom etish uchun to\'lovni qaytarish shartlariga rozilik bildirish katakchasini belgilang."
+            modal_warn: "⚠️ Davom etish uchun to\'lovni qaytarish shartlariga rozilik bildirish katakchasini belgilang.",
+            card_period_sub: "/ oy",
+            card_note_sub: "3 kunlik sinov $1, so'ng $19/oy. 1 bosishda bekor qilish.",
+            card_btn_sub: "Pro Max olish ($1 sinov) →",
+            card_period_once: "bir martalik (3 kun)",
+            card_note_once: "Obunasiz va avto-uzaytirishsiz. Kartadan faqat $1.00 yechiladi.",
+            card_btn_once: "Bir martalik to'lov ($1.00) →"
         },
         es: {
             cookie_msg: "Utilizamos cookies para seguridad y personalización. Al continuar utilizando EduHub AI, aceptas nuestros <a href='/terms' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Términos de servicio</a>, <a href='/privacy' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Política de privacidad</a> y <a href='/refund' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Política de reembolsos</a>.",
@@ -88,7 +106,13 @@ const EduHubLegal = (function() {
             autorenew_title: "Activar renovación automática ($19/mes tras prueba de 3 días)",
             autorenew_desc: "Desmarca la casilla si prefieres solo 3 días por $1.00 sin pagos recurrentes.",
             modal_cancel: "Cancelar y Volver al Sitio",
-            modal_warn: "⚠️ Por favor, marca la casilla de aceptación de las condiciones de reembolso para continuar."
+            modal_warn: "⚠️ Por favor, marca la casilla de aceptación de las condiciones de reembolso para continuar.",
+            card_period_sub: "/ mes",
+            card_note_sub: "Prueba de 3 días por $1, luego $19/mes. Cancela en 1 clic.",
+            card_btn_sub: "Obtener Pro Max ($1 prueba) →",
+            card_period_once: "pago único (3 días)",
+            card_note_once: "Sin suscripción ni cargos recurrentes. Pago único de $1.00.",
+            card_btn_once: "Pagar Pase Único ($1.00) →"
         }
     };
 
@@ -435,10 +459,52 @@ const EduHubLegal = (function() {
         });
     }
 
+    function toggleProMaxCardPlan(isSubscribed, syncModal) {
+        if (syncModal === undefined) syncModal = true;
+        const btn = document.getElementById('promax-checkout-main-btn');
+        const btnText = document.getElementById('promax-btn-text');
+        const priceDisplay = document.getElementById('promax-price-display');
+        const periodDisplay = document.getElementById('promax-period-display');
+        const noteDisplay = document.getElementById('promax-note-display');
+        const cardToggle = document.getElementById('promax-autorenew-card-toggle');
+        if (cardToggle && cardToggle.checked !== isSubscribed) {
+            cardToggle.checked = isSubscribed;
+        }
+
+        if (syncModal) {
+            const modalChk = document.getElementById('pre-checkout-autorenew-checkbox');
+            if (modalChk) {
+                modalChk.checked = isSubscribed;
+                updateConfirmButtonText();
+            }
+        }
+
+        const lang = getLocale();
+        const dict = DICTIONARY[lang] || DICTIONARY.en;
+
+        if (isSubscribed) {
+            if (btn) btn.href = "https://checkout.dodopayments.com/buy/pdt_0No9KRSRGMZyhypjqIEfu?quantity=1&redirect_url=https://eduhub-ai.onrender.com%2Fstatic%2Fpayment-success.html";
+            if (priceDisplay) priceDisplay.textContent = "$19";
+            if (periodDisplay) periodDisplay.textContent = dict.card_period_sub;
+            if (noteDisplay) noteDisplay.textContent = dict.card_note_sub;
+            if (btnText) btnText.textContent = dict.card_btn_sub;
+        } else {
+            if (btn) btn.href = "https://checkout.dodopayments.com/buy/pdt_0NoLUjhcuEzS9BBgujRcS?quantity=1&redirect_url=https://eduhub-ai.onrender.com%2Fstatic%2Fpayment-success.html";
+            if (priceDisplay) priceDisplay.textContent = "$1.00";
+            if (periodDisplay) periodDisplay.textContent = dict.card_period_once;
+            if (noteDisplay) noteDisplay.textContent = dict.card_note_once;
+            if (btnText) btnText.textContent = dict.card_btn_once;
+        }
+    }
+
     function onLanguageChanged() {
         renderCookieBarContent();
         renderCheckoutModalContent();
         updateMicroConsent();
+        const cardToggle = document.getElementById('promax-autorenew-card-toggle');
+        if (cardToggle) {
+            toggleProMaxCardPlan(cardToggle.checked, false);
+        }
     }
 
     // Bootstrap
@@ -465,13 +531,16 @@ const EduHubLegal = (function() {
     }
     window.addEventListener('eduhub:locale-changed', onLanguageChanged);
 
+    window.toggleProMaxCardPlan = toggleProMaxCardPlan;
+
     return {
         acceptCookieConsent,
         closeCheckoutModal,
         confirmCheckoutConsent,
         openCheckoutModal,
         onLanguageChanged,
-        updateMicroConsent
+        updateMicroConsent,
+        toggleProMaxCardPlan
     };
 })();
 
