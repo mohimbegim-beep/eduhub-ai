@@ -1573,9 +1573,12 @@
                         <p class="text-xs text-slate-400 mt-0.5" data-i18n="banner_guarantee_desc">Test EduHub AI completely risk-free. If it doesn't elevate your academic performance, get an immediate 100% refund.</p>
                     </div>
                 </div>
-                <button onclick="openModal('refund-modal')" class="text-xs text-blue-400 hover:text-blue-300 font-semibold underline shrink-0" data-i18n="banner_guarantee_link">
-                    Read Refund Policy &rarr;
-                </button>
+                <div class="flex flex-col sm:flex-row items-center gap-3 shrink-0">
+                    <span class="text-[11px] text-slate-400 border border-slate-800 bg-slate-950/70 px-2.5 py-1 rounded-lg" data-i18n="banner_guarantee_entity">Backed by LLC «KIFOYATECH»</span>
+                    <button onclick="openModal('refund-modal')" class="text-xs text-blue-400 hover:text-blue-300 font-semibold underline shrink-0" data-i18n="banner_guarantee_link">
+                        Read Refund Policy &rarr;
+                    </button>
+                </div>
             </div>
         </section>
 
@@ -1663,7 +1666,33 @@
                     <a href="mailto:mahallamade.uz@gmail.com" class="text-slate-400 hover:text-white transition underline">mahallamade.uz@gmail.com</a>
                 </div>
             </div>
+
+            <!-- Quality & Legal Origin Trust Banner (LLC KIFOYATECH • Made in Uzbekistan) -->
+            <div class="mt-8 pt-6 border-t border-slate-900/90 flex flex-col sm:flex-row items-center justify-between gap-4 bg-slate-900/40 p-4 sm:p-5 rounded-2xl border border-white/[0.05]">
+                <div class="flex items-center gap-3.5">
+                    <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/25 flex items-center justify-center text-amber-400 shrink-0 shadow-lg shadow-amber-500/5">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                        </svg>
+                    </div>
+                    <div class="text-left">
+                        <div class="flex flex-wrap items-center gap-2">
+                            <span class="font-semibold text-slate-200 text-xs sm:text-sm" data-i18n="trust_badge_quality_title">100% Quality &amp; Academic Integrity Guarantee</span>
+                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-mono tracking-wide" data-i18n="trust_badge_guarantee_pill">14 Days Refund</span>
+                        </div>
+                        <p class="text-[11px] text-slate-400 mt-0.5" data-i18n="trust_badge_quality_desc">14-day unconditional money-back guarantee • Official IELTS 9.0 rubric alignment</p>
+                    </div>
+                </div>
+                <div class="flex flex-col sm:items-end text-center sm:text-right shrink-0">
+                    <span class="text-xs font-semibold text-slate-300 inline-flex items-center justify-center sm:justify-end gap-1.5" data-i18n="trust_badge_made_in">Made with pride in Uzbekistan 🇺🇿</span>
+                    <span class="text-[11px] text-slate-500 mt-0.5" data-i18n="trust_badge_company">Crafted &amp; operated by LLC «KIFOYATECH»</span>
+                </div>
+            </div>
+
             <div class="mt-6 pt-6 border-t border-slate-900/80 text-center text-[11px] text-slate-500 space-y-2 max-w-4xl mx-auto">
+                <p data-i18n="footer_legal_entity">
+                    EduHub AI is a proprietary product developed and operated by LLC «KIFOYATECH» (OOO «KIFOYATECH»), registered in the Republic of Uzbekistan.
+                </p>
                 <p data-i18n="footer_academic_disclaimer">
                     Academic Integrity &amp; Auxiliary Tool Notice: EduHub AI is an assistive pedagogical tool designed solely for study assistance, tutoring, and self-assessment. AI-generated explanations and drafts are reference materials to foster critical thinking and must not be submitted as a student's own original coursework. Users are strictly responsible for upholding their institution's academic honesty policies.
                 </p>

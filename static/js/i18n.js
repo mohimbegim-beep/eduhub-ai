@@ -21,6 +21,14 @@
   // 1. In-memory master dictionary for instant zero-latency rendering
   const I18N_CACHE = {
       "en": {
+          "trust_badge_quality_title": "100% Quality & Academic Integrity Guarantee",
+          "trust_badge_guarantee_pill": "14 Days Refund",
+          "trust_badge_quality_desc": "14-day unconditional money-back guarantee • Official IELTS 9.0 rubric alignment",
+          "trust_badge_made_in": "Made with pride in Uzbekistan 🇺🇿",
+          "trust_badge_company": "Crafted & operated by LLC «KIFOYATECH»",
+          "banner_guarantee_entity": "Backed by LLC «KIFOYATECH»",
+          "footer_legal_entity": "EduHub AI is a proprietary product developed and operated by LLC «KIFOYATECH» (OOO «KIFOYATECH»), registered in the Republic of Uzbekistan.",
+
           "hero_badge_socratic": "Socratic Intelligence • 100% Safe Guardrails (Strict 18+ Refusal)",
           "hero_badge_trial": "Start 3-Day Pro Access for Just $1 &rarr;",
           "hero_cta_try": "Try Live Assistant",
@@ -1360,6 +1368,14 @@
           "preview_unlocked_label": "Free Preview Unlocked (1 Section)"
       },
       "ru": {
+          "trust_badge_quality_title": "Гарантия качества 100% и академическая честность",
+          "trust_badge_guarantee_pill": "14 дней возврат",
+          "trust_badge_quality_desc": "14 дней на безусловный возврат средств • Соответствие критериям IELTS 9.0",
+          "trust_badge_made_in": "Создано с гордостью в Узбекистане 🇺🇿",
+          "trust_badge_company": "Разработчик и оператор: ООО «KIFOYATECH»",
+          "banner_guarantee_entity": "Гарант: ООО «KIFOYATECH»",
+          "footer_legal_entity": "EduHub AI — программный продукт, разработанный и управляемый ООО «KIFOYATECH» (LLC KIFOYATECH), зарегистрированным в Республике Узбекистан.",
+
           "hero_badge_socratic": "Сократовский Интеллект • 100% Академическая Безопасность (Отказ 18+)",
           "hero_badge_trial": "3 Дня Pro-доступа всего за $1 &rarr;",
           "hero_cta_try": "Попробовать Ассистента",
@@ -2699,6 +2715,14 @@
           "preview_unlocked_label": "Бесплатный просмотр разблокирован (1 раздел)"
       },
       "uz": {
+          "trust_badge_quality_title": "100% Sifat va Akademik Halollik Kafolati",
+          "trust_badge_guarantee_pill": "14 kunlik qaytarish",
+          "trust_badge_quality_desc": "14 kunlik to'lov qaytarish kafolati • Rasmiy IELTS 9.0 mezonlari",
+          "trust_badge_made_in": "O'zbekistonda g'urur bilan yaratilgan 🇺🇿",
+          "trust_badge_company": "Ishlab chiquvchi va operator: \"KIFOYATECH\" MChJ",
+          "banner_guarantee_entity": "\"KIFOYATECH\" MChJ kafilligi",
+          "footer_legal_entity": "EduHub AI — O'zbekiston Respublikasida ro'yxatdan o'tgan \"KIFOYATECH\" MChJ (LLC KIFOYATECH) tomonidan ishlab chiqilgan va boshqariladigan dasturiy mahsulot.",
+
           "hero_badge_socratic": "Suqrot Intellekti • 100% Xavfsiz Muhit (18+ Rad Etish)",
           "hero_badge_trial": "3 Kunlik Pro-kirish atigi $1 &rarr;",
           "hero_cta_try": "AI Yordamchini Sinash",
@@ -4038,6 +4062,14 @@
           "preview_unlocked_label": "Bepul ko'rish ochildi (1 bo'lim)"
       },
       "es": {
+          "trust_badge_quality_title": "Garantía de Calidad 100% e Integridad Académica",
+          "trust_badge_guarantee_pill": "14 días de reembolso",
+          "trust_badge_quality_desc": "Garantía incondicional de reembolso de 14 días • Criterios oficiales IELTS 9.0",
+          "trust_badge_made_in": "Creado con orgullo en Uzbekistán 🇺🇿",
+          "trust_badge_company": "Desarrollado y operado por LLC «KIFOYATECH»",
+          "banner_guarantee_entity": "Respaldado por LLC «KIFOYATECH»",
+          "footer_legal_entity": "EduHub AI es un producto desarrollado y operado por LLC «KIFOYATECH» (OOO «KIFOYATECH»), registrado en la República de Uzbekistán.",
+
           "hero_badge_socratic": "Inteligencia Socrática • Filtro de Seguridad 18+ Estricto",
           "hero_badge_trial": "Comenzar Pro 3 Días por Solo $1 &rarr;",
           "hero_cta_try": "Probar Asistente en Vivo",

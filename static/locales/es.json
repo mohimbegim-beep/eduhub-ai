@@ -1341,5 +1341,12 @@
     "nav_pricing_short": "Precios",
     "footer_academic_disclaimer": "Descargo de responsabilidad de integridad académica: EduHub AI es una herramienta pedagógica auxiliar diseñada exclusivamente para el estudio, tutoría y autoevaluación. Las explicaciones generadas son material de referencia y no deben presentarse como trabajos originales de los estudiantes. Los usuarios son responsables de cumplir las políticas académicas de sus instituciones.",
     "promax_card_chk_title": "Renovación automática (/mes)",
-    "promax_card_chk_hint": "Desmarca si solo deseas un pase único de 3 días por .00"
+    "promax_card_chk_hint": "Desmarca si solo deseas un pase único de 3 días por .00",
+    "trust_badge_quality_title": "Garantía de Calidad 100% e Integridad Académica",
+    "trust_badge_guarantee_pill": "14 días de reembolso",
+    "trust_badge_quality_desc": "Garantía incondicional de reembolso de 14 días • Criterios oficiales IELTS 9.0",
+    "trust_badge_made_in": "Creado con orgullo en Uzbekistán 🇺🇿",
+    "trust_badge_company": "Desarrollado y operado por LLC «KIFOYATECH»",
+    "banner_guarantee_entity": "Respaldado por LLC «KIFOYATECH»",
+    "footer_legal_entity": "EduHub AI es un producto desarrollado y operado por LLC «KIFOYATECH» (OOO «KIFOYATECH»), registrado en la República de Uzbekistán."
 }

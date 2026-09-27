@@ -1341,5 +1341,12 @@
     "nav_pricing_short": "Narxlar",
     "footer_academic_disclaimer": "Mas'uliyatdan cheklash (Akademik halollik): EduHub AI faqat mustaqil o'rganish, mavzularni tahlil qilish va o'z-o'zini tekshirish uchun yordamchi ta'lim vositasidir. Sun'iy intellekt javoblari ma'lumot beruvchi xarakterga ega bo'lib, o'quvchilar o'rniga ko'chirib olish uchun mo'ljallanmagan. Foydalanuvchilar o'z ta'lim muassasalarining akademik halollik qoidalariga rioya qilishlari shart.",
     "promax_card_chk_title": "Obunani avtomatik uzaytirish (/oy)",
-    "promax_card_chk_hint": "Agar faqat .00 ga bir martalik 3 kunlik kirish kerak bo'lsa, belgini olib tashlang"
+    "promax_card_chk_hint": "Agar faqat .00 ga bir martalik 3 kunlik kirish kerak bo'lsa, belgini olib tashlang",
+    "trust_badge_quality_title": "100% Sifat va Akademik Halollik Kafolati",
+    "trust_badge_guarantee_pill": "14 kunlik qaytarish",
+    "trust_badge_quality_desc": "14 kunlik to'lov qaytarish kafolati • Rasmiy IELTS 9.0 mezonlari",
+    "trust_badge_made_in": "O'zbekistonda g'urur bilan yaratilgan 🇺🇿",
+    "trust_badge_company": "Ishlab chiquvchi va operator: \"KIFOYATECH\" MChJ",
+    "banner_guarantee_entity": "\"KIFOYATECH\" MChJ kafilligi",
+    "footer_legal_entity": "EduHub AI — O'zbekiston Respublikasida ro'yxatdan o'tgan \"KIFOYATECH\" MChJ (LLC KIFOYATECH) tomonidan ishlab chiqilgan va boshqariladigan dasturiy mahsulot."
 }
