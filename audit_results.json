@@ -1,0 +1,443 @@
+{
+  "timestamp": "2026-09-27T04:59:27.803427+00:00",
+  "overall_score": 100.0,
+  "total_checks": 35,
+  "total_passed": 35,
+  "duration_sec": 1.79,
+  "vectors": {
+    "Бизнес и монетизация": {
+      "score": 100.0,
+      "passed": 5,
+      "total": 5,
+      "checks": [
+        {
+          "check_id": "BUS-01",
+          "name": "Интеграция Dodo Payments MoR и кассы",
+          "vector": "Бизнес и монетизация",
+          "passed": true,
+          "score": 100,
+          "errors": [],
+          "warnings": [],
+          "details": "Dodo Payments Merchant of Record (MoR) keys & checkout endpoints verified.",
+          "duration_ms": 0.41
+        },
+        {
+          "check_id": "BUS-02",
+          "name": "Тарифная сетка ($1 trial -> $19, $39, $79, $190)",
+          "vector": "Бизнес и монетизация",
+          "passed": true,
+          "score": 100,
+          "errors": [],
+          "warnings": [],
+          "details": "Verified 5 commercial subscription tiers: Starter, Pro Max ($1 trial), Sprint, Tutor, Center.",
+          "duration_ms": 3.04
+        },
+        {
+          "check_id": "BUS-03",
+          "name": "Защита от чарна и Dunning (3-дневный грейс-период)",
+          "vector": "Бизнес и монетизация",
+          "passed": true,
+          "score": 100,
+          "errors": [],
+          "warnings": [],
+          "details": "3-day Dunning Grace Period active for failed recurring charges.",
+          "duration_ms": 1337.52
+        },
+        {
+          "check_id": "BUS-04",
+          "name": "Политика 14-дневного безусловного возврата",
+          "vector": "Бизнес и монетизация",
+          "passed": true,
+          "score": 100,
+          "errors": [],
+          "warnings": [],
+          "details": "14-day full money-back guarantee verified in static/refund.html.",
+          "duration_ms": 0.33
+        },
+        {
+          "check_id": "BUS-05",
+          "name": "Идемпотентность и криптозащита вебхуков",
+          "vector": "Бизнес и монетизация",
+          "passed": true,
+          "score": 100,
+          "errors": [],
+          "warnings": [],
+          "details": "Webhook signature verification & event idempotency fully functional.",
+          "duration_ms": 50.44
+        }
+      ]
+    },
+    "Юридический комплаенс": {
+      "score": 100.0,
+      "passed": 5,
+      "total": 5,
+      "checks": [
+        {
+          "check_id": "LEG-01",
+          "name": "Защита чужих товарных знаков (Nominative Fair Use 24/24)",
+          "vector": "Юридический комплаенс",
+          "passed": true,
+          "score": 100,
+          "errors": [],
+          "warnings": [],
+          "details": "Verified 24/24 HTML pages for Nominative Fair Use & trademark protection.",
+          "duration_ms": 30.62
+        },
+        {
+          "check_id": "LEG-02",
+          "name": "Условия использования: Разделы 10-14, Арбитраж Ташкента",
+          "vector": "Юридический комплаенс",
+          "passed": true,
+          "score": 100,
+          "errors": [],
+          "warnings": [],
+          "details": "Terms of Service Sections 10-14, Tashkent Arbitration & Class Action Waiver verified.",
+          "duration_ms": 0.37
+        },
+        {
+          "check_id": "LEG-03",
+          "name": "Раскрытие юрлица: ООО «KIFOYATECH» (ИНН/STIR 312206850)",
+          "vector": "Юридический комплаенс",
+          "passed": true,
+          "score": 100,
+          "errors": [],
+          "warnings": [],
+          "details": "Verified LLC «KIFOYATECH» (STIR 312206850) as registered operating legal entity.",
+          "duration_ms": 6.83
+        },
+        {
+          "check_id": "LEG-04",
+          "name": "GDPR ст. 17 (Право на забвение) и защита данных",
+          "vector": "Юридический комплаенс",
+          "passed": true,
+          "score": 100,
+          "errors": [],
+          "warnings": [],
+          "details": "GDPR Article 17 right to erasure & privacy disclosures fully verified.",
+          "duration_ms": 5.06
+        },
+        {
+          "check_id": "LEG-05",
+          "name": "Гарантия Zero Model Training (Защита студенческих эссе)",
+          "vector": "Юридический комплаенс",
+          "passed": true,
+          "score": 100,
+          "errors": [],
+          "warnings": [],
+          "details": "Zero Model Training Guarantee verified: student essays are never used to train public LLMs.",
+          "duration_ms": 0.46
+        }
+      ]
+    },
+    "Маркетинг и рост": {
+      "score": 100.0,
+      "passed": 5,
+      "total": 5,
+      "checks": [
+        {
+          "check_id": "MKT-01",
+          "name": "Каталог Programmatic SEO (50+ тем в pseo_topics.json)",
+          "vector": "Маркетинг и рост",
+          "passed": true,
+          "score": 100,
+          "errors": [],
+          "warnings": [],
+          "details": "Verified 50 high-intent pSEO educational topics across 4 subject domains.",
+          "duration_ms": 0.33
+        },
+        {
+          "check_id": "MKT-02",
+          "name": "Микроразметка Schema.org (Course, FAQPage, Organization)",
+          "vector": "Маркетинг и рост",
+          "passed": true,
+          "score": 100,
+          "errors": [],
+          "warnings": [],
+          "details": "Schema.org microdata (Organization, FAQPage, Course) verified.",
+          "duration_ms": 0.92
+        },
+        {
+          "check_id": "MKT-03",
+          "name": "Social Meta-теги (OpenGraph & Twitter Cards 24/24)",
+          "vector": "Маркетинг и рост",
+          "passed": true,
+          "score": 100,
+          "errors": [],
+          "warnings": [],
+          "details": "OpenGraph & Twitter Cards present across all 24 HTML pages.",
+          "duration_ms": 3.93
+        },
+        {
+          "check_id": "MKT-04",
+          "name": "Комплаенс рекламных текстов Google Ads",
+          "vector": "Маркетинг и рост",
+          "passed": true,
+          "score": 100,
+          "errors": [],
+          "warnings": [],
+          "details": "Google Ads copy strictly compliant with Google Review Guidelines.",
+          "duration_ms": 0.26
+        },
+        {
+          "check_id": "MKT-05",
+          "name": "База Telegram Outreach каналов и защита от флуда",
+          "vector": "Маркетинг и рост",
+          "passed": true,
+          "score": 100,
+          "errors": [],
+          "warnings": [],
+          "details": "Verified 16 targeted Telegram channels with safe anti-flood rate limits.",
+          "duration_ms": 0.18
+        }
+      ]
+    },
+    "UI/UX и мультиязычность": {
+      "score": 100.0,
+      "passed": 5,
+      "total": 5,
+      "checks": [
+        {
+          "check_id": "UX-01",
+          "name": "Симметрия локалей: ровно 1,352 ключа в 4 языках",
+          "vector": "UI/UX и мультиязычность",
+          "passed": true,
+          "score": 100,
+          "errors": [],
+          "warnings": [],
+          "details": "Exact symmetry across 4 languages: exactly 1,352 keys each (en, ru, uz, es).",
+          "duration_ms": 5.27
+        },
+        {
+          "check_id": "UX-02",
+          "name": "Чистота DOM и отсутствие FOUC (мелькания перевода)",
+          "vector": "UI/UX и мультиязычность",
+          "passed": true,
+          "score": 100,
+          "errors": [],
+          "warnings": [],
+          "details": "DOM tree verified: English root defaults with zero untagged Cyrillic leakage.",
+          "duration_ms": 2.32
+        },
+        {
+          "check_id": "UX-03",
+          "name": "Запрет 'Asbob/Instrument' в узбекской терминологии",
+          "vector": "UI/UX и мультиязычность",
+          "passed": true,
+          "score": 100,
+          "errors": [],
+          "warnings": [],
+          "details": "100% purged: Zero occurrences of banned words 'asbob/instrument' in Uzbek locale.",
+          "duration_ms": 3.09
+        },
+        {
+          "check_id": "UX-04",
+          "name": "Мобильная адаптивность (Viewport теги во всех 24 страницах)",
+          "vector": "UI/UX и мультиязычность",
+          "passed": true,
+          "score": 100,
+          "errors": [],
+          "warnings": [],
+          "details": "Mobile viewport tag verified across all 24 HTML pages.",
+          "duration_ms": 5.04
+        },
+        {
+          "check_id": "UX-05",
+          "name": "Совместимость с Safari & WebKit (-webkit-backdrop-filter)",
+          "vector": "UI/UX и мультиязычность",
+          "passed": true,
+          "score": 100,
+          "errors": [],
+          "warnings": [],
+          "details": "CSS Safari/WebKit backdrop-filter & layout compatibility verified.",
+          "duration_ms": 0.14
+        }
+      ]
+    },
+    "Бэкенд и API": {
+      "score": 100.0,
+      "passed": 5,
+      "total": 5,
+      "checks": [
+        {
+          "check_id": "API-01",
+          "name": "Маршрут GET / (Лендинг платформы)",
+          "vector": "Бэкенд и API",
+          "passed": true,
+          "score": 100,
+          "errors": [],
+          "warnings": [],
+          "details": "Root endpoint GET / returns HTTP 200 and loads landing page.",
+          "duration_ms": 20.14
+        },
+        {
+          "check_id": "API-02",
+          "name": "Маршрут GET /health (Глубокий healthcheck)",
+          "vector": "Бэкенд и API",
+          "passed": true,
+          "score": 100,
+          "errors": [],
+          "warnings": [],
+          "details": "System health operational: Model gemini-3.6-flash, SDK loaded: True.",
+          "duration_ms": 8.64
+        },
+        {
+          "check_id": "API-03",
+          "name": "Документация OpenAPI /docs",
+          "vector": "Бэкенд и API",
+          "passed": true,
+          "score": 100,
+          "errors": [],
+          "warnings": [],
+          "details": "Swagger OpenAPI Documentation (/docs) available and healthy.",
+          "duration_ms": 4.24
+        },
+        {
+          "check_id": "API-04",
+          "name": "Валидация входящих схем Pydantic (HTTP 422)",
+          "vector": "Бэкенд и API",
+          "passed": true,
+          "score": 100,
+          "errors": [],
+          "warnings": [],
+          "details": "Pydantic request payload validations return strict HTTP 422 on bad inputs.",
+          "duration_ms": 12.68
+        },
+        {
+          "check_id": "API-05",
+          "name": "Целостность схемы базы данных (SQLite/eduhub.db)",
+          "vector": "Бэкенд и API",
+          "passed": true,
+          "score": 100,
+          "errors": [],
+          "warnings": [],
+          "details": "Database eduhub.db integrity verified with tables: user_balances, transactions, disputes.",
+          "duration_ms": 1.68
+        }
+      ]
+    },
+    "AI-Safety и безопасность": {
+      "score": 100.0,
+      "passed": 5,
+      "total": 5,
+      "checks": [
+        {
+          "check_id": "SEC-01",
+          "name": "Сократический метод AI (Защита от списывания)",
+          "vector": "AI-Safety и безопасность",
+          "passed": true,
+          "score": 100,
+          "errors": [],
+          "warnings": [],
+          "details": "Socratic AI guardrails active: guiding students without ghostwriting essays.",
+          "duration_ms": 13.53
+        },
+        {
+          "check_id": "SEC-02",
+          "name": "Строгий 18+ фильтр контента (HTTP 400 ContentPolicyViolation)",
+          "vector": "AI-Safety и безопасность",
+          "passed": true,
+          "score": 100,
+          "errors": [],
+          "warnings": [],
+          "details": "18+ content policy enforced: explicit requests blocked with HTTP 400 ContentPolicyViolation.",
+          "duration_ms": 6.47
+        },
+        {
+          "check_id": "SEC-03",
+          "name": "Защита от Prompt Injection и утечки системного промпта",
+          "vector": "AI-Safety и безопасность",
+          "passed": true,
+          "score": 100,
+          "errors": [],
+          "warnings": [],
+          "details": "Prompt injection defense verified: system prompt secrets remain fully protected.",
+          "duration_ms": 6.05
+        },
+        {
+          "check_id": "SEC-04",
+          "name": "Rate Limiting & Anti-DDoS (HTTP 429 + Retry-After)",
+          "vector": "AI-Safety и безопасность",
+          "passed": true,
+          "score": 100,
+          "errors": [],
+          "warnings": [],
+          "details": "Rate limiter triggered HTTP 429 with Retry-After header upon threshold breach.",
+          "duration_ms": 110.84
+        },
+        {
+          "check_id": "SEC-05",
+          "name": "Сканирование на утечки API-ключей в клиентском коде",
+          "vector": "AI-Safety и безопасность",
+          "passed": true,
+          "score": 100,
+          "errors": [],
+          "warnings": [],
+          "details": "Perimeter scan clean: Zero hardcoded API keys or webhook secrets in client code.",
+          "duration_ms": 8.42
+        }
+      ]
+    },
+    "DevOps и надежность": {
+      "score": 100.0,
+      "passed": 5,
+      "total": 5,
+      "checks": [
+        {
+          "check_id": "DEV-01",
+          "name": "Экспоненциальный откат (Exponential Backoff) для Gemini API",
+          "vector": "DevOps и надежность",
+          "passed": true,
+          "score": 100,
+          "errors": [],
+          "warnings": [],
+          "details": "Gemini 2.5 Flash exponential retry backoff verified against transient 429 errors.",
+          "duration_ms": 125.52
+        },
+        {
+          "check_id": "DEV-02",
+          "name": "Телеметрия ошибок и трейсинг (Sentry SDK)",
+          "vector": "DevOps и надежность",
+          "passed": true,
+          "score": 100,
+          "errors": [],
+          "warnings": [],
+          "details": "Sentry SDK active with 100% error and transaction tracing.",
+          "duration_ms": 6.93
+        },
+        {
+          "check_id": "DEV-03",
+          "name": "Структурированное аудит-логирование (system_audit.log)",
+          "vector": "DevOps и надежность",
+          "passed": true,
+          "score": 100,
+          "errors": [],
+          "warnings": [],
+          "details": "Structured JSON audit logging verified at system_audit.log.",
+          "duration_ms": 0.66
+        },
+        {
+          "check_id": "DEV-04",
+          "name": "Автономный бэкап данных и восстановление (Backup Engine)",
+          "vector": "DevOps и надежность",
+          "passed": true,
+          "score": 100,
+          "errors": [],
+          "warnings": [],
+          "details": "Disaster Recovery verified: created snapshot snapshot_20260927_095927.",
+          "duration_ms": 6.34
+        },
+        {
+          "check_id": "DEV-05",
+          "name": "Контейнеризация и готовность к деплою (Docker)",
+          "vector": "DevOps и надежность",
+          "passed": true,
+          "score": 100,
+          "errors": [],
+          "warnings": [],
+          "details": "Container specifications (Dockerfile, docker-compose.yml) verified for production.",
+          "duration_ms": 0.1
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduHub AI — Сводный Аудиторский Сертификат (7 Векторов)</title>
+    <style>
+        :root {
+            --bg: #090d16;
+            --surface: #111827;
+            --surface-hover: #1f2937;
+            --border: #374151;
+            --primary: #3b82f6;
+            --accent: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --text-main: #f9fafb;
+            --text-muted: #9ca3af;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+        body { background: var(--bg); color: var(--text-main); padding: 40px 20px; line-height: 1.5; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .header { text-align: center; margin-bottom: 40px; padding: 30px; background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%); border-radius: 16px; border: 1px solid var(--border); }
+        .header h1 { font-size: 2.2rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 10px; background: linear-gradient(135deg, #60a5fa, #34d399); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .header p { color: var(--text-muted); font-size: 1rem; }
+        
+        .score-hero { display: flex; align-items: center; justify-content: space-around; flex-wrap: wrap; margin-bottom: 40px; gap: 20px; }
+        .score-box { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 24px; min-width: 220px; text-align: center; }
+        .score-num { font-size: 3rem; font-weight: 900; color: var(--accent); }
+        .score-label { color: var(--text-muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-top: 5px; }
+
+        .vector-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 24px; margin-bottom: 30px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+        .vector-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .vector-header h3 { font-size: 1.3rem; color: #e2e8f0; }
+        .score-badge { padding: 6px 14px; border-radius: 20px; font-weight: 700; font-size: 0.9rem; }
+        .badge-success { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid #10b981; }
+        .badge-warning { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid #f59e0b; }
+
+        .progress-bar-bg { background: #1f2937; height: 8px; border-radius: 4px; overflow: hidden; margin-bottom: 20px; }
+        .progress-bar-fill { background: linear-gradient(90deg, #3b82f6, #10b981); height: 100%; }
+
+        .checks-table { width: 100%; border-collapse: collapse; }
+        .checks-table th { text-align: left; padding: 10px; font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); border-bottom: 1px solid var(--border); }
+        .checks-table td { padding: 12px 10px; font-size: 0.9rem; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .check-id { font-family: monospace; color: #60a5fa; font-weight: 600; }
+        .check-status .status-pass { background: rgba(16, 185, 129, 0.2); color: #10b981; padding: 3px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; }
+        .check-status .status-fail { background: rgba(239, 68, 68, 0.2); color: #ef4444; padding: 3px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; }
+        .check-time { color: var(--text-muted); font-size: 0.8rem; font-family: monospace; }
+        .error-msg { color: #f87171; font-size: 0.8rem; margin-top: 5px; }
+        .warn-msg { color: #fbbf24; font-size: 0.8rem; margin-top: 5px; }
+        
+        .footer { text-align: center; margin-top: 50px; color: var(--text-muted); font-size: 0.85rem; border-top: 1px solid var(--border); padding-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>EduHub AI — Universal Multi-Dimensional Master Audit</h1>
+            <p>Комплексный сквозной аудит качества: Бизнес, Юриспруденция, Маркетинг, UI/UX, Бэкенд, AI-Safety, DevOps</p>
+            <p style="margin-top: 5px; font-size: 0.85rem; color: #64748b;">Юридический оператор: ООО «KIFOYATECH» (STIR 312206850, Ташкент, Узбекистан)</p>
+        </div>
+
+        <div class="score-hero">
+            <div class="score-box">
+                <div class="score-num">100.0%</div>
+                <div class="score-label">Индекс здоровья платформы</div>
+            </div>
+            <div class="score-box">
+                <div class="score-num" style="color: #60a5fa;">35 / 35</div>
+                <div class="score-label">Пройдено тестов</div>
+            </div>
+            <div class="score-box">
+                <div class="score-num" style="color: #fbbf24;">1.79s</div>
+                <div class="score-label">Время сквозного скана</div>
+            </div>
+            <div class="score-box">
+                <div class="score-num" style="color: #a78bfa;">7 / 7</div>
+                <div class="score-label">Векторов аттестовано</div>
+            </div>
+        </div>
+
+        
+            <div class="vector-card">
+                <div class="vector-header">
+                    <h3>Бизнес и монетизация</h3>
+                    <div class="score-badge badge-success">100.0% (5/5)</div>
+                </div>
+                <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 100.0%;"></div></div>
+                <table class="checks-table">
+                    <thead>
+                        <tr>
+                            <th width="10%">ID</th>
+                            <th width="65%">Контрольная проверка</th>
+                            <th width="15%">Статус</th>
+                            <th width="10%">Время</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                <tr class="check-row">
+                    <td class="check-id">BUS-01</td>
+                    <td class="check-name"><strong>Интеграция Dodo Payments MoR и кассы</strong><br><small>Dodo Payments Merchant of Record (MoR) keys & checkout endpoints verified.</small></td>
+                    <td class="check-status">✅ <span class="status-pass">PASS</span></td>
+                    <td class="check-time">0.4ms</td>
+                </tr>
+                
+                <tr class="check-row">
+                    <td class="check-id">BUS-02</td>
+                    <td class="check-name"><strong>Тарифная сетка ($1 trial -> $19, $39, $79, $190)</strong><br><small>Verified 5 commercial subscription tiers: Starter, Pro Max ($1 trial), Sprint, Tutor, Center.</small></td>
+                    <td class="check-status">✅ <span class="status-pass">PASS</span></td>
+                    <td class="check-time">3.0ms</td>
+                </tr>
+                
+                <tr class="check-row">
+                    <td class="check-id">BUS-03</td>
+                    <td class="check-name"><strong>Защита от чарна и Dunning (3-дневный грейс-период)</strong><br><small>3-day Dunning Grace Period active for failed recurring charges.</small></td>
+                    <td class="check-status">✅ <span class="status-pass">PASS</span></td>
+                    <td class="check-time">1337.5ms</td>
+                </tr>
+                
+                <tr class="check-row">
+                    <td class="check-id">BUS-04</td>
+                    <td class="check-name"><strong>Политика 14-дневного безусловного возврата</strong><br><small>14-day full money-back guarantee verified in static/refund.html.</small></td>
+                    <td class="check-status">✅ <span class="status-pass">PASS</span></td>
+                    <td class="check-time">0.3ms</td>
+                </tr>
+                
+                <tr class="check-row">
+                    <td class="check-id">BUS-05</td>
+                    <td class="check-name"><strong>Идемпотентность и криптозащита вебхуков</strong><br><small>Webhook signature verification & event idempotency fully functional.</small></td>
+                    <td class="check-status">✅ <span class="status-pass">PASS</span></td>
+                    <td class="check-time">50.4ms</td>
+                </tr>
+                
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="vector-card">
+                <div class="vector-header">
+                    <h3>Юридический комплаенс</h3>
+                    <div class="score-badge badge-success">100.0% (5/5)</div>
+                </div>
+                <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 100.0%;"></div></div>
+                <table class="checks-table">
+                    <thead>
+                        <tr>
+                            <th width="10%">ID</th>
+                            <th width="65%">Контрольная проверка</th>
+                            <th width="15%">Статус</th>
+                            <th width="10%">Время</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                <tr class="check-row">
+                    <td class="check-id">LEG-01</td>
+                    <td class="check-name"><strong>Защита чужих товарных знаков (Nominative Fair Use 24/24)</strong><br><small>Verified 24/24 HTML pages for Nominative Fair Use & trademark protection.</small></td>
+                    <td class="check-status">✅ <span class="status-pass">PASS</span></td>
+                    <td class="check-time">30.6ms</td>
+                </tr>
+                
+                <tr class="check-row">
+                    <td class="check-id">LEG-02</td>
+                    <td class="check-name"><strong>Условия использования: Разделы 10-14, Арбитраж Ташкента</strong><br><small>Terms of Service Sections 10-14, Tashkent Arbitration & Class Action Waiver verified.</small></td>
+                    <td class="check-status">✅ <span class="status-pass">PASS</span></td>
+                    <td class="check-time">0.4ms</td>
+                </tr>
+                
+                <tr class="check-row">
+                    <td class="check-id">LEG-03</td>
+                    <td class="check-name"><strong>Раскрытие юрлица: ООО «KIFOYATECH» (ИНН/STIR 312206850)</strong><br><small>Verified LLC «KIFOYATECH» (STIR 312206850) as registered operating legal entity.</small></td>
+                    <td class="check-status">✅ <span class="status-pass">PASS</span></td>
+                    <td class="check-time">6.8ms</td>
+                </tr>
+                
+                <tr class="check-row">
+                    <td class="check-id">LEG-04</td>
+                    <td class="check-name"><strong>GDPR ст. 17 (Право на забвение) и защита данных</strong><br><small>GDPR Article 17 right to erasure & privacy disclosures fully verified.</small></td>
+                    <td class="check-status">✅ <span class="status-pass">PASS</span></td>
+                    <td class="check-time">5.1ms</td>
+                </tr>
+                
+                <tr class="check-row">
+                    <td class="check-id">LEG-05</td>
+                    <td class="check-name"><strong>Гарантия Zero Model Training (Защита студенческих эссе)</strong><br><small>Zero Model Training Guarantee verified: student essays are never used to train public LLMs.</small></td>
+                    <td class="check-status">✅ <span class="status-pass">PASS</span></td>
+                    <td class="check-time">0.5ms</td>
+                </tr>
+                
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="vector-card">
+                <div class="vector-header">
+                    <h3>Маркетинг и рост</h3>
+                    <div class="score-badge badge-success">100.0% (5/5)</div>
+                </div>
+                <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 100.0%;"></div></div>
+                <table class="checks-table">
+                    <thead>
+                        <tr>
+                            <th width="10%">ID</th>
+                            <th width="65%">Контрольная проверка</th>
+                            <th width="15%">Статус</th>
+                            <th width="10%">Время</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                <tr class="check-row">
+                    <td class="check-id">MKT-01</td>
+                    <td class="check-name"><strong>Каталог Programmatic SEO (50+ тем в pseo_topics.json)</strong><br><small>Verified 50 high-intent pSEO educational topics across 4 subject domains.</small></td>
+                    <td class="check-status">✅ <span class="status-pass">PASS</span></td>
+                    <td class="check-time">0.3ms</td>
+                </tr>
+                
+                <tr class="check-row">
+                    <td class="check-id">MKT-02</td>
+                    <td class="check-name"><strong>Микроразметка Schema.org (Course, FAQPage, Organization)</strong><br><small>Schema.org microdata (Organization, FAQPage, Course) verified.</small></td>
+                    <td class="check-status">✅ <span class="status-pass">PASS</span></td>
+                    <td class="check-time">0.9ms</td>
+                </tr>
+                
+                <tr class="check-row">
+                    <td class="check-id">MKT-03</td>
+                    <td class="check-name"><strong>Social Meta-теги (OpenGraph & Twitter Cards 24/24)</strong><br><small>OpenGraph & Twitter Cards present across all 24 HTML pages.</small></td>
+                    <td class="check-status">✅ <span class="status-pass">PASS</span></td>
+                    <td class="check-time">3.9ms</td>
+                </tr>
+                
+                <tr class="check-row">
+                    <td class="check-id">MKT-04</td>
+                    <td class="check-name"><strong>Комплаенс рекламных текстов Google Ads</strong><br><small>Google Ads copy strictly compliant with Google Review Guidelines.</small></td>
+                    <td class="check-status">✅ <span class="status-pass">PASS</span></td>
+                    <td class="check-time">0.3ms</td>
+                </tr>
+                
+                <tr class="check-row">
+                    <td class="check-id">MKT-05</td>
+                    <td class="check-name"><strong>База Telegram Outreach каналов и защита от флуда</strong><br><small>Verified 16 targeted Telegram channels with safe anti-flood rate limits.</small></td>
+                    <td class="check-status">✅ <span class="status-pass">PASS</span></td>
+                    <td class="check-time">0.2ms</td>
+                </tr>
+                
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="vector-card">
+                <div class="vector-header">
+                    <h3>UI/UX и мультиязычность</h3>
+                    <div class="score-badge badge-success">100.0% (5/5)</div>
+                </div>
+                <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 100.0%;"></div></div>
+                <table class="checks-table">
+                    <thead>
+                        <tr>
+                            <th width="10%">ID</th>
+                            <th width="65%">Контрольная проверка</th>
+                            <th width="15%">Статус</th>
+                            <th width="10%">Время</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                <tr class="check-row">
+                    <td class="check-id">UX-01</td>
+                    <td class="check-name"><strong>Симметрия локалей: ровно 1,352 ключа в 4 языках</strong><br><small>Exact symmetry across 4 languages: exactly 1,352 keys each (en, ru, uz, es).</small></td>
+                    <td class="check-status">✅ <span class="status-pass">PASS</span></td>
+                    <td class="check-time">5.3ms</td>
+                </tr>
+                
+                <tr class="check-row">
+                    <td class="check-id">UX-02</td>
+                    <td class="check-name"><strong>Чистота DOM и отсутствие FOUC (мелькания перевода)</strong><br><small>DOM tree verified: English root defaults with zero untagged Cyrillic leakage.</small></td>
+                    <td class="check-status">✅ <span class="status-pass">PASS</span></td>
+                    <td class="check-time">2.3ms</td>
+                </tr>
+                
+                <tr class="check-row">
+                    <td class="check-id">UX-03</td>
+                    <td class="check-name"><strong>Запрет 'Asbob/Instrument' в узбекской терминологии</strong><br><small>100% purged: Zero occurrences of banned words 'asbob/instrument' in Uzbek locale.</small></td>
+                    <td class="check-status">✅ <span class="status-pass">PASS</span></td>
+                    <td class="check-time">3.1ms</td>
+                </tr>
+                
+                <tr class="check-row">
+                    <td class="check-id">UX-04</td>
+                    <td class="check-name"><strong>Мобильная адаптивность (Viewport теги во всех 24 страницах)</strong><br><small>Mobile viewport tag verified across all 24 HTML pages.</small></td>
+                    <td class="check-status">✅ <span class="status-pass">PASS</span></td>
+                    <td class="check-time">5.0ms</td>
+                </tr>
+                
+                <tr class="check-row">
+                    <td class="check-id">UX-05</td>
+                    <td class="check-name"><strong>Совместимость с Safari & WebKit (-webkit-backdrop-filter)</strong><br><small>CSS Safari/WebKit backdrop-filter & layout compatibility verified.</small></td>
+                    <td class="check-status">✅ <span class="status-pass">PASS</span></td>
+                    <td class="check-time">0.1ms</td>
+                </tr>
+                
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="vector-card">
+                <div class="vector-header">
+                    <h3>Бэкенд и API</h3>
+                    <div class="score-badge badge-success">100.0% (5/5)</div>
+                </div>
+                <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 100.0%;"></div></div>
+                <table class="checks-table">
+                    <thead>
+                        <tr>
+                            <th width="10%">ID</th>
+                            <th width="65%">Контрольная проверка</th>
+                            <th width="15%">Статус</th>
+                            <th width="10%">Время</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                <tr class="check-row">
+                    <td class="check-id">API-01</td>
+                    <td class="check-name"><strong>Маршрут GET / (Лендинг платформы)</strong><br><small>Root endpoint GET / returns HTTP 200 and loads landing page.</small></td>
+                    <td class="check-status">✅ <span class="status-pass">PASS</span></td>
+                    <td class="check-time">20.1ms</td>
+                </tr>
+                
+                <tr class="check-row">
+                    <td class="check-id">API-02</td>
+                    <td class="check-name"><strong>Маршрут GET /health (Глубокий healthcheck)</strong><br><small>System health operational: Model gemini-3.6-flash, SDK loaded: True.</small></td>
+                    <td class="check-status">✅ <span class="status-pass">PASS</span></td>
+                    <td class="check-time">8.6ms</td>
+                </tr>
+                
+                <tr class="check-row">
+                    <td class="check-id">API-03</td>
+                    <td class="check-name"><strong>Документация OpenAPI /docs</strong><br><small>Swagger OpenAPI Documentation (/docs) available and healthy.</small></td>
+                    <td class="check-status">✅ <span class="status-pass">PASS</span></td>
+                    <td class="check-time">4.2ms</td>
+                </tr>
+                
+                <tr class="check-row">
+                    <td class="check-id">API-04</td>
+                    <td class="check-name"><strong>Валидация входящих схем Pydantic (HTTP 422)</strong><br><small>Pydantic request payload validations return strict HTTP 422 on bad inputs.</small></td>
+                    <td class="check-status">✅ <span class="status-pass">PASS</span></td>
+                    <td class="check-time">12.7ms</td>
+                </tr>
+                
+                <tr class="check-row">
+                    <td class="check-id">API-05</td>
+                    <td class="check-name"><strong>Целостность схемы базы данных (SQLite/eduhub.db)</strong><br><small>Database eduhub.db integrity verified with tables: user_balances, transactions, disputes.</small></td>
+                    <td class="check-status">✅ <span class="status-pass">PASS</span></td>
+                    <td class="check-time">1.7ms</td>
+                </tr>
+                
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="vector-card">
+                <div class="vector-header">
+                    <h3>AI-Safety и безопасность</h3>
+                    <div class="score-badge badge-success">100.0% (5/5)</div>
+                </div>
+                <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 100.0%;"></div></div>
+                <table class="checks-table">
+                    <thead>
+                        <tr>
+                            <th width="10%">ID</th>
+                            <th width="65%">Контрольная проверка</th>
+                            <th width="15%">Статус</th>
+                            <th width="10%">Время</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                <tr class="check-row">
+                    <td class="check-id">SEC-01</td>
+                    <td class="check-name"><strong>Сократический метод AI (Защита от списывания)</strong><br><small>Socratic AI guardrails active: guiding students without ghostwriting essays.</small></td>
+                    <td class="check-status">✅ <span class="status-pass">PASS</span></td>
+                    <td class="check-time">13.5ms</td>
+                </tr>
+                
+                <tr class="check-row">
+                    <td class="check-id">SEC-02</td>
+                    <td class="check-name"><strong>Строгий 18+ фильтр контента (HTTP 400 ContentPolicyViolation)</strong><br><small>18+ content policy enforced: explicit requests blocked with HTTP 400 ContentPolicyViolation.</small></td>
+                    <td class="check-status">✅ <span class="status-pass">PASS</span></td>
+                    <td class="check-time">6.5ms</td>
+                </tr>
+                
+                <tr class="check-row">
+                    <td class="check-id">SEC-03</td>
+                    <td class="check-name"><strong>Защита от Prompt Injection и утечки системного промпта</strong><br><small>Prompt injection defense verified: system prompt secrets remain fully protected.</small></td>
+                    <td class="check-status">✅ <span class="status-pass">PASS</span></td>
+                    <td class="check-time">6.1ms</td>
+                </tr>
+                
+                <tr class="check-row">
+                    <td class="check-id">SEC-04</td>
+                    <td class="check-name"><strong>Rate Limiting & Anti-DDoS (HTTP 429 + Retry-After)</strong><br><small>Rate limiter triggered HTTP 429 with Retry-After header upon threshold breach.</small></td>
+                    <td class="check-status">✅ <span class="status-pass">PASS</span></td>
+                    <td class="check-time">110.8ms</td>
+                </tr>
+                
+                <tr class="check-row">
+                    <td class="check-id">SEC-05</td>
+                    <td class="check-name"><strong>Сканирование на утечки API-ключей в клиентском коде</strong><br><small>Perimeter scan clean: Zero hardcoded API keys or webhook secrets in client code.</small></td>
+                    <td class="check-status">✅ <span class="status-pass">PASS</span></td>
+                    <td class="check-time">8.4ms</td>
+                </tr>
+                
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="vector-card">
+                <div class="vector-header">
+                    <h3>DevOps и надежность</h3>
+                    <div class="score-badge badge-success">100.0% (5/5)</div>
+                </div>
+                <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 100.0%;"></div></div>
+                <table class="checks-table">
+                    <thead>
+                        <tr>
+                            <th width="10%">ID</th>
+                            <th width="65%">Контрольная проверка</th>
+                            <th width="15%">Статус</th>
+                            <th width="10%">Время</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                <tr class="check-row">
+                    <td class="check-id">DEV-01</td>
+                    <td class="check-name"><strong>Экспоненциальный откат (Exponential Backoff) для Gemini API</strong><br><small>Gemini 2.5 Flash exponential retry backoff verified against transient 429 errors.</small></td>
+                    <td class="check-status">✅ <span class="status-pass">PASS</span></td>
+                    <td class="check-time">125.5ms</td>
+                </tr>
+                
+                <tr class="check-row">
+                    <td class="check-id">DEV-02</td>
+                    <td class="check-name"><strong>Телеметрия ошибок и трейсинг (Sentry SDK)</strong><br><small>Sentry SDK active with 100% error and transaction tracing.</small></td>
+                    <td class="check-status">✅ <span class="status-pass">PASS</span></td>
+                    <td class="check-time">6.9ms</td>
+                </tr>
+                
+                <tr class="check-row">
+                    <td class="check-id">DEV-03</td>
+                    <td class="check-name"><strong>Структурированное аудит-логирование (system_audit.log)</strong><br><small>Structured JSON audit logging verified at system_audit.log.</small></td>
+                    <td class="check-status">✅ <span class="status-pass">PASS</span></td>
+                    <td class="check-time">0.7ms</td>
+                </tr>
+                
+                <tr class="check-row">
+                    <td class="check-id">DEV-04</td>
+                    <td class="check-name"><strong>Автономный бэкап данных и восстановление (Backup Engine)</strong><br><small>Disaster Recovery verified: created snapshot snapshot_20260927_095927.</small></td>
+                    <td class="check-status">✅ <span class="status-pass">PASS</span></td>
+                    <td class="check-time">6.3ms</td>
+                </tr>
+                
+                <tr class="check-row">
+                    <td class="check-id">DEV-05</td>
+                    <td class="check-name"><strong>Контейнеризация и готовность к деплою (Docker)</strong><br><small>Container specifications (Dockerfile, docker-compose.yml) verified for production.</small></td>
+                    <td class="check-status">✅ <span class="status-pass">PASS</span></td>
+                    <td class="check-time">0.1ms</td>
+                </tr>
+                
+                    </tbody>
+                </table>
+            </div>
+            
+
+        <div class="footer">
+            <p>Аудиторский сертификат сгенерирован автоматически в среде EduHub AI Continuous Sentinel Framework.</p>
+            <p>Дата фиксации: 2026-09-27 04:59:27 UTC</p>
+        </div>
+    </div>
+</body>
+</html>
