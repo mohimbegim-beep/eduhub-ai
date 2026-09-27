@@ -396,7 +396,7 @@ PRODUCT_CATALOG = {
     },
     "pro_max": {
         "id": "pro_max",
-        "name": "Cambridge IELTS AI Examiner & Pro Max",
+        "name": "IELTS Academic AI Examiner & Pro Max",
         "type": "subscription",
         "billing": "monthly",
         "price_usd": 19.00,
@@ -404,12 +404,12 @@ PRODUCT_CATALOG = {
             "enabled": True,
             "intro_price_usd": 1.00,
             "duration_days": 3,
-            "description": "Start 3-Day Cambridge Examiner Pro Access for Just $1, then $19/mo recurring"
+            "description": "Start 3-Day IELTS Examiner Pro Access for Just $1, then $19/mo recurring"
         },
         "badge": "Flagship Hero — $1 for 3 Days",
-        "description": "Senior Cambridge Examiner diagnostics, Band 1–9 scoring across TR, CC, LR, GRA, handwritten essay OCR, Band 8.5+ model rewrites, and 1-click Anki export. 3-day full pass for $1.",
+        "description": "Senior IELTS Examiner diagnostics, Band 1–9 scoring across TR, CC, LR, GRA, handwritten essay OCR, Band 8.5+ model rewrites, and 1-click Anki export. 3-day full pass for $1.",
         "features": [
-            "Cambridge IELTS Task 1 & 2 Senior Examiner Rubric Diagnostic",
+            "Official IELTS Task 1 & 2 Senior Examiner Rubric Diagnostic",
             "Introductory 3-Day Full Pass for $1 (then $19/mo)",
             "Instant Band 1.0 - 9.0 Scores across TR, CC, LR, and GRA",
             "Side-by-side Band 8.5+ model essay rewrites",
@@ -2603,7 +2603,7 @@ async def grade_essay(
     try:
         client = get_genai_client()
         system_prompt = (
-            "You are Cambridge Senior IELTS Examiner & Lead CEFR Writing Assessor. "
+            "You are a Senior IELTS Examiner & Lead CEFR Writing Assessor. "
             "Your duty is to perform an objective, strict, and actionable evaluation of the student's essay "
             "according to official standardized rubrics:\n"
             "1. Task Achievement / Task Response (TR): 0.0 - 9.0 (Did they address all parts with well-developed ideas?)\n"
@@ -3362,7 +3362,7 @@ def load_pseo_topics() -> dict:
                 "category": "IELTS Academic Writing",
                 "prompt": "Some people believe that computers and the internet will soon replace teachers in schools. To what extent do you agree or disagree?",
                 "sample_feedback": "Task Response: Band 6.5 (clear position but underdeveloped examples). Coherence: Band 6.0. Lexical Resource: Band 6.5. Grammatical Range: Band 6.0.",
-                "meta_desc": "Cambridge-standard IELTS Writing Task 2 evaluation on technology in education. Compare Band 6.0 vs Band 9.0 rewrite with high-yield academic vocabulary."
+                "meta_desc": "Official-standard IELTS Writing Task 2 evaluation on technology in education. Compare Band 6.0 vs Band 9.0 rewrite with high-yield academic vocabulary."
             }
         }
     }
@@ -3499,7 +3499,7 @@ async def render_programmatic_topic(category: str, topic_slug: str):
             <!-- Climax Paywall: Frosted-Glass Blur on Model Solution -->
             <div class="relative rounded-2xl overflow-hidden border border-amber-500/40 bg-slate-950/60 shadow-2xl p-6">
                 <div class="filter blur-md select-none pointer-events-none opacity-30 space-y-4">
-                    <h3 class="text-lg font-bold text-white">Full Band 9.0 Cambridge Model Solution &amp; Step-by-Step Derivation</h3>
+                    <h3 class="text-lg font-bold text-white">Full Band 9.0 Model Solution &amp; Step-by-Step Derivation</h3>
                     <p class="text-sm text-slate-300">In the contemporary epoch, the ubiquity of computational devices has catalyzed profound transformations in academic methodologies. While technological paradigms afford unprecedented access to empirical archives, human mentorship remains indispensable...</p>
                     <p class="text-sm text-slate-300">Furthermore, pedagogical efficacy transcends mere factual transmission, necessitating nuanced emotional scaffolding that artificial neural architectures cannot replicate...</p>
                 </div>
@@ -3510,7 +3510,7 @@ async def render_programmatic_topic(category: str, topic_slug: str):
                     </div>
                     <h3 class="text-xl sm:text-2xl font-black text-white mb-2">Unlock Full Solution &amp; Download Anki Deck</h3>
                     <p class="text-slate-300 text-xs sm:text-sm max-w-md mb-5">
-                        Access the complete Cambridge examiner rewrite, LaTeX formulas, and 1-click Anki flashcard deck.
+                        Access the complete Band 9.0 examiner rewrite, LaTeX formulas, and 1-click Anki flashcard deck.
                     </p>
                     <button onclick="EduHubConversion.triggerCheckout('promax_trial')" class="px-8 py-3.5 rounded-xl font-black text-sm text-slate-950 bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 hover:brightness-110 shadow-lg shadow-amber-500/30 transition transform hover:-translate-y-0.5 cursor-pointer">
                         Start 3-Day Pro Access for Just $1 →
@@ -6140,7 +6140,7 @@ BLUEPRINTS_CATALOG = {
     },
     "bp_stem_anki_deck": {
         "id": "bp_stem_anki_deck",
-        "title": "Cambridge IELTS 8.5+ & STEM Spaced Repetition Decks",
+        "title": "IELTS 8.5+ & STEM Spaced Repetition Decks",
         "category": "Exams & Higher Education",
         "price_usd": 1.00,
         "format": "TSV / Anki Deck",
@@ -7377,7 +7377,7 @@ AUTONOMOUS_POSTS = [
             "🎓 <b>Как выиграть зарубежный грант или сдать IELTS на 7.5+?</b>\n\n"
             "Приемные комиссии зарубежных вузов отсеивают 90% эссе из-за шаблонных формулировок.\n\n"
             "🏆 <b>SOP & Essay Grader:</b>\n"
-            "• Диагностика по 4 критериям Cambridge (TR, CC, LR, GRA)\n"
+            "• Диагностика по 4 официальным критериям IELTS (TR, CC, LR, GRA)\n"
             "• Авторский рерайт слабых предложений на уровень Band 8.5–9.0\n"
             "• Экспорт словаря в Anki за секунду\n\n"
             "💎 <i>Твой билет в университет мечты всего за $1.00!</i>"
