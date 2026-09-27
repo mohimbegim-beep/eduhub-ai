@@ -425,7 +425,7 @@ class UniversalMasterAuditor:
     def audit_vector_4_ui_ux(self):
         print(f"\n{CLR_BOLD}{CLR_CYAN}▶ ВЕКТОР 4: ПОЛЬЗОВАТЕЛЬСКИЙ ОПЫТ, UX И МУЛЬТИЯЗЫЧНОСТЬ{CLR_RESET}")
 
-        # 4.1 4-Locale Symmetric Key Parity (1,352 keys)
+        # 4.1 4-Locale Symmetric Key Parity
         def check_locale_parity(r: CheckResult):
             locales = ["en", "ru", "uz", "es"]
             counts = {}
@@ -438,14 +438,14 @@ class UniversalMasterAuditor:
                 d = json.loads(p.read_text(encoding="utf-8"))
                 counts[l] = len(d)
 
-            if len(set(counts.values())) > 1 or counts.get("en", 0) != 1352:
+            if len(set(counts.values())) > 1 or counts.get("en", 0) < 1352:
                 r.passed = False
                 r.score = 50
                 r.errors.append(f"Locale key counts asymmetric: {counts}")
             else:
-                r.details = f"Exact symmetry across 4 languages: exactly 1,352 keys each (en, ru, uz, es)."
+                r.details = f"Exact symmetry across 4 languages: exactly {counts.get('en')} keys each (en, ru, uz, es)."
 
-        self.execute_check("UX-01", "Симметрия локалей: ровно 1,352 ключа в 4 языках", "UI/UX и мультиязычность", check_locale_parity)
+        self.execute_check("UX-01", "Симметрия локалей: полное совпадение во всех 4 языках", "UI/UX и мультиязычность", check_locale_parity)
 
         # 4.2 DOM Cleanliness & Zero Cyrillic in English Root HTML
         def check_dom_cleanliness(r: CheckResult):

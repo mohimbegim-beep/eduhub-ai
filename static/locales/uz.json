@@ -1350,5 +1350,16 @@
     "banner_guarantee_entity": "\"KIFOYATECH\" MChJ kafilligi",
     "footer_legal_entity": "EduHub AI — O'zbekiston Respublikasida ro'yxatdan o'tgan \"KIFOYATECH\" MChJ (LLC KIFOYATECH) tomonidan ishlab chiqilgan va boshqariladigan dasturiy mahsulot.",
     "footer_trademark_disclaimer": "Uchinchi tomon tovar belgilari haqida bildirishnoma: IELTS® — University of Cambridge, British Council va IDP Education Australia kompaniyalarining ro'yxatdan o'tgan tovar belgisi. TOEFL® va GRE® — Educational Testing Service (ETS) kompaniyasining tovar belgilari. SAT® — College Board tovar belgisi. ChatGPT® — OpenAI LLC tovar belgisi. EduHub AI — \"KIFOYATECH\" MChJ tomonidan boshqariladigan mustaqil akademik platformadir. EduHub AI ushbu tashkilotlar bilan bog'lanmagan, ular tomonidan tasdiqlanmagan yoki homiylik qilinmagan.",
-    "footer_score_disclaimer": "Ta'limiy natijalar va imtihon baholari bo'yicha ogohlantirish: EduHub AI — mustaqil o'quv dasturiy vositasi. 1.0–9.0 ballik baholashlar va namunaviy insholar faqat tavsiyaviy xarakterga ega bo'lib, rasmiy imtihon natijasi hisoblanmaydi. 100% to'lov qaytarish kafolati faqat dasturiy ta'minotdan foydalanish sifatiga tegishlidir."
+    "footer_score_disclaimer": "Ta'limiy natijalar va imtihon baholari bo'yicha ogohlantirish: EduHub AI — mustaqil o'quv dasturiy vositasi. 1.0–9.0 ballik baholashlar va namunaviy insholar faqat tavsiyaviy xarakterga ega bo'lib, rasmiy imtihon natijasi hisoblanmaydi. 100% to'lov qaytarish kafolati faqat dasturiy ta'minotdan foydalanish sifatiga tegishlidir.",
+    "instant_widget_title": "⚡ Insho tezkor 15 soniyalik diagnostikasi",
+    "instant_widget_badge": "Bepul tezkor sinov • Karta talab qilinmaydi",
+    "instant_widget_desc": "Taxminiy Band balli va kuchaytirish nuqtalarini ko'rish uchun insho kirish qismi yoki xatboshini kiriting:",
+    "instant_sample_label": "Yoki namunani tanlang:",
+    "instant_sample_1": "Namuna: Ta'limda texnologiyalar",
+    "instant_sample_2": "Namuna: Masofaviy ish",
+    "instant_widget_placeholder": "IELTS insho xatboshisini shu yerga yozing yoki qo'ying (kamida 20 belgi)...",
+    "instant_btn_analyze": "⚡ Matnni 5 soniyada tahlil qilish",
+    "instant_pred_band": "Taxminiy Band balli:",
+    "instant_target_band": "AI tahriri bilan imkoniyat:",
+    "instant_cta_banner": "To'liq qatorma-qator tahlil, mezonlar bahosi va Band 9.0 versiyasini atigi  ga oling (3 kun) →"
 }
