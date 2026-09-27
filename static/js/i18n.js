@@ -21,6 +21,8 @@
   // 1. In-memory master dictionary for instant zero-latency rendering
   const I18N_CACHE = {
       "en": {
+          "footer_score_disclaimer": "Educational Outcome & Examination Disclaimer: EduHub AI is an independent assistive study tool. Diagnostic band score estimates (e.g. Band 1.0–9.0) and model rewrites are algorithmic heuristic evaluations for academic guidance only and do not constitute official examination results or test scores. Official exam results depend exclusively on the candidate and official test administering bodies. Our 100% money-back guarantee applies solely to software satisfaction under our 14-day Refund Policy.",
+
           "ielts_flagship_title": "AI Essay Examiner for IELTS — Expert Evaluation",
           "ielts_flagship_desc": "Full diagnostic across 4 official criteria (TR, CC, LR, GRA), handwritten essay photo grading, Band 8.5+ model rewrite, and instant Anki vocabulary export.",
           "comp_subtitle": "Get 24/7 unlimited examiner-level grading for less than 1 hour with a human tutor.",
@@ -1386,6 +1388,8 @@
           "preview_unlocked_label": "Free Preview Unlocked (1 Section)"
       },
       "ru": {
+          "footer_score_disclaimer": "Отказ от ответственности за результаты экзаменов: EduHub AI — независимый учебный тренажер. Оценки по шкалам (Band 1.0–9.0) и примеры эссе носят исключительно рекомендательный учебный характер и не являются официальными результатами экзаменационной комиссии. Наша 100% гарантия возврата средств распространяется исключительно на удовлетворенность софтом в рамках 14-дневной политики возврата.",
+
           "ielts_flagship_title": "ИИ-экзаменатор для IELTS — экспертная оценка эссе",
           "ielts_flagship_desc": "Полная диагностика по 4 официальным критериям (TR, CC, LR, GRA), оценка рукописных эссе по фото, улучшение до Band 8.5+ и экспорт в Anki.",
           "comp_subtitle": "Неограниченная проверка экспертного уровня 24/7 дешевле, чем 1 час с репетитором.",
@@ -2751,6 +2755,8 @@
           "preview_unlocked_label": "Бесплатный просмотр разблокирован (1 раздел)"
       },
       "uz": {
+          "footer_score_disclaimer": "Ta'limiy natijalar va imtihon baholari bo'yicha ogohlantirish: EduHub AI — mustaqil o'quv dasturiy vositasi. 1.0–9.0 ballik baholashlar va namunaviy insholar faqat tavsiyaviy xarakterga ega bo'lib, rasmiy imtihon natijasi hisoblanmaydi. 100% to'lov qaytarish kafolati faqat dasturiy ta'minotdan foydalanish sifatiga tegishlidir.",
+
           "ielts_flagship_title": "IELTS uchun AI Imtihonchi — Insho ekspert baholashi",
           "ielts_flagship_desc": "4 ta rasmiy mezon (TR, CC, LR, GRA) bo'yicha to'liq diagnostika, qo'lyozma inshoni rasm orqali baholash, Band 8.5+ darajasiga qayta yozish va Anki eksporti.",
           "comp_subtitle": "Repetitor bilan 1 soatlik narxga 24/7 cheksiz ekspert darajasidagi baholashga ega bo'ling.",
@@ -4116,6 +4122,8 @@
           "preview_unlocked_label": "Bepul ko'rish ochildi (1 bo'lim)"
       },
       "es": {
+          "footer_score_disclaimer": "Descargo de Responsabilidad de Resultados Educativos: EduHub AI es una herramienta de estudio independiente. Las estimaciones de puntuación (Band 1.0–9.0) son evaluaciones heurísticas de orientación y no constituyen resultados oficiales de comités examinadores. Nuestra garantía de reembolso del 100% aplica exclusivamente a la satisfacción del software bajo nuestra Política de Reembolso de 14 días.",
+
           "ielts_flagship_title": "Examinador IA para IELTS — Evaluación Experta de Ensayos",
           "ielts_flagship_desc": "Diagnóstico completo según los 4 criterios oficiales (TR, CC, LR, GRA), calificación de ensayos manuscritos por foto, reescritura a Band 8.5+ y exportación a Anki.",
           "comp_subtitle": "Obtén corrección ilimitada de nivel examinador 24/7 por menos de lo que cuesta 1 hora de tutor.",

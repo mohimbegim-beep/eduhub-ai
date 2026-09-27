@@ -151,7 +151,7 @@ class EduHubSaaSAgent:
             "custom_url": "https://eduhub-ai.onrender.com/tools/marketplace-lab"
         },
         {
-            "product_name": "Cambridge IELTS Band 8.5+ AI Examiner",
+            "product_name": "IELTS Academic Band 8.5+ AI Examiner",
             "hook_pain": "Студенты платят $50/час репетиторам, но срезаются на Task 2 из-за грамматических клише.",
             "target_channel": "Channel_1_Edu_Exam",
             "custom_url": "https://eduhub-ai.onrender.com/tools/essay-grader"

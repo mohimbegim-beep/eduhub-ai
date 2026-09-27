@@ -5,14 +5,14 @@
             "category": "IELTS Academic Writing",
             "prompt": "Some people believe that computers and the internet will soon replace teachers in schools. To what extent do you agree or disagree?",
             "sample_feedback": "Task Response: Band 6.5 (clear position but underdeveloped examples). Coherence: Band 6.0. Lexical Resource: Band 6.5. Grammatical Range: Band 6.0.",
-            "meta_desc": "Cambridge-standard IELTS Writing Task 2 evaluation on technology in education. Compare Band 6.0 vs Band 9.0 rewrite with high-yield academic vocabulary."
+            "meta_desc": "Official-standard IELTS Writing Task 2 evaluation on technology in education. Compare Band 6.0 vs Band 9.0 rewrite with high-yield academic vocabulary."
         },
         "environmental-protection-responsibility": {
             "title": "IELTS Writing Task 2: Environmental Protection — Government vs Individuals",
             "category": "IELTS Academic Writing",
             "prompt": "Environmental problems are too big for individuals to solve alone. Only governments and large companies can make real differences. To what extent do you agree or disagree?",
             "sample_feedback": "Task Response: Band 6.5. Coherence: Band 6.5. Lexical Resource: Band 6.0. Grammatical Range: Band 6.0.",
-            "meta_desc": "Cambridge-level IELTS evaluation on environmental responsibility. Step-by-step scoring rubric and Band 8.5+ model rewrite."
+            "meta_desc": "Official examiner-level IELTS evaluation on environmental responsibility. Step-by-step scoring rubric and Band 8.5+ model rewrite."
         },
         "remote-work-society": {
             "title": "IELTS Writing Task 2: Remote Work and Future Society",
@@ -47,14 +47,14 @@
             "category": "IELTS Academic Writing",
             "prompt": "The best way to improve public health is to increase taxes on fast food and sugary drinks. To what extent do you agree or disagree?",
             "sample_feedback": "Task Response: Band 6.5. Coherence: Band 7.0. Lexical Resource: Band 6.5. Grammatical Range: Band 6.5.",
-            "meta_desc": "IELTS Task 2 opinion essay on health policies and junk food taxation. Detailed Cambridge scoring and Band 9 rewrite."
+            "meta_desc": "IELTS Task 2 opinion essay on health policies and junk food taxation. Detailed rubric scoring and Band 9 rewrite."
         },
         "traditional-newspapers-vs-social-media": {
             "title": "IELTS Writing Task 2: Decline of Print Media vs Online News Platforms",
             "category": "IELTS Academic Writing",
             "prompt": "Printed newspapers and books will soon disappear as digital media and social networks become dominant. Do you agree or disagree?",
             "sample_feedback": "Task Response: Band 6.5. Coherence: Band 6.5. Lexical Resource: Band 6.0. Grammatical Range: Band 6.5.",
-            "meta_desc": "Cambridge examiner model response on journalism in the digital age. Learn how to craft sophisticated concessive clauses."
+            "meta_desc": "Examiner model response on journalism in the digital age. Learn how to craft sophisticated concessive clauses."
         },
         "gap-year-before-university-pros-cons": {
             "title": "IELTS Writing Task 2: Taking a Gap Year Between High School and College",
@@ -75,7 +75,7 @@
             "category": "IELTS Academic Writing",
             "prompt": "Some people believe that long prison terms are the most effective deterrent to crime, while others favor community rehabilitation. Discuss both views.",
             "sample_feedback": "Task Response: Band 7.0. Coherence: Band 6.5. Lexical Resource: Band 6.5. Grammatical Range: Band 6.5.",
-            "meta_desc": "Cambridge IELTS essay on criminal justice and reform programs. Academic vocabulary for legal and penal discourse."
+            "meta_desc": "IELTS Academic essay on criminal justice and reform programs. Academic vocabulary for legal and penal discourse."
         },
         "overpopulation-urbanization-megacities": {
             "title": "IELTS Writing Task 2: Causes and Solutions for Megacity Overcrowding",
@@ -96,7 +96,7 @@
             "category": "IELTS Academic Writing",
             "prompt": "Some argue that keeping wild animals in zoos is cruel and unnecessary, while others believe zoos are vital for protecting endangered species. Discuss both views.",
             "sample_feedback": "Task Response: Band 6.5. Coherence: Band 6.5. Lexical Resource: Band 6.5. Grammatical Range: Band 6.5.",
-            "meta_desc": "Balanced IELTS essay analyzing wildlife sanctuaries and captive breeding. Oxford collocations and Cambridge Band 9 answer."
+            "meta_desc": "Balanced IELTS essay analyzing wildlife sanctuaries and captive breeding. Academic collocations and Band 9 model answer."
         },
         "globalization-traditional-culture-preservation": {
             "title": "IELTS Writing Task 2: Cultural Homogenization vs Preserving National Identity",
@@ -282,7 +282,7 @@
         "ielts-writing-rubric-classroom-grading-rubric": {
             "title": "IELTS Writing Task 2 Grading Rubric for ESL & Academic English Teachers",
             "category": "Teacher AI Lab & Lesson Planning",
-            "prompt": "How can teachers standardize classroom grading for IELTS Writing Task 2 essays according to official Cambridge Band Descriptors?",
+            "prompt": "How can teachers standardize classroom grading for IELTS Writing Task 2 essays according to official IELTS Band Descriptors?",
             "sample_feedback": "Configured standardized teacher scoring sheet: Granular 9-band matrix for TR, CC, LR, and GRA with pre-written corrective student comments.",
             "meta_desc": "Download ready-to-use IELTS Writing grading rubric for ESL teachers. Accelerate student feedback by 70% with standardized criteria."
         },

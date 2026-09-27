@@ -116,7 +116,7 @@ https://eduhub-ai.onrender.com/ielts-checker?utm_source=google&utm_medium=cpc&ut
 
 **Заголовки (Headlines — до 30 символов каждый):**
 1. `IELTS Writing Task 2 Checker`
-2. `Instant Cambridge Band Score`
+2. `Instant IELTS Band Score`
 3. `Check Your Essay In 10 Sec`
 4. `Band 8.5+ Model Rewrites`
 5. `Senior Examiner Evaluation`
@@ -125,17 +125,17 @@ https://eduhub-ai.onrender.com/ielts-checker?utm_source=google&utm_medium=cpc&ut
 8. `Photo & Handwritten OCR`
 9. `1-Click Anki Deck Export`
 10. `EduHub AI — IELTS Grader`
-11. `Official Cambridge Rubrics`
+11. `Official IELTS Rubrics`
 12. `Accurate Band Diagnostic`
 13. `Fix Grammar & Lexical Gaps`
 14. `Improve Your Writing Band`
 15. `Test Your Essay Now`
 
 **Описания (Descriptions — до 90 символов каждое):**
-1. `Instant Cambridge senior examiner evaluation. Get TR, CC, LR & GRA breakdown in 10 sec.`
+1. `Instant senior IELTS examiner evaluation. Get TR, CC, LR & GRA breakdown in 10 sec.`
 2. `Upload your draft or handwriting photo. Get side-by-side Band 8.5+ rewrite for just $1.`
 3. `Discover why examiners mark down your essay. High-yield vocabulary & full rubric scoring.`
-4. `100% standardized Cambridge grading. Try full 3-day unlimited pass today for only $1.00.`
+4. `100% standardized IELTS grading. Try full 3-day unlimited pass today for only $1.00.`
 
 ---
 
@@ -147,7 +147,7 @@ https://eduhub-ai.onrender.com/ielts-checker?utm_source=google&utm_medium=cpc&ut
 
 **Заголовки (Headlines — до 30 символов каждый):**
 1. `Проверка эссе IELTS за 10 сек`
-2. `Оценка по шкале Cambridge`
+2. `Оценка по шкале IELTS`
 3. `Разбор критериев TR CC LR GRA`
 4. `Рерайт эссе на Band 8.5+`
 5. `Тест-драйв за $1.00 на 3 дня`
@@ -163,10 +163,10 @@ https://eduhub-ai.onrender.com/ielts-checker?utm_source=google&utm_medium=cpc&ut
 15. `Проверь эссе прямо сейчас`
 
 **Описания (Descriptions — до 90 символов каждое):**
-1. `Мгновенная диагностика эссе по 4 критериям Cambridge. Разбор ошибок и рерайт на Band 8.5.`
+1. `Мгновенная диагностика эссе по 4 критериям IELTS. Разбор ошибок и рерайт на Band 8.5.`
 2. `Загрузи текст или фото рукописного черновика. Получи полный аудит эксперта за $1.00.`
 3. `Узнай, за что экзаменаторы снижают балл. Готовые академические связки и экспорт в Anki.`
-4. `Стандарты Cambridge IELTS. Попробуй неограниченный 3-дневный доступ всего за $1.`
+4. `Официальные стандарты IELTS. Попробуй неограниченный 3-дневный доступ всего за $1.`
 
 ---
 
@@ -175,7 +175,7 @@ https://eduhub-ai.onrender.com/ielts-checker?utm_source=google&utm_medium=cpc&ut
 Добавьте расширения для увеличения размера объявления в выдаче и роста CTR на 15–20%:
 
 1. **Быстрые ссылки (Sitelinks):**
-   - **Sitelink 1:** *Критерии Cambridge* $\to$ Описание: *Диагностика TR, CC, LR, GRA за 10 сек*. URL: `https://eduhub-ai.onrender.com/ielts-checker#rubrics`
+   - **Sitelink 1:** *Критерии IELTS* $\to$ Описание: *Диагностика TR, CC, LR, GRA за 10 сек*. URL: `https://eduhub-ai.onrender.com/ielts-checker#rubrics`
    - **Sitelink 2:** *Рерайт на Band 8.5* $\to$ Описание: *Академические обороты и связки*. URL: `https://eduhub-ai.onrender.com/ielts-checker#rewrite`
    - **Sitelink 3:** *Экспорт в Anki* $\to$ Описание: *Словарь для запоминания за 1 клик*. URL: `https://eduhub-ai.onrender.com/ielts-checker#anki`
    - **Sitelink 4:** *Тариф $1.00* $\to$ Описание: *3-дневный пробный доступ ко всем функциям*. URL: `https://eduhub-ai.onrender.com/ielts-checker#pricing`
