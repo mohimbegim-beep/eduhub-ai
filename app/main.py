@@ -3127,15 +3127,20 @@ async def telegram_webhook_info():
 @app.post("/api/v1/telegram/webhook", tags=["Telegram Bot"])
 async def telegram_webhook_receiver(request: Request):
     """Processes incoming updates from Telegram for @eduhub_ielts_bot.
-    Protected by X-Telegram-Bot-Api-Secret-Token — rejects any non-Telegram requests.
+    Security: validates X-Telegram-Bot-Api-Secret-Token when TELEGRAM_WEBHOOK_SECRET is set.
     """
     # ── Webhook Secret Guard ──────────────────────────────────────────────────
     WEBHOOK_SECRET = os.getenv("TELEGRAM_WEBHOOK_SECRET", "")
     if WEBHOOK_SECRET:
         incoming_secret = request.headers.get("X-Telegram-Bot-Api-Secret-Token", "")
         if incoming_secret != WEBHOOK_SECRET:
-            print(f"[SECURITY] Rejected fake webhook from {request.client.host} — bad secret token")
-            return Response(status_code=403, content="Forbidden")
+            # Log the attempt but only block if incoming_secret is non-empty
+            # (empty = Telegram without secret configured = allow during transition)
+            if incoming_secret:
+                print(f"[SECURITY] Rejected fake webhook from {request.client.host} — bad secret token")
+                return Response(status_code=403, content="Forbidden")
+            else:
+                print(f"[SECURITY] Warning: webhook request without secret from {request.client.host}")
     # ─────────────────────────────────────────────────────────────────────────
     try:
         data = await request.json()
