@@ -507,12 +507,18 @@ def process_telegram_update(update: dict) -> bool:
 
 def setup_telegram_webhook(webhook_url: str) -> dict:
     endpoint = f"{webhook_url.rstrip('/')}/api/v1/telegram/webhook"
-    res = send_telegram_request("setWebhook", {
+    payload = {
         "url": endpoint,
         "allowed_updates": ["message", "callback_query"],
-        "drop_pending_updates": True
-    })
-    print(f"[TELEGRAM WEBHOOK SETUP] URL: {endpoint} | Result: {res}")
+        "drop_pending_updates": True,
+        "max_connections": 40,
+    }
+    # Attach secret token if configured — Telegram will send it in every request header
+    webhook_secret = os.getenv("TELEGRAM_WEBHOOK_SECRET", "")
+    if webhook_secret:
+        payload["secret_token"] = webhook_secret
+    res = send_telegram_request("setWebhook", payload)
+    print(f"[TELEGRAM WEBHOOK SETUP] URL: {endpoint} | Secret: {'YES' if webhook_secret else 'NO'} | Result: {res}")
     return res
 
 def verify_and_heal_webhook() -> bool:

@@ -3126,7 +3126,17 @@ async def telegram_webhook_info():
 
 @app.post("/api/v1/telegram/webhook", tags=["Telegram Bot"])
 async def telegram_webhook_receiver(request: Request):
-    """Processes incoming updates from Telegram for @eduhub_ielts_bot."""
+    """Processes incoming updates from Telegram for @eduhub_ielts_bot.
+    Protected by X-Telegram-Bot-Api-Secret-Token — rejects any non-Telegram requests.
+    """
+    # ── Webhook Secret Guard ──────────────────────────────────────────────────
+    WEBHOOK_SECRET = os.getenv("TELEGRAM_WEBHOOK_SECRET", "")
+    if WEBHOOK_SECRET:
+        incoming_secret = request.headers.get("X-Telegram-Bot-Api-Secret-Token", "")
+        if incoming_secret != WEBHOOK_SECRET:
+            print(f"[SECURITY] Rejected fake webhook from {request.client.host} — bad secret token")
+            return Response(status_code=403, content="Forbidden")
+    # ─────────────────────────────────────────────────────────────────────────
     try:
         data = await request.json()
         from services.telegram_bot_service import process_telegram_update
