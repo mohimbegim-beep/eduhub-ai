@@ -294,11 +294,11 @@ async def add_security_headers(request: Request, call_next):
 
     csp = (
         "default-src 'self'; "
-        "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://checkout.dodopayments.com https://test.checkout.dodopayments.com; "
+        "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://checkout.dodopayments.com https://test.checkout.dodopayments.com https://pagead2.googlesyndication.com https://*.googlesyndication.com https://*.google.com https://*.doubleclick.net; "
         "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; "
         "font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; "
         "img-src 'self' data: blob: https:; "
-        "frame-src 'self' https://checkout.dodopayments.com https://test.checkout.dodopayments.com; "
+        "frame-src 'self' https://checkout.dodopayments.com https://test.checkout.dodopayments.com https://googleads.g.doubleclick.net https://*.google.com https://*.googlesyndication.com https://*.doubleclick.net; "
         "connect-src 'self' https: http:; "
         "object-src 'none'; "
         "base-uri 'self';"
