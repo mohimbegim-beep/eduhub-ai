@@ -3732,6 +3732,11 @@ async def render_ads_txt():
     return Response(content=ads_txt_content, media_type="text/plain; charset=utf-8")
 
 
+@app.get("/googleb1b336acb92cd062.html", response_class=Response, tags=["SEO & Sitemaps"])
+async def render_google_verification():
+    return Response(content="google-site-verification: googleb1b336acb92cd062.html", media_type="text/html; charset=utf-8")
+
+
 @app.get("/sitemap.xml", response_class=Response, tags=["SEO & Sitemaps"])
 async def render_sitemap():
     """
