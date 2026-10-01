@@ -3710,14 +3710,26 @@ async def render_robots():
 @app.get("/ads.txt", response_class=Response, tags=["Monetization & Ads"])
 async def render_ads_txt():
     """
-    IAB Standard ads.txt verification file for Google AdSense and programmatic ad networks.
+    IAB Standard ads.txt verification file for Google AdSense and Yandex РСЯ.
     """
+    ads_file = STATIC_DIR / "ads.txt"
+    if ads_file.exists():
+        return Response(content=ads_file.read_text(encoding="utf-8"), media_type="text/plain; charset=utf-8")
     ads_txt_content = (
         "# EduHub AI Programmatic Ad Monetization\n"
         "# Google AdSense Publisher verification\n"
         "google.com, pub-6900527541339592, DIRECT, f08c47fec0942fa0\n"
+        "# Yandex РСЯ Partner verification\n"
+        "google.com, pub-5533854580432370, RESELLER, f08c47fec0942fa0\n"
+        "improvedigital.com, 2031, RESELLER\n"
+        "yandex.com, 332163935, DIRECT\n"
+        "uis.mobfox.com, 165, RESELLER\n"
+        "hyperad.tech, 215, RESELLER\n"
+        "betweendigital.com, 43554, RESELLER\n"
+        "Contextweb.com, 562899, RESELLER, 89ff185a4c4e857c\n"
+        "hyperad.tech, 150, RESELLER\n"
     )
-    return Response(content=ads_txt_content, media_type="text/plain")
+    return Response(content=ads_txt_content, media_type="text/plain; charset=utf-8")
 
 
 @app.get("/sitemap.xml", response_class=Response, tags=["SEO & Sitemaps"])
