@@ -3715,7 +3715,7 @@ async def render_ads_txt():
     ads_txt_content = (
         "# EduHub AI Programmatic Ad Monetization\n"
         "# Google AdSense Publisher verification\n"
-        "google.com, pub-9128381928471923, DIRECT, f08c47fec0942fa0\n"
+        "google.com, pub-6900527541339592, DIRECT, f08c47fec0942fa0\n"
     )
     return Response(content=ads_txt_content, media_type="text/plain")
 
