@@ -240,8 +240,8 @@ def build_welcome_keyboard() -> dict:
             ],
             [
                 {
-                    "text": "💎 Pro Max за $1 (3 дня)",
-                    "url": PRICING_URL
+                    "text": "🎉 100% Free Open Beta",
+                    "url": IELTS_WEBAPP_URL
                 },
                 {
                     "text": "📚 Топ связок Band 8.5+",
@@ -489,8 +489,8 @@ def process_telegram_update(update: dict) -> bool:
         feedback = evaluate_essay_for_telegram(full_text)
         send_message(chat_id, feedback, reply_markup={
             "inline_keyboard": [
-                [{"text": "✨ Попробовать в веб-версии EduHub AI", "url": IELTS_WEBAPP_URL}],
-                [{"text": "💎 Полный доступ Pro Max за $1", "url": PRICING_URL}]
+                [{"text": "🚀 Полный разбор на сайте (Бесплатно)", "url": IELTS_WEBAPP_URL}],
+                [{"text": "👥 Поделиться ботом с друзьями", "url": "https://t.me/share/url?url=https://t.me/eduhub_ielts_bot&text=Бесплатная%20проверка%20IELTS%20эссе%20за%2010%20секунд%20через%20ИИ!"}]
             ]
         })
         return True

@@ -1587,8 +1587,8 @@ async def instant_essay_diagnostic(payload: InstantDiagnosticRequest, request: R
             "Add a counter-argument paragraph to improve Task Response score.",
             "Vary sentence structure: mix simple, compound, and complex sentences.",
         ],
-        "cta": "Get full line-by-line examiner feedback for $1 (3 days unlimited access)",
-        "upgrade_url": "/#pricing"
+        "cta": "🎉 100% Free Open Beta! Open Full Line-by-Line Examiner Feedback",
+        "upgrade_url": "/tools/essay-grader"
     }
 
 
@@ -1672,6 +1672,8 @@ async def serve_citation_generator():
         return FileResponse(str(tool_file))
     raise HTTPException(status_code=404, detail="Tool page '/tools/citation-generator' not found.")
 
+@app.get("/essay-grader", tags=["Standalone Tools"])
+@app.get("/essay-grader/", tags=["Standalone Tools"])
 @app.get("/tools/essay-grader", tags=["Standalone Tools"])
 @app.get("/ielts-checker", tags=["Standalone Tools"])
 @app.get("/ielts-essay-checker", tags=["Standalone Tools"])

@@ -302,12 +302,11 @@
     <link rel="stylesheet" href="/static/css/safari_compat.css">
 </head>
 <body class="bg-[#030712] text-slate-300 font-sans min-h-screen flex flex-col justify-between selection:bg-indigo-600 selection:text-white">
-    <!-- Top Trending EdTech Discovery Banner (Autonomous Trend Scout) -->
-    <div id="trending-banner" class="bg-gradient-to-r from-indigo-950/90 via-blue-950/90 to-purple-950/90 border-b border-indigo-700/40 py-1.5 px-4 text-center text-xs text-white flex items-center justify-center gap-2 relative z-50">
-        <span class="bg-indigo-600/80 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full shadow-sm">Trending #1</span>
-        <span id="trending-topic" class="font-semibold text-blue-100" data-i18n="banner_trending_topic">IELTS & TOEFL AI Speaking & Writing Diagnostic Coach (+340% YoY)</span>
-        <span class="hidden md:inline text-indigo-300">— Live on EduHub Socratic Copilot</span>
-        <a href="/tools/essay-grader" class="underline font-semibold hover:text-white ml-2 text-blue-200" data-i18n="update_cta">Start Free &rarr;</a>
+    <!-- Top Open Beta 100% Free Access Banner -->
+    <div id="trending-banner" class="bg-gradient-to-r from-emerald-950 via-teal-900 to-indigo-950 border-b border-emerald-500/40 py-2 px-4 text-center text-xs text-white flex items-center justify-center gap-2 relative z-50">
+        <span class="bg-emerald-500 text-slate-950 text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full shadow-sm animate-pulse">100% FREE</span>
+        <span class="font-bold text-emerald-200">🎉 Открытый бесплатный доступ: Проверяйте IELTS эссе, домашку и задачи без ограничений и оплаты!</span>
+        <a href="#instant-diagnostic" class="underline font-bold text-white hover:text-emerald-300 ml-1">Проверить эссе сейчас &rarr;</a>
         <button onclick="closeAnnouncementBanner()" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white p-1 rounded-md transition focus:outline-none" aria-label="Dismiss banner">&times;</button>
     </div>
 
@@ -480,11 +479,11 @@
                 <p class="text-base sm:text-xl text-slate-400 max-w-3xl mx-auto mb-10 leading-relaxed" data-i18n="hero_desc">Designed for ambitious students, proactive educators, and engaged parents. Synthesize messy lecture recordings into flashcards, diagnose homework through guided Socratic hints, and automate classroom grading with zero academic dishonesty.</p>
 
                 <div class="flex flex-col sm:flex-row justify-center items-center gap-4 mb-14">
-                    <a href="#playground" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-500 text-white font-semibold px-8 py-3.5 rounded-xl shadow-xl shadow-blue-500/25 transition transform hover:-translate-y-0.5" data-i18n="hero_cta_try">
-                        Try Live Assistant
+                    <a href="#instant-diagnostic" class="w-full sm:w-auto bg-gradient-to-r from-emerald-600 via-teal-600 to-blue-600 hover:from-emerald-500 hover:to-blue-500 text-white font-bold px-8 py-3.5 rounded-xl shadow-xl shadow-emerald-500/25 transition transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
+                        <span>⚡ Проверить эссе бесплатно (Open Beta)</span>
                     </a>
-                    <a href="#pricing" class="w-full sm:w-auto bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700 hover:border-slate-600 font-medium px-8 py-3.5 rounded-xl transition" data-i18n="hero_cta_pricing">
-                        View Pricing ($9 - $39)
+                    <a href="/tools/essay-grader" class="w-full sm:w-auto bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700 hover:border-slate-600 font-semibold px-8 py-3.5 rounded-xl transition flex items-center justify-center gap-2">
+                        <span>🎓 Полный IELTS Grader (Бесплатно) →</span>
                     </a>
                 </div>
 
@@ -580,12 +579,16 @@
                     </div>
                     <!-- Hints -->
                     <ul id="res-hints" class="space-y-2 mb-5"></ul>
-                    <!-- CTA Banner -->
-                    <div class="bg-gradient-to-r from-indigo-700/70 to-purple-700/70 rounded-xl p-4 sm:p-5 text-center border border-indigo-500/40">
-                        <p class="text-white font-semibold text-base mb-3" data-i18n="instant_cta_banner">Want a full line-by-line examiner report? Get 3 days unlimited access.</p>
+                    <!-- Free Open Beta CTA Banner -->
+                    <div class="bg-gradient-to-r from-emerald-600/80 via-teal-600/80 to-indigo-600/80 rounded-xl p-4 sm:p-5 text-center border border-emerald-400/40 shadow-lg">
+                        <div class="inline-flex items-center gap-2 bg-emerald-950/60 text-emerald-300 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-2 border border-emerald-500/40">
+                            🎉 100% Free Open Beta • Бесплатный доступ
+                        </div>
+                        <p class="text-white font-bold text-base sm:text-lg mb-3">Хотите получить полный построчный разбор экзаменатора и переписанный вариант на Band 8.5+? Доступ открыт бесплатно!</p>
                         <div class="flex flex-col sm:flex-row justify-center gap-3">
-                            <a href="/#pricing" class="bg-white text-indigo-900 font-bold px-6 py-2.5 rounded-xl hover:bg-indigo-50 transition shadow-md text-sm" data-i18n="hero_cta_pricing">View Pricing ($1 Trial)</a>
-                            <a href="/essay-grader" class="bg-slate-900/70 text-slate-200 border border-slate-600 font-medium px-6 py-2.5 rounded-xl hover:bg-slate-800 transition text-sm">Full Essay Grader →</a>
+                            <a href="/tools/essay-grader" class="bg-white text-emerald-950 font-black px-8 py-3 rounded-xl hover:bg-emerald-50 transition shadow-lg text-sm sm:text-base flex items-center justify-center gap-2">
+                                🚀 Открыть полный разбор эссе (Бесплатно) →
+                            </a>
                         </div>
                     </div>
                 </div>
