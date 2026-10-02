@@ -44,16 +44,16 @@
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Marked.js for Markdown Parsing -->
-    <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+    <!-- Marked.js for Markdown Parsing (Deferred) -->
+    <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js" defer></script>
 
-    <!-- KaTeX for LaTeX Math Rendering (Fractions, Integrals, Equations) -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+    <!-- KaTeX for LaTeX Math Rendering (Non-blocking) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" media="print" onload="this.media='all'">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" defer></script>
 
-    <!-- Mermaid.js for Diagrams -->
-    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+    <!-- Mermaid.js for Diagrams (Deferred) -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js" defer></script>
 
     <!-- Enhanced Document Renderer -->
     <script src="/static/js/doc-renderer.js" defer></script>
@@ -89,7 +89,7 @@
     <script src="/static/js/theme-engine.js"></script>
 
     <!-- EduHub Single Source of Truth Configuration -->
-    <script src="/static/js/eduhub-config.js"></script>
+    <script src="/static/js/eduhub-config.js" defer></script>
 
     <!-- Essential User Utilities (Export, History Drawer, Stepper, Camera) -->
     <script src="/static/js/user-utils.js" defer></script>

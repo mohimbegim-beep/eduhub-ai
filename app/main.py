@@ -344,12 +344,20 @@ DATA_DIR.mkdir(parents=True, exist_ok=True)
 REPORTS_DIR = BASE_DIR / "reports"
 REPORTS_DIR.mkdir(parents=True, exist_ok=True)
 
+class CachedStaticFiles(StaticFiles):
+    """Оптимизированная отдача статики с заголовками кэширования для Lighthouse/PageSpeed 90+"""
+    async def get_response(self, path: str, scope):
+        response = await super().get_response(path, scope)
+        if response.status_code == 200:
+            response.headers["Cache-Control"] = "public, max-age=604800, stale-while-revalidate=86400"
+        return response
+
 if STATIC_DIR.exists():
-    app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
+    app.mount("/static", CachedStaticFiles(directory=str(STATIC_DIR)), name="static")
 
 LOCALES_DIR = Path("/server/locales") if Path("/server/locales").exists() else (BASE_DIR / "locales")
 if LOCALES_DIR.exists():
-    app.mount("/locales", StaticFiles(directory=str(LOCALES_DIR)), name="locales")
+    app.mount("/locales", CachedStaticFiles(directory=str(LOCALES_DIR)), name="locales")
 
 # Загрузка переменных из .env, если они не заданы в окружении
 env_file = BASE_DIR / ".env"
