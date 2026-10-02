@@ -88,10 +88,24 @@ class BackupEngine:
                 except Exception as e:
                     errors.append(f"{filename}: {str(e)}")
 
+        import hashlib
+        checksums = {}
+        for fname in copied_files:
+            fpath = snapshot_folder / fname
+            if fpath.exists():
+                h = hashlib.sha256()
+                with open(fpath, "rb") as bf:
+                    while chunk := bf.read(65536):
+                        h.update(chunk)
+                checksums[fname] = h.hexdigest()
+
         meta = {
             "timestamp": time.time(),
             "datetime": time.strftime("%Y-%m-%d %H:%M:%S UTC", time.gmtime()),
             "files": copied_files,
+            "checksums_sha256": checksums,
+            "offsite_region": os.getenv("BACKUP_S3_REGION", "eu-central-1"),
+            "storage_class": "STANDARD_IA",
             "errors": errors
         }
         with open(snapshot_folder / "manifest.json", "w", encoding="utf-8") as f:
@@ -103,14 +117,16 @@ class BackupEngine:
             "status": "success" if copied_files else "empty",
             "snapshot_id": snapshot_folder.name,
             "files_backed_up": copied_files,
+            "checksums_sha256": checksums,
             "errors": errors
         }
 
     def verify_restore_integrity(self, snapshot_id: Optional[str] = None) -> Dict[str, Any]:
         """
         Non-destructive verification of snapshot recoverability.
-        Validates JSON parseability and SQLite integrity check from backup without altering production.
+        Validates SHA-256 checksums, JSON parseability, and SQLite integrity check from backup without altering production.
         """
+        import hashlib
         snapshots = self.list_snapshots()
         if not snapshots:
             return {"status": "error", "message": "No snapshots available to verify"}
@@ -122,13 +138,40 @@ class BackupEngine:
         verified_files = []
         errors = []
 
-        # Check JSON files
+        manifest_file = target_path / "manifest.json"
+        manifest_meta = {}
+        if manifest_file.exists():
+            try:
+                with open(manifest_file, "r", encoding="utf-8") as mf:
+                    manifest_meta = json.load(mf)
+            except Exception as me:
+                errors.append(f"Manifest read error: {me}")
+
+        expected_checksums = manifest_meta.get("checksums_sha256", {})
+
+        # Check JSON files and verify SHA-256
         for f in target_path.iterdir():
+            if f.name == "manifest.json":
+                continue
+            if f.is_file():
+                # Verify SHA-256
+                if f.name in expected_checksums:
+                    h = hashlib.sha256()
+                    with open(f, "rb") as bf:
+                        while chunk := bf.read(65536):
+                            h.update(chunk)
+                    actual_hash = h.hexdigest()
+                    if actual_hash != expected_checksums[f.name]:
+                        errors.append(f"SHA-256 checksum mismatch for {f.name}")
+                    else:
+                        verified_files.append(f"{f.name} (SHA-256 verified)")
+                else:
+                    verified_files.append(f.name)
+
             if f.suffix == ".json" and f.name != "manifest.json":
                 try:
                     with open(f, "r", encoding="utf-8") as fp:
                         json.load(fp)
-                    verified_files.append(f.name)
                 except Exception as ex:
                     errors.append(f"Corrupt JSON in {f.name}: {ex}")
 

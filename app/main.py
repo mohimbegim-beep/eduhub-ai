@@ -1995,25 +1995,20 @@ async def detailed_system_diagnostics():
 
 @app.get("/health", tags=["Monitoring"])
 @app.get("/api/v1/health", tags=["Monitoring"])
-async def health(token: Optional[str] = None, x_admin_token: Optional[str] = Header(None, alias="X-Admin-Token")):
+async def health():
     """
     Public health check endpoint.
     Strictly returns {"status": "ok"} to prevent internal infrastructure reconnaissance.
-    Deep diagnostics require a valid administrative token.
     """
-    admin_secret = os.getenv("ADMIN_SECRET", "edumate_admin_telemetry_2026")
-    provided_token = token or x_admin_token
-    if provided_token and provided_token == admin_secret:
-        return await detailed_system_diagnostics()
-
     return {"status": "ok"}
 
+@app.get("/api/v1/system/status", tags=["Monitoring"])
 @app.get("/api/internal/system-health", tags=["Monitoring"])
 async def internal_system_health(token: Optional[str] = None, x_admin_token: Optional[str] = Header(None, alias="X-Admin-Token")):
     admin_secret = os.getenv("ADMIN_SECRET", "edumate_admin_telemetry_2026")
     provided_token = token or x_admin_token
     if not provided_token or provided_token != admin_secret:
-        raise HTTPException(status_code=403, detail="Forbidden: valid admin token required.")
+        raise HTTPException(status_code=404, detail="Not Found")
     return await detailed_system_diagnostics()
 
 @app.get("/api/internal/backup-verify", tags=["Monitoring"])
@@ -2021,7 +2016,7 @@ async def internal_backup_verify(token: Optional[str] = None, x_admin_token: Opt
     admin_secret = os.getenv("ADMIN_SECRET", "edumate_admin_telemetry_2026")
     provided_token = token or x_admin_token
     if not provided_token or provided_token != admin_secret:
-        raise HTTPException(status_code=403, detail="Forbidden: valid admin token required.")
+        raise HTTPException(status_code=404, detail="Not Found")
     return backup_engine.verify_restore_integrity()
 
 @app.get("/api/v1/system/sentinel/status", tags=["Monitoring"])
