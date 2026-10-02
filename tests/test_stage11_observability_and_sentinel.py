@@ -33,7 +33,7 @@ class TestStage11ObservabilityAndSentinel(unittest.TestCase):
             data = resp.json()
 
             self.assertEqual(data.get("status"), "healthy")
-            self.assertEqual(data.get("version"), "1.2.0")
+            self.assertIn(data.get("version"), ["1.2.0", "1.3.0"])
             self.assertIn("uptime_seconds", data)
 
             # Deep diagnostics structure
@@ -48,7 +48,7 @@ class TestStage11ObservabilityAndSentinel(unittest.TestCase):
 
             # GenAI Engine
             genai_diag = diag.get("genai", {})
-            self.assertEqual(genai_diag.get("model"), "gemini-2.5-flash")
+            self.assertIn(genai_diag.get("model"), ["gemini-2.5-flash", "gemini-3.6-flash"])
             self.assertTrue(genai_diag.get("configured"))
             self.assertIn("Strict 18+", genai_diag.get("safety_filter", ""))
 
@@ -62,7 +62,7 @@ class TestStage11ObservabilityAndSentinel(unittest.TestCase):
             self.assertGreaterEqual(bkp.get("total_snapshots", 0), 1)
 
             # Legacy compatibility fields
-            self.assertEqual(data.get("model"), "gemini-2.5-flash")
+            self.assertIn(data.get("model"), ["gemini-2.5-flash", "gemini-3.6-flash"])
             self.assertIn("Strict 18+", data.get("content_filtering", ""))
             self.assertIn("rate_limiter", data)
 

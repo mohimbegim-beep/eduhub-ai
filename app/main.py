@@ -102,17 +102,18 @@ try:
 except Exception as _sentry_err:
     print(f"[Sentry Warning] Init failed: {_sentry_err}")
 
+# В продакшене публичная документация (/docs, /redoc, /openapi.json) отключена для безопасности
+ENABLE_DOCS = os.getenv("ENABLE_DOCS", "false").lower() == "true"
+
 app = FastAPI(
-    title="EduHub Core API",
+    title="EduMate Core API",
     description="Autonomous production API with Google GenAI (gemini-3.6-flash), 18+ Safe Content Filtering, PCI-DSS multi-gateway billing, and in-memory rate limiting.",
-    version="1.2.0"
+    version="1.3.0",
+    docs_url="/docs" if ENABLE_DOCS else None,
+    redoc_url="/redoc" if ENABLE_DOCS else None,
+    openapi_url="/openapi.json" if ENABLE_DOCS else None,
 )
 
-@app.get("/sentry-debug", tags=["Monitoring"])
-async def trigger_sentry_debug_error():
-    """Тестовый эндпоинт верификации Sentry — генерирует исключение деления на ноль."""
-    division_by_zero = 1 / 0
-    return {"result": division_by_zero}
 
 
 # --------------------------------------------------------------------------
@@ -174,13 +175,15 @@ async def global_exception_handler(request: Request, exc: Exception):
 # --------------------------------------------------------------------------
 # Безопасность: Production CORS и HTTP Security Headers
 # --------------------------------------------------------------------------
-PRODUCTION_URL = os.getenv("PRODUCTION_URL", "https://eduhub-ai.onrender.com").rstrip("/")
+PRODUCTION_URL = os.getenv("PRODUCTION_URL", "https://edumate.cam").rstrip("/")
 allowed_origins_env = os.getenv("ALLOWED_ORIGINS", "")
 if allowed_origins_env:
     raw_origins = [o.strip() for o in allowed_origins_env.split(",") if o.strip()]
 else:
     raw_origins = [
         PRODUCTION_URL,
+        "https://edumate.cam",
+        "https://www.edumate.cam",
         "https://eduhub-ai.onrender.com",
         "https://eduhub.study",
         "https://eduhub-ai.com",
@@ -194,7 +197,7 @@ ALLOWED_ORIGINS = list(dict.fromkeys(raw_origins))
 app.add_middleware(
     CORSMiddleware,
     allow_origins=ALLOWED_ORIGINS,
-    allow_origin_regex=r"^https?://(localhost|127\.0\.0\.1)(:\d+)?$|^https://.*\.onrender\.com$",
+    allow_origin_regex=r"^https?://(localhost|127\.0\.0\.1)(:\d+)?$|^https://.*\.onrender\.com$|^https://.*\.edumate\.cam$",
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD"],
     allow_headers=["*"],
@@ -1882,16 +1885,13 @@ async def health():
 
     return {
         "status": "healthy" if "degraded" not in db_status else "degraded",
-        "service": "EduHub Autonomous SaaS",
-        "version": "1.2.0",
+        "service": "EduMate AI Platform",
+        "version": "1.3.0",
         "uptime_seconds": uptime_sec,
         "diagnostics": {
             "latency_ms": latency_ms,
             "database": {
-                "status": db_status,
-                "users_registered": users_count,
-                "transactions_recorded": tx_count,
-                "storage_directory": str(DATA_DIR)
+                "status": db_status
             },
             "genai": {
                 "configured": genai_configured,
@@ -1917,7 +1917,7 @@ async def health():
         "dodo_payments_api_ready": bool(key and len(key) > 8),
         "genai_sdk_loaded": GENAI_AVAILABLE,
         "rate_limiter": rate_limiter.stats(),
-        "mode": "headless-laptop"
+        "mode": "production-cluster"
     }
 
 @app.get("/api/v1/system/sentinel/status", tags=["Monitoring"])
@@ -3086,6 +3086,12 @@ async def dodo_payments_webhook(
     body = await request.body()
     secret = os.getenv("DODO_WEBHOOK_SECRET", "").strip()
     active_sig = webhook_signature or x_signature
+    is_production = os.getenv("ENVIRONMENT", "production").lower() == "production"
+
+    # Строгая проверка в продакшене: вебхуки без секрета или без подписи категорически отклоняются
+    if is_production and not secret:
+        print("[DODO WEBHOOK SECURITY ERROR] DODO_WEBHOOK_SECRET is not configured in production environment!")
+        raise HTTPException(status_code=500, detail="DODO_WEBHOOK_SECRET is not configured on server.")
 
     # Проверка подписи (Standard Webhooks / Svix спецификация и HMAC-SHA256 hex)
     if secret:
@@ -3934,6 +3940,10 @@ async def render_sitemap():
         {"loc": f"{base_url}/tools/marketplace-lab", "priority": "0.9", "changefreq": "daily"},
         {"loc": f"{base_url}/tools/sop-builder", "priority": "0.9", "changefreq": "daily"},
         {"loc": f"{base_url}/tools/excel-wizard", "priority": "0.9", "changefreq": "daily"},
+        {"loc": f"{base_url}/tools/anti-plagiarism", "priority": "0.9", "changefreq": "daily"},
+        {"loc": f"{base_url}/tools/ats-resume", "priority": "0.9", "changefreq": "daily"},
+        {"loc": f"{base_url}/tools/career-navigator", "priority": "0.9", "changefreq": "daily"},
+        {"loc": f"{base_url}/tools/teacher-lab", "priority": "0.9", "changefreq": "daily"},
     ]
 
     # Add all Programmatic SEO topics
