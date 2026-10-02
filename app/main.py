@@ -456,7 +456,7 @@ PRODUCT_CATALOG = {
             "Export to DOCX, Markdown, PDF",
             "Safe Content Filtering (No toxic/18+ content)"
         ],
-        "checkout_url": os.getenv("DODO_CHECKOUT_STUDENT", "https://checkout.dodopayments.com/buy/pdt_0NoLUke48JkYWRX8siGaA?quantity=1&redirect_url=https://eduhub-ai.onrender.com%2Fstatic%2Fpayment-success.html")
+        "checkout_url": os.getenv("DODO_CHECKOUT_STUDENT", "https://checkout.dodopayments.com/buy/pdt_0NoLUke48JkYWRX8siGaA?quantity=1&redirect_url=https://edumate.cam%2Fstatic%2Fpayment-success.html")
     },
     "pro_max": {
         "id": "pro_max",
@@ -482,7 +482,7 @@ PRODUCT_CATALOG = {
             "Unlimited homework grading & exam prep generator",
             "Cancel anytime in 1 click"
         ],
-        "checkout_url": os.getenv("DODO_CHECKOUT_PRO_MAX", "https://checkout.dodopayments.com/buy/pdt_0No9KRSRGMZyhypjqIEfu?quantity=1&redirect_url=https://eduhub-ai.onrender.com%2Fstatic%2Fpayment-success.html")
+        "checkout_url": os.getenv("DODO_CHECKOUT_PRO_MAX", "https://checkout.dodopayments.com/buy/pdt_0No9KRSRGMZyhypjqIEfu?quantity=1&redirect_url=https://edumate.cam%2Fstatic%2Fpayment-success.html")
     },
     "tutor_creator": {
         "id": "tutor_creator",
@@ -500,7 +500,7 @@ PRODUCT_CATALOG = {
             "Classroom sharing & multi-seat license (up to 5)",
             "Dedicated onboarding & API webhook access"
         ],
-        "checkout_url": os.getenv("DODO_CHECKOUT_TUTOR", "https://checkout.dodopayments.com/buy/pdt_0NoLUk00vfRnMQMFQFLo7?quantity=1&redirect_url=https://eduhub-ai.onrender.com%2Fstatic%2Fpayment-success.html")
+        "checkout_url": os.getenv("DODO_CHECKOUT_TUTOR", "https://checkout.dodopayments.com/buy/pdt_0NoLUk00vfRnMQMFQFLo7?quantity=1&redirect_url=https://edumate.cam%2Fstatic%2Fpayment-success.html")
     },
     "b2b_center": {
         "id": "b2b_center",
@@ -539,7 +539,7 @@ PRODUCT_CATALOG = {
             "Comprehensive crash-course flashcard decks",
             "Instant activation upon payment"
         ],
-        "checkout_url": os.getenv("DODO_CHECKOUT_EXAM", "https://checkout.dodopayments.com/buy/pdt_0NoLUkLAQ4Nv9QAK3dPNT?quantity=1&redirect_url=https://eduhub-ai.onrender.com%2Fstatic%2Fpayment-success.html")
+        "checkout_url": os.getenv("DODO_CHECKOUT_EXAM", "https://checkout.dodopayments.com/buy/pdt_0NoLUkLAQ4Nv9QAK3dPNT?quantity=1&redirect_url=https://edumate.cam%2Fstatic%2Fpayment-success.html")
     },
     "flash_sprint_50": {
         "id": "flash_sprint_50",
@@ -591,7 +591,7 @@ PRODUCT_CATALOG = {
             "Instant Markdown & Clean Text Export",
             "Formatting recommendations for older ATS parsers"
         ],
-        "checkout_url": os.getenv("DODO_CHECKOUT_ATS", "https://checkout.dodopayments.com/buy/pdt_0NoLUjhcuEzS9BBgujRcS?quantity=1&redirect_url=https://eduhub-ai.onrender.com%2Fstatic%2Fpayment-success.html")
+        "checkout_url": os.getenv("DODO_CHECKOUT_ATS", "https://checkout.dodopayments.com/buy/pdt_0NoLUjhcuEzS9BBgujRcS?quantity=1&redirect_url=https://edumate.cam%2Fstatic%2Fpayment-success.html")
     },
     "blueprint_download_pass": {
         "id": "blueprint_download_pass",
@@ -608,7 +608,7 @@ PRODUCT_CATALOG = {
             "Step-by-step 2-minute setup documentation",
             "100% money-back guarantee if not satisfied"
         ],
-        "checkout_url": os.getenv("DODO_CHECKOUT_BLUEPRINT", "https://checkout.dodopayments.com/buy/pdt_0NoLUjhcuEzS9BBgujRcS?quantity=1&redirect_url=https://eduhub-ai.onrender.com%2Fstatic%2Fpayment-success.html")
+        "checkout_url": os.getenv("DODO_CHECKOUT_BLUEPRINT", "https://checkout.dodopayments.com/buy/pdt_0NoLUjhcuEzS9BBgujRcS?quantity=1&redirect_url=https://edumate.cam%2Fstatic%2Fpayment-success.html")
     }
 }
 

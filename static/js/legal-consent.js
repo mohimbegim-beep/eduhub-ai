@@ -395,10 +395,10 @@ const EduHubLegal = (function() {
             if (autoRenewContainer && !autoRenewContainer.classList.contains('hidden') && autoRenewChk) {
                 if (autoRenewChk.checked) {
                     // Subscription trial ($1 intro -> $19/mo auto-renewal)
-                    href = "https://checkout.dodopayments.com/buy/pdt_0No9KRSRGMZyhypjqIEfu?quantity=1&redirect_url=https://eduhub-ai.onrender.com%2Fstatic%2Fpayment-success.html";
+                    href = "https://checkout.dodopayments.com/buy/pdt_0No9KRSRGMZyhypjqIEfu?quantity=1&redirect_url=https://edumate.cam%2Fstatic%2Fpayment-success.html";
                 } else {
                     // Pure one-time pass ($1.00 once, zero subscription)
-                    href = "https://checkout.dodopayments.com/buy/pdt_0NoLUjhcuEzS9BBgujRcS?quantity=1&redirect_url=https://eduhub-ai.onrender.com%2Fstatic%2Fpayment-success.html";
+                    href = "https://checkout.dodopayments.com/buy/pdt_0NoLUjhcuEzS9BBgujRcS?quantity=1&redirect_url=https://edumate.cam%2Fstatic%2Fpayment-success.html";
                 }
             }
 
@@ -483,13 +483,13 @@ const EduHubLegal = (function() {
         const dict = DICTIONARY[lang] || DICTIONARY.en;
 
         if (isSubscribed) {
-            if (btn) btn.href = "https://checkout.dodopayments.com/buy/pdt_0No9KRSRGMZyhypjqIEfu?quantity=1&redirect_url=https://eduhub-ai.onrender.com%2Fstatic%2Fpayment-success.html";
+            if (btn) btn.href = "https://checkout.dodopayments.com/buy/pdt_0No9KRSRGMZyhypjqIEfu?quantity=1&redirect_url=https://edumate.cam%2Fstatic%2Fpayment-success.html";
             if (priceDisplay) priceDisplay.textContent = "$19";
             if (periodDisplay) periodDisplay.textContent = dict.card_period_sub;
             if (noteDisplay) noteDisplay.textContent = dict.card_note_sub;
             if (btnText) btnText.textContent = dict.card_btn_sub;
         } else {
-            if (btn) btn.href = "https://checkout.dodopayments.com/buy/pdt_0NoLUjhcuEzS9BBgujRcS?quantity=1&redirect_url=https://eduhub-ai.onrender.com%2Fstatic%2Fpayment-success.html";
+            if (btn) btn.href = "https://checkout.dodopayments.com/buy/pdt_0NoLUjhcuEzS9BBgujRcS?quantity=1&redirect_url=https://edumate.cam%2Fstatic%2Fpayment-success.html";
             if (priceDisplay) priceDisplay.textContent = "$1.00";
             if (periodDisplay) periodDisplay.textContent = dict.card_period_once;
             if (noteDisplay) noteDisplay.textContent = dict.card_note_once;
