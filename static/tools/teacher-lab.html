@@ -60,6 +60,8 @@
     }
 }
     </script>
+    <!-- Yandex РСЯ Context Script -->
+    <script src="https://yandex.ru/ads/system/context.js" async></script>
 </head>
 <body data-page-tool="teacher-lab" class="bg-slate-950 text-slate-100 min-h-screen font-sans antialiased selection:bg-emerald-500 selection:text-slate-950">
 
@@ -266,7 +268,23 @@
             </div>
 
         </div>
-    </main>
+                <!-- Yandex РСЯ Direct Ad Slot R-A-20153901-1 -->
+            <div class="my-6 max-w-4xl mx-auto text-center">
+                <div id="yandex_rtb_R-A-20153901-1_teacher"></div>
+                <script>
+                window.yaContextCb = window.yaContextCb || [];
+                window.yaContextCb.push(function() {
+                    if (window.Ya && window.Ya.Context && window.Ya.Context.AdvManager) {
+                        window.Ya.Context.AdvManager.render({
+                            blockId: "R-A-20153901-1",
+                            renderTo: "yandex_rtb_R-A-20153901-1_teacher"
+                        });
+                    }
+                });
+                </script>
+            </div>
+
+</main>
 
         <!-- Footer -->
     <footer class="border-t border-slate-800/80 bg-slate-950 py-6 text-center text-xs text-slate-500">
