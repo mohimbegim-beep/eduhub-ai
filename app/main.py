@@ -1196,33 +1196,39 @@ def get_genai_client() -> "genai.Client":
         )
     return genai.Client(api_key=api_key)
 
-def call_genai_with_retry(client, model: str, contents, config, max_retries: int = 3, base_delay: float = 0.4):
+def call_genai_with_retry(client, model: str, contents, config, max_retries: int = 2, base_delay: float = 0.3):
     """
-    Выполняет вызов Gemini API с экспоненциальной задержкой и джиттером (Exponential Backoff with Jitter).
-    Автоматически восстанавливается после временных сетевых ошибок и 429/503.
+    Выполняет вызов Gemini API с автоматическим переключением моделей (gemini-3.6-flash -> gemini-3.5-flash-lite)
+    при возникновении 503 High Demand или 429 Quota Spikes.
     """
     import random
     last_exception = None
-    for attempt in range(max_retries):
-        try:
-            return client.models.generate_content(
-                model=model,
-                contents=contents,
-                config=config
-            )
-        except Exception as e:
-            last_exception = e
-            err_str = str(e).lower()
-            is_transient = any(k in err_str for k in [
-                "429", "503", "504", "502", "resourceexhausted", 
-                "quota", "overloaded", "unavailable", "timeout", "timed out"
-            ])
-            if is_transient and attempt < max_retries - 1:
-                sleep_sec = (base_delay * (2 ** attempt)) + random.uniform(0.05, 0.2)
-                print(f"[GENAI RETRY] Attempt {attempt + 1} failed with transient error: {e}. Retrying in {sleep_sec:.2f}s...")
-                time.sleep(sleep_sec)
-            else:
-                break
+    models_to_try = [model]
+    for alt in ["gemini-3.5-flash-lite", "gemini-3.6-flash"]:
+        if alt not in models_to_try:
+            models_to_try.append(alt)
+
+    for current_model in models_to_try:
+        for attempt in range(max_retries):
+            try:
+                return client.models.generate_content(
+                    model=current_model,
+                    contents=contents,
+                    config=config
+                )
+            except Exception as e:
+                last_exception = e
+                err_str = str(e).lower()
+                is_transient = any(k in err_str for k in [
+                    "429", "503", "504", "502", "resourceexhausted", 
+                    "quota", "overloaded", "unavailable", "timeout", "timed out"
+                ])
+                if is_transient and attempt < max_retries - 1:
+                    sleep_sec = (base_delay * (2 ** attempt)) + random.uniform(0.05, 0.15)
+                    print(f"[GENAI RETRY] Model {current_model} attempt {attempt+1} got {e}. Retrying in {sleep_sec:.2f}s...")
+                    time.sleep(sleep_sec)
+                else:
+                    break
     raise last_exception
 
 # --------------------------------------------------------------------------
@@ -1550,38 +1556,84 @@ async def instant_essay_diagnostic(payload: InstantDiagnosticRequest, request: R
 
     ai_hints = []
     ai_criteria = {}
+    ai_errors = []
 
     try:
-        if GENAI_AVAILABLE and client:
+        genai_cli = get_genai_client() if GENAI_AVAILABLE else None
+        if genai_cli:
             INSTANT_PROMPT = (
-                "You are a certified IELTS examiner. Evaluate the following text fragment BRIEFLY:\n"
-                f"Text: \"{payload.text[:600]}\"\n\n"
-                "Respond ONLY in JSON with this exact structure (no markdown):\n"
-                '{"band": 6.5, "tr": 6.5, "cc": 6.5, "lr": 6.5, "gra": 6.5, '
-                '"strength": "One sentence strength.", '
-                '"hints": ["Hint 1 (≤15 words)", "Hint 2 (≤15 words)", "Hint 3 (≤15 words)"]}'
+                "You are an official Cambridge Senior IELTS Examiner.\n"
+                f"Evaluate the following IELTS essay text:\n"
+                f"\"\"\"{payload.text[:1000]}\"\"\"\n\n"
+                "Provide honest band scores (3.0-9.0 with 0.5 increments) for TR (Task Response), CC (Coherence/Cohesion), LR (Lexical Resource), and GRA (Grammatical Range/Accuracy).\n"
+                "Identify up to 3 grammar, vocabulary, or collocation errors with correction and brief explanation.\n"
+                "Respond ONLY in valid JSON format (no markdown fences, no text outside JSON):\n"
+                "{\n"
+                '  "band": 6.5,\n'
+                '  "tr": 6.5,\n'
+                '  "cc": 6.5,\n'
+                '  "lr": 6.5,\n'
+                '  "gra": 6.5,\n'
+                '  "strength": "One specific sentence highlighting what was done well in this text.",\n'
+                '  "errors": [\n'
+                '    {"original": "mistake phrase", "correction": "corrected phrase", "explanation": "why this is incorrect"}\n'
+                '  ],\n'
+                '  "hints": ["Specific actionable advice 1", "Specific actionable advice 2", "Specific actionable advice 3"]\n'
+                "}"
             )
             config = types.GenerateContentConfig(
+                response_mime_type="application/json",
                 temperature=0.2,
-                max_output_tokens=300,
+                max_output_tokens=1500,
                 safety_settings=get_safety_settings()
             )
-            resp = call_genai_with_retry(client, GEMINI_MODEL, INSTANT_PROMPT, config, max_retries=2, base_delay=0.5)
+            resp = call_genai_with_retry(genai_cli, "gemini-3.5-flash-lite", INSTANT_PROMPT, config, max_retries=2, base_delay=0.3)
             if resp and resp.text:
-                raw = resp.text.strip().strip("```json").strip("```").strip()
+                raw = resp.text.strip()
+                if "```json" in raw:
+                    raw = raw.split("```json", 1)[1].split("```", 1)[0].strip()
+                elif "```" in raw:
+                    raw = raw.split("```", 1)[1].split("```", 1)[0].strip()
                 parsed = json.loads(raw)
-                predicted = float(parsed.get("band", predicted))
+
+                def _safe_float(val, fallback: float) -> float:
+                    if val is None:
+                        return fallback
+                    try:
+                        return float(val)
+                    except (ValueError, TypeError):
+                        import re
+                        m = re.search(r"\b([3-9](?:\.[05])?)\b", str(val))
+                        return float(m.group(1)) if m else fallback
+
+                predicted = _safe_float(parsed.get("band"), predicted)
                 potential = min(9.0, predicted + 1.5)
                 ai_hints = parsed.get("hints", [])
+                raw_errors = parsed.get("errors", [])
+                clean_errors = []
+                for err in raw_errors:
+                    if isinstance(err, dict):
+                        clean_errors.append({
+                            "original": str(err.get("original", "")).strip(),
+                            "correction": str(err.get("correction", "")).strip(),
+                            "explanation": str(err.get("explanation", "")).strip()
+                        })
+                    elif isinstance(err, str) and err.strip():
+                        clean_errors.append({
+                            "original": "Grammar/Style issue",
+                            "correction": "Improvement suggested",
+                            "explanation": err.strip()
+                        })
+                ai_errors = clean_errors
                 ai_criteria = {
-                    "tr": parsed.get("tr", predicted),
-                    "cc": parsed.get("cc", predicted),
-                    "lr": parsed.get("lr", predicted),
-                    "gra": parsed.get("gra", predicted),
-                    "strength": parsed.get("strength", "")
+                    "tr": _safe_float(parsed.get("tr"), predicted),
+                    "cc": _safe_float(parsed.get("cc"), predicted),
+                    "lr": _safe_float(parsed.get("lr"), predicted),
+                    "gra": _safe_float(parsed.get("gra"), predicted),
+                    "strength": str(parsed.get("strength", "")).strip()
                 }
-    except Exception:
-        pass  # Fallback to heuristic scoring silently
+    except Exception as e:
+        print(f"[INSTANT DIAGNOSTIC ERROR] {e}")
 
     # ── Telegram owner notification ───────────────────────────────────────────
     try:
@@ -1603,6 +1655,7 @@ async def instant_essay_diagnostic(payload: InstantDiagnosticRequest, request: R
         "predicted_band": predicted,
         "potential_band": potential,
         "criteria": ai_criteria,
+        "errors": ai_errors,
         "hints": ai_hints or [
             "Use more precise academic vocabulary (e.g. 'consequently' instead of 'so').",
             "Add a counter-argument paragraph to improve Task Response score.",

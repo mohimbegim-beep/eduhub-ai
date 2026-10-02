@@ -586,20 +586,33 @@
                         </div>
                     </div>
                     <!-- Strength -->
-                    <div id="res-strength-block" class="hidden mb-4 bg-emerald-950/40 border border-emerald-700/40 rounded-xl px-4 py-3 text-sm text-emerald-300">
+                    <div id="res-strength-block" class="hidden mb-4 bg-emerald-950/50 border border-emerald-500/40 rounded-xl px-4 py-3 text-sm text-emerald-300 text-left font-medium">
                         💪 <span id="res-strength"></span>
                     </div>
-                    <!-- Hints -->
-                    <ul id="res-hints" class="space-y-2 mb-5"></ul>
-                    <!-- Free Open Beta CTA Banner -->
-                    <div class="bg-gradient-to-r from-emerald-600/80 via-teal-600/80 to-indigo-600/80 rounded-xl p-4 sm:p-5 text-center border border-emerald-400/40 shadow-lg">
-                        <div class="inline-flex items-center gap-2 bg-emerald-950/60 text-emerald-300 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-2 border border-emerald-500/40">
-                            🎉 100% Free Open Beta • Бесплатный доступ
+
+                    <!-- Detected Errors Block -->
+                    <div id="res-errors-block" class="hidden mb-4 bg-rose-950/40 border border-rose-500/40 rounded-xl p-4 text-left">
+                        <div class="flex items-center gap-2 text-rose-300 font-bold text-sm mb-2.5">
+                            <span>🚨</span>
+                            <span>Обнаруженные ошибки и исправления:</span>
                         </div>
-                        <p class="text-white font-bold text-base sm:text-lg mb-3">Хотите получить полный построчный разбор экзаменатора и переписанный вариант на Band 8.5+? Доступ открыт бесплатно!</p>
+                        <div id="res-errors-list" class="space-y-2"></div>
+                    </div>
+
+                    <!-- Hints -->
+                    <div class="text-left mb-2 text-xs font-bold uppercase tracking-wider text-slate-400">Рекомендации экзаменатора:</div>
+                    <ul id="res-hints" class="space-y-2 mb-5"></ul>
+
+                    <!-- Free Open Beta CTA Banner -->
+                    <div class="bg-gradient-to-r from-emerald-600/90 via-teal-600/90 to-indigo-600/90 rounded-2xl p-4 sm:p-6 text-center border border-emerald-400/50 shadow-2xl">
+                        <div class="inline-flex items-center gap-2 bg-emerald-950/70 text-emerald-300 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-2 border border-emerald-500/40">
+                            🎉 100% Free Open Beta • Полный бесплатный доступ
+                        </div>
+                        <p class="text-white font-bold text-base sm:text-lg mb-2">Хотите увидеть полный построчный разбор всего эссе с переписанным вариантом на Band 8.5+?</p>
+                        <p class="text-emerald-100 text-xs sm:text-sm mb-4">В профессиональном тренажере доступна проверка без ограничений, словарь уровня C1/C2 и экспорт в Anki.</p>
                         <div class="flex flex-col sm:flex-row justify-center gap-3">
-                            <a href="/tools/essay-grader" class="bg-white text-emerald-950 font-black px-8 py-3 rounded-xl hover:bg-emerald-50 transition shadow-lg text-sm sm:text-base flex items-center justify-center gap-2">
-                                🚀 Открыть полный разбор эссе (Бесплатно) →
+                            <a href="/tools/essay-grader" class="bg-white hover:bg-slate-100 text-slate-950 font-black px-8 py-3.5 rounded-xl transition shadow-xl text-sm sm:text-base flex items-center justify-center gap-2">
+                                🚀 Перейти к полной проверке эссе (Бесплатно) →
                             </a>
                         </div>
                     </div>
@@ -675,23 +688,48 @@
                 document.getElementById('res-potential').textContent = data.potential_band?.toFixed(1) ?? '–';
 
                 if (data.criteria && data.criteria.tr) {
-                    document.getElementById('res-tr').textContent = data.criteria.tr?.toFixed(1);
-                    document.getElementById('res-cc').textContent = data.criteria.cc?.toFixed(1);
-                    document.getElementById('res-lr').textContent = data.criteria.lr?.toFixed(1);
-                    document.getElementById('res-gra').textContent = data.criteria.gra?.toFixed(1);
+                    document.getElementById('res-tr').textContent = data.criteria.tr?.toFixed(1) || '–';
+                    document.getElementById('res-cc').textContent = data.criteria.cc?.toFixed(1) || '–';
+                    document.getElementById('res-lr').textContent = data.criteria.lr?.toFixed(1) || '–';
+                    document.getElementById('res-gra').textContent = data.criteria.gra?.toFixed(1) || '–';
                 }
 
                 if (data.criteria?.strength) {
                     document.getElementById('res-strength').textContent = data.criteria.strength;
                     document.getElementById('res-strength-block').classList.remove('hidden');
+                } else {
+                    document.getElementById('res-strength-block').classList.add('hidden');
+                }
+
+                // Render Detected Errors (Highlighted with Red/Green badge)
+                const errBlock = document.getElementById('res-errors-block');
+                const errList = document.getElementById('res-errors-list');
+                errList.innerHTML = '';
+                if (data.errors && data.errors.length > 0) {
+                    data.errors.forEach(err => {
+                        const div = document.createElement('div');
+                        div.className = 'bg-slate-900/95 border border-rose-500/40 rounded-xl p-3 text-xs shadow-md';
+                        div.innerHTML = `
+                            <div class="flex flex-wrap items-center gap-2 mb-1.5">
+                                <span class="line-through text-rose-300 font-semibold bg-rose-950/70 px-2 py-0.5 rounded border border-rose-800/60">"${err.original || ''}"</span>
+                                <span class="text-slate-400 font-bold">➔</span>
+                                <span class="text-emerald-300 font-bold bg-emerald-950/70 px-2 py-0.5 rounded border border-emerald-800/60">"${err.correction || ''}"</span>
+                            </div>
+                            <div class="text-slate-200 leading-relaxed font-normal">${err.explanation || ''}</div>
+                        `;
+                        errList.appendChild(div);
+                    });
+                    errBlock.classList.remove('hidden');
+                } else {
+                    errBlock.classList.add('hidden');
                 }
 
                 const ul = document.getElementById('res-hints');
                 ul.innerHTML = '';
                 (data.hints || []).forEach((h, i) => {
                     const li = document.createElement('li');
-                    li.className = 'flex items-start gap-2 text-sm text-slate-300 bg-slate-800/40 border border-slate-700/40 rounded-xl px-4 py-2.5';
-                    li.innerHTML = `<span class="text-indigo-400 font-bold shrink-0">${i+1}.</span><span>${h}</span>`;
+                    li.className = 'flex items-start gap-2.5 text-sm text-slate-100 bg-slate-900/90 border border-slate-700/80 rounded-xl px-4 py-3 shadow-sm text-left';
+                    li.innerHTML = `<span class="text-indigo-400 font-black shrink-0">${i+1}.</span><span class="leading-relaxed font-medium">${h}</span>`;
                     ul.appendChild(li);
                 });
 
