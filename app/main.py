@@ -200,6 +200,19 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+class SlashNormMiddleware:
+    """Нормализует дублирующиеся слеши в URL (например, //sitemap.xml -> /sitemap.xml)"""
+    def __init__(self, app):
+        self.app = app
+
+    async def __call__(self, scope, receive, send):
+        if scope.get("type") == "http" and "//" in scope.get("path", ""):
+            import re
+            scope["path"] = re.sub(r"/+", "/", scope["path"])
+        await self.app(scope, receive, send)
+
+app.add_middleware(SlashNormMiddleware)
+
 # Компрессия ответов (GZip): автоматическое сжатие контента > 1000 байт (снижение трафика на 70-80%)
 app.add_middleware(GZipMiddleware, minimum_size=1000)
 
@@ -3791,7 +3804,7 @@ async def render_sitemap():
     xml_lines.append('</urlset>')
 
     xml_content = "\n".join(xml_lines)
-    return Response(content=xml_content, media_type="application/xml")
+    return Response(content=xml_content, media_type="application/xml; charset=utf-8")
 
 
 
