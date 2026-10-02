@@ -1,5 +1,5 @@
 /**
- * EduHub AI — High-Performance Service Worker (PWA) v2
+ * EduMate AI — High-Performance Service Worker (PWA) v2
  * Caches static core assets for instant load and offline resilience.
  * Uses Network-First for static assets to ensure zero stale cache issues.
  * API routes always bypass cache (network-only).

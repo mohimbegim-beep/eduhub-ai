@@ -1,5 +1,5 @@
 """
-EduHub AI — Quality Gate 13: Autonomous AI Agents & Unfinished Work Elimination
+EduMate AI — Quality Gate 13: Autonomous AI Agents & Unfinished Work Elimination
 Verifies:
 1. Autonomous Dunning Sweeper: Automatically revokes unbilled grace access when 3 days lapse.
 2. AI Dispute Arbiter Financial Execution: Auto-credits wallet bonus and logs ledger refunds.

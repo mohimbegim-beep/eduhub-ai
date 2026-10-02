@@ -1,8 +1,8 @@
 {
   "created_at": "2026-09-19T03:52:41.952423+00:00",
   "all_time": {
-    "total_pageviews": 87,
-    "human_pageviews": 87,
+    "total_pageviews": 89,
+    "human_pageviews": 89,
     "bot_pageviews": 0,
     "unique_visitors": [
       "6d571dc805cb",
@@ -92,22 +92,22 @@
       "utm_sources": {}
     },
     "2026-10-02": {
-      "total_pageviews": 6,
-      "human_pageviews": 6,
+      "total_pageviews": 8,
+      "human_pageviews": 8,
       "bot_pageviews": 0,
       "unique_visitors": [
         "c80aaaa90d3b"
       ],
       "pages": {
-        "/": 3,
+        "/": 4,
         "/tools": 2,
-        "/support": 1
+        "/support": 2
       },
       "referrers": {
-        "Direct": 6
+        "Direct": 8
       },
       "devices": {
-        "desktop": 6,
+        "desktop": 8,
         "mobile": 0,
         "bot": 0
       },
@@ -115,6 +115,26 @@
     }
   },
   "recent_events": [
+    {
+      "time": "18:20:18 UTC",
+      "date": "2026-10-02",
+      "path": "/support",
+      "visitor_id": "c80aaaa90d3b",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
+    {
+      "time": "18:20:03 UTC",
+      "date": "2026-10-02",
+      "path": "/",
+      "visitor_id": "c80aaaa90d3b",
+      "is_bot": false,
+      "device": "desktop",
+      "referrer": "Direct",
+      "country": "Unknown"
+    },
     {
       "time": "18:11:19 UTC",
       "date": "2026-10-02",
@@ -587,26 +607,6 @@
     },
     {
       "time": "04:29:13 UTC",
-      "date": "2026-09-23",
-      "path": "/",
-      "visitor_id": "2f0ce84d4870",
-      "is_bot": false,
-      "device": "desktop",
-      "referrer": "Direct",
-      "country": "Unknown"
-    },
-    {
-      "time": "04:29:09 UTC",
-      "date": "2026-09-23",
-      "path": "/",
-      "visitor_id": "2f0ce84d4870",
-      "is_bot": false,
-      "device": "desktop",
-      "referrer": "Direct",
-      "country": "Unknown"
-    },
-    {
-      "time": "04:29:00 UTC",
       "date": "2026-09-23",
       "path": "/",
       "visitor_id": "2f0ce84d4870",

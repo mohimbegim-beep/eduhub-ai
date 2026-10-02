@@ -1,5 +1,5 @@
 /**
- * EduHub AI — PWA Install & Lifecycle Manager
+ * EduMate AI — PWA Install & Lifecycle Manager
  * Handles Service Worker registration, Android/Chrome Install Prompt, and iOS Safari Guide.
  */
 

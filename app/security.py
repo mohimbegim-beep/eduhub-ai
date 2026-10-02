@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 ===============================================================================
-EduHub AI — Chief Security & Ethics Guardrail Engine (Manifesto v3.0)
+EduMate AI — Chief Security & Ethics Guardrail Engine (Manifesto v3.0)
 ===============================================================================
 Миссия: Защита свободы, ненасилия, правды и природы.
 Принципы:

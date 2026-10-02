@@ -478,12 +478,12 @@ PRODUCT_CATALOG = {
             "description": "Start 3-Day IELTS Examiner Pro Access for Just $1, then $19/mo recurring"
         },
         "badge": "Flagship Hero — $1 for 3 Days",
-        "description": "Senior IELTS Examiner diagnostics, Band 1–9 scoring across TR, CC, LR, GRA, handwritten essay OCR, Band 8.5+ model rewrites, and 1-click Anki export. 3-day full pass for $1.",
+        "description": "Senior IELTS Examiner diagnostics, Band 1–9 scoring across TR, CC, LR, GRA, handwritten essay OCR, Cambridge Evaluator model rewrites, and 1-click Anki export. 3-day full pass for $1.",
         "features": [
             "Official IELTS Task 1 & 2 Senior Examiner Rubric Diagnostic",
             "Introductory 3-Day Full Pass for $1 (then $19/mo)",
             "Instant Band 1.0 - 9.0 Scores across TR, CC, LR, and GRA",
-            "Side-by-side Band 8.5+ model essay rewrites",
+            "Side-by-side Cambridge Evaluator model essay rewrites",
             "Handwritten essay photo upload & vision OCR",
             "1-click Anki deck export for high-yield vocabulary",
             "Unlimited homework grading & exam prep generator",
@@ -853,7 +853,7 @@ def provision_subscription(email: str, tier: str, order_id: str, variant_id: str
     try:
         from services.telegram_bot_service import notify_owner
         tier_labels = {
-            "pro_max": "EduHub Pro Max ($1 Trial / $39/mo)",
+            "pro_max": "EduMate Pro Max ($1 Trial / $39/mo)",
             "student": "Student Starter ($19/mo)",
             "sprint": "Exam Sprint Pack (One-time)",
             "tutor": "Tutor & Creator Kit",
@@ -1849,6 +1849,12 @@ async def serve_citation_generator():
         return FileResponse(str(tool_file))
     raise HTTPException(status_code=404, detail="Tool page '/tools/citation-generator' not found.")
 
+# Anti-Plagiarism Permanently Removed -> 301 to Citation Generator
+@app.get("/tools/anti-plagiarism", tags=["Standalone Tools"])
+@app.get("/tools/anti-plagiarism/", tags=["Standalone Tools"])
+async def redirect_anti_plagiarism_legacy():
+    return RedirectResponse(url="/tools/citation-generator", status_code=301)
+
 @app.get("/tools", tags=["Standalone Tools"])
 @app.get("/tools/", tags=["Standalone Tools"])
 async def serve_tools_catalog():
@@ -2533,7 +2539,7 @@ def get_fallback_homework_guidance(assignment: str, student_solution: Optional[s
 3. *Chap tomondagi qavslar ochilganda qaysi matematik ishora hosil bo'lishi kerak?*
 
 ---
-*💡 EduHub AI tavsiyasi: Suqrot metodidan foydalaning — tayyor javobni ko'chirmasdan, yo'naltiruvchi savollarga qadam-baqadam javob bering.*"""
+*💡 EduMate AI tavsiyasi: Suqrot metodidan foydalaning — tayyor javobni ko'chirmasdan, yo'naltiruvchi savollarga qadam-baqadam javob bering.*"""
     elif is_en:
         return f"""### 💡 Socratic Step-by-Step Guidance & Pedagogical Prompts
 
@@ -2556,7 +2562,7 @@ def get_fallback_homework_guidance(assignment: str, student_solution: Optional[s
 3. *What sign must result when distributing across terms on the left side?*
 
 ---
-*💡 EduHub AI Guidance: Leverage the Socratic method — empower learners to uncover the solution through targeted reflection rather than direct answer replication.*"""
+*💡 EduMate AI Guidance: Leverage the Socratic method — empower learners to uncover the solution through targeted reflection rather than direct answer replication.*"""
     elif is_es:
         return f"""### 💡 Guía Pedagógica y Desglose Paso a Paso (Método Socrático)
 
@@ -2579,7 +2585,7 @@ def get_fallback_homework_guidance(assignment: str, student_solution: Optional[s
 3. *¿Qué signo algebraico debe resultar al expandir los paréntesis del miembro izquierdo?*
 
 ---
-*💡 Consejo de EduHub AI: Aplique el método socrático guiando con preguntas reflexivas en lugar de dictar el resultado final.*"""
+*💡 Consejo de EduMate AI: Aplique el método socrático guiando con preguntas reflexivas en lugar de dictar el resultado final.*"""
     else:
         return f"""### 💡 Пошаговый разбор и педагогические подсказки (Метод Сократа)
 
@@ -2602,7 +2608,7 @@ def get_fallback_homework_guidance(assignment: str, student_solution: Optional[s
 3. *Какой знак должен получиться при раскрытии скобок в левой части?*
 
 ---
-*💡 Совет от EduHub AI: используйте метод Сократа — не переписывайте готовый ответ, а ответьте на наводящие вопросы шаг за шагом.*"""
+*💡 Совет от EduMate AI: используйте метод Сократа — не переписывайте готовый ответ, а ответьте на наводящие вопросы шаг за шагом.*"""
 
 
 def get_fallback_lecture_summary(text: str, format_type: str, language: str) -> str:
@@ -2716,7 +2722,7 @@ def get_fallback_assistant_answer(question: str, context: Optional[str], languag
     is_en = "en" in l
 
     if is_uz:
-        return f"""### 🎓 EduHub AI Akademik Javobi
+        return f"""### 🎓 EduMate AI Akademik Javobi
 
 Sizning **«{question[:100]}»** savolingiz bo'yicha:
 
@@ -2727,9 +2733,9 @@ Mazkur masala fanning fundamental asoslarini qamrab oladi. Uni tahlil qilishda u
 3. **Ko'p uchraydigan xatolar:** Eng ko'p yo'l qo'yiladigan xatolik — o'xshash terminlarni adashtirish va kontekst cheklovlarini e'tibordan chetda qoldirishdir.
 
 ---
-💡 *EduHub AI tavsiyasi: Mavzuni to'liq mustahkamlash uchun o'zingizni tekshirish maqsadida 3 ta savol tuzing yoki PDF Summarizer moduli orqali qisqa konspekt hosil qiling.*"""
+💡 *EduMate AI tavsiyasi: Mavzuni to'liq mustahkamlash uchun o'zingizni tekshirish maqsadida 3 ta savol tuzing yoki PDF Summarizer moduli orqali qisqa konspekt hosil qiling.*"""
     elif is_en:
-        return f"""### 🎓 EduHub AI Academic Response
+        return f"""### 🎓 EduMate AI Academic Response
 
 Regarding your inquiry **"{question[:100]}"**:
 
@@ -2740,9 +2746,9 @@ This inquiry directly addresses core principles of the field. A scholarly analys
 3. **Common Pitfalls:** The most frequent misstep involves blurring closely related terminology and ignoring context constraints.
 
 ---
-💡 *EduHub AI Recommendation: Formulate 3 self-test questions or generate a structured brief using the PDF Summarizer module to consolidate mastery.*"""
+💡 *EduMate AI Recommendation: Formulate 3 self-test questions or generate a structured brief using the PDF Summarizer module to consolidate mastery.*"""
     elif is_es:
-        return f"""### 🎓 Respuesta Académica de EduHub AI
+        return f"""### 🎓 Respuesta Académica de EduMate AI
 
 En relación con su consulta **«{question[:100]}»**:
 
@@ -2753,9 +2759,9 @@ La cuestión planteada incide en los fundamentos de la disciplina. Un análisis 
 3. **Errores Habituales:** La confusión recurrente radica en equiparar términos afines y desatender los límites contextuales.
 
 ---
-💡 *Recomendación de EduHub AI: Para afianzar el aprendizaje, elabore 3 preguntas de autoevaluación o un resumen con el módulo PDF Summarizer.*"""
+💡 *Recomendación de EduMate AI: Para afianzar el aprendizaje, elabore 3 preguntas de autoevaluación o un resumen con el módulo PDF Summarizer.*"""
     else:
-        return f"""### 🎓 Академический ответ EduHub AI
+        return f"""### 🎓 Академический ответ EduMate AI
 
 По вашему вопросу **«{question[:100]}»**:
 
@@ -2766,7 +2772,7 @@ La cuestión planteada incide en los fundamentos de la disciplina. Un análisis 
 3. **Типичные ошибки:** Наиболее частым заблуждением является смешение смежных терминов и игнорирование контекстуальных ограничений.
 
 ---
-💡 *Рекомендация EduHub AI: для закрепления темы вы можете сформировать 3 вопроса для самопроверки или составить конспект в модуле PDF Summarizer.*"""
+💡 *Рекомендация EduMate AI: для закрепления темы вы можете сформировать 3 вопроса для самопроверки или составить конспект в модуле PDF Summarizer.*"""
 
 # Fallback Generators for Offline / Sandbox / Demo Environments
 # --------------------------------------------------------------------------
@@ -2944,7 +2950,7 @@ async def grade_essay(
 ):
     """
     Автономная оценка эссе по официальным критериям IELTS / CEFR (TR, CC, LR, GRA)
-    с генерацией улучшенной версии Band 8.5-9.0 и экспортом лексики для Anki.
+    с генерацией улучшенной версии Cambridge 4-Criteria и экспортом лексики для Anki.
     """
     if REQUIRE_API_KEY and not x_api_key:
         raise HTTPException(
@@ -2998,7 +3004,7 @@ async def grade_essay(
             "CRITICAL REQUIREMENTS:\n"
             f"1. Provide all diagnostic feedback, explanations, and advice in {lang}.\n"
             "2. Calculate exact numerical scores for all 4 criteria (rounded to nearest 0.5) and calculate Overall Band.\n"
-            "3. Produce a side-by-side comparison between the student's Original text and an Upgraded Band 8.5-9.0 Version.\n"
+            "3. Produce a side-by-side comparison between the student's Original text and an Upgraded Cambridge 4-Criteria Version.\n"
             "4. Include an Anki-compatible High-Yield Vocabulary list (Term, Native Meaning, Model Collocation).\n\n"
             "FORMAT YOUR RESPONSE IN CLEAN GFM MARKDOWN WITH HEADINGS, TABLES, AND BULLETS."
         )
@@ -3442,7 +3448,7 @@ async def get_billing_receipt(order_id: str):
             "support_email": "support@dodopayments.com"
         },
         "item": {
-            "title": "EduHub AI Pro Max Subscription",
+            "title": "EduMate AI Pro Max Subscription",
             "tier": "pro_max",
             "amount_usd": 19.00,
             "currency": "USD"
@@ -3797,7 +3803,7 @@ async def get_payout_policy():
 @app.get("/api/v1/catalog/products", tags=["Catalog & Pricing"])
 async def get_product_catalog():
     """
-    Возвращает актуальную структуру тарифов EduHub AI для фронтенда и сторонних интеграций.
+    Возвращает актуальную структуру тарифов EduMate AI для фронтенда и сторонних интеграций.
     """
     return {
         "currency": "USD",
@@ -3882,7 +3888,7 @@ async def render_programmatic_topic(category: str, topic_slug: str):
             "category": category.replace('-', ' ').title(),
             "prompt": f"Solve and explain: {topic_slug.replace('-', ' ')} with rigorous academic standards.",
             "sample_feedback": "Comprehensive Socratic scaffolding and formal step-by-step analysis.",
-            "meta_desc": f"Complete guide and AI-powered step-by-step solution for {topic_slug.replace('-', ' ')} on EduHub AI."
+            "meta_desc": f"Complete guide and AI-powered step-by-step solution for {topic_slug.replace('-', ' ')} on EduMate AI."
         }
     else:
         topic_info = cat_data[topic_slug.lower()]
@@ -3894,7 +3900,7 @@ async def render_programmatic_topic(category: str, topic_slug: str):
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{topic_info['title']} — EduHub AI</title>
+    <title>{topic_info['title']} — EduMate AI</title>
     <meta name="description" content="{topic_info['meta_desc']}">
     <link rel="canonical" href="{canonical_url}">
     
@@ -3920,13 +3926,13 @@ async def render_programmatic_topic(category: str, topic_slug: str):
           "description": "{topic_info['meta_desc']}",
           "provider": {{
             "@type": "Organization",
-            "name": "EduHub AI",
+            "name": "EduMate AI",
             "sameAs": "https://eduhub.ai"
           }}
         }},
         {{
           "@type": "SoftwareApplication",
-          "name": "EduHub AI",
+          "name": "EduMate AI",
           "applicationCategory": "EducationalApplication",
           "offers": {{
             "@type": "Offer",
@@ -4049,7 +4055,7 @@ async def render_programmatic_topic(category: str, topic_slug: str):
 
     <!-- Footer -->
     <footer class="border-t border-slate-800/80 bg-slate-950 py-8 text-center text-xs text-slate-500">
-        <p>© 2026 EduHub AI. All rights reserved. • <a href="/privacy" class="hover:text-slate-400">Privacy Policy</a> • <a href="/terms" class="hover:text-slate-400">Terms of Service</a> • <a href="/refund" class="hover:text-slate-400">Refund Guarantee</a></p>
+        <p>© 2026 EduMate AI. All rights reserved. • <a href="/privacy" class="hover:text-slate-400">Privacy Policy</a> • <a href="/terms" class="hover:text-slate-400">Terms of Service</a> • <a href="/refund" class="hover:text-slate-400">Refund Guarantee</a></p>
     </footer>
 </body>
 </html>
@@ -4105,7 +4111,7 @@ async def render_ads_txt():
     if ads_file.exists():
         return Response(content=ads_file.read_text(encoding="utf-8"), media_type="text/plain; charset=utf-8")
     ads_txt_content = (
-        "# EduHub AI Programmatic Ad Monetization\n"
+        "# EduMate AI Programmatic Ad Monetization\n"
         "# Google AdSense Publisher verification\n"
         "google.com, pub-6900527541339592, DIRECT, f08c47fec0942fa0\n"
         "# Yandex РСЯ Partner verification\n"
@@ -4161,7 +4167,6 @@ async def render_sitemap(request: Request):
         {"loc": f"{base_url}/tools/marketplace-lab", "priority": "0.9", "changefreq": "daily"},
         {"loc": f"{base_url}/tools/sop-builder", "priority": "0.9", "changefreq": "daily"},
         {"loc": f"{base_url}/tools/excel-wizard", "priority": "0.9", "changefreq": "daily"},
-        {"loc": f"{base_url}/tools/anti-plagiarism", "priority": "0.9", "changefreq": "daily"},
         {"loc": f"{base_url}/tools/ats-resume", "priority": "0.9", "changefreq": "daily"},
         {"loc": f"{base_url}/tools/career-navigator", "priority": "0.9", "changefreq": "daily"},
         {"loc": f"{base_url}/tools/teacher-lab", "priority": "0.9", "changefreq": "daily"},
@@ -4476,7 +4481,7 @@ async def analyze_billing_dispute(payload: DisputeAnalyzeRequest):
         elif is_en:
             title = "Legal Arbitration Verdict: Guarantee Window Expired (Goodwill Grant Issued)"
             legal_basis = f"Refund Policy Section 1.1: The 100% money-back guarantee window is strictly 14 calendar days from transaction date. Your request was submitted on day {days_elapsed}."
-            resolution_text = f"Dear Customer: Under statutory terms, the 14-day refund window has lapsed, precluding a direct cash reversal. However, to ensure you remain satisfied with EduHub AI, we have granted your account 25 Complimentary Flash AI Credits and a 50% renewal discount voucher."
+            resolution_text = f"Dear Customer: Under statutory terms, the 14-day refund window has lapsed, precluding a direct cash reversal. However, to ensure you remain satisfied with EduMate AI, we have granted your account 25 Complimentary Flash AI Credits and a 50% renewal discount voucher."
         else:
             title = "Юридическое заключение арбитража: Истечение срока гарантии (Начислена компенсация лояльности)"
             legal_basis = f"Пункт 1.1 Политики возвратов: Гарантийный срок безусловного возврата составляет 14 календарных дней с момента списания. Обращение подано на {days_elapsed}-й день (пресекательный срок истек)."
@@ -5010,7 +5015,7 @@ async def generate_peer_lesson_summary(payload: PeerLessonSummaryRequest):
         chat_transcript = "\n".join([f"{m['sender_handle']} ({m['sender_role']}): {m['text']}" for m in messages])
 
     # AI Synthesis with Gemini or Resilient Pedagogical Heuristic
-    summary_markdown = f"""# 📝 Академический конспект сессии EduHub AI
+    summary_markdown = f"""# 📝 Академический конспект сессии EduMate AI
 **Дата:** {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')}
 **Тема:** {room.get('topic') if room else 'Conversational Fluency'}
 **Преподаватель/Носитель:** {room.get('tutor_name') if room else 'Verified Native Tutor'}
@@ -5428,7 +5433,7 @@ async def get_live_pulse_data():
                     masked = cemail[:3] + "***"
 
                 ev_name = str(r.get("event") or "payment.succeeded")
-                plan = "EduHub Pro Max ($19/mo)" if "pro" in str(r).lower() else ("Student Starter ($9/mo)" if "starter" in str(r).lower() else "IELTS $1.00 Trial Pass")
+                plan = "EduMate Pro Max ($19/mo)" if "pro" in str(r).lower() else ("Student Starter ($9/mo)" if "starter" in str(r).lower() else "IELTS $1.00 Trial Pass")
 
                 if len(orders_list) < 15:
                     orders_list.append({
@@ -6177,7 +6182,7 @@ def get_fallback_career_profile(payload: CareerOrientateRequest) -> dict:
                 ],
                 "recommended_faculties_and_universities": ["Kamoliddin Behzod nomidagi Milliy rassomlik va dizayn instituti", "WIUT — Interactive Media Design", "Italiya va Chexiyaning yetakchi dizayn akademiyalari grantlari"],
                 "immediate_next_steps": ["Figma va Behance platformalarida 3 ta kuchli keysdan iborat portfolio yig'ish", "Dizayn-tizimlar va foydalanuvchi psixologiyasi asoslarini chuqur o'rganish", "Xalqaro mijozlar uchun portfolio tashrif qog'ozini tayyorlash"],
-                "next_eduhub_tool": {"name": "AI Anti-Plagiat va Qayta Ishlash", "url": "/tools/anti-plagiarism", "reason": "O'z dizayn-konsepsiyalari va insholarini akademik jihatdan benuqson taqdim etish uchun"}
+                "next_eduhub_tool": {"name": "Akademik iqtibos va uslub tahriri", "url": "/tools/anti-plagiarism", "reason": "O'z dizayn-konsepsiyalari va insholarini akademik jihatdan benuqson taqdim etish uchun"}
             },
             "business": {
                 "archetype": "Kapital va Startaplar Me'mori",
@@ -6466,7 +6471,7 @@ async def orientate_career(payload: CareerOrientateRequest, request: Request):
     stage_desc = stage_names.get(payload.stage, "Любой желающий")
     
     system_prompt = (
-        "You are EduHub AI Chief Career Strategist & Guidance Counselor — a world-class mentor.\n"
+        "You are EduMate AI Chief Career Strategist & Guidance Counselor — a world-class mentor.\n"
         "Your mission is to provide an empowering, highly accurate, and non-generic career diagnosis for a user.\n"
         "Do NOT force everyone into coding/programming. Honor human diversity: communications, design, diplomacy, finance, STEM, healthcare, entrepreneurship.\n"
         "Return ONLY a valid JSON object with the following schema:\n"
@@ -6754,7 +6759,7 @@ BLUEPRINTS_CATALOG = {
         "price_usd": 1.00,
         "format": "TSV / Anki Deck",
         "badge": "Academic Edge ($1)",
-        "description": "1-click Anki import deck: Band 8.5 academic collocations, transitional discourse markers, and STEM algorithmic proofs.",
+        "description": "1-click Anki import deck: Cambridge Examiner academic collocations, transitional discourse markers, and STEM algorithmic proofs.",
         "file_name": "stem_anki_deck.tsv",
         "media_type": "text/tab-separated-values",
         "checkout_url": os.getenv("DODO_CHECKOUT_BLUEPRINT_4", "https://checkout.dodopayments.com/buy/pdt_0NoLUjhcuEzS9BBgujRcS?quantity=1&redirect_url=https://eduhub-ai.onrender.com%2Fstatic%2Fpayment-success.html")
@@ -7813,7 +7818,7 @@ async def telegram_autopilot_webhook_info():
     return {
         "status": "active",
         "bot_username": "eduhub_autopilot_bot",
-        "service": "EduHub AI Autonomous Telegram Sales Agent",
+        "service": "EduMate AI Autonomous Telegram Sales Agent",
         "platform_url": "https://eduhub-ai.onrender.com"
     }
 
@@ -7876,7 +7881,7 @@ async def telegram_autopilot_webhook(request: Request):
 
     if text.startswith("/start"):
         welcome_msg = (
-            f"👋 <b>Привет, {first_name}! Добро пожаловать в EduHub AI!</b>\n\n"
+            f"👋 <b>Привет, {first_name}! Добро пожаловать в EduMate AI!</b>\n\n"
             "Я автономный ИИ-ассистент платформы <b>EduHub</b>. Я помогаю учителям, студентам и предпринимателям решать задачи за секунды вместо часов рутины.\n\n"
             "🔥 <b>Наши топ-инструменты по $1.00:</b>\n"
             "• <b>Учителям:</b> Готовый поурочный план + 15 тестов с ключами за 10 сек.\n"
@@ -7894,7 +7899,7 @@ async def telegram_autopilot_webhook(request: Request):
     if client:
         try:
             sys_prompt = (
-                "Ты — дружелюбный ИИ-консультант образовательной платформы EduHub AI (https://eduhub-ai.onrender.com). "
+                "Ты — дружелюбный ИИ-консультант образовательной платформы EduMate AI (https://eduhub-ai.onrender.com). "
                 "Все наши инструменты стоят ровно $1.00 (или комбо-бандлы по $2.99). "
                 "Ответь пользователю кратко, дружелюбно и вежливо (до 80 слов), реши его вопрос и порекомендуй подходящий инструмент на сайте."
             )
@@ -7984,7 +7989,7 @@ AUTONOMOUS_POSTS = [
             "Приемные комиссии зарубежных вузов отсеивают 90% эссе из-за шаблонных формулировок.\n\n"
             "🏆 <b>SOP & Essay Grader:</b>\n"
             "• Диагностика по 4 официальным критериям IELTS (TR, CC, LR, GRA)\n"
-            "• Авторский рерайт слабых предложений на уровень Band 8.5–9.0\n"
+            "• Авторский рерайт слабых предложений на уровень Cambridge 4-Criteria\n"
             "• Экспорт словаря в Anki за секунду\n\n"
             "💎 <i>Твой билет в университет мечты всего за $1.00!</i>"
         ),
@@ -8073,7 +8078,7 @@ async def serve_engineer_report_dashboard():
     fallback_html = (
         "<!DOCTYPE html><html><head><title>Site Engineer Dashboard</title></head>"
         "<body style='font-family:sans-serif;background:#020617;color:#f8fafc;padding:40px;'>"
-        "<h1>⚙ EduHub AI Autonomous Site Engineer</h1>"
+        "<h1>⚙ EduMate AI Autonomous Site Engineer</h1>"
         "<p>Site inspection engine is active. View status at <a style='color:#34d399;' href='/api/v1/engineer/status'>/api/v1/engineer/status</a>.</p>"
         "</body></html>"
     )

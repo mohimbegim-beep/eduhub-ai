@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 ===============================================================================
-EduHub AI — Internationalization & Global Localization Core Engine
+EduMate AI — Internationalization & Global Localization Core Engine
 ===============================================================================
 Role: Global Localization & i18n Expert
 Supported Languages: EN, RU, UZ, ES

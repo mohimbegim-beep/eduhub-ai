@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-EduHub AI — Resilient SQLite WAL Database Engine (2026)
+EduMate AI — Resilient SQLite WAL Database Engine (2026)
 File: services/db_engine.py
 Mission: Ensure zero data loss across container restarts, deploys, and process crashes.
 Features:

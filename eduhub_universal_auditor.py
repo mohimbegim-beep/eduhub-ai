@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 ================================================================================
-EduHub AI — Universal Multi-Dimensional Master Audit Engine (2026)
+EduMate AI — Universal Multi-Dimensional Master Audit Engine (2026)
 ================================================================================
 Universal 7-Vector Comprehensive Full-Stack Audit:
   1. Business, Monetization & Unit Economics (Dodo MoR, Pricing, Dunning, Refund)
@@ -515,7 +515,7 @@ class UniversalMasterAuditor:
         # 5.1 Root Route & Static Landing Page
         def check_root_route(r: CheckResult):
             res = client.get("/")
-            if res.status_code != 200 or "EduHub AI" not in res.text:
+            if res.status_code != 200 or "EduMate AI" not in res.text:
                 r.passed = False
                 r.score = 0
                 r.errors.append(f"GET / failed with status {res.status_code}")
@@ -687,7 +687,7 @@ class UniversalMasterAuditor:
                 r.passed = False
                 r.score = 40
                 r.errors.append("call_genai_with_retry failed exponential backoff test")
-            r.details = "Gemini 2.5 Flash exponential retry backoff verified against transient 429 errors."
+            r.details = "Gemini 3.6 Flash exponential retry backoff verified against transient 429 errors."
 
         self.execute_check("DEV-01", "Экспоненциальный откат (Exponential Backoff) для Gemini API", "DevOps и надежность", check_gemini_backoff)
 
@@ -891,7 +891,7 @@ class UniversalMasterAuditor:
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EduHub AI — Сводный Аудиторский Сертификат (7 Векторов)</title>
+    <title>EduMate AI — Сводный Аудиторский Сертификат (7 Векторов)</title>
     <style>
         :root {{
             --bg: #090d16;
@@ -943,7 +943,7 @@ class UniversalMasterAuditor:
 <body>
     <div class="container">
         <div class="header">
-            <h1>EduHub AI — Universal Multi-Dimensional Master Audit</h1>
+            <h1>EduMate AI — Universal Multi-Dimensional Master Audit</h1>
             <p>Комплексный сквозной аудит качества: Бизнес, Юриспруденция, Маркетинг, UI/UX, Бэкенд, AI-Safety, DevOps</p>
             <p style="margin-top: 5px; font-size: 0.85rem; color: #64748b;">Юридический оператор: ООО «KIFOYATECH» (STIR 312206850, Ташкент, Узбекистан)</p>
         </div>
@@ -970,7 +970,7 @@ class UniversalMasterAuditor:
         {vector_cards_html}
 
         <div class="footer">
-            <p>Аудиторский сертификат сгенерирован автоматически в среде EduHub AI Continuous Sentinel Framework.</p>
+            <p>Аудиторский сертификат сгенерирован автоматически в среде EduMate AI Continuous Sentinel Framework.</p>
             <p>Дата фиксации: {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S UTC')}</p>
         </div>
     </div>

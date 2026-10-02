@@ -1,9 +1,9 @@
 /**
- * EduHub AI — High-Converting CRO & Paywall Engine
+ * EduMate AI — High-Converting CRO & Paywall Engine
  * Features:
  * 1. Exit-Intent Detection & High-Converting $1 Trial Modal
  * 2. Live Social Proof & Activity Ticker (Rotating Student Verified Actions)
- * 3. Climax Paywall: Frosted-Glass Blur on High-Value Output (Band 8.5+ Rewrites & Socratic Derivations)
+ * 3. Climax Paywall: Frosted-Glass Blur on High-Value Output (Cambridge Evaluator Rewrites & Socratic Derivations)
  * 4. PCI-DSS Direct Checkout Integration
  * 5. Full Multi-Language i18n Synchronization
  */
@@ -281,7 +281,7 @@
       overlay.className = "absolute inset-0 z-10 flex flex-col items-center justify-center p-6 sm:p-8 bg-slate-950/85 backdrop-blur-md text-center";
       overlay.innerHTML = `
         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/15 text-amber-300 border border-amber-500/40 text-[11px] font-black uppercase tracking-wider mb-2.5 shadow-sm">
-          <span>🔥</span> <span data-i18n="paywall_locked_badge">Band 8.5+ Model Rewrite Unlock</span>
+          <span>🔥</span> <span data-i18n="paywall_locked_badge">Cambridge Evaluator Model Rewrite Unlock</span>
         </div>
 
         <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-bold mb-3 shadow-inner">
@@ -300,7 +300,7 @@
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-left text-xs text-slate-200 mb-5 max-w-xl mx-auto w-full">
           <div class="flex items-center gap-2 bg-slate-900/90 border border-slate-800 rounded-xl px-3 py-2">
-            <span>✍️</span> <span data-i18n="paywall_feat_rewrite">Complete Band 8.5–9.0 Native Examiner Essay Rewrite</span>
+            <span>✍️</span> <span data-i18n="paywall_feat_rewrite">Complete Cambridge 4-Criteria Native Examiner Essay Rewrite</span>
           </div>
           <div class="flex items-center gap-2 bg-slate-900/90 border border-slate-800 rounded-xl px-3 py-2">
             <span>🎯</span> <span data-i18n="paywall_feat_notes">Paragraph-by-paragraph C1/C2 Lexical Upgrades</span>

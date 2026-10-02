@@ -34,9 +34,9 @@
     "flash_credits": 0,
     "daily_usage": {
       "date": "2026-10-02",
-      "count": 4
+      "count": 7
     },
-    "last_updated": 1790964652.257636
+    "last_updated": 1790965221.4857712
   },
   "student_test_1789147251@eduhub.ai": {
     "email": "student_test_1789147251@eduhub.ai",
@@ -308,7 +308,7 @@
       "date": "2026-10-02",
       "count": 0
     },
-    "last_updated": 1790964628.2189164,
+    "last_updated": 1790965203.7928066,
     "role": "pro_max",
     "tier": "pro_max",
     "is_subscribed": true,
@@ -318,8 +318,8 @@
       "tier": "pro_max",
       "role": "pro_max",
       "variant_id": "ca17b5d8-9754-44f3-9a1f-f6d779eb8203",
-      "order_id": "1790964628",
-      "activated_at": 1790964628.2189164,
+      "order_id": "1790965203",
+      "activated_at": 1790965203.7928066,
       "trial": true
     }
   },
@@ -447,12 +447,12 @@
   },
   "student_winwin@stanford.edu": {
     "email": "student_winwin@stanford.edu",
-    "flash_credits": 240,
+    "flash_credits": 480,
     "daily_usage": {
       "date": "2026-10-02",
       "count": 0
     },
-    "last_updated": 1790964648.2017672,
+    "last_updated": 1790965218.3881533,
     "role": "pro_max",
     "tier": "pro_max",
     "is_subscribed": true,
@@ -462,10 +462,10 @@
       "tier": "pro_max",
       "order_id": "ORD-LS-1001",
       "dispute_settlement": {
-        "dispute_id": "DISP-20261002-49FBC8",
+        "dispute_id": "DISP-20261002-547871",
         "bonus_value": 22.8,
         "credits_awarded": 240,
-        "timestamp": 1790964648.2017672
+        "timestamp": 1790965218.3881533
       }
     }
   },
@@ -476,17 +476,17 @@
       "date": "2026-10-02",
       "count": 0
     },
-    "last_updated": 1790964648.234863,
+    "last_updated": 1790965218.4158137,
     "role": "free_tier",
     "tier": "free_tier",
     "is_subscribed": false,
     "subscription": {
       "status": "refunded",
       "role": "free_tier",
-      "ended_at": 1790964648.234863,
+      "ended_at": 1790965218.4158137,
       "dispute_or_refund": {
         "action": "dispute_refund",
-        "timestamp": 1790964648.234863,
+        "timestamp": 1790965218.4158137,
         "order_id": "ORD-LS-2002"
       }
     }
@@ -498,29 +498,29 @@
       "date": "2026-10-02",
       "count": 0
     },
-    "last_updated": 1790964648.2682724,
+    "last_updated": 1790965218.4388747,
     "role": "free_tier",
     "tier": "free_tier",
     "is_subscribed": false,
     "subscription": {
       "status": "refunded",
       "role": "free_tier",
-      "ended_at": 1790964648.2682724,
+      "ended_at": 1790965218.4388747,
       "dispute_or_refund": {
         "action": "dispute_refund",
-        "timestamp": 1790964648.2682724,
+        "timestamp": 1790965218.4388747,
         "order_id": "ORD-LS-3003"
       }
     }
   },
   "toshkent_student@edu.uz": {
     "email": "toshkent_student@edu.uz",
-    "flash_credits": 140,
+    "flash_credits": 280,
     "daily_usage": {
       "date": "2026-10-02",
       "count": 0
     },
-    "last_updated": 1790964648.3142035,
+    "last_updated": 1790965218.4752982,
     "role": "pro_max",
     "tier": "pro_max",
     "is_subscribed": true,
@@ -528,12 +528,12 @@
       "status": "active",
       "role": "pro_max",
       "tier": "pro_max",
-      "order_id": "DISP-20261002-ECB6EE",
+      "order_id": "DISP-20261002-1599D3",
       "dispute_settlement": {
-        "dispute_id": "DISP-20261002-ECB6EE",
+        "dispute_id": "DISP-20261002-1599D3",
         "bonus_value": 10.8,
         "credits_awarded": 140,
-        "timestamp": 1790964648.3142035
+        "timestamp": 1790965218.4752982
       }
     }
   },
@@ -544,17 +544,17 @@
       "date": "2026-10-02",
       "count": 0
     },
-    "last_updated": 1790964648.3506148,
+    "last_updated": 1790965218.5022538,
     "role": "free_tier",
     "tier": "free_tier",
     "is_subscribed": false,
     "subscription": {
       "status": "refunded",
       "role": "free_tier",
-      "ended_at": 1790964648.3506148,
+      "ended_at": 1790965218.5022538,
       "dispute_or_refund": {
         "action": "dispute_refund",
-        "timestamp": 1790964648.3506148,
+        "timestamp": 1790965218.5022538,
         "order_id": null
       }
     }
@@ -566,17 +566,17 @@
       "date": "2026-10-02",
       "count": 0
     },
-    "last_updated": 1790964648.386261,
+    "last_updated": 1790965218.526868,
     "role": "free_tier",
     "tier": "free_tier",
     "is_subscribed": false,
     "subscription": {
       "status": "refunded",
       "role": "free_tier",
-      "ended_at": 1790964648.386261,
+      "ended_at": 1790965218.526868,
       "dispute_or_refund": {
         "action": "dispute_refund",
-        "timestamp": 1790964648.386261,
+        "timestamp": 1790965218.526868,
         "order_id": "ORD-RET-999"
       }
     }
@@ -743,6 +743,177 @@
         "action": "dispute.opened",
         "timestamp": 1790964653.9197865,
         "order_id": "disp_1790964653869"
+      }
+    }
+  },
+  "test_session_1790965218": {
+    "email": "student_test@eduhub.ai",
+    "tier": "pro_max",
+    "balance": 1.0,
+    "credits": 50
+  },
+  "user_1790965220@eduhub.ai": {
+    "email": "user_1790965220@eduhub.ai",
+    "flash_credits": 0,
+    "daily_usage": {
+      "date": "2026-10-02",
+      "count": 0
+    },
+    "last_updated": 1790965220.1845686
+  },
+  "quota_exhausted_1790965221@eduhub.ai": {
+    "email": "quota_exhausted_1790965221@eduhub.ai",
+    "flash_credits": 0,
+    "daily_usage": {
+      "date": "2026-10-02",
+      "count": 65
+    },
+    "last_updated": 1790965221.4012527
+  },
+  "dunning_test_1790965222348@eduhub.ai": {
+    "email": "dunning_test_1790965222348@eduhub.ai",
+    "flash_credits": 0,
+    "daily_usage": {
+      "date": "2026-10-02",
+      "count": 0
+    },
+    "last_updated": 1790965222.3570063,
+    "role": "pro_max",
+    "is_subscribed": true,
+    "subscription": {
+      "status": "grace_period",
+      "role": "pro_max",
+      "dunning": {
+        "active": true,
+        "grace_period_until": 1791224422.3570063,
+        "grace_days": 3,
+        "reason": "payment_failed",
+        "notice": "Payment failed. You have 3 days of grace access to update your billing details."
+      },
+      "last_order_id": "sub_grace_100"
+    }
+  },
+  "grace_status_1790965222362@eduhub.ai": {
+    "email": "grace_status_1790965222362@eduhub.ai",
+    "flash_credits": 0,
+    "daily_usage": {
+      "date": "2026-10-02",
+      "count": 0
+    },
+    "last_updated": 1790965222.3671165,
+    "role": "pro_max",
+    "is_subscribed": true,
+    "subscription": {
+      "status": "grace_period",
+      "role": "pro_max",
+      "dunning": {
+        "active": true,
+        "grace_period_until": 1791224422.3671165,
+        "grace_days": 3,
+        "reason": "payment_failed",
+        "notice": "Payment failed. You have 3 days of grace access to update your billing details."
+      },
+      "last_order_id": "sub_grace_200"
+    }
+  },
+  "wh_failed_1790965222388@eduhub.ai": {
+    "email": "wh_failed_1790965222388@eduhub.ai",
+    "flash_credits": 0,
+    "daily_usage": {
+      "date": "2026-10-02",
+      "count": 0
+    },
+    "last_updated": 1790965222.4164286,
+    "role": "pro_max",
+    "is_subscribed": true,
+    "subscription": {
+      "status": "grace_period",
+      "role": "pro_max",
+      "dunning": {
+        "active": true,
+        "grace_period_until": 1791224422.4164286,
+        "grace_days": 3,
+        "reason": "payment_failed",
+        "notice": "Payment failed. You have 3 days of grace access to update your billing details."
+      },
+      "last_order_id": "fail_1790965222388"
+    }
+  },
+  "idemp_1790965222436@eduhub.ai": {
+    "email": "idemp_1790965222436@eduhub.ai",
+    "flash_credits": 120,
+    "daily_usage": {
+      "date": "2026-10-02",
+      "count": 0
+    },
+    "last_updated": 1790965222.4625347,
+    "role": "pro_max",
+    "tier": "pro_max",
+    "is_subscribed": true,
+    "user_id": "usr_a1404e99",
+    "subscription": {
+      "status": "active",
+      "tier": "pro_max",
+      "role": "pro_max",
+      "variant_id": "ca17b5d8-9754-44f3-9a1f-f6d779eb8203",
+      "order_id": "dodo_idemp_1790965222436",
+      "activated_at": 1790965222.4625347,
+      "trial": true
+    }
+  },
+  "refund_target_1790965222478@eduhub.ai": {
+    "email": "refund_target_1790965222478@eduhub.ai",
+    "flash_credits": 0,
+    "daily_usage": {
+      "date": "2026-10-02",
+      "count": 0
+    },
+    "last_updated": 1790965222.5066187,
+    "role": "free_tier",
+    "tier": "free_tier",
+    "is_subscribed": false,
+    "user_id": "usr_77411d59",
+    "subscription": {
+      "status": "refunded",
+      "tier": "pro_max",
+      "role": "free_tier",
+      "variant_id": "ca17b5d8-9754-44f3-9a1f-f6d779eb8203",
+      "order_id": "ord_initial_300",
+      "activated_at": 1790965222.4870827,
+      "trial": true,
+      "ended_at": 1790965222.5066187,
+      "dispute_or_refund": {
+        "action": "refund.processed",
+        "timestamp": 1790965222.5066187,
+        "order_id": "ord_refund_300"
+      }
+    }
+  },
+  "dispute_wh_1790965222510@eduhub.ai": {
+    "email": "dispute_wh_1790965222510@eduhub.ai",
+    "flash_credits": 0,
+    "daily_usage": {
+      "date": "2026-10-02",
+      "count": 0
+    },
+    "last_updated": 1790965222.5456698,
+    "role": "free_tier",
+    "tier": "free_tier",
+    "is_subscribed": false,
+    "user_id": "usr_6d8bb5e9",
+    "subscription": {
+      "status": "disputed",
+      "tier": "pro_max",
+      "role": "free_tier",
+      "variant_id": "ca17b5d8-9754-44f3-9a1f-f6d779eb8203",
+      "order_id": "ord_disp_orig",
+      "activated_at": 1790965222.5147598,
+      "trial": true,
+      "ended_at": 1790965222.5456698,
+      "dispute_or_refund": {
+        "action": "dispute.opened",
+        "timestamp": 1790965222.5456698,
+        "order_id": "disp_1790965222518"
       }
     }
   }

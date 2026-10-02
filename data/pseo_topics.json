@@ -12,7 +12,7 @@
             "category": "IELTS Academic Writing",
             "prompt": "Environmental problems are too big for individuals to solve alone. Only governments and large companies can make real differences. To what extent do you agree or disagree?",
             "sample_feedback": "Task Response: Band 6.5. Coherence: Band 6.5. Lexical Resource: Band 6.0. Grammatical Range: Band 6.0.",
-            "meta_desc": "Official examiner-level IELTS evaluation on environmental responsibility. Step-by-step scoring rubric and Band 8.5+ model rewrite."
+            "meta_desc": "Official examiner-level IELTS evaluation on environmental responsibility. Step-by-step scoring rubric and Cambridge Evaluator model rewrite."
         },
         "remote-work-society": {
             "title": "IELTS Writing Task 2: Remote Work and Future Society",
@@ -26,7 +26,7 @@
             "category": "IELTS Academic Writing",
             "prompt": "As artificial intelligence advances, many occupations will become obsolete, causing widespread unemployment. To what extent do you agree or disagree?",
             "sample_feedback": "Task Response: Band 7.0. Coherence: Band 7.0. Lexical Resource: Band 7.5. Grammatical Range: Band 6.5.",
-            "meta_desc": "Band 8.5 model essay on AI and job displacement. Learn examiner-approved cohesion devices and complex syntactic structures."
+            "meta_desc": "Cambridge Examiner model essay on AI and job displacement. Learn examiner-approved cohesion devices and complex syntactic structures."
         },
         "higher-education-free-tuition": {
             "title": "IELTS Writing Task 2: Should University Education Be Free for All Students?",
@@ -68,7 +68,7 @@
             "category": "IELTS Academic Writing",
             "prompt": "Spending billions on exploring outer space is unjustified when millions on Earth lack food, healthcare, and education. To what extent do you agree or disagree?",
             "sample_feedback": "Task Response: Band 6.5. Coherence: Band 6.0. Lexical Resource: Band 6.5. Grammatical Range: Band 6.0.",
-            "meta_desc": "High-scoring argumentative essay on space funding vs domestic welfare. Full diagnostic review with Band 8.5 rewrite."
+            "meta_desc": "High-scoring argumentative essay on space funding vs domestic welfare. Full diagnostic review with Cambridge Examiner rewrite."
         },
         "crime-punishment-rehabilitation-prisons": {
             "title": "IELTS Writing Task 2: Prison Sentencing vs Rehabilitation of Criminals",
@@ -89,7 +89,7 @@
             "category": "IELTS Academic Writing",
             "prompt": "Governments should allocate budgets primarily to STEM education and scientific research rather than creative arts and music. To what extent do you agree?",
             "sample_feedback": "Task Response: Band 7.0. Coherence: Band 7.0. Lexical Resource: Band 7.0. Grammatical Range: Band 6.5.",
-            "meta_desc": "Explore academic arguments defending public funding for cultural heritage. Full scoring rubric and Band 8.5 model rewrite."
+            "meta_desc": "Explore academic arguments defending public funding for cultural heritage. Full scoring rubric and Cambridge Examiner model rewrite."
         },
         "zoos-animal-rights-biodiversity": {
             "title": "IELTS Writing Task 2: The Ethical Role of Zoos in Contemporary Wildlife Conservation",
@@ -103,7 +103,7 @@
             "category": "IELTS Academic Writing",
             "prompt": "As globalization spreads Western culture and corporate brands, unique local customs and languages are fading. Is this a positive or negative development?",
             "sample_feedback": "Task Response: Band 7.0. Coherence: Band 6.5. Lexical Resource: Band 7.5. Grammatical Range: Band 7.0.",
-            "meta_desc": "Band 8.5 model essay on cultural homogenization. High-level rhetorical structures and examiner feedback."
+            "meta_desc": "Cambridge Examiner model essay on cultural homogenization. High-level rhetorical structures and examiner feedback."
         }
     },
     "ats": {

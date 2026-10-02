@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-EduHub AI — Autonomous AI Growth & Marketing Engine
+EduMate AI — Autonomous AI Growth & Marketing Engine
 Role: Autonomous growth agent responsible for:
 1. Generating viral short-form video scripts (TikTok/Reels/Shorts) based on student pain points.
 2. Generating high-converting Telegram channel posts in 4 languages (UZ, RU, EN, ES).
@@ -46,7 +46,7 @@ def generate_growth_pack(topic_focus: str = "exam_session_and_career") -> dict:
                 "tool_featured": "ATS Resume & Job Matcher ($1)",
                 "duration_seconds": 30,
                 "hook_first_3_sec": "HR-робот удалил твое резюме еще до того, как его открыл человек. Вот почему.",
-                "visual_cues": "Показать экран с надписью 'Application Rejected' и затем открыть сканер резюме на EduHub AI.",
+                "visual_cues": "Показать экран с надписью 'Application Rejected' и затем открыть сканер резюме на EduMate AI.",
                 "body_content": "78% резюме отсеиваются алгоритмами Workday и Taleo из-за отсутствия точных ключевых слов. Загрузи текст вакансии и свое резюме в EduHub ATS Scanner за $1 — робот перепишет формулировки по стандарту Google XYZ и покажет точный % совпадения.",
                 "cta_caption": "Ссылка на сканер в шапке профиля. Проверь свой скор за 1 минуту 🚀"
             },
@@ -59,13 +59,13 @@ def generate_growth_pack(topic_focus: str = "exam_session_and_career") -> dict:
                 "hook_first_3_sec": "Научрук вернул диплом и написал: 'Где научная новизна и гипотеза?'",
                 "visual_cues": "Паника студента в 2 часа ночи -> открытие Academic Lab на ноутбуке.",
                 "body_content": "Не трать три недели на оформление оглавления и введения. Academic Lab выстраивает структуру исследования строго по мировому канону IMRAD и ВАК: гипотеза, объект, предмет, положения на защиту и список литературы по ГОСТ 7.0.5.",
-                "cta_caption": "Запусти своего персонального научного ассистента в EduHub AI 🎓"
+                "cta_caption": "Запусти своего персонального научного ассистента в EduMate AI 🎓"
             },
             {
                 "id": "vid_ielts_03",
                 "target_platform": "TikTok / Instagram Reels",
                 "target_audience": "IELTS / CEFR Candidates",
-                "tool_featured": "Essay Grader & Rewriter (Band 8.5–9.0)",
+                "tool_featured": "Essay Grader & Rewriter (Cambridge 4-Criteria)",
                 "duration_seconds": 28,
                 "hook_first_3_sec": "Ты застрял на 6.0 по IELTS Writing? Вот ошибка, о которой молчат репетиторы.",
                 "visual_cues": "Красные пометки на эссе -> моментальный разбор по 4 критериям Cambridge.",
@@ -75,7 +75,7 @@ def generate_growth_pack(topic_focus: str = "exam_session_and_career") -> dict:
         ],
         "telegram_posts": {
             "ru": {
-                "title": "🔥 3 инструмента EduHub AI, которые спасут твою сессию за 1 вечер",
+                "title": "🔥 3 инструмента EduMate AI, которые спасут твою сессию за 1 вечер",
                 "body": (
                     "Сессия близко, а дедлайны уже вчера? Мы собрали арсенал автономных академических модулей, "
                     "которые решают 90% рутины:\n\n"
@@ -89,7 +89,7 @@ def generate_growth_pack(topic_focus: str = "exam_session_and_career") -> dict:
                 "button_url": "https://eduhub-ai.onrender.com/#pricing"
             },
             "uz": {
-                "title": "🎓 Sessiyada vaqtni 5 barobar tejash siri: EduHub AI",
+                "title": "🎓 Sessiyada vaqtni 5 barobar tejash siri: EduMate AI",
                 "body": (
                     "Diplom ishi, kurs ishi yoki xalqaro til sertifikatiga tayyorgarlik ko'ryapsizmi? "
                     "Talabalar uchun eng kuchli 3 ta modul:\n\n"
@@ -103,12 +103,12 @@ def generate_growth_pack(topic_focus: str = "exam_session_and_career") -> dict:
                 "button_url": "https://eduhub-ai.onrender.com/#pricing"
             },
             "en": {
-                "title": "⚡ Crush Your Academic Deadlines with EduHub AI Copilot",
+                "title": "⚡ Crush Your Academic Deadlines with EduMate AI Copilot",
                 "body": (
-                    "Facing tight paper deadlines and internship applications? EduHub AI is your 24/7 academic engine:\n\n"
+                    "Facing tight paper deadlines and internship applications? EduMate AI is your 24/7 academic engine:\n\n"
                     "• Academic Lab: Complete IMRAD dissertation and thesis scaffolding in seconds.\n"
                     "• ATS Resume Matcher: Pass Workday & Taleo screening algorithms with a 90%+ match score for just $1.\n"
-                    "• Essay Grader: Instant Cambridge examiner rubric evaluation (Band 8.5–9.0 rewrites).\n\n"
+                    "• Essay Grader: Instant Cambridge examiner rubric evaluation (Cambridge 4-Criteria rewrites).\n\n"
                     "🚀 Claim 3 days of Pro Max for just $1.\n"
                     "🛡️ Payments securely processed by Dodo Payments Inc. with a 14-day 100% money-back guarantee."
                 ),
@@ -116,7 +116,7 @@ def generate_growth_pack(topic_focus: str = "exam_session_and_career") -> dict:
                 "button_url": "https://eduhub-ai.onrender.com/#pricing"
             },
             "es": {
-                "title": "📚 Domina tus Entregas Académicas con EduHub AI",
+                "title": "📚 Domina tus Entregas Académicas con EduMate AI",
                 "body": (
                     "¿Tesis, ensayos o aplicaciones de trabajo pendientes? Tu copiloto académico autónomo:\n\n"
                     "• Laboratorio de Investigación: Estructura IMRAD rigurosa con citas bibliográficas.\n"
@@ -134,7 +134,7 @@ def generate_growth_pack(topic_focus: str = "exam_session_and_career") -> dict:
             "commission_rate": "25% рекуррентной комиссии ежемесячно со всех оплат группы",
             "sample_pitch_message": (
                 "Ребята, всем привет! Чтобы закрыть курсачи и сессию без бессонных ночей, "
-                "я подключил для нашей группы промо-доступ к академическому ИИ EduHub AI: "
+                "я подключил для нашей группы промо-доступ к академическому ИИ EduMate AI: "
                 "https://eduhub-ai.onrender.com. По нашей ссылке 3-дневный Pro Max со всеми генерациями стоит всего $1. "
                 "Там есть сканер резюме, оформление ГОСТ-списков и дипломный ассистент."
             )

@@ -34,7 +34,7 @@ CATALOG = [
 FAQ = {
     "faq_payment": "💳 We accept Visa, Mastercard, Humo/Uzcard, and international cards via Dodo Payments ($1 each).",
     "faq_delivery": "⚡ All products and access tokens are delivered instantly right inside this chat and via email.",
-    "faq_support": "👨‍💻 Support team: Contact @mahallamade_m or email mahallamade.uz@gmail.com."
+    "faq_support": "👨‍💻 Support team: Contact @mahallamade_m or email support@edumate.cam."
 }
 
 user_states = {}
@@ -79,7 +79,7 @@ def handle_update(update):
 
         if text == "/start":
             welcome_text = (
-                f"👋 <b>Добро пожаловать в EduHub AI Store!</b>
+                f"👋 <b>Добро пожаловать в EduMate AI Store!</b>
 
 "
                 f"Мы автоматизируем учебу, карьеру и бизнес с помощью ИИ-полуфабрикатов по $1.

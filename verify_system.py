@@ -75,8 +75,8 @@ def run_checks():
     res_index = client.get("/")
     check(
         "Маршрут GET / (Лендинг платформы)",
-        res_index.status_code == 200 and "EduHub AI" in res_index.text,
-        f"Статус: {res_index.status_code}, Заголовок обнаружен: {'EduHub AI' in res_index.text}"
+        res_index.status_code == 200 and "EduMate AI" in res_index.text,
+        f"Статус: {res_index.status_code}, Заголовок обнаружен: {'EduMate AI' in res_index.text}"
     )
 
     # 4. Проверка эндпоинта /health

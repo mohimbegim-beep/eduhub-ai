@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-EduHub AI — Translation Integrity & Type Safety Checker
+EduMate AI — Translation Integrity & Type Safety Checker
 Verifies that all language files (uz.json, ru.json, es.json) contain all keys
 defined in the canonical en.json. Reports missing keys to ensure 100% UI safety.
 """

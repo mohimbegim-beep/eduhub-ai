@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 """
 ===============================================================================
-EduHub AI — CEO Agent Autonomous Orchestrator (CrewAI & LangGraph Architecture)
+EduMate AI — CEO Agent Autonomous Orchestrator (CrewAI & LangGraph Architecture)
 ===============================================================================
-Назначение: Автономное управление компанией EduHub AI в режиме CEO Agent.
+Назначение: Автономное управление компанией EduMate AI в режиме CEO Agent.
 Реализует:
 1. Модель C-Suite и специализированных суб-агентов (Dev, FinTech, CMO, Traffic, CRO).
 2. Граф состояний LangGraph (Audit -> Plan -> Dispatch -> Monitor -> Report).
@@ -42,7 +42,7 @@ class SubAgent:
 
 
 class EduHubCSuiteCrew:
-    """Управляющая структура автономной ИИ-компании EduHub AI."""
+    """Управляющая структура автономной ИИ-компании EduMate AI."""
 
     def __init__(self):
         self.agents: Dict[str, SubAgent] = {
@@ -275,7 +275,7 @@ class WeekOneRoadmap:
 # =============================================================================
 
 class CEOAgentApp:
-    """Главный координатор компании EduHub AI."""
+    """Главный координатор компании EduMate AI."""
 
     def __init__(self):
         self.crew = EduHubCSuiteCrew()

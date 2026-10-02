@@ -43,7 +43,7 @@ class EduHubThemeEngine:
             "UX_LOGIC": {
                 "tabs_navigation": "Enabled (Smooth crossfade between Hub, Resume, and Factories)",
                 "paywall_blur_effect": "Active (Blur last 70% of AI response text for non-paying users)",
-                "loading_animation": "Ultra-low-latency typing effect (Gemini 2.5 Flash stream optimization)"
+                "loading_animation": "Ultra-low-latency typing effect (Gemini 3.6 Flash stream optimization)"
             }
         }
 

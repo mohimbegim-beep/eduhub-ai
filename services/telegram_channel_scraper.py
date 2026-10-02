@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-EduHub AI — High-Converting Telegram Channel Scraper & Outreach Parser
+EduMate AI — High-Converting Telegram Channel Scraper & Outreach Parser
 Target: Active IELTS, English Learning, University & Student Channels in Uzbekistan.
 Extracts: Channel Name, Link, Subscribers, Bio, Admin Contact for Ads/Sponsorship.
 """

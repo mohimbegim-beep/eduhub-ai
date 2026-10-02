@@ -1,5 +1,5 @@
 /**
- * EduHub AI — Autonomous Theme & Micro-Interactions Engine (2026)
+ * EduMate AI — Autonomous Theme & Micro-Interactions Engine (2026)
  * File: static/js/theme-engine.js
  * Features:
  * 1. Zero-FOUC Synchronous Theme Initialization.

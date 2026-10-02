@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 ================================================================================
-EduHub AI — Autonomous E2E Testing & Honest QA Guard Engine (2026)
+EduMate AI — Autonomous E2E Testing & Honest QA Guard Engine (2026)
 ================================================================================
 Role: Autonomous E2E Testing & Honest QA Agent
 Integrates into Render deployment pipeline, automated CI/CD and self-healing loop.
@@ -446,9 +446,9 @@ class AutoQAGuardEngine:
 
             # 1. GET /
             res = client.get("/")
-            if res.status_code != 200 or "EduHub AI" not in res.text:
+            if res.status_code != 200 or "EduMate AI" not in res.text:
                 t.passed = False
-                t.errors.append(f"GET / returned HTTP {res.status_code}, expected 200 with 'EduHub AI'")
+                t.errors.append(f"GET / returned HTTP {res.status_code}, expected 200 with 'EduMate AI'")
 
             # 2. GET /health
             res = client.get("/health")

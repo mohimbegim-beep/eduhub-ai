@@ -1,5 +1,5 @@
 """
-EduHub AI — Локальный скрипт-будильник (Keep-Alive Pinger).
+EduMate AI — Локальный скрипт-будильник (Keep-Alive Pinger).
 Пингует эндпоинт https://eduhub-ai.onrender.com/health каждые 12 минут,
 чтобы Render никогда не засыпал и открывался за 50 мс.
 """

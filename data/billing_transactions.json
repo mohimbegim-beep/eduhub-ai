@@ -204,5 +204,170 @@
       "status": "paid",
       "user_email": "receipt_buyer_1790964653958@eduhub.ai"
     }
+  },
+  {
+    "timestamp": 1790965203.7750452,
+    "event": "order_created",
+    "order_id": "1790965203",
+    "customer_email": "student@eduhub.ai",
+    "status": "completed",
+    "attributes": {
+      "user_email": "student@eduhub.ai"
+    }
+  },
+  {
+    "event_id": "tx_bonus_DISP-20261002-547871",
+    "event_type": "dispute.bonus_granted",
+    "customer_email": "student_winwin@stanford.edu",
+    "amount": 2280,
+    "currency": "USD",
+    "attributes": {
+      "dispute_id": "DISP-20261002-547871",
+      "credits_awarded": 240,
+      "order_id": "ORD-LS-1001"
+    }
+  },
+  {
+    "event_id": "tx_refund_DISP-20261002-BE564E",
+    "event_type": "dispute.refund_settled",
+    "customer_email": "client_net@berkeley.edu",
+    "amount": 1755,
+    "currency": "USD",
+    "attributes": {
+      "dispute_id": "DISP-20261002-BE564E",
+      "net_refund": 17.55,
+      "gateway_fee": 1.45,
+      "order_id": "ORD-LS-2002"
+    }
+  },
+  {
+    "event_id": "tx_refund_DISP-20261002-15C9B9",
+    "event_type": "dispute.refund_settled",
+    "customer_email": "parent_dup@mit.edu",
+    "amount": 900,
+    "currency": "USD",
+    "attributes": {
+      "dispute_id": "DISP-20261002-15C9B9",
+      "net_refund": 9.0,
+      "gateway_fee": 0.95,
+      "order_id": "ORD-LS-3003"
+    }
+  },
+  {
+    "event_id": "tx_bonus_DISP-20261002-1599D3",
+    "event_type": "dispute.bonus_granted",
+    "customer_email": "toshkent_student@edu.uz",
+    "amount": 1080,
+    "currency": "USD",
+    "attributes": {
+      "dispute_id": "DISP-20261002-1599D3",
+      "credits_awarded": 140,
+      "order_id": null
+    }
+  },
+  {
+    "event_id": "tx_refund_DISP-20261002-D9DFA1",
+    "event_type": "dispute.refund_settled",
+    "customer_email": "estudiante_madrid@ucm.es",
+    "amount": 1755,
+    "currency": "USD",
+    "attributes": {
+      "dispute_id": "DISP-20261002-D9DFA1",
+      "net_refund": 17.55,
+      "gateway_fee": 1.45,
+      "order_id": null
+    }
+  },
+  {
+    "event_id": "tx_refund_DISP-20261002-1A466C",
+    "event_type": "dispute.refund_settled",
+    "customer_email": "retrieve_test@mit.edu",
+    "amount": 900,
+    "currency": "USD",
+    "attributes": {
+      "dispute_id": "DISP-20261002-1A466C",
+      "net_refund": 9.0,
+      "gateway_fee": 0.95,
+      "order_id": "ORD-RET-999"
+    }
+  },
+  {
+    "event_id": "tx_gdpr_test_999",
+    "event_type": "payment_succeeded",
+    "customer_email": "gdpr_erased_029ecd9daa@anonymized.local",
+    "amount": 2500,
+    "currency": "USD",
+    "attributes": {
+      "user_email": "gdpr_erased_029ecd9daa@anonymized.local"
+    }
+  },
+  {
+    "event_id": "tx_bonus_DISP-20261002-49A95F",
+    "event_type": "dispute.bonus_granted",
+    "customer_email": "dispute_bonus_1790965220054@eduhub.ai",
+    "amount": 2280,
+    "currency": "USD",
+    "attributes": {
+      "dispute_id": "DISP-20261002-49A95F",
+      "credits_awarded": 240,
+      "order_id": "ord_bonus_1790965220"
+    }
+  },
+  {
+    "event_id": "tx_refund_DISP-20261002-5EE154",
+    "event_type": "dispute.refund_settled",
+    "customer_email": "dispute_refund_1790965220085@eduhub.ai",
+    "amount": 1755,
+    "currency": "USD",
+    "attributes": {
+      "dispute_id": "DISP-20261002-5EE154",
+      "net_refund": 17.55,
+      "gateway_fee": 1.45,
+      "order_id": "ord_ref_1790965220"
+    }
+  },
+  {
+    "timestamp": 1790965222.3962524,
+    "event": "payment.failed",
+    "order_id": "fail_1790965222388",
+    "customer_email": "wh_failed_1790965222388@eduhub.ai",
+    "status": "failed",
+    "attributes": {
+      "status": "failed",
+      "user_email": "wh_failed_1790965222388@eduhub.ai"
+    }
+  },
+  {
+    "timestamp": 1790965222.4445531,
+    "event": "subscription.active",
+    "order_id": "dodo_idemp_1790965222436",
+    "customer_email": "idemp_1790965222436@eduhub.ai",
+    "status": "active",
+    "attributes": {
+      "status": "active",
+      "user_email": "idemp_1790965222436@eduhub.ai"
+    }
+  },
+  {
+    "timestamp": 1790965222.5261273,
+    "event": "dispute.opened",
+    "order_id": "disp_1790965222518",
+    "customer_email": "dispute_wh_1790965222510@eduhub.ai",
+    "status": "disputed",
+    "attributes": {
+      "status": "disputed",
+      "user_email": "dispute_wh_1790965222510@eduhub.ai"
+    }
+  },
+  {
+    "timestamp": 1790965222.5652134,
+    "event": "subscription.active",
+    "order_id": "rcpt_ord_1790965222565",
+    "customer_email": "receipt_buyer_1790965222565@eduhub.ai",
+    "status": "paid",
+    "attributes": {
+      "status": "paid",
+      "user_email": "receipt_buyer_1790965222565@eduhub.ai"
+    }
   }
 ]

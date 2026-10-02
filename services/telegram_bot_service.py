@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-EduHub AI — Autonomous Telegram Bot Service (@eduhub_ielts_bot)
+EduMate AI — Autonomous Telegram Bot Service (@eduhub_ielts_bot)
 Role: 24/7 Telegram Copilot for IELTS Candidates & Students.
 """
 
@@ -208,7 +208,7 @@ def get_system_stats_summary() -> str:
         "• 🟡 Яндекс РСЯ: `На модерации` (11 блоков активны)\n"
         "• 🟢 Доступ: `100% Free Open Beta` (для набора аудитории)\n\n"
         "🌐 *Сервер:* `Online 100.5ч без сбоев (Render)`\n"
-        "🤖 *AI Ядро:* `Gemini 2.5 Flash Ultra`\n"
+        "🤖 *AI Ядро:* `Gemini 3.6 Flash Ultra`\n"
         f"🕒 *Срез данных на:* `{now_utc}`"
     )
 
@@ -303,7 +303,7 @@ def build_welcome_keyboard() -> dict:
                     "url": IELTS_WEBAPP_URL
                 },
                 {
-                    "text": "📚 Топ связок Band 8.5+",
+                    "text": "📚 Топ связок Cambridge Evaluator",
                     "callback_data": "vocab_pack"
                 }
             ],
@@ -323,7 +323,7 @@ def build_welcome_keyboard() -> dict:
 def handle_start_command(chat_id: int, first_name: str = "Студент") -> None:
     text = (
         f"👋 *Привет, {first_name}*\n\n"
-        "Я официальный ИИ-ассистент платформы *EduHub AI* по подготовке к *IELTS Writing* 🎓\n\n"
+        "Я официальный ИИ-ассистент платформы *EduMate AI* по подготовке к *IELTS Writing* 🎓\n\n"
         "✨ *Что я умею делать прямо в этом чате:*\n"
         "1️⃣ *Оценка эссе за 10 секунд:* Отправь мне текст своего эссе или *фото рукописного листа* из тетради.\n"
         "2️⃣ *Разбор по 4 критериям Cambridge:* Расчет балла по *TR, CC, LR, GRA* и итоговый *Overall Band*.\n"
@@ -335,7 +335,7 @@ def handle_start_command(chat_id: int, first_name: str = "Студент") -> No
 def handle_start_uz(chat_id: int, first_name: str = "Talaba") -> None:
     text = (
         f"👋 *Salom, {first_name}*\n\n"
-        "*EduHub AI* — IELTS Writing bo'yicha rasmiy sun'iy intellekt assistenti botiga xush kelibsiz! 🎓\n\n"
+        "*EduMate AI* — IELTS Writing bo'yicha rasmiy sun'iy intellekt assistenti botiga xush kelibsiz! 🎓\n\n"
         "✨ *Bot imkoniyatlari:*\n"
         "1️⃣ *Inshoni 10 soniyada tekshirish:* Insho matnini yoki daftaringizdagi qo'lyozma rasmini yuboring.\n"
         "2️⃣ *4 ta rasmiy Cambridge mezoni:* TR, CC, LR va GRA bo'yicha aniq baholash.\n"
@@ -401,7 +401,7 @@ def process_telegram_update(update: dict) -> bool:
 
         if data == "vocab_pack":
             vocab_text = (
-                "📚 *ТОП-5 Академических связок для IELTS Band 8.5+*\n\n"
+                "📚 *ТОП-5 Академических связок для IELTS Cambridge Evaluator*\n\n"
                 "1️⃣ *A paramount argument against... lies in...* (Вместо 'First of all')\n"
                 "2️⃣ *Compounding this problem is the fact that...* (Вместо 'Also / Moreover')\n"
                 "3️⃣ *Conversely, proponents of this view contend that...* (Вместо 'On the other hand')\n"
@@ -453,7 +453,7 @@ def process_telegram_update(update: dict) -> bool:
             "🚨 *СИСТЕМА БЕЗОПАСНОСТИ EDUHUB SHIELD*\n\n"
             "⚠️ *Обнаружена несанкционированная реклама или вредоносный спам.*\n"
             "Ваш контент удалён, а попытка спам-атаки зафиксирована в журнале безопасности.\n\n"
-            "❌ *Статус:* Доступ заблокирован. Платформа EduHub AI обучает академическому английскому, "
+            "❌ *Статус:* Доступ заблокирован. Платформа EduMate AI обучает академическому английскому, "
             "а не сомнительным схемам. Не тратьте наше и своё время."
         )
         send_message(chat_id, roast)
@@ -466,7 +466,7 @@ def process_telegram_update(update: dict) -> bool:
         username = from_user.get("username", "")
         save_owner_chat_id(chat_id, username, first_name)
         welcome_owner = (
-            f"👑 *Добро пожаловать, {first_name}! (Владелец EduHub AI)*\n\n"
+            f"👑 *Добро пожаловать, {first_name}! (Владелец EduMate AI)*\n\n"
             "✅ *Ваш Telegram успешно привязан в качестве пульта управления платформой.*\n\n"
             "🔔 Теперь сюда в режиме реального времени будут приходить оповещения:\n"
             "• 💰 Новые оплаты $1 триала и подписок от Dodo Payments\n"
@@ -487,7 +487,7 @@ def process_telegram_update(update: dict) -> bool:
         return True
 
     if cmd_clean == "/ping" and is_owner(chat_id):
-        send_message(chat_id, "🏓 *PONG!* Сервер EduHub AI на связи. Задержка Gemini 3.6 Flash: 0.12s. Все системы 100% исправны.")
+        send_message(chat_id, "🏓 *PONG!* Сервер EduMate AI на связи. Задержка Gemini 3.6 Flash: 0.12s. Все системы 100% исправны.")
         return True
 
     if full_text.startswith("/start"):
@@ -500,7 +500,7 @@ def process_telegram_update(update: dict) -> bool:
                 if linked and linked.get("tier") == "pro_max":
                     welcome_auth = (
                         f"🎉 *Добро пожаловать, {first_name}!*\n\n"
-                        "✅ *Ваш аккаунт EduHub Pro Max успешно синхронизирован!*\n"
+                        "✅ *Ваш аккаунт EduMate Pro Max успешно синхронизирован!*\n"
                         "💎 У вас активен *безлимитный доступ* к проверке эссе и разборам Cambridge 8.5+ прямо в этом чате.\n\n"
                         "📸 Отправьте фото или текст эссе для мгновенной проверки!"
                     )
@@ -509,7 +509,7 @@ def process_telegram_update(update: dict) -> bool:
                 elif linked:
                     welcome_auth = (
                         f"👋 *Привет, {first_name}!*\n\n"
-                        "✅ *Ваш веб-аккаунт EduHub AI успешно привязан к этому чату!*\n"
+                        "✅ *Ваш веб-аккаунт EduMate AI успешно привязан к этому чату!*\n"
                         f"Текущий баланс: *{linked.get('credits', 3)} проверок*.\n\n"
                         "📸 Отправьте фото или текст эссе прямо сейчас!"
                     )
@@ -526,10 +526,10 @@ def process_telegram_update(update: dict) -> bool:
             user = get_user_by_telegram(chat_id)
             token = user.get("session_id") if user else f"tg_{chat_id}"
             web_link = f"{PRODUCTION_URL}/tools/essay-grader?token={token}"
-            send_message(chat_id, f"🌐 *Ваша персональная ссылка для входа на сайт:* [Открыть EduHub AI]({web_link})\n\nВаш статус Pro Max и история будут автоматически синхронизированы.")
+            send_message(chat_id, f"🌐 *Ваша персональная ссылка для входа на сайт:* [Открыть EduMate AI]({web_link})\n\nВаш статус Pro Max и история будут автоматически синхронизированы.")
             return True
         except Exception as e:
-            send_message(chat_id, f"🌐 [Открыть EduHub AI]({PRODUCTION_URL}/tools/essay-grader)")
+            send_message(chat_id, f"🌐 [Открыть EduMate AI]({PRODUCTION_URL}/tools/essay-grader)")
             return True
 
     photos = message.get("photo")
@@ -542,7 +542,7 @@ def process_telegram_update(update: dict) -> bool:
             feedback = evaluate_essay_for_telegram(full_text, image_bytes=img_bytes)
             send_message(chat_id, feedback, reply_markup={
                 "inline_keyboard": [
-                    [{"text": "🚀 Получить полную версию Band 9.0 на EduHub AI", "url": IELTS_WEBAPP_URL}],
+                    [{"text": "🚀 Получить полную версию Band 9.0 на EduMate AI", "url": IELTS_WEBAPP_URL}],
                     [{"text": "💎 Pro Max за $1", "url": PRICING_URL}]
                 ]
             })

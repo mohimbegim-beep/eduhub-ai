@@ -1,5 +1,5 @@
 /**
- * EduHub AI - Client-side Single Source of Truth Configuration
+ * EduMate AI - Client-side Single Source of Truth Configuration
  */
 window.EduHubConfig = {
     brandName: "EduMate AI",

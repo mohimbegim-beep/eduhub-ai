@@ -1,5 +1,5 @@
 /**
- * EduHub AI — Trust & Legal Micro-Consent Layer
+ * EduMate AI — Trust & Legal Micro-Consent Layer
  * Features:
  * 1. Floating Cookie & Legal Consent Bar with localStorage persistence.
  * 2. Mandatory Pre-Checkout Legal Consent Gate (Interactive Checkbox Modal) ensuring 100% indisputable consent before payment.
@@ -15,7 +15,7 @@ const EduHubLegal = (function() {
 
     const DICTIONARY = {
         en: {
-            cookie_msg: "We use cookies for security and personalization. By continuing to use EduHub AI, you agree to our <a href='/terms' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Terms of Service</a>, <a href='/privacy' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Privacy Policy</a>, and <a href='/refund' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Refund Policy</a>.",
+            cookie_msg: "We use cookies for security and personalization. By continuing to use EduMate AI, you agree to our <a href='/terms' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Terms of Service</a>, <a href='/privacy' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Privacy Policy</a>, and <a href='/refund' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Refund Policy</a>.",
             cookie_btn: "Accept & Continue",
             micro_consent: "By clicking, you agree to the <a href='/terms' target='_blank' class='underline text-slate-300 hover:text-white'>Terms of Service</a> and our <a href='/refund' target='_blank' class='underline text-slate-300 hover:text-white'>14-day money-back guarantee</a>. Cancel anytime in 1 click.",
             modal_badge: "Legal Confirmation & Consumer Assurance",
@@ -40,7 +40,7 @@ const EduHubLegal = (function() {
             card_btn_once: "Pay One-Time Pass ($1.00) →"
         },
         ru: {
-            cookie_msg: "Мы используем cookies для безопасности и персонализации. Продолжая использовать EduHub AI, вы соглашаетесь с <a href='/terms' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Условиями обслуживания</a>, <a href='/privacy' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Политикой конфиденциальности</a> и <a href='/refund' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Политикой возвратов</a>.",
+            cookie_msg: "Мы используем cookies для безопасности и персонализации. Продолжая использовать EduMate AI, вы соглашаетесь с <a href='/terms' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Условиями обслуживания</a>, <a href='/privacy' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Политикой конфиденциальности</a> и <a href='/refund' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Политикой возвратов</a>.",
             cookie_btn: "Принять и продолжить",
             micro_consent: "Нажимая кнопку, вы принимаете <a href='/terms' target='_blank' class='underline text-slate-300 hover:text-white'>Условия оферты</a> и <a href='/refund' target='_blank' class='underline text-slate-300 hover:text-white'>14-дневную гарантию возврата</a>. Отмена подписки в 1 клик в любое время.",
             modal_badge: "Правовое подтверждение и защита покупателя",
@@ -65,7 +65,7 @@ const EduHubLegal = (function() {
             card_btn_once: "Оплатить разовый пропуск ($1.00) →"
         },
         uz: {
-            cookie_msg: "Xavfsizlik va shaxsiylashtirish uchun cookies fayllaridan foydalanamiz. EduHub AI dan foydalanishni davom ettirish orqali siz <a href='/terms' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Xizmat ko\'rsatish shartlari</a>, <a href='/privacy' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Maxfiylik siyosati</a> va <a href='/refund' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Qaytarish siyosati</a>ga rozilik bildirasiz.",
+            cookie_msg: "Xavfsizlik va shaxsiylashtirish uchun cookies fayllaridan foydalanamiz. EduMate AI dan foydalanishni davom ettirish orqali siz <a href='/terms' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Xizmat ko\'rsatish shartlari</a>, <a href='/privacy' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Maxfiylik siyosati</a> va <a href='/refund' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Qaytarish siyosati</a>ga rozilik bildirasiz.",
             cookie_btn: "Qabul qilish va davom etish",
             micro_consent: "Tugmani bosish orqali siz <a href='/terms' target='_blank' class='underline text-slate-300 hover:text-white'>Ommaviy oferta shartlari</a> va <a href='/refund' target='_blank' class='underline text-slate-300 hover:text-white'>14 kunlik to\'lovni qaytarish kafolati</a>ni qabul qilasiz. Obunani istalgan vaqtda 1 bosishda bekor qilish mumkin.",
             modal_badge: "Huquqiy tasdiqlash va xaridor himoyasi",
@@ -90,7 +90,7 @@ const EduHubLegal = (function() {
             card_btn_once: "Bir martalik to'lov ($1.00) →"
         },
         es: {
-            cookie_msg: "Utilizamos cookies para seguridad y personalización. Al continuar utilizando EduHub AI, aceptas nuestros <a href='/terms' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Términos de servicio</a>, <a href='/privacy' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Política de privacidad</a> y <a href='/refund' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Política de reembolsos</a>.",
+            cookie_msg: "Utilizamos cookies para seguridad y personalización. Al continuar utilizando EduMate AI, aceptas nuestros <a href='/terms' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Términos de servicio</a>, <a href='/privacy' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Política de privacidad</a> y <a href='/refund' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Política de reembolsos</a>.",
             cookie_btn: "Aceptar y continuar",
             micro_consent: "Al hacer clic, aceptas los <a href='/terms' target='_blank' class='underline text-slate-300 hover:text-white'>Términos del servicio</a> y nuestra <a href='/refund' target='_blank' class='underline text-slate-300 hover:text-white'>garantía de reembolso de 14 días</a>. Cancela en cualquier momento con 1 clic.",
             modal_badge: "Confirmación Legal y Protección del Comprador",

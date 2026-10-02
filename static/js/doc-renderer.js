@@ -1,5 +1,5 @@
 /**
- * EduHub AI — Enhanced Academic Document Renderer
+ * EduMate AI — Enhanced Academic Document Renderer
  * Features:
  * 1. Responsive scrollable HTML tables (overflow-x: auto) with Tailwind styling.
  * 2. Mermaid.js integration for automatic SVG flowcharts, mindmaps, and sequence diagrams.

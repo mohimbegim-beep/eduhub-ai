@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-EduHub AI — Autonomous System Sweeper & Lifecycle Agent
+EduMate AI — Autonomous System Sweeper & Lifecycle Agent
 Role: Background autonomous agent maintaining:
 1. Dunning Grace Period enforcement (revoking expired unbilled access).
 2. Ephemeral P2P room data destruction (sliding 60-minute privacy guarantee).

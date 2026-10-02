@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-EduHub AI — Autonomous Trend Scout Agent
-Analyzes high-converting EdTech trends using Gemini 2.5 Flash,
+EduMate AI — Autonomous Trend Scout Agent
+Analyzes high-converting EdTech trends using Gemini 3.6 Flash,
 persists structured results to data/dynamic_trends.json,
 and synchronizes landing page highlights, SEO keywords, and AEO structured data.
 """
@@ -82,7 +82,7 @@ CURATED_TRENDS = [
 
 def scout_trends_with_gemini() -> dict:
     """
-    Queries Gemini 2.5 Flash for emerging 2026 EdTech search queries and trends.
+    Queries Gemini 3.6 Flash for emerging 2026 EdTech search queries and trends.
     Falls back gracefully to verified curated data if API key is not configured or unavailable.
     """
     api_key = os.getenv("GEMINI_API_KEY")
@@ -107,7 +107,7 @@ def scout_trends_with_gemini() -> dict:
 
         client = genai.Client(api_key=api_key)
         prompt = (
-            "You are the Trend Scout AI for EduHub AI (an academic AI copilot). "
+            "You are the Trend Scout AI for EduMate AI (an academic AI copilot). "
             "Identify the top 4 rising, high-converting global EdTech search trends for 2026 "
             "(e.g. IELTS AI speaking coach, automated rubric essay grading, Socratic calculus solver, lecture to flashcards). "
             "Return STRICT JSON only matching this schema:\n"
@@ -245,7 +245,7 @@ def run_scout_cycle() -> dict:
     return trends_data
 
 def main():
-    parser = argparse.ArgumentParser(description="EduHub AI Trend Scout Agent")
+    parser = argparse.ArgumentParser(description="EduMate AI Trend Scout Agent")
     parser.add_argument("--run-once", action="store_true", help="Run once and exit immediately")
     parser.add_argument("--interval", type=int, default=3600, help="Interval between runs in seconds (default: 3600)")
     args = parser.parse_args()

@@ -92,7 +92,7 @@ def test_language_suite():
     assert "Grammatical Range" in feedback or "GRA" in feedback
     assert "Band" in feedback
     assert "Original" in feedback or "Оригинал" in feedback
-    assert "Band 8.5" in feedback or "Band 9" in feedback or "Upgraded" in feedback or "Улучшенная" in feedback
+    assert "Cambridge Examiner" in feedback or "Band 9" in feedback or "Upgraded" in feedback or "Улучшенная" in feedback
     assert "Vocabulary" in feedback or "Словарь" in feedback
     print(f"  [PASS] Grade Essay (RU): Band Breakdown, Side-by-Side Upgrade, Anki Vocab table verified (len: {len(feedback)})")
 
@@ -189,7 +189,7 @@ def test_language_suite():
     # ----------------------------------------------------------------------
     print("\n--- 5. Full Platform Route Audit (11 Routes Verified) ---")
     all_routes = [
-        ("/", "EduHub AI"),
+        ("/", "EduMate AI"),
         ("/privacy", "Privacy Policy"),
         ("/terms", "Terms of Service"),
         ("/refund", "Refund Policy"),

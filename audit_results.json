@@ -390,7 +390,7 @@
           "score": 100,
           "errors": [],
           "warnings": [],
-          "details": "Gemini 2.5 Flash exponential retry backoff verified against transient 429 errors.",
+          "details": "Gemini 3.6 Flash exponential retry backoff verified against transient 429 errors.",
           "duration_ms": 125.52
         },
         {

@@ -96,7 +96,7 @@ def test_i18n_and_standalone_tools():
     assert "MULTILINGUAL FLUENCY & CROSS-SELL DIRECTIVE" in main_content, "AI Assistant directive missing from main.py"
     assert "LANGUAGE MATCHING" in main_content, "Language matching directive missing"
     assert "SMART CROSS-SELL" in main_content, "Smart cross-sell recommendation missing"
-    print("  [PASS] Backend: Gemini 2.5 Flash prompt incorporates multi-language fluency and smart cross-sell rules")
+    print("  [PASS] Backend: Gemini 3.6 Flash prompt incorporates multi-language fluency and smart cross-sell rules")
 
     print("\n==================================================")
     print("🎉 ALL i18n & STANDALONE TOOLS TESTS PASSED (100%)")

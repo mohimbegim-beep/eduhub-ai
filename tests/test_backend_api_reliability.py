@@ -18,7 +18,7 @@ client = TestClient(app)
 
 class TestBackendAndAPIReliability(unittest.TestCase):
     """
-    Комплексный стресс-тест надежности бэкенда и API EduHub AI:
+    Комплексный стресс-тест надежности бэкенда и API EduMate AI:
     1. Проверка всех ключевых эндпоинтов
     2. Проверка интеграции Gemini AI (2026 модели: gemini-3.6-flash, gemini-3.5-flash-lite)
     3. Проверка отказоустойчивости при сбоях AI (503, 429, Timeout, Empty response)

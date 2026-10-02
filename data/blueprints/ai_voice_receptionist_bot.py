@@ -20,7 +20,7 @@ from datetime import datetime
 # --- КОНФИГУРАЦИЯ (Вставьте ваши данные) ---
 TELEGRAM_BOT_TOKEN = os.getenv("BOT_TOKEN", "YOUR_TELEGRAM_BOT_TOKEN_HERE")
 OWNER_CHAT_ID = os.getenv("OWNER_CHAT_ID", "YOUR_TELEGRAM_CHAT_ID_HERE")
-COMPANY_NAME = "EduHub AI & Digital Solutions"
+COMPANY_NAME = "EduMate AI & Digital Solutions"
 STORAGE_FILE = "leads_database.json"
 
 FAQ_DATABASE = {

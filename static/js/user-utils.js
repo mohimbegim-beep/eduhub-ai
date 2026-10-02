@@ -1,5 +1,5 @@
 /**
- * EduHub AI — Essential User Utilities
+ * EduMate AI — Essential User Utilities
  * 1. Export actions: Copy Text, Download PDF, Export DOCX.
  * 2. Session history auto-save to localStorage with "Recent Documents" slide-over drawer.
  * 3. Streaming/animated step progress indicator during processing.
@@ -90,14 +90,14 @@ const EduHubUtils = (function () {
       <body>
         <div class="header">
           <div>
-            <h1>EduHub AI — Academic Analysis</h1>
+            <h1>EduMate AI — Academic Analysis</h1>
             <span>Verified Socratic Copilot • Generated on ${new Date().toLocaleDateString()}</span>
           </div>
           <button class="no-print" onclick="window.print()" style="padding: 6px 14px; background: #2563eb; color: #fff; border: none; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 600;">Print / Save PDF</button>
         </div>
         <div class="content">${contentHtml}</div>
         <div class="footer">
-          Generated autonomously by EduHub AI (https://eduhub.ai) • Strict 18+ Safe Academic Filter • Merchant: PCI-DSS Compliant Processor
+          Generated autonomously by EduMate AI (https://eduhub.ai) • Strict 18+ Safe Academic Filter • Merchant: PCI-DSS Compliant Processor
         </div>
         <script>
           setTimeout(() => { window.print(); }, 400);
@@ -133,11 +133,11 @@ const EduHubUtils = (function () {
       </head>
       <body>
         <p style="font-size: 9pt; color: #6b7280; border-bottom: 1pt solid #d1d5db; padding-bottom: 4pt;">
-          <strong>EduHub AI Academic Diagnostic</strong> | Generated on ${new Date().toLocaleString()}
+          <strong>EduMate AI Academic Diagnostic</strong> | Generated on ${new Date().toLocaleString()}
         </p>
         <div>${contentHtml}</div>
         <p style="font-size: 8pt; color: #9ca3af; margin-top: 24pt; border-top: 1pt solid #e5e7eb; padding-top: 4pt;">
-          EduHub AI Autonomous Platform • Confidential Student Record • Safe Content Filter
+          EduMate AI Autonomous Platform • Confidential Student Record • Safe Content Filter
         </p>
       </body>
       </html>

@@ -24,7 +24,7 @@ def verify_phase1():
         ("/terms", "Terms of Service"),
         ("/refund", "Refund Policy"),
         ("/payment-success", "Payment Successful"),
-        ("/", "EduHub AI")
+        ("/", "EduMate AI")
     ]
     
     all_ok = True

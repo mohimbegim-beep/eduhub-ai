@@ -2,10 +2,10 @@
 # -*- coding: utf-8 -*-
 """
 ===============================================================================
-EduHub AI — Autonomous Site Quality and Evolution Engineer (Site Inspector & Healer)
+EduMate AI — Autonomous Site Quality and Evolution Engineer (Site Inspector & Healer)
 ===============================================================================
 Mission:
-  Autonomous AI engineering agent that continuously walks the EduHub AI platform,
+  Autonomous AI engineering agent that continuously walks the EduMate AI platform,
   detects linguistic/translation defects, tests live features end-to-end,
   audits modern UX/web standards, autonomously heals identified issues,
   and delivers comprehensive executive audit reports every 6 hours.
@@ -49,7 +49,7 @@ HISTORY_FILE = DATA_DIR / "site_engineer_history.json"
 LATEST_REPORT_MD = REPORTS_DIR / "site_engineer_report_latest.md"
 LATEST_REPORT_JSON = REPORTS_DIR / "site_engineer_report_latest.json"
 
-OFFICIAL_SUPPORT_EMAIL = "mahallamade.uz@gmail.com"
+OFFICIAL_SUPPORT_EMAIL = "support@edumate.cam"
 BANNED_PERSONAL_EMAIL = ['mohim', 'mohimbegim@gmail.com']
 BANNED_UZ_TERMS = [r'asbob', r'asboblar', r'asbobi', r'instrument', r'instrumentlar']
 PRIVACY_BANNED_TERMS = [r'water\s+law', r'водн(?:ое|ого|ому|ым|ом)\s+прав(?:о|а|у|ом|е)']
@@ -447,7 +447,7 @@ class AutonomousSiteEngineer:
 
         status_emoji = "🟢 EXCELLENT" if self.health_score >= 95 else ("🟡 ACCEPTABLE" if self.health_score >= 80 else "🔴 CRITICAL")
 
-        md = f"""# 🛡️ EduHub AI — Autonomous Site Quality & Evolution Report
+        md = f"""# 🛡️ EduMate AI — Autonomous Site Quality & Evolution Report
 
 > **Периодический отчет автономного инженера качества (Каждые 6 часов)**  
 > **Дата формирования:** `{now_utc}`  
@@ -476,7 +476,7 @@ class AutonomousSiteEngineer:
   - Сканирование на термины *'asbob'*, *'instrument'* — найдено: **{self.linguistic_metrics.get('banned_uz_terms_detected', 0)}**.
 - **Privacy Gate 1 (Защита личной почты):**  
   - Личный адрес (Quarantined) — найдено на страницах: **{self.linguistic_metrics.get('personal_email_hits', 0)}** (Абсолютный ноль).
-  - Корпоративный адрес `mahallamade.uz@gmail.com` — действует на всех юридических и справочных страницах.
+  - Корпоративный адрес `support@edumate.cam` — действует на всех юридических и справочных страницах.
 - **Privacy Gate 2 (Тема диссертации):**  
   - Упоминаний Water Law: **{self.linguistic_metrics.get('privacy_gate_hits', 0)}** (Соблюдено).
 - **Симметрия словарей:**  
@@ -620,7 +620,7 @@ def run_daemon_loop(interval_seconds: int = DEFAULT_INTERVAL_SECONDS):
 
 if __name__ == "__main__":
     import argparse
-    parser = argparse.ArgumentParser(description="EduHub AI Autonomous Site Engineer")
+    parser = argparse.ArgumentParser(description="EduMate AI Autonomous Site Engineer")
     parser.add_argument("--daemon", action="store_true", help="Run in persistent background loop (every 6 hours)")
     parser.add_argument("--interval", type=int, default=DEFAULT_INTERVAL_SECONDS, help="Interval in seconds (default 21600 = 6 hours)")
     parser.add_argument("--check-only", action="store_true", help="Inspect without applying auto-fixes")

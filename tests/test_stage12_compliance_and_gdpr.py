@@ -1,5 +1,5 @@
 """
-EduHub AI — Quality Gate 12 Test Suite: International Legal Compliance & GDPR
+EduMate AI — Quality Gate 12 Test Suite: International Legal Compliance & GDPR
 Verifies:
 1. GDPR Article 17 Right to Erasure ("Right to be Forgotten"):
    - Endpoint: POST /api/v1/user/delete-account & POST /api/v1/user/gdpr-erasure

@@ -24,7 +24,7 @@ def test_global_growth_engine():
     assert res_manifest.status_code == 200, f"manifest.json failed: {res_manifest.status_code}"
     manifest_data = res_manifest.json()
     assert manifest_data.get("display") == "standalone", "manifest display must be standalone"
-    assert "EduHub AI" in manifest_data.get("name", ""), "manifest name invalid"
+    assert "EduMate AI" in manifest_data.get("name", ""), "manifest name invalid"
     assert len(manifest_data.get("icons", [])) >= 2, "manifest must contain at least 2 icons"
     print("  [PASS] /static/manifest.json -> HTTP 200 OK (Standalone mode + icons verified)")
 

@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 ===============================================================================
-EduHub AI & YouTube Media — Inter-Agent Bridge (Cross-Project Integration Matrix)
+EduMate AI & YouTube Media — Inter-Agent Bridge (Cross-Project Integration Matrix)
 ===============================================================================
 Миссия: Сквозная интеграция продаж ИИ-продуктов EduHub SaaS с конвейером
         производства YouTube Shorts без ручного вмешательства.
@@ -151,7 +151,7 @@ class EduHubSaaSAgent:
             "custom_url": "https://eduhub-ai.onrender.com/tools/marketplace-lab"
         },
         {
-            "product_name": "IELTS Academic Band 8.5+ AI Examiner",
+            "product_name": "IELTS Academic Cambridge Evaluator AI Examiner",
             "hook_pain": "Студенты платят $50/час репетиторам, но срезаются на Task 2 из-за грамматических клише.",
             "target_channel": "Channel_1_Edu_Exam",
             "custom_url": "https://eduhub-ai.onrender.com/tools/essay-grader"
@@ -200,7 +200,7 @@ class YouTubeMediaAgent:
         self.bridge = bridge
 
     def generate_viral_shorts_script(self, task: Dict[str, Any]) -> Dict[str, Any]:
-        product = task.get("promote_product", "EduHub AI")
+        product = task.get("promote_product", "EduMate AI")
         pain = task.get("user_pain_point", "")
         channel = task.get("target_youtube_slot", "Main_Channel")
         url = task.get("destination_url", "https://eduhub-ai.onrender.com/")
@@ -227,7 +227,7 @@ class YouTubeMediaAgent:
                 {
                     "timing": "00:15 - 00:42",
                     "speaker": "Voiceover + Screen Capture",
-                    "visual_cue": f"[Запись экрана: сайт EduHub AI, запуск {product}, 1 клик, генерация решения]",
+                    "visual_cue": f"[Запись экрана: сайт EduMate AI, запуск {product}, 1 клик, генерация решения]",
                     "script_text": f"Смотри: открываем {product}. Вставляем исходный запрос, жмем 'Сгенерировать' — и ИИ за 5 секунд выдает безупречный результат академического уровня с готовым оформлением."
                 },
                 {

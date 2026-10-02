@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 ===============================================================================
-EduHub AI — Privacy-Preserving Lightweight Visitor Analytics Engine
+EduMate AI — Privacy-Preserving Lightweight Visitor Analytics Engine
 ===============================================================================
 1. GDPR & CCPA compliant: IP addresses are salted and hashed (never stored raw).
 2. Zero-cookie, lightweight telemetry: tracks visits, referrers, devices, UTM.

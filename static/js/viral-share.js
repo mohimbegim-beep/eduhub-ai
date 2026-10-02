@@ -1,5 +1,5 @@
 /**
- * EduHub AI — Omni-Channel Viral Engine
+ * EduMate AI — Omni-Channel Viral Engine
  * Features:
  * 1. 1-Click WhatsApp Share (with formatted text & URL for LatAm, US, EU)
  * 2. 1-Click Telegram Share (with localized preview for CIS, Central Asia)
@@ -22,16 +22,16 @@
 
     getLocalizedText: function (customTitle) {
       const lang = document.documentElement.lang || 'en';
-      const title = customTitle || (window.t ? window.t('share_default_title') : 'Check out EduHub AI');
+      const title = customTitle || (window.t ? window.t('share_default_title') : 'Check out EduMate AI');
       
       if (lang === 'ru') {
-        return `🔥 Я использую EduHub AI для учебы и экзаменов (IELTS, математика, конспекты с ИИ по методу Сократа). Попробуй бесплатно:`;
+        return `🔥 Я использую EduMate AI для учебы и экзаменов (IELTS, математика, конспекты с ИИ по методу Сократа). Попробуй бесплатно:`;
       } else if (lang === 'uz') {
-        return `🔥 Men o'qish va imtihonlar (IELTS, matematika va konspektlar) uchun EduHub AI-dan foydalanmoqdaman. Bepul sinab ko'ring:`;
+        return `🔥 Men o'qish va imtihonlar (IELTS, matematika va konspektlar) uchun EduMate AI-dan foydalanmoqdaman. Bepul sinab ko'ring:`;
       } else if (lang === 'es') {
-        return `🔥 Estoy usando EduHub AI para preparar exámenes (IELTS, matemáticas y ensayos con IA socrática). Pruébalo gratis aquí:`;
+        return `🔥 Estoy usando EduMate AI para preparar exámenes (IELTS, matemáticas y ensayos con IA socrática). Pruébalo gratis aquí:`;
       } else {
-        return `🔥 I'm using EduHub AI to ace my exams (IELTS essays, STEM homework, and Socratic AI tutor). Try it free here:`;
+        return `🔥 I'm using EduMate AI to ace my exams (IELTS essays, STEM homework, and Socratic AI tutor). Try it free here:`;
       }
     },
 
@@ -51,7 +51,7 @@
     // 3. Native Web Share API
     shareNative: async function (title, text) {
       const shareData = {
-        title: title || 'EduHub AI — Academic Super-Copilot',
+        title: title || 'EduMate AI — Academic Super-Copilot',
         text: text || this.getLocalizedText(title),
         url: this.getShareUrl()
       };
@@ -116,7 +116,7 @@
       ctx.fill();
       ctx.stroke();
 
-      // EduHub AI Brand Header
+      // EduMate AI Brand Header
       ctx.fillStyle = '#60a5fa';
       ctx.font = 'bold 44px sans-serif';
       ctx.textAlign = 'center';

@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 ===============================================================================
-EduHub AI — Autonomous Email Robot & Merchant Onboarding Agent
+EduMate AI — Autonomous Email Robot & Merchant Onboarding Agent
 ===============================================================================
 Миссия: Автономная коммуникация и подача заявок в международные платежные
         системы (Dodo Payments, PayPro Global, Paddle).
@@ -66,7 +66,7 @@ TARGET_CONFIGS: Dict[str, Dict[str, any]] = {
     "dodo": {
         "name": "Dodo Payments",
         "recipient": "support@dodopayments.com",
-        "subject": "Re: [#29346] Product Verification Resubmission — EduHub AI (Details Enclosed)",
+        "subject": "Re: [#29346] Product Verification Resubmission — EduMate AI (Details Enclosed)",
         "body_template": """Hi Evan and the Dodo Payments Compliance Team,
 
 Thank you for your assistance and for enabling the product verification resubmission option on ticket [#29346].
@@ -76,10 +76,10 @@ We have updated our product compliance profile, verified our corporate legal ent
 As requested, I am notifying you so that your team can prioritize our compliance review. To ensure everything is 100% seamless and expedite our merchant account approval, our complete and verified Product Verification Dossier is enclosed below:
 
 ----------------------------------------------------------------------
-PRODUCT VERIFICATION DOSSIER — EduHub AI
+PRODUCT VERIFICATION DOSSIER — EduMate AI
 ----------------------------------------------------------------------
 1. Business / Product Name:
-   EduHub AI (operated by KIFOYATECH LLC)
+   EduMate AI (operated by KIFOYATECH LLC)
 
 2. Operating Legal Entity:
    KIFOYATECH LLC (STIR / Tax ID: 312206850)
@@ -94,12 +94,12 @@ PRODUCT VERIFICATION DOSSIER — EduHub AI
    SaaS / EdTech / Digital Educational Services (MCC 8299 / 5734)
 
 5. Product Description:
-   EduHub AI is a cloud-hosted pedagogical learning assistant providing Socratic tutoring, homework scaffolding, lecture summarization (PDF/audio), and standardized exam rubrics (Cambridge Examiner Band 8.5+ IELTS/TOEFL) powered by Google Gemini AI models. The platform is designed strictly for lawful student learning and educator productivity.
+   EduMate AI is a cloud-hosted pedagogical learning assistant providing Socratic tutoring, homework scaffolding, lecture summarization (PDF/audio), and standardized exam rubrics (Cambridge Examiner Cambridge Evaluator IELTS/TOEFL) powered by Google Gemini AI models. The platform is designed strictly for lawful student learning and educator productivity.
 
 6. Pricing Architecture & Billing Model (100% White-Hat):
    We operate a transparent SaaS model with zero deceptive billing, zero trial traps, and zero negative option billing:
    • Student Starter: $9.00 / month (Recurring monthly subscription)
-   • EduHub Pro Max: $19.00 / month (Recurring monthly subscription with 14-day 100% money-back guarantee)
+   • EduMate Pro Max: $19.00 / month (Recurring monthly subscription with 14-day 100% money-back guarantee)
    • Exam Sprint Pass: $15.00 one-time flat fee (Non-recurring 30-day intensive access pass)
    • Tutor & Creator Kit: $39.00 / month (Institutional multi-seat license)
 
@@ -124,27 +124,27 @@ Thank you once again for your prompt support.
 
 Best regards,
 Mohim
-Founder, EduHub AI
+Founder, EduMate AI
 support@edumate.cam
 """
     },
     "paypro": {
         "name": "PayPro Global",
         "recipient": "sellers@payproglobal.com",
-        "subject": "Vendor Merchant Application & Onboarding — EduHub AI Educational SaaS",
+        "subject": "Vendor Merchant Application & Onboarding — EduMate AI Educational SaaS",
         "body_template": """Dear PayPro Global Seller Onboarding Team,
 
 I hope this email finds you well.
 
-I am writing to apply for a merchant vendor account with PayPro Global for our educational SaaS platform, EduHub AI. We are looking for an institutional Merchant of Record partner that handles global sales tax, VAT, and card payments.
+I am writing to apply for a merchant vendor account with PayPro Global for our educational SaaS platform, EduMate AI. We are looking for an institutional Merchant of Record partner that handles global sales tax, VAT, and card payments.
 
 Below is our company and product profile:
 
 ----------------------------------------------------------------------
-MERCHANT PROFILE — EduHub AI
+MERCHANT PROFILE — EduMate AI
 ----------------------------------------------------------------------
 1. Company / Project Name:
-   EduHub AI (operated by KIFOYATECH LLC)
+   EduMate AI (operated by KIFOYATECH LLC)
 
 2. Operating Legal Entity:
    KIFOYATECH LLC (STIR / Tax ID: 312206850, Tashkent, Uzbekistan)
@@ -159,7 +159,7 @@ MERCHANT PROFILE — EduHub AI
 
 5. Pricing Structure:
    • Student Starter: $9.00 / month
-   • EduHub Pro Max: $19.00 / month
+   • EduMate Pro Max: $19.00 / month
    • Exam Sprint Pass: $15.00 (One-time 30-day utility pass)
    • Tutor & Creator Kit: $39.00 / month
 
@@ -179,25 +179,25 @@ We would be delighted to partner with PayPro Global as our global MoR. Please le
 
 Sincerely,
 Mohim
-Founder, EduHub AI
+Founder, EduMate AI
 support@edumate.cam
 """
     },
     "paddle": {
         "name": "Paddle",
         "recipient": "sellers@paddle.com",
-        "subject": "Paddle Seller Account Verification & Product Dossier — EduHub AI",
+        "subject": "Paddle Seller Account Verification & Product Dossier — EduMate AI",
         "body_template": """Dear Paddle Seller Onboarding Team,
 
-I am writing to submit our product dossier for seller account verification for EduHub AI.
+I am writing to submit our product dossier for seller account verification for EduMate AI.
 
 We are a pure-play digital educational software provider (EdTech SaaS) and wish to integrate Paddle's Merchant of Record checkout for our global student and tutor customer base.
 
 ----------------------------------------------------------------------
-PRODUCT DOSSIER — EduHub AI
+PRODUCT DOSSIER — EduMate AI
 ----------------------------------------------------------------------
 1. Product Name:
-   EduHub AI
+   EduMate AI
 
 2. Product URL:
    {prod_url}/
@@ -232,7 +232,7 @@ Thank you for your consideration.
 
 Warm regards,
 Mohim
-Founder, EduHub AI
+Founder, EduMate AI
 support@edumate.cam
 """
     }
@@ -269,7 +269,7 @@ class EmailRobot:
     def send_email(self, recipient: str, subject: str, body: str) -> bool:
         """Отправляет одно письмо."""
         msg = MIMEMultipart()
-        msg["From"] = f"EduHub AI <{self.sender_email}>"
+        msg["From"] = f"EduMate AI <{self.sender_email}>"
         msg["To"] = recipient
         msg["Subject"] = subject
         msg.attach(MIMEText(body, "plain", "utf-8"))
@@ -303,7 +303,7 @@ class EmailRobot:
 # -----------------------------------------------------------------------------
 
 def main():
-    parser = argparse.ArgumentParser(description="EduHub AI Email Robot for Merchant Onboarding")
+    parser = argparse.ArgumentParser(description="EduMate AI Email Robot for Merchant Onboarding")
     parser.add_argument("--test-connection", action="store_true", help="Test SMTP login to Gmail")
     parser.add_argument("--preview", action="store_true", help="Preview all rendered email applications")
     parser.add_argument("--send", type=str, choices=["dodo", "paypro", "paddle"], help="Send email to a specific provider")

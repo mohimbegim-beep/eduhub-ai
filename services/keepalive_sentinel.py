@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-EduHub AI — 24/7 Keep-Alive Sentinel Daemon & Autonomous Sweeper
+EduMate AI — 24/7 Keep-Alive Sentinel Daemon & Autonomous Sweeper
 1. Pings the Render production endpoint every 9 minutes (540 seconds)
    to prevent the free-tier container from falling into a 15-minute sleep.
 2. Coordinates the Autonomous Sweeper Agent (Dunning expiry, ephemeral P2P rooms, periodic snapshots).

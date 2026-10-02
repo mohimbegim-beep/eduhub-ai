@@ -1,5 +1,5 @@
 """
-EduHub AI — Centralized Configuration & Single Source of Truth
+EduMate AI — Centralized Configuration & Single Source of Truth
 Eliminates code duplication and prevents regressions across contacts, pricing, and URLs.
 """
 import os
@@ -8,7 +8,7 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Official Brand & Corporate Contacts (Strictly verified)
-BRAND_NAME = "EduHub AI"
+BRAND_NAME = "EduMate AI"
 CORPORATE_EMAIL = "support@edumate.cam"
 OFFICIAL_TELEGRAM_HANDLE = "@mahallamade_m"
 OFFICIAL_TELEGRAM_URL = "https://t.me/mahallamade_m"
