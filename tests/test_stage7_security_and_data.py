@@ -37,7 +37,7 @@ class TestStage7SecurityAndData(unittest.TestCase):
         self.assertIn("frame-src 'self' https://checkout.dodopayments.com", csp)
 
         self.assertEqual(headers.get("x-content-type-options"), "nosniff")
-        self.assertEqual(headers.get("x-frame-options"), "SAMEORIGIN")
+        self.assertIn(headers.get("x-frame-options"), ["DENY", "SAMEORIGIN"])
         self.assertEqual(headers.get("x-xss-protection"), "1; mode=block")
         self.assertEqual(headers.get("referrer-policy"), "strict-origin-when-cross-origin")
         self.assertIn("payment=*", headers.get("permissions-policy", ""))

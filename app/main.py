@@ -8,10 +8,13 @@ import re
 import time
 from collections import defaultdict
 from pathlib import Path
+import logging
 from threading import Lock
 from typing import Optional, List, Dict, Any
 from services.analytics_engine import analytics_engine
 from services.backup_engine import backup_engine, atomic_write_json
+
+logger = logging.getLogger("eduhub")
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 SERVER_START_TIME = time.time()
@@ -70,7 +73,8 @@ from fastapi import FastAPI, Request, HTTPException, Header, status, Depends, Ba
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse, JSONResponse, HTMLResponse, Response, StreamingResponse
+from fastapi.responses import FileResponse, JSONResponse, HTMLResponse, Response, StreamingResponse, RedirectResponse
+from starlette.middleware.base import BaseHTTPMiddleware
 from pydantic import BaseModel, Field, field_validator
 
 # Официальный Google GenAI SDK
@@ -219,6 +223,34 @@ app.add_middleware(SlashNormMiddleware)
 # Компрессия ответов (GZip): автоматическое сжатие контента > 1000 байт (снижение трафика на 70-80%)
 app.add_middleware(GZipMiddleware, minimum_size=1000)
 
+SITE_DOMAIN = os.getenv("SITE_DOMAIN", "edumate.cam")
+SITE_URL = os.getenv("SITE_URL", "https://edumate.cam")
+OLD_DOMAIN = os.getenv("OLD_DOMAIN", "eduhub-ai.onrender.com")
+ENABLE_LEGACY_REDIRECT = os.getenv("ENABLE_LEGACY_REDIRECT", "false").lower() in ("true", "1")
+
+class LegacyDomainRedirectMiddleware(BaseHTTPMiddleware):
+    async def dispatch(self, request: Request, call_next):
+        host = (request.headers.get("host") or "").split(":")[0].lower()
+        # www.edumate.cam -> edumate.cam (301)
+        if host == f"www.{SITE_DOMAIN}":
+            query_str = f"?{request.url.query}" if request.url.query else ""
+            return RedirectResponse(
+                url=f"https://{SITE_DOMAIN}{request.url.path}{query_str}",
+                status_code=301,
+            )
+        # onrender.com -> edumate.cam (301) when ENABLE_LEGACY_REDIRECT is active
+        # Exclude billing webhooks and healthcheck to prevent third-party disruption
+        if host == OLD_DOMAIN and ENABLE_LEGACY_REDIRECT:
+            if not request.url.path.startswith("/api/v1/billing/dodo-webhook") and request.url.path != "/health":
+                query_str = f"?{request.url.query}" if request.url.query else ""
+                return RedirectResponse(
+                    url=f"{SITE_URL}{request.url.path}{query_str}",
+                    status_code=301,
+                )
+        return await call_next(request)
+
+app.add_middleware(LegacyDomainRedirectMiddleware)
+
 # --------------------------------------------------------------------------
 # AI Route Timeout & Panic-Free Error Protection (20s Abort Guard)
 # --------------------------------------------------------------------------
@@ -302,11 +334,16 @@ async def add_security_headers(request: Request, call_next):
             duration_ms=dur_ms
         )
     response.headers["X-Content-Type-Options"] = "nosniff"
-    response.headers["X-Frame-Options"] = "SAMEORIGIN"
+    response.headers["X-Frame-Options"] = "DENY"
     response.headers["X-XSS-Protection"] = "1; mode=block"
     response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
     response.headers["Permissions-Policy"] = "geolocation=(), microphone=(), payment=*"
     response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains; preload"
+
+    if "server" in response.headers:
+        del response.headers["server"]
+    if "x-powered-by" in response.headers:
+        del response.headers["x-powered-by"]
 
     csp = (
         "default-src 'self'; "
@@ -1528,6 +1565,14 @@ class GradeEssayRequest(BaseModel):
             raise ValueError(f"Некорректные данные base64 изображения: {str(e)}")
         return clean_b64
 
+
+class DTMEvaluationRequest(BaseModel):
+    answers: Dict[str, int] = Field(..., description="Словарь ответов {question_id: selected_index}")
+
+class SpeakingEvaluationRequest(BaseModel):
+    topic: str = Field(..., description="Тема IELTS Speaking Part 2/3")
+    transcript: str = Field(..., min_length=10, description="Транскрипт ответа кандидата")
+    target_band: Optional[float] = Field(7.5, description="Целевой балл IELTS Speaking")
 
 class LanguageChatRequest(BaseModel):
     message: str = Field(
@@ -3044,6 +3089,112 @@ async def language_chat(
 
 
 # --------------------------------------------------------------------------
+# IELTS Speaking Simulator & Rubric Assessment
+# --------------------------------------------------------------------------
+@app.post("/api/v1/language/speaking-evaluate", tags=["Language & Exam Prep"])
+async def evaluate_speaking_response(payload: SpeakingEvaluationRequest):
+    """
+    Автономная оценка ответа IELTS Speaking по 4 официальным критериям:
+    1. Fluency & Coherence
+    2. Lexical Resource
+    3. Grammatical Range & Accuracy
+    4. Pronunciation & Delivery
+    """
+    from services.ai_firewall import AIFirewall
+    risk_score, matches, integrity_note = AIFirewall.evaluate_injection_risk(payload.transcript)
+    if risk_score >= 0.95:
+        raise HTTPException(status_code=400, detail="Security policy violation: prompt injection detected.")
+
+    sys_prompt = (
+        "You are an official Cambridge/British Council certified IELTS Speaking Senior Examiner. "
+        "Evaluate the following candidate transcript for IELTS Speaking Part 2/3 according to the 4 official assessment rubrics:\n"
+        "1. Fluency & Coherence (Band 0-9)\n"
+        "2. Lexical Resource (Band 0-9)\n"
+        "3. Grammatical Range & Accuracy (Band 0-9)\n"
+        "4. Pronunciation & Delivery (Band 0-9)\n\n"
+        "Return ONLY a JSON object with this exact schema:\n"
+        "{\n"
+        "  \"overall_band\": float,\n"
+        "  \"fluency_score\": float,\n"
+        "  \"lexical_score\": float,\n"
+        "  \"grammar_score\": float,\n"
+        "  \"pronunciation_score\": float,\n"
+        "  \"key_strengths\": [\"string\", ...],\n"
+        "  \"critical_weaknesses\": [\"string\", ...],\n"
+        "  \"recommended_idioms_and_collocations\": [\"string\", ...],\n"
+        "  \"step_by_step_improvement_plan\": [\"string\", ...]\n"
+        "}"
+    )
+    user_content = f"Topic: {payload.topic}\nCandidate Transcript: {payload.transcript}"
+
+    client = get_genai_client()
+    if client:
+        try:
+            isolated = AIFirewall.build_isolated_prompt(sys_prompt, user_content)
+            resp = client.models.generate_content(model=GEMINI_MODEL, contents=isolated)
+            cleaned_json = AIFirewall.sanitize_output(resp.text)
+            match = re.search(r'\{.*\}', cleaned_json, re.DOTALL)
+            if match:
+                data = json.loads(match.group(0))
+                data["status"] = "success"
+                if integrity_note:
+                    data["integrity_note"] = integrity_note
+                return data
+        except Exception as e:
+            logger.warning(f"Live Gemini speaking eval failed: {e}")
+
+    # Resilient heuristic fallback
+    words = len(payload.transcript.split())
+    est_band = 6.0 if words < 50 else (6.5 if words < 120 else 7.5)
+    return {
+        "status": "success",
+        "overall_band": est_band,
+        "fluency_score": est_band,
+        "lexical_score": est_band,
+        "grammar_score": est_band,
+        "pronunciation_score": est_band,
+        "key_strengths": ["Четкое раскрытие основной темы", "Уверенная структура ответа"],
+        "critical_weaknesses": ["Речевые повторы базовой лексики", "Желательно использовать более сложные связки (Moreover, Consequently)"],
+        "recommended_idioms_and_collocations": ["take into consideration", "a double-edged sword", "predominantly"],
+        "step_by_step_improvement_plan": ["Ежедневная 2-минутная запись речи на диктофон", "Практика развернутых ответов с аргументацией"],
+        "integrity_note": integrity_note
+    }
+
+
+# --------------------------------------------------------------------------
+# DTM (Государственный тестовый центр РУз) Simulator & 189-Point Scaler
+# --------------------------------------------------------------------------
+@app.get("/api/v1/dtm/questions", tags=["DTM Exam Simulator"])
+async def get_dtm_questions(subject: Optional[str] = None):
+    """
+    Возвращает официальные типовые вопросы DTM с разбором и пояснениями на русском и узбекском языках.
+    """
+    from services.dtm_engine import DTMEngine
+    questions = DTMEngine.get_questions(subject)
+    return {"status": "success", "total": len(questions), "questions": questions}
+
+
+@app.post("/api/v1/dtm/evaluate", tags=["DTM Exam Simulator"])
+async def evaluate_dtm_exam(payload: DTMEvaluationRequest):
+    """
+    Рассчитывает официальный балл DTM из 189.0 возможных,
+    выявляет слабые темы и строит адаптивный 7-дневный план подготовки.
+    """
+    from services.dtm_engine import DTMEngine
+    result = DTMEngine.evaluate_answers(payload.answers)
+    return result
+
+
+@app.get("/dtm", tags=["DTM Exam Simulator"])
+@app.get("/dtm-simulator", tags=["DTM Exam Simulator"])
+async def serve_dtm_page():
+    dtm_file = STATIC_DIR / "tools" / "dtm-simulator.html"
+    if dtm_file.exists():
+        return FileResponse(str(dtm_file))
+    raise HTTPException(status_code=404, detail="DTM Simulator page not found.")
+
+
+# --------------------------------------------------------------------------
 # Эндпоинт 4: Generic Webhook Alias -> Dodo Payments
 # --------------------------------------------------------------------------
 @app.get("/api/v1/billing/webhook", tags=["Billing"])
@@ -3862,18 +4013,34 @@ async def render_programmatic_topic(category: str, topic_slug: str):
 @app.get("/robots.txt", response_class=Response, tags=["SEO & Sitemaps"])
 async def render_robots():
     """
-    Robots.txt для поисковых систем (Google, Bing, Yandex) и ИИ-агентов (GPTBot, ClaudeBot, PerplexityBot).
+    Robots.txt для поисковых систем (Google, Bing, Yandex) и ИИ-агентов (GPTBot, ClaudeBot, PerplexityBot, OAI-SearchBot).
     """
     robots_text = (
         "User-agent: *\n"
         "Allow: /\n"
         "Disallow: /api/\n"
-        "Disallow: /data/\n\n"
+        "Disallow: /data/\n"
+        "Disallow: /admin/\n"
+        "Disallow: /internal/\n"
+        "Disallow: /reset\n"
+        "Disallow: /payment-success\n"
+        "Disallow: /*?token=\n\n"
+        "User-agent: Googlebot\n"
+        "Allow: /\n\n"
+        "User-agent: YandexBot\n"
+        "Allow: /\n"
+        "Crawl-delay: 1\n\n"
+        "User-agent: Bingbot\n"
+        "Allow: /\n\n"
         "User-agent: GPTBot\n"
+        "Allow: /\n\n"
+        "User-agent: OAI-SearchBot\n"
+        "Allow: /\n\n"
+        "User-agent: PerplexityBot\n"
         "Allow: /\n\n"
         "User-agent: ClaudeBot\n"
         "Allow: /\n\n"
-        "User-agent: PerplexityBot\n"
+        "User-agent: Google-Extended\n"
         "Allow: /\n\n"
         f"Sitemap: {PRODUCTION_URL}/sitemap.xml\n"
     )
@@ -3944,6 +4111,8 @@ async def render_sitemap():
         {"loc": f"{base_url}/tools/ats-resume", "priority": "0.9", "changefreq": "daily"},
         {"loc": f"{base_url}/tools/career-navigator", "priority": "0.9", "changefreq": "daily"},
         {"loc": f"{base_url}/tools/teacher-lab", "priority": "0.9", "changefreq": "daily"},
+        {"loc": f"{base_url}/dtm", "priority": "1.0", "changefreq": "daily"},
+        {"loc": f"{base_url}/tools/dtm-simulator", "priority": "0.9", "changefreq": "daily"},
     ]
 
     # Add all Programmatic SEO topics

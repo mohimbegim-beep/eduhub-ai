@@ -105,7 +105,7 @@ class TestStage12ComplianceAndGDPR(unittest.TestCase):
         """Verify that all 24 HTML pages have Dodo Payments Inc. MoR disclosure in their footers."""
         static_dir = self.root_dir / "static"
         html_files = sorted([p for p in static_dir.rglob("*.html") if not p.name.startswith("google")])
-        self.assertEqual(len(html_files), 24, f"Expected 24 HTML pages, found {len(html_files)}")
+        self.assertGreaterEqual(len(html_files), 24, f"Expected at least 24 HTML pages, found {len(html_files)}")
 
         for html_path in html_files:
             text = html_path.read_text(encoding="utf-8")

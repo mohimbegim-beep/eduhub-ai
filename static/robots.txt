@@ -2,14 +2,35 @@ User-agent: *
 Allow: /
 Disallow: /api/
 Disallow: /data/
+Disallow: /admin/
+Disallow: /internal/
+Disallow: /reset
+Disallow: /payment-success
+Disallow: /*?token=
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
 
 User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
 Allow: /
 
 User-agent: ClaudeBot
 Allow: /
 
-User-agent: PerplexityBot
+User-agent: Google-Extended
 Allow: /
 
 Sitemap: https://edumate.cam/sitemap.xml

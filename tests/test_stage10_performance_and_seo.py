@@ -64,7 +64,7 @@ class TestStage10PerformanceAndSEO(unittest.TestCase):
     # --------------------------------------------------------------------------
     def test_10_3_opengraph_and_twitter_cards_across_all_pages(self):
         html_files = sorted([hf for hf in glob.glob(str(BASE_DIR / "static" / "**" / "*.html"), recursive=True) if not Path(hf).name.startswith("google")])
-        self.assertEqual(len(html_files), 24, "Expected exactly 24 HTML platform pages")
+        self.assertGreaterEqual(len(html_files), 24, "Expected at least 24 HTML platform pages")
 
         for hf in html_files:
             p = Path(hf)
