@@ -1853,7 +1853,11 @@ async def serve_citation_generator():
 @app.get("/tools/anti-plagiarism", tags=["Standalone Tools"])
 @app.get("/tools/anti-plagiarism/", tags=["Standalone Tools"])
 async def redirect_anti_plagiarism_legacy():
-    return RedirectResponse(url="/tools/citation-generator", status_code=301)
+    return RedirectResponse(
+        url="/tools/citation-generator",
+        status_code=status.HTTP_301_MOVED_PERMANENTLY,
+        headers={"Cache-Control": "no-cache, no-store, must-revalidate"}
+    )
 
 @app.get("/tools", tags=["Standalone Tools"])
 @app.get("/tools/", tags=["Standalone Tools"])
@@ -1882,7 +1886,11 @@ async def serve_essay_grader():
 @app.get("/ielts", tags=["Standalone Tools"])
 @app.get("/ielts/", tags=["Standalone Tools"])
 async def redirect_ielts_aliases():
-    return RedirectResponse(url="/tools/essay-grader", status_code=301)
+    return RedirectResponse(
+        url="/tools/essay-grader",
+        status_code=status.HTTP_301_MOVED_PERMANENTLY,
+        headers={"Cache-Control": "no-cache, no-store, must-revalidate"}
+    )
 
 @app.get("/academic-lab", tags=["Academic Tools"])
 @app.get("/tools/academic-lab", tags=["Academic Tools"])
@@ -5306,7 +5314,7 @@ PAGE_NAMES = {
     "/blueprints": "Каталог ИИ-фабрик",
     "/academic-lab": "Академическая лаборатория",
     "/tools/essay-grader": "IELTS AI Экзаменатор",
-    "/tools/anti-plagiarism": "Антиплагиат & Humanizer",
+    "/tools/citation-generator": "Генератор цитат и ссылок",
     "/tools/sop-builder": "SOP & Гранты за рубеж",
     "/tools/homework-solver": "STEM Socratic Solver",
     "/tools/teacher-lab": "Copilot учителей",
@@ -6177,7 +6185,7 @@ def get_fallback_career_profile(payload: CareerOrientateRequest) -> dict:
                 ],
                 "recommended_faculties_and_universities": ["Kamoliddin Behzod nomidagi Milliy rassomlik va dizayn instituti", "WIUT — Interactive Media Design", "Italiya va Chexiyaning yetakchi dizayn akademiyalari grantlari"],
                 "immediate_next_steps": ["Figma va Behance platformalarida 3 ta kuchli keysdan iborat portfolio yig'ish", "Dizayn-tizimlar va foydalanuvchi psixologiyasi asoslarini chuqur o'rganish", "Xalqaro mijozlar uchun portfolio tashrif qog'ozini tayyorlash"],
-                "next_eduhub_tool": {"name": "Akademik iqtibos va uslub tahriri", "url": "/tools/anti-plagiarism", "reason": "O'z dizayn-konsepsiyalari va insholarini akademik jihatdan benuqson taqdim etish uchun"}
+                "next_eduhub_tool": {"name": "Akademik iqtibos va bibliografiya generatori", "url": "/tools/citation-generator", "reason": "O'z dizayn-konsepsiyalari va insholarini akademik jihatdan benuqson taqdim etish uchun"}
             },
             "business": {
                 "archetype": "Kapital va Startaplar Me'mori",
@@ -6245,7 +6253,7 @@ def get_fallback_career_profile(payload: CareerOrientateRequest) -> dict:
                 ],
                 "recommended_faculties_and_universities": ["National Institute of Arts and Design", "WIUT — Interactive Media Design", "European Arts Fellowships in Italy and Czechia"],
                 "immediate_next_steps": ["Curate a 3-case study portfolio on Figma and Behance", "Study user psychology heuristics and design system tokens", "Build an international client pitch deck"],
-                "next_eduhub_tool": {"name": "AI Anti-Plagiarism & Humanizer", "url": "/tools/anti-plagiarism", "reason": "Refine design rationales and portfolio case descriptions to academic polish"}
+                "next_eduhub_tool": {"name": "Citation & Bibliography Formatter", "url": "/tools/citation-generator", "reason": "Refine design rationales and portfolio case descriptions to academic polish"}
             },
             "business": {
                 "archetype": "Venture & Capital Architect",
@@ -6313,7 +6321,7 @@ def get_fallback_career_profile(payload: CareerOrientateRequest) -> dict:
                 ],
                 "recommended_faculties_and_universities": ["Facultades de Bellas Artes y Diseño", "Diseño de Medios Interactivos", "Becas de posgrado en Europa"],
                 "immediate_next_steps": ["Diseñar un portafolio de 3 casos reales en Figma y Behance", "Estudiar heurísticas de usabilidad y sistemas de diseño", "Crear una presentación profesional para captación de clientes"],
-                "next_eduhub_tool": {"name": "AI Anti-Plagiarism & Humanizer", "url": "/tools/anti-plagiarism", "reason": "Redacte memorias descriptivas de proyectos de diseño con máximo rigor profesional"}
+                "next_eduhub_tool": {"name": "Citation & Bibliography Formatter", "url": "/tools/citation-generator", "reason": "Redacte memorias descriptivas de proyectos de diseño con máximo rigor profesional"}
             },
             "business": {
                 "archetype": "Arquitecto de Capital y Startups",
@@ -6381,7 +6389,7 @@ def get_fallback_career_profile(payload: CareerOrientateRequest) -> dict:
                 ],
                 "recommended_faculties_and_universities": ["Институт искусств и дизайна", "WIUT — Interactive Media Design", "Онлайн-академии школы дизайна (Bang Bang / British Higher School)", "Европейские гранты в Италии и Чехии"],
                 "immediate_next_steps": ["Собрать портфолио из 3 сильных кейсов в Figma / Behance", "Изучить основы дизайн-систем и психологии пользователей", "Оформить визитку для международных клиентов"],
-                "next_eduhub_tool": {"name": "AI Anti-Plagiarism & Humanizer", "url": "/tools/anti-plagiarism", "reason": "Для идеального описания своих дизайн-концепций и эссе"}
+                "next_eduhub_tool": {"name": "Генератор цитирований & Оформление библиографии", "url": "/tools/citation-generator", "reason": "Для идеального оформления своих концепций и эссе"}
             },
             "business": {
                 "archetype": "Архитектор Капитала & Стартапов",

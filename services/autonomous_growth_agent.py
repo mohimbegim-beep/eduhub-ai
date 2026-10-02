@@ -81,7 +81,7 @@ def generate_growth_pack(topic_focus: str = "exam_session_and_career") -> dict:
                     "которые решают 90% рутины:\n\n"
                     "1️⃣ Academic Lab — поглавный план, научная новизна и введение по стандартам ВАК и IMRAD.\n"
                     "2️⃣ ATS Resume Scanner — подготовь идеальное резюме для стажировки за $1.\n"
-                    "3️⃣ Anti-Plagiarism Humanizer — академический рерайтер с сохранением научного смысла.\n\n"
+                    "3️⃣ Citation Generator — автоматическое оформление библиографии и сносок по ГОСТ и APA 7.\n\n"
                     "💳 Доступ ко всем модулям Pro Max всего за $1 на 3 дня!\n"
                     "🛡️ Платежи защищены Dodo Payments Inc. (Merchant of Record). 14 дней гарантии возврата."
                 ),

@@ -71,7 +71,6 @@ ALL_PAGES = [
     "/tools/gpa-calculator",
     "/tools/citation-generator",
     "/tools/academic-lab",
-    "/tools/anti-plagiarism",
     "/tools/career-navigator",
     "/tools/excel-wizard",
     "/tools/language-tutor",
