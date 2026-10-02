@@ -186,6 +186,8 @@ if allowed_origins_env:
 else:
     raw_origins = [
         PRODUCTION_URL,
+        "https://edumate.com",
+        "https://www.edumate.com",
         "https://edumate.cam",
         "https://www.edumate.cam",
         "https://eduhub-ai.onrender.com",
@@ -201,7 +203,7 @@ ALLOWED_ORIGINS = list(dict.fromkeys(raw_origins))
 app.add_middleware(
     CORSMiddleware,
     allow_origins=ALLOWED_ORIGINS,
-    allow_origin_regex=r"^https?://(localhost|127\.0\.0\.1)(:\d+)?$|^https://.*\.onrender\.com$|^https://.*\.edumate\.cam$",
+    allow_origin_regex=r"^https?://(localhost|127\.0\.0\.1)(:\d+)?$|^https://.*\.onrender\.com$|^https://.*\.edumate\.(com|cam)$",
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD"],
     allow_headers=["*"],
@@ -223,19 +225,20 @@ app.add_middleware(SlashNormMiddleware)
 # Компрессия ответов (GZip): автоматическое сжатие контента > 1000 байт (снижение трафика на 70-80%)
 app.add_middleware(GZipMiddleware, minimum_size=1000)
 
-SITE_DOMAIN = os.getenv("SITE_DOMAIN", "edumate.cam")
-SITE_URL = os.getenv("SITE_URL", "https://edumate.cam")
+SITE_DOMAIN = os.getenv("SITE_DOMAIN", "edumate.com" if os.getenv("PRIMARY_DOMAIN_COM") else "edumate.cam")
+SITE_URL = os.getenv("SITE_URL", f"https://{SITE_DOMAIN}")
 OLD_DOMAIN = os.getenv("OLD_DOMAIN", "eduhub-ai.onrender.com")
 ENABLE_LEGACY_REDIRECT = os.getenv("ENABLE_LEGACY_REDIRECT", "false").lower() in ("true", "1")
 
 class LegacyDomainRedirectMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request: Request, call_next):
         host = (request.headers.get("host") or "").split(":")[0].lower()
-        # www.edumate.cam -> edumate.cam (301)
-        if host == f"www.{SITE_DOMAIN}":
+        # www.edumate.com -> edumate.com (301) and www.edumate.cam -> edumate.cam (301)
+        if host in (f"www.{SITE_DOMAIN}", "www.edumate.com", "www.edumate.cam"):
+            target_domain = host[4:]
             query_str = f"?{request.url.query}" if request.url.query else ""
             return RedirectResponse(
-                url=f"https://{SITE_DOMAIN}{request.url.path}{query_str}",
+                url=f"https://{target_domain}{request.url.path}{query_str}",
                 status_code=301,
             )
         # onrender.com -> edumate.cam (301) when ENABLE_LEGACY_REDIRECT is active
