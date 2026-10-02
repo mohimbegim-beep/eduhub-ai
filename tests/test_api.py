@@ -32,8 +32,8 @@ class TestEduHubAPI(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         data = response.json()
         self.assertEqual(data, {"status": "ok"})
-        # Authenticated query returns deep diagnostics
-        admin_resp = client.get("/health?token=edumate_admin_telemetry_2026")
+        # Deep diagnostics moved to protected internal route
+        admin_resp = client.get("/api/internal/system-health?token=edumate_admin_telemetry_2026")
         self.assertEqual(admin_resp.status_code, 200)
         admin_data = admin_resp.json()
         self.assertIn("diagnostics", admin_data)

@@ -32,44 +32,44 @@ class TestStage11ObservabilityAndSentinel(unittest.TestCase):
             self.assertEqual(resp.status_code, 200, f"Route {route} must return HTTP 200")
             self.assertEqual(resp.json(), {"status": "ok"})
 
-            # Authenticated admin access
-            resp_admin = client.get(f"{route}?token=edumate_admin_telemetry_2026")
-            self.assertEqual(resp_admin.status_code, 200)
-            data = resp_admin.json()
+        # Authenticated admin access moved to internal endpoint
+        resp_admin = client.get("/api/internal/system-health?token=edumate_admin_telemetry_2026")
+        self.assertEqual(resp_admin.status_code, 200)
+        data = resp_admin.json()
 
-            self.assertEqual(data.get("status"), "healthy")
-            self.assertIn(data.get("version"), ["1.2.0", "1.3.0"])
-            self.assertIn("uptime_seconds", data)
+        self.assertEqual(data.get("status"), "healthy")
+        self.assertIn(data.get("version"), ["1.2.0", "1.3.0"])
+        self.assertIn("uptime_seconds", data)
 
-            # Deep diagnostics structure
-            diag = data.get("diagnostics", {})
-            self.assertIn("latency_ms", diag)
+        # Deep diagnostics structure
+        diag = data.get("diagnostics", {})
+        self.assertIn("latency_ms", diag)
 
-            # Database / Storage
-            db = diag.get("database", {})
-            self.assertEqual(db.get("status"), "healthy")
-            self.assertGreaterEqual(db.get("users_registered", 0), 0)
-            self.assertGreaterEqual(db.get("transactions_recorded", 0), 0)
+        # Database / Storage
+        db = diag.get("database", {})
+        self.assertEqual(db.get("status"), "healthy")
+        self.assertGreaterEqual(db.get("users_registered", 0), 0)
+        self.assertGreaterEqual(db.get("transactions_recorded", 0), 0)
 
-            # GenAI Engine
-            genai_diag = diag.get("genai", {})
-            self.assertIn(genai_diag.get("model"), ["gemini-2.5-flash", "gemini-3.6-flash"])
-            self.assertTrue(genai_diag.get("configured"))
-            self.assertIn("Strict 18+", genai_diag.get("safety_filter", ""))
+        # GenAI Engine
+        genai_diag = diag.get("genai", {})
+        self.assertIn(genai_diag.get("model"), ["gemini-2.5-flash", "gemini-3.6-flash"])
+        self.assertTrue(genai_diag.get("configured"))
+        self.assertIn("Strict 18+", genai_diag.get("safety_filter", ""))
 
-            # MoR Billing Gateway
-            billing = diag.get("billing", {})
-            self.assertEqual(billing.get("provider"), "Dodo Payments Inc.")
-            self.assertEqual(billing.get("role"), "Authorized Merchant of Record (MoR)")
+        # MoR Billing Gateway
+        billing = diag.get("billing", {})
+        self.assertEqual(billing.get("provider"), "Dodo Payments Inc.")
+        self.assertEqual(billing.get("role"), "Authorized Merchant of Record (MoR)")
 
-            # Backup Engine
-            bkp = diag.get("backup", {})
-            self.assertGreaterEqual(bkp.get("total_snapshots", 0), 1)
+        # Backup Engine
+        bkp = diag.get("backup", {})
+        self.assertGreaterEqual(bkp.get("total_snapshots", 0), 1)
 
-            # Legacy compatibility fields
-            self.assertIn(data.get("model"), ["gemini-2.5-flash", "gemini-3.6-flash"])
-            self.assertIn("Strict 18+", data.get("content_filtering", ""))
-            self.assertIn("rate_limiter", data)
+        # Legacy compatibility fields
+        self.assertIn(data.get("model"), ["gemini-2.5-flash", "gemini-3.6-flash"])
+        self.assertIn("Strict 18+", data.get("content_filtering", ""))
+        self.assertIn("rate_limiter", data)
 
     # --------------------------------------------------------------------------
     # 11.2: Structured System Audit Logging & Sanitized Error Responses

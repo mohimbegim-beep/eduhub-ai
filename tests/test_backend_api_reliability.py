@@ -40,12 +40,12 @@ class TestBackendAndAPIReliability(unittest.TestCase):
             data = response.json()
             self.assertEqual(data, {"status": "ok"})
 
-            # Authenticated admin access
-            admin_resp = client.get(f"{path}?token=edumate_admin_telemetry_2026")
-            self.assertEqual(admin_resp.status_code, 200)
-            admin_data = admin_resp.json()
-            self.assertIn("diagnostics", admin_data)
-            self.assertIn("genai", admin_data["diagnostics"])
+        # Authenticated admin access moved to internal endpoint
+        admin_resp = client.get("/api/internal/system-health?token=edumate_admin_telemetry_2026")
+        self.assertEqual(admin_resp.status_code, 200)
+        admin_data = admin_resp.json()
+        self.assertIn("diagnostics", admin_data)
+        self.assertIn("genai", admin_data["diagnostics"])
 
     def test_sentinel_status(self):
         response = client.get("/api/v1/system/sentinel/status")
@@ -57,7 +57,8 @@ class TestBackendAndAPIReliability(unittest.TestCase):
     # 2. ЭНДПОИНТ: /api/v1/instant-diagnostic
     # =========================================================================
 
-    def test_instant_diagnostic_success_fallback(self):
+    @patch("app.main.get_genai_client_safe", return_value=None)
+    def test_instant_diagnostic_success_fallback(self, mock_cli):
         payload = {
             "text": "The rapid advancement of artificial intelligence has revolutionized modern education. Many educators argue that automated tutors enhance personalized learning.",
             "lang": "en"
