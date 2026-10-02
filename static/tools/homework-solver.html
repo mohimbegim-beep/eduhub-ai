@@ -91,7 +91,8 @@
     }
 }
     </script>
-    <!-- Yandex РСЯ Context Script -->
+    <!-- Yandex.RTB -->
+    <script>window.yaContextCb=window.yaContextCb||[]</script>
     <script src="https://yandex.ru/ads/system/context.js" async></script>
 </head>
 <body data-page-tool="homework-solver" class="bg-slate-950 text-slate-100 font-sans min-h-screen flex flex-col justify-between selection:bg-blue-600 selection:text-white">
@@ -261,18 +262,15 @@
 
         </div>
 
-                    <!-- Yandex РСЯ Direct Ad Slot R-A-20153901-1 -->
+            <!-- Yandex.RTB R-A-20160062-1 -->
             <div class="my-6 max-w-4xl mx-auto text-center">
-                <div id="yandex_rtb_R-A-20153901-1_hw"></div>
+                <div id="yandex_rtb_R-A-20160062-1_hw"></div>
                 <script>
-                window.yaContextCb = window.yaContextCb || [];
-                window.yaContextCb.push(function() {
-                    if (window.Ya && window.Ya.Context && window.Ya.Context.AdvManager) {
-                        window.Ya.Context.AdvManager.render({
-                            blockId: "R-A-20153901-1",
-                            renderTo: "yandex_rtb_R-A-20153901-1_hw"
-                        });
-                    }
+                window.yaContextCb.push(() => {
+                    Ya.Context.AdvManager.render({
+                        "blockId": "R-A-20160062-1",
+                        "renderTo": "yandex_rtb_R-A-20160062-1_hw"
+                    });
                 });
                 </script>
             </div>

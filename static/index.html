@@ -38,17 +38,9 @@
     <!-- Google AdSense Verification & Auto-Ads -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6900527541339592" crossorigin="anonymous"></script>
 
-    <!-- Yandex РСЯ Direct Context Loader for block R-A-20153901-1 -->
-    <script>
-    window.addEventListener('DOMContentLoaded', function() {
-        setTimeout(function() {
-            var yContext = document.createElement('script');
-            yContext.src = 'https://yandex.ru/ads/system/context.js';
-            yContext.async = true;
-            document.head.appendChild(yContext);
-        }, 1000);
-    });
-    </script>
+    <!-- Yandex.RTB -->
+    <script>window.yaContextCb=window.yaContextCb||[]</script>
+    <script src="https://yandex.ru/ads/system/context.js" async></script>
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -635,18 +627,15 @@
             </div>
         </section>
 
-        <!-- Yandex РСЯ Direct Ad Slot R-A-20153901-1 -->
-        <div class="max-w-4xl mx-auto px-4 my-4 text-center">
-            <div id="yandex_rtb_R-A-20153901-1"></div>
+        <!-- Yandex.RTB R-A-20160062-1 -->
+        <div class="max-w-4xl mx-auto px-4 my-6 text-center">
+            <div id="yandex_rtb_R-A-20160062-1"></div>
             <script>
-            window.yaContextCb = window.yaContextCb || [];
-            window.yaContextCb.push(function() {
-                if (window.Ya && window.Ya.Context && window.Ya.Context.AdvManager) {
-                    window.Ya.Context.AdvManager.render({
-                        blockId: "R-A-20153901-1",
-                        renderTo: "yandex_rtb_R-A-20153901-1"
-                    });
-                }
+            window.yaContextCb.push(() => {
+                Ya.Context.AdvManager.render({
+                    "blockId": "R-A-20160062-1",
+                    "renderTo": "yandex_rtb_R-A-20160062-1"
+                });
             });
             </script>
         </div>
@@ -1022,18 +1011,15 @@
 
             </div>
 
-            <!-- Clean Yandex РСЯ Ad Slot (Between Catalog and Telegram Banner) -->
+            <!-- Clean Yandex.RTB Ad Slot (Between Catalog and Telegram Banner) -->
             <div class="my-10 max-w-4xl mx-auto text-center">
-                <div id="yandex_rtb_R-A-20153901-1_home"></div>
+                <div id="yandex_rtb_R-A-20160062-1_home"></div>
                 <script>
-                window.yaContextCb = window.yaContextCb || [];
-                window.yaContextCb.push(function() {
-                    if (window.Ya && window.Ya.Context && window.Ya.Context.AdvManager) {
-                        window.Ya.Context.AdvManager.render({
-                            blockId: "R-A-20153901-1",
-                            renderTo: "yandex_rtb_R-A-20153901-1_home"
-                        });
-                    }
+                window.yaContextCb.push(() => {
+                    Ya.Context.AdvManager.render({
+                        "blockId": "R-A-20160062-1",
+                        "renderTo": "yandex_rtb_R-A-20160062-1_home"
+                    });
                 });
                 </script>
             </div>

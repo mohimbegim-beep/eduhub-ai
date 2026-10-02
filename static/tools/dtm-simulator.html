@@ -43,9 +43,11 @@
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="/static/css/safari_compat.css">
     <script src="/static/js/legal-consent.js" defer></script>
     <script src="/static/js/i18n.js" defer></script>
+    <!-- Yandex.RTB -->
+    <script>window.yaContextCb=window.yaContextCb||[]</script>
+    <script src="https://yandex.ru/ads/system/context.js" async></script>
 </head>
 <body class="bg-slate-950 text-slate-100 font-sans min-h-screen flex flex-col justify-between selection:bg-indigo-600 selection:text-white">
 
@@ -303,6 +305,19 @@
 
         document.addEventListener("DOMContentLoaded", loadQuestions);
     </script>
+    <!-- Yandex.RTB R-A-20160062-1 -->
+    <div class="my-8 max-w-4xl mx-auto px-4 text-center">
+        <div id="yandex_rtb_R-A-20160062-1_dtm"></div>
+        <script>
+        window.yaContextCb.push(() => {
+            Ya.Context.AdvManager.render({
+                "blockId": "R-A-20160062-1",
+                "renderTo": "yandex_rtb_R-A-20160062-1_dtm"
+            });
+        });
+        </script>
+    </div>
+
     <!-- Footer with Merchant of Record Transparency -->
     <footer class="mt-12 py-6 text-center text-xs text-slate-500 border-t border-slate-900">
         <p>EduMate AI &copy; 2026. All global transactions and billing are handled by Dodo Payments Inc., acting as the official Merchant of Record (MoR).</p>
