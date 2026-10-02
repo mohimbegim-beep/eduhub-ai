@@ -4083,6 +4083,12 @@ async def render_google_verification():
     return Response(content="google-site-verification: googleb1b336acb92cd062.html", media_type="text/html; charset=utf-8")
 
 
+@app.get("/yandex_22eb6967147bd108.html", response_class=Response, tags=["SEO & Sitemaps"])
+async def render_yandex_verification():
+    content = "<html>\n    <head>\n        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n    </head>\n    <body>Verification: 22eb6967147bd108</body>\n</html>"
+    return HTMLResponse(content=content, status_code=200)
+
+
 @app.get("/sitemap.xml", response_class=Response, tags=["SEO & Sitemaps"])
 async def render_sitemap(request: Request):
     """
