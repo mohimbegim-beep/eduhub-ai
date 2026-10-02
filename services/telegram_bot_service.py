@@ -144,10 +144,16 @@ def get_system_stats_summary() -> str:
         today = analytics.get("today", {})
         all_time = analytics.get("all_time", {})
         
-        human_views_today = today.get("human_views", 0)
-        unique_today = today.get("unique_visitors", 0)
-        human_views_total = all_time.get("human_views", 0)
-        unique_total = all_time.get("unique_visitors_count", 0)
+        # Фиксированная база реальных посетителей до перезапусков Render
+        BASELINE_UNIQUE_TOTAL = 86
+        BASELINE_VIEWS_TOTAL = 484
+        BASELINE_UNIQUE_TODAY = 44
+        BASELINE_VIEWS_TODAY = 239
+
+        human_views_today = BASELINE_VIEWS_TODAY + today.get("human_views", 0)
+        unique_today = BASELINE_UNIQUE_TODAY + today.get("unique_visitors", 0)
+        human_views_total = BASELINE_VIEWS_TOTAL + all_time.get("human_views", 0)
+        unique_total = BASELINE_UNIQUE_TOTAL + all_time.get("unique_visitors_count", 0)
     except Exception:
         pass
 
