@@ -4014,10 +4014,13 @@ async def render_programmatic_topic(category: str, topic_slug: str):
     return HTMLResponse(content=html, status_code=200)
 
 @app.get("/robots.txt", response_class=Response, tags=["SEO & Sitemaps"])
-async def render_robots():
+async def render_robots(request: Request):
     """
     Robots.txt для поисковых систем (Google, Bing, Yandex) и ИИ-агентов (GPTBot, ClaudeBot, PerplexityBot, OAI-SearchBot).
     """
+    host = (request.headers.get("host") or "").split(":")[0].lower()
+    base_url = f"https://{host}" if host in ("edumate.cam", "edumate.com", "eduhub-ai.onrender.com") else "https://edumate.cam"
+
     robots_text = (
         "User-agent: *\n"
         "Allow: /\n"
@@ -4045,7 +4048,7 @@ async def render_robots():
         "Allow: /\n\n"
         "User-agent: Google-Extended\n"
         "Allow: /\n\n"
-        f"Sitemap: {PRODUCTION_URL}/sitemap.xml\n"
+        f"Sitemap: {base_url}/sitemap.xml\n"
     )
     return Response(content=robots_text, media_type="text/plain")
 
@@ -4081,11 +4084,12 @@ async def render_google_verification():
 
 
 @app.get("/sitemap.xml", response_class=Response, tags=["SEO & Sitemaps"])
-async def render_sitemap():
+async def render_sitemap(request: Request):
     """
     Автоматическая генерация XML-карты сайта для поисковых систем Google, Bing, Yandex.
     """
-    base_url = PRODUCTION_URL
+    host = (request.headers.get("host") or "").split(":")[0].lower()
+    base_url = f"https://{host}" if host in ("edumate.cam", "edumate.com", "eduhub-ai.onrender.com") else "https://edumate.cam"
     urls = [
         {"loc": f"{base_url}/", "priority": "1.0", "changefreq": "daily"},
         {"loc": f"{base_url}/privacy", "priority": "0.5", "changefreq": "monthly"},
