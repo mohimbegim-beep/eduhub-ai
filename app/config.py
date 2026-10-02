@@ -9,7 +9,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Official Brand & Corporate Contacts (Strictly verified)
 BRAND_NAME = "EduHub AI"
-CORPORATE_EMAIL = "mahallamade.uz@gmail.com"
+CORPORATE_EMAIL = "support@edumate.cam"
 OFFICIAL_TELEGRAM_HANDLE = "@mahallamade_m"
 OFFICIAL_TELEGRAM_URL = "https://t.me/mahallamade_m"
 

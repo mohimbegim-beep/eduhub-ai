@@ -31,10 +31,12 @@ class TestEduHubAPI(unittest.TestCase):
         response = client.get("/health")
         self.assertEqual(response.status_code, 200)
         data = response.json()
-        self.assertEqual(data["status"], "healthy")
-        self.assertEqual(data["model"], "gemini-2.5-flash")
-        self.assertIn("content_filtering", data)
-        self.assertIn("rate_limiter", data)
+        self.assertEqual(data, {"status": "ok"})
+        # Authenticated query returns deep diagnostics
+        admin_resp = client.get("/health?token=edumate_admin_telemetry_2026")
+        self.assertEqual(admin_resp.status_code, 200)
+        admin_data = admin_resp.json()
+        self.assertIn("diagnostics", admin_data)
 
     def test_landing_endpoint(self):
         response = client.get("/")

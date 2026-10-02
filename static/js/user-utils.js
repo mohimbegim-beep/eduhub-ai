@@ -334,7 +334,7 @@ const EduHubUtils = (function () {
     const stages = customStages || [
       { id: 1, text: (window.t && window.t('stepper_ingest')) || "📥 Ingesting & tokenizing document...", pct: 25 },
       { id: 2, text: (window.t && window.t('stepper_safety')) || "🛡️ Verifying Safe Content Filter & citations...", pct: 55 },
-      { id: 3, text: (window.t && window.t('stepper_reason')) || "🧠 Socratic synthesis via Gemini 2.5 Flash...", pct: 85 },
+      { id: 3, text: (window.t && window.t('stepper_reason')) || "🧠 Socratic synthesis via Gemini 3.6 Flash...", pct: 85 },
       { id: 4, text: (window.t && window.t('stepper_finalize')) || "✨ Formatting responsive tables & formulas...", pct: 98 }
     ];
 

@@ -30,7 +30,12 @@ class TestStage11ObservabilityAndSentinel(unittest.TestCase):
         for route in ["/health", "/api/v1/health"]:
             resp = client.get(route)
             self.assertEqual(resp.status_code, 200, f"Route {route} must return HTTP 200")
-            data = resp.json()
+            self.assertEqual(resp.json(), {"status": "ok"})
+
+            # Authenticated admin access
+            resp_admin = client.get(f"{route}?token=edumate_admin_telemetry_2026")
+            self.assertEqual(resp_admin.status_code, 200)
+            data = resp_admin.json()
 
             self.assertEqual(data.get("status"), "healthy")
             self.assertIn(data.get("version"), ["1.2.0", "1.3.0"])

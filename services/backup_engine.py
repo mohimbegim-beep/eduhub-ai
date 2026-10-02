@@ -24,6 +24,7 @@ BACKUP_DIR = DATA_DIR / "backups"
 TARGET_FILES = [
     "user_balances.json",
     "billing_transactions.json",
+    "disputes.json",
     "visitor_analytics.json",
     "archived_lemon_transactions.json"
 ]
@@ -58,6 +59,23 @@ class BackupEngine:
         copied_files = []
         errors = []
 
+        # 1. Hot Backup of SQLite WAL Database
+        db_file = self.data_dir / "eduhub.db"
+        if db_file.exists():
+            try:
+                import sqlite3
+                src_conn = sqlite3.connect(str(db_file), timeout=5.0)
+                src_conn.execute("PRAGMA wal_checkpoint(PASSIVE);")
+                dst_db = snapshot_folder / "eduhub.db"
+                dst_conn = sqlite3.connect(str(dst_db))
+                src_conn.backup(dst_conn)
+                dst_conn.close()
+                src_conn.close()
+                copied_files.append("eduhub.db")
+            except Exception as dbe:
+                errors.append(f"eduhub.db: {str(dbe)}")
+
+        # 2. JSON State Snapshots
         for filename in TARGET_FILES:
             src = self.data_dir / filename
             if src.exists():
@@ -86,6 +104,57 @@ class BackupEngine:
             "snapshot_id": snapshot_folder.name,
             "files_backed_up": copied_files,
             "errors": errors
+        }
+
+    def verify_restore_integrity(self, snapshot_id: Optional[str] = None) -> Dict[str, Any]:
+        """
+        Non-destructive verification of snapshot recoverability.
+        Validates JSON parseability and SQLite integrity check from backup without altering production.
+        """
+        snapshots = self.list_snapshots()
+        if not snapshots:
+            return {"status": "error", "message": "No snapshots available to verify"}
+        target = snapshots[0]["path"] if not snapshot_id else str(self.backup_dir / snapshot_id)
+        target_path = Path(target)
+        if not target_path.exists():
+            return {"status": "error", "message": f"Snapshot {snapshot_id} not found"}
+
+        verified_files = []
+        errors = []
+
+        # Check JSON files
+        for f in target_path.iterdir():
+            if f.suffix == ".json" and f.name != "manifest.json":
+                try:
+                    with open(f, "r", encoding="utf-8") as fp:
+                        json.load(fp)
+                    verified_files.append(f.name)
+                except Exception as ex:
+                    errors.append(f"Corrupt JSON in {f.name}: {ex}")
+
+        # Check SQLite db integrity
+        bak_db = target_path / "eduhub.db"
+        if bak_db.exists():
+            try:
+                import sqlite3
+                conn = sqlite3.connect(str(bak_db))
+                cur = conn.cursor()
+                cur.execute("PRAGMA integrity_check;")
+                res = cur.fetchone()
+                conn.close()
+                if res and res[0] == "ok":
+                    verified_files.append("eduhub.db (integrity: ok)")
+                else:
+                    errors.append(f"SQLite integrity check failed: {res}")
+            except Exception as sqe:
+                errors.append(f"SQLite restore check error: {sqe}")
+
+        return {
+            "status": "verified" if not errors else "degraded",
+            "snapshot_id": target_path.name,
+            "verified_files": verified_files,
+            "errors": errors,
+            "integrity_passed": len(errors) == 0
         }
 
     def _rotate_snapshots(self) -> None:

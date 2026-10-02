@@ -98,32 +98,9 @@
     // 1. Exit-Intent Detection & Modal
     // ------------------------------------------------------------------------
     initExitIntent: function () {
-      if (this.isBetaMode) return;
-      let hasShown = sessionStorage.getItem("eduhub_exit_intent_shown");
-      if (hasShown) return;
-
-      // Desktop: mouse leaves top viewport
-      document.addEventListener("mouseleave", (e) => {
-        if (e.clientY <= 10 && !sessionStorage.getItem("eduhub_exit_intent_shown")) {
-          this.showExitModal();
-        }
-      });
-
-      // Mobile: trigger on rapid back or idle after interaction
-      let touchStartY = 0;
-      document.addEventListener("touchstart", (e) => {
-        touchStartY = e.touches[0].clientY;
-      }, { passive: true });
-
-      document.addEventListener("touchend", (e) => {
-        let touchEndY = e.changedTouches[0].clientY;
-        // User scrolls up rapidly at the top of the page
-        if (window.scrollY < 50 && touchEndY - touchStartY > 120) {
-          if (!sessionStorage.getItem("eduhub_exit_intent_shown")) {
-            this.showExitModal();
-          }
-        }
-      }, { passive: true });
+      // Disabled automatic popup on exit-intent or gestures per compliance & UX standards.
+      // Modals must only appear upon explicit user click/interaction.
+      return;
     },
 
     showExitModal: function () {

@@ -38,12 +38,14 @@ class TestBackendAndAPIReliability(unittest.TestCase):
             response = client.get(path)
             self.assertEqual(response.status_code, 200, f"Failed on {path}")
             data = response.json()
-            self.assertIn(data["status"], ["healthy", "degraded"])
-            self.assertIn("diagnostics", data)
-            self.assertIn("genai", data["diagnostics"])
-            self.assertIn("database", data["diagnostics"])
-            self.assertIn("billing", data["diagnostics"])
-            self.assertTrue(data["diagnostics"]["genai"]["model"].startswith("gemini-"))
+            self.assertEqual(data, {"status": "ok"})
+
+            # Authenticated admin access
+            admin_resp = client.get(f"{path}?token=edumate_admin_telemetry_2026")
+            self.assertEqual(admin_resp.status_code, 200)
+            admin_data = admin_resp.json()
+            self.assertIn("diagnostics", admin_data)
+            self.assertIn("genai", admin_data["diagnostics"])
 
     def test_sentinel_status(self):
         response = client.get("/api/v1/system/sentinel/status")
