@@ -37,9 +37,23 @@
     <!-- Google AdSense Verification & Auto-Ads -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6900527541339592" crossorigin="anonymous"></script>
 
-    <!-- Yandex РСЯ Autoplacement 20153901 -->
-    <script src="https://yandex.ru/ads/system/context.js" async></script>
-    <script data-page-id="20153901" src="https://yandex.ru/ads/system/ap-loader.js" async></script>
+    <!-- Yandex РСЯ Autoplacement 20153901 (Non-blocking background loader) -->
+    <script>
+    window.addEventListener('DOMContentLoaded', function() {
+        setTimeout(function() {
+            var yContext = document.createElement('script');
+            yContext.src = 'https://yandex.ru/ads/system/context.js';
+            yContext.async = true;
+            document.head.appendChild(yContext);
+
+            var yLoader = document.createElement('script');
+            yLoader.setAttribute('data-page-id', '20153901');
+            yLoader.src = 'https://yandex.ru/ads/system/ap-loader.js';
+            yLoader.async = true;
+            document.head.appendChild(yLoader);
+        }, 1200);
+    });
+    </script>
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
