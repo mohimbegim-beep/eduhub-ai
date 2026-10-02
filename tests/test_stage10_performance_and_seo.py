@@ -63,7 +63,7 @@ class TestStage10PerformanceAndSEO(unittest.TestCase):
     # 10.3: Social Share Cards (OpenGraph & Twitter Card)
     # --------------------------------------------------------------------------
     def test_10_3_opengraph_and_twitter_cards_across_all_pages(self):
-        html_files = sorted(glob.glob(str(BASE_DIR / "static" / "**" / "*.html"), recursive=True))
+        html_files = sorted([hf for hf in glob.glob(str(BASE_DIR / "static" / "**" / "*.html"), recursive=True) if not Path(hf).name.startswith("google")])
         self.assertEqual(len(html_files), 24, "Expected exactly 24 HTML platform pages")
 
         for hf in html_files:
@@ -91,7 +91,7 @@ class TestStage10PerformanceAndSEO(unittest.TestCase):
     # 10.4: JSON-LD Schema.org Structured Data
     # --------------------------------------------------------------------------
     def test_10_4_json_ld_schema_org_validity_across_all_pages(self):
-        html_files = sorted(glob.glob(str(BASE_DIR / "static" / "**" / "*.html"), recursive=True))
+        html_files = sorted([hf for hf in glob.glob(str(BASE_DIR / "static" / "**" / "*.html"), recursive=True) if not Path(hf).name.startswith("google")])
         for hf in html_files:
             p = Path(hf)
             with open(hf, "r", encoding="utf-8", errors="ignore") as f:

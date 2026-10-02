@@ -93,7 +93,7 @@ def scout_trends_with_gemini() -> dict:
         return {
             "updated_at": datetime.now(timezone.utc).isoformat(),
             "source": "curated_2026_edtech_index",
-            "model": "gemini-2.5-flash-baseline",
+            "model": "gemini-3.6-flash-baseline",
             "trends": CURATED_TRENDS,
             "top_keywords": [
                 "IELTS AI practice", "exam essay grader", "Socratic math solver",
@@ -128,7 +128,7 @@ def scout_trends_with_gemini() -> dict:
         )
 
         response = client.models.generate_content(
-            model=os.getenv("GEMINI_MODEL", "gemini-2.5-flash"),
+            model=os.getenv("GEMINI_MODEL", "gemini-3.6-flash"),
             contents=prompt,
             config=types.GenerateContentConfig(
                 temperature=0.2,
@@ -147,9 +147,9 @@ def scout_trends_with_gemini() -> dict:
 
         parsed = json.loads(raw_text.strip())
         parsed["updated_at"] = datetime.now(timezone.utc).isoformat()
-        parsed["source"] = "gemini-2.5-flash-live"
-        parsed["model"] = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
-        print("[TREND SCOUT] Successfully queried Gemini 2.5 Flash for live EdTech trends.")
+        parsed["source"] = "gemini-3.6-flash-live"
+        parsed["model"] = os.getenv("GEMINI_MODEL", "gemini-3.6-flash")
+        print("[TREND SCOUT] Successfully queried Gemini 3.6 Flash for live EdTech trends.")
         return parsed
 
     except Exception as e:
@@ -157,7 +157,7 @@ def scout_trends_with_gemini() -> dict:
         return {
             "updated_at": datetime.now(timezone.utc).isoformat(),
             "source": "curated_fallback_after_error",
-            "model": "gemini-2.5-flash-fallback",
+            "model": "gemini-3.6-flash-fallback",
             "error_detail": str(e),
             "trends": CURATED_TRENDS,
             "top_keywords": [

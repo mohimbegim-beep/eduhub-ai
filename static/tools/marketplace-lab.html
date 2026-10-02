@@ -525,22 +525,26 @@
                     body: JSON.stringify(payload)
                 });
                 const data = await res.json();
-
-                if (data.seo_title) document.getElementById('res-title').textContent = data.seo_title;
-                if (data.selling_bullets) {
-                    document.getElementById('res-bullets').innerHTML = data.selling_bullets.map(b => `<p>${b}</p>`).join('');
-                }
-                if (data.description) document.getElementById('res-desc').textContent = data.description;
-                if (data.objection_faq) {
-                    document.getElementById('res-faq').innerHTML = data.objection_faq.map(f => `<p><strong>Q: ${f.question}</strong><br>A: ${f.answer}</p>`).join('');
-                }
-                if (data.unit_economics) {
-                    document.getElementById('res-profit').textContent = '$' + Number(data.unit_economics.net_profit || 0).toFixed(2);
-                    document.getElementById('res-margin').textContent = Number(data.unit_economics.margin_percentage || 0).toFixed(1) + '%';
-                    document.getElementById('res-roi').textContent = Number(data.unit_economics.roi_percentage || 0).toFixed(1) + '%';
+                if (res.ok) {
+                    if (data.seo_title) document.getElementById('res-title').textContent = data.seo_title;
+                    if (data.selling_bullets) {
+                        document.getElementById('res-bullets').innerHTML = data.selling_bullets.map(b => `<p>${b}</p>`).join('');
+                    }
+                    if (data.description) document.getElementById('res-desc').textContent = data.description;
+                    if (data.objection_faq) {
+                        document.getElementById('res-faq').innerHTML = data.objection_faq.map(f => `<p><strong>Q: ${f.question}</strong><br>A: ${f.answer}</p>`).join('');
+                    }
+                    if (data.unit_economics) {
+                        document.getElementById('res-profit').textContent = '$' + Number(data.unit_economics.net_profit || 0).toFixed(2);
+                        document.getElementById('res-margin').textContent = Number(data.unit_economics.margin_percentage || 0).toFixed(1) + '%';
+                        document.getElementById('res-roi').textContent = Number(data.unit_economics.roi_percentage || 0).toFixed(1) + '%';
+                    }
+                } else {
+                    document.getElementById('res-title').textContent = "Error: " + (data.detail || "Generation failed. Please try again.");
                 }
             } catch (err) {
                 console.error(err);
+                document.getElementById('res-title').textContent = "Connection issue: " + err.message;
             } finally {
                 btn.innerHTML = originalText;
                 btn.disabled = false;

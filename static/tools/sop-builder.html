@@ -194,7 +194,8 @@
 
     <footer class="border-t border-slate-800/80 bg-slate-950 py-6 text-xs text-slate-500 text-center">
         <div class="max-w-6xl mx-auto px-4">
-            <div>EduHub AI &mdash; Academic Statement of Purpose Architect. Secured by PCI DSS Level 1.</div>
+            <p>&copy; 2026 EduHub AI. All rights reserved. &bull; <a href="/terms" class="hover:text-slate-400">Terms</a> &bull; <a href="/privacy" class="hover:text-slate-400">Privacy</a> &bull; <a href="/refund" class="hover:text-slate-400">Refund</a> &bull; <a href="/support" class="hover:text-slate-400">Support</a></p>
+            <div class="mt-2 text-xs text-slate-400">EduHub AI &mdash; Academic Statement of Purpose Architect. Secured by PCI DSS Level 1.</div>
             <div class="mt-4 pt-4 border-t border-slate-900/60 text-center text-[11px] text-slate-500" data-i18n="footer_mor_disclosure">
                 Payments are securely processed by Dodo Payments Inc., acting as the authorized Merchant of Record.
             </div>
@@ -306,14 +307,19 @@
                     body: JSON.stringify(payload)
                 });
                 const data = await res.json();
-                if (data.statement_of_purpose) {
-                    document.getElementById('sop-output').textContent = data.statement_of_purpose;
-                }
-                if (data.academic_collocations) {
-                    document.getElementById('sop-collocations').textContent = data.academic_collocations.join(', ');
+                if (res.ok) {
+                    if (data.statement_of_purpose) {
+                        document.getElementById('sop-output').textContent = data.statement_of_purpose;
+                    }
+                    if (data.academic_collocations) {
+                        document.getElementById('sop-collocations').textContent = data.academic_collocations.join(', ');
+                    }
+                } else {
+                    document.getElementById('sop-output').textContent = "Error: " + (data.detail || "Unable to generate Statement of Purpose. Please check inputs and try again.");
                 }
             } catch (err) {
                 console.error(err);
+                document.getElementById('sop-output').textContent = "Connection issue: " + err.message;
             } finally {
                 btn.innerHTML = '<span>⚡ Generate Statement of Purpose &rarr;</span>';
                 btn.disabled = false;

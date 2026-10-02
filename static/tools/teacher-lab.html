@@ -509,31 +509,36 @@
 
                 const data = await res.json();
                 
-                if (data.lesson_objectives) {
-                    const objList = document.getElementById('objectives-list');
-                    objList.innerHTML = data.lesson_objectives.map(o => `<li>${o}</li>`).join('');
-                }
+                if (res.ok) {
+                    if (data.lesson_objectives) {
+                        const objList = document.getElementById('objectives-list');
+                        objList.innerHTML = data.lesson_objectives.map(o => `<li>${o}</li>`).join('');
+                    }
 
-                if (data.warmup_5min) {
-                    document.getElementById('warmup-title').innerHTML = `<span>⚡ ${data.warmup_5min.title || 'Interactive Warmup (5 min)'}:</span>`;
-                    document.getElementById('warmup-text').textContent = data.warmup_5min.activity || '';
-                }
+                    if (data.warmup_5min) {
+                        document.getElementById('warmup-title').innerHTML = `<span>⚡ ${data.warmup_5min.title || 'Interactive Warmup (5 min)'}:</span>`;
+                        document.getElementById('warmup-text').textContent = data.warmup_5min.activity || '';
+                    }
 
-                if (data.preview_tests && data.preview_tests.length > 0) {
-                    const testContainer = document.getElementById('test-preview-items');
-                    testContainer.innerHTML = data.preview_tests.map(t => `
-                        <div class="p-2.5 rounded-lg bg-slate-950/60 border border-slate-800">
-                            <p class="font-medium text-slate-200">${t.num}. ${t.question}</p>
-                            <div class="grid grid-cols-2 gap-1 text-[11px] text-slate-400 mt-1.5">
-                                ${t.options.map(opt => `<span class="${opt.includes('(correct)') || opt.includes('(✓)') ? 'text-emerald-400 font-medium' : ''}">${opt}</span>`).join('')}
+                    if (data.preview_tests && data.preview_tests.length > 0) {
+                        const testContainer = document.getElementById('test-preview-items');
+                        testContainer.innerHTML = data.preview_tests.map(t => `
+                            <div class="p-2.5 rounded-lg bg-slate-950/60 border border-slate-800">
+                                <p class="font-medium text-slate-200">${t.num}. ${t.question}</p>
+                                <div class="grid grid-cols-2 gap-1 text-[11px] text-slate-400 mt-1.5">
+                                    ${t.options.map(opt => `<span class="${opt.includes('(correct)') || opt.includes('(✓)') ? 'text-emerald-400 font-medium' : ''}">${opt}</span>`).join('')}
+                                </div>
                             </div>
-                        </div>
-                    `).join('');
-                }
+                        `).join('');
+                    }
 
-                document.getElementById('timing-badge').textContent = 'Generated in 0.3s';
+                    document.getElementById('timing-badge').textContent = 'Generated in 0.3s';
+                } else {
+                    document.getElementById('warmup-text').textContent = "Error: " + (data.detail || "Failed to generate lesson plan. Please try again.");
+                }
             } catch (err) {
                 console.error('Generation error:', err);
+                document.getElementById('warmup-text').textContent = "Connection issue: " + err.message;
             } finally {
                 btn.disabled = false;
                 btn.innerHTML = '<span>⚡ Generate Lesson &amp; Tests (Free Preview)</span>';

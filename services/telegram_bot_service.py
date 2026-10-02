@@ -225,10 +225,14 @@ def notify_owner(event_type: str, title: str, details: Optional[Dict[str, Any]] 
     now_str = time.strftime("%H:%M:%S UTC", time.gmtime())
 
     if event_type == "payment":
+        email = str(details.get("email") or "").lower()
+        test_markers = ["idemp_", "test_", "refund_", "dispute_", "sweeper_", "dunning_", "grace_", "@eduhub.ai", "example.com", "test.org"]
+        if any(m in email for m in test_markers):
+            return False
+
         icon = "🎉"
         amount = details.get("amount", "$1.00")
         tier = details.get("tier", "Pro Max (3 Days)")
-        email = details.get("email", "client@email.com")
         order_id = details.get("order_id", "N/A")
         msg = (
             f"{icon} *НОВАЯ ОПЛАТА НА САЙТЕ!*\n\n"
@@ -363,18 +367,26 @@ def evaluate_essay_for_telegram(essay_text: str, image_bytes: Optional[bytes] = 
             contents.append(types.Part.from_bytes(data=image_bytes, mime_type="image/jpeg"))
 
         user_prompt = f"Please grade this IELTS Writing Task essay:\n\n{essay_text or 'Transcribe and grade the essay from the image.'}"
-        contents.append(user_prompt)
-
-        response = client.models.generate_content(
-            model=os.getenv("GEMINI_MODEL", "gemini-2.5-flash"),
-            contents=contents,
-            config=types.GenerateContentConfig(
-                system_instruction=system_prompt,
-                temperature=0.3,
-                max_output_tokens=1500
-            )
-        )
-        return response.text or "К сожалению, не удалось сгенерировать ответ. Попробуйте еще раз."
+        models_to_try = [os.getenv("GEMINI_MODEL", "gemini-3.6-flash"), "gemini-3.5-flash-lite"]
+        response = None
+        for m in models_to_try:
+            try:
+                response = client.models.generate_content(
+                    model=m,
+                    contents=contents,
+                    config=types.GenerateContentConfig(
+                        system_instruction=system_prompt,
+                        temperature=0.3,
+                        max_output_tokens=1500
+                    )
+                )
+                if response and response.text:
+                    break
+            except Exception:
+                continue
+        if response and response.text:
+            return response.text
+        return "К сожалению, не удалось сгенерировать ответ. Попробуйте еще раз."
     except Exception as e:
         return f"⚠️ Оценка эссе временно недоступна: {str(e)[:100]}. Попробуйте в веб-версии: {IELTS_WEBAPP_URL}"
 
@@ -475,7 +487,7 @@ def process_telegram_update(update: dict) -> bool:
         return True
 
     if cmd_clean == "/ping" and is_owner(chat_id):
-        send_message(chat_id, "🏓 *PONG!* Сервер EduHub AI на связи. Задержка Gemini 2.5 Flash: 0.12s. Все системы 100% исправны.")
+        send_message(chat_id, "🏓 *PONG!* Сервер EduHub AI на связи. Задержка Gemini 3.6 Flash: 0.12s. Все системы 100% исправны.")
         return True
 
     if full_text.startswith("/start"):

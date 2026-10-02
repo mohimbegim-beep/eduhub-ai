@@ -104,7 +104,7 @@ except Exception as _sentry_err:
 
 app = FastAPI(
     title="EduHub Core API",
-    description="Autonomous production API with Google GenAI (gemini-2.5-flash), 18+ Safe Content Filtering, PCI-DSS multi-gateway billing, and in-memory rate limiting.",
+    description="Autonomous production API with Google GenAI (gemini-3.6-flash), 18+ Safe Content Filtering, PCI-DSS multi-gateway billing, and in-memory rate limiting.",
     version="1.2.0"
 )
 
@@ -328,7 +328,7 @@ async def add_security_headers(request: Request, call_next):
         elif path.startswith(("/api/", "/health", "/docs", "/openapi")):
             response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
         elif path == "/" or path.endswith(".html"):
-            response.headers["Cache-Control"] = "no-cache, must-revalidate"
+            response.headers["Cache-Control"] = "public, max-age=3600, must-revalidate"
         else:
             response.headers["Cache-Control"] = "public, max-age=3600, must-revalidate"
 
@@ -1196,40 +1196,80 @@ def get_genai_client() -> "genai.Client":
         )
     return genai.Client(api_key=api_key)
 
+def get_genai_client_safe() -> Optional["genai.Client"]:
+    """
+    Безопасная инициализация клиента Google GenAI SDK.
+    Возвращает None вместо HTTPException(503/500) при отсутствии ключа или сбое SDK,
+    позволяя API эндпоинтам мгновенно переключаться на resilient fallback генераторы.
+    """
+    try:
+        return get_genai_client()
+    except Exception as e:
+        print(f"[GENAI CLIENT NOTICE] Resilient mode active: {e}")
+        return None
+
 def call_genai_with_retry(client, model: str, contents, config, max_retries: int = 2, base_delay: float = 0.3):
     """
     Выполняет вызов Gemini API с автоматическим переключением моделей (gemini-3.6-flash -> gemini-3.5-flash-lite)
-    при возникновении 503 High Demand или 429 Quota Spikes.
+    при возникновении 503 High Demand, 429 Quota Spikes, таймаутов или пустых ответов.
     """
     import random
     last_exception = None
-    models_to_try = [model]
-    for alt in ["gemini-3.5-flash-lite", "gemini-3.6-flash"]:
+    
+    # Авто-апгрейд устаревших версий (1.5, 2.0) до актуальных моделей 2026 года
+    target_model = model or "gemini-3.6-flash"
+    if any(old in target_model.lower() for old in ["gemini-1.5", "gemini-2.0", "gemini-1.0"]):
+        target_model = "gemini-3.6-flash"
+
+    models_to_try = [target_model]
+    for alt in ["gemini-3.6-flash", "gemini-3.5-flash-lite"]:
         if alt not in models_to_try:
             models_to_try.append(alt)
 
     for current_model in models_to_try:
         for attempt in range(max_retries):
             try:
-                return client.models.generate_content(
+                resp = client.models.generate_content(
                     model=current_model,
                     contents=contents,
                     config=config
                 )
+                if resp is not None:
+                    if getattr(resp, "text", None) is not None:
+                        return resp
+                    if getattr(resp, "candidates", None):
+                        return resp
+                raise ValueError(f"Model {current_model} returned empty response")
             except Exception as e:
                 last_exception = e
                 err_str = str(e).lower()
+                is_quota_permanent = any(k in err_str for k in ["quota exceeded", "resource_exhausted", "quotaid", "daily limit", "api_key_invalid", "not valid"])
+                if is_quota_permanent:
+                    print(f"[GENAI QUOTA NOTICE] Model {current_model} quota or key limit reached: {e}. Switching quickly...")
+                    break
                 is_transient = any(k in err_str for k in [
-                    "429", "503", "504", "502", "resourceexhausted", 
-                    "quota", "overloaded", "unavailable", "timeout", "timed out"
+                    "429", "503", "504", "502", "overloaded", "unavailable", "timeout", "timed out", "empty response"
                 ])
                 if is_transient and attempt < max_retries - 1:
-                    sleep_sec = (base_delay * (2 ** attempt)) + random.uniform(0.05, 0.15)
+                    sleep_sec = (base_delay * (2 ** attempt)) + random.uniform(0.02, 0.08)
                     print(f"[GENAI RETRY] Model {current_model} attempt {attempt+1} got {e}. Retrying in {sleep_sec:.2f}s...")
                     time.sleep(sleep_sec)
                 else:
                     break
-    raise last_exception
+    if last_exception:
+        raise last_exception
+    raise RuntimeError("All candidate Gemini models failed to generate content.")
+
+async def call_genai_with_retry_async(client, model: str, contents, config, max_retries: int = 1, base_delay: float = 0.2, timeout: float = 8.0):
+    """
+    Асинхронный адаптер с тайм-аутом для предотвращения блокировки Event Loop при вызовах Gemini API.
+    """
+    loop = asyncio.get_running_loop()
+    return await asyncio.wait_for(
+        loop.run_in_executor(None, lambda: call_genai_with_retry(client, model, contents, config, max_retries, base_delay)),
+        timeout=timeout
+    )
+
 
 # --------------------------------------------------------------------------
 # Динамическая привязка языка интерфейса к генерациям Gemini AI
@@ -1543,6 +1583,11 @@ async def instant_essay_diagnostic(payload: InstantDiagnosticRequest, request: R
     text_len = len(payload.text.split())
     lang = (payload.lang or "en").lower()[:2]
 
+    # Проверка на безопасность контента (18+ Safe Policy)
+    check_content_safety(payload.text)
+    if payload.topic:
+        check_content_safety(payload.topic)
+
     # ── Fallback scoring (works even when Gemini quota is exhausted) ──────────
     def _quick_band(words: int) -> float:
         if words < 20: return 5.0
@@ -1559,7 +1604,7 @@ async def instant_essay_diagnostic(payload: InstantDiagnosticRequest, request: R
     ai_errors = []
 
     try:
-        genai_cli = get_genai_client() if GENAI_AVAILABLE else None
+        genai_cli = get_genai_client_safe()
         if genai_cli:
             INSTANT_PROMPT = (
                 "You are an official Cambridge Senior IELTS Examiner.\n"
@@ -1790,6 +1835,8 @@ async def serve_standalone_tool(tool_name: str):
 
 
 @app.get("/blueprints", tags=["AI Blueprints"])
+@app.get("/blueprints/", tags=["AI Blueprints"])
+@app.get("/blueprints.html", tags=["AI Blueprints"])
 async def serve_blueprints_page():
     blueprints_file = STATIC_DIR / "blueprints" / "index.html"
     if blueprints_file.exists():
@@ -2138,7 +2185,7 @@ async def summarize_lecture(
 ):
     """
     Интеллектуальная суммаризация конспектов, лекций и учебных материалов
-    с использованием Google GenAI SDK (gemini-2.5-flash) и защитой от 18+.
+    с использованием Google GenAI SDK (gemini-3.6-flash) и защитой от 18+.
     """
     if REQUIRE_API_KEY and not x_api_key:
         raise HTTPException(
@@ -2151,7 +2198,16 @@ async def summarize_lecture(
     if payload.focus_topic:
         check_content_safety(payload.focus_topic)
 
-    client = get_genai_client()
+    client = get_genai_client_safe()
+    if not client:
+        summary_text = get_fallback_lecture_summary(payload.text, payload.format, payload.language)
+        return {
+            "status": "success",
+            "model": f"{GEMINI_MODEL}-resilient",
+            "format": payload.format,
+            "summary": summary_text,
+            "char_count": len(payload.text)
+        }
 
     system_prompt = (
         "You are EduHub Academic Assistant — a top-tier academic synthesizer and study accelerator. "
@@ -2183,17 +2239,20 @@ async def summarize_lecture(
             temperature=0.2,
             safety_settings=get_safety_settings()
         )
-        response = client.models.generate_content(
+        response = await call_genai_with_retry_async(
+            client=client,
             model=GEMINI_MODEL,
             contents=user_prompt,
-            config=config
+            config=config,
+            timeout=8.0
         )
 
+        summary_out = response.text.strip() if (response and response.text and response.text.strip()) else get_fallback_lecture_summary(payload.text, payload.format, payload.language)
         return {
             "status": "success",
             "model": GEMINI_MODEL,
             "format": payload.format,
-            "summary": response.text or "No summary generated.",
+            "summary": summary_out,
             "char_count": len(payload.text)
         }
 
@@ -2234,11 +2293,43 @@ async def check_homework(
     if payload.student_solution:
         check_content_safety(payload.student_solution)
 
-    client = get_genai_client()
+    contents = []
+
+    # Добавляем изображение, если прикреплено
+    if payload.image_base64:
+        try:
+            clean_b64 = payload.image_base64
+            if "base64," in clean_b64:
+                clean_b64 = clean_b64.split("base64,", 1)[1]
+            raw_image = base64.b64decode(clean_b64)
+            mime = payload.mime_type or "image/jpeg"
+            contents.append(types.Part.from_bytes(data=raw_image, mime_type=mime))
+        except Exception:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail={"error": "InvalidImageFormat", "message": "Failed to decode base64 image data."}
+            )
+
+    target_lang = (payload.language or "uz").lower()
+    lang_names = {"uz": "Uzbek", "en": "English", "ru": "Russian", "es": "Spanish"}
+    lang_str = lang_names.get(target_lang, "Uzbek" if "uz" in target_lang else "Russian")
+
+    client = get_genai_client_safe()
+    if not client:
+        guidance_text = get_fallback_homework_guidance(payload.assignment, payload.student_solution, payload.subject or "General", payload.grade_level or "All", payload.language or "uz")
+        if "uz" in target_lang:
+            guidance_text = sanitize_uzbek_content(guidance_text)
+        return {
+            "status": "success",
+            "model": f"{GEMINI_MODEL}-resilient",
+            "subject": payload.subject,
+            "grade_level": payload.grade_level,
+            "guidance": guidance_text
+        }
 
     system_prompt = (
         "You are EduHub Parent Vision AI — an empathetic, encouraging, and pedagogically trained "
-        "homework guide for parents and educators.\n\n"
+        f"homework guide for parents and educators. All explanations, steps, and questions MUST be written strictly in {lang_str}.\n\n"
         "STRICT SAFETY DIRECTIVE: Strictly refuse any inappropriate, adult (18+), or vulgar topics.\n\n"
         "PEDAGOGICAL DIRECTIVES:\n"
         "1. DO NOT give a blunt, ready-made answer for the student to simply copy.\n"
@@ -2248,14 +2339,6 @@ async def check_homework(
         "4. Include 2-3 guiding questions or hints that will empower the student to reach the correct answer on their own.\n"
         "5. Keep the tone warm, constructive, and motivating."
     )
-
-    contents = []
-
-    # Добавляем изображение, если прикреплено
-    if payload.image_base64:
-        raw_image = base64.b64decode(payload.image_base64)
-        mime = payload.mime_type or "image/jpeg"
-        contents.append(types.Part.from_bytes(data=raw_image, mime_type=mime))
 
     text_parts = [
         f"Subject: {payload.subject or 'General / Multi-disciplinary'}",
@@ -2277,23 +2360,6 @@ async def check_homework(
         "### 🔑 Guiding Questions for the Student"
     )
 
-    target_lang = (payload.language or "uz").lower()
-    lang_names = {"uz": "Uzbek", "en": "English", "ru": "Russian", "es": "Spanish"}
-    lang_str = lang_names.get(target_lang, "Uzbek" if "uz" in target_lang else "Russian")
-
-    system_prompt = (
-        "You are EduHub Parent Vision AI — an empathetic, encouraging, and pedagogically trained "
-        f"homework guide for parents and educators. All explanations, steps, and questions MUST be written strictly in {lang_str}.\n\n"
-        "STRICT SAFETY DIRECTIVE: Strictly refuse any inappropriate, adult (18+), or vulgar topics.\n\n"
-        "PEDAGOGICAL DIRECTIVES:\n"
-        "1. DO NOT give a blunt, ready-made answer for the student to simply copy.\n"
-        "2. Analyze the student's solution or draft to find where their reasoning is sound, "
-        "   and pinpoint the exact misunderstanding or arithmetic/conceptual slip.\n"
-        "3. Provide step-by-step guidance tailored for a parent to explain to their child.\n"
-        "4. Include 2-3 guiding questions or hints that will empower the student to reach the correct answer on their own.\n"
-        "5. Keep the tone warm, constructive, and motivating."
-    )
-
     contents.append("\n".join(text_parts))
 
     try:
@@ -2302,13 +2368,15 @@ async def check_homework(
             temperature=0.3,
             safety_settings=get_safety_settings()
         )
-        response = client.models.generate_content(
+        response = await call_genai_with_retry_async(
+            client=client,
             model=GEMINI_MODEL,
             contents=contents,
-            config=config
+            config=config,
+            timeout=8.0
         )
 
-        guidance_out = response.text or "No guidance generated."
+        guidance_out = response.text.strip() if (response and response.text and response.text.strip()) else get_fallback_homework_guidance(payload.assignment, payload.student_solution, payload.subject or "General", payload.grade_level or "All", payload.language or "uz")
         if "uz" in target_lang:
             guidance_out = sanitize_uzbek_content(guidance_out)
         return {
@@ -2319,6 +2387,8 @@ async def check_homework(
             "guidance": guidance_out
         }
 
+    except HTTPException:
+        raise
     except Exception as e:
         guidance_text = get_fallback_homework_guidance(payload.assignment, payload.student_solution, payload.subject or "General", payload.grade_level or "All", payload.language or "uz")
         if "uz" in target_lang:
@@ -2792,8 +2862,33 @@ async def grade_essay(
     exam_type = payload.exam_type or "IELTS Academic Writing Task 2"
     target_band = payload.target_band or 7.5
 
+    contents = []
+    if payload.image_base64:
+        try:
+            clean_b64 = payload.image_base64
+            if "base64," in clean_b64:
+                clean_b64 = clean_b64.split("base64,", 1)[1]
+            raw_image = base64.b64decode(clean_b64)
+            mime = payload.mime_type or "image/jpeg"
+            contents.append(types.Part.from_bytes(data=raw_image, mime_type=mime))
+        except Exception:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail={"error": "InvalidImageFormat", "message": "Failed to decode base64 image data."}
+            )
+
+    client = get_genai_client_safe()
+    if not client:
+        feedback_text = get_fallback_essay_evaluation(payload.essay_text, exam_type, target_band, lang)
+        return {
+            "status": "success",
+            "model": f"{GEMINI_MODEL}-resilient",
+            "exam_type": exam_type,
+            "target_band": target_band,
+            "feedback": feedback_text
+        }
+
     try:
-        client = get_genai_client()
         system_prompt = (
             "You are a Senior IELTS Examiner & Lead CEFR Writing Assessor. "
             "Your duty is to perform an objective, strict, and actionable evaluation of the student's essay "
@@ -2810,12 +2905,6 @@ async def grade_essay(
             "FORMAT YOUR RESPONSE IN CLEAN GFM MARKDOWN WITH HEADINGS, TABLES, AND BULLETS."
         )
 
-        contents = []
-        if payload.image_base64:
-            raw_image = base64.b64decode(payload.image_base64)
-            mime = payload.mime_type or "image/jpeg"
-            contents.append(types.Part.from_bytes(data=raw_image, mime_type=mime))
-
         text_parts = [
             f"Exam Type: {exam_type}",
             f"Target Band: {target_band}",
@@ -2831,13 +2920,15 @@ async def grade_essay(
             temperature=0.25,
             safety_settings=get_safety_settings()
         )
-        response = client.models.generate_content(
+        response = await call_genai_with_retry_async(
+            client=client,
             model=GEMINI_MODEL,
             contents=contents,
-            config=config
+            config=config,
+            timeout=8.0
         )
 
-        feedback_text = response.text or get_fallback_essay_evaluation(payload.essay_text, exam_type, target_band, lang)
+        feedback_text = (response.text.strip() if (response and response.text and response.text.strip()) else get_fallback_essay_evaluation(payload.essay_text, exam_type, target_band, lang))
         return {
             "status": "success",
             "model": GEMINI_MODEL,
@@ -2846,6 +2937,8 @@ async def grade_essay(
             "feedback": feedback_text
         }
 
+    except HTTPException:
+        raise
     except Exception:
         # Graceful fallback to verified examiner engine
         feedback_text = get_fallback_essay_evaluation(payload.essay_text, exam_type, target_band, lang)
@@ -6244,6 +6337,7 @@ def get_fallback_ats_analysis(payload: ATSResumeRequest) -> Dict[str, Any]:
 
 
 @app.post("/api/v1/career/ats-tailor", tags=["Career & ATS Resume"])
+@app.post("/api/v1/career/ats-check", tags=["Career & ATS Resume"])
 async def tailor_ats_resume(payload: ATSResumeRequest, request: Request):
     """
     Интеллектуальный ATS-анализатор и оптимизатор резюме ($1 Micro-SaaS):
@@ -6253,7 +6347,7 @@ async def tailor_ats_resume(payload: ATSResumeRequest, request: Request):
     """
     check_content_safety(payload.resume_text + " " + payload.job_description)
     target_lang = (payload.language or "en").lower()
-    client = get_genai_client()
+    client = get_genai_client_safe()
     if not client:
         fallback = get_fallback_ats_analysis(payload)
         if "uz" in target_lang:
@@ -6298,12 +6392,21 @@ async def tailor_ats_resume(payload: ATSResumeRequest, request: Request):
             response_mime_type="application/json",
             safety_settings=get_safety_settings()
         )
-        response = client.models.generate_content(
+        response = await call_genai_with_retry_async(
+            client=client,
             model=GEMINI_MODEL,
             contents=user_prompt,
-            config=config
+            config=config,
+            timeout=8.0
         )
-        data = json.loads(response.text.strip())
+        raw_text = response.text.strip() if response and response.text else ""
+        if "```json" in raw_text:
+            raw_text = raw_text.split("```json", 1)[1].split("```", 1)[0].strip()
+        elif "```" in raw_text:
+            raw_text = raw_text.split("```", 1)[1].split("```", 1)[0].strip()
+        data = json.loads(raw_text) if raw_text else {}
+        if not data or not isinstance(data, dict):
+            raise ValueError("Empty or invalid ATS analysis JSON.")
         data["status"] = "success"
         if "result" not in data:
             data["result"] = dict(data)
@@ -6971,7 +7074,7 @@ async def generate_marketplace_listing(payload: MarketplaceLabRequest):
     Интерактивная Web-генерация SEO-карточек и расчет Unit-экономики для Uzum, WB и Ozon.
     """
     target_lang = (payload.language or "uz").lower()
-    client = get_genai_client()
+    client = get_genai_client_safe()
     if not client:
         fallback = get_fallback_marketplace_lab(payload)
         if "uz" in target_lang:
@@ -7009,21 +7112,20 @@ async def generate_marketplace_listing(payload: MarketplaceLabRequest):
             response_mime_type="application/json",
             safety_settings=get_safety_settings()
         )
-        loop = asyncio.get_running_loop()
-        resp = await asyncio.wait_for(
-            loop.run_in_executor(None, lambda: client.models.generate_content(
-                model=GEMINI_MODEL,
-                contents=user_prompt,
-                config=config
-            )),
-            timeout=7.0
-        )
-        data = json.loads(resp.text.strip())
+        resp = await call_genai_with_retry_async(client, GEMINI_MODEL, user_prompt, config, timeout=10.0)
+        raw_text = resp.text.strip() if resp and resp.text else ""
+        if "```json" in raw_text:
+            raw_text = raw_text.split("```json", 1)[1].split("```", 1)[0].strip()
+        elif "```" in raw_text:
+            raw_text = raw_text.split("```", 1)[1].split("```", 1)[0].strip()
+        data = json.loads(raw_text) if raw_text else {}
+        if not data or not isinstance(data, dict):
+            raise ValueError("Empty or invalid marketplace listing JSON.")
         data["status"] = "success"
         if "uz" in target_lang:
             data = sanitize_uzbek_content(data)
         return data
-    except Exception:
+    except Exception as e:
         fallback = get_fallback_marketplace_lab(payload)
         if "uz" in target_lang:
             fallback = sanitize_uzbek_content(fallback)
@@ -7036,7 +7138,7 @@ async def generate_sop(payload: SOPBuilderRequest):
     Генерация академических мотивационных писем и Statement of Purpose для международных грантов.
     """
     target_lang = (payload.language or "en").lower()
-    client = get_genai_client()
+    client = get_genai_client_safe()
     if not client:
         fallback = get_fallback_sop_builder(payload)
         if "uz" in target_lang:
@@ -7074,21 +7176,20 @@ async def generate_sop(payload: SOPBuilderRequest):
             response_mime_type="application/json",
             safety_settings=get_safety_settings()
         )
-        loop = asyncio.get_running_loop()
-        resp = await asyncio.wait_for(
-            loop.run_in_executor(None, lambda: client.models.generate_content(
-                model=GEMINI_MODEL,
-                contents=user_prompt,
-                config=config
-            )),
-            timeout=7.0
-        )
-        data = json.loads(resp.text.strip())
+        resp = await call_genai_with_retry_async(client, GEMINI_MODEL, user_prompt, config, timeout=10.0)
+        raw_text = resp.text.strip() if resp and resp.text else ""
+        if "```json" in raw_text:
+            raw_text = raw_text.split("```json", 1)[1].split("```", 1)[0].strip()
+        elif "```" in raw_text:
+            raw_text = raw_text.split("```", 1)[1].split("```", 1)[0].strip()
+        data = json.loads(raw_text) if raw_text else {}
+        if not data or not isinstance(data, dict):
+            raise ValueError("Empty or invalid SOP analysis JSON.")
         data["status"] = "success"
         if "uz" in target_lang:
             data = sanitize_uzbek_content(data)
         return data
-    except Exception:
+    except Exception as e:
         fallback = get_fallback_sop_builder(payload)
         if "uz" in target_lang:
             fallback = sanitize_uzbek_content(fallback)
@@ -7101,7 +7202,7 @@ async def generate_excel_formula(payload: ExcelWizardRequest):
     Преобразование текстового запроса на русском/узбекском/английском в рабочую формулу Excel/Google Sheets.
     """
     target_lang = (payload.language or "uz").lower()
-    client = get_genai_client()
+    client = get_genai_client_safe()
     if not client:
         fallback = get_fallback_excel_wizard(payload)
         if "uz" in target_lang:
@@ -7129,21 +7230,20 @@ async def generate_excel_formula(payload: ExcelWizardRequest):
             response_mime_type="application/json",
             safety_settings=get_safety_settings()
         )
-        loop = asyncio.get_running_loop()
-        resp = await asyncio.wait_for(
-            loop.run_in_executor(None, lambda: client.models.generate_content(
-                model=GEMINI_MODEL,
-                contents=user_prompt,
-                config=config
-            )),
-            timeout=7.0
-        )
-        data = json.loads(resp.text.strip())
+        resp = await call_genai_with_retry_async(client, GEMINI_MODEL, user_prompt, config, timeout=10.0)
+        raw_text = resp.text.strip() if resp and resp.text else ""
+        if "```json" in raw_text:
+            raw_text = raw_text.split("```json", 1)[1].split("```", 1)[0].strip()
+        elif "```" in raw_text:
+            raw_text = raw_text.split("```", 1)[1].split("```", 1)[0].strip()
+        data = json.loads(raw_text) if raw_text else {}
+        if not data or not isinstance(data, dict):
+            raise ValueError("Empty or invalid Excel wizard JSON.")
         data["status"] = "success"
         if "uz" in target_lang:
             data = sanitize_uzbek_content(data)
         return data
-    except Exception:
+    except Exception as e:
         fallback = get_fallback_excel_wizard(payload)
         if "uz" in target_lang:
             fallback = sanitize_uzbek_content(fallback)
@@ -7364,7 +7464,7 @@ async def generate_teacher_lesson(payload: TeacherLabRequest):
     Генератор поурочных планов и тестовых наборов для учителей с Blur-пейволлом.
     """
     target_lang = (payload.language or "uz").lower()
-    client = get_genai_client()
+    client = get_genai_client_safe()
     if not client:
         fallback = get_fallback_teacher_lab(payload)
         if "uz" in target_lang:
@@ -7399,21 +7499,20 @@ async def generate_teacher_lesson(payload: TeacherLabRequest):
             response_mime_type="application/json",
             safety_settings=get_safety_settings()
         )
-        loop = asyncio.get_running_loop()
-        resp = await asyncio.wait_for(
-            loop.run_in_executor(None, lambda: client.models.generate_content(
-                model=GEMINI_MODEL,
-                contents=user_prompt,
-                config=config
-            )),
-            timeout=7.0
-        )
-        data = json.loads(resp.text.strip())
+        resp = await call_genai_with_retry_async(client, GEMINI_MODEL, user_prompt, config, timeout=10.0)
+        raw_text = resp.text.strip() if resp and resp.text else ""
+        if "```json" in raw_text:
+            raw_text = raw_text.split("```json", 1)[1].split("```", 1)[0].strip()
+        elif "```" in raw_text:
+            raw_text = raw_text.split("```", 1)[1].split("```", 1)[0].strip()
+        data = json.loads(raw_text) if raw_text else {}
+        if not data or not isinstance(data, dict):
+            raise ValueError("Empty or invalid Teacher Lab JSON.")
         data["status"] = "success"
         if "uz" in target_lang:
             data = sanitize_uzbek_content(data)
         return data
-    except Exception:
+    except Exception as e:
         fallback = get_fallback_teacher_lab(payload)
         if "uz" in target_lang:
             fallback = sanitize_uzbek_content(fallback)
@@ -7424,10 +7523,10 @@ async def generate_teacher_lesson(payload: TeacherLabRequest):
 
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "8658937944:AAEBJxjc2pz_XeVyJXVZxWAFRmFzDGwSRwM")
 
-@app.get("/api/v1/telegram/webhook", tags=["Telegram Bot"])
-async def telegram_webhook_info():
+@app.get("/api/v1/telegram/autopilot-webhook", tags=["Telegram Bot"])
+async def telegram_autopilot_webhook_info():
     """
-    Информация о статусе Telegram Webhook.
+    Информация о статусе Telegram Autopilot Webhook.
     """
     return {
         "status": "active",
@@ -7436,8 +7535,8 @@ async def telegram_webhook_info():
         "platform_url": "https://eduhub-ai.onrender.com"
     }
 
-@app.post("/api/v1/telegram/webhook", tags=["Telegram Bot"])
-async def telegram_webhook(request: Request):
+@app.post("/api/v1/telegram/autopilot-webhook", tags=["Telegram Bot"])
+async def telegram_autopilot_webhook(request: Request):
     """
     Автономный Telegram Webhook для бота @eduhub_autopilot_bot.
     Работает 24/7 в облаке Render без локального ПК!
@@ -7508,7 +7607,7 @@ async def telegram_webhook(request: Request):
         return {"ok": True}
 
     # AI Consultation response with Gemini or smart fallback
-    client = get_genai_client()
+    client = get_genai_client_safe()
     ai_reply = ""
     if client:
         try:
@@ -7522,12 +7621,13 @@ async def telegram_webhook(request: Request):
                 temperature=0.3,
                 safety_settings=get_safety_settings()
             )
-            resp = client.models.generate_content(
+            resp = call_genai_with_retry(
+                client=client,
                 model=GEMINI_MODEL,
                 contents=text,
                 config=config
             )
-            ai_reply = resp.text.strip()
+            ai_reply = resp.text.strip() if resp and resp.text else ""
         except Exception:
             pass
 

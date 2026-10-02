@@ -594,8 +594,7 @@ Summary: ${lastResult.personality_summary}
 
 Top Careers:
 ` + 
-                (lastResult.top_professions || []).map(p => `- ${p.title} (${p.salary_range_usd}): ${p.why_fit}`).join('
-');
+                (lastResult.top_professions || []).map(p => `- ${p.title} (${p.salary_range_usd}): ${p.why_fit}`).join('\n');
             const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
