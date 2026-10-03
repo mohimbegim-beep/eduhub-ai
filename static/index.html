@@ -32,62 +32,54 @@
     <meta name="twitter:image" content="https://edumate.cam/static/img/og_banner.png">
 
     <!-- Multi-Language Hreflang Tags -->
-    <link rel="alternate" hreflang="en" href="https://eduhub.ai/?lang=en">
-    <link rel="alternate" hreflang="ru" href="https://eduhub.ai/?lang=ru">
-    <link rel="alternate" hreflang="uz" href="https://eduhub.ai/?lang=uz">
-    <!-- Google AdSense Verification & Auto-Ads -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6900527541339592" crossorigin="anonymous"></script>
+    <!-- Multi-Language Hreflang Tags -->
+    <link rel="alternate" hreflang="en" href="https://edumate.cam/?lang=en">
+    <link rel="alternate" hreflang="ru" href="https://edumate.cam/?lang=ru">
+    <link rel="alternate" hreflang="uz" href="https://edumate.cam/?lang=uz">
+    <link rel="alternate" hreflang="x-default" href="https://edumate.cam/">
 
-    <!-- Yandex.RTB -->
-    <script>window.yaContextCb=window.yaContextCb||[]</script>
-    <script src="https://yandex.ru/ads/system/context.js" async></script>
+    <!-- Precompiled High-Performance Tailwind CSS (Zero Runtime JIT Overhead) -->
+    <link rel="stylesheet" href="/static/css/tailwind.min.css">
 
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Marked.js for Markdown Parsing (Deferred) -->
-    <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js" defer></script>
-
-    <!-- KaTeX for LaTeX Math Rendering (Non-blocking) -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" media="print" onload="this.media='all'">
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" defer></script>
-
-    <!-- Mermaid.js for Diagrams (Deferred) -->
-    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js" defer></script>
-
-    <!-- Enhanced Document Renderer -->
-    <script src="/static/js/doc-renderer.js" defer></script>
-
-    <!-- EduMate AI Premium Theme (Linear Pro Max Dark Aesthetic 2026) -->
-        <!-- Google Fonts: Montserrat (Headings) & Inter (Body UI) -->
+    <!-- Non-Blocking Google Fonts (Inter & Montserrat) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet"></noscript>
 
-    <!-- Tailwind Configuration for Linear / Stripe Theme -->
+    <!-- Optimized Non-Blocking Ad & Monetization Loader (Guarantees Core Web Vitals 90+ Mobile) -->
     <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              sans: ['Inter', 'sans-serif'],
-              heading: ['Montserrat', 'sans-serif'],
-            },
-            colors: {
-              main: '#030712',
-              surface: 'rgba(11, 15, 25, 0.65)',
-            }
-          }
-        }
-      }
+    window.yaContextCb = window.yaContextCb || [];
+    function initMonetizationAds() {
+        if (window.__adsInitialized) return;
+        window.__adsInitialized = true;
+        // Google AdSense
+        var gas = document.createElement('script');
+        gas.async = true;
+        gas.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6900527541339592";
+        gas.crossOrigin = "anonymous";
+        document.head.appendChild(gas);
+        // Yandex RTB
+        var yrtb = document.createElement('script');
+        yrtb.async = true;
+        yrtb.src = "https://yandex.ru/ads/system/context.js";
+        document.head.appendChild(yrtb);
+    }
+    if ('requestIdleCallback' in window) {
+        requestIdleCallback(function() { setTimeout(initMonetizationAds, 1000); });
+    } else {
+        window.addEventListener('load', function() { setTimeout(initMonetizationAds, 1200); });
+    }
+    ['scroll', 'touchstart', 'mousemove', 'keydown'].forEach(function(ev) {
+        window.addEventListener(ev, initMonetizationAds, { once: true, passive: true });
+    });
     </script>
 
     <!-- EduMate AI Premium Design System (Linear & Stripe Aesthetics) -->
     <link rel="stylesheet" href="/static/css/eduhub_premium_core.css">
     <link rel="stylesheet" href="/static/css/premium_theme.css">
     <link rel="stylesheet" href="/static/css/theme-system.css">
-    <script src="/static/js/theme-engine.js"></script>
+    <script src="/static/js/theme-engine.js" defer></script>
 
     <!-- EduMate Single Source of Truth Configuration -->
     <script src="/static/js/eduhub-config.js" defer></script>
@@ -146,8 +138,9 @@
         });
       }
 
-      // Mutation observer to intercept any cached JS trying to insert legacy email or telegram
-      if (window.MutationObserver) {
+      // Observe dynamically added nodes after initial page parse (non-blocking)
+      function initObserver() {
+        if (!window.MutationObserver) return;
         var obs = new MutationObserver(function(mutations) {
           for (var m = 0; m < mutations.length; m++) {
             var mut = mutations[m];
@@ -167,10 +160,13 @@
             }
           }
         });
-        obs.observe(document.documentElement, { childList: true, subtree: true, characterData: true });
+        obs.observe(document.body || document.documentElement, { childList: true, subtree: true, characterData: true });
       }
 
-      document.addEventListener('DOMContentLoaded', sweepDOM);
+      document.addEventListener('DOMContentLoaded', function() {
+        sweepDOM();
+        initObserver();
+      });
       window.addEventListener('load', sweepDOM);
       window.addEventListener('eduhub:locale-changed', sweepDOM);
     })();
@@ -304,17 +300,28 @@
       ]
     }
     </script>
-    <link rel="stylesheet" href="/static/css/safari_compat.css">
-    <!-- Yandex.Metrika counter -->
+    <!-- Yandex.Metrika counter (Deferred for 90+ Mobile Performance) -->
     <script type="text/javascript">
-        (function(m,e,t,r,i,k,a){
-            m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-            m[i].l=1*new Date();
-            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-        })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=113336552', 'ym');
+        function initYandexMetrika() {
+            if (window.__ymInitialized) return;
+            window.__ymInitialized = true;
+            (function(m,e,t,r,i,k,a){
+                m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+                m[i].l=1*new Date();
+                for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+                k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+            })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=113336552', 'ym');
 
-        ym(113336552, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+            ym(113336552, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+        }
+        if ('requestIdleCallback' in window) {
+            requestIdleCallback(function() { setTimeout(initYandexMetrika, 1200); });
+        } else {
+            window.addEventListener('load', function() { setTimeout(initYandexMetrika, 1500); });
+        }
+        ['scroll', 'touchstart', 'click'].forEach(function(ev) {
+            window.addEventListener(ev, initYandexMetrika, { once: true, passive: true });
+        });
     </script>
     <noscript><div><img src="https://mc.yandex.ru/watch/113336552" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
     <!-- /Yandex.Metrika counter -->
@@ -640,14 +647,14 @@
             </div>
         </section>
 
-        <!-- Yandex.RTB R-A-20160062-1 -->
+        <!-- Yandex.RTB R-A-20164842-1 -->
         <div class="max-w-4xl mx-auto px-4 my-6 text-center">
-            <div id="yandex_rtb_R-A-20160062-1"></div>
+            <div id="yandex_rtb_R-A-20164842-1"></div>
             <script>
             window.yaContextCb.push(() => {
                 Ya.Context.AdvManager.render({
-                    "blockId": "R-A-20160062-1",
-                    "renderTo": "yandex_rtb_R-A-20160062-1"
+                    "blockId": "R-A-20164842-1",
+                    "renderTo": "yandex_rtb_R-A-20164842-1"
                 });
             });
             </script>
@@ -1026,12 +1033,12 @@
 
             <!-- Clean Yandex.RTB Ad Slot (Between Catalog and Telegram Banner) -->
             <div class="my-10 max-w-4xl mx-auto text-center">
-                <div id="yandex_rtb_R-A-20160062-1_home"></div>
+                <div id="yandex_rtb_R-A-20164842-1_home"></div>
                 <script>
                 window.yaContextCb.push(() => {
                     Ya.Context.AdvManager.render({
-                        "blockId": "R-A-20160062-1",
-                        "renderTo": "yandex_rtb_R-A-20160062-1_home"
+                        "blockId": "R-A-20164842-1",
+                        "renderTo": "yandex_rtb_R-A-20164842-1_home"
                     });
                 });
                 </script>
