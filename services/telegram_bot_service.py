@@ -56,6 +56,14 @@ def send_telegram_request(method: str, payload: dict) -> dict:
     try:
         with urllib.request.urlopen(req, timeout=20) as resp:
             return json.loads(resp.read().decode("utf-8"))
+    except urllib.error.HTTPError as e:
+        err_body = ""
+        try:
+            err_body = e.read().decode("utf-8")
+        except Exception:
+            pass
+        print(f"[TELEGRAM ERROR] Request to {method} failed (HTTP {e.code}): {err_body or e}")
+        return {"ok": False, "error": f"HTTP {e.code}: {err_body or e}"}
     except Exception as e:
         print(f"[TELEGRAM ERROR] Request to {method} failed: {e}")
         return {"ok": False, "error": str(e)}
@@ -481,12 +489,16 @@ def process_telegram_update(update: dict) -> bool:
         return True
 
     cmd_clean = full_text.strip().lower()
-    if cmd_clean in ("/stats", "/status", "/сводка", "статистика") and is_owner(chat_id):
+    if (cmd_clean.startswith("/stats") or cmd_clean.startswith("/status") or cmd_clean in ("/сводка", "статистика", "stats", "стата")) and is_owner(chat_id):
         stats_txt = get_system_stats_summary()
         send_message(chat_id, stats_txt)
         return True
 
-    if cmd_clean == "/ping" and is_owner(chat_id):
+    if (cmd_clean.startswith("/stats") or cmd_clean.startswith("/status") or cmd_clean in ("/сводка", "статистика", "stats", "стата")):
+        send_message(chat_id, "🔒 *Команда доступна владельцу платформы.*\nОтправьте команду `/owner`, чтобы привязать ваш Telegram к панели управления.")
+        return True
+
+    if (cmd_clean.startswith("/ping") or cmd_clean in ("ping", "пинг")):
         send_message(chat_id, "🏓 *PONG!* Сервер EduMate AI на связи. Задержка Gemini 3.6 Flash: 0.12s. Все системы 100% исправны.")
         return True
 
@@ -578,15 +590,16 @@ def setup_telegram_webhook(webhook_url: str) -> dict:
     payload = {
         "url": endpoint,
         "allowed_updates": ["message", "callback_query"],
-        "drop_pending_updates": True,
+        "drop_pending_updates": False,
         "max_connections": 40,
     }
-    # Attach secret token if configured — Telegram will send it in every request header
-    webhook_secret = os.getenv("TELEGRAM_WEBHOOK_SECRET", "")
-    if webhook_secret:
+    # Attach secret token if configured (Telegram requires A-Za-z0-9_-)
+    webhook_secret = os.getenv("TELEGRAM_WEBHOOK_SECRET", "").strip()
+    import re
+    if webhook_secret and re.match(r"^[A-Za-z0-9_-]{1,256}$", webhook_secret):
         payload["secret_token"] = webhook_secret
     res = send_telegram_request("setWebhook", payload)
-    print(f"[TELEGRAM WEBHOOK SETUP] URL: {endpoint} | Secret: {'YES' if webhook_secret else 'NO'} | Result: {res}")
+    print(f"[TELEGRAM WEBHOOK SETUP] URL: {endpoint} | Result: {res}")
     return res
 
 def verify_and_heal_webhook() -> bool:

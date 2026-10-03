@@ -257,9 +257,13 @@ class LegacyDomainRedirectMiddleware(BaseHTTPMiddleware):
                 status_code=301,
             )
         # onrender.com and legacy domains -> edumate.cam (301) when ENABLE_LEGACY_REDIRECT is active
-        # Exclude billing webhooks and healthcheck to prevent third-party disruption
+        # Exclude billing webhooks, telegram webhooks, and healthcheck to prevent third-party disruption
         if (host in OLD_DOMAINS or host == OLD_DOMAIN) and ENABLE_LEGACY_REDIRECT:
-            if not request.url.path.startswith("/api/v1/billing/dodo-webhook") and request.url.path != "/health":
+            if (
+                not request.url.path.startswith("/api/v1/billing/dodo-webhook")
+                and not request.url.path.startswith("/api/v1/telegram/")
+                and request.url.path != "/health"
+            ):
                 query_str = f"?{request.url.query}" if request.url.query else ""
                 return RedirectResponse(
                     url=f"{SITE_URL}{request.url.path}{query_str}",
