@@ -41,8 +41,8 @@ if env_file.exists():
 
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "")
 TELEGRAM_API_URL = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}"
-PRODUCTION_URL = os.getenv("PRODUCTION_URL", "https://eduhub-ai.onrender.com").rstrip("/")
-IELTS_WEBAPP_URL = f"{PRODUCTION_URL}/ielts/checker"
+PRODUCTION_URL = os.getenv("PRODUCTION_URL", "https://edumate.cam").rstrip("/")
+IELTS_WEBAPP_URL = f"{PRODUCTION_URL}/tools/essay-grader"
 PRICING_URL = f"{PRODUCTION_URL}/#pricing"
 
 def send_telegram_request(method: str, payload: dict) -> dict:

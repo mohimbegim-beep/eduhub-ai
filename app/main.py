@@ -235,7 +235,15 @@ app.add_middleware(GZipMiddleware, minimum_size=1000)
 SITE_DOMAIN = os.getenv("SITE_DOMAIN", "edumate.com" if os.getenv("PRIMARY_DOMAIN_COM") else "edumate.cam")
 SITE_URL = os.getenv("SITE_URL", f"https://{SITE_DOMAIN}")
 OLD_DOMAIN = os.getenv("OLD_DOMAIN", "eduhub-ai.onrender.com")
-ENABLE_LEGACY_REDIRECT = os.getenv("ENABLE_LEGACY_REDIRECT", "false").lower() in ("true", "1")
+OLD_DOMAINS = tuple(
+    d.strip().lower()
+    for d in os.getenv(
+        "OLD_DOMAINS",
+        "eduhub-ai.onrender.com,eduhub.study,eduhub-ai.com,eduhub.ai,www.eduhub.study,www.eduhub-ai.com,www.eduhub.ai",
+    ).split(",")
+    if d.strip()
+)
+ENABLE_LEGACY_REDIRECT = os.getenv("ENABLE_LEGACY_REDIRECT", "true").lower() in ("true", "1")
 
 class LegacyDomainRedirectMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request: Request, call_next):
@@ -248,9 +256,9 @@ class LegacyDomainRedirectMiddleware(BaseHTTPMiddleware):
                 url=f"https://{target_domain}{request.url.path}{query_str}",
                 status_code=301,
             )
-        # onrender.com -> edumate.cam (301) when ENABLE_LEGACY_REDIRECT is active
+        # onrender.com and legacy domains -> edumate.cam (301) when ENABLE_LEGACY_REDIRECT is active
         # Exclude billing webhooks and healthcheck to prevent third-party disruption
-        if host == OLD_DOMAIN and ENABLE_LEGACY_REDIRECT:
+        if (host in OLD_DOMAINS or host == OLD_DOMAIN) and ENABLE_LEGACY_REDIRECT:
             if not request.url.path.startswith("/api/v1/billing/dodo-webhook") and request.url.path != "/health":
                 query_str = f"?{request.url.query}" if request.url.query else ""
                 return RedirectResponse(
@@ -427,7 +435,7 @@ if env_file.exists():
 WEBHOOK_SECRET = os.getenv("DODO_WEBHOOK_SECRET") or os.getenv("DODO_PAYMENTS_WEBHOOK_KEY", "dodo_default_webhook_secret_2026")
 GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-3.6-flash")
 REQUIRE_API_KEY = os.getenv("REQUIRE_API_KEY", "false").lower() in ("true", "1", "yes")
-PRODUCTION_URL = os.getenv("PRODUCTION_URL", "https://eduhub-ai.onrender.com").rstrip("/")
+PRODUCTION_URL = os.getenv("PRODUCTION_URL", "https://edumate.cam").rstrip("/")
 
 # Инициализация Dodo Payments
 DODO_API_KEY = os.getenv("DODO_API_KEY", "")
@@ -6729,7 +6737,7 @@ BLUEPRINTS_CATALOG = {
         "description": "Production-ready n8n workflow with webhook trigger, AI lead qualification, and automated Google Sheets/CRM pipeline.",
         "file_name": "n8n_lead_scraper.json",
         "media_type": "application/json",
-        "checkout_url": os.getenv("DODO_CHECKOUT_BLUEPRINT_1", "https://checkout.dodopayments.com/buy/pdt_0NoLUjhcuEzS9BBgujRcS?quantity=1&redirect_url=https://eduhub-ai.onrender.com%2Fstatic%2Fpayment-success.html")
+        "checkout_url": os.getenv("DODO_CHECKOUT_BLUEPRINT_1", "https://checkout.dodopayments.com/buy/pdt_0NoLUjhcuEzS9BBgujRcS?quantity=1&redirect_url=https://edumate.cam%2Fstatic%2Fpayment-success.html")
     },
     "bp_cursorrules_master": {
         "id": "bp_cursorrules_master",
@@ -6741,7 +6749,7 @@ BLUEPRINTS_CATALOG = {
         "description": "Precision rules for Cursor, Windsurf, Claude Dev & Copilot. TypeScript strictness, FastAPI patterns, OWASP safeguards.",
         "file_name": "cursorrules_master.md",
         "media_type": "text/markdown",
-        "checkout_url": os.getenv("DODO_CHECKOUT_BLUEPRINT_2", "https://checkout.dodopayments.com/buy/pdt_0NoLUjhcuEzS9BBgujRcS?quantity=1&redirect_url=https://eduhub-ai.onrender.com%2Fstatic%2Fpayment-success.html")
+        "checkout_url": os.getenv("DODO_CHECKOUT_BLUEPRINT_2", "https://checkout.dodopayments.com/buy/pdt_0NoLUjhcuEzS9BBgujRcS?quantity=1&redirect_url=https://edumate.cam%2Fstatic%2Fpayment-success.html")
     },
     "bp_viral_content_engine": {
         "id": "bp_viral_content_engine",
@@ -6753,7 +6761,7 @@ BLUEPRINTS_CATALOG = {
         "description": "60 proven hook templates, multi-platform adaptation framework (Telegram, X, LinkedIn, Reels) and automated prompt chains.",
         "file_name": "viral_content_engine.md",
         "media_type": "text/markdown",
-        "checkout_url": os.getenv("DODO_CHECKOUT_BLUEPRINT_3", "https://checkout.dodopayments.com/buy/pdt_0NoLUjhcuEzS9BBgujRcS?quantity=1&redirect_url=https://eduhub-ai.onrender.com%2Fstatic%2Fpayment-success.html")
+        "checkout_url": os.getenv("DODO_CHECKOUT_BLUEPRINT_3", "https://checkout.dodopayments.com/buy/pdt_0NoLUjhcuEzS9BBgujRcS?quantity=1&redirect_url=https://edumate.cam%2Fstatic%2Fpayment-success.html")
     },
     "bp_stem_anki_deck": {
         "id": "bp_stem_anki_deck",
@@ -6765,7 +6773,7 @@ BLUEPRINTS_CATALOG = {
         "description": "1-click Anki import deck: Cambridge Examiner academic collocations, transitional discourse markers, and STEM algorithmic proofs.",
         "file_name": "stem_anki_deck.tsv",
         "media_type": "text/tab-separated-values",
-        "checkout_url": os.getenv("DODO_CHECKOUT_BLUEPRINT_4", "https://checkout.dodopayments.com/buy/pdt_0NoLUjhcuEzS9BBgujRcS?quantity=1&redirect_url=https://eduhub-ai.onrender.com%2Fstatic%2Fpayment-success.html")
+        "checkout_url": os.getenv("DODO_CHECKOUT_BLUEPRINT_4", "https://checkout.dodopayments.com/buy/pdt_0NoLUjhcuEzS9BBgujRcS?quantity=1&redirect_url=https://edumate.cam%2Fstatic%2Fpayment-success.html")
     },
     "bp_content_factory_reels": {
         "id": "bp_content_factory_reels",
@@ -6777,7 +6785,7 @@ BLUEPRINTS_CATALOG = {
         "description": "Готовый контент-завод: вводите 1 тему — получаете 30 сценариев с хуками, текстом озвучки, промптами для AI-видео и хештегами прямо в Google Таблицу.",
         "file_name": "content_factory_reels.json",
         "media_type": "application/json",
-        "checkout_url": os.getenv("DODO_CHECKOUT_BLUEPRINT_5", "https://checkout.dodopayments.com/buy/pdt_0NoLUjhcuEzS9BBgujRcS?quantity=1&redirect_url=https://eduhub-ai.onrender.com%2Fstatic%2Fpayment-success.html")
+        "checkout_url": os.getenv("DODO_CHECKOUT_BLUEPRINT_5", "https://checkout.dodopayments.com/buy/pdt_0NoLUjhcuEzS9BBgujRcS?quantity=1&redirect_url=https://edumate.cam%2Fstatic%2Fpayment-success.html")
     },
     "bp_telegram_bot_factory": {
         "id": "bp_telegram_bot_factory",
@@ -6789,7 +6797,7 @@ BLUEPRINTS_CATALOG = {
         "description": "Автономный бот без сторонних библиотек: интерактивные кнопки, меню товаров, сбор контактов клиентов и мгновенная пересылка заявок владельцу в личку.",
         "file_name": "telegram_bot_factory.py",
         "media_type": "text/x-python",
-        "checkout_url": os.getenv("DODO_CHECKOUT_BLUEPRINT_6", "https://checkout.dodopayments.com/buy/pdt_0NoLUjhcuEzS9BBgujRcS?quantity=1&redirect_url=https://eduhub-ai.onrender.com%2Fstatic%2Fpayment-success.html")
+        "checkout_url": os.getenv("DODO_CHECKOUT_BLUEPRINT_6", "https://checkout.dodopayments.com/buy/pdt_0NoLUjhcuEzS9BBgujRcS?quantity=1&redirect_url=https://edumate.cam%2Fstatic%2Fpayment-success.html")
     },
     "bp_marketplace_card_factory": {
         "id": "bp_marketplace_card_factory",
@@ -6801,7 +6809,7 @@ BLUEPRINTS_CATALOG = {
         "description": "Промпт-матрица для селлеров: SEO-заголовок, 5 продающих буллетов, LSI-описание до 3500 знаков и блокировка 5 главных возражений покупателей.",
         "file_name": "marketplace_card_factory.md",
         "media_type": "text/markdown",
-        "checkout_url": os.getenv("DODO_CHECKOUT_BLUEPRINT_7", "https://checkout.dodopayments.com/buy/pdt_0NoLUjhcuEzS9BBgujRcS?quantity=1&redirect_url=https://eduhub-ai.onrender.com%2Fstatic%2Fpayment-success.html")
+        "checkout_url": os.getenv("DODO_CHECKOUT_BLUEPRINT_7", "https://checkout.dodopayments.com/buy/pdt_0NoLUjhcuEzS9BBgujRcS?quantity=1&redirect_url=https://edumate.cam%2Fstatic%2Fpayment-success.html")
     },
     "bp_cold_outreach_factory": {
         "id": "bp_cold_outreach_factory",
@@ -6813,7 +6821,7 @@ BLUEPRINTS_CATALOG = {
         "description": "Психологические скрипты касаний с Open Rate 78%: метод аудита одной ошибки, B2B-зацепки в Telegram и деликатные follow-up цепочки без спама.",
         "file_name": "cold_outreach_factory.md",
         "media_type": "text/markdown",
-        "checkout_url": os.getenv("DODO_CHECKOUT_BLUEPRINT_8", "https://checkout.dodopayments.com/buy/pdt_0NoLUjhcuEzS9BBgujRcS?quantity=1&redirect_url=https://eduhub-ai.onrender.com%2Fstatic%2Fpayment-success.html")
+        "checkout_url": os.getenv("DODO_CHECKOUT_BLUEPRINT_8", "https://checkout.dodopayments.com/buy/pdt_0NoLUjhcuEzS9BBgujRcS?quantity=1&redirect_url=https://edumate.cam%2Fstatic%2Fpayment-success.html")
     },
     "bp_prompt_engineer_vault": {
         "id": "bp_prompt_engineer_vault",
@@ -6825,7 +6833,7 @@ BLUEPRINTS_CATALOG = {
         "description": "500+ проверенных промптов для Claude 3.7 Sonnet, GPT-4o, DeepSeek-R1 и Midjourney v7: вирусный маркетинг, кодинг, B2B продажи, предметные фото для маркетплейсов и гранты.",
         "file_name": "prompt_engineer_vault.json",
         "media_type": "application/json",
-        "checkout_url": os.getenv("DODO_CHECKOUT_BLUEPRINT_9", "https://checkout.dodopayments.com/buy/pdt_0NoLUjhcuEzS9BBgujRcS?quantity=1&redirect_url=https://eduhub-ai.onrender.com%2Fstatic%2Fpayment-success.html")
+        "checkout_url": os.getenv("DODO_CHECKOUT_BLUEPRINT_9", "https://checkout.dodopayments.com/buy/pdt_0NoLUjhcuEzS9BBgujRcS?quantity=1&redirect_url=https://edumate.cam%2Fstatic%2Fpayment-success.html")
     },
     "bp_ai_finance_tracker": {
         "id": "bp_ai_finance_tracker",
@@ -6837,7 +6845,7 @@ BLUEPRINTS_CATALOG = {
         "description": "Готовая финансовая модель: учет доходов и расходов, расчет точки безубыточности, юнит-экономика бизнеса с авто-формулами SUMIFS, XLOOKUP и индикаторами маржи.",
         "file_name": "ai_finance_tracker_2026.csv",
         "media_type": "text/csv",
-        "checkout_url": os.getenv("DODO_CHECKOUT_BLUEPRINT_10", "https://checkout.dodopayments.com/buy/pdt_0NoLUjhcuEzS9BBgujRcS?quantity=1&redirect_url=https://eduhub-ai.onrender.com%2Fstatic%2Fpayment-success.html")
+        "checkout_url": os.getenv("DODO_CHECKOUT_BLUEPRINT_10", "https://checkout.dodopayments.com/buy/pdt_0NoLUjhcuEzS9BBgujRcS?quantity=1&redirect_url=https://edumate.cam%2Fstatic%2Fpayment-success.html")
     },
     "bp_ai_voice_receptionist": {
         "id": "bp_ai_voice_receptionist",
@@ -6849,7 +6857,7 @@ BLUEPRINTS_CATALOG = {
         "description": "Автономный Telegram-бот с приемом голосовых и текстовых сообщений клиентов, базой знаний FAQ, автоматическим сбором телефонных номеров и пересылкой заявок в CRM.",
         "file_name": "ai_voice_receptionist_bot.py",
         "media_type": "text/x-python",
-        "checkout_url": os.getenv("DODO_CHECKOUT_BLUEPRINT_11", "https://checkout.dodopayments.com/buy/pdt_0NoLUjhcuEzS9BBgujRcS?quantity=1&redirect_url=https://eduhub-ai.onrender.com%2Fstatic%2Fpayment-success.html")
+        "checkout_url": os.getenv("DODO_CHECKOUT_BLUEPRINT_11", "https://checkout.dodopayments.com/buy/pdt_0NoLUjhcuEzS9BBgujRcS?quantity=1&redirect_url=https://edumate.cam%2Fstatic%2Fpayment-success.html")
     }
 }
 

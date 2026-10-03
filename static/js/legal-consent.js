@@ -10,6 +10,7 @@
 const EduHubLegal = (function() {
     const COOKIE_CONSENT_KEY = 'cookie_consent';
     const CHECKOUT_CONSENT_KEY = 'checkout_legal_confirmed';
+    const MIGRATION_BANNER_KEY = 'edumate_migration_dismissed';
 
     let pendingCheckoutElement = null;
 
@@ -17,6 +18,9 @@ const EduHubLegal = (function() {
         en: {
             cookie_msg: "We use cookies for security and personalization. By continuing to use EduMate AI, you agree to our <a href='/terms' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Terms of Service</a>, <a href='/privacy' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Privacy Policy</a>, and <a href='/refund' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Refund Policy</a>.",
             cookie_btn: "Accept & Continue",
+            migration_banner_text: "📢 <strong>We have officially moved to edumate.cam!</strong> All your accounts, balances, and AI tools are fully preserved.",
+            migration_banner_cta: "Switch to edumate.cam →",
+            migration_banner_dismiss: "Got it",
             micro_consent: "By clicking, you agree to the <a href='/terms' target='_blank' class='underline text-slate-300 hover:text-white'>Terms of Service</a> and our <a href='/refund' target='_blank' class='underline text-slate-300 hover:text-white'>14-day money-back guarantee</a>. Cancel anytime in 1 click.",
             modal_badge: "Legal Confirmation & Consumer Assurance",
             modal_title: "Review Order & 14-Day Refund Guarantee",
@@ -42,6 +46,9 @@ const EduHubLegal = (function() {
         ru: {
             cookie_msg: "Мы используем cookies для безопасности и персонализации. Продолжая использовать EduMate AI, вы соглашаетесь с <a href='/terms' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Условиями обслуживания</a>, <a href='/privacy' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Политикой конфиденциальности</a> и <a href='/refund' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Политикой возвратов</a>.",
             cookie_btn: "Принять и продолжить",
+            migration_banner_text: "📢 <strong>Мы официально переехали на edumate.cam!</strong> Все ваши данные, балансы и инструменты сохранены. Пожалуйста, обновите закладки в браузере.",
+            migration_banner_cta: "Перейти на edumate.cam →",
+            migration_banner_dismiss: "Понятно",
             micro_consent: "Нажимая кнопку, вы принимаете <a href='/terms' target='_blank' class='underline text-slate-300 hover:text-white'>Условия оферты</a> и <a href='/refund' target='_blank' class='underline text-slate-300 hover:text-white'>14-дневную гарантию возврата</a>. Отмена подписки в 1 клик в любое время.",
             modal_badge: "Правовое подтверждение и защита покупателя",
             modal_title: "Подтверждение условий заказа и 14-дневной гарантии возврата",
@@ -67,6 +74,9 @@ const EduHubLegal = (function() {
         uz: {
             cookie_msg: "Xavfsizlik va shaxsiylashtirish uchun cookies fayllaridan foydalanamiz. EduMate AI dan foydalanishni davom ettirish orqali siz <a href='/terms' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Xizmat ko\'rsatish shartlari</a>, <a href='/privacy' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Maxfiylik siyosati</a> va <a href='/refund' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Qaytarish siyosati</a>ga rozilik bildirasiz.",
             cookie_btn: "Qabul qilish va davom etish",
+            migration_banner_text: "📢 <strong>Biz rasmiy edumate.cam domeniga ko'chdik!</strong> Barcha hisoblar, balanslar va vositalar to'liq saqlangan. Iltimos, brauzeringiz xatcho'plarini yangilang.",
+            migration_banner_cta: "edumate.cam ga o'tish →",
+            migration_banner_dismiss: "Tushunarli",
             micro_consent: "Tugmani bosish orqali siz <a href='/terms' target='_blank' class='underline text-slate-300 hover:text-white'>Ommaviy oferta shartlari</a> va <a href='/refund' target='_blank' class='underline text-slate-300 hover:text-white'>14 kunlik to\'lovni qaytarish kafolati</a>ni qabul qilasiz. Obunani istalgan vaqtda 1 bosishda bekor qilish mumkin.",
             modal_badge: "Huquqiy tasdiqlash va xaridor himoyasi",
             modal_title: "Buyurtma shartlari va 14 kunlik qaytarish kafolatini tasdiqlash",
@@ -92,6 +102,9 @@ const EduHubLegal = (function() {
         es: {
             cookie_msg: "Utilizamos cookies para seguridad y personalización. Al continuar utilizando EduMate AI, aceptas nuestros <a href='/terms' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Términos de servicio</a>, <a href='/privacy' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Política de privacidad</a> y <a href='/refund' target='_blank' class='underline text-blue-400 hover:text-blue-300 font-medium'>Política de reembolsos</a>.",
             cookie_btn: "Aceptar y continuar",
+            migration_banner_text: "📢 <strong>¡Nos hemos mudado oficialmente a edumate.cam!</strong> Todas sus cuentas, saldos y herramientas se conservan. Por favor, actualice sus marcadores.",
+            migration_banner_cta: "Ir a edumate.cam →",
+            migration_banner_dismiss: "Entendido",
             micro_consent: "Al hacer clic, aceptas los <a href='/terms' target='_blank' class='underline text-slate-300 hover:text-white'>Términos del servicio</a> y nuestra <a href='/refund' target='_blank' class='underline text-slate-300 hover:text-white'>garantía de reembolso de 14 días</a>. Cancela en cualquier momento con 1 clic.",
             modal_badge: "Confirmación Legal y Protección del Comprador",
             modal_title: "Confirmación de Pedido y Garantía de Reembolso de 14 Días",
@@ -497,10 +510,87 @@ const EduHubLegal = (function() {
         }
     }
 
+    // 5. Official Domain Migration Announcement Banner
+    function initMigrationBanner() {
+        if (localStorage.getItem(MIGRATION_BANNER_KEY) === 'true' || localStorage.getItem(MIGRATION_BANNER_KEY) === '1') {
+            return;
+        }
+
+        let banner = document.getElementById('edumate-migration-banner');
+        if (!banner) {
+            banner = document.createElement('div');
+            banner.id = 'edumate-migration-banner';
+            banner.className = 'w-full bg-gradient-to-r from-blue-950 via-slate-900 to-indigo-950 border-b border-blue-500/40 text-white text-xs sm:text-sm py-2 px-3 sm:px-4 shadow-lg transition-all duration-300 relative z-50';
+            banner.innerHTML = `
+                <div class="max-w-7xl mx-auto flex items-center justify-between gap-3 flex-wrap sm:flex-nowrap">
+                    <div class="flex items-center gap-2 flex-grow min-w-0">
+                        <span class="text-base sm:text-lg shrink-0">🚀</span>
+                        <div class="text-slate-200 leading-snug">
+                            <span id="edumate-migration-text"></span>
+                            <a id="edumate-migration-link" href="https://edumate.cam" class="font-bold text-amber-300 hover:text-amber-200 underline decoration-amber-400/60 ml-1.5 whitespace-nowrap inline-flex items-center gap-0.5">edumate.cam</a>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 shrink-0 ml-auto sm:ml-0">
+                        <button id="edumate-migration-dismiss-btn" onclick="EduHubLegal.dismissMigrationBanner()" class="bg-blue-600/30 hover:bg-blue-600/50 border border-blue-400/40 text-blue-200 hover:text-white px-2.5 py-1 rounded-lg text-xs font-semibold cursor-pointer transition">
+                        </button>
+                        <button onclick="EduHubLegal.dismissMigrationBanner()" class="text-slate-400 hover:text-white p-1 text-sm transition cursor-pointer" title="Dismiss">✕</button>
+                    </div>
+                </div>
+            `;
+            if (document.body.firstChild) {
+                document.body.insertBefore(banner, document.body.firstChild);
+            } else {
+                document.body.appendChild(banner);
+            }
+        }
+
+        renderMigrationBannerContent();
+    }
+
+    function renderMigrationBannerContent() {
+        const lang = getLocale();
+        const dict = DICTIONARY[lang] || DICTIONARY.en;
+        const textEl = document.getElementById('edumate-migration-text');
+        const linkEl = document.getElementById('edumate-migration-link');
+        const btnEl = document.getElementById('edumate-migration-dismiss-btn');
+
+        if (textEl) textEl.innerHTML = dict.migration_banner_text;
+        if (btnEl) btnEl.textContent = dict.migration_banner_dismiss;
+        if (linkEl) {
+            const currentPath = window.location.pathname + window.location.search;
+            linkEl.href = 'https://edumate.cam' + currentPath;
+            if (window.location.hostname !== 'edumate.cam') {
+                linkEl.textContent = dict.migration_banner_cta;
+            } else {
+                linkEl.textContent = "edumate.cam";
+            }
+        }
+    }
+
+    function dismissMigrationBanner() {
+        localStorage.setItem(MIGRATION_BANNER_KEY, '1');
+        const banner = document.getElementById('edumate-migration-banner');
+        if (banner) {
+            banner.style.maxHeight = banner.offsetHeight + 'px';
+            banner.style.overflow = 'hidden';
+            banner.style.transition = 'all 0.3s ease';
+            requestAnimationFrame(() => {
+                banner.style.maxHeight = '0px';
+                banner.style.paddingTop = '0px';
+                banner.style.paddingBottom = '0px';
+                banner.style.opacity = '0';
+            });
+            setTimeout(() => {
+                if (banner && banner.parentNode) banner.remove();
+            }, 350);
+        }
+    }
+
     function onLanguageChanged() {
         renderCookieBarContent();
         renderCheckoutModalContent();
         updateMicroConsent();
+        renderMigrationBannerContent();
         const cardToggle = document.getElementById('promax-autorenew-card-toggle');
         if (cardToggle) {
             toggleProMaxCardPlan(cardToggle.checked, false);
@@ -509,6 +599,7 @@ const EduHubLegal = (function() {
 
     // Bootstrap
     function init() {
+        initMigrationBanner();
         initCookieBar();
         initPreCheckoutModal();
         setupCheckoutInterceptors();
@@ -538,6 +629,7 @@ const EduHubLegal = (function() {
         closeCheckoutModal,
         confirmCheckoutConsent,
         openCheckoutModal,
+        dismissMigrationBanner,
         onLanguageChanged,
         updateMicroConsent,
         toggleProMaxCardPlan
