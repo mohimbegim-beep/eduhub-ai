@@ -4079,7 +4079,7 @@ async def render_robots(request: Request):
     Robots.txt для поисковых систем (Google, Bing, Yandex) и ИИ-агентов (GPTBot, ClaudeBot, PerplexityBot, OAI-SearchBot).
     """
     host = (request.headers.get("host") or "").split(":")[0].lower()
-    base_url = f"https://{host}" if host in ("edumate.cam", "edumate.com", "eduhub-ai.onrender.com") else "https://edumate.cam"
+    base_url = f"https://{host}" if host in ("edumate.cam", "edumate.com") else "https://edumate.cam"
 
     robots_text = (
         "User-agent: *\n"
@@ -4155,7 +4155,7 @@ async def render_sitemap(request: Request):
     Автоматическая генерация XML-карты сайта для поисковых систем Google, Bing, Yandex.
     """
     host = (request.headers.get("host") or "").split(":")[0].lower()
-    base_url = f"https://{host}" if host in ("edumate.cam", "edumate.com", "eduhub-ai.onrender.com") else "https://edumate.cam"
+    base_url = f"https://{host}" if host in ("edumate.cam", "edumate.com") else "https://edumate.cam"
     urls = [
         {"loc": f"{base_url}/", "priority": "1.0", "changefreq": "daily"},
         {"loc": f"{base_url}/tools", "priority": "1.0", "changefreq": "daily"},
@@ -7830,7 +7830,7 @@ async def telegram_autopilot_webhook_info():
         "status": "active",
         "bot_username": "eduhub_autopilot_bot",
         "service": "EduMate AI Autonomous Telegram Sales Agent",
-        "platform_url": "https://eduhub-ai.onrender.com"
+        "platform_url": "https://edumate.cam"
     }
 
 @app.post("/api/v1/telegram/autopilot-webhook", tags=["Telegram Bot"])
@@ -7871,21 +7871,21 @@ async def telegram_autopilot_webhook(request: Request):
     menu_markup = {
         "inline_keyboard": [
             [
-                {"text": "👩‍🏫 Учителям: Уроки & Тесты ($1)", "url": "https://eduhub-ai.onrender.com/tools/teacher-lab"}
+                {"text": "👩‍🏫 Учителям: Уроки & Тесты ($1)", "url": "https://edumate.cam/tools/teacher-lab"}
             ],
             [
-                {"text": "📦 Селлерам Uzum: Карточки ($1)", "url": "https://eduhub-ai.onrender.com/tools/marketplace-lab"},
-                {"text": "📊 Excel-Маг формул ($1)", "url": "https://eduhub-ai.onrender.com/tools/excel-wizard"}
+                {"text": "📦 Селлерам Uzum: Карточки ($1)", "url": "https://edumate.cam/tools/marketplace-lab"},
+                {"text": "📊 Excel-Маг формул ($1)", "url": "https://edumate.cam/tools/excel-wizard"}
             ],
             [
-                {"text": "🎓 Студентам: Гранты & IELTS ($1)", "url": "https://eduhub-ai.onrender.com/tools/sop-builder"},
-                {"text": "🏭 Все Заводы & Промпты ($1)", "url": "https://eduhub-ai.onrender.com/blueprints"}
+                {"text": "🎓 Студентам: Гранты & IELTS ($1)", "url": "https://edumate.cam/tools/sop-builder"},
+                {"text": "🏭 Все Заводы & Промпты ($1)", "url": "https://edumate.cam/blueprints"}
             ],
             [
-                {"text": "🎁 Бандлы «Все-в-Одном» со скидкой 95% ($2.99)", "url": "https://eduhub-ai.onrender.com/blueprints"}
+                {"text": "🎁 Бандлы «Все-в-Одном» со скидкой 95% ($2.99)", "url": "https://edumate.cam/blueprints"}
             ],
             [
-                {"text": "🌐 Открыть веб-платформу EduHub", "url": "https://eduhub-ai.onrender.com"}
+                {"text": "🌐 Открыть веб-платформу EduHub", "url": "https://edumate.cam"}
             ]
         ]
     }
@@ -7910,7 +7910,7 @@ async def telegram_autopilot_webhook(request: Request):
     if client:
         try:
             sys_prompt = (
-                "Ты — дружелюбный ИИ-консультант образовательной платформы EduMate AI (https://eduhub-ai.onrender.com). "
+                "Ты — дружелюбный ИИ-консультант образовательной платформы EduMate AI (https://edumate.cam). "
                 "Все наши инструменты стоят ровно $1.00 (или комбо-бандлы по $2.99). "
                 "Ответь пользователю кратко, дружелюбно и вежливо (до 80 слов), реши его вопрос и порекомендуй подходящий инструмент на сайте."
             )
@@ -7933,9 +7933,9 @@ async def telegram_autopilot_webhook(request: Request):
         ai_reply = (
             f"Спасибо за вопрос: «{text}»!\n\n"
             "Я зафиксировал ваш запрос. Вы можете протестировать наши ИИ-инструменты прямо сейчас на платформе EduHub:\n"
-            "• Готовые планы уроков и тесты: https://eduhub-ai.onrender.com/tools/teacher-lab\n"
-            "• Карточки для Uzum и маркетплейсов: https://eduhub-ai.onrender.com/tools/marketplace-lab\n"
-            "• Полный каталог цифровых продуктов по $1: https://eduhub-ai.onrender.com/blueprints"
+            "• Готовые планы уроков и тесты: https://edumate.cam/tools/teacher-lab\n"
+            "• Карточки для Uzum и маркетплейсов: https://edumate.cam/tools/marketplace-lab\n"
+            "• Полный каталог цифровых продуктов по $1: https://edumate.cam/blueprints"
         )
 
     send_tg(chat_id, ai_reply, menu_markup)
@@ -7959,7 +7959,7 @@ AUTONOMOUS_POSTS = [
             "🔥 <i>Стоимость: всего $1.00 (разовый доступ) вместо усталости.</i>"
         ),
         "buttons": [
-            [{"text": "👉 Попробовать Teacher Lab ($1.00)", "url": "https://eduhub-ai.onrender.com/tools/teacher-lab"}],
+            [{"text": "👉 Попробовать Teacher Lab ($1.00)", "url": "https://edumate.cam/tools/teacher-lab"}],
             [{"text": "🤖 Написать боту-помощнику", "url": "https://t.me/eduhub_autopilot_bot"}]
         ]
     },
@@ -7974,7 +7974,7 @@ AUTONOMOUS_POSTS = [
             "⚡️ <i>Стоимость: всего $1.00 за разовый вывод товара в ТОП!</i>"
         ),
         "buttons": [
-            [{"text": "🚀 Вывести товар в ТОП ($1.00)", "url": "https://eduhub-ai.onrender.com/tools/marketplace-lab"}],
+            [{"text": "🚀 Вывести товар в ТОП ($1.00)", "url": "https://edumate.cam/tools/marketplace-lab"}],
             [{"text": "🤖 Написать боту-помощнику", "url": "https://t.me/eduhub_autopilot_bot"}]
         ]
     },
@@ -7989,7 +7989,7 @@ AUTONOMOUS_POSTS = [
             "⚡️ <i>Экономьте от 5 часов рабочего времени каждую неделю за $1.00!</i>"
         ),
         "buttons": [
-            [{"text": "📊 Создать формулу за 3 сек ($1.00)", "url": "https://eduhub-ai.onrender.com/tools/excel-wizard"}],
+            [{"text": "📊 Создать формулу за 3 сек ($1.00)", "url": "https://edumate.cam/tools/excel-wizard"}],
             [{"text": "🤖 Написать боту-помощнику", "url": "https://t.me/eduhub_autopilot_bot"}]
         ]
     },
@@ -8005,7 +8005,7 @@ AUTONOMOUS_POSTS = [
             "💎 <i>Твой билет в университет мечты всего за $1.00!</i>"
         ),
         "buttons": [
-            [{"text": "🎓 Проверить эссе и SOP ($1.00)", "url": "https://eduhub-ai.onrender.com/tools/sop-builder"}],
+            [{"text": "🎓 Проверить эссе и SOP ($1.00)", "url": "https://edumate.cam/tools/sop-builder"}],
             [{"text": "🤖 Написать боту-помощнику", "url": "https://t.me/eduhub_autopilot_bot"}]
         ]
     },
@@ -8023,7 +8023,7 @@ AUTONOMOUS_POSTS = [
             "💰 <b>Всего $2.99 разово</b> с пожизненным доступом!"
         ),
         "buttons": [
-            [{"text": "🎁 Забрать бандл со скидкой 95% ($2.99)", "url": "https://eduhub-ai.onrender.com/blueprints"}],
+            [{"text": "🎁 Забрать бандл со скидкой 95% ($2.99)", "url": "https://edumate.cam/blueprints"}],
             [{"text": "🤖 Написать боту-помощнику", "url": "https://t.me/eduhub_autopilot_bot"}]
         ]
     }
@@ -8038,7 +8038,7 @@ async def autonomous_keepalive_daemon():
     await asyncio.sleep(20)
     while True:
         try:
-            url = "https://eduhub-ai.onrender.com/health"
+            url = "https://edumate.cam/health"
             req = urllib.request.Request(url, headers={"User-Agent": "EduHub-KeepAlive-24-7/1.0"})
             urllib.request.urlopen(req, timeout=10)
         except Exception:

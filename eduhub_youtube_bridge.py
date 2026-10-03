@@ -63,7 +63,7 @@ class InterAgentBridge:
                 if k in clean_key:
                     route = v
                     break
-            base_url = f"https://eduhub-ai.onrender.com/{route}"
+            base_url = f"https://edumate.cam/{route}"
 
         # Добавление строгих UTM-меток
         channel_slug = target_channel.lower().replace(" ", "_")
@@ -148,25 +148,25 @@ class EduHubSaaSAgent:
             "product_name": "AI E-com Factory",
             "hook_pain": "Селлеры тратят по 3 дня на SEO-описания и карточки Uzum/Wildberries, теряя продажи в сезон.",
             "target_channel": "Channel_5_Marketplace_AI",
-            "custom_url": "https://eduhub-ai.onrender.com/tools/marketplace-lab"
+            "custom_url": "https://edumate.cam/tools/marketplace-lab"
         },
         {
             "product_name": "IELTS Academic Cambridge Evaluator AI Examiner",
             "hook_pain": "Студенты платят $50/час репетиторам, но срезаются на Task 2 из-за грамматических клише.",
             "target_channel": "Channel_1_Edu_Exam",
-            "custom_url": "https://eduhub-ai.onrender.com/tools/essay-grader"
+            "custom_url": "https://edumate.cam/tools/essay-grader"
         },
         {
             "product_name": "ATS Resume Tailor & Humanizer",
             "hook_pain": "92% резюме отсеиваются роботами ATS до того, как их увидит живой HR-рекрутер.",
             "target_channel": "Channel_3_Career_Tech",
-            "custom_url": "https://eduhub-ai.onrender.com/tools/ats-resume"
+            "custom_url": "https://edumate.cam/tools/ats-resume"
         },
         {
             "product_name": "AI Teacher Lab & Lesson Wizard",
             "hook_pain": "Преподаватели тратят по 4 часа каждый вечер на ручную проверку тестов и планов уроков.",
             "target_channel": "Channel_2_Teacher_Tools",
-            "custom_url": "https://eduhub-ai.onrender.com/tools/teacher-lab"
+            "custom_url": "https://edumate.cam/tools/teacher-lab"
         }
     ]
 
@@ -203,7 +203,7 @@ class YouTubeMediaAgent:
         product = task.get("promote_product", "EduMate AI")
         pain = task.get("user_pain_point", "")
         channel = task.get("target_youtube_slot", "Main_Channel")
-        url = task.get("destination_url", "https://eduhub-ai.onrender.com/")
+        url = task.get("destination_url", "https://edumate.cam/")
 
         return {
             "title": f"Секрет ИИ: Как решить проблему '{product}' за 60 секунд | Лайфхак",
@@ -302,7 +302,7 @@ class QABridgeAgent:
 
         # 2. Проверка destination_url
         url = data.get("data", {}).get("destination_url", "")
-        if not url.startswith("https://eduhub-ai.onrender.com"):
+        if not (url.startswith("https://edumate.cam") or url.startswith("https://eduhub-ai.onrender.com")):
             errors.append(f"Недопустимый домен в destination_url: {url}")
         elif "utm_source=youtube_shorts" not in url:
             errors.append(f"Отсутствуют обязательные UTM-метки в destination_url: {url}")

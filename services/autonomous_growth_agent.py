@@ -34,9 +34,9 @@ def generate_growth_pack(topic_focus: str = "exam_session_and_career") -> dict:
         "created_at": now_iso,
         "theme": topic_focus,
         "tripwire_offers": {
-            "ats_resume": {"price": "$1", "url": "https://eduhub-ai.onrender.com/tools/ats-resume"},
-            "promax_trial": {"price": "$1", "url": "https://eduhub-ai.onrender.com/#pricing"},
-            "blueprints": {"price": "$1", "url": "https://eduhub-ai.onrender.com/blueprints"}
+            "ats_resume": {"price": "$1", "url": "https://edumate.cam/tools/ats-resume"},
+            "promax_trial": {"price": "$1", "url": "https://edumate.cam/#pricing"},
+            "blueprints": {"price": "$1", "url": "https://edumate.cam/blueprints"}
         },
         "viral_video_scripts": [
             {
@@ -70,7 +70,7 @@ def generate_growth_pack(topic_focus: str = "exam_session_and_career") -> dict:
                 "hook_first_3_sec": "Ты застрял на 6.0 по IELTS Writing? Вот ошибка, о которой молчат репетиторы.",
                 "visual_cues": "Красные пометки на эссе -> моментальный разбор по 4 критериям Cambridge.",
                 "body_content": "Ты используешь слабые связки вместо академических оборотов. Загрузи эссе в EduHub Essay Grader: он оценит работу по официальным критериям Task Response, Cohesion, Lexical Resource и покажет версию Band 9.0.",
-                "cta_caption": "Проверь свое эссе бесплатно на eduhub-ai.onrender.com ✨"
+                "cta_caption": "Проверь свое эссе бесплатно на edumate.cam ✨"
             }
         ],
         "telegram_posts": {
@@ -86,7 +86,7 @@ def generate_growth_pack(topic_focus: str = "exam_session_and_career") -> dict:
                     "🛡️ Платежи защищены Dodo Payments Inc. (Merchant of Record). 14 дней гарантии возврата."
                 ),
                 "button_text": "Попробовать Pro Max за $1 →",
-                "button_url": "https://eduhub-ai.onrender.com/#pricing"
+                "button_url": "https://edumate.cam/#pricing"
             },
             "uz": {
                 "title": "🎓 Sessiyada vaqtni 5 barobar tejash siri: EduMate AI",
@@ -100,7 +100,7 @@ def generate_growth_pack(topic_focus: str = "exam_session_and_career") -> dict:
                     "🛡️ Dodo Payments Inc. orqali 100% xavfsiz to'lov va 14 kunlik qaytarish kafolati."
                 ),
                 "button_text": "Pro Max 1$ ga boshlash →",
-                "button_url": "https://eduhub-ai.onrender.com/#pricing"
+                "button_url": "https://edumate.cam/#pricing"
             },
             "en": {
                 "title": "⚡ Crush Your Academic Deadlines with EduMate AI Copilot",
@@ -113,7 +113,7 @@ def generate_growth_pack(topic_focus: str = "exam_session_and_career") -> dict:
                     "🛡️ Payments securely processed by Dodo Payments Inc. with a 14-day 100% money-back guarantee."
                 ),
                 "button_text": "Claim 3-Day Pass for $1 →",
-                "button_url": "https://eduhub-ai.onrender.com/#pricing"
+                "button_url": "https://edumate.cam/#pricing"
             },
             "es": {
                 "title": "📚 Domina tus Entregas Académicas con EduMate AI",
@@ -126,7 +126,7 @@ def generate_growth_pack(topic_focus: str = "exam_session_and_career") -> dict:
                     "🛡️ Pagos procesados de forma segura por Dodo Payments Inc. Garantía de devolución de 14 días."
                 ),
                 "button_text": "Obtener Pro Max por $1 →",
-                "button_url": "https://eduhub-ai.onrender.com/#pricing"
+                "button_url": "https://edumate.cam/#pricing"
             }
         },
         "campus_ambassador_pitch": {
@@ -135,7 +135,7 @@ def generate_growth_pack(topic_focus: str = "exam_session_and_career") -> dict:
             "sample_pitch_message": (
                 "Ребята, всем привет! Чтобы закрыть курсачи и сессию без бессонных ночей, "
                 "я подключил для нашей группы промо-доступ к академическому ИИ EduMate AI: "
-                "https://eduhub-ai.onrender.com. По нашей ссылке 3-дневный Pro Max со всеми генерациями стоит всего $1. "
+                "https://edumate.cam. По нашей ссылке 3-дневный Pro Max со всеми генерациями стоит всего $1. "
                 "Там есть сканер резюме, оформление ГОСТ-списков и дипломный ассистент."
             )
         },
@@ -143,7 +143,7 @@ def generate_growth_pack(topic_focus: str = "exam_session_and_career") -> dict:
             "subject": "Автоматизация проверки домашних заданий и поурочных планов для репетиторов",
             "body": (
                 "Здравствуйте! Вы тратите по 2–3 часа каждый вечер на рутинную проверку эссе учеников и составление тестов? "
-                "Мы разработали специализированный модуль Teacher Lab & Essay Grader (https://eduhub-ai.onrender.com/tools/teacher-lab). "
+                "Мы разработали специализированный модуль Teacher Lab & Essay Grader (https://edumate.cam/tools/teacher-lab). "
                 "Он генерирует поурочный план на 45 минут с тестами и проверяет студенческие работы за 15 секунд с развернутым отчетом для родителей. "
                 "В тариф Tutor Kit ($39/мес) включены безлимитные проверки и генерация брендированных заданий."
             )

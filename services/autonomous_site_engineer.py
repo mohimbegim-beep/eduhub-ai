@@ -41,7 +41,7 @@ if str(BASE_DIR) not in sys.path:
 
 # Configuration
 DEFAULT_INTERVAL_SECONDS = 21600  # 6 Hours
-TARGET_PRODUCTION_URL = os.getenv("PRODUCTION_URL", "https://eduhub-ai.onrender.com")
+TARGET_PRODUCTION_URL = os.getenv("PRODUCTION_URL", "https://edumate.cam")
 REPORTS_DIR = BASE_DIR / "reports"
 DATA_DIR = BASE_DIR / "data"
 STATE_FILE = DATA_DIR / "site_engineer_state.json"

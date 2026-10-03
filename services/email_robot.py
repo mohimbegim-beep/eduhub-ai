@@ -53,7 +53,7 @@ SENDER_EMAIL = os.getenv("SMTP_SENDER_EMAIL", "")
 GOOGLE_APP_PASSWORD = os.getenv("SMTP_APP_PASSWORD", "").replace(" ", "")
 SMTP_HOST = os.getenv("SMTP_HOST", "smtp.gmail.com")
 SMTP_PORT = int(os.getenv("SMTP_PORT", "587"))
-PRODUCTION_URL = os.getenv("PRODUCTION_URL", "https://eduhub-ai.onrender.com")
+PRODUCTION_URL = os.getenv("PRODUCTION_URL", "https://edumate.cam")
 
 LOG_FILE = os.path.join(os.path.dirname(os.path.dirname(__file__)), "logs", "email_robot.log")
 
