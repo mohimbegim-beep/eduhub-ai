@@ -12,12 +12,12 @@ jobs:
     steps:
       - name: Heartbeat Ping EduHub Production
         run: |
-          HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 30 https://eduhub-ai.onrender.com/health || echo "000")
-          echo "Keep-Alive Ping to https://eduhub-ai.onrender.com/health returned: HTTP $HTTP_STATUS"
+          HTTP_STATUS=$(curl -s -L -o /dev/null -w "%{http_code}" --max-time 30 https://edumate.cam/health || echo "000")
+          echo "Keep-Alive Ping to https://edumate.cam/health returned: HTTP $HTTP_STATUS"
           if [ "$HTTP_STATUS" = "200" ]; then
-            echo "EduHub AI is fully awake and healthy."
+            echo "EduMate AI is fully awake and healthy."
           else
             echo "Instance was asleep or waking up. Retrying in 15 seconds..."
             sleep 15
-            curl -s -o /dev/null -w "%{http_code}" --max-time 45 https://eduhub-ai.onrender.com/health || true
+            curl -s -L -o /dev/null -w "%{http_code}" --max-time 45 https://edumate.cam/health || true
           fi

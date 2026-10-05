@@ -36,7 +36,7 @@ jobs:
 
       - name: Execute E2E Production Tests
         env:
-          BASE_URL: https://eduhub-ai.onrender.com
+          BASE_URL: https://edumate.cam
           CI: 'true'
         run: npx playwright test
 
