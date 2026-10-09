@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 /**
- * PRODUCTION SMOKE & INTEGRITY CHECKS FOR EDUHUB AI
+ * PRODUCTION SMOKE & INTEGRITY CHECKS FOR EDUMATE AI
  * 
  * Target: Production or staging URL specified in playwright.config.ts / BASE_URL
  * Safety guarantees:
@@ -19,34 +19,26 @@ const CORE_SECTIONS = [
     expectedText: 'Autonomous AI Academic Copilot',
   },
   {
-    id: 'ielts',
-    name: 'IELTS Section',
+    id: 'ielts-widget',
+    name: 'IELTS Diagnostic Section',
     path: '/',
-    expectedText: 'Cambridge Band',
+    expectedText: 'Instant 15-Second Essay Diagnostic',
   },
   {
-    id: 'math-solver',
-    name: 'Math Solver Section',
+    id: 'pricing-tiers',
+    name: 'Pricing & Learning Tier Section',
     path: '/',
-    expectedText: 'LaTeX & Formula',
+    expectedText: 'Choose Your Learning Tier',
   },
   {
-    id: 'ai-factories',
-    name: 'AI Factories Section',
+    id: 'faq',
+    name: 'Frequently Asked Questions Section',
     path: '/',
-    expectedText: 'Ready AI Factories',
-    tabSelector: '#room-tab-3',
-  },
-  {
-    id: 'resume-scanner',
-    name: 'Resume Match Scanner Section',
-    path: '/',
-    expectedText: 'Job Requirements',
-    tabSelector: '#room-tab-2',
+    expectedText: 'Frequently Asked Questions',
   },
 ];
 
-test.describe('EduHub AI Production Health & Landmark Verification', () => {
+test.describe('EduMate AI Production Health & Landmark Verification', () => {
 
   test.beforeEach(async ({ context }) => {
     // Ensure canonical baseline English locale before scripts run
@@ -68,15 +60,7 @@ test.describe('EduHub AI Production Health & Landmark Verification', () => {
       expect(status, `HTTP error ${status} on ${section.path}`).toBeGreaterThanOrEqual(200);
       expect(status, `HTTP error ${status} on ${section.path}`).toBeLessThan(400);
 
-      // If section is located inside an interactive tab, activate it
-      if ('tabSelector' in section && section.tabSelector) {
-        const tabBtn = page.locator(section.tabSelector).first();
-        if (await tabBtn.isVisible()) {
-          await tabBtn.click();
-        }
-      }
-
-      // Verify landmark text is present and visible (handling hidden dropdowns gracefully)
+      // Verify landmark text is attached to DOM
       const matches = page.getByText(section.expectedText, { exact: false });
       await expect(matches.first(), `Text "${section.expectedText}" not found in DOM`).toBeAttached();
 
@@ -96,6 +80,7 @@ test.describe('EduHub AI Production Health & Landmark Verification', () => {
   const DEDICATED_TOOL_PAGES = [
     { name: 'IELTS Essay Grader Tool', path: '/tools/essay-grader' },
     { name: 'STEM Homework Solver Tool', path: '/tools/homework-solver' },
+    { name: 'Citation Generator Tool', path: '/tools/citation-generator' },
     { name: 'AI Report 2026', path: '/report' },
   ];
 
@@ -109,7 +94,7 @@ test.describe('EduHub AI Production Health & Landmark Verification', () => {
   }
 
   // 3. Language switcher functionality test (English -> Uzbek)
-  test('Language switcher: clicking "UZ" dynamically updates interface ("Panelni ochish")', async ({ page }) => {
+  test('Language switcher: clicking "UZ" dynamically updates interface ("Vositalar")', async ({ page }) => {
     const response = await page.goto('/', { waitUntil: 'domcontentloaded' });
     expect(response).not.toBeNull();
     expect(response!.status()).toBeLessThan(400);
@@ -119,8 +104,8 @@ test.describe('EduHub AI Production Health & Landmark Verification', () => {
     await expect(uzButton).toBeVisible();
     await uzButton.click();
 
-    // Verify characteristic Uzbek translation appears in UI buttons
-    const uzbekElement = page.getByText('Panelni ochish', { exact: false }).first();
+    // Verify characteristic Uzbek translation appears in UI navbar
+    const uzbekElement = page.getByText('Vositalar', { exact: false }).first();
     await expect(uzbekElement).toBeVisible({ timeout: 10000 });
   });
 
