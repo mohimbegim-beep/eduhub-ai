@@ -7823,7 +7823,7 @@ async def generate_teacher_lesson(payload: TeacherLabRequest):
 
 
 
-TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "8658937944:AAEBJxjc2pz_XeVyJXVZxWAFRmFzDGwSRwM")
+TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "")
 
 @app.get("/api/v1/telegram/autopilot-webhook", tags=["Telegram Bot"])
 async def telegram_autopilot_webhook_info():

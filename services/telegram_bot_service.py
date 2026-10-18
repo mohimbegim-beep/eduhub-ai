@@ -471,11 +471,15 @@ def process_telegram_update(update: dict) -> bool:
     # 👑 OWNER & FOUNDER TELEMETRY & COMMANDS
     # ---------------------------------------------------------
     if full_text.startswith("/owner") or full_text.startswith("/admin") or full_text == "/start owner":
+        if not is_owner(chat_id):
+            print(f"[SECURITY ALERT] Unauthorized /owner attempt blocked from chat_id {chat_id} (@{from_user.get('username', 'none')})")
+            send_message(chat_id, "⛔ *Доступ запрещен.*\nКоманда доступна исключительно подтвержденному владельцу платформы. Попытка несанкционированного доступа зафиксирована в журнале безопасности.")
+            return True
         username = from_user.get("username", "")
         save_owner_chat_id(chat_id, username, first_name)
         welcome_owner = (
             f"👑 *Добро пожаловать, {first_name}! (Владелец EduMate AI)*\n\n"
-            "✅ *Ваш Telegram успешно привязан в качестве пульта управления платформой.*\n\n"
+            "✅ *Ваш Telegram успешно верифицирован в качестве пульта управления платформой.*\n\n"
             "🔔 Теперь сюда в режиме реального времени будут приходить оповещения:\n"
             "• 💰 Новые оплаты $1 триала и подписок от Dodo Payments\n"
             "• ✍️ Проверки эссе реальными студентами на сайте\n"
