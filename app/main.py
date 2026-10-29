@@ -1795,6 +1795,17 @@ async def serve_landing():
 async def serve_favicon():
     return Response(status_code=204)
 
+@app.api_route("/sw.js", methods=["GET", "HEAD"], include_in_schema=False)
+async def serve_sw_js():
+    sw_file = STATIC_DIR / "sw.js"
+    if sw_file.exists():
+        return FileResponse(
+            str(sw_file),
+            media_type="application/javascript",
+            headers={"Service-Worker-Allowed": "/"}
+        )
+    raise HTTPException(status_code=404, detail="Service worker script not found.")
+
 @app.get("/privacy", tags=["Legal"])
 async def serve_privacy():
     privacy_file = STATIC_DIR / "privacy.html"
