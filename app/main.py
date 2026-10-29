@@ -369,11 +369,12 @@ async def add_security_headers(request: Request, call_next):
 
     csp = (
         "default-src 'self'; "
-        "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://checkout.dodopayments.com https://test.checkout.dodopayments.com https://pagead2.googlesyndication.com https://*.googlesyndication.com https://*.google.com https://*.doubleclick.net https://yandex.ru https://*.yandex.ru https://yastatic.net https://*.yastatic.net; "
+        "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://checkout.dodopayments.com https://test.checkout.dodopayments.com https://pagead2.googlesyndication.com https://*.googlesyndication.com https://*.google.com https://*.doubleclick.net https://yandex.ru https://*.yandex.ru https://yastatic.net https://*.yastatic.net https://3nbf4.com https://*.3nbf4.com https://*.monetag.com; "
         "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://yandex.ru https://*.yandex.ru https://yastatic.net https://*.yastatic.net; "
         "font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://yastatic.net https://*.yastatic.net; "
         "img-src 'self' data: blob: https:; "
-        "frame-src 'self' https://checkout.dodopayments.com https://test.checkout.dodopayments.com https://googleads.g.doubleclick.net https://*.google.com https://*.googlesyndication.com https://*.doubleclick.net https://yandex.ru https://*.yandex.ru https://*.yastatic.net; "
+        "frame-src 'self' https://checkout.dodopayments.com https://test.checkout.dodopayments.com https://googleads.g.doubleclick.net https://*.google.com https://*.googlesyndication.com https://*.doubleclick.net https://yandex.ru https://*.yandex.ru https://*.yastatic.net https://3nbf4.com https://*.3nbf4.com https://*.monetag.com; "
+        "worker-src 'self' blob: https:; "
         "connect-src 'self' https: http:; "
         "object-src 'none'; "
         "base-uri 'self';"
@@ -383,7 +384,7 @@ async def add_security_headers(request: Request, call_next):
     # Производительность и HTTP-кэширование (Cache-Control)
     path = request.url.path
     if response.status_code < 400:
-        if path == "/static/sw.js":
+        if path in ("/sw.js", "/static/sw.js"):
             response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
         elif path.startswith(("/static/", "/locales/")):
             response.headers["Cache-Control"] = "public, max-age=86400, stale-while-revalidate=604800"
