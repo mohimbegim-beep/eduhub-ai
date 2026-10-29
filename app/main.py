@@ -287,7 +287,8 @@ async def ai_safety_guard_middleware(request: Request, call_next):
     path = request.url.path
     if path.startswith("/api/") and request.method in ("POST", "PUT"):
         try:
-            return await asyncio.wait_for(call_next(request), timeout=20.0)
+            route_timeout = 35.0 if "/academic/" in path else 20.0
+            return await asyncio.wait_for(call_next(request), timeout=route_timeout)
         except asyncio.TimeoutError:
             record_system_audit_event(
                 level="WARN",
@@ -6117,12 +6118,20 @@ async def compose_academic_research(payload: AcademicResearchRequest, request: R
                 if m and m not in unique_models:
                     unique_models.append(m)
 
+            t_acad_start = time.perf_counter()
             for mod_name in unique_models:
+                if time.perf_counter() - t_acad_start > 8.0:
+                    print("[ACADEMIC LAB NOTICE] Fast-forwarding to resilient academic fallback engine")
+                    break
                 try:
-                    response = client.models.generate_content(
-                        model=mod_name,
-                        contents=user_prompt,
-                        config=config
+                    response = await asyncio.wait_for(
+                        asyncio.to_thread(
+                            client.models.generate_content,
+                            model=mod_name,
+                            contents=user_prompt,
+                            config=config
+                        ),
+                        timeout=5.0
                     )
                     if response and response.text:
                         result_text = response.text.strip()
